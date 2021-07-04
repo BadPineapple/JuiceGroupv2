@@ -1,0 +1,748 @@
+{
+	"info": {
+		"_postman_id": "58d377d7-1440-47ba-ac49-5acaa637d5bb",
+		"name": "Terrafós",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth / Login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"login\": \"ilion\", \n    \"senha\": \"ilion123\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/v1/auth/login/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"v1",
+						"auth",
+						"login",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Auth / Resgatar Senha",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"jan@ilion.com.br\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/v1/auth/resgatar-senha/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"v1",
+						"auth",
+						"resgatar-senha",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Usuario / Profile",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ7XG4gIFwibm9tZUVudGlkYWRlXCI6IFwiQ2xpZW50ZVwiLFxuICBcImlkXCI6IDFcbn0ifQ.piK6_YqCI5v0dvlqSyAZ7FdxCrDfS3XYPhukhIaVVCQbBr1P-yQ-3stgGUZ7doJHma3fGMHYJxmgkzCoC-1KSg",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{base_url}}/v1/profile/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"v1",
+						"profile",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Fazendas do Usuário",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIn0.eD3e13Sh09vf90KgY8gpV8sbjn2Q0kMeMfP-q4twPRnUhWYtPderrdTob6-0aM0cRKXW_d3RMlgIPGHQrFu2UA"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{base_url}}/v1/terrafos/fazendas/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"v1",
+						"terrafos",
+						"fazendas",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta Fazenda",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIn0.eD3e13Sh09vf90KgY8gpV8sbjn2Q0kMeMfP-q4twPRnUhWYtPderrdTob6-0aM0cRKXW_d3RMlgIPGHQrFu2UA"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{base_url}}/v1/terrafos/fazendas/1/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"v1",
+						"terrafos",
+						"fazendas",
+						"1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fazenda / Retiros",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIn0.eD3e13Sh09vf90KgY8gpV8sbjn2Q0kMeMfP-q4twPRnUhWYtPderrdTob6-0aM0cRKXW_d3RMlgIPGHQrFu2UA"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{base_url}}/v1/terrafos/fazendas/1/retiros/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"v1",
+						"terrafos",
+						"fazendas",
+						"1",
+						"retiros",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fazenda / Categorias de Animais",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIn0.eD3e13Sh09vf90KgY8gpV8sbjn2Q0kMeMfP-q4twPRnUhWYtPderrdTob6-0aM0cRKXW_d3RMlgIPGHQrFu2UA"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{base_url}}/v1/terrafos/fazendas/1/categorias-de-animais/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"v1",
+						"terrafos",
+						"fazendas",
+						"1",
+						"categorias-de-animais",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fazenda / Retiros / Pastos",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIn0.eD3e13Sh09vf90KgY8gpV8sbjn2Q0kMeMfP-q4twPRnUhWYtPderrdTob6-0aM0cRKXW_d3RMlgIPGHQrFu2UA"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{base_url}}/v1/terrafos/fazendas/1/retiros/1/pastos/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"v1",
+						"terrafos",
+						"fazendas",
+						"1",
+						"retiros",
+						"1",
+						"pastos",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lotes / Total de Animais",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIn0.eD3e13Sh09vf90KgY8gpV8sbjn2Q0kMeMfP-q4twPRnUhWYtPderrdTob6-0aM0cRKXW_d3RMlgIPGHQrFu2UA"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{base_url}}/v1/terrafos/pastos/2/total-de-animais/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"v1",
+						"terrafos",
+						"pastos",
+						"2",
+						"total-de-animais",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fazenda / Retiros / Pasto / Por ID",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIn0.eD3e13Sh09vf90KgY8gpV8sbjn2Q0kMeMfP-q4twPRnUhWYtPderrdTob6-0aM0cRKXW_d3RMlgIPGHQrFu2UA"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{base_url}}/v1/terrafos/fazendas/1/retiros/1/pastos/1/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"v1",
+						"terrafos",
+						"fazendas",
+						"1",
+						"retiros",
+						"1",
+						"pastos",
+						"1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fazenda / Raças",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIn0.eD3e13Sh09vf90KgY8gpV8sbjn2Q0kMeMfP-q4twPRnUhWYtPderrdTob6-0aM0cRKXW_d3RMlgIPGHQrFu2UA"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{base_url}}/v1/terrafos/fazendas/1/racas/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"v1",
+						"terrafos",
+						"fazendas",
+						"1",
+						"racas",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fazenda / Produtos",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIn0.eD3e13Sh09vf90KgY8gpV8sbjn2Q0kMeMfP-q4twPRnUhWYtPderrdTob6-0aM0cRKXW_d3RMlgIPGHQrFu2UA"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{base_url}}/v1/terrafos/fazendas/1/produtos/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"v1",
+						"terrafos",
+						"fazendas",
+						"1",
+						"produtos",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Medição de Forragem",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIn0.eD3e13Sh09vf90KgY8gpV8sbjn2Q0kMeMfP-q4twPRnUhWYtPderrdTob6-0aM0cRKXW_d3RMlgIPGHQrFu2UA"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"idPasto\": 2,\n    \"tipo\": \"ROTINA\",\n    \"altura\": 35\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/v1/terrafos/medicao-de-forragem/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"v1",
+						"terrafos",
+						"medicao-de-forragem",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Entrevero",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIn0.eD3e13Sh09vf90KgY8gpV8sbjn2Q0kMeMfP-q4twPRnUhWYtPderrdTob6-0aM0cRKXW_d3RMlgIPGHQrFu2UA"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"idPasto\": 2,\n    \"status\": true\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/v1/terrafos/entrevero/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"v1",
+						"terrafos",
+						"entrevero",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Formação de Lote",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIn0.eD3e13Sh09vf90KgY8gpV8sbjn2Q0kMeMfP-q4twPRnUhWYtPderrdTob6-0aM0cRKXW_d3RMlgIPGHQrFu2UA"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"idPasto\": 2,\n    \"idCategoriaAnimal\": 3,\n    \"qtd\": 49,\n    \"pesoMedio\": 533\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/v1/terrafos/formacao-de-lote/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"v1",
+						"terrafos",
+						"formacao-de-lote",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Movimentacao de Lote",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIn0.eD3e13Sh09vf90KgY8gpV8sbjn2Q0kMeMfP-q4twPRnUhWYtPderrdTob6-0aM0cRKXW_d3RMlgIPGHQrFu2UA"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"idPastoOrigem\": 1,\n    \"idPastoDestino\": 2,\n    \"movimentos\": [{\n        \"idCategoriaAnimal\": 1,\n        \"valor\": 10\n    }]\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/v1/terrafos/movimentacao-de-lote/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"v1",
+						"terrafos",
+						"movimentacao-de-lote",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lotes / Baixas",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIn0.eD3e13Sh09vf90KgY8gpV8sbjn2Q0kMeMfP-q4twPRnUhWYtPderrdTob6-0aM0cRKXW_d3RMlgIPGHQrFu2UA"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"idPasto\": 2,\n    \"baixas\": [{\n        \"idCategoriaAnimal\": 2,\n        \"valor\": 2,\n        \"motivoBaixa\": \"ACIDENTES\"\n    }]\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/v1/terrafos/baixas/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"v1",
+						"terrafos",
+						"baixas",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lotes / Nascimentos",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIn0.eD3e13Sh09vf90KgY8gpV8sbjn2Q0kMeMfP-q4twPRnUhWYtPderrdTob6-0aM0cRKXW_d3RMlgIPGHQrFu2UA"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"idPasto\": 2,\n    \"idRaca\": 1,\n    \"qtd\": 3,\n    \"sexo\": \"MACHO\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/v1/terrafos/nascimentos/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"v1",
+						"terrafos",
+						"nascimentos",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Suplementacao",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIn0.eD3e13Sh09vf90KgY8gpV8sbjn2Q0kMeMfP-q4twPRnUhWYtPderrdTob6-0aM0cRKXW_d3RMlgIPGHQrFu2UA"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"idPasto\": 1,\n    \"status\": \"COM_PRODUTO\",\n    \"idProduto\": 2,\n    \"qtd\": 2\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/v1/terrafos/suplementacao/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"v1",
+						"terrafos",
+						"suplementacao",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pesagens",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIn0.eD3e13Sh09vf90KgY8gpV8sbjn2Q0kMeMfP-q4twPRnUhWYtPderrdTob6-0aM0cRKXW_d3RMlgIPGHQrFu2UA"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"idPasto\": 2,\n    \"pesagens\": [\n        {\n            \"tipo\": \"VISUAL\",\n            \"idCategoriaAnimal\": 3,\n            \"valor\": 900\n        },\n        {\n            \"tipo\": \"VISUAL\",\n            \"idCategoriaAnimal\": 4,\n            \"valor\": 850\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/v1/terrafos/pesagens/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"v1",
+						"terrafos",
+						"pesagens",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

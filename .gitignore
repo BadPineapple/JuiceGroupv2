@@ -1,0 +1,44 @@
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+#.project
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+site.war
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+### nodejs ###
+src/main/webapp/node_modules/
+
+##especificas
+src/main/webapp/arquivos/
+util/databases/
+derby.log
+src/main/webapp/images/tmp
+static/
+gulpfile.js~
+build
+bin
+
+ROOT.war
+site.war
+.vscode
+.project
+
+pagseguro.log*

@@ -1,0 +1,121 @@
+@media (max-width: 768px) {
+
+    .container { width: auto; }
+
+    /*INDEX*/
+
+    .banner img { width: 100%; }
+
+    .link-simple { text-align: right; padding: 10px 0; }
+
+    h3 {
+        padding: 10px 0 10px 0;
+    }
+
+    .infos {
+        text-align: center;
+    }
+
+    .promo-image {
+        height: 200px;
+    }
+
+    /*CONTATO*/
+
+    .img-contato {
+        margin-top: 30px;
+    }
+
+    form .form-default .row {
+        text-align: center;
+    }
+
+    /*SOBRE*/
+
+    h2.highlight.highlight-big {
+        text-align: center;
+    }
+
+    h2.highlight {
+        text-align: center;
+        margin-top: 15px;
+    }
+
+    h2.highlight::after {
+        left: calc(50% - 42.5px);
+    }
+
+
+    /*BUSCA-EXECUTIVO*/
+
+
+    .passagem-ticket {
+        width: 30%;
+    }
+
+    /*FRETAMENTO*/
+
+    .fretamento {
+        padding: 25px 0;
+    }
+
+    /*ENCOMENDAS*/
+
+    .box-entrega {
+        text-align: center;
+    }
+
+    .entrega-label {
+        right: 25%;
+    }
+
+    .areas-de-atuacao p {
+        margin-top: 25px;
+    }
+
+    .button-yellow {
+        margin-bottom: 15px;
+    }
+
+    /*FOOTER*/
+
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    footer {
+        align-items: center;
+    }
+
+    footer .footer-content div {
+        width: 100%;
+    }
+
+    /*COPYRIGHT*/
+    .copyright { text-align: center; }
+    .copyright img { margin: 20px 0; }
+    .copyright .text-right { text-align: center !important; }
+
+    .search form {
+        display: block;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .search-destiny { position: relative; padding-left: 50px; }
+    .search-destiny svg { left: 40px; }
+
+    .box-info { flex-direction: column; justify-content: center; align-items: center; }
+    .box-info img { margin-bottom: 20px; }
+    
+    .search form button { transform: translateX(0); }
+    .search .search-date svg { right: 45px; }
+}
+
+.mm-menu.mm-theme-dark {
+    background: #003966 !important;
+    border-color: rgba(0,0,0,.15);
+    color: rgba(255,255,255,.8);
+}

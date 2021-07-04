@@ -1,0 +1,98 @@
+/* This file skins dialog */
+
+.iliontheme .ui-dialog,
+.iliontheme.ui-dialog {
+	background-color: #f3f3f3;
+}
+
+.iliontheme .ui-dialog .ui-dialog-titlebar,
+.iliontheme.ui-dialog .ui-dialog-titlebar {
+	border-bottom: 1px solid #d8d2aa;
+	background: #d5e3ec url(i/dialog-title.gif) repeat-x;
+	padding: 0px;
+	height: 28px;
+	_height: 29px;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:10px;
+	font-weight:bold;
+}
+
+.iliontheme .ui-dialog.ui-draggable .ui-dialog-titlebar,
+.iliontheme.ui-dialog.ui-draggable .ui-dialog-titlebar {
+	cursor: move;
+}
+
+.iliontheme .ui-dialog .ui-dialog-titlebar-close,
+.iliontheme.ui-dialog .ui-dialog-titlebar-close {
+	width: 16px;
+	height: 16px;
+	background: url(i/dialog-titlebar-close.png) no-repeat;
+	position:absolute;
+	top: 6px;
+	right: 7px;
+	cursor: default;
+}
+
+.iliontheme .ui-dialog .ui-dialog-titlebar-close span,
+.iliontheme.ui-dialog .ui-dialog-titlebar-close span {
+	display: none;
+}
+
+.iliontheme .ui-dialog .ui-dialog-titlebar-close-hover,
+.iliontheme.ui-dialog .ui-dialog-titlebar-close-hover {
+	background: url(i/dialog-titlebar-close-hover.png) no-repeat;
+}
+
+.iliontheme .ui-dialog .ui-dialog-title,
+.iliontheme.ui-dialog .ui-dialog-title {
+	margin-left: 5px;
+	color: #385572;
+	font-weight: bold;
+	position: relative;
+	top: 8px;
+	left: 4px;
+}
+
+.iliontheme .ui-dialog .ui-dialog-content,
+.iliontheme.ui-dialog .ui-dialog-content {
+	margin: 0.5em;
+}
+
+.iliontheme .ui-dialog .ui-dialog-buttonpane,
+.iliontheme.ui-dialog .ui-dialog-buttonpane {
+	position: absolute;
+	bottom: 8px;
+	right: 12px;
+	width: 100%;
+	text-align: right;
+}
+
+.iliontheme .ui-dialog .ui-dialog-buttonpane button,
+.iliontheme.ui-dialog .ui-dialog-buttonpane button {
+	margin: 6px;
+}
+
+/* Dialog handle styles */
+.iliontheme .ui-dialog .ui-resizable-n,
+.iliontheme.ui-dialog .ui-resizable-n { cursor: n-resize; height: 6px; width: 100%; top: 0px; left: 0px; background: transparent url(i/dialog-n.gif) repeat scroll center top; }
+
+.iliontheme .ui-dialog .ui-resizable-s,
+.iliontheme.ui-dialog .ui-resizable-s { cursor: s-resize; height: 8px; width: 100%; bottom: 0px; left: 0px; background: transparent url(i/dialog-s.gif) repeat scroll center top; }
+
+.iliontheme .ui-dialog .ui-resizable-e,
+.iliontheme.ui-dialog .ui-resizable-e { cursor: e-resize; width: 7px; right: 0px; top: 0px; height: 100%; background: transparent url(i/dialog-e.gif) repeat scroll right center; }
+
+.iliontheme .ui-dialog .ui-resizable-w,
+.iliontheme.ui-dialog .ui-resizable-w { cursor: w-resize; width: 7px; left: 0px; top: 0px; height: 100%; background: transparent url(i/dialog-w.gif) repeat scroll right center; }
+
+.iliontheme .ui-dialog .ui-resizable-se,
+.iliontheme.ui-dialog .ui-resizable-se { cursor: se-resize; width: 9px; height: 9px; right: 0px; bottom: 0px; background: transparent url(i/dialog-se.gif); }
+
+.iliontheme .ui-dialog .ui-resizable-sw,
+.iliontheme.ui-dialog .ui-resizable-sw { cursor: sw-resize; width: 9px; height: 9px; left: 0px; bottom: 0px; background: transparent url(i/dialog-sw.gif); }
+
+.iliontheme .ui-dialog .ui-resizable-nw,
+.iliontheme.ui-dialog .ui-resizable-nw { cursor: nw-resize; width: 9px; height: 29px; left: 0px; top: 0px; background: transparent url(i/dialog-nw.gif); }
+
+.iliontheme .ui-dialog .ui-resizable-ne,
+.iliontheme.ui-dialog .ui-resizable-ne { cursor: ne-resize; width: 9px; height: 29px; right: 0px; top: 0px; background: transparent url(i/dialog-ne.gif); }

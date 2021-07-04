@@ -1,0 +1,133 @@
+@charset "UTF-8";
+
+/** 
+ * Default CSS Drop-Down Menu Theme
+ *
+ * @file		default.css
+ * @name		Default
+ * @version		0.1
+ * @type		transitional
+ * @browsers	Windows: IE5+, Opera7+, Firefox1+
+ *				Mac OS: Safari2+, Firefox2+
+ *
+ * @link		http://www.lwis.net/
+ * @copyright	2008 Live Web Institute. All Rights Reserved.
+ *
+ * Module Classes: *.dir {} *.on {} *.open {} li.hover {} li.first {} li.last {}
+ * Expected directory tag - li
+ *
+ */
+
+/*
+@import "helper.css";
+*/
+
+
+/*-------------------------------------------------/
+ * @section		Base Drop-Down Styling
+ * @structure	ul (unordered list)
+ *				ul li (list item)
+ *				ul li a (links)
+ *				/*\.class|(li|a):hover/
+ * @level sep	ul
+ */
+
+
+ul.dropdown {
+ font-weight: bold;
+ text-transform:uppercase;
+ font-family:Arial, Helvetica, sans-serif;
+ font-size:12px;
+}
+
+	ul.dropdown li {
+	 padding: 5px 8px;
+	 /*border-style: solid;
+	 border-width: 1px 1px 1px 0;
+	 border-color: #eaeaea #eaeaea #eaeaea;
+	 background-color: #eaeaea;*/
+	 text-align: left;
+	}
+
+	ul.dropdown li.hover,
+	ul.dropdown li:hover {
+	 background-color: #aeaeae;
+	 color: #fff;
+	}
+
+	ul.dropdown a:link,
+	ul.dropdown a:visited	{ text-decoration: none; }
+	ul.dropdown a:hover		{ color: #fff; }
+	ul.dropdown a:active	{ color: #fff; }
+
+
+	/* -- level mark -- */
+
+	ul.dropdown ul {
+	 width: 150px;
+	 /*margin-top: 1px;*/
+	}
+
+		ul.dropdown ul li {
+		 font-weight: normal;
+		 text-transform:none;
+		 font-size:11px;
+		 padding:5px 5px 5px 10px;
+		 border-style: solid;
+		 border-width: 0 1px 1px 1px;
+		 border-color: #dedede #dedede #dedede;
+		 background-color: #eaeaea;
+		}
+		ul.dropdown ul li a {
+		 padding:5px 5px 5px 0;
+		 width: 100%;
+		}
+
+
+
+/*-------------------------------------------------/
+ * @section		Support Class `dir`
+ * @level sep	ul, .class
+ */
+
+
+ul.dropdown *.dir {
+ /*padding-right:0;
+ background-image: url(images/nav-arrow-down.png);
+ background-position: 100% 50%;
+ background-repeat: no-repeat;*/
+}
+
+
+/* -- Components override -- */
+
+ul.dropdown-horizontal ul *.dir {
+ padding-right: 15px;
+ background-image: url(../imagens/nav-arrow-right.gif);
+ background-position: 100% 50%;
+ background-repeat: no-repeat;
+}
+
+ul.dropdown-upward *.dir {
+ background-image: url(images/nav-arrow-top.gif);
+}
+
+ul.dropdown-vertical *.dir,
+ul.dropdown-upward ul *.dir {
+ background-image: url(images/nav-arrow-right.gif);
+}
+
+ul.dropdown-vertical-rtl *.dir {
+ padding-right: 10px;
+ padding-left: 15px;
+ background-image: url(images/nav-arrow-left.gif);
+ background-position: 0 50%;
+}
+
+/*--- Main Menu 
+#boxMenu{width:100%;clear:both;margin:10px 0;}
+#boxMenu #navMenu{width:930px;height:25px;background:none;clear:both;margin:0;padding:0;}
+--*/
+
+.menuCategorias{text-transform:none;font-size:1.2em;-moz-border-radius: 5px;-webkit-border-radius: 5px;}
+.menuWebSite{text-transform:none;font-size:1em;background:none;border:none;}

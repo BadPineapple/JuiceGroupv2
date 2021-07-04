@@ -1,0 +1,535 @@
+body {
+	background-color: #FFFFFF;
+
+
+
+}
+.forms {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: 12px;
+	color: #003366;
+	background-color: #FFFFFF;
+	border-top: 1px solid #003366;
+	border-right: 1px solid #003366;
+	border-bottom: 1px solid #003366;
+	border-left: 1px solid #003366;
+	width: 100%;
+
+
+}
+
+.forms2 {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #003366;
+	background-color: #FFFFFF;
+	border-top: 1px solid #003366;
+	border-right: 1px solid #003366;
+	border-bottom: 1px solid #003366;
+	border-left: 1px solid #003366;
+	line-height: normal;
+
+
+}
+
+
+.PrinOcre {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: normal;
+	font-weight: bold;
+	color: #003366;
+	background-color: #CCCCCC;
+	background-image: url(../imagens/bt_ocreFundo.gif);
+	background-repeat: repeat-x;
+	background-position: left center;
+	height: 17px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	border-bottom-color: #7C5F49;
+	border-top-color: #ECE8CC;
+	border-left-color: #ECE8CC;
+	border-right-color: #7C5F49;
+}
+
+.PrinAzul {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: normal;
+	font-weight: bold;
+	color: #003366;
+	background-color: #CCCCCC;
+	background-image: url(../imagens/bt_azulFundo.gif);
+	background-repeat: repeat-x;
+	background-position: left center;
+	height: 17px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	border-bottom-color: #7C5F49;
+	border-top-color: #ECE8CC;
+	border-left-color: #ECE8CC;
+	border-right-color: #7C5F49;
+	text-align: center;
+	vertical-align: middle;
+	padding-right: 2px;
+	padding-left: 2px;
+
+}
+.acoesAzul {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: normal;
+	font-weight: bold;
+	color: #003366;
+	background-color: #CCCCCC;
+	background-image: url(../imagens/bt_azul2.gif);
+	background-repeat: repeat-x;
+	background-position: left center;
+	height: 17px;
+	padding-left: 14px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	cursor: hand;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #DCE8EF;
+	border-right-color: #32566D;
+	border-bottom-color: #32566D;
+	border-left-color: #DCE8EF;
+
+}
+
+
+.linkAzul01 {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: normal;
+	font-weight: bold;
+	color: #003366;
+	height: 17px;
+	padding-left: 2px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	background-color: #D5E3EC;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #FFFFFF;
+	text-align: center;
+	vertical-align: middle;
+	padding-right: 2px;
+}
+.linkAzul01Rigth {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: normal;
+	font-weight: bold;
+	color: #003366;
+	height: 17px;
+	padding-left: 2px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	background-color: #D5E3EC;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #FFFFFF;
+	text-align: right;
+	vertical-align: middle;
+	padding-right: 3px;
+}
+
+
+.linkAzul01Total {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: normal;
+	font-weight: bold;
+	color: #003366;
+	height: 17px;
+	padding-left: 2px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	background-color: #FFFFFF;
+	text-align: right;
+	vertical-align: middle;
+	padding-right: 4px;
+
+}
+.linkAzul02Total {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: normal;
+	font-weight: bold;
+	color: #990000;
+	height: 17px;
+	padding-left: 2px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	background-color: #D5E3EC;
+	text-align: center;
+	vertical-align: middle;
+	padding-right: 2px;
+	border: 1px solid #003366;
+
+}
+
+
+
+
+.tDcre01 {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: normal;
+	font-weight: normal;
+	color: #003366;
+	height: 17px;
+	padding-left: 4px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	background-color: #EAEAEA;
+	background-repeat: no-repeat;
+	background-position: left center;
+	text-align: left;
+	vertical-align: middle;
+	padding-right: 2px;
+
+}
+
+.tDcre01B {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: normal;
+	font-weight: normal;
+	color: #003366;
+	height: 17px;
+	padding-left: 4px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	background-color: #F2F2F2;
+	background-repeat: no-repeat;
+	background-position: left center;
+	text-align: left;
+	vertical-align: middle;
+	padding-right: 2px;
+
+}
+
+.tDgray01Bcenter {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: normal;
+	font-weight: normal;
+	color: #003366;
+	height: 17px;
+	padding-left: 2px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	background-color: #F2F2F2;
+	background-repeat: no-repeat;
+	text-align: center;
+	vertical-align: middle;
+	padding-right: 2px;
+
+}
+
+.orelhaAzul {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: normal;
+	font-weight: normal;
+	color: #F2F2F2;
+	background-color: #397AC1;
+	background-repeat: no-repeat;
+	background-position: right top;
+	text-align: center;
+	vertical-align: middle;
+	padding: 1px 12px 1px 4px;
+	background-attachment: fixed;
+	background-image: url(../imagens/OrelhaAzul.gif);
+
+}
+.orelhaAzulClaro {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: normal;
+	font-weight: normal;
+	color: #F2F2F2;
+	background-color: #397AC1;
+	background-repeat: no-repeat;
+	background-position: right top;
+	text-align: center;
+	vertical-align: middle;
+	padding: 1px 12px 1px 4px;
+	background-attachment: fixed;
+	background-image: url(../imagens/OrelhaAzulClaro.gif);
+
+}
+
+.tDcre01Center {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: normal;
+	font-weight: normal;
+	color: #003366;
+	background-color: #EDE9D1;
+	background-repeat: no-repeat;
+	background-position: left center;
+	text-align: center;
+	vertical-align: middle;
+	padding: 2px;
+
+
+}
+
+.tDgray01Center {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: normal;
+	font-weight: normal;
+	color: #003366;
+	height: 17px;
+	padding-left: 2px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	background-color: #E2E2E2;
+	background-repeat: no-repeat;
+	background-position: left center;
+	text-align: center;
+	vertical-align: middle;
+	padding-right: 2px;
+
+}
+
+
+.tDcre01Lefth {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: normal;
+	font-weight: normal;
+	color: #003366;
+	padding: 2px;
+	background-color: #EDE9D1;
+
+
+
+}
+
+.tDgray01Lefth {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: normal;
+	font-weight: normal;
+	color: #003366;
+	height: 17px;
+	padding-left: 2px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	background-color: #E2E2E2;
+	background-repeat: no-repeat;
+	background-position: left center;
+	text-align: lefth;
+	vertical-align: middle;
+	padding-right: 2px;
+
+}
+
+
+
+.tDcre01CenterB {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: normal;
+	font-weight: normal;
+	color: #003366;
+	background-color: #F7F4EA;
+	background-repeat: no-repeat;
+	background-position: left center;
+	text-align: center;
+	vertical-align: middle;
+	padding: 2px;
+
+
+}
+
+.tDcre01LefthB {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: normal;
+	font-weight: normal;
+	color: #003366;
+	height: 17px;
+	padding-left: 2px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	background-color: #F7F4EA;
+	background-repeat: no-repeat;
+	background-position: left center;
+	text-align: lefth;
+	vertical-align: middle;
+	padding-right: 2px;
+
+}
+
+
+.tDazul01 {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: normal;
+	font-weight: bold;
+	color: #003366;
+	height: 17px;
+	padding-left: 15px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	background-color: #D6DDE4;
+	background-image: url(../imagens/seta_azul01.gif);
+	background-repeat: no-repeat;
+	background-position: left center;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #FFFFFF;
+
+}
+.divisaoAzul {
+	line-height: 9px;
+	background-image: url(../imagens/shin_azul.gif);
+	background-repeat: repeat-x;
+	background-position: left center;
+	height: 9px;
+
+}
+.botao {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 9px;
+	line-height: normal;
+	font-weight: bold;
+}
+a:link {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: normal;
+	font-weight: bold;
+	color: #0000FF;
+	text-decoration: none;
+
+}
+a:visited {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: normal;
+	font-weight: bold;
+	color: #0066CC;
+	text-decoration: none;
+}
+a:hover {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: normal;
+	font-weight: bold;
+	color: #990000;
+	text-decoration: underline;
+}
+a:active {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: normal;
+	font-weight: bold;
+	color: #0000FF;
+	text-decoration: none;
+}
+.iFrame{
+	background-color: #FFFFFF;
+	height: 100%;
+	width: 100%;
+	border-bottom: 1px solid #666666;
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #666666;
+
+}
+
+.calendarioComp {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: normal;
+	font-weight: normal;
+	color: #990000;
+	height: 17px;
+	padding-left: 2px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	background-repeat: no-repeat;
+	background-position: left center;
+	text-align: center;
+	vertical-align: middle;
+	padding-right: 2px;
+	background-color: #E7E498;
+}
+.calendarioFeriado {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: normal;
+	font-weight: normal;
+	color: #990000;
+	height: 17px;
+	padding-left: 2px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	background-repeat: no-repeat;
+	background-position: left center;
+	text-align: center;
+	vertical-align: middle;
+	padding-right: 2px;
+	background-color: #DDFDFF;
+}
+.texto {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: normal;
+	color: #003366;
+	text-decoration: none;
+	background-color: #E3EBF4;
+
+
+}
+
+.seach02 {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: normal;
+	color: #003366;
+	background-image:  url(../imagens/seach02.gif);
+	background-repeat: repeat-x;
+	vertical-align: top;
+	padding-top: 5px;
+
+}
+.seach03 {
+	background-image:  url(../imagens/seach03.gif);
+	height: 27px;
+	width: 25px;
+}
+.seach04 {
+	background-image:  url(../imagens/seach04.gif);
+	background-repeat: repeat-x;
+	text-align: left;
+	vertical-align: middle;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 9px;
+	line-height: normal;
+	font-weight: bold;
+	color: #990000;
+	padding-left: 8px;
+}
+.textoSmall {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: normal;
+	color: #003366;
+}

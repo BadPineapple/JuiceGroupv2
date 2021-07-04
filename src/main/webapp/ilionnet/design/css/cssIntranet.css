@@ -1,0 +1,387 @@
+body {
+	margin: 0px;
+}
+
+.bodyPrin {
+	margin: 10px;
+	padding: 10px;
+
+}
+
+.bodyLink {
+	margin: 0px;
+	background-image:  url(../imagens/link_fundo.gif);
+	background-attachment: fixed;
+	background-repeat: repeat-y;
+}
+
+.bodyTop {
+	margin: 0px;
+	background-image: url(../imagens/fundo_top.gif);
+	background-repeat: repeat-x;
+}
+
+.texto {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: normal;
+	font-weight: normal;
+	color: #000000;
+	text-decoration: none;
+
+}
+
+.texto:link {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: normal;
+	font-weight: normal;
+	color: #0033CC;
+	text-decoration: none;
+
+}
+
+.texto:visited {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: normal;
+	font-weight: normal;
+	color: #0066FF;
+}
+
+.texto:hover {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: normal;
+	font-weight: normal;
+	color: #3399FF;
+}
+
+.texto:active {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: normal;
+	font-weight: normal;
+	color: #0033CC;
+	text-decoration: none;
+
+}
+
+.seach02 {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: normal;
+	color: #003366;
+	background-image:  url(../imagens/seach02.gif);
+	background-repeat: repeat-x;
+	vertical-align: top;
+	padding-top: 5px;
+
+}
+.seach03 {
+	background-image:  url(../imagens/seach03.gif);
+	height: 27px;
+	width: 25px;
+}
+.seach04 {
+	background-image:  url(../imagens/seach04.gif);
+	background-repeat: repeat-x;
+	text-align: left;
+	vertical-align: middle;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 9px;
+	line-height: normal;
+	font-weight: bold;
+	color: #990000;
+	padding-left: 8px;
+}
+.forms {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: 12px;
+	color: #003366;
+	background-color: #FFFFFF;
+	border-top: 1px solid #003366;
+	border-right: 1px solid #003366;
+	border-bottom: 1px solid #003366;
+	border-left: 1px solid #003366;
+	width: 100%;
+}
+
+.forms2 {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: 12px;
+	color: #003366;
+	background-color: #FFFFFF;
+	border-top: 1px solid #003366;
+	border-right: 1px solid #003366;
+	border-bottom: 1px solid #003366;
+	border-left: 1px solid #003366;
+
+}
+.formsBlock {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: 12px;
+	color: #003366;
+	background-color: #F2F7F9;
+	border: 1px solid #5BA9CE;
+
+
+}
+
+.PrinAzul {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: normal;
+	font-weight: bold;
+	color: #003366;
+	background-color: #CCCCCC;
+	height: 20px;
+	border-bottom-color: #7C5F49;
+	border-top-color: #ECE8CC;
+	border-left-color: #ECE8CC;
+	border-right-color: #7C5F49;
+
+
+}
+
+.linkAzul01 {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: normal;
+	font-weight: bold;
+	color: #003366;
+	background-color: #D5E3EC;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #AFC1D3;
+	text-align: center;
+	vertical-align: middle;
+	padding: 3px;
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #AFC1D3;
+
+}
+
+.linkAzulRigth {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: normal;
+	font-weight: bold;
+	color: #003366;
+	background-color: #D5E3EC;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #FFFFFF;
+	text-align: right;
+	vertical-align: middle;
+	padding: 2px;
+}
+
+
+.linkAzulLefth {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: normal;
+	font-weight: bold;
+	color: #003366;
+	background-color: #D5E3EC;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #FFFFFF;
+	text-align: left;
+	vertical-align: middle;
+	padding: 2px;
+
+}
+
+
+.linkCinza {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: normal;
+	font-weight: normal;
+	color: #333333;
+	height: 17px;
+	padding-left: 2px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	background-color: #F4F4F4;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #CFCFCF;
+	padding-right: 2px;
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #CFCFCF;
+}
+
+.linkCinzaEscuro {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: normal;
+	font-weight: normal;
+	color: #333333;
+	height: 17px;
+	padding-left: 2px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	background-color: #E9E9E9;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #CDCDCD;
+	padding-right: 2px;
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #CDCDCD;
+}
+
+
+.divisaoAzul {
+	line-height: 9px;
+	background-image:  url(../imagens/shin_azul.gif);
+	background-repeat: repeat-x;
+	background-position: left center;
+	height: 9px;
+
+}
+.botao {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 9px;
+	line-height: normal;
+	font-weight: bold;
+}
+.botaoBusca {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 9px;
+	line-height: normal;
+	font-weight: bold;
+	color: #666666;
+	background-color: #E1E1E1;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #F2F2F2;
+	border-right-color: #CDCDCD;
+	border-bottom-color: #CDCDCD;
+	border-left-color: #F2F2F2;
+	width: 100%;
+
+}
+a:link {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: normal;
+	font-weight: bold;
+	color: #0000FF;
+	text-decoration: none;
+
+}
+a:visited {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: normal;
+	font-weight: bold;
+	color: #0066CC;
+	text-decoration: none;
+}
+a:hover {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: normal;
+	font-weight: bold;
+	color: #990000;
+	text-decoration: underline;
+}
+a:active {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: normal;
+	font-weight: bold;
+	color: #0000FF;
+	text-decoration: none;
+}
+.link {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: normal;
+	font-weight: bold;
+	color: #003366;
+	text-align: left;
+	vertical-align: middle;
+	padding-right: 1px;
+	padding-left: 1px;
+	background-image: url(../imagens/link_meio_azul.gif);
+	background-repeat: no-repeat;
+	background-position: right;
+}
+.link2 {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: normal;
+	font-weight: bold;
+	color: #003366;
+	text-align: left;
+	vertical-align: middle;
+	padding-right: 1px;
+	padding-left: 1px;
+	background-image: url(../imagens/link_meio_gray.gif);
+	background-repeat: no-repeat;
+	background-position: right;
+}
+.tituloDestaque {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: normal;
+	font-weight: bold;
+	color: #0066CC;
+	height: 17px;
+	padding-left: 15px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #FFFFFF;
+
+}
+.iFrame {
+	height: 100%;
+}
+
+.tDcre01LefthB {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	line-height: normal;
+	font-weight: normal;
+	color: #003366;
+	height: 17px;
+	padding-left: 2px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	background-color: #F7F4EA;
+	background-repeat: no-repeat;
+	background-position: left center;
+	text-align: left;
+	vertical-align: middle;
+	padding-right: 2px;
+	border-right-color: #CFCFCF;
+	border-bottom-color: #CFCFCF;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-right-style: solid;
+	border-bottom-style: solid;
+
+
+
+}
+.foto {
+	border: 2px solid #CCCCCC;
+}
