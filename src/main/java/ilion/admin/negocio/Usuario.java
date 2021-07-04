@@ -8,15 +8,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-
-import ilion.terrafos.cadastros.negocio.Fazenda;
 
 @Entity
 @Table(name="adminusuario")
@@ -55,12 +50,6 @@ public class Usuario implements Serializable {
 	
 	@ManyToOne
 	private Perfil perfil;
-	
-	@ManyToMany
-    @JoinTable(name="adminusuario_x_fazendas", joinColumns=
-    {@JoinColumn(name="usuario_id")}, inverseJoinColumns=
-      {@JoinColumn(name="fazenda_id")})
-    private List<Fazenda> fazendas;
 	
 	@Transient
 	private List<String> permissoes;
@@ -174,14 +163,6 @@ public class Usuario implements Serializable {
 
 	public void setConfirmar(String confirmar) {
 		this.confirmar = confirmar;
-	}
-
-	public List<Fazenda> getFazendas() {
-		return fazendas;
-	}
-
-	public void setFazendas(List<Fazenda> fazendas) {
-		this.fazendas = fazendas;
 	}
 
 	public String getSenhaAux() {

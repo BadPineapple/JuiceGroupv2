@@ -19,8 +19,6 @@ import org.springframework.validation.ValidationUtils;
 import ilion.SpringApplicationContext;
 import ilion.email.negocio.Email;
 import ilion.email.negocio.EmailSenderFactory;
-import ilion.terrafos.auth.negocio.TokenDTO;
-import ilion.terrafos.auth.negocio.UsuarioProfileVH;
 import ilion.util.JWTUtil;
 import ilion.util.StringUtil;
 import ilion.util.Uteis;
@@ -353,19 +351,5 @@ public class UsuarioNegocio {
     	logger.info("login: ["+login+"] OK");
 		
     	return usuario;
-	}
-
-	public TokenDTO loginToken(UsuarioProfileVH usuarioProfileVH, String origem) {
-		
-		String json = GSONUteis.getInstance().toJson(usuarioProfileVH.getId());
-		
-		String token = jwtUtil.create(json);
-		
-		TokenDTO tokenDTO = new TokenDTO(token);
-		
-		String email = usuarioProfileVH.getEmail();
-		logger.info("logged OK: [" + email + "], origem: "+origem);
-		
-		return tokenDTO;
 	}
 }

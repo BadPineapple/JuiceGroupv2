@@ -79,29 +79,7 @@ public class ApplicationContextConfig {
     sessionFactory.addAnnotatedClass(ilion.email.negocio.EmailSender.class);
     sessionFactory.addAnnotatedClass(ilion.email.negocio.Email.class);
     
-    sessionFactory.addAnnotatedClass(ilion.terrafos.cadastros.negocio.Fazenda.class);
-    sessionFactory.addAnnotatedClass(ilion.terrafos.cadastros.negocio.Retiro.class);
-    sessionFactory.addAnnotatedClass(ilion.terrafos.cadastros.negocio.Pasto.class);
-    sessionFactory.addAnnotatedClass(ilion.terrafos.cadastros.negocio.Forrageira.class);
-    sessionFactory.addAnnotatedClass(ilion.terrafos.cadastros.negocio.Produto.class);
-    sessionFactory.addAnnotatedClass(ilion.terrafos.cadastros.negocio.CategoriaAnimal.class);
-    sessionFactory.addAnnotatedClass(ilion.terrafos.cadastros.negocio.PlanoDeAcao.class);
     
-    sessionFactory.addAnnotatedClass(ilion.terrafos.cadastrospadroes.negocio.ForrageiraPadrao.class);
-    sessionFactory.addAnnotatedClass(ilion.terrafos.cadastrospadroes.negocio.CategoriaAnimalPadrao.class);
-    sessionFactory.addAnnotatedClass(ilion.terrafos.cadastrospadroes.negocio.ProdutoPadrao.class);
-    
-    sessionFactory.addAnnotatedClass(ilion.terrafos.forragens.negocio.MedicaoForragem.class);
-    sessionFactory.addAnnotatedClass(ilion.terrafos.entrevero.negocio.Entrevero.class);
-    
-    sessionFactory.addAnnotatedClass(ilion.terrafos.animais.negocio.Lote.class);
-    sessionFactory.addAnnotatedClass(ilion.terrafos.animais.negocio.PesoMedio.class);
-    
-    sessionFactory.addAnnotatedClass(ilion.terrafos.cadastros.negocio.Raca.class);
-    
-    sessionFactory.addAnnotatedClass(ilion.terrafos.suplementacao.negocio.Suplementacao.class);
-    
-    sessionFactory.addAnnotatedClass(ilion.terrafos.relatorios.negocio.LogDeAcao.class);
     
     return sessionFactory.buildSessionFactory();
   }

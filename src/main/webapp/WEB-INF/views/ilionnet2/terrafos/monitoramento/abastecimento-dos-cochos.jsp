@@ -7,8 +7,6 @@
         <title>Monitoramento / Abastecimento dos Cochos - <ilion:nomeEmpresa/></title>
         
         <jsp:include page="../../inc/include-head.jsp" flush="true"/>
-		
-		<ilion:googleMapsKey varRetorno="googleMapsKey"/>
         
         <script src="http://maps.google.com/maps/api/js?libraries=drawing,places,geometry&key=${googleMapsKey}" type="text/javascript"></script>
 		
