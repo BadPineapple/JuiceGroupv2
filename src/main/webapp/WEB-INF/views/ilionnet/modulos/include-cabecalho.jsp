@@ -58,7 +58,7 @@
 			<table border="0" align="left" cellpadding="0" cellspacing="0">
               <tr> 
                     <td class="top_combo_esquerdo"></td>
-	                <td class="top_combo_meio"><a href="<ilion:url/>ilionnet/home2">Terraf&oacute;s</a></td>
+	                <td class="top_combo_meio"><a href="<ilion:url/>ilionnet/home2">Vitazure</a></td>
                     <td class="top_combo_direito"></td>
               </tr>
             </table>

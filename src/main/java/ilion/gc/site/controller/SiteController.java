@@ -17,6 +17,8 @@ import ilion.gc.negocio.Artigo;
 import ilion.gc.negocio.ArtigoSiteNegocio;
 import ilion.gc.taglibs.ArtigoParamsVO;
 import ilion.util.contexto.autorizacao.AcessoLivre;
+import ilion.vitazure.model.Pessoa;
+import ilion.vitazure.negocio.PessoaNegocio;
 
 @Controller
 @AcessoLivre
@@ -33,10 +35,15 @@ public class SiteController extends CustomErrorController {
 	@Autowired
 	private ArquivoNegocio arquivoNegocio;
 	
-	@GetMapping(value = { "/", "/home" })
+	@GetMapping(value = { "/",})
+	public String aguarde(HttpServletRequest request) {
+		return "/aguarde";
+	}
+	@GetMapping(value = { "/home" })
 	public String index(HttpServletRequest request) {
-		
-		return "redirect:/ilionnet";
+		Pessoa PessoaSessao = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
+		request.setAttribute("pessoa", PessoaSessao);
+		return "/ilionnet2/vitazure/index";
 	}
 
 	@GetMapping("/404")
@@ -167,12 +174,55 @@ public class SiteController extends CustomErrorController {
 		
 		return "/politica-de-privacidade";
 	}
-//	
-//	@GetMapping("/contato")
-//	public String contato(HttpServletRequest request) {
+	
+	@GetMapping("/como-funciona")
+	public String comoFunciona(HttpServletRequest request) {
+//		ArtigoParamsVO artigoParamsVO = 
+//				ArtigoParamsVO
+//				.build()
+//				.comSite(propNegocio.findValueById(PropEnum.SITE))
+//				.comCategoria("termos-de-uso")
+//				.comOrder("posicao")
+//				.comMaxResults(1)
+//				.comFirstResult(0)
+//				.comDataAtual();
 //		
-//		request.setAttribute("titulo", "Contato");
+//		List artigos = artigoSiteNegocio.listarArtigosSite(artigoParamsVO);
 //		
-//		return "/contato";
-//	}
+//		Artigo artigo = null;
+//		
+//		if( ! artigos.isEmpty() ) {
+//			artigo = (Artigo) artigos.get(0);
+//		}
+//		
+//		request.setAttribute("artigo", artigo);
+		
+		return "/ilionnet2/vitazure/como-funciona";
+	}
+	
+	@GetMapping("/aqui-e-para-voce")
+	public String aquiPraVoce(HttpServletRequest request) {
+		return "/ilionnet2/vitazure/aqui-e-para-voce";
+	}
+	@GetMapping("/para-sua-empresa")
+	public String paraSuaEmpresa(HttpServletRequest request) {
+		return "/ilionnet2/vitazure/aqui-e-para-voce";
+	}
+	@GetMapping("/sou-profissional")
+	public String souProfissional(HttpServletRequest request) {
+		return "/ilionnet2/vitazure/sou-profissional";
+	}
+	@GetMapping("/registre-se-como-psicologo")
+	public String registreComoPsicologo(HttpServletRequest request) {
+		return "/ilionnet2/vitazure/registre-se-como-psicologo";
+	}
+	@GetMapping("/registre-se-como-cliente")
+	public String registreComoCliente(HttpServletRequest request) {
+		return "/ilionnet2/vitazure/registre-se-como-cliente";
+	}
+	@GetMapping("/entrar")
+	public String entrar(HttpServletRequest request) {
+		return "/ilionnet2/vitazure/entrar";
+	}
+	
 }

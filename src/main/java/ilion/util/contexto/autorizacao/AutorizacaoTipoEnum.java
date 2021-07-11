@@ -5,6 +5,7 @@ public enum AutorizacaoTipoEnum {
 	ACESSO_LIVRE(AcessoLivre.class, new AcessoLivreAutorizacaoVerificacao()),
 	USUARIO_LOGADO(UsuarioLogado.class, new UsuarioLogadoAutorizacaoVerificacao()),
 	USUARIO_APP_TOKEN(UsuarioAppToken.class, new UsuarioAppTokenAutorizacaoVerificacao()),
+	PESSOA_LOGADA(PessoaLogada.class, new PessoaLogadaAutorizacaoVerificacao()),
 	;
 	
 	private Class clazzAnnotation;

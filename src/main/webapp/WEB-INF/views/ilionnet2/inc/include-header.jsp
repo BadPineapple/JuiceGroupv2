@@ -116,8 +116,7 @@
 
           <a href="<ilion:url/>ilionnet/home" class="navbar-brand">
 			
-			Terraf&oacute;s
-			<%-- <img src="<ilion:url/>assets/images/satelite-norte.svg"/> --%>
+			Vitazure
 			
           </a>
 

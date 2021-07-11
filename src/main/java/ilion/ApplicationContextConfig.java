@@ -78,8 +78,7 @@ public class ApplicationContextConfig {
 
     sessionFactory.addAnnotatedClass(ilion.email.negocio.EmailSender.class);
     sessionFactory.addAnnotatedClass(ilion.email.negocio.Email.class);
-    
-    
+    sessionFactory.addAnnotatedClass(ilion.vitazure.model.Pessoa.class);
     
     return sessionFactory.buildSessionFactory();
   }

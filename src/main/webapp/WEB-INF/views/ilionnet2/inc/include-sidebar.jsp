@@ -12,80 +12,6 @@
 
  <ul class="nav pmd-sidebar-nav">
 
-
-  <!-- User info -->
-
-  <li class="dropdown pmd-dropdown pmd-user-info visible-xs visible-md visible-sm visible-lg">
-
-   <a aria-expanded="false"
-      data-toggle="dropdown"
-      class="btn-user dropdown-toggle media"
-      data-sidebar="true"
-      aria-expandedhref="javascript:void(0);">
-	<c:choose>
-		<c:when test="${not empty fazendaSessao}">
-		
-		    <div class="media-body media-middle">Fazenda: ${fazendaSessao.nome}</div>
-		
-		    <div class="media-right media-middle"><i class="dic-more-vert dic"></i></div>
-		
-		</c:when>
-		<c:otherwise>
-					
-			<div class="alert alert-danger" role="alert">
-				<em>Nenhuma fazenda selecionada</em>					
-			</div>
-		
-		</c:otherwise>
-	</c:choose>
-   </a>
-
-   <ul class="dropdown-menu">
-
-    <li><a href="<ilion:url/>ilionnet/terrafos/home">In&iacute;cio</a></li>
-	
-	<li><a href="<ilion:url/>ilionnet/terrafos/fazendas">Fazendas</a></li>
-	
-   </ul>
-
-  </li><!-- End user info -->
-
-  <c:if test="${not empty fazendaSessao}">
-  <ilion:permissaoExiste permissoes="terrafos_cadastros">
-  <li class="dropdown pmd-dropdown">
-
-   <a id="cadastros"
-      aria-expanded="false"
-      data-toggle="dropdown"
-      class="btn-user dropdown-toggle media"
-      data-sidebar="true"
-      href="javascript:void(0);">
-
-    <i class="media-left media-middle material-icons">
-     library_add
-    </i>
-
-    <span class="media-body">Cadastros</span>
-
-    <div class="media-right media-bottom"><i class="dic-more-vert dic"></i></div>
-
-   </a>
-
-   <ul class="dropdown-menu">
-
-    <li><a href="<ilion:url/>ilionnet/terrafos/fazendas/${fazendaSessao.id}/retiros">Retiros</a></li>
-    <li><a href="<ilion:url/>ilionnet/terrafos/fazendas/${fazendaSessao.id}/pastos">Pastos</a></li>
-    <li><a href="<ilion:url/>ilionnet/terrafos/fazendas/${fazendaSessao.id}/forrageiras">Forrageiras</a></li>
-    <li><a href="<ilion:url/>ilionnet/terrafos/fazendas/${fazendaSessao.id}/categorias-animal">Categoria Animal</a></li>
-    <li><a href="<ilion:url/>ilionnet/terrafos/fazendas/${fazendaSessao.id}/racas">Raças</a></li>
-    <li><a href="<ilion:url/>ilionnet/terrafos/fazendas/${fazendaSessao.id}/produtos">Produtos</a></li>
-    <li> &nbsp; </li>
-    
-   </ul>
-
-  </li>
-  </ilion:permissaoExiste>
-  </c:if>
   
   <ilion:permissaoExiste permissoes="terrafos_cadastros_padroes">
   <li class="dropdown pmd-dropdown">
@@ -235,7 +161,7 @@
 
                         <g>
 
-                         <path fill="#044B2D" d="M307.555,407.535h-9.108v10.264h9.108V407.535z M287.725,407.535v6.232h9.109v-6.232H287.725z
+                         <path fill="#020202" d="M307.555,407.535h-9.108v10.264h9.108V407.535z M287.725,407.535v6.232h9.109v-6.232H287.725z
 
 M296.834,415.271h-9.109v10.264h9.109V415.271z M307.555,419.303h-9.108v6.232h9.108V419.303z"/>
 
@@ -267,7 +193,7 @@ M296.834,415.271h-9.109v10.264h9.109V415.271z M307.555,419.303h-9.108v6.232h9.10
           enable-background="new 288.64 337.535 18 18"
           xml:space="preserve">
 
-                <path fill="#044B2D" d="M295.39,337.535v2.25h9v13.5h-9v2.25h11.25v-18H295.39z M297.64,342.035v3.375h-9v2.25h9v3.375l3.375-3.375
+                <path fill="#020202" d="M295.39,337.535v2.25h9v13.5h-9v2.25h11.25v-18H295.39z M297.64,342.035v3.375h-9v2.25h9v3.375l3.375-3.375
 
                     l1.125-1.125l-1.125-1.125L297.64,342.035z"/>
 

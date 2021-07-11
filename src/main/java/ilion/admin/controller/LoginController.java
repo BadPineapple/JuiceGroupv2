@@ -74,7 +74,7 @@ public class LoginController extends CustomErrorController {
     		return "redirect:/ilionnet/login";
 		}
     	
-        return "redirect:/ilionnet/terrafos/home";
+        return "redirect:/ilionnet/vitazure/home";
     }
     
     @RequestMapping("/ilionnet/esqueci-minha-senha")

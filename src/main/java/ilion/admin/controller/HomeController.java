@@ -16,7 +16,7 @@ public class HomeController extends CustomErrorController {
 
 	static Logger logger = Logger.getLogger(HomeController.class);
 	
-	@GetMapping("/ilionnet/terrafos/home")
+	@GetMapping("/ilionnet/vitazure/home")
     public String home(HttpServletRequest request) {
 		
 		Usuario usuarioSessao = (Usuario) request.getSession().getAttribute("usuarioSessao");
@@ -27,13 +27,13 @@ public class HomeController extends CustomErrorController {
     @GetMapping("/ilionnet/home2")
     public String home2(HttpServletRequest request) {
     	
-    	return "redirect:/ilionnet/terrafos/home";
+    	return "redirect:/ilionnet/vitazure/home";
     }
     
     @GetMapping("/ilionnet/home")
     public String home1(HttpServletRequest request) {
     	
-    	return "redirect:/ilionnet/terrafos/home";
+    	return "redirect:/ilionnet/vitazure/home";
     }
     
 }
