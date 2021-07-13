@@ -1,5 +1,7 @@
 package ilion.vitazure.negocio;
 
+import java.util.List;
+
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,6 +94,12 @@ public class PessoaNegocio {
 		
 		user = null;
 		return  pessoa;
+	}
+	
+	public List<Pessoa> consultarProfissionais(String email) {
+		DetachedCriteria dc = DetachedCriteria.forClass(Pessoa.class);
+		dc.add(Restrictions.eq("psicologo", true));
+		return (List<Pessoa>) hibernateUtil.list(dc);
 	}
 	
 }

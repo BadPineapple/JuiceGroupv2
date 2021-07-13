@@ -1,29 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!doctype html>
-<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="pt-BR"> <![endif]-->
-<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="pt-BR" <![endif]-->
-<!--[if IE 8]>    <html class="no-js lt-ie9" lang="pt-BR"> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js" lang="pt-BR">
-<!--<![endif]-->
-
+<html class="no-js" lang="pt-BR" ng-app="cadastroPessoaApp" ng-controller="CadastroPessoaController">
 <head>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-	<meta name="author" content="Ilion" />
-	
-	<title>Vitazure</title>
-	
 	<jsp:include page="includes/include-head.jsp" flush="true" />
-	
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>	
+	<script src="../assets/js/vitazure/cadastroPessoa.js"></script>
 </head>
 
 <body id="index" class="home">
-	
     <div id="app">
         <jsp:include page="includes/include-header.jsp" flush="true" />
-    
-
         <div class="content-internas">
             <div class="container">
                 <div class="row">
@@ -56,75 +42,70 @@
                     <div class="col-12 text-center">
                         <h3>Criar nova conta</h3>
                     </div>
-
                     <div class="col-12 col-md-6 offset-md-3 col-xl-6 offset-xl-3">
-                        <form class="form-default" style="padding: 3rem 0; font-weight: 800;">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="input-block">
-                                        <label>Nome completo</label>
-                                        <input type="text" required />
+                      <form ng-submit="submit()" class="form-default" style="padding: 3rem 0; font-weight: 800;">
+						          <angular-initializer
+						            ng-init="pessoa.cliente='true';tipoConta='CL';"/>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="input-block">
+                                            <label>Tipo Conta</label>
+		                                    <select ng-model="tipoConta">
+		                                        <option value="CL">Cliente</option>
+		                                        <option value="PS">Psicologo</option>
+		                                    </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="input-block">
+                                            <label>Nome completo</label>
+                                            <input type="text"  ng-model="pessoa.nome" required />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="input-block">
+                                            <label>Celular</label>
+                                            <input type="text" placeholder="(00) 0000 0000" data-mask="(00) 00000-0000" ng-model="pessoa.celular" required />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="input-block">
+                                            <label>E-mail (Será seu Login)</label>
+                                            <input type="text" ng-model="pessoa.email" required />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="input-block">
+                                            <label>Senha</label>
+                                            <input type="text" ng-model="pessoa.senha" required />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="termos">
+                                            <input type="checkbox" required />
+                                            <span class="new-cadastro">
+                                                Eu declaro que li e concordo com os
+                                                <div class="button-blue line">
+                                                    <a href="#">Termos de serviço.</a>
+                                                </div>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <button type="submit" class="button-secundary" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Criar conta</button>
                                     </div>
                                 </div>
-
-                                <div class="col-12">
-                                    <div class="input-block">
-                                        <label>Celular</label>
-                                        <input type="text" placeholder="(00) 0000 0000" required />
-                                    </div>
-                                </div>
-
-                                <div class="col-12">
-                                    <div class="input-block">
-                                        <label>E-mail (Será seu Login)</label>
-                                        <input type="text" required />
-                                    </div>
-                                </div>
-
-                                <div class="col-12">
-                                    <div class="input-block">
-                                        <label>Data de nascimento</label>
-                                        <input type="text" required />
-                                    </div>
-                                </div>
-
-                                <div class="col-12">
-                                    <div class="input-block">
-                                        <label>Senha</label>
-                                        <input type="text" required />
-                                    </div>
-                                </div>
-
-                                <div class="col-12">
-                                    <div class="termos">
-                                        <input type="checkbox" required />
-                                        <span class="new-cadastro">
-                                            Eu declaro que li e concordo com os
-                                            <div class="button-blue line">
-                                                <a href="#">Termos de serviço.</a>
-                                            </div>
-                                        </span>
-                                    </div>
-                                </div>
-
-                                <!-- <div class="col-12">
-                                    <div class="sou-robo">
-                                        <figure style=" text-align: center; padding: 2rem 0;">
-                                            <img src="images/nao-sou-robo.png" alt="">
-                                        </figure>
-                                    </div>
-                                </div> -->
-
-                                <div class="col-12">
-                                    <button class="button-secundary" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Criar conta</button>
-                                </div>
-                            </div>
-                        </form>
+                            </form>
 
                         <span class="new-cadastro">
                             Já tem uma conta?
                             <div class="button-blue line">
-                                <a href="#"> Entre agora</a>
+                                 <a href="<ilion:url/>entrar">Entre agora</a>
                             </div>
                         </span>
                     </div>
@@ -133,6 +114,31 @@
         </div>
 
         <jsp:include page="includes/include-footer.jsp" flush="true" />
+        <script src="../assets/js/bundle.libs.ilionnet.js"></script>
+			<script src="../assets/js/bundle.scripts.ilionnet.js"></script>
+			<script src="../assets/js/bundle.libs.angular.js"></script>
+            
+            <c:if test="${param.m == 'ok'}">
+	<button 
+		type="button" 
+		data-positionX="right" 
+		data-positionY="top" 
+		data-effect="fadeInUp" 
+		data-message="Dados gravados com sucesso."
+		data-type="success" 
+		class="btn pmd-ripple-effect btn-success pmd-z-depth pmd-alert-toggle"
+		id="alertSucess"
+		style="display:none;">
+		Sucesso
+	</button>
+	<script type="text/javascript">
+		(function() {
+			setTimeout(function() {
+				$('#alertSucess').click();
+			}, 300);
+		})();
+	</script>
+</c:if>
     </div>
 </body>
 </html>

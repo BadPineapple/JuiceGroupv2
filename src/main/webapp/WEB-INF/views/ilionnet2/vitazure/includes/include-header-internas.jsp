@@ -1,11 +1,51 @@
 <%@ include file="/ilionnet/taglibs.jsp"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <header class="header-internas">
+<style>
+.dropbtn {
+  background-color: transparent;
+  color: #18191F;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+  background-color: transparent;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  min-width: 160px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #6DCFF6;}
+
+.show {display: block;}
+</style>
     <div class="container">
         <div class="row">
             <div class="col-6 col-md-8 col-xl-8">
                 <div class="menu-list">
-                    <a href="index.jsp"><img src="../assets/images/logo.png" alt="Vitazure"></a>
+                    <a href="<ilion:url/>home"><img src="../assets/images/logo.png" alt="Vitazure"></a>
 
                     <div class="menu d-none d-md-block">
                         <ul>
@@ -34,14 +74,47 @@
                     </svg>
                 </a>
             </div>
-
-            <div class="col-12 col-md-4 col-xl-4 d-none d-md-block text-right">
+            <c:if test="${pessoa == null}">
+	            <div class="col-12 col-md-4 col-xl-4 d-none d-md-block">
+	                <div class="buttons">
+	                    <a href="<ilion:url/>entrar" class="button-primary">Entrar</a>
+	                    <a href="<ilion:url/>cadastre-se" class="button-secundary">Crie sua conta</a>
+	                </div>
+	            </div>
+	          </c:if>
+	           <c:if test="${pessoa != null}">
+	              <div class="col-12 col-md-4 col-xl-4 d-none d-md-block text-right">
                 <div class="logado">
-                    <span>
-                        Olá ${pessoa.nome} <img src="../assets/images/arrow-down.png" alt="">
-                    </span>
+                    <div class="dropdown">
+					  <a onclick="myFunction()" class="dropbtn">
+	                        Olá ${pessoa.nome} <img src="../assets/images/arrow-down.png" alt="">
+					  </a>
+					  <div id="myDropdown" class="dropdown-content">
+					    <a href="<ilion:url/>/vitazure/informacoes-perfil">Painel Principal</a>
+					    <a href="<ilion:url/>/deslogar">Deslogar</a>
+					  </div>
+					</div>
                 </div>
             </div>
+	       </c:if> 
         </div>
     </div>
+    <script>
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+</script>
 </header>

@@ -82,7 +82,7 @@
                                 <div class="col-12 col-xl-6">
                                     <div class="input-block">
                                         <label>Bairro</label>
-                                        <input type="text" ng-model="pessoa.bairro" required />
+                                        <input type="text" ng-model="pessoa.setor" required />
                                     </div>
                                 </div>
                                 <div class="col-12 col-xl-6">

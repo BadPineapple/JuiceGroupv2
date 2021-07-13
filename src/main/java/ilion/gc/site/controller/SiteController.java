@@ -8,6 +8,8 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import ilion.CustomErrorController;
 import ilion.admin.negocio.PropEnum;
@@ -35,6 +37,9 @@ public class SiteController extends CustomErrorController {
 	@Autowired
 	private ArquivoNegocio arquivoNegocio;
 	
+	@Autowired
+	private PessoaNegocio  pessoaNegocio;
+	
 	@GetMapping(value = { "/",})
 	public String aguarde(HttpServletRequest request) {
 		return "/aguarde";
@@ -43,6 +48,7 @@ public class SiteController extends CustomErrorController {
 	public String index(HttpServletRequest request) {
 		Pessoa PessoaSessao = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
 		request.setAttribute("pessoa", PessoaSessao);
+		request.setAttribute("areaRestrita", false);
 		return "/ilionnet2/vitazure/index";
 	}
 
@@ -196,21 +202,39 @@ public class SiteController extends CustomErrorController {
 //		}
 //		
 //		request.setAttribute("artigo", artigo);
-		
+		Pessoa PessoaSessao = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
+		request.setAttribute("pessoa", PessoaSessao);
+		request.setAttribute("areaRestrita", false);
 		return "/ilionnet2/vitazure/como-funciona";
 	}
 	
 	@GetMapping("/aqui-e-para-voce")
 	public String aquiPraVoce(HttpServletRequest request) {
+		Pessoa PessoaSessao = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
+		request.setAttribute("pessoa", PessoaSessao);
+		request.setAttribute("areaRestrita", false);
 		return "/ilionnet2/vitazure/aqui-e-para-voce";
 	}
 	@GetMapping("/para-sua-empresa")
 	public String paraSuaEmpresa(HttpServletRequest request) {
+		Pessoa PessoaSessao = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
+		request.setAttribute("pessoa", PessoaSessao);
+		request.setAttribute("areaRestrita", false);
 		return "/ilionnet2/vitazure/aqui-e-para-voce";
 	}
 	@GetMapping("/sou-profissional")
 	public String souProfissional(HttpServletRequest request) {
+		Pessoa PessoaSessao = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
+		request.setAttribute("pessoa", PessoaSessao);
+		request.setAttribute("areaRestrita", false);
 		return "/ilionnet2/vitazure/sou-profissional";
+	}
+	
+	@RequestMapping("/resultado-de-busca/{tipoProfissional}/{especialista}")
+	public String buscaProfissional(HttpServletRequest request,@PathVariable String tipoProfissional,@PathVariable String especialista) {
+		List<Pessoa> listPessoa = pessoaNegocio.consultarProfissionais("");
+		request.getSession().setAttribute("listPessoa", listPessoa);
+		return "/ilionnet2/vitazure/resultado-de-busca";
 	}
 	@GetMapping("/registre-se-como-psicologo")
 	public String registreComoPsicologo(HttpServletRequest request) {
@@ -220,9 +244,23 @@ public class SiteController extends CustomErrorController {
 	public String registreComoCliente(HttpServletRequest request) {
 		return "/ilionnet2/vitazure/registre-se-como-cliente";
 	}
+	@GetMapping("/cadastre-se")
+	public String cadastrase(HttpServletRequest request) {
+		return "/ilionnet2/vitazure/nova-conta";
+	}
 	@GetMapping("/entrar")
 	public String entrar(HttpServletRequest request) {
 		return "/ilionnet2/vitazure/entrar";
+	}
+	@GetMapping("/listaProfissionais")
+	public String consultarProfissionais(HttpServletRequest request) {
+		request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
+		Pessoa PessoaSessao = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
+		List<Pessoa> listPessoa = (List<Pessoa>) request.getSession().getAttribute("listPessoa");
+		request.setAttribute("pessoa", PessoaSessao);
+		request.setAttribute("listPessoa", listPessoa);
+		request.setAttribute("areaRestrita", false);
+		return "/ilionnet2/vitazure/resultado-de-busca";
 	}
 	
 }

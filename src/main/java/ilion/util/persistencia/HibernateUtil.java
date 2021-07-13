@@ -73,7 +73,8 @@ public class HibernateUtil {
 	}
 
 	public void update(Object e) {
-
+		getCurrentSession().flush();
+		getCurrentSession().clear();
 		getCurrentSession().update(e);
 	}
 

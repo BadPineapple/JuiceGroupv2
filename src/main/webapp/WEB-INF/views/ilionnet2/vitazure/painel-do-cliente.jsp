@@ -8,7 +8,7 @@
 <body id="index" class="home">
 	
     <div id="app">
-        <jsp:include page="includes/include-header.jsp" flush="true" />
+        <jsp:include page="includes/include-header-internas.jsp" flush="true" />
         <jsp:include page="includes/include-menu-painel.jsp" flush="true" />
         <jsp:include page="includes/include-painel-person.jsp" flush="true" />
         <div class="area-white">
