@@ -61,7 +61,7 @@
                 </div>
             </div>
 
-            <div class="col-6 d-md-none text-right">
+            <div class="col-2 d-md-none text-right">
                 <a href="#menu" class="menu-mobile d-md-none">
                     <svg width="26px" height="16px" viewBox="0 0 26 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -91,7 +91,7 @@
 					  </a>
 					  <div id="myDropdown" class="dropdown-content">
 					    <a href="<ilion:url/>/vitazure/informacoes-perfil">Painel Principal</a>
-					    <a href="<ilion:url/>/deslogar">Deslogar</a>
+					    <a href="<ilion:url/>/deslogar">Sair</a>
 					  </div>
 					</div>
                 </div>

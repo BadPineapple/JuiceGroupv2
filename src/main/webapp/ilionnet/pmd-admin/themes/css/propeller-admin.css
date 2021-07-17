@@ -292,7 +292,7 @@ h2.typo-fill-secondary{ color:rgba(77, 87, 93, 0.68); font-size:22px;}
 .pmd-content { margin-left: 64px;}
 .pmd-sidebar { width:64px; min-width:64px; transform:translate3d(0px, 0px, 0px); -webkit-transform: translate3d(0, 0, 0); -moz-transform: translate3d(0, 0, 0); background-color:#fff;}
 .pmd-sidebar.pmd-sidebar-open {min-width: 274px; width: 274px;}
-.pmd-sidebar .pmd-sidebar-nav li a { padding: 18px 20px 16px; color:#020202; background-color:transparent;}
+.pmd-sidebar .pmd-sidebar-nav li a { padding: 18px 13px 16px; color:#020202; background-color:transparent;}
 .pmd-sidebar-left .nav > li > a:hover svg.stroke-fill path, .pmd-sidebar-left .nav > li > a:focus svg.stroke-fill path, .pmd-sidebar-left .nav > li > a:active svg.stroke-fill path, .pmd-sidebar-left .nav > li > a.active svg.stroke-fill path {stroke: #fff; fill: none;}
 .pmd-sidebar-left .nav > li > a:hover svg circle, .pmd-sidebar-left .nav > li > a:focus svg circle, .pmd-sidebar-left .nav > li > a:active svg circle, .pmd-sidebar-left .nav > li > a.active svg circle {fill: #fff;}
 /*online order icon*/

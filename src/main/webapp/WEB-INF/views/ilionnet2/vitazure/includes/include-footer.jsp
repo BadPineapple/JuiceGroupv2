@@ -12,7 +12,7 @@
                     <ul>
                         <li><a href="index.jsp" class="line">Home</a></li>
 
-                        <li><a href="como-funciona.jsp" class="line">Como funciona</a></li>
+                        <li><a href="como-funcionas.jsp" class="line">Como funciona</a></li>
 
                         <li><a href="aqui-e-para-voce.jsp" class="line">Aqui é pra você</a></li>
 
@@ -68,14 +68,20 @@
 
 <nav id="menu">
     <ul>
-        <li><a href="index.jsp">Home</a></li>
-        <li><a href="como-funciona.jsp">Como funciona</a></li>
-        <li><a href="aqui-e-para-voce.jsp">Aqui é para você</a></li>
-        <li><a href="sou-profissional.jsp">Sou profissional</a></li>
-        <li><a href="para-sua-empresa.jsp">Para sua empresa</a></li>
-        <li><a href="entrar.jsp">Entrar</a></li>
-        <li><a href="criar-conta-psicologo.jsp">Crie sua conta</a></li>
-
+    
+        <li><a href="<ilion:url/>home">Home</a></li>
+        <li><a href="<ilion:url/>como-funciona" class="line">Como funciona</a></li>
+        <li><a href="<ilion:url/>aqui-e-para-voce" class="line">Aqui é para você</a></li>
+        <li><a href="<ilion:url/>sou-profissional" class="line">Sou Profissional</a></li>
+        <li><a href="<ilion:url/>para-sua-empresa" class="line">Para sua empresa</a></li>
+        <c:if test="${pessoa == null}">
+         <li><a href="<ilion:url/>entrar">Entrar</a></li>
+         <li><a href="<ilion:url/>cadastre-se">Crie sua conta</a></li>
+		</c:if>
+		<c:if test="${pessoa != null}">
+		  <a href="<ilion:url/>/vitazure/informacoes-perfil">Painel Principal</a>
+		  <a href="<ilion:url/>/deslogar">Sair</a>
+		</c:if>
     </ul>
 </nav>
 

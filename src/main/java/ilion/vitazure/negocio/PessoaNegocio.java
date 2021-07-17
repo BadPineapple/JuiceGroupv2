@@ -3,16 +3,23 @@ package ilion.vitazure.negocio;
 import java.util.List;
 
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ilion.admin.negocio.Usuario;
+import ilion.util.StatusEnum;
 import ilion.util.StringUtil;
 import ilion.util.Uteis;
+import ilion.util.VLHForm;
+import ilion.util.ValueListInfo;
+import ilion.util.busca.PalavrasChaveCondicoes;
 import ilion.util.exceptions.ValidacaoException;
 import ilion.util.persistencia.HibernateUtil;
 import ilion.vitazure.model.Pessoa;
+import net.mlw.vlh.ValueList;
 
 @Service
 @SuppressWarnings("unchecked")
@@ -30,7 +37,7 @@ public class PessoaNegocio {
 	public Pessoa consultarPorEmail(String email) {
 		DetachedCriteria dc = DetachedCriteria.forClass(Pessoa.class);
 		dc.add(Restrictions.eq("email", email));
-		return (Pessoa) hibernateUtil.uniqueResult(dc);
+		return (Pessoa) hibernateUtil.consultarUniqueResult(dc);
 	}
 
 	@Transactional
@@ -45,8 +52,8 @@ public class PessoaNegocio {
 	}
 	
 	@Transactional
-	public void excluir(Pessoa pessoa) {
-		pessoa = (Pessoa) hibernateUtil.findById(Pessoa.class, pessoa.getId());
+	public void excluir(Long idPessoa) {
+		Pessoa pessoa = (Pessoa) hibernateUtil.findById(Pessoa.class, idPessoa);
 		hibernateUtil.delete(pessoa);
 	}
 	
@@ -100,6 +107,37 @@ public class PessoaNegocio {
 		DetachedCriteria dc = DetachedCriteria.forClass(Pessoa.class);
 		dc.add(Restrictions.eq("psicologo", true));
 		return (List<Pessoa>) hibernateUtil.list(dc);
+	}
+	
+	public ValueList buscar(VLHForm vlhForm, ValueListInfo valueListInfo , Usuario usuarioSessao , String tipoPessoa) {
+
+		DetachedCriteria dc = DetachedCriteria.forClass(Pessoa.class);
+		dc.add(Restrictions.eq(tipoPessoa, true));
+		if (!Uteis.ehNuloOuVazio(vlhForm.getPalavraChave())) {
+			Disjunction disjunction = Restrictions.disjunction();
+			List<String> condicoes = PalavrasChaveCondicoes.nova().comPalavrasChave(vlhForm.getPalavraChave()).gerar();
+			for (String condicao : condicoes) {
+				disjunction.add( Restrictions.ilike("nome", condicao));
+				disjunction.add( Restrictions.ilike("email", condicao));
+			}
+			Long id = Uteis.converterLong(vlhForm.getPalavraChave());
+
+			if (id != null) {
+				disjunction.add(Restrictions.eq("id", id));
+			}
+			dc.add(disjunction);
+		}
+
+		StatusEnum statusEnum = StatusEnum.fromString(vlhForm.getStatus());
+
+		if (statusEnum != null) {
+			dc.add(Restrictions.eq("status", statusEnum));
+		}
+		
+		ValueList notificacaos = hibernateUtil.consultarValueList(dc, org.hibernate.criterion.Order.desc("id"), valueListInfo);
+
+		return notificacaos;
+
 	}
 	
 }

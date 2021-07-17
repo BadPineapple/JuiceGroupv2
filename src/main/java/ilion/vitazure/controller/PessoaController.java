@@ -33,7 +33,7 @@ public class PessoaController {
 	      try {
 	    	  pessoa = pessoaNegocio.incluirAtualizar(pessoa);
 	    	  request.getSession().setAttribute(PessoaNegocio.ATRIBUTO_SESSAO, pessoa);
-			return new ResponseEntity<>(new JsonString("Categoria salva com sucesso!"), HttpStatus.OK);
+			return new ResponseEntity<>(new JsonString("Cadastro salvo com sucesso!"), HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<>(new JsonString(e.getMessage()), HttpStatus.BAD_REQUEST);
@@ -45,7 +45,7 @@ public class PessoaController {
 		  try {
 			  pessoa = pessoaNegocio.login(pessoa);
 			  request.getSession().setAttribute(PessoaNegocio.ATRIBUTO_SESSAO, pessoa);
-			  return new ResponseEntity<>(new JsonString("ok"), HttpStatus.OK);
+			  return new ResponseEntity<>(new JsonString("Logadando"), HttpStatus.OK);
 		  } catch (Exception e) {
 			  e.printStackTrace();
 			  return new ResponseEntity<>(new JsonString(e.getMessage()), HttpStatus.BAD_REQUEST);

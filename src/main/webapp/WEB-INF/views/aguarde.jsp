@@ -2,9 +2,8 @@
 
 <!DOCTYPE html>
 <html lang="pt" dir="ltr" style="background: #f9f9f9;">
-
-<%-- 	<jsp:include page="inc/include-head.jsp" /> --%>
-
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/images/logo-square.png">
+<title>Vitazure</title>
 <body>
 
 	<style>
@@ -28,16 +27,11 @@
 		}
 		
 		.mensagem {
-			color: #555553;
 			font-weight: 100;
     		font-size: 32px;
-	    	transform: scale(.75, 1);
-	    	text-shadow: 1px 1px white, -1px -1px #16739a;
 		}
 		
 		.row {
-		     margin-right: -15px;
-		     margin-left: -15px;
 			 text-align: center;
 		}
 		
@@ -45,7 +39,7 @@
 
 	<div class="row">
 		<div class="col-md-12 logotipo">
-			<img src="assets/images/logo.png" alt="logotipo"/>
+			<img src="assets/images/VITAZURE_LOGO_COR.png" style="width: 349px;" alt="logotipo"/>
 		</div>
 		
 		<div class="col-md-12">

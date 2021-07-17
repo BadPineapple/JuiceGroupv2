@@ -233,7 +233,7 @@ public class SiteController extends CustomErrorController {
 		Pessoa PessoaSessao = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
 		request.setAttribute("pessoa", PessoaSessao);
 		request.setAttribute("areaRestrita", false);
-		return "/ilionnet2/vitazure/aqui-e-para-voce";
+		return "/ilionnet2/vitazure/para-sua-empresa";
 	}
 	@GetMapping("/sou-profissional")
 	public String souProfissional(HttpServletRequest request) {
@@ -265,6 +265,7 @@ public class SiteController extends CustomErrorController {
 	public String entrar(HttpServletRequest request) {
 		return "/ilionnet2/vitazure/entrar";
 	}
+	
 	@GetMapping("/listaProfissionais")
 	public String consultarProfissionais(HttpServletRequest request) {
 		request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
@@ -292,10 +293,10 @@ public class SiteController extends CustomErrorController {
 		//Datas apenas temporárias
 		//Formatação padrão da data yyyy-MM-ddThh-mm-ss.000Z
 		String startDate = sdfData.format(new Date(newDate.getTime()));
-		String startHour = sdfHora.format(new Date(newDate.getTime() + 1 * 1000)); // adiciona 1 min a data de início
+		String startHour = sdfHora.format(new Date(newDate.getTime() + 2 * 1000)); // adiciona 1 min a data de início
 
 		String endDate = sdfData.format(new Date(newDate.getTime()));
-		String endHour = sdfHora.format(new Date(newDate.getTime()  + 1 * 1000)); // 1 min após o inicio
+		String endHour = sdfHora.format(new Date(newDate.getTime()  + (5 * 60 * 1000))); // 1 min após o inicio
 
 		try {
 			HttpPost requestJson = new HttpPost("https://api.whereby.dev/v1/meetings"); //url da api

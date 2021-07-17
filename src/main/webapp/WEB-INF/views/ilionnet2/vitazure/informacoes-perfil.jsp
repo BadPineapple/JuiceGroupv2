@@ -2,14 +2,9 @@
 <!doctype html>
 <html class="no-js" lang="pt-BR">
 <head>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-	<meta name="author" content="Ilion" />
-	
-	<title>Vitazure</title>
-	
 	<jsp:include page="includes/include-head.jsp" flush="true" />
-	
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>	
+	<script src="../assets/js/vitazure/informacoesPerfil.js"></script>
 </head>
 
 <body>
@@ -48,14 +43,11 @@
                                         <div class="col-12">
                                             <div class="perfil">
                                                 <label for="avatar" class="photo-perfil">
-                                                
                                                     <input type="file" name="avatar" id="avatar" style="display: none;">
                                                     <figure>
                                                         <img src="../assets/images/perfil.png" alt="">
                                                     </figure>
-
                                                     <p>Alterar foto</p>
-                                                    
                                                 </label>
                                             </div>
                                         </div>
@@ -63,79 +55,68 @@
                                         <div class="col-12 col-md-6 col-xl-6">
                                             <div class="input-block">
                                                 <label>CPF</label>
-                                                <input type="text" required/>
+                                                <input type="text" ng-model="profissional.pessoa.cpf" required/>
                                             </div>
                                         </div>
 
                                         <div class="col-12 col-md-6 col-xl-6">
                                             <div class="input-block">
                                                 <label>Data de Nascimento</label>
-                                                <input type="text" required/>
+                                                <input type="text" ng-model="profissional.pessoa.dataNascimento" required/>
                                             </div>
                                         </div>
 
                                         <div class="col-12 col-md-6 col-xl-6">
                                             <div class="input-block">
                                                 <label>Documento do (CRP/CRM)</label>
-                                                <input type="text" required/>
+                                                <input type="text" ng-model="profissional.documentoCrpCrm" required/>
                                             </div>
                                         </div>
 
                                         <div class="col-12 col-md-6 col-xl-6">
                                             <div class="input-block">
                                                 <label>Cadastro do E-Psi</label>
-                                                <input type="text" required/>
+                                                <input type="text" ng-model="profissional.cadastroEpsi" required/>
                                             </div>
                                         </div>
 
                                         <div class="col-12">
                                             <div class="input-block">
                                                 <label>Título Profissional</label>
-                                                <input type="text" required/>
+                                                <input type="text" ng-model="profissional.tituloProfissional" required/>
                                             </div>
                                         </div>
 
                                         <div class="col-12">
                                             <div class="input-block">
                                                 <label>Tipo Profissional</label>
-                                                <select>
-                                                    <option></option>
-                                                    <option value="psicólogo">psicólogo</option>
-                                                    <option value="psicanalista">psicanalista</option>
-                                                    <option value="terapeuta">terapeuta</option>
-                                                </select>
+                                                <select ng-model="profissional.tipoProfissional" class="form-control input-sm">
+													<c:forEach var="tipoProfissional" items="${tiposProfissional}">
+				   							          <option value="${tipoProfissional}">${tipoProfissional.valor}</option>
+										            </c:forEach>
+									           </select>
                                             </div>
                                         </div>
 
                                         <div class="col-12">
                                             <div class="input-block">
                                                 <label>Especialidade</label>
-                                                <select>
-                                                    <option></option>
-                                                    <option value="relacionamento">relacionamento</option>
-                                                    <option value="Psicopedagogia">Psicopedagogia</option>
-                                                    <option value="Psicomotricidade">Psicomotricidade</option>
-                                                </select>
+                                                <select ng-model="profissional.especialidade" class="form-control input-sm">
+													<c:forEach var="especialidade" items="${especialidades}">
+				   							          <option value="${especialidade}">${especialidade.valor}</option>
+										            </c:forEach>
+									           </select>
                                             </div>
                                         </div>
 
                                         <div class="col-12">
                                             <div class="input-block">
                                                 <label>Temas de Trabalho</label>
-                                                <select style="background: none;">
-                                                    <option></option>
-                                                    <option value="relacionamento">relacionamento</option>
-                                                    <option value="Psicopedagogia">Psicopedagogia</option>
-                                                    <option value="Psicomotricidade">Psicomotricidade</option>
-                                                </select>
-
-                                                <!-- <div class="temas-title select">
-                                                    <p>Adicionar área</p>
-                                                    <figure>
-                                                        <img src="images/plus.png" alt="">
-                                                    </figure>
-                                                </div> -->
-
+                                               <select ng-model="profissional.temasTrabalho" class="form-control input-sm">
+													<c:forEach var="temas" items="${temasTrabalho}">
+				   							          <option value="${temas}">${temas.valor}</option>
+										            </c:forEach>
+									           </select>
                                                 <strong>
                                                     Acompanhamento psicológico, Ansiedade, Anorexia nervisa,  Autismo, Autoestima, Conflitos amorosos, Conflitos familiáres, Depressão.
                                                 </strong>
@@ -145,19 +126,18 @@
                                         <div class="col-12">
                                             <div class="input-block">
                                                 <label>Tempo de duração do atendimento</label>
-                                                <select>
-                                                    <option></option>
-                                                    <option value="50 minutos">50 minutos</option>
-                                                    <option value="60 minutos">60 minutos</option>
-                                                    <option value="70 minutos">70 minutos</option>
-                                                </select>
+                                                <select ng-model="profissional.duracaoAtendimento" class="form-control input-sm">
+													<c:forEach var="duracaoAtendimento" items="${duracoes}">
+				   							          <option value="${duracaoAtendimento}">${duracaoAtendimento.valor}</option>
+										            </c:forEach>
+									           </select>
                                             </div>
                                         </div>
 
                                         <div class="col-12">
                                             <div class="input-block">
                                                 <label>Bibliografia</label>
-                                                <textarea cols="20" rows="5" placeholder="Informe aqui sua vida profissional. Procure ser mais claro possível." style="color: #A6A6A6"></textarea>
+                                                <textarea cols="20" rows="5" ng-model="profissional.biografia" placeholder="Informe aqui sua vida profissional. Procure ser mais claro possível." style="color: #A6A6A6"></textarea>
                                             </div>
                                         </div>
 
@@ -193,69 +173,65 @@
                                         <div class="col-12">
                                             <div class="input-title">
                                                 <p>Endereço</p>
-
-                                                <!-- <div class="temas-title">
-                                                    <p>Adicionar mais um endereço</p>
-                                                    <figure>
-                                                        <img src="images/plus.png" alt="">
-                                                    </figure>
-                                                </div> -->
                                             </div>
-
                                             <div class="row">
                                                 <div class="col-12 col-md-6 col-xl-6">
                                                     <div class="input-block">
                                                         <label>CEP</label>
-                                                        <input type="text" required/>
+                                                        <input type="text" ng-model="profissional.cep"  required/>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-12 col-md-6 col-xl-6">
                                                     <div class="input-block">
                                                         <label>Logradouro</label>
-                                                        <input type="text" required/>
+                                                        <input type="text" ng-model="profissional.logradouro"  required/>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-12 col-md-6 col-xl-6">
                                                     <div class="input-block">
                                                         <label>Número</label>
-                                                        <input type="text" required/>
+                                                        <input type="text" ng-model="profissional.numero" required/>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-12 col-md-6 col-xl-6">
                                                     <div class="input-block">
                                                         <label>Bairro</label>
-                                                        <input type="text" required/>
+                                                        <input type="text" ng-model="profissional.bairro" required/>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-12 col-md-6 col-xl-6">
                                                     <div class="input-block">
                                                         <label>Estado</label>
-                                                        <input type="text" required/>
+                                                        <select ng-model="profissional.estado" class="form-control input-sm">
+															<c:forEach var="estado" items="${estados}">
+						   							          <option value="${estado}">${estado.valor}</option>
+												            </c:forEach>
+											           </select>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-12 col-md-6 col-xl-6">
                                                     <div class="input-block">
                                                         <label>Cidade</label>
-                                                        <input type="text" required/>
+                                                        <input type="text" ng-model="profissional.cidade" required/>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-12 col-md-6 col-xl-6">
                                                     <div class="input-block">
                                                         <label>Complemento</label>
-                                                        <input type="text" required/>
+                                                        <input type="text" ng-model="profissional.complemento" required/>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-12 col-md-6 col-xl-6">
                                                     <div class="input-block">
                                                         <label>Link do Gogle Maps</label>
-                                                        <input type="text" required/>
+                                                        <input type="text" ng-model="profissional.linkGoogleMaps" required/>
                                                     </div>
                                                 </div>
 
@@ -274,14 +250,11 @@
 
                                     <div class="duvidas">
                                         <span>?</span>
-
                                         <p><b>Dicas de como Cobrar</b> <br/>É importante que o valor da consulta online seja menor que o da consulta presencial. Afinal não estão presentes vários custos relativos a estrutura física de um consultório.</p>
                                     </div>
                                 </div>
-
                                 <div class="toggle-body vitazure">
                                     <div class="row">
-
                                         <div class="col-12">
                                             <div class="input-block">
                                                 <label>Tempo de consulta:</label>
@@ -296,21 +269,18 @@
                                                 </select>
                                             </div>
                                         </div>
-    
                                         <div class="col-12">
                                             <div class="input-block">
                                                 <label>Valor da consulta online:</label>
                                                 <input type="text" required/>
                                             </div>
                                         </div>
-    
                                         <div class="col-12">
                                             <div class="input-block">
                                                 <label>Valor da consulta presencial:</label>
                                                 <input type="text" required />
                                             </div>
                                         </div>
-    
                                         <div class="col-12">
                                             <div class="input-block">
                                                 <label>Tempo de antecendencia:</label>
@@ -360,66 +330,64 @@
                                         <div class="col-12">
                                             <div class="input-block">
                                                 <label>Tipo da conta:</label>
-                                                <select>
-                                                    <option></option>
-                                                    <option value="conta corrente">Conta corrente</option>
-                                                    <option value="poupança">Poupança</option>
-                                                </select>
+                                                 <select ng-model="profissional.tipoConta" class="form-control input-sm">
+														<c:forEach var="tipoConta" items="${tiposConta}">
+				   							                <option value="${tipoConta}">${tipoConta.valor}</option>
+										                </c:forEach>
+									                </select>
                                             </div>
                                         </div>
         
                                         <div class="col-12">
                                             <div class="input-block">
                                                 <label>Banco:</label>
-                                                <select>
-                                                    <option></option>
-                                                    <option value="Itaú">Itaú</option>
-                                                    <option value="Bradesco">Bradesco</option>
-                                                    <option value="Caixa">Caixa</option>
-                                                    <option value="Nubank">Nubank</option>
-                                                </select>
+                                               <select ng-model="profissional.banco" class="form-control input-sm">
+														<c:forEach var="banco" items="${bancos}">
+				   							                <option value="${banco}">${banco.valor}</option>
+										                </c:forEach>
+									            </select>
                                             </div>
                                         </div>
         
                                         <div class="col-12">
                                             <div class="input-block">
                                                 <label>Agência:</label>
-                                                <input type="text" required />
+                                                <input type="text" ng-model="profissional.agencia" required />
                                             </div>
                                         </div>
         
                                         <div class="col-12">
                                             <div class="input-block">
                                                 <label>Conta:</label>
-                                                <input type="text" required />
+                                                <input type="text" ng-model="profissional.conta" required />
                                             </div>
                                         </div>
         
                                         <div class="col-12">
                                             <div class="input-block">
                                                 <label>Conta (dígito verificador):</label>
-                                                <input type="text" required />
+                                                <input type="text" ng-model="profissional.digitoVerificador" />
                                             </div>
                                         </div>
         
                                         <div class="col-12">
                                             <div class="input-block">
                                                 <label>Nome do favorecido</label>
-                                                <input type="text" required />
+                                                <input type="text" ng-model="profissional.nomeFavorecido" required />
                                             </div>
                                         </div>
 
-                                        <div class="col-12">
-                                            <div class="input-block">
-                                                <div class="pix">
-                                                    <img src="images/pix.png" alt="">
-                                                    <p>Novidade! Informe sua chave pix</p>
-                                                </div>
+<!--                                         <div class="col-12"> -->
+<!--                                             <div class="input-block"> -->
+<!--                                                 <div class="pix"> -->
+<!--                                                     <img src="images/pix.png" alt=""> -->
+<!--                                                     <p>Novidade! Informe sua chave pix</p> -->
+<!--                                                 </div> -->
 
-                                                <label>Pix</label>
-                                                <input type="text" required />
-                                            </div>
-                                        </div>
+<!--                                                 <label>Pix</label> -->
+<!--                                                 <input type="text" required /> -->
+<!--                                             </div> -->
+<!--                                         </div> -->
 
                                         <div class="col-12">
                                             <button class="button-secundary checkbox-button" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Salvar</button>
@@ -450,35 +418,35 @@
 
                                         <div class="col-12">
                                             <div class="checkbox">
-                                                <input type="checkbox" required />
+                                                <input type="checkbox" ng-model="profissional.convenio20" required />
                                                 <label>Habilitar opção para realizar atendimento para os convênios no valor de R$20,00</label>
                                             </div>
                                         </div>
     
                                         <div class="col-12">
                                             <div class="checkbox">
-                                                <input type="checkbox" required />
+                                                <input type="checkbox" ng-model="profissional.convenio30" required />
                                                 <label>Habilitar opção para realizar atendimento para os convênios no valor de R$30,00</label>
                                             </div>
                                         </div>
     
                                         <div class="col-12">
                                             <div class="checkbox">
-                                                <input type="checkbox" required />
+                                                <input type="checkbox" ng-model="profissional.convenio40" required />
                                                 <label>Habilitar opção para realizar atendimento para os convênios no valor de R$40,00</label>
                                             </div>
                                         </div>
     
                                         <div class="col-12">
                                             <div class="checkbox">
-                                                <input type="checkbox" required />
+                                                <input type="checkbox" ng-model="profissional.convenio50" required />
                                                 <label>Habilitar opção para realizar atendimento para os convênios no valor de R$50,00</label>
                                             </div>
                                         </div>
     
                                         <div class="col-12">
                                             <div class="checkbox">
-                                                <input type="checkbox" required />
+                                                <input type="checkbox" ng-model="profissional.convenio60" required />
                                                 <label>Habilitar opção para realizar atendimento para os convênios no valor de R$60,00</label>
                                             </div>
                                         </div>
@@ -512,21 +480,21 @@
 
                                         <div class="col-12">
                                             <div class="checkbox">
-                                                <input type="checkbox" required />
+                                                <input type="checkbox" ng-model="profissional.pacote2com30Desconto" required />
                                                 <label>Pacote com 2 consultas por 30% de desconto cada</label>
                                             </div>
                                         </div>
     
                                         <div class="col-12">
                                             <div class="checkbox">
-                                                <input type="checkbox" required />
+                                                <input type="checkbox" ng-model="profissional.pacote3com40Desconto" required />
                                                 <label>Pacote com 3 consultas por 40% de desconto cada</label>
                                             </div>
                                         </div>
     
                                         <div class="col-12">
                                             <div class="checkbox">
-                                                <input type="checkbox" required />
+                                                <input type="checkbox" ng-model="profissional.pacote4com50Desconto" required />
                                                 <label>Pacote com 4 consultas por 50% de desconto cada</label>
                                             </div>
                                         </div>
@@ -560,7 +528,7 @@
 
                                         <div class="col-12">
                                             <div class="checkbox">
-                                                <input type="checkbox" required />
+                                                <input type="checkbox" ng-model="profissional.primeiraConsultaCortesia" required />
                                                 <label>Habilitar opção para uma primeira consulta cortesia dos novos pacientes</label>
                                             </div>
     
@@ -580,7 +548,6 @@
 
                                     <div class="duvidas">
                                         <span>?</span>
-
                                         <p><b>Dicas de como Cobrar</b> <br/>É importante que o valor da consulta online seja menor que o da consulta presencial. Afinal não estão presentes vários custos relativos a estrutura física de um consultório.</p>
                                     </div>
                                 </div>
@@ -591,7 +558,7 @@
     
                                             <p>Habilitando essa informação você aparecerá como psicólogo fluente em Libras</p>
                                             <div class="checkbox">
-                                                <input type="checkbox" required />
+                                                <input type="checkbox"  ng-model="profissional.atendimentoPorLibras" required />
                                                 <label>Confirmar que atende em Libras</label>
                                             </div>
                                         </div>
@@ -606,10 +573,8 @@
                             <div class="match-toggle">
                                 <div class="toggle-header">
                                     <strong>Consulta com desconto</strong>
-
                                     <div class="duvidas">
                                         <span>?</span>
-
                                         <p><b>Dicas de como Cobrar</b> <br/>É importante que o valor da consulta online seja menor que o da consulta presencial. Afinal não estão presentes vários custos relativos a estrutura física de um consultório.</p>
                                     </div>
                                 </div>
@@ -624,7 +589,7 @@
 
                                         <div class="col-12">
                                             <div class="checkbox">
-                                                <input type="checkbox" required />
+                                                <input type="checkbox" ng-model="profissional.habilitarDesconto40" required />
                                                 <label>Habilitar desconto de R$40,00</label>
                                             </div>
     
@@ -641,14 +606,11 @@
                             <div class="match-toggle">
                                 <div class="toggle-header">
                                     <strong>Aviso de férias</strong>
-
                                     <div class="duvidas">
                                         <span>?</span>
-
                                         <p><b>Dicas de como Cobrar</b> <br/>É importante que o valor da consulta online seja menor que o da consulta presencial. Afinal não estão presentes vários custos relativos a estrutura física de um consultório.</p>
                                     </div>
                                 </div>
-    
                                 <div class="toggle-body vitazure">
                                     <div class="row">
                                         <div class="col-12">
@@ -659,7 +621,7 @@
 
                                         <div class="col-12">
                                             <div class="checkbox">
-                                                <input type="checkbox" required />
+                                                <input type="checkbox" ng-model="profissional.avisoFerias" required />
                                                 <label>Retirar agenda do perfil de forma temporária</label>
                                             </div>
                                         </div>

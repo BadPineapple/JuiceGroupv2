@@ -22,7 +22,7 @@ function logar($scope, $http, $window) {
         alert_error(response.data.message);
     })
 }
-function logar($scope, $http, $window) {
+function deslogar($scope, $http, $window) {
 	$http.get("/deslogar")
         .then(function (response) {
            $window.location.href = "/home";

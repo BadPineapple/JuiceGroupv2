@@ -52,7 +52,7 @@
                                             <label>Tipo Conta</label>
 		                                    <select ng-model="tipoConta">
 		                                        <option value="CL">Cliente</option>
-		                                        <option value="PS">Psicologo</option>
+		                                        <option value="PS">Profissional</option>
 		                                    </select>
                                         </div>
                                     </div>
