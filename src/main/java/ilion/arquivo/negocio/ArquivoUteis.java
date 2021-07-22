@@ -23,12 +23,22 @@ import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.channels.WritableByteChannel;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
+import javax.validation.ValidationException;
+
+import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import ilion.admin.negocio.PropEnum;
 import ilion.admin.negocio.PropNegocio;
@@ -47,6 +57,12 @@ public class ArquivoUteis {
 	protected String pathArquivos;
 	
 	protected String enderecoArquivos;
+	
+	protected static String url;
+	
+	private static final String SLASH_WINDOWS = "\\";
+	private static final String SLASH_LINUX = "/";
+	
 	
 	public ArquivoUteis() {
 		super();
@@ -489,4 +505,50 @@ public class ArquivoUteis {
 			logger.error("Exception while reading the Image ", ioe);
 		}
 	}
+	
+	 public  List<Arquivo> uploadArquivos(List<MultipartFile> arquivos, String caminho, String pacote) {
+
+		    List<Arquivo> ar = new ArrayList<>();
+
+		    for (MultipartFile file : arquivos) {
+		      String extension = FilenameUtils.getExtension(file.getOriginalFilename());
+		      String fileName = FilenameUtils.removeExtension(file.getOriginalFilename()).concat("_").concat(String.valueOf(new Date().getTime())).concat(".").concat(extension);
+		      java.io.File basePath = new java.io.File(caminho.concat(SLASH_LINUX).concat(pacote).concat(SLASH_LINUX));
+		      if (!basePath.exists()) {
+		        basePath.mkdirs();
+		      }
+		      Path newPath = Paths.get(caminho + SLASH_LINUX + pacote + SLASH_LINUX + fileName);
+		      try {
+
+		        if (!file.getOriginalFilename().isEmpty()) {
+		          Files.copy(file.getInputStream(), newPath);
+		        } else {
+		          throw new ValidationException("Arquivo inválido.");
+		        }
+		      } catch (IOException e) {
+		        throw new ValidationException("Houve um erro: " + e.getMessage());
+		      }
+		      String staticPath =  getUrl() +"/static/arquivos/" + pacote;
+		      Arquivo arquivo = new Arquivo();
+		      arquivo.setNomeClasse(pacote);
+		      arquivo.setArquivo1(fileName);
+		      arquivo.setLink(staticPath.concat("/").concat(fileName));
+		      arquivo.setData(new Date().toString());
+		      arquivo.setNomeArquivoOriginal(file.getOriginalFilename());
+		      arquivo.setDiretorio(basePath.toString());
+		      arquivo.setOpcao(extension);
+		      arquivo.setLayout("destaque");
+		      arquivo.setTipo(new Byte("1"));
+		      ar.add(arquivo);
+		    }
+		    return ar;
+		  }
+		
+	 public String getUrl() {
+				if (url == null) {
+				 String teste =	propNegocio.findValueById(PropEnum.URL);
+				  return teste;
+				}
+				return url;
+			}
 }

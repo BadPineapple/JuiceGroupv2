@@ -1,7 +1,8 @@
 package ilion.vitazure.enumeradores;
 
 public enum TipoProfissionalEnum {
-
+	
+	NAO_INFORMADO("",""),
 	PSICOLOGO("PSICOLOGO","psicólogo"),
 	PSICANALISTTA("PSICANALISTTA","psicanalista"),
 	TERAPEUTA("TERAPEUTA","terapeuta");	

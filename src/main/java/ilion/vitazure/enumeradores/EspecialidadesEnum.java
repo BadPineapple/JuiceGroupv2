@@ -1,7 +1,8 @@
 package ilion.vitazure.enumeradores;
 
 public enum EspecialidadesEnum {
-
+	
+	NAO_INFORMADO("",""),
 	RELACIONAMENTO("RELACIONAMENTO","relacionamento"),
 	PSICOPEDAGOGIA("PSICOPEDAGOGIA","Psicopedagogia"),
 	PSICOMOTRICIDADE("PSICOMOTRICIDADE","Psicomotricidade");	

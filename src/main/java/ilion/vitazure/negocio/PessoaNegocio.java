@@ -42,6 +42,7 @@ public class PessoaNegocio {
 
 	@Transactional
 	public Pessoa incluirAtualizar(Pessoa pessoa) throws Exception{
+		validarUsuario(pessoa);
 		pessoa = criptografarSenha(pessoa);
 		if (pessoa.getId() == null || pessoa.getId() == 0) {
 			pessoa = (Pessoa) hibernateUtil.save(pessoa);
@@ -138,6 +139,27 @@ public class PessoaNegocio {
 
 		return notificacaos;
 
+	}
+	
+	public void validarUsuario(Pessoa pessoa) throws Exception{
+
+		if( ! Uteis.ehNuloOuVazio(pessoa.getEmail()) ) {
+			if( existeEmailJaCadastrado(pessoa) ) {
+				throw new ValidacaoException("Email já Cadastrado.");
+			}
+		}
+		
+	}
+	
+	public Boolean existeEmailJaCadastrado(Pessoa pessoa) {
+		DetachedCriteria dc = DetachedCriteria.forClass(Pessoa.class);
+		dc.add(Restrictions.eq("email", pessoa.getEmail()));
+
+		if(pessoa.getId() != null) {
+			dc.add(Restrictions.not(Restrictions.eq("id", pessoa.getId())));
+		}
+
+		return hibernateUtil.possuiRegistros(dc);
 	}
 	
 }

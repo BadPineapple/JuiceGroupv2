@@ -129,6 +129,10 @@ public class Arquivo implements Serializable {
 	@Transient
 	private String titulo;// usado pelo artigo quando banner
 	
+	private String nomeArquivoOriginal;
+	
+	private String diretorio;
+	
 	public Arquivo() {
 		super();
 	}
@@ -158,6 +162,9 @@ public class Arquivo implements Serializable {
 		this.idObjeto = idObjeto;
 	}
 	public String getArquivo1() {
+		if (arquivo1 == null) {
+			arquivo1 = "";
+		}
 		return arquivo1;
 	}
 	public void setArquivo1(String arquivo1) {
@@ -472,5 +479,34 @@ public class Arquivo implements Serializable {
 		this.titulo = titulo;
 	}
 	
+	public String getNomeArquivoOriginal() {
+		if (nomeArquivoOriginal == null) {
+			nomeArquivoOriginal = "";
+		}
+		return nomeArquivoOriginal;
+	}
+
+	public void setNomeArquivoOriginal(String nomeArquivoOriginal) {
+		this.nomeArquivoOriginal = nomeArquivoOriginal;
+	}
+
+	public String getDiretorio() {
+		if (diretorio == null) {
+			diretorio = "";
+		}
+		return diretorio;
+	}
+
+	public void setDiretorio(String diretorio) {
+		this.diretorio = diretorio;
+	}
+	
+	public String getImagemApresentar() {
+		if (getLink() != null && !getLink().equals("")) {
+			return getLink();
+		}
+		
+		return "../assets/images/perfil.png";
+	}
 	
 }

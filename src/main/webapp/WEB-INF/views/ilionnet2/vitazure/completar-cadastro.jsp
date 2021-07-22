@@ -3,11 +3,6 @@
 <!doctype html>
 <html class="no-js" lang="pt-BR"  ng-app="cadastroPessoaApp" ng-controller="CadastroPessoaController">
 <head>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-	<meta name="author" content="Ilion" />
-	<link rel="icon" type="image/png" sizes="32x32" href="../assets/images/logo-square.png">
-	<title>Vitazure</title>
 	<jsp:include page="includes/include-head.jsp" flush="true" />
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>	
 	<script src="../assets/js/vitazure/cadastroPessoa.js"></script>	
@@ -43,17 +38,27 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12 text-center">
-                        <h3>Profissional complete seu cadastro</h3>
+                        <h3>${pessoa.psicologo ? 'Profissional' : 'Cliente'} complete seu cadastro</h3>
                     </div>
                     <div class="col-12 col-md-6 offset-md-3 col-xl-6 offset-xl-3">
                         <form ng-submit="submit()" class="form-default" style="padding: 3rem 0; font-weight: 800;">
-                          <angular-initializer ng-init="pessoa.id ='${pessoa.id}';
-                          pessoa.nome ='${pessoa.nome}';
-                          pessoa.email ='${pessoa.email}';
-                          pessoa.celular ='${pessoa.celular}';
-                          pessoa.cliente ='${pessoa.cliente}';
-                          pessoa.psicologo ='${pessoa.psicologo}';
-                          pessoa.senha ='${pessoa.senha}';"/>
+                          <angular-initializer ng-init="pessoa.id='${pessoa.id}';
+						                     pessoa.nome='${pessoa.nome}';
+						                     pessoa.email='${pessoa.email}';
+						                     pessoa.telefone='${pessoa.telefone}';
+						                     pessoa.celular='${pessoa.celular}';
+						                     pessoa.senha='${pessoa.senha}';
+						                     pessoa.dataNascimento='${pessoa.dataNascimento}';
+						                     pessoa.cpf='${pessoa.cpf}';
+						                     pessoa.cep='${pessoa.cep}';
+						                     pessoa.cidade='${pessoa.cidade}';
+						                     pessoa.estado='${pessoa.estado}';
+						                     pessoa.endereco='${pessoa.endereco}';
+						                     pessoa.setor='${pessoa.setor}';
+                          					 pessoa.cliente ='${pessoa.cliente}';
+                         					 pessoa.psicologo ='${pessoa.psicologo}';
+                          					 "/>
+                          
                             <div class="row">
                                 <div class="col-12">
                                     <div class="input-block">
@@ -88,7 +93,11 @@
                                 <div class="col-12 col-xl-6">
                                     <div class="input-block">
                                         <label>Estado</label>
-                                        <input type="text" ng-model="pessoa.estado" required />
+                                        <select ng-model="pessoa.estado" class="form-control input-sm">
+										  <c:forEach var="estado" items="${estados}">
+						   					<option value="${estado}">${estado.valor}</option>
+										  </c:forEach>
+										</select>
                                     </div>
                                 </div>
                                 <div class="col-12">
