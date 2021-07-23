@@ -39,7 +39,7 @@
 
                                                 <li>Acompanhamento de recebíveis</li>
                                             </ul>
-                                            <a href="#" class="button-secundary">Comece Agora</a>
+                                            <button onclick="chamada(450)" class="button-secundary">Comece Agora</button>
                                         </div>
                                     </div>
                                 </div>
@@ -58,7 +58,7 @@
                                                 <li>Controle de seus atendimentos</li>
                                                 <li>Acompanhamento de recebíveis</li>
                                             </ul>
-                                            <a href="#" class="button-secundary">Comece Agora</a>
+                                            <button onclick="chamada(800)" class="button-secundary">Comece Agora</button>
                                         </div>
                                     </div>
                                 </div>
@@ -77,7 +77,7 @@
                                                 <li>Controle de seus atendimentos</li>
                                                 <li>Acompanhamento de recebíveis</li>
                                             </ul>
-                                            <a href="#" class="button-secundary">Comece Agora</a>
+                                            <button onclick="chamada(1500)" class="button-secundary">Comece Agora</button>
                                         </div>
                                     </div>
                                 </div>
