@@ -2,6 +2,7 @@ package ilion.vitazure.enumeradores;
 
 public enum BancoEnum {
 
+	NAO_INFORMADO("",""),
 	ITAU("ITAU","Itaú"),
 	BB("BB","Banco do Brasil"),
 	CAIXA("CAIXA","Caixa Econômica"),

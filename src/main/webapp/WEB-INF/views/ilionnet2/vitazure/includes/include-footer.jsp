@@ -1,3 +1,4 @@
+<%@ include file="/ilionnet/taglibs.jsp"%>
 <footer>
     <div class="container">
         <div class="row">

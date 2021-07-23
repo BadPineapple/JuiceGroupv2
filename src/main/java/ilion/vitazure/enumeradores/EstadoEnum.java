@@ -1,7 +1,8 @@
 package ilion.vitazure.enumeradores;
 
 public enum EstadoEnum {
-
+	
+	NAO_INFORMADO("",""),
 	AC("AC","Acre"),
     AL("AL","Alagoas"),
     AP("AP","Amapá"),

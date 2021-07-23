@@ -46,6 +46,7 @@
 						                     pessoa.cpf='${pessoa.cpf}';
 						                     pessoa.cep='${pessoa.cep}';
 						                     pessoa.cidade='${pessoa.cidade}';
+						                     pessoa.estado='${pessoa.estado}';
 						                     pessoa.endereco='${pessoa.endereco}';
 						                     pessoa.setor='${pessoa.setor}';
 						                     pessoa.psicologo='true'

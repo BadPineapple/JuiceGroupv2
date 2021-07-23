@@ -15,9 +15,7 @@ function logar($scope, $http, $window) {
  
     $http.post("/vitazure/login", $scope.pessoa)
         .then(function (response) {
-            alert_success(response.data.message, () => {
                 $window.location.href = "/vitazure/informacoes-perfil";
-            });
         }).catch(function (response) {
         alert_error(response.data.message);
     })

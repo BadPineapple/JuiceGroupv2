@@ -1,10 +1,11 @@
 package ilion.vitazure.enumeradores;
 
-public enum TipoContaEnum {
-	
+public enum FormacaoEnum {
+
 	NAO_INFORMADO("",""),
-	CORRENTE("CORRENTE","Conta Corrente"),
-	POUPANCA("POUPANCA","Conta Poupança");	
+	PHD("PHD","Phd"),
+	MESTRADO("MESTRADO","Mestrado em Psicologia"),
+	GRADUACAO("GRADUACAO","Gradução em Psicologia");
 	
 	private String nome;
 	
@@ -18,16 +19,16 @@ public enum TipoContaEnum {
 		return valor;
 	}
 
-	private static final TipoContaEnum VALUES[] = TipoContaEnum.values();
+	private static final FormacaoEnum VALUES[] = FormacaoEnum.values();
 	
 	
-	private TipoContaEnum(String nome , String valor) {
+	private FormacaoEnum(String nome , String valor) {
 		this.nome = nome;
 		this.valor = valor;
 	}
 	
-	public static TipoContaEnum fromString(String nome) {
-		for (TipoContaEnum item : VALUES) {
+	public static FormacaoEnum fromString(String nome) {
+		for (FormacaoEnum item : VALUES) {
 			if( item.nome.equals(nome) || item.toString().equals(nome)){
 				return item;
 			}

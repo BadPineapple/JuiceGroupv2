@@ -1,7 +1,8 @@
 package ilion.vitazure.enumeradores;
 
 public enum TempoAntecendenciaEnum {
-
+	
+	NAO_INFORMADO("",""),
 	UMA("1","1 Hora"),
 	DUAS("2","2 Hora"),
 	TREIS("3","3 Hora");

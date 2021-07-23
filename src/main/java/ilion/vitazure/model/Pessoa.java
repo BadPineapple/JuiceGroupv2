@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -29,10 +31,15 @@ public class Pessoa implements Serializable{
 	  private String cep;
 	  private String setor;
 	  private String cidade;
+	  private String estado;
 	  private String endereco;
 	  private Boolean cliente;
 	  private Boolean psicologo;
+	  
+	  @ManyToOne
+	  @JoinColumn(nullable = true)
 	  private Arquivo foto;
+	  
 	  private String dataNascimento;
 	  private Date dataCadastro;
 	
@@ -154,9 +161,6 @@ public class Pessoa implements Serializable{
 		this.psicologo = psicologo;
 	}
 	public Arquivo getFoto() {
-		if (foto == null) {
-			foto = new Arquivo();
-		}
 		return foto;
 	}
 	public void setFoto(Arquivo foto) {
@@ -176,6 +180,15 @@ public class Pessoa implements Serializable{
 	}
 	public void setDataCadastro(Date dataCadastro) {
 		this.dataCadastro = dataCadastro;
+	}
+	public String getEstado() {
+		if (estado == null) {
+			estado = "";
+		}
+		return estado;
+	}
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 	  
 	  
