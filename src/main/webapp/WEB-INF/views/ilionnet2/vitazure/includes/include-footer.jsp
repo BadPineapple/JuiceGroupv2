@@ -15,9 +15,9 @@
 
                         <li><a href="como-funcionas.jsp" class="line">Como funciona</a></li>
 
-                        <li><a href="aqui-e-para-voce.jsp" class="line">Aqui é pra você</a></li>
+                        <li><a href="aqui-e-para-voce.jsp" class="line">Aqui ï¿½ pra vocï¿½</a></li>
 
-                        <li><a href="sou-profissional.jsp" class="line">Sou psicólogo</a></li>
+                        <li><a href="sou-profissional.jsp" class="line">Sou psicï¿½logo</a></li>
 
                         <li><a href="para-sua-empresa.jsp" class="line">Para sua empresa</a></li>
 
@@ -27,20 +27,20 @@
 
                 <div class="footer-down-menu">
                     <ul>
-                        <li><a href="#" class="line">Polí­tica de cancelamento</a></li>
+                        <li><a href="#" class="line">Polï¿½tica de cancelamento</a></li>
 
-                        <li><a href="#" class="line">Polí­tica de privacidade</a></li>
+                        <li><a href="#" class="line">Polï¿½tica de privacidade</a></li>
 
                         <li><a href="#" class="line">Termos de uso</a></li>
 
-                        <li><a href="#" class="line">Código de ética</a></li>
+                        <li><a href="#" class="line">Cï¿½digo de ï¿½tica</a></li>
                     </ul>
                 </div>
             </div>
 
             <div class="col-12">
                 <div class="copyright">
-                    <p>© 2021. Todos os direitos reservados.</p>
+                    <p>ï¿½ 2021. Todos os direitos reservados.</p>
 
                     <div class="redes-sociais">
                         <a href="#">
@@ -72,7 +72,7 @@
     
         <li><a href="<ilion:url/>home">Home</a></li>
         <li><a href="<ilion:url/>como-funciona" class="line">Como funciona</a></li>
-        <li><a href="<ilion:url/>aqui-e-para-voce" class="line">Aqui é para você</a></li>
+        <li><a href="<ilion:url/>aqui-e-para-voce" class="line">Aqui ï¿½ para vocï¿½</a></li>
         <li><a href="<ilion:url/>sou-profissional" class="line">Sou Profissional</a></li>
         <li><a href="<ilion:url/>para-sua-empresa" class="line">Para sua empresa</a></li>
         <c:if test="${pessoa == null}">
@@ -111,6 +111,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 <script src="../assets/js/calendario.js"></script>
+<script src="https://assets.pagar.me/checkout/1.1.0/checkout.js"></script>
+<script src="../assets/js/pagar-me.js"></script>
     
 <script>
     Mmenu.configs.offCanvas.page.selector = "#app";

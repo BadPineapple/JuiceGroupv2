@@ -17,6 +17,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import ilion.vitazure.enumeradores.*;
+
 import ilion.vitazure.enumeradores.BancoEnum;
 import ilion.vitazure.enumeradores.DuracaoAtendimentoEnum;
 import ilion.vitazure.enumeradores.EspecialidadesEnum;
@@ -89,7 +91,10 @@ public class Profissional implements Serializable{
 	  private String digitoVerificador;
 
 	  private String nomeFavorecido;
-	  
+
+	  private Integer idConta;
+
+	  private String idRecebedor;
 	  
 	  private Boolean convenio20;
 	  
@@ -303,6 +308,14 @@ public class Profissional implements Serializable{
 	public void setNomeFavorecido(String nomeFavorecido) {
 		this.nomeFavorecido = nomeFavorecido;
 	}
+
+	public Integer getIdConta() {return idConta;}
+
+	public void setIdConta(Integer idConta) {this.idConta = idConta;}
+
+	public String getIdRecebedor() {return idRecebedor;}
+
+	public void setIdRecebedor(String idRecebedor) {this.idRecebedor = idRecebedor;}
 
 	public Boolean getConvenio20() {
 		return convenio20;
