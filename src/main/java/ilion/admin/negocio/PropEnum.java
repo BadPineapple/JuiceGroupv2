@@ -23,6 +23,7 @@ public enum PropEnum {
   GOOGLE_MAPS_KEY,
 
   PAGAR_ME_API_KEY,
+  PAGAR_ME_ENCRYPTION_KEY
   ;
 
   public static PropEnum fromString(String s) {

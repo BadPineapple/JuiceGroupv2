@@ -1,5 +1,5 @@
 var informacoesPerfilApp = angular.module('informacoesPerfilApp', []);
-var arquivos = []
+var arquivos = [];
 
 var formacaoInformadas = new Array();
 
@@ -48,10 +48,13 @@ function informacoesPerfilController($scope, $http, $window) {
  	$scope.enderecoAtendimento = function () {
        enderecoAtendimento($scope, $http, $window);
     };
+ 	$scope.salvarConta = function () {
+ 		salvarConta($scope, $http, $window);
+	}
 }
 
 function perfilProfissional($scope, $http, $window) {
-	
+
 	$scope.ProfissionalVH.profissional.avisoFerias = document.getElementById("avisoFerias").checked;
 	$scope.ProfissionalVH.profissional.habilitarDesconto40 = document.getElementById("habilitarDesconto40").checked;
 	$scope.ProfissionalVH.profissional.atendimentoPorLibras = document.getElementById("atendimentoPorLibras").checked;
@@ -79,6 +82,27 @@ $http.post("/vitazure/perfilProfissional", $scope.ProfissionalVH)
         }).catch(function (response) {
         alert_error(response.data.message);
     })
+}
+
+function salvarConta($scope, $http, $window) {
+    window.onload = function() {
+        $scope.profissional.tipoConta = document.getElementById("tipoConta").checked;
+        $scope.profissional.banco = document.getElementById("banco").checked;
+        $scope.profissional.agencia = document.getElementById("agencia").checked;
+        $scope.profissional.conta = document.getElementById("conta").checked;
+        $scope.profissional.digitoVerificador = document.getElementById("digitoVerificador").checked;
+        $scope.profissional.nomeFavorecido = document.getElementById("nomeFavorecido").checked;
+    };
+
+    $http.post("/api/v1/registrar-cartao", $scope.ProfissionalVH.profissional)
+        .then(function (response) {
+            alert_success(response.data.message, () => {
+                $window.location.href = "/vitazure/informacoes-perfil";
+        });
+        }).catch(function (response) {
+        alert_error(response.data.message);
+    })
+
 }
 
 $(function ($scope) {

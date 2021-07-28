@@ -39,7 +39,7 @@
 
                                                 <li>Acompanhamento de recebíveis</li>
                                             </ul>
-                                            <button onclick="chamada(450)" class="button-secundary">Comece Agora</button>
+                                            <button onclick="chamada(450, 'Plano Trimestral')" class="button-secundary">Comece Agora</button>
                                         </div>
                                     </div>
                                 </div>
@@ -58,7 +58,7 @@
                                                 <li>Controle de seus atendimentos</li>
                                                 <li>Acompanhamento de recebíveis</li>
                                             </ul>
-                                            <button onclick="chamada(800)" class="button-secundary">Comece Agora</button>
+                                            <button onclick="chamada(800, 'Plano Semestral')" class="button-secundary">Comece Agora</button>
                                         </div>
                                     </div>
                                 </div>
@@ -77,7 +77,7 @@
                                                 <li>Controle de seus atendimentos</li>
                                                 <li>Acompanhamento de recebíveis</li>
                                             </ul>
-                                            <button onclick="chamada(1500)" class="button-secundary">Comece Agora</button>
+                                            <button onclick="chamada(1500, 'Plano Anual')" class="button-secundary">Comece Agora</button>
                                         </div>
                                     </div>
                                 </div>

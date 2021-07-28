@@ -1,10 +1,10 @@
 
-function chamada (valor) {
+function chamada (valor, item) {
 
     var confirma = 0;
 
     $.ajax({
-        url: 'v1/getAPI',
+        url: 'api/v1/getAPI',
         type: 'GET',
         contentType: 'text/plain',
         error: function (data, textStatus, xhr) {
@@ -15,7 +15,6 @@ function chamada (valor) {
         confirma = 1;
     }).then(function (data, textStatus, jqXHR) {
         var ccae6d912a41bfefd569a77b5cd86603cde92e53cdd45813cba9e5bf080b3734 =  jqXHR.responseText;
-
 
 
         //valor passado para o checkout deve ser em centavos
@@ -47,6 +46,8 @@ function chamada (valor) {
                 defaultInstallment: 1,
                 customerData: 'true',
                 createToken: 'true',
+                postbackUrl: 'https://vitazure.com.br/api/v1/postback',
+                async: false,
                 paymentMethods: 'boleto,credit_card,pix',
                 uiColor: '#0097D6',
                 boletoDiscountPercentage: 0,
@@ -55,7 +56,7 @@ function chamada (valor) {
 
                 items: [{
                     id: '1',
-                    title: 'ItemZero',
+                    title: item,
                     unit_price: 10000,
                     quantity: 1,
                     tangible: 'false'

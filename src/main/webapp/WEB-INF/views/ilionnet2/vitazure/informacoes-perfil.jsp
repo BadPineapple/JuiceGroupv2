@@ -5,8 +5,7 @@
 <head>
 	<jsp:include page="includes/include-head.jsp" flush="true" />
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>	
-	<script src="../assets/js/vitazure/informacoesPerfil.js"></script>
-	<script src="../assets/js/vitazure/cep.js"></script>
+
 </head>
 
 <body>
@@ -528,7 +527,7 @@
 <!--                                         </div> -->
 
                                         <div class="col-12">
-                                            <button class="button-secundary checkbox-button" ng-click="perfilProfissional()" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Salvar</button>
+                                            <button class="button-secundary checkbox-button" ng-click="salvarConta()" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Salvar</button>
                                         </div>
                                     </div>
                                 </div>
@@ -780,6 +779,8 @@
         <script src="../assets/js/bundle.libs.ilionnet.js"></script>
 			<script src="../assets/js/bundle.scripts.ilionnet.js"></script>
 			<script src="../assets/js/bundle.libs.angular.js"></script>
+        <script src="../assets/js/vitazure/informacoesPerfil.js"></script>
+        <script src="../assets/js/vitazure/cep.js"></script>
             
             <c:if test="${param.m == 'ok'}">
 	<button 
