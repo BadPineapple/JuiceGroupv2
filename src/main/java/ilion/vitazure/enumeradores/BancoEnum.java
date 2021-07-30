@@ -1,5 +1,7 @@
 package ilion.vitazure.enumeradores;
 
+import ilion.admin.negocio.PropEnum;
+
 public enum BancoEnum {
 
 	 	NAO_INFORMADO("","", ""),
@@ -10,12 +12,14 @@ public enum BancoEnum {
 	 	BRADESCO("BRADESCO","Bradesco", "237"),
 	 	SANTANDER("SANTANDER","Santander", "033"),
 	 	INTER("INTER","Banco Inter", "077");	
+
 	
 	private String nome;
 	
 	private String valor;
-	
+
 	private String codigo;
+	
 	
 	public String getNome() {
 		return nome;
@@ -25,11 +29,12 @@ public enum BancoEnum {
 		return valor;
 	}
 
+	public String getCodigo() {return codigo;}
+
 	private static final BancoEnum VALUES[] = BancoEnum.values();
 	
-	public String getCodigo() {return codigo;}
 	
-	private BancoEnum(String nome , String valor , String codigo) {
+	private BancoEnum(String nome , String valor, String codigo) {
 		this.nome = nome;
 		this.valor = valor;
 		this.codigo = codigo;
@@ -43,7 +48,7 @@ public enum BancoEnum {
 		}
 		return null;
 	}
-	
+
 	public static String getCodigoFromType(String nome) {
 		for (BancoEnum item : VALUES) {
 			if( item.nome.equals(nome) || item.toString().equals(nome)) {
@@ -52,5 +57,6 @@ public enum BancoEnum {
 		}
 		return null;
 	}
+	
 
 }

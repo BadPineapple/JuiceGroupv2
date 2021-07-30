@@ -31,6 +31,7 @@ import ilion.gc.negocio.Artigo;
 import ilion.gc.negocio.ArtigoSiteNegocio;
 import ilion.gc.taglibs.ArtigoParamsVO;
 import ilion.util.contexto.autorizacao.AcessoLivre;
+import ilion.util.contexto.autorizacao.PessoaLogada;
 import ilion.vitazure.model.Pessoa;
 import ilion.vitazure.negocio.PessoaNegocio;
 import sun.java2d.pipe.SpanShapeRenderer;
@@ -283,5 +284,6 @@ public class SiteController extends CustomErrorController {
 	public String pagamentoPagarMe(HttpServletRequest request) {
 		return "/ilionnet2/vitazure/assinatura";
 	}
+
 	
 }

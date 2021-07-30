@@ -4,9 +4,14 @@
 <html class="no-js" lang="pt-BR" ng-app="informacoesPerfilApp" ng-controller="InformacoesPerfilController">
 <head>
 	<jsp:include page="includes/include-head.jsp" flush="true" />
+<<<<<<< HEAD
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>	
 	<script src="../assets/js/vitazure/informacoesPerfil.js"></script>
 	<script src="../assets/js/vitazure/cep.js"></script>
+=======
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>	
+
+>>>>>>> 916c9ae55ed0e23f5f5ddc023322c3acd6c037d8
 </head>
 
 <body>
@@ -832,6 +837,8 @@
         <script src="../assets/js/bundle.libs.ilionnet.js"></script>
 			<script src="../assets/js/bundle.scripts.ilionnet.js"></script>
 			<script src="../assets/js/bundle.libs.angular.js"></script>
+        <script src="../assets/js/vitazure/informacoesPerfil.js"></script>
+        <script src="../assets/js/vitazure/cep.js"></script>
             
             <c:if test="${param.m == 'ok'}">
 	<button 
