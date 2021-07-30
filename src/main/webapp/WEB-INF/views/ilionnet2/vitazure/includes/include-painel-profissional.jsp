@@ -5,7 +5,7 @@
                 <div class="dados-person">
                     <div class="img-person">
                         <figure>
-                            <img src="${profissional.pessoa.foto.imagemApresentar == null ? '../assets/images/perfil.png' : profissional.pessoa.foto.link}" alt="" style="height: 150px;">
+                            <img src="${pessoa.foto.imagemApresentar == null ? '../assets/images/perfil.png' : pessoa.foto.link}" alt="" style="height: 150px;width: 150px;">
                         </figure>
                     </div>
 

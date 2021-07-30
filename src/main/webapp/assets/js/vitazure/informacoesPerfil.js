@@ -5,6 +5,11 @@ var formacaoInformadas = new Array();
 
 var endercosInformadas = new Array();
 
+var horarioAtendimentos = new Array();
+
+var especialidadeAtendimentos = new Array();
+
+var temas = new Array();
 
 
 class FormacaoAcademica{
@@ -13,10 +18,20 @@ class FormacaoAcademica{
     this.descricaoFormacao = descricaoFormacao;
   }
 }
+class Especialidade{
+  constructor(especialidade) {
+    this.especialidade = especialidade;
+  }
+}
+class TemasTrabalho{
+  constructor(tema) {
+    this.tema = tema;
+  }
+}
 
 
 class EnderecoAtendimento{
-  constructor(linkGoogleMaps,estado,logradouro,complemento,cep,cidade,bairro , numero) {
+  constructor(linkGoogleMaps,estado,logradouro,complemento,cep,cidade,bairro , numero , id) {
 	 this.linkGoogleMaps= linkGoogleMaps;
 	 this.estado= estado;
 	 this.logradouro= logradouro;
@@ -25,8 +40,24 @@ class EnderecoAtendimento{
 	 this.cidade= cidade; 
 	 this.bairro= bairro;
 	 this.numero= numero;
+	 this.id= id;
   }
 }
+
+class HorarioAtenimento{
+  constructor(diaSemana,horaInicio,horaFim,horaAlmocoInicio,horaAlmocoFim,atendimentoOnline , enderecoSemanaHorario , atendimentoPresencial) {
+	 this.diaSemana= diaSemana;
+	 this.horaInicio= horaInicio;
+	 this.horaFim= horaFim;
+	 this.horaAlmocoInicio= horaAlmocoInicio; 
+	 this.horaAlmocoFim= horaAlmocoFim;
+	 this.atendimentoOnline= atendimentoOnline;
+	 this.atendimentoPresencial= atendimentoPresencial;
+	 const enderecoAtendimentoVO = enderecoSemanaHorario.split(',');	 
+     this.enderecoAtendimento= new EnderecoAtendimento(enderecoAtendimentoVO[0],enderecoAtendimentoVO[1],enderecoAtendimentoVO[2],enderecoAtendimentoVO[3],enderecoAtendimentoVO[4],enderecoAtendimentoVO[5],enderecoAtendimentoVO[6],enderecoAtendimentoVO[7],enderecoAtendimentoVO[8]);
+  }
+}
+
 
 informacoesPerfilApp.controller('InformacoesPerfilController', informacoesPerfilController);
 
@@ -48,6 +79,29 @@ function informacoesPerfilController($scope, $http, $window) {
  	$scope.enderecoAtendimento = function () {
        enderecoAtendimento($scope, $http, $window);
     };
+ 	$scope.especialidadeAtendimento = function () {
+       especialidadeAtendimento($scope, $http, $window);
+    };
+ 	$scope.temasAtendimento = function () {
+       temasAtendimento($scope, $http, $window);
+    };
+ 	$scope.horarioAtendimento = function () {
+       horarioAtendimento($scope, $http, $window);
+    };
+ 	$scope.adicionarTemas= function () {
+       adicionarTemas($scope, $http, $window);
+    };
+    $scope.adicionarHorarioAtendimento= function () {
+       adicionarHorarioAtendimento($scope, $http, $window);
+    };
+    $scope.adicionarEspecialidades= function () {
+       adicionarEspecialidades($scope, $http, $window);
+    };
+
+	$scope.salvarConta = function () {
+    	salvarConta($scope, $http, $window);
+	}
+
 }
 
 function perfilProfissional($scope, $http, $window) {
@@ -66,6 +120,9 @@ function perfilProfissional($scope, $http, $window) {
 	$scope.ProfissionalVH.profissional.convenio60 = document.getElementById("convenio60").checked;
 	$scope.ProfissionalVH.formacaoAcademica = formacaoInformadas;
 	$scope.ProfissionalVH.enderecoAtendimento = endercosInformadas;
+	$scope.ProfissionalVH.especialidade = especialidadeAtendimentos;
+	$scope.ProfissionalVH.temasTrabalho = temas;
+	$scope.ProfissionalVH.horarioAtendimento = horarioAtendimentos;
 	
 	if(arquivos.length != 0){
 		$scope.ProfissionalVH.profissional.pessoa.foto = arquivos;
@@ -209,4 +266,154 @@ function enderecoAtendimento($scope, $http, $window) {
         }).catch(function (response) {
         alert_error(response.data.message);
     })
+};
+
+function especialidadeAtendimento($scope, $http, $window) {
+    id = $scope.ProfissionalVH.profissional.id;
+    $http.get("/vitazure/especialidadeAtendimento/"+id)
+        .then(function (response) {
+           		 for (var i = 0; i < response.data.length; i++) {
+           		     especialidadeAtendimentos.push(response.data[i]);
+           			$("#panelFiltrosEspecialidades a").remove();
+           			especialidadeAtendimentos.forEach(AdicionarTabelaEspecialidades);
+    			}
+        }).catch(function (response) {
+        alert_error(response.data.message);
+    })
+};
+
+function temasAtendimento($scope, $http, $window) {
+    id = $scope.ProfissionalVH.profissional.id;
+    $http.get("/vitazure/temasAtendimento/"+id)
+        .then(function (response) {
+           		 for (var i = 0; i < response.data.length; i++) {
+           		     temas.push(response.data[i]);
+           			$("#panelFiltrosSelecionados a").remove();
+           			temas.forEach(AdicionarTabelaTema);
+    			}
+        }).catch(function (response) {
+        alert_error(response.data.message);
+    })
+};
+
+function horarioAtendimento($scope, $http, $window) {
+    id = $scope.ProfissionalVH.profissional.id;
+    $http.get("/vitazure/horarioAtendimento/"+id)
+        .then(function (response) {
+           		 for (var i = 0; i < response.data.length; i++) {
+           		     horarioAtendimentos.push(response.data[i]);
+           			$("#tblCadastroHorarioAtendimento td").remove();
+           			horarioAtendimentos.forEach(AdicionarTabelaHorarioAtendimento);
+    			}
+        }).catch(function (response) {
+        alert_error(response.data.message);
+    })
+};
+
+function adicionarTemas($scope, $http, $window){
+	const tema = new TemasTrabalho($scope.temasTrabalho);
+	  temas.push(tema);
+	  $("#panelFiltrosSelecionados a").remove();
+      temas.forEach(AdicionarTabelaTema);
+}
+
+function AdicionarTabelaTema(item, indice){
+		$("#panelFiltrosSelecionados").append(
+			"<a type='text' onclick='ExcluirTema("+indice+")' class='line' style='height: 26px !important;margin: 5px 0 !important;box-shadow: 3px 3px 6px #7f6038;padding: 3px 12px;'>"+
+			  item.tema+
+	       "<i class='fas fa-times' style='color: #f11616;padding-left: 11px;'></i>"+
+			"</a>"
+			);		
+};
+function ExcluirTema(x){
+	    temas.splice(x, 1);
+	     $("#panelFiltrosSelecionados a").remove();
+	     temas.forEach(AdicionarTabelaTema);
+};
+
+function adicionarHorarioAtendimento($scope, $http, $window) {
+   	const horarioAtendimento = new HorarioAtenimento($scope.diaSemana,$scope.horaInicio,$scope.horaFim,$scope.horaAlmocoInicio,$scope.horaAlmocoFim,$scope.atendimentoOnline , $scope.enderecoSemanaHorario , $scope.atendimentoPresencial) 
+	horarioAtendimentos.push(horarioAtendimento);
+	$("#tblCadastroHorarioAtendimento td").remove();
+    horarioAtendimentos.forEach(AdicionarTabelaHorarioAtendimento);
+	
+}
+
+function AdicionarTabelaHorarioAtendimento(item, indice){
+		$("#tblCadastroHorarioAtendimento tbody").append(
+			"<tr>"+
+			"<td align='center'>"+item.diaSemana+"</td>"+
+			"<td align='center'>"+(item.horaInicio)+"</td>"+
+			"<td align='center'>"+(item.horaFim)+"</td>"+
+			"<td align='center'>"+(item.atendimentoOnline ? 'sim' : 'Não')+"</td>"+
+			"<td align='center'>"+(item.atendimentoPresencial  ? 'sim' : 'Não')+"</td>"+
+			"<td align='center'>"+(item.enderecoAtendimento.logradouro)+"</td>"+
+			"<td align='center'><a  id='btn-excluir' onclick='ExcluirHorarioAtendimento("+indice+")' style='color: red;'><i class='fas fa-trash'></i></a></td>"+
+			"</tr>");
+		
+};
+
+function ExcluirHorarioAtendimento(x){
+	    horarioAtendimentos.splice(x, 1);
+	     $("#tblCadastroHorarioAtendimento td").remove();
+	    horarioAtendimentos.forEach(AdicionarTabelaHorarioAtendimento);
+};
+
+function adicionarEspecialidades($scope, $http, $window){
+	  const valor = new Especialidade($scope.especialidade);
+	  especialidadeAtendimentos.push(valor);
+	  $("#panelFiltrosEspecialidades a").remove();
+      especialidadeAtendimentos.forEach(AdicionarTabelaEspecialidades);
+}
+
+function AdicionarTabelaEspecialidades(item, indice){
+		$("#panelFiltrosEspecialidades").append(
+			"<a type='text' onclick='ExcluirEspecialidades("+indice+")' class='line' style='height: 26px !important;margin: 5px 0 !important;box-shadow: 3px 3px 6px #7f6038;padding: 3px 12px;'>"+
+			  item.especialidade+
+	       "<i class='fas fa-times' style='color: #f11616;padding-left: 11px;'></i>"+
+			"</a>"
+			);		
+};
+function ExcluirEspecialidades(x){
+	    especialidadeAtendimentos.splice(x, 1);
+	     $("#panelFiltrosEspecialidades a").remove();
+	     especialidadeAtendimentos.forEach(AdicionarTabelaEspecialidades);
+};
+
+function salvarConta($scope, $http, $window) {
+
+    window.onload = function() {
+
+        $scope.profissional.tipoConta = document.getElementById("tipoConta").checked;
+
+        $scope.profissional.banco = document.getElementById("banco").checked;
+
+        $scope.profissional.agencia = document.getElementById("agencia").checked;
+
+        $scope.profissional.conta = document.getElementById("conta").checked;
+
+        $scope.profissional.digitoVerificador = document.getElementById("digitoVerificador").checked;
+
+        $scope.profissional.nomeFavorecido = document.getElementById("nomeFavorecido").checked;
+
+    };
+
+
+    $http.post("/api/v1/registrar-cartao", $scope.ProfissionalVH.profissional)
+
+        .then(function (response) {
+
+            alert_success(response.data.message, () => {
+
+                $window.location.href = "/vitazure/informacoes-perfil";
+
+        });
+
+        }).catch(function (response) {
+
+        alert_error(response.data.message);
+
+    })
+
+
 };

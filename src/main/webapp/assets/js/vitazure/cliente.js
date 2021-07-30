@@ -7,6 +7,9 @@ function clienteController($scope, $http, $window) {
     $scope.submit = function () {
         post($scope, $http, $window);
     };
+    $scope.submitProfissional = function () {
+        postProfissional($scope, $http, $window);
+    };
          
     $scope.validarDataMaiorAtual = function (data) {
         validarDataMaiorAtual(data);
@@ -16,6 +19,27 @@ function clienteController($scope, $http, $window) {
 
 function post($scope, $http, $window) {
     $http.post("/vitazure/pessoa", $scope.pessoa)
+        .then(function (response) {
+            alert_success(response.data.message, () => {
+            });
+        }).catch(function (response) {
+        alert_error(response.data.message);
+    })
+}
+function postProfissional($scope, $http, $window) {
+	$scope.profissional.avisoFerias = document.getElementById("avisoFerias").checked;
+	$scope.profissional.habilitarDesconto40 = document.getElementById("habilitarDesconto40").checked;
+	$scope.profissional.atendimentoPorLibras = document.getElementById("atendimentoPorLibras").checked;
+	$scope.profissional.primeiraConsultaCortesia = document.getElementById("primeiraConsultaCortesia").checked;
+	$scope.profissional.pacote2com30Desconto = document.getElementById("pacote2com30Desconto").checked;
+	$scope.profissional.pacote3com40Desconto = document.getElementById("pacote3com40Desconto").checked;
+	$scope.profissional.pacote4com50Desconto = document.getElementById("pacote4com50Desconto").checked;
+	$scope.profissional.convenio20 = document.getElementById("convenio20").checked;
+	$scope.profissional.convenio30 = document.getElementById("convenio30").checked;
+	$scope.profissional.convenio40 = document.getElementById("convenio40").checked;
+	$scope.profissional.convenio50 = document.getElementById("convenio50").checked;
+	$scope.profissional.convenio60 = document.getElementById("convenio60").checked;
+    $http.post("/vitazure/ilionnet/perfilProfissional", $scope.profissional)
         .then(function (response) {
             alert_success(response.data.message, () => {
             });

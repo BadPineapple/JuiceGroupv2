@@ -1,5 +1,8 @@
 package ilion.vitazure.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +17,24 @@ import ilion.admin.negocio.Usuario;
 import ilion.util.VLHForm;
 import ilion.util.ValueListInfo;
 import ilion.util.contexto.autorizacao.UsuarioLogado;
+import ilion.vitazure.enumeradores.BancoEnum;
+import ilion.vitazure.enumeradores.DuracaoAtendimentoEnum;
+import ilion.vitazure.enumeradores.EspecialidadesEnum;
+import ilion.vitazure.enumeradores.EstadoEnum;
+import ilion.vitazure.enumeradores.FormacaoEnum;
+import ilion.vitazure.enumeradores.TemasTrabalhoEnum;
+import ilion.vitazure.enumeradores.TempoAntecendenciaEnum;
+import ilion.vitazure.enumeradores.TipoContaEnum;
+import ilion.vitazure.enumeradores.TipoProfissionalEnum;
+import ilion.vitazure.model.EnderecoAtendimento;
+import ilion.vitazure.model.FormacaoAcademica;
 import ilion.vitazure.model.Pessoa;
+import ilion.vitazure.model.Profissional;
+import ilion.vitazure.negocio.EnderecoNegocio;
+import ilion.vitazure.negocio.FormacaoAcademicaNegocio;
 import ilion.vitazure.negocio.PessoaNegocio;
+import ilion.vitazure.negocio.ProfissionalNegocio;
+import ilion.vitazure.negocio.ProfissionalVH;
 import net.mlw.vlh.ValueList;
 
 @Controller
@@ -23,6 +42,15 @@ public class menuVitazureController  extends CustomErrorController{
 
 	@Autowired
 	private PessoaNegocio pessoaNegocio;
+	
+	@Autowired
+	private ProfissionalNegocio profissionalNegocio;
+	
+	@Autowired
+	private FormacaoAcademicaNegocio formacaoAcademicaNegocio;
+	
+	@Autowired
+	private EnderecoNegocio enderecoNegocio;
 	
 	@RequestMapping("/cliente")
 	@UsuarioLogado()
@@ -79,11 +107,28 @@ public class menuVitazureController  extends CustomErrorController{
 			RedirectAttributes redirectAttributes) {
 		
 		try {
-			Pessoa pessoa = new Pessoa();
+			Profissional profissional = new Profissional();
+			List<FormacaoAcademica> formacao = new ArrayList<FormacaoAcademica>();
+			List<EnderecoAtendimento> enderecoAtendimento = new ArrayList<EnderecoAtendimento>();
 			if (id != null && id != 0) {
-				pessoa = pessoaNegocio.consultarPorId(id);
+				profissional = profissionalNegocio.consultarPorPessoa(id);
+				formacao.addAll(formacaoAcademicaNegocio.consultarFormacoesPorPessoa(profissional.getId()));
+				enderecoAtendimento.addAll(enderecoNegocio.consultarEnderecoPorPessoa(profissional.getId()));
 			}
-			request.setAttribute("pessoa", pessoa);
+			request.setAttribute("profissional", profissional);
+			request.setAttribute("estados", EstadoEnum.values());
+			request.setAttribute("tiposProfissional", TipoProfissionalEnum.values());
+			request.setAttribute("especialidades", EspecialidadesEnum.values());
+			request.setAttribute("temasTrabalho", TemasTrabalhoEnum.values());
+			request.setAttribute("duracoes", DuracaoAtendimentoEnum.values());
+			request.setAttribute("duracaoAtendimentoValor", DuracaoAtendimentoEnum.values());
+			request.setAttribute("tiposConta", TipoContaEnum.values());
+			request.setAttribute("bancos", BancoEnum.values());
+			request.setAttribute("temasTrabalho", TemasTrabalhoEnum.values());
+			request.setAttribute("tempoAntecendencia", TempoAntecendenciaEnum.values());
+			request.setAttribute("formacoes", FormacaoEnum.values());
+			request.setAttribute("formacao", formacao);
+			request.setAttribute("enderecoAtendimento", enderecoAtendimento);
 			return "/ilionnet/modulos/vitazure/profissionalForm";
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("msgError", e.getMessage());

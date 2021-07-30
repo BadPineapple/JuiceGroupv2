@@ -45,7 +45,7 @@
         <div class="row">
             <div class="col-6 col-md-8 col-xl-8">
                 <div class="menu-list">
-                    <a href="<ilion:url/>home"><img src="../assets/images/logo.png" alt="Vitazure"></a>
+                    <a href="<ilion:url/>home"><img src="../../assets/images/logo.png" alt="Vitazure"></a>
 
                     <div class="menu d-none d-md-block">
                         <ul>
@@ -87,7 +87,7 @@
                 <div class="logado">
                     <div class="dropdown">
 					  <a onclick="myFunction()" class="dropbtn">
-	                        Olá ${pessoa.nome} <img src="../assets/images/arrow-down.png" alt="">
+	                        Olá ${pessoa.nome} <img src="../../assets/images/arrow-down.png" alt="">
 					  </a>
 					  <div id="myDropdown" class="dropdown-content">
 					    <a href="<ilion:url/>/vitazure/informacoes-perfil">Painel Principal</a>

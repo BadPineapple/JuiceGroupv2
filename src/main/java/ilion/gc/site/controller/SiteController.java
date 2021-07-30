@@ -277,57 +277,11 @@ public class SiteController extends CustomErrorController {
 		return "/ilionnet2/vitazure/resultado-de-busca";
 	}
 
-	@GetMapping("/consulta")
-	public String gerarConsulta(HttpServletRequest request) {
-		Pessoa PessoaSessao = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
-		request.setAttribute("pessoa", PessoaSessao);
-		request.setAttribute("areaRestrita", false); //true
+	
 
-		HttpClient httpClient = HttpClientBuilder.create().build();
-		String API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmFwcGVhci5pbiIsImF1ZCI6Imh0dHBzOi8vYXBpLmFwcGVhci5pbi92MSIsImV4cCI6OTAwNzE5OTI1NDc0MDk5MSwiaWF0IjoxNjI0NzE0ODIyLCJvcmdhbml6YXRpb25JZCI6MTE2NjYyLCJqdGkiOiJmZGM0ZDcwZi1iODFiLTRhNWItOWM0Mi1kZjc0OGI0YmI3YmYifQ.Ic8HKQscH7Io5bxH-tiGPaTtsyshGQA5h4VM-YhnjCc";
-
-		SimpleDateFormat sdfData = new SimpleDateFormat("yyyy-MM-dd");
-		SimpleDateFormat sdfHora = new SimpleDateFormat("hh:mm:ss");
-		Date newDate = new Date();
-
-		//Datas apenas temporárias
-		//Formatação padrão da data yyyy-MM-ddThh-mm-ss.000Z
-		String startDate = sdfData.format(new Date(newDate.getTime()));
-		String startHour = sdfHora.format(new Date(newDate.getTime() + 2 * 1000)); // adiciona 1 min a data de início
-
-		String endDate = sdfData.format(new Date(newDate.getTime()));
-		String endHour = sdfHora.format(new Date(newDate.getTime()  + (5 * 60 * 1000))); // 1 min após o inicio
-
-		try {
-			HttpPost requestJson = new HttpPost("https://api.whereby.dev/v1/meetings"); //url da api
-
-			//Body do Json
-			StringEntity params = new StringEntity("{ \"startDate\": \"" + startDate + "T" + startHour + ".000Z" + "\", \"endDate\": " +
-							" \"" + endDate + "T" + endHour + ".000Z" + "\"," +
-							" \"fields\": [\"https://vitazure.whereby.com/\"]}");
-
-			//Header do Json
-			requestJson.addHeader("authorization", "Bearer " + API_KEY);
-			requestJson.addHeader("content-type", "application/json");
-			requestJson.setEntity(params);
-
-			HttpResponse responseJson = httpClient.execute(requestJson); //Possíveis retornos "200" OK "401" Autenticação incorreta
-
-			String responseString = EntityUtils.toString(responseJson.getEntity());
-
-			String iframeSource = responseString.substring(responseString.indexOf("https:"), responseString.lastIndexOf("\",")); //Pega a url da resposta
-
-			request.setAttribute("iframeSource", iframeSource);
-			request.setAttribute("iframeSourceFull", responseString);
-
-
-		} catch (ClientProtocolException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		return "/ilionnet2/vitazure/whereby";
+	@GetMapping("/pagamento")
+	public String pagamentoPagarMe(HttpServletRequest request) {
+		return "/ilionnet2/vitazure/assinatura";
 	}
 	
 }

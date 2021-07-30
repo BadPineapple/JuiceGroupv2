@@ -2,8 +2,8 @@ package ilion.vitazure.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -20,7 +20,6 @@ import javax.persistence.Transient;
 import ilion.vitazure.enumeradores.BancoEnum;
 import ilion.vitazure.enumeradores.DuracaoAtendimentoEnum;
 import ilion.vitazure.enumeradores.EspecialidadesEnum;
-import ilion.vitazure.enumeradores.EstadoEnum;
 import ilion.vitazure.enumeradores.TemasTrabalhoEnum;
 import ilion.vitazure.enumeradores.TempoAntecendenciaEnum;
 import ilion.vitazure.enumeradores.TipoContaEnum;
@@ -90,6 +89,9 @@ public class Profissional implements Serializable{
 
 	  private String nomeFavorecido;
 	  
+	  private Integer idConta;
+
+	  private String idRecebedor;
 	  
 	  private Boolean convenio20;
 	  
@@ -118,6 +120,13 @@ public class Profissional implements Serializable{
 	  private Integer quantidadeConsultaDesconto40Mes;
 	  
 	  private Boolean avisoFerias;
+	  
+	  @Transient
+	  List<Date> datasPossivelAgendamento;
+	  
+	  @Transient
+	  List<HorarioPossivelAtendimento> horarioPossivelAtendimento;
+	  
 
 	public Long getId() {
 		if (id == null) {
@@ -304,6 +313,14 @@ public class Profissional implements Serializable{
 		this.nomeFavorecido = nomeFavorecido;
 	}
 
+	public Integer getIdConta() {return idConta;}
+
+	public void setIdConta(Integer idConta) {this.idConta = idConta;}
+
+	public String getIdRecebedor() {return idRecebedor;}
+
+	public void setIdRecebedor(String idRecebedor) {this.idRecebedor = idRecebedor;}
+	
 	public Boolean getConvenio20() {
 		return convenio20;
 	}
@@ -459,6 +476,29 @@ public class Profissional implements Serializable{
 	public void setValorConsultaPresencial(BigDecimal valorConsultaPresencial) {
 		this.valorConsultaPresencial = valorConsultaPresencial;
 	}
+
+	public List<Date> getDatasPossivelAgendamento() {
+		if (datasPossivelAgendamento == null) {
+			datasPossivelAgendamento = new ArrayList<Date>();
+		}
+		return datasPossivelAgendamento;
+	}
+
+	public void setDatasPossivelAgendamento(List<Date> datasPossivelAgendamento) {
+		this.datasPossivelAgendamento = datasPossivelAgendamento;
+	}
+
+	public List<HorarioPossivelAtendimento> getHorarioPossivelAtendimento() {
+		if (horarioPossivelAtendimento == null) {
+			horarioPossivelAtendimento = new ArrayList<HorarioPossivelAtendimento>();
+		}
+		return horarioPossivelAtendimento;
+	}
+
+	public void setHorarioPossivelAtendimento(List<HorarioPossivelAtendimento> horarioPossivelAtendimento) {
+		this.horarioPossivelAtendimento = horarioPossivelAtendimento;
+	}
 	  
+	
 	  
 }

@@ -82,6 +82,10 @@ public class ApplicationContextConfig {
     sessionFactory.addAnnotatedClass(ilion.vitazure.model.Profissional.class);
     sessionFactory.addAnnotatedClass(ilion.vitazure.model.FormacaoAcademica.class);
     sessionFactory.addAnnotatedClass(ilion.vitazure.model.EnderecoAtendimento.class);
+    sessionFactory.addAnnotatedClass(ilion.vitazure.model.Especialidade.class);
+    sessionFactory.addAnnotatedClass(ilion.vitazure.model.TemaTrabalho.class);
+    sessionFactory.addAnnotatedClass(ilion.vitazure.model.HorarioAtendimento.class);
+    sessionFactory.addAnnotatedClass(ilion.vitazure.model.Agenda.class);
     
     return sessionFactory.buildSessionFactory();
   }

@@ -5,7 +5,7 @@
             <div class="col-12 text-center">
                 <a href="#">
                     <figure>
-                        <img src="../assets/images/logo-footer.png" alt="">
+                        <img src="../../assets/images/logo-footer.png" alt="">
                     </figure>
                 </a>
 
@@ -45,19 +45,19 @@
                     <div class="redes-sociais">
                         <a href="#">
                             <figure>
-                                <img src="../assets/images/instagram.png" alt="">
+                                <img src="../../assets/images/instagram.png" alt="">
                             </figure>
                         </a>
 
                         <a href="#">
                             <figure>
-                                <img src="../assets/images/twitter.png" alt="">
+                                <img src="../../assets/images/twitter.png" alt="">
                             </figure>
                         </a>
 
                         <a href="#">
                             <figure>
-                                <img src="../assets/images/youtube.png" alt="">
+                                <img src="../../assets/images/youtube.png" alt="">
                             </figure>
                         </a>
                     </div>
@@ -110,7 +110,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-<script src="../assets/js/calendario.js"></script>
+<script src="../../assets/js/calendario.js"></script>
     
 <script>
     Mmenu.configs.offCanvas.page.selector = "#app";
@@ -130,8 +130,8 @@
         slidesToShow: 5,
         slidesToScroll: 1,
         arrows: true,
-        prevArrow: '<img class="slick-prev" src="images/left-arrow.png" alt="">',
-        nextArrow: '<img class="slick-next" src="images/right-arrow.png" alt="">',
+        prevArrow: '<img class="slick-prev" src="../../assets/images/left-arrow.png" alt="">',
+        nextArrow: '<img class="slick-next" src="../../assets/images/right-arrow.png" alt="">',
         responsive: [
             {
             breakpoint: 1024,

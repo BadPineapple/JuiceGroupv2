@@ -15,8 +15,10 @@ import java.math.RoundingMode;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.Instant;
@@ -1451,4 +1453,108 @@ public class Uteis {
 	    String string = fmt.format(valor);
 	    return Double.parseDouble(string);
 	}
+	
+	public static String formatarDataSemana(Date data, String pattern) {
+		if (data == null) {
+			return "";
+		}
+		String etaLele = "";
+		switch (data.getDay()) {
+        case 0:
+        	etaLele = "DOM ";
+            break;
+        case 1:
+        	etaLele = "SEG ";
+            break;
+        case 2:
+        	etaLele = "TER ";
+        break;
+        case 3:
+        	etaLele = "QUA ";
+            break;
+        case 4:
+        	etaLele = "QUI ";
+            break;
+        case 5:
+        	etaLele = "SEX ";
+            break;
+        case 6:
+        	etaLele = "SAB ";
+
+    }
+		simpleDateFormat.applyPattern(pattern);
+		String bosta = simpleDateFormat.format(data);
+		return etaLele.concat(bosta);
+	}
+	
+	public static Date converterHoraEmDate(String Hora , String pattern) {
+		try {
+		    DateFormat sdf = new SimpleDateFormat(pattern);
+			Date date = sdf.parse(Hora);
+			return date;
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public static String calculodeHoraSemIntervalo(String tempo, Integer nrAulas, Integer duracao) {
+		Double resultado;
+		resultado = (double) duracao * nrAulas;
+		int res1 = (int) (resultado / 60);
+		double res2 = ((resultado % 60));
+
+		String hora = tempo.substring(0, 2);
+		String minuto = tempo.substring(3, 5);
+		Integer hora1 = Integer.parseInt(hora);
+		Integer minuto1 = Integer.parseInt(minuto);
+
+		hora1 = hora1 + res1;
+		minuto1 = (int) (minuto1 + res2);
+
+		if (hora1 > 23) {
+			hora1 = hora1 - 23;
+			hora1 = hora1 - 1;
+		}
+		if (minuto1 > 59) {
+			minuto1 = minuto1 - 60;
+			hora1 = hora1 + 1;
+			minuto1 = minuto1 + 0;
+		}
+
+		if (minuto1 >= 0 && minuto1 <= 9) {
+			minuto = "0" + String.valueOf(minuto1);
+		} else {
+			minuto = String.valueOf(minuto1);
+		}
+
+		if (hora1 >= 0 && hora1 <= 9) {
+			hora = "0" + String.valueOf(hora1);
+		} else {
+			hora = String.valueOf(hora1);
+		}
+
+		tempo = hora + ":" + minuto;
+		return tempo;
+
+	}
+	
+	public static Date converterDataHoraString(String data, String horaData) throws ParseException {
+	
+		SimpleDateFormat sdf = new SimpleDateFormat("EE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
+
+		Date date = sdf.parse(data);
+	    
+		String hora = horaData.substring(0, 2);
+		String minuto = horaData.substring(3, 5);
+		Integer hora1 = Integer.parseInt(hora);
+		Integer minuto1 = Integer.parseInt(minuto);
+		
+		date.setHours(hora1);
+		date.setMinutes(minuto1);
+	  
+	  return date;
+	
+	}
+	
 }

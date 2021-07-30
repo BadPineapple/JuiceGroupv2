@@ -11,7 +11,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jQuery.mmenu/8.5.6/mmenu.min.css" />
 
 
-	<link rel="stylesheet" type="text/css" href="../assets/css/css-vitazure.css?v1.5">
+	<link rel="stylesheet" type="text/css" href="../../assets/css/css-vitazure.css?v1.5">
 
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <link rel="stylesheet" href="https://kenwheeler.github.io/slick/slick/slick-theme.css" />
@@ -20,9 +20,9 @@
 
 	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 	
-	<link rel="stylesheet" href="../assets/css/all.css">
+	<link rel="stylesheet" href="../../assets/css/all.css">
 	
-	<link rel="icon" type="image/png" sizes="32x32" href="../assets/images/logo-square.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="../../assets/images/logo-square.png">
 	<title>Vitazure</title>
 
 

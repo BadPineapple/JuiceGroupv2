@@ -124,6 +124,11 @@ public class EnderecoAtendimento {
 		public void setProfissional(Profissional profissional) {
 			this.profissional = profissional;
 		}
-	
+		
+		@Override
+		public String toString() {
+			return linkGoogleMaps +","+ estado +","+logradouro +","+complemento +","+cep+","+cidade+","+bairro +","+ numero +","+ id;
+		}
+		
 		
 }

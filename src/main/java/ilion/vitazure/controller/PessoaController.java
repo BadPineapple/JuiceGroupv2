@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import ilion.util.contexto.autorizacao.AcessoLivre;
 import ilion.util.json.JsonString;
 import ilion.vitazure.model.Pessoa;
+import ilion.vitazure.model.Profissional;
 import ilion.vitazure.negocio.PessoaNegocio;
+import ilion.vitazure.negocio.ProfissionalNegocio;
 
 @Controller
 @SessionAttributes("pessoa")
@@ -26,6 +28,9 @@ public class PessoaController {
 	
 	@Autowired
 	private PessoaNegocio  pessoaNegocio;
+	
+	@Autowired
+	private ProfissionalNegocio profissionalNegocio;
 	
 	  @PostMapping(value = "/vitazure/pessoa", produces = "application/json")
 	  @ResponseBody
@@ -52,6 +57,19 @@ public class PessoaController {
 		  } 
 	  }
 	
+	  @PostMapping(value = "/vitazure/ilionnet/perfilProfissional", produces = "application/json")
+	  @ResponseBody
+	  public ResponseEntity<JsonString> atualizarPerfilProfissional(HttpServletRequest request,@RequestBody Profissional profissional) {
+	      try {
+	    	  profissional.setPessoa(pessoaNegocio.incluirAtualizar(profissional.getPessoa()));
+	    	  profissional = profissionalNegocio.incluirAtualizar(profissional);
+	    	  
+	    	  return new ResponseEntity<>(new JsonString("Perfil Profissional Atualizado!"), HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(new JsonString(e.getMessage()), HttpStatus.BAD_REQUEST);
+	    } 
+	  }
 	  
 	  
 	

@@ -4,7 +4,7 @@
 <html class="no-js" lang="pt-BR" ng-app="informacoesPerfilApp" ng-controller="InformacoesPerfilController">
 <head>
 	<jsp:include page="includes/include-head.jsp" flush="true" />
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>	
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>	
 	<script src="../assets/js/vitazure/informacoesPerfil.js"></script>
 	<script src="../assets/js/vitazure/cep.js"></script>
 </head>
@@ -87,20 +87,18 @@
                           					ProfissionalVH.profissional.pessoa.cliente ='${profissional.pessoa.cliente}';
                          					ProfissionalVH.profissional.pessoa.psicologo ='${profissional.pessoa.psicologo}';
                          					ProfissionalVH.formacaoAcademica ='${formacaoAcademica}';
-                         					ProfissionalVH.enderecoAtendimento ='${enderecoAtendimento}';
+                         					ProfissionalVH.enderecoAtendimento ='';
                          					descricaoFormacao ='${descricaoFormacao}';
                          					formacao ='${formacao}';
                          					formacaoProfissional();
                          					enderecoAtendimento();
+                         					especialidadeAtendimento();
+                         					temasAtendimento();
+                         					horarioAtendimento();
                           					 "/>
                             <div class="match-toggle">
                                 <div class="toggle-header">
-                                    <strong>Perfil Profissional</strong>
-
-                                    <div class="duvidas">
-                                        <span>?</span>
-                                        <p><b>Dicas de como Cobrar</b> <br/>É importante que o valor da consulta online seja menor que o da consulta presencial. Afinal não estão presentes vários custos relativos a estrutura física de um consultório.</p>
-                                    </div>
+                                    <strong>Dados Profissional</strong>
                                 </div>
     
                                 <div class="toggle-body">
@@ -156,49 +154,53 @@
                                         <div class="col-12">
                                             <div class="input-block">
                                                 <label>Tipo Profissional</label>
-                                                <select ng-model="ProfissionalVH.profissional.tipoProfissional" class="form-control input-sm">
+                                                <select ng-model="ProfissionalVH.profissional.tipoProfissional" class="form-control input-sm" id="tipoProfissional">
 													<c:forEach var="tipoProfissional" items="${tiposProfissional}">
 				   							          <option value="${tipoProfissional}">${tipoProfissional.valor}</option>
 										            </c:forEach>
 									           </select>
                                             </div>
                                         </div>
-
-                                        <div class="col-12">
+                                        <div class="col-12 col-md-12 col-xl-12">
                                             <div class="input-block">
                                                 <label>Especialidade</label>
-                                                <select ng-model="ProfissionalVH.profissional.especialidade" class="form-control input-sm">
+                                                <select ng-model="especialidade" class="form-control input-sm" style="width: 95%">
 													<c:forEach var="especialidade" items="${especialidades}">
-				   							          <option value="${especialidade}">${especialidade.valor}</option>
+				   							           <option  ng-if="ProfissionalVH.profissional.tipoProfissional == 'PSICOLOGO' && ${especialidade.tipoProfissional == 'PSICOLOGO'}" value="${especialidade}">${especialidade.valor}</option>
+				   							           <option  ng-if="ProfissionalVH.profissional.tipoProfissional == 'MEDICO' && ${especialidade.tipoProfissional == 'MEDICO'}" value="${especialidade}">${especialidade.valor}</option>
 										            </c:forEach>
 									           </select>
+									           <a class="btn pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-default btn-sm" style="position: absolute;left: 94%;top: 32px;"  ng-click =adicionarEspecialidades()>
+													<i class="fas fa-plus" style="font-size: 23px;"></i>
+												</a>
                                             </div>
                                         </div>
+                                        <div class="col-12" style="padding-bottom: 15px;">  
+                                        				<div class="menu d-none d-md-block" layout="block">
+                       											 <span id="panelFiltrosEspecialidades">
+ 																  </span>
+																</div>
+                                               </div>
 
-                                        <div class="col-12">
-                                            <div class="input-block">
-                                                <label>Temas de Trabalho</label>
-                                               <select ng-model="ProfissionalVH.profissional.temasTrabalho" class="form-control input-sm">
-													<c:forEach var="temas" items="${temasTrabalho}">
-				   							          <option value="${temas}">${temas.valor}</option>
-										            </c:forEach>
-									           </select>
-                                                <strong>
-                                                    Acompanhamento psicológico, Ansiedade, Anorexia nervisa,  Autismo, Autoestima, Conflitos amorosos, Conflitos familiáres, Depressão.
-                                                </strong>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12">
-                                            <div class="input-block">
-                                                <label>Tempo de duração do atendimento</label>
-                                                <select ng-model="ProfissionalVH.profissional.duracaoAtendimento" class="form-control input-sm">
-													<c:forEach var="duracaoAtendimento" items="${duracoes}">
-				   							          <option value="${duracaoAtendimento}">${duracaoAtendimento.valor}</option>
-										            </c:forEach>
-									           </select>
-                                            </div>
-                                        </div>
+                                           <div class="col-12 col-md-12 col-xl-12">
+	                                            <div class="input-block">
+	                                                <label>Temas de Trabalho</label>
+	                                               <select ng-model="temasTrabalho" class="form-control input-sm" style="width: 95%">
+														<c:forEach var="temas" items="${temasTrabalho}">
+					   							          <option  value="${temas}">${temas.valor}</option>
+											            </c:forEach>
+										           </select>
+	                                            <a class="btn pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-default btn-sm" style="position: absolute;left: 94%;top: 32px;"  ng-click =adicionarTemas()>
+													<i class="fas fa-plus" style="font-size: 23px;"></i>
+												</a>
+	                                            </div>
+	                                         </div> 
+											 <div class="col-12" style="padding-bottom: 15px;">  
+                                        				<div class="menu d-none d-md-block" layout="block">
+                       											 <span id="panelFiltrosSelecionados">
+ 																  </span>
+																</div>
+                                               </div>
 
                                         <div class="col-12">
                                             <div class="input-block">
@@ -217,10 +219,6 @@
     						<div class="match-toggle">
                                 <div class="toggle-header">
                                     <strong>Formação</strong>
-                                    <div class="duvidas">
-                                        <span>?</span>
-                                        <p><b>Dicas de como Cobrar</b> <br/>É importante que o valor da consulta online seja menor que o da consulta presencial. Afinal não estão presentes vários custos relativos a estrutura física de um consultório.</p>
-                                    </div>
                                 </div>
     
     						<div class="toggle-body">
@@ -282,10 +280,6 @@
     						<div class="match-toggle">
                                 <div class="toggle-header">
                                     <strong>Endereço de atendimento presencial</strong>
-                                    <div class="duvidas">
-                                        <span>?</span>
-                                        <p><b>Dicas de como Cobrar</b> <br/>É importante que o valor da consulta online seja menor que o da consulta presencial. Afinal não estão presentes vários custos relativos a estrutura física de um consultório.</p>
-                                    </div>
                                 </div>
     
                                 <div class="toggle-body">
@@ -387,29 +381,124 @@
                                     </div>
                                 </div>
     						
+    					<div class="match-toggle">
+                                <div class="toggle-header">
+                                    <strong>Tempo de duração do atendimento</strong>
+                                </div>
+                                <div class="toggle-body vitazure">	
+		    						<div class="col-12">
+		                                            <div class="input-block">
+		                                                <label>Tempo de duração do atendimento</label>
+		                                                <select ng-model="ProfissionalVH.profissional.duracaoAtendimento" class="form-control input-sm">
+															<c:forEach var="duracaoAtendimento" items="${duracoes}">
+						   							          <option value="${duracaoAtendimento}">${duracaoAtendimento.valor}</option>
+												            </c:forEach>
+											           </select>
+		                                            </div>
+		                                        </div>
+		 										<div class="col-12">
+		                                                    <button class="button-secundary checkbox-button" ng-click="perfilProfissional()" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Salvar</button>
+                                         </div>
+                                      </div>
+                          </div>               
     						
+    						
+    						<div class="match-toggle">
+                                <div class="toggle-header">
+                                    <strong>Horario Atendimento</strong>
+                                </div>
+                                <div class="toggle-body vitazure">
+                                  <div class="col-12">
+                                        <div class="input-title">
+                                                <div class="col-md-11 col-lg-11 col-sm-12">
+                                                  <p>Horario Atendimento</p>
+                                                </div>  
+                                                <div class="col-md-1 col-lg-1 col-sm-12" style="margin-top: 28px;">
+														<a class="btn pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-default btn-sm"  ng-click =adicionarHorarioAtendimento()>
+															<i class="fas fa-plus" style="font-size: 23px;"></i>
+														</a>
+												</div>  
+                                        </div>
+                                    <div class="row">
+                                        <div class="col-12 col-md-4 col-xl-4">
+                                                    <div class="input-block">
+                                                        <label>Dia Semana</label>
+                                                        <select ng-model="diaSemana" class="form-control input-sm">
+															<c:forEach var="diaSemana" items="${diasSemana}">
+						   							          <option value="${diaSemana}">${diaSemana.valor}</option>
+												            </c:forEach>
+											           </select>
+                                                    </div>
+                                                </div>
+                                        <div class="col-12 col-md-4 col-xl-4">
+                                                    <div class="input-block">
+                                                        <label>Hora Inicio</label>
+                                                        <input type="text" ng-model="horaInicio" data-mask="00:00"  />
+                                                    </div>
+                                         </div>
+                                        <div class="col-12 col-md-4 col-xl-4">
+                                                    <div class="input-block">
+                                                        <label>Hora Fim</label>
+                                                        <input type="text" ng-model="horaFim" data-mask="00:00"  />
+                                                    </div>
+                                         </div>
+                                        <div class="col-12 col-md-12 col-xl-12">
+                                                    <div class="input-block">
+                                                        <label>Endereço Atendimento</label>
+                                                        <select ng-model="enderecoSemanaHorario" class="form-control input-sm">
+															<c:forEach var="endereco" items="${enderecoAtendimento}">
+						   							          <option value="${endereco}">${endereco.logradouro} ${endereco.complemento}</option>
+												            </c:forEach>
+											           </select>
+                                                    </div>
+                                         </div>
+										<div class="col-12 col-md-6 col-xl-6">
+                                            <div class="checkbox">
+                                                <input type="checkbox" ng-model="atendimentoOnline" ng-checked="${atendimentoOnline}"/>
+                                                <label>Atendimento Online</label>
+                                            </div>
+                                        </div>
+										<div class="col-12 col-md-6 col-xl-6">
+                                            <div class="checkbox">
+                                                <input type="checkbox" ng-model="atendimentoPresencial" ng-checked="${atendimentoPresencial}"/>
+                                                <label>Atendimento Presencial</label>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-12" style="padding-top: 18px;">  
+                                        <div class="table-responsive">
+							                <table id="tblCadastroHorarioAtendimento" class="table table-bordered">         
+											      <thead style="font-size: 15px;">
+												     <tr>
+												       <th class="text-center">Dia</th>
+												       <th class="text-center">Hora Inicio</th>
+												       <th class="text-center">Hora Fim</th>
+												       <th class="text-center">Online</th>
+												       <th class="text-center">Presencial</th>
+												       <th class="text-center">Logradouro</th>
+												       <th class="text-center">Opção</th>
+												     </tr>
+												   </thead>
+											      <tbody style="font-size: 15px;">
+											      </tbody>
+											   </table>
+						            	</div>
+						            </div>	
+                                        
+                                        <div class="col-12">
+                                            <button class="button-secundary checkbox-button" ng-click="perfilProfissional()" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Salvar</button>
+                                        </div>
+                                    </div>
+                                  </div>  
+                                </div>
+                            </div>
     						
                             <div class="match-toggle">
                                 <div class="toggle-header">
                                     <strong>Valores de consulta</strong>
-
-                                    <div class="duvidas">
-                                        <span>?</span>
-                                        <p><b>Dicas de como Cobrar</b> <br/>É importante que o valor da consulta online seja menor que o da consulta presencial. Afinal não estão presentes vários custos relativos a estrutura física de um consultório.</p>
-                                    </div>
                                 </div>
                                 <div class="toggle-body vitazure">
                                     <div class="row">
-                                        <div class="col-12">
-                                            <div class="input-block">
-                                                <label>Tempo de consulta:</label>
-                                                <select ng-model="ProfissionalVH.profissional.duracaoAtendimentoValor" class="form-control input-sm">
-													<c:forEach var="duracaoAtendimento" items="${duracoes}">
-				   							          <option value="${duracaoAtendimento}">${duracaoAtendimento.valor}</option>
-										            </c:forEach>
-									           </select>
-                                            </div>
-                                        </div>
                                         <div class="col-12">
                                             <div class="input-block">
                                                 <label>Valor da consulta online:</label>
@@ -444,12 +533,6 @@
                             <div class="match-toggle">
                                 <div class="toggle-header">
                                     <strong>Dados bancários para recebimento de consultas</strong>
-
-                                    <div class="duvidas">
-                                        <span>?</span>
-
-                                        <p><b>Dicas de como Cobrar</b> <br/>É importante que o valor da consulta online seja menor que o da consulta presencial. Afinal não estão presentes vários custos relativos a estrutura física de um consultório.</p>
-                                    </div>
                                 </div>
     
                                 <div class="toggle-body vitazure">
@@ -528,7 +611,7 @@
 <!--                                         </div> -->
 
                                         <div class="col-12">
-                                            <button class="button-secundary checkbox-button" ng-click="perfilProfissional()" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Salvar</button>
+                                            <button class="button-secundary checkbox-button" ng-click="salvarConta()" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Salvar</button>
                                         </div>
                                     </div>
                                 </div>
@@ -537,12 +620,6 @@
                             <div class="match-toggle">
                                 <div class="toggle-header">
                                     <strong>Convênios</strong>
-
-                                    <div class="duvidas">
-                                        <span>?</span>
-
-                                        <p><b>Dicas de como Cobrar</b> <br/>É importante que o valor da consulta online seja menor que o da consulta presencial. Afinal não estão presentes vários custos relativos a estrutura física de um consultório.</p>
-                                    </div>
                                 </div>
     
                                 <div class="toggle-body vitazure">
@@ -599,12 +676,6 @@
                             <div class="match-toggle">
                                 <div class="toggle-header">
                                     <strong>Pacotes</strong>
-
-                                    <div class="duvidas">
-                                        <span>?</span>
-
-                                        <p><b>Dicas de como Cobrar</b> <br/>É importante que o valor da consulta online seja menor que o da consulta presencial. Afinal não estão presentes vários custos relativos a estrutura física de um consultório.</p>
-                                    </div>
                                 </div>
     
                                 <div class="toggle-body vitazure">
@@ -647,12 +718,6 @@
                             <div class="match-toggle">
                                 <div class="toggle-header">
                                     <strong>Primeira consulta cortesia</strong>
-
-                                    <div class="duvidas">
-                                        <span>?</span>
-
-                                        <p><b>Dicas de como Cobrar</b> <br/>É importante que o valor da consulta online seja menor que o da consulta presencial. Afinal não estão presentes vários custos relativos a estrutura física de um consultório.</p>
-                                    </div>
                                 </div>
     
                                 <div class="toggle-body vitazure"> 
@@ -683,11 +748,6 @@
                             <div class="match-toggle">
                                 <div class="toggle-header">
                                     <strong>Atendimento por libras</strong>
-
-                                    <div class="duvidas">
-                                        <span>?</span>
-                                        <p><b>Dicas de como Cobrar</b> <br/>É importante que o valor da consulta online seja menor que o da consulta presencial. Afinal não estão presentes vários custos relativos a estrutura física de um consultório.</p>
-                                    </div>
                                 </div>
     
                                 <div class="toggle-body vitazure">
@@ -711,10 +771,6 @@
                             <div class="match-toggle">
                                 <div class="toggle-header">
                                     <strong>Consulta com desconto</strong>
-                                    <div class="duvidas">
-                                        <span>?</span>
-                                        <p><b>Dicas de como Cobrar</b> <br/>É importante que o valor da consulta online seja menor que o da consulta presencial. Afinal não estão presentes vários custos relativos a estrutura física de um consultório.</p>
-                                    </div>
                                 </div>
     
                                 <div class="toggle-body vitazure">
@@ -744,10 +800,6 @@
                             <div class="match-toggle">
                                 <div class="toggle-header">
                                     <strong>Aviso de férias/Afastamento</strong>
-                                    <div class="duvidas">
-                                        <span>?</span>
-                                        <p><b>Dicas de como Cobrar</b> <br/>É importante que o valor da consulta online seja menor que o da consulta presencial. Afinal não estão presentes vários custos relativos a estrutura física de um consultório.</p>
-                                    </div>
                                 </div>
                                 <div class="toggle-body vitazure">
                                     <div class="row">
@@ -805,6 +857,7 @@
 <script>
 $('.valorMonetario').mask('#.##0.00', {reverse: true});
 </script>
+
 <script>
  $(function(){
 	 $('#avatar').change(function(){

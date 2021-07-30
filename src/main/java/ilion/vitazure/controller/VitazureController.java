@@ -1,6 +1,7 @@
 package ilion.vitazure.controller;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +22,7 @@ import com.google.gson.Gson;
 
 import ilion.util.contexto.autorizacao.PessoaLogada;
 import ilion.vitazure.enumeradores.BancoEnum;
+import ilion.vitazure.enumeradores.DiasSemanaEnum;
 import ilion.vitazure.enumeradores.DuracaoAtendimentoEnum;
 import ilion.vitazure.enumeradores.EspecialidadesEnum;
 import ilion.vitazure.enumeradores.EstadoEnum;
@@ -29,13 +31,21 @@ import ilion.vitazure.enumeradores.TemasTrabalhoEnum;
 import ilion.vitazure.enumeradores.TempoAntecendenciaEnum;
 import ilion.vitazure.enumeradores.TipoContaEnum;
 import ilion.vitazure.enumeradores.TipoProfissionalEnum;
+import ilion.vitazure.model.Agenda;
 import ilion.vitazure.model.EnderecoAtendimento;
+import ilion.vitazure.model.Especialidade;
 import ilion.vitazure.model.FormacaoAcademica;
+import ilion.vitazure.model.HorarioAtendimento;
 import ilion.vitazure.model.Pessoa;
 import ilion.vitazure.model.Profissional;
+import ilion.vitazure.model.TemaTrabalho;
+import ilion.vitazure.negocio.AgendaNegocio;
 import ilion.vitazure.negocio.EnderecoNegocio;
+import ilion.vitazure.negocio.EspecialidadeNegocio;
 import ilion.vitazure.negocio.FormacaoAcademicaNegocio;
+import ilion.vitazure.negocio.HorarioAtendimentoNegocio;
 import ilion.vitazure.negocio.ProfissionalNegocio;
+import ilion.vitazure.negocio.TemaAtendimentoNegocio;
 
 @Controller
 @SessionAttributes("usuario")
@@ -50,6 +60,18 @@ public class VitazureController {
 	
 	@Autowired
 	private EnderecoNegocio enderecoNegocio;
+	
+	@Autowired
+	private TemaAtendimentoNegocio temaNegocio;
+	
+	@Autowired
+	private EspecialidadeNegocio especialidadeNegocio;
+	
+	@Autowired
+	private HorarioAtendimentoNegocio horarioNegocio;
+	
+	@Autowired
+	private AgendaNegocio agendaNegocio;
 	
 	private Gson gson = new Gson();
 
@@ -82,7 +104,9 @@ public class VitazureController {
 			request.setAttribute("temasTrabalho", TemasTrabalhoEnum.values());
 			request.setAttribute("tempoAntecendencia", TempoAntecendenciaEnum.values());
 			request.setAttribute("formacoes", FormacaoEnum.values());
+			request.setAttribute("diasSemana", DiasSemanaEnum.values());
 			request.setAttribute("profissional", profissional);
+			request.setAttribute("enderecoAtendimento", enderecoNegocio.consultarEnderecoPorPessoa(profissional.getId()));
 			return "/ilionnet2/vitazure/informacoes-perfil";
 		}
 	}
@@ -110,6 +134,56 @@ public class VitazureController {
 			 return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		 }
 	 }
+	 
+	 @RequestMapping("/vitazure/especialidadeAtendimento/{id}")
+	 public  ResponseEntity<String> consultaEspecialidadeAtendimento(@PathVariable String id) {
+		 try {
+			 List<Especialidade> especialidade = especialidadeNegocio.consultarEspecialidadesProfissional(Long.valueOf(id));
+			 return new ResponseEntity<>(gson.toJson(especialidade), HttpStatus.OK);
+		 } catch (Exception e) {
+			 return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		 }
+	 }
+	 
+	 @RequestMapping("/vitazure/temasAtendimento/{id}")
+	 public  ResponseEntity<String> consultaTemasAtendimento(@PathVariable String id) {
+		 try {
+			 List<TemaTrabalho> temaTrabalho = temaNegocio.consultarTemasPorProfissional(Long.valueOf(id));
+			 return new ResponseEntity<>(gson.toJson(temaTrabalho), HttpStatus.OK);
+		 } catch (Exception e) {
+			 return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		 }
+	 }
+	 
+	 @RequestMapping("/vitazure/horarioAtendimento/{id}")
+	 public  ResponseEntity<String> consultaHorarioAtendimento(@PathVariable String id) {
+		 try {
+			 List<HorarioAtendimento> horarioAtendimento = horarioNegocio.consultarHorariosAtendimentoPorProfissional(Long.valueOf(id) , false , false);
+			 return new ResponseEntity<>(gson.toJson(horarioAtendimento), HttpStatus.OK);
+		 } catch (Exception e) {
+			 return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		 }
+	 }
 	
+	 
+	 @GetMapping("/vitazure/meuCadastro")
+		public String meuCadastro(ModelMap modelMap, HttpServletRequest request) {
+			Pessoa pessoa = (Pessoa) request.getSession().getAttribute("pessoaSessao");
+			
+			modelMap.addAttribute("pessoa", pessoa);
+			
+			return "/ilionnet2/vitazure/completar-cadastro";
+			
+		}
+	 @GetMapping("/vitazure/lista-de-consultas")
+	 public String listaConsulta(ModelMap modelMap, HttpServletRequest request) {
+		 Pessoa pessoa = (Pessoa) request.getSession().getAttribute("pessoaSessao");
+		 modelMap.addAttribute("pessoa", pessoa);
+		 List<Agenda> listAgendas = new ArrayList<Agenda>();
+		 listAgendas.addAll(agendaNegocio.consultarAgenda(pessoa));
+		 request.setAttribute("listAgendas", listAgendas);
+		 return "/ilionnet2/vitazure/lista-de-consultas";
+		 
+	 }
 	
 }

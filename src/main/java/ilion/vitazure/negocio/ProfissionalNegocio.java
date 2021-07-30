@@ -44,4 +44,14 @@ public class ProfissionalNegocio {
 		return (List<Profissional>) hibernateUtil.list(dc);
 	}
 	
+	public Profissional consultarPorId(Long idProfissional) {
+		DetachedCriteria dc = DetachedCriteria.forClass(Profissional.class);
+		dc.add(Restrictions.eq("id", idProfissional));
+		Profissional profissional = (Profissional) hibernateUtil.consultarUniqueResult(dc);
+		if (profissional == null) {
+			return new Profissional();
+		}
+		return profissional;
+	}
+	
 }
