@@ -79,7 +79,7 @@ function informacoesPerfilController($scope, $http, $window) {
  	$scope.enderecoAtendimento = function () {
        enderecoAtendimento($scope, $http, $window);
     };
-<<<<<<< HEAD
+
  	$scope.especialidadeAtendimento = function () {
        especialidadeAtendimento($scope, $http, $window);
     };
@@ -102,12 +102,6 @@ function informacoesPerfilController($scope, $http, $window) {
 	$scope.salvarConta = function () {
     	salvarConta($scope, $http, $window);
 	}
-
-=======
- 	$scope.salvarConta = function () {
- 		salvarConta($scope, $http, $window);
-	}
->>>>>>> 916c9ae55ed0e23f5f5ddc023322c3acd6c037d8
 }
 
 function perfilProfissional($scope, $http, $window) {
@@ -116,11 +110,9 @@ function perfilProfissional($scope, $http, $window) {
 	$scope.ProfissionalVH.profissional.habilitarDesconto40 = document.getElementById("habilitarDesconto40").checked;
 	$scope.ProfissionalVH.profissional.atendimentoPorLibras = document.getElementById("atendimentoPorLibras").checked;
 	$scope.ProfissionalVH.profissional.primeiraConsultaCortesia = document.getElementById("primeiraConsultaCortesia").checked;
-	$scope.ProfissionalVH.profissional.pacote2com30Desconto = document.getElementById("pacote2com30Desconto").checked;
-	$scope.ProfissionalVH.profissional.pacote3com40Desconto = document.getElementById("pacote3com40Desconto").checked;
-	$scope.ProfissionalVH.profissional.pacote4com50Desconto = document.getElementById("pacote4com50Desconto").checked;
-	$scope.ProfissionalVH.profissional.convenio20 = document.getElementById("convenio20").checked;
-	$scope.ProfissionalVH.profissional.convenio30 = document.getElementById("convenio30").checked;
+	$scope.ProfissionalVH.profissional.pacote2com5Desconto = document.getElementById("pacote2com5Desconto").checked;
+	$scope.ProfissionalVH.profissional.pacote3com10Desconto = document.getElementById("pacote3com10Desconto").checked;
+	$scope.ProfissionalVH.profissional.pacote4com15Desconto = document.getElementById("pacote4com15Desconto").checked;
 	$scope.ProfissionalVH.profissional.convenio40 = document.getElementById("convenio40").checked;
 	$scope.ProfissionalVH.profissional.convenio50 = document.getElementById("convenio50").checked;
 	$scope.ProfissionalVH.profissional.convenio60 = document.getElementById("convenio60").checked;

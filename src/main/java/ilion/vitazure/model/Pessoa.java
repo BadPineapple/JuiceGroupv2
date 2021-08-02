@@ -23,6 +23,7 @@ public class Pessoa implements Serializable{
 	  @SequenceGenerator(name = "pessoa_id_seq", sequenceName = "pessoa_id_seq", allocationSize = 1)
 	  private Long id;
 	  private String nome;
+	  private String genero;
 	  private String email;
 	  private String telefone;
 	  private String celular;
@@ -189,6 +190,15 @@ public class Pessoa implements Serializable{
 	}
 	public void setEstado(String estado) {
 		this.estado = estado;
+	}
+	public String getGenero() {
+		if(genero == null) {
+			genero = "";
+		}
+		return genero;
+	}
+	public void setGenero(String genero) {
+		this.genero = genero;
 	}
 	  
 	  

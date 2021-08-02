@@ -51,15 +51,27 @@
 						                     pessoa.dataNascimento='${pessoa.dataNascimento}';
 						                     pessoa.cpf='${pessoa.cpf}';
 						                     pessoa.cep='${pessoa.cep}';
-						                     pessoa.cidade='${pessoa.cidade}';
-						                     pessoa.estado='${pessoa.estado}';
-						                     pessoa.endereco='${pessoa.endereco}';
-						                     pessoa.setor='${pessoa.setor}';
+						                     pessoa.genero='${pessoa.genero}';
                           					 pessoa.cliente ='${pessoa.cliente}';
                          					 pessoa.psicologo ='${pessoa.psicologo}';
                           					 "/>
                           
                             <div class="row">
+                                <div class="col-12">
+                                    <div class="input-block">
+                                        <label>Nome</label>
+                                        <input type="text" ng-model="pessoa.nome" required />
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="input-block">
+                                        <label>Gênero</label>
+                                        <select ng-model="pessoa.genero" class="form-control input-sm">
+						   					<option value="M">Masculino</option>
+						   					<option value="F">Feminino</option>
+										</select>
+                                    </div>
+                                </div>
                                 <div class="col-12">
                                     <div class="input-block">
                                         <label>CPF</label>
@@ -74,36 +86,26 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="input-block">
+                                        <label>Telefone</label>
+                                        <input type="text" data-mask="(00)0000-0000" ng-model="pessoa.telefone" required/>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="input-block">
+                                        <label>Celular</label>
+                                        <input type="text" data-mask="(00)00000-0000" ng-model="pessoa.celular" required/>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="input-block">
+                                        <label>Email</label>
+                                        <input type="text" ng-model="pessoa.email" required/>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="input-block">
                                         <label>CEP</label>
                                         <input type="text" data-mask="00000-000" ng-model="pessoa.cep" required />
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="input-block">
-                                        <label>Endereço</label>
-                                        <input type="text" ng-model="pessoa.endereco" required />
-                                    </div>
-                                </div>
-                                <div class="col-12 col-xl-6">
-                                    <div class="input-block">
-                                        <label>Bairro</label>
-                                        <input type="text" ng-model="pessoa.setor" required />
-                                    </div>
-                                </div>
-                                <div class="col-12 col-xl-6">
-                                    <div class="input-block">
-                                        <label>Estado</label>
-                                        <select ng-model="pessoa.estado" class="form-control input-sm">
-										  <c:forEach var="estado" items="${estados}">
-						   					<option value="${estado}">${estado.valor}</option>
-										  </c:forEach>
-										</select>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="input-block">
-                                        <label>Cidade</label>
-                                        <input type="text" ng-model="pessoa.cidade" required />
                                     </div>
                                 </div>
                                 <div class="col-12">

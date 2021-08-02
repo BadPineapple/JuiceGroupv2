@@ -42,7 +42,6 @@
                                     <div class="psicologo-name">
                                         <h3>${profissional.pessoa.nome}</h3>
                                         <p>${profissional.documentoCrpCrm}-${profissional.cadastroEpsi}</p>
-                                        <p>Psicologa Clínica e Consultora de Imagem</p>
                                     </div>
                                     <div class="psicologo-description">
                                         <strong>Sobre min:</strong>

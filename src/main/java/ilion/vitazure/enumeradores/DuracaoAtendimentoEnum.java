@@ -3,13 +3,9 @@ package ilion.vitazure.enumeradores;
 public enum DuracaoAtendimentoEnum {
 	
 	NAO_INFORMADO("",""),
-	DEZ_MINUTOS("10","10 Minutos"),
-	VINTE_MINUTOS("20","20 Minutos"),
-	TRINTA_MINUTOS("30","30 Minutos"),
 	QUARENTA_MINUTOS("40","40 Minutos"),
 	CINQUENTA_MINUTOS("50","50 Minutos"),
-	SESSETA_MINUTOS("60","60 Minutos"),
-	SETENTA_MINUTOS("70","70 Minutos");	
+	SESSETA_MINUTOS("60","60 Minutos");
 	
 	private String nome;
 	

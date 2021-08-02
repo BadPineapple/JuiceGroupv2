@@ -105,11 +105,11 @@ public class Profissional implements Serializable{
 	  
 	  private Boolean convenio60;
 	  
-	  private Boolean pacote2com30Desconto;
+	  private Boolean pacote2com5Desconto;
 	  
-	  private Boolean pacote3com40Desconto;
+	  private Boolean pacote3com10Desconto;
 	  
-	  private Boolean pacote4com50Desconto;
+	  private Boolean pacote4com15Desconto;
 
 	  private Boolean primeiraConsultaCortesia;
 	  
@@ -122,6 +122,14 @@ public class Profissional implements Serializable{
 	  private Integer quantidadeConsultaDesconto40Mes;
 	  
 	  private Boolean avisoFerias;
+
+	  private Boolean adolescentes;
+	  
+	  private Boolean adultos;
+	  
+	  private Boolean casais;
+	  
+	  private Boolean idosos;
 	  
 	  @Transient
 	  List<Date> datasPossivelAgendamento;
@@ -363,28 +371,28 @@ public class Profissional implements Serializable{
 		this.convenio60 = convenio60;
 	}
 
-	public Boolean getPacote2com30Desconto() {
-		return pacote2com30Desconto;
+	public Boolean getPacote2com5Desconto() {
+		return pacote2com5Desconto;
 	}
 
-	public void setPacote2com30Desconto(Boolean pacote2com30Desconto) {
-		this.pacote2com30Desconto = pacote2com30Desconto;
+	public void setPacote2com5Desconto(Boolean pacote2com5Desconto) {
+		this.pacote2com5Desconto = pacote2com5Desconto;
 	}
 
-	public Boolean getPacote3com40Desconto() {
-		return pacote3com40Desconto;
+	public Boolean getPacote3com10Desconto() {
+		return pacote3com10Desconto;
 	}
 
-	public void setPacote3com40Desconto(Boolean pacote3com40Desconto) {
-		this.pacote3com40Desconto = pacote3com40Desconto;
+	public void setPacote3com10Desconto(Boolean pacote3com10Desconto) {
+		this.pacote3com10Desconto = pacote3com10Desconto;
 	}
 
-	public Boolean getPacote4com50Desconto() {
-		return pacote4com50Desconto;
+	public Boolean getPacote4com15Desconto() {
+		return pacote4com15Desconto;
 	}
 
-	public void setPacote4com50Desconto(Boolean pacote4com50Desconto) {
-		this.pacote4com50Desconto = pacote4com50Desconto;
+	public void setPacote4com15Desconto(Boolean pacote4com15Desconto) {
+		this.pacote4com15Desconto = pacote4com15Desconto;
 	}
 
 	public Boolean getPrimeiraConsultaCortesia() {
@@ -499,6 +507,38 @@ public class Profissional implements Serializable{
 
 	public void setHorarioPossivelAtendimento(List<HorarioPossivelAtendimento> horarioPossivelAtendimento) {
 		this.horarioPossivelAtendimento = horarioPossivelAtendimento;
+	}
+
+	public Boolean getAdolescentes() {
+		return adolescentes;
+	}
+
+	public void setAdolescentes(Boolean adolescentes) {
+		this.adolescentes = adolescentes;
+	}
+
+	public Boolean getAdultos() {
+		return adultos;
+	}
+
+	public void setAdultos(Boolean adultos) {
+		this.adultos = adultos;
+	}
+
+	public Boolean getCasais() {
+		return casais;
+	}
+
+	public void setCasais(Boolean casais) {
+		this.casais = casais;
+	}
+
+	public Boolean getIdosos() {
+		return idosos;
+	}
+
+	public void setIdosos(Boolean idosos) {
+		this.idosos = idosos;
 	}
 	  
 	

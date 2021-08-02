@@ -4,14 +4,9 @@
 <html class="no-js" lang="pt-BR" ng-app="informacoesPerfilApp" ng-controller="InformacoesPerfilController">
 <head>
 	<jsp:include page="includes/include-head.jsp" flush="true" />
-<<<<<<< HEAD
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>	
 	<script src="../assets/js/vitazure/informacoesPerfil.js"></script>
 	<script src="../assets/js/vitazure/cep.js"></script>
-=======
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>	
-
->>>>>>> 916c9ae55ed0e23f5f5ddc023322c3acd6c037d8
 </head>
 
 <body>
@@ -27,7 +22,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12 text-center">
-                        <h3>Meu cadastro</h3>
+                        <h3>Meu perfil</h3>
                         <p>Preencha todos os tópicos para seu Perfil  Profissional</p>
                     </div>
 
@@ -54,20 +49,22 @@
 						                    ProfissionalVH.profissional.valorConsultaOnline='${profissional.valorConsultaOnline}';
 						                    ProfissionalVH.profissional.valorConsultaPresencial='${profissional.valorConsultaPresencial}';
 						                    ProfissionalVH.profissional.tempoAntecendencia='${profissional.tempoAntecendencia}';
+						                    ProfissionalVH.profissional.adolescentes='${profissional.adolescentes}';
+						                    ProfissionalVH.profissional.adultos='${profissional.adultos}';
+						                    ProfissionalVH.profissional.casais='${profissional.casais}';
+						                    ProfissionalVH.profissional.idosos='${profissional.idosos}';
 						                    ProfissionalVH.profissional.tipoConta='${profissional.tipoConta}';
 						                    ProfissionalVH.profissional.banco='${profissional.banco}';
 						                    ProfissionalVH.profissional.agencia='${profissional.agencia}';
 						                    ProfissionalVH.profissional.conta='${profissional.conta}';
      					                    ProfissionalVH.profissional.digitoVerificador='${profissional.digitoVerificador}';
 						                    ProfissionalVH.profissional.nomeFavorecido='${profissional.nomeFavorecido}';
-						                    ProfissionalVH.profissional.convenio20='${profissional.convenio20}';
-										    ProfissionalVH.profissional.convenio30='${profissional.convenio30}';
 										    ProfissionalVH.profissional.convenio40='${profissional.convenio40}';
 										    ProfissionalVH.profissional.convenio50='${profissional.convenio50}';
 										    ProfissionalVH.profissional.convenio60='${profissional.convenio60}';
-										    ProfissionalVH.profissional.pacote2com30Desconto='${profissional.pacote2com30Desconto}';
-										    ProfissionalVH.profissional.pacote3com40Desconto='${profissional.pacote3com40Desconto}';
-										    ProfissionalVH.profissional.pacote4com50Desconto='${profissional.pacote4com50Desconto}';
+										    ProfissionalVH.profissional.pacote2com5Desconto='${profissional.pacote2com5Desconto}';
+										    ProfissionalVH.profissional.pacote3com10Desconto='${profissional.pacote3com10Desconto}';
+										    ProfissionalVH.profissional.pacote4com15Desconto='${profissional.pacote4com15Desconto}';
 										    ProfissionalVH.profissional.primeiraConsultaCortesia='${profissional.primeiraConsultaCortesia}';
 										    ProfissionalVH.profissional.quantidadeConsultaCortesiaMes='${profissional.quantidadeConsultaCortesiaMes}';
 										    ProfissionalVH.profissional.atendimentoPorLibras='${profissional.atendimentoPorLibras}';
@@ -123,20 +120,6 @@
 
                                         <div class="col-12 col-md-6 col-xl-6">
                                             <div class="input-block">
-                                                <label>CPF</label>
-                                                <input type="text" ng-model="ProfissionalVH.profissional.pessoa.cpf" data-mask="000.000.000-00"  />
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12 col-md-6 col-xl-6">
-                                            <div class="input-block">
-                                                <label>Data de Nascimento</label>
-                                                <input type="text" ng-model="ProfissionalVH.profissional.pessoa.dataNascimento" data-mask="00/00/0000"  />
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12 col-md-6 col-xl-6">
-                                            <div class="input-block">
                                                 <label>Documento do (CRP/CRM)</label>
                                                 <input type="text" ng-model="ProfissionalVH.profissional.documentoCrpCrm"  />
                                             </div>
@@ -146,13 +129,6 @@
                                             <div class="input-block">
                                                 <label>Cadastro do E-Psi</label>
                                                 <input type="text" ng-model="ProfissionalVH.profissional.cadastroEpsi"  />
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12">
-                                            <div class="input-block">
-                                                <label>Título Profissional</label>
-                                                <input type="text" ng-model="ProfissionalVH.profissional.tituloProfissional"  />
                                             </div>
                                         </div>
 
@@ -206,14 +182,25 @@
  																  </span>
 																</div>
                                                </div>
-
-                                        <div class="col-12">
-                                            <div class="input-block">
-                                                <label>Bibliografia</label>
-                                                <textarea cols="20" rows="5" ng-model="ProfissionalVH.profissional.biografia" placeholder="Informe aqui sua vida profissional. Procure ser mais claro possível." style="color: #A6A6A6"></textarea>
-                                            </div>
-                                        </div>
-
+                                               <div class="col-12 input-block" style="padding-bottom: 15px;">
+                                                 <label>Faixa de atendimento</label>
+	                                           </div>   
+	                                            <div class="checkbox col-md-3 col-lg-3 col-sm-12">
+	                                                <input type="checkbox" ng-model="ProfissionalVH.profissional.adolescentes" id="adolescentes" ng-checked="${profissional.adolescentes}"/>
+	                                                <label>adolescentes</label>
+	                                            </div>
+	                                            <div class="checkbox col-md-3 col-lg-3 col-sm-12">
+	                                                <input type="checkbox" ng-model="ProfissionalVH.profissional.adultos" id="adultos" ng-checked="${profissional.adultos}"/>
+	                                                <label>adultos</label>
+	                                            </div>
+	                                            <div class="checkbox col-md-3 col-lg-3 col-sm-12">
+	                                                <input type="checkbox" ng-model="ProfissionalVH.profissional.casais" id="casais" ng-checked="${profissional.casais}"/>
+	                                                <label>casais</label>
+	                                            </div>
+	                                            <div class="checkbox col-md-3 col-lg-3 col-sm-12">
+	                                                <input type="checkbox" ng-model="ProfissionalVH.profissional.idosos" id="idosos" ng-checked="${profissional.idosos}"/>
+	                                                <label>idosos</label>
+	                                            </div>
  										<div class="col-12">
                                                     <button class="button-secundary checkbox-button" ng-click="perfilProfissional()" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Salvar</button>
                                          </div>
@@ -240,20 +227,16 @@
 												</div>  
                                             </div>
                                             <div class="row">
-                                                <div class="col-6">
+                                                <div class="col-12">
                                                     <div class="input-block">
                                                         <label>Formação</label>
-                                                        <select ng-model="formacao" class="form-control input-sm">
-															<c:forEach var="formacao" items="${formacoes}">
-						   							          <option value="${formacao.valor}">${formacao.valor}</option>
-												            </c:forEach>
-											           </select>
+                                                        <input type="text" ng-model="formacao" />
                                                     </div>
                                                 </div>
-                                                <div class="col-6">
+                                                <div class="col-12">
                                                     <div class="input-block">
                                                         <label>Descrição da Formação</label>
-                                                        <input type="text" ng-model="descricaoFormacao" />
+                                                              <textarea cols="20" rows="5" ng-model="descricaoFormacao"  style="color: #A6A6A6"></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -279,8 +262,23 @@
                                             </div>
                                         </div>
                                     </div>
-    						
-    						
+    						<div class="match-toggle">
+                                <div class="toggle-header">
+                                    <strong>Sobre Mim</strong>
+                                </div>
+    						<div class="toggle-body">
+                                       <div class="col-12">
+                                          <p>Esta informação será mostrada para o paciente. Neste espaço fale de você numa linguagem de fácil entendimento, destacando sua paixão pela profissão e seu interesse em ajudar as pessoas.</p>
+                                       </div>
+                                    <div class="row">
+    						            <div class="col-12">
+                                            <div class="input-block">
+                                                <textarea cols="20" rows="5" ng-model="ProfissionalVH.profissional.biografia" placeholder="Informe aqui sua vida profissional. Procure ser mais claro possível." style="color: #A6A6A6"></textarea>
+                                            </div>
+                                        </div>
+                                      </div>
+                                  </div>      
+    						</div>
     						
     						<div class="match-toggle">
                                 <div class="toggle-header">
@@ -632,21 +630,7 @@
 
                                         <div class="col-12">
                                             <div class="toogle-title">
-                                                <p>O Portal Vitazure oferece a oportunidade para os psicólogos atenderem diversas empresas ou planos de saúde. Ao marcar a opção abaixo você aceita oferecer o desconto estipulado para os funcionários e dependentes das empresas conveniadas. O desconto será aplicado automaticamente quando um paciente for identificado pelo sistema.</p>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12">
-                                            <div class="checkbox">
-                                                <input type="checkbox" ng-model="ProfissionalVH.profissional.convenio20" id="convenio20" ng-checked="${profissional.convenio20}"/>
-                                                <label>Habilitar opção para realizar atendimento para os convênios no valor de R$20,00</label>
-                                            </div>
-                                        </div>
-    
-                                        <div class="col-12">
-                                            <div class="checkbox">
-                                                <input type="checkbox" ng-model="ProfissionalVH.profissional.convenio30" id="convenio30" ng-checked="${profissional.convenio30}"/>
-                                                <label>Habilitar opção para realizar atendimento para os convênios no valor de R$30,00</label>
+                                                <p>O Portal Vitazure oferece a oportunidade para os psicólogos atenderem diversas empresas. Ao marcar a opção abaixo você aceita oferecer o desconto estipulado para os funcionários e dependentes das empresas conveniadas. O desconto será aplicado automaticamente quando um paciente for identificado pelo sistema.</p>
                                             </div>
                                         </div>
     
@@ -694,22 +678,22 @@
 
                                         <div class="col-12">
                                             <div class="checkbox">
-                                                <input type="checkbox" ng-model="ProfissionalVH.profissional.pacote2com30Desconto" id="pacote2com30Desconto" ng-checked="${profissional.pacote2com30Desconto}"/>
-                                                <label>Pacote com 2 consultas por 30% de desconto cada</label>
+                                                <input type="checkbox" ng-model="ProfissionalVH.profissional.pacote2com5Desconto" id="pacote2com5Desconto" ng-checked="${profissional.pacote2com5Desconto}"/>
+                                                <label>Pacote com 2 consultas por 5% de desconto cada</label>
                                             </div>
                                         </div>
     
                                         <div class="col-12">
                                             <div class="checkbox">
-                                                <input type="checkbox" ng-model="ProfissionalVH.profissional.pacote3com40Desconto" id="pacote3com40Desconto" ng-checked="${profissional.pacote3com40Desconto}"/>
-                                                <label>Pacote com 3 consultas por 40% de desconto cada</label>
+                                                <input type="checkbox" ng-model="ProfissionalVH.profissional.pacote3com10Desconto" id="pacote3com10Desconto" ng-checked="${profissional.pacote3com10Desconto}"/>
+                                                <label>Pacote com 3 consultas por 10% de desconto cada</label>
                                             </div>
                                         </div>
     
                                         <div class="col-12">
                                             <div class="checkbox">
-                                                <input type="checkbox" ng-model="ProfissionalVH.profissional.pacote4com50Desconto" id="pacote4com50Desconto" ng-checked="${profissional.pacote4com50Desconto}"/>
-                                                <label>Pacote com 4 consultas por 50% de desconto cada</label>
+                                                <input type="checkbox" ng-model="ProfissionalVH.profissional.pacote4com15Desconto" id="pacote4com15Desconto" ng-checked="${profissional.pacote4com15Desconto}"/>
+                                                <label>Pacote com 4 consultas por 15% de desconto cada</label>
                                             </div>
                                         </div>
 
