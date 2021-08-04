@@ -9,6 +9,19 @@
 
 <li>
 
+   <a class="pmd-ripple-effect" href="<ilion:url/>agenda">
+
+    <i class="media-left media-middle">
+     <i class="far fa-calendar-alt" style="font-size: 25px;"></i>
+    </i>
+
+    <span class="media-body">Agenda</span>
+
+   </a>
+
+  </li>  
+<li>
+
    <a class="pmd-ripple-effect" href="<ilion:url/>cliente">
 
     <i class="media-left media-middle">

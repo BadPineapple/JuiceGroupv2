@@ -17,7 +17,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import ilion.vitazure.enumeradores.*;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import ilion.vitazure.enumeradores.BancoEnum;
 import ilion.vitazure.enumeradores.DuracaoAtendimentoEnum;
@@ -42,10 +42,10 @@ public class Profissional implements Serializable{
 	  private Boolean ativo;
 	  
 	  private String plano;
+
+	  private String dataInicioPlano;
 	  
-	  private Date dataInicioPlano;
-	  
-	  private Date dataFimPlano;
+	  private String dataFimPlano;
 	  
 	  private String documentoCrpCrm;
 	  
@@ -131,6 +131,8 @@ public class Profissional implements Serializable{
 	  
 	  private Boolean idosos;
 	  
+	  private String tokenTransacaoPlano;
+	  
 	  @Transient
 	  List<Date> datasPossivelAgendamento;
 	  
@@ -176,19 +178,19 @@ public class Profissional implements Serializable{
 		this.plano = plano;
 	}
 
-	public Date getDataInicioPlano() {
+	public String getDataInicioPlano() {
 		return dataInicioPlano;
 	}
 
-	public void setDataInicioPlano(Date dataInicioPlano) {
+	public void setDataInicioPlano(String dataInicioPlano) {
 		this.dataInicioPlano = dataInicioPlano;
 	}
 
-	public Date getDataFimPlano() {
+	public String getDataFimPlano() {
 		return dataFimPlano;
 	}
 
-	public void setDataFimPlano(Date dataFimPlano) {
+	public void setDataFimPlano(String dataFimPlano) {
 		this.dataFimPlano = dataFimPlano;
 	}
 
@@ -541,6 +543,17 @@ public class Profissional implements Serializable{
 		this.idosos = idosos;
 	}
 	  
+	public int getQuantidadesDiasVencimentoPlano() {
+		return getPlano().equals("plano_mensal") ? 30 : getPlano().equals("plano_semestral") ? 180 :  365 ;
+	}
+
+	public String getTokenTransacaoPlano() {
+		return tokenTransacaoPlano;
+	}
+
+	public void setTokenTransacaoPlano(String tokenTransacaoPlano) {
+		this.tokenTransacaoPlano = tokenTransacaoPlano;
+	}
+	 
 	
-	  
 }

@@ -144,6 +144,9 @@ public class Arquivo implements Serializable {
 	
 	
 	public String getId() {
+		if (id == null) {
+			id = "";
+		}
 		return id;
 	}
 	public void setId(String id) {

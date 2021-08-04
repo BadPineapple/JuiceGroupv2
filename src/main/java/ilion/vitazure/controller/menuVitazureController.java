@@ -30,6 +30,7 @@ import ilion.vitazure.model.EnderecoAtendimento;
 import ilion.vitazure.model.FormacaoAcademica;
 import ilion.vitazure.model.Pessoa;
 import ilion.vitazure.model.Profissional;
+import ilion.vitazure.negocio.AgendaNegocio;
 import ilion.vitazure.negocio.EnderecoNegocio;
 import ilion.vitazure.negocio.FormacaoAcademicaNegocio;
 import ilion.vitazure.negocio.PessoaNegocio;
@@ -52,6 +53,9 @@ public class menuVitazureController  extends CustomErrorController{
 	@Autowired
 	private EnderecoNegocio enderecoNegocio;
 	
+	@Autowired
+	private AgendaNegocio agendaNegocio;
+	
 	@RequestMapping("/cliente")
 	@UsuarioLogado()
 	public String clienteCons(HttpServletRequest request) {
@@ -72,8 +76,8 @@ public class menuVitazureController  extends CustomErrorController{
 		
 		VLHForm vlhForm = VLHForm.getVLHSession("profissionalLista", request);
 		Usuario usuarioSessao = (Usuario) request.getSession().getAttribute("usuarioSessao");
-		ValueList arquivosAreaRestrita = pessoaNegocio.buscar(vlhForm, new ValueListInfo(vlhForm) , usuarioSessao , "psicologo");
-		request.setAttribute("profissionais", arquivosAreaRestrita);
+		ValueList profissionais = profissionalNegocio.buscar(vlhForm, new ValueListInfo(vlhForm) , usuarioSessao);
+		request.setAttribute("profissionais", profissionais);
 		
 		request.setAttribute("vlhForm", vlhForm);
 		
@@ -165,4 +169,17 @@ public class menuVitazureController  extends CustomErrorController{
 			return "redirect:/profissional/?m=erro";
 		}
 	 }
+	
+	@RequestMapping("/agenda")
+	@UsuarioLogado()
+	public String agendaCons(HttpServletRequest request) {
+		
+		VLHForm vlhForm = VLHForm.getVLHSession("agendaLista", request);
+		Usuario usuarioSessao = (Usuario) request.getSession().getAttribute("usuarioSessao");
+		ValueList agendas = agendaNegocio.buscar(vlhForm, new ValueListInfo(vlhForm) , usuarioSessao);
+		request.setAttribute("agendas", agendas);
+		request.setAttribute("vlhForm", vlhForm);
+		
+		return "/ilionnet/modulos/vitazure/agendaCons";
+	}
 }

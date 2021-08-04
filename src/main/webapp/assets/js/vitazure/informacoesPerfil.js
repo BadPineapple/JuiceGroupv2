@@ -1,4 +1,5 @@
 var informacoesPerfilApp = angular.module('informacoesPerfilApp', []);
+informacoesPerfilApp.controller('InformacoesPerfilController', informacoesPerfilController);
 var arquivos = [];
 
 var formacaoInformadas = new Array();
@@ -59,7 +60,6 @@ class HorarioAtenimento{
 }
 
 
-informacoesPerfilApp.controller('InformacoesPerfilController', informacoesPerfilController);
 
 function informacoesPerfilController($scope, $http, $window) {
     $scope.perfilProfissional = function () {
@@ -121,7 +121,6 @@ function perfilProfissional($scope, $http, $window) {
 	$scope.ProfissionalVH.especialidade = especialidadeAtendimentos;
 	$scope.ProfissionalVH.temasTrabalho = temas;
 	$scope.ProfissionalVH.horarioAtendimento = horarioAtendimentos;
-	
 	if(arquivos.length != 0){
 		$scope.ProfissionalVH.profissional.pessoa.foto = arquivos;
     }

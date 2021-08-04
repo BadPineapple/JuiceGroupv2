@@ -31,14 +31,20 @@ public class PostbackDelivery extends PagarMeModel<String> {
     private DateTime updatedAt;
 
     @Expose(serialize = false)
-    private Transaction.Status status;
-
+    private String status;
+    
+    @Expose(serialize = false)
+	private String id;
+    
     public Integer getResponseTime() {
         return responseTime;
     }
 
     public String getResponseBody() {
-        return responseBody;
+        if (responseBody == null) {
+        	responseBody = "";
+		}
+    	return responseBody;
     }
 
     public String getResponseHeaders() {
@@ -57,18 +63,12 @@ public class PostbackDelivery extends PagarMeModel<String> {
         return updatedAt;
     }
 
-    public Transaction.Status getStatus() {
+    public String getStatus() {
         return status;
     }
-
-    @Override
-    public void setId(String id) {
-        throw new UnsupportedOperationException("Not allowed.");
-    }
-
-    @Override
-    public void setClassName(String className) {
-        throw new UnsupportedOperationException("Not allowed.");
-    }
+    
+    public String getId() {
+		return id;
+	}
 
 }

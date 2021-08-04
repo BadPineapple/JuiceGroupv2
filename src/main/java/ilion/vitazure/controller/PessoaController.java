@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import ilion.arquivo.negocio.ArquivoNegocio;
 import ilion.util.contexto.autorizacao.AcessoLivre;
 import ilion.util.json.JsonString;
 import ilion.vitazure.model.Pessoa;
@@ -32,10 +33,16 @@ public class PessoaController {
 	@Autowired
 	private ProfissionalNegocio profissionalNegocio;
 	
+	@Autowired
+	private ArquivoNegocio arquivoNegocio;
+	
 	  @PostMapping(value = "/vitazure/pessoa", produces = "application/json")
 	  @ResponseBody
 	  public ResponseEntity<JsonString> salvar(HttpServletRequest request,@RequestBody Pessoa pessoa) {
 	      try {
+	    	  if (pessoa.getFoto() != null && !pessoa.getFoto().getArquivo1().equals("")) {
+	    		  pessoa.setFoto(arquivoNegocio.inserir(pessoa.getFoto()));
+	    	  }
 	    	  pessoa = pessoaNegocio.incluirAtualizar(pessoa);
 	    	  request.getSession().setAttribute(PessoaNegocio.ATRIBUTO_SESSAO, pessoa);
 			return new ResponseEntity<>(new JsonString("Cadastro salvo com sucesso!"), HttpStatus.OK);

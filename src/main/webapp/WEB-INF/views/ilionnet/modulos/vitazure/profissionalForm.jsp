@@ -55,14 +55,12 @@
 						                    profissional.conta='${profissional.conta}';
      					                    profissional.digitoVerificador='${profissional.digitoVerificador}';
 						                    profissional.nomeFavorecido='${profissional.nomeFavorecido}';
-						                    profissional.convenio20='${profissional.convenio20}';
-										    profissional.convenio30='${profissional.convenio30}';
 										    profissional.convenio40='${profissional.convenio40}';
 										    profissional.convenio50='${profissional.convenio50}';
 										    profissional.convenio60='${profissional.convenio60}';
-										    profissional.pacote2com30Desconto='${profissional.pacote2com30Desconto}';
-										    profissional.pacote3com40Desconto='${profissional.pacote3com40Desconto}';
-										    profissional.pacote4com50Desconto='${profissional.pacote4com50Desconto}';
+										    profissional.pacote2com5Desconto='${profissional.pacote2com5Desconto}';
+										    profissional.pacote3com10Desconto='${profissional.pacote3com10Desconto}';
+										    profissional.pacote4com15Desconto='${profissional.pacote4com15Desconto}';
 										    profissional.primeiraConsultaCortesia='${profissional.primeiraConsultaCortesia}';
 										    profissional.quantidadeConsultaCortesiaMes='${profissional.quantidadeConsultaCortesiaMes}';
 										    profissional.atendimentoPorLibras='${profissional.atendimentoPorLibras}';
@@ -361,22 +359,22 @@
 
                                         <div class="col-md-4 col-lg-4 col-sm-12">
                                             <div class="checkbox">
-                                                <input type="checkbox" ng-model="profissional.pacote2com30Desconto" id="pacote2com30Desconto" ng-checked="${profissional.pacote2com30Desconto}"/>
-                                                <label>Pacote com 2 consultas por 30% de desconto cada</label>
+                                                <input type="checkbox" ng-model="profissional.pacote2com5Desconto" id="pacote2com5Desconto" ng-checked="${profissional.pacote2com5Desconto}"/>
+                                                <label>Pacote com 2 consultas por 5% de desconto cada</label>
                                             </div>
                                         </div>
     
                                         <div class="col-md-4 col-lg-4 col-sm-12">
                                             <div class="checkbox">
-                                                <input type="checkbox" ng-model="profissional.pacote3com40Desconto" id="pacote3com40Desconto" ng-checked="${profissional.pacote3com40Desconto}"/>
-                                                <label>Pacote com 3 consultas por 40% de desconto cada</label>
+                                                <input type="checkbox" ng-model="profissional.pacote3com10Desconto" id="pacote3com10Desconto" ng-checked="${profissional.pacote3com10Desconto}"/>
+                                                <label>Pacote com 3 consultas por 10% de desconto cada</label>
                                             </div>
                                         </div>
     
                                         <div class="col-md-4 col-lg-4 col-sm-12">
                                             <div class="checkbox">
-                                                <input type="checkbox" ng-model="profissional.pacote4com50Desconto" id="pacote4com50Desconto" ng-checked="${profissional.pacote4com50Desconto}"/>
-                                                <label>Pacote com 4 consultas por 50% de desconto cada</label>
+                                                <input type="checkbox" ng-model="profissional.pacote4com15Desconto" id="pacote4com15Desconto" ng-checked="${profissional.pacote4com15Desconto}"/>
+                                                <label>Pacote com 4 consultas por 15% de desconto cada</label>
                                             </div>
                                         </div>
                                     </div>

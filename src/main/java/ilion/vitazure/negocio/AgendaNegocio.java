@@ -2,22 +2,37 @@ package ilion.vitazure.negocio;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ilion.admin.negocio.PropEnum;
+import ilion.admin.negocio.PropNegocio;
+import ilion.admin.negocio.Usuario;
+import ilion.me.pagar.model.PagarMe;
+import ilion.me.pagar.model.PagarMeException;
+import ilion.me.pagar.model.SplitRule;
+import ilion.me.pagar.model.Transaction;
 import ilion.util.Uteis;
+import ilion.util.VLHForm;
+import ilion.util.ValueListInfo;
+import ilion.util.busca.PalavrasChaveCondicoes;
 import ilion.util.persistencia.HibernateUtil;
 import ilion.vitazure.enumeradores.StatusEnum;
 import ilion.vitazure.model.Agenda;
 import ilion.vitazure.model.Pessoa;
 import ilion.vitazure.model.Profissional;
+import net.mlw.vlh.ValueList;
 
 @Service
 public class AgendaNegocio {
@@ -31,19 +46,35 @@ public class AgendaNegocio {
 	@Autowired
 	private WherebyApi wherebyApi;
 	
+	@Autowired
+	private PropNegocio propNegocio;
+	
 	
 	@Transactional
-	public Agenda incluirAgendaPaciente(String idProfissional , String horarioPossivelAtendimento ,String dataAtendimento,  String tipoAtendimento , Pessoa paciente) {
+	public Agenda incluirAgendaPaciente(JSONObject jsonRetornoToken , Pessoa paciente) throws NumberFormatException, JSONException, PagarMeException {
 		
 		try {
-		Profissional profissional = profissionalNegocio.consultarPorId(Long.parseLong(idProfissional));
-		Date dataAgenda = Uteis.converterDataHoraString(dataAtendimento, horarioPossivelAtendimento);
-		Agenda agenda = new Agenda(paciente, profissional, dataAgenda, tipoAtendimento.equals("online") ? Boolean.TRUE : Boolean.FALSE, tipoAtendimento.equals("presencial") ? Boolean.TRUE : Boolean.FALSE, "", StatusEnum.ANDAMENTO, null , "");
-		if (agenda.getOnline()) {
-			wherebyApi.gerarLinkAtendimentoOnline(profissional, agenda);
-		}
-		agenda = (Agenda) hibernateUtil.save(agenda);
-		return agenda;
+			Profissional profissional = profissionalNegocio.consultarPorId(Long.parseLong(jsonRetornoToken.get("idProfissional").toString()));
+			Date dataAgenda = Uteis.converterDataHoraString(jsonRetornoToken.get("dataAtendimento").toString(), jsonRetornoToken.get("horarioPossivelAtendimento").toString());
+			Agenda agenda = new Agenda(paciente, profissional, dataAgenda, jsonRetornoToken.get("tipoAtendimento").toString().equals("online") ? Boolean.TRUE : Boolean.FALSE, jsonRetornoToken.get("tipoAtendimento").toString().equals("presencial")  ? Boolean.TRUE : Boolean.FALSE, "", StatusEnum.ANDAMENTO, null , "");
+			agenda.setTokenTransacaoPagamentoConsulta(jsonRetornoToken.get("token").toString());
+			if (agenda.getOnline()) {
+				wherebyApi.gerarLinkAtendimentoOnline(profissional, agenda);
+			}
+			agenda = (Agenda) hibernateUtil.save(agenda);
+			
+			PagarMe.init(propNegocio.findValueById(PropEnum.PAGAR_ME_API_KEY));
+			Transaction tx = new Transaction().find(agenda.getTokenTransacaoPagamentoConsulta());
+			Transaction capturarTransacao = new Transaction().find(tx.getId());
+			Collection<SplitRule> rules = new ArrayList<>();
+				SplitRule splitRules = new SplitRule();
+				splitRules.setRecipientId(profissional.getIdRecebedor());
+				splitRules.setPercentage(100);
+	            rules.add(splitRules);
+	        capturarTransacao.setSplitRules(rules);
+			capturarTransacao.capture(tx.getAmount());
+			
+			return agenda;
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -65,6 +96,50 @@ public class AgendaNegocio {
 		dc.addOrder(Order.asc("dataHoraAgendamento"));
 		listAgendas = (List<Agenda>) hibernateUtil.list(dc);
 		return listAgendas;
+	}
+	
+	@Transactional
+	public Agenda alterarAgenda(Long idAgenda , String situacao){
+		DetachedCriteria dc = DetachedCriteria.forClass(Agenda.class);
+		dc.add(Restrictions.eq("id", idAgenda));
+		Agenda agenda = (Agenda) hibernateUtil.consultarUniqueResult(dc);
+		agenda.setStatus(StatusEnum.valueOf(situacao));
+		hibernateUtil.update(agenda);
+		return agenda;
+	}
+	
+	public ValueList buscar(VLHForm vlhForm, ValueListInfo valueListInfo , Usuario usuarioSessao) {
+
+		DetachedCriteria dc = DetachedCriteria.forClass(Agenda.class);
+		dc.createAlias("paciente", "pac");
+		dc.createAlias("profissional", "prof");
+		dc.createAlias("prof.pessoa", "pessoa");
+		if (!Uteis.ehNuloOuVazio(vlhForm.getPalavraChave())) {
+			Disjunction disjunction = Restrictions.disjunction();
+			List<String> condicoes = PalavrasChaveCondicoes.nova().comPalavrasChave(vlhForm.getPalavraChave()).gerar();
+			for (String condicao : condicoes) {
+				disjunction.add( Restrictions.ilike("pac.nome", condicao));
+				disjunction.add( Restrictions.ilike("pessoa.nome", condicao));
+			}
+			disjunction.add( Restrictions.eq("status", StatusEnum.valueOf(vlhForm.getPalavraChave())));
+			Long id = Uteis.converterLong(vlhForm.getPalavraChave());
+
+			if (id != null) {
+				disjunction.add(Restrictions.eq("id", id));
+			}
+			dc.add(disjunction);
+		}
+
+		StatusEnum statusEnum = StatusEnum.fromString(vlhForm.getStatus());
+
+		if (statusEnum != null) {
+			dc.add(Restrictions.eq("status", statusEnum));
+		}
+		
+		ValueList notificacaos = hibernateUtil.consultarValueList(dc, org.hibernate.criterion.Order.desc("id"), valueListInfo);
+
+		return notificacaos;
+
 	}
 	
 }

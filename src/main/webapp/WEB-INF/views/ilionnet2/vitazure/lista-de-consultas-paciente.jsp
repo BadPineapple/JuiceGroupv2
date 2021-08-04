@@ -13,7 +13,7 @@
     <div id="app">
         <jsp:include page="includes/include-header-internas.jsp" flush="true" />
         <jsp:include page="includes/include-menu-painel.jsp" flush="true" />
-        <jsp:include page="includes/include-painel-profissional.jsp" flush="true" />
+        <jsp:include page="includes/include-painel-person.jsp" flush="true" />
         <div class="area-white">
             <div class="container">
                 <div class="row">
@@ -37,7 +37,7 @@
                             <table class="tabela-consultas">
                                 <thead>
                                     <tr>
-                                        <td style="text-align: center;">Paciente</td>
+                                        <td style="text-align: center;">Profissional</td>
                                         <td style="text-align: center;">Localização</td>
                                         <td style="text-align: center;">Data</td>
                                         <td style="text-align: center;">Duração</td>
@@ -49,7 +49,7 @@
                                 <tbody>
                                 <c:forEach var="agenda" items="${listAgendas}">
                                     <tr>
-                                        <td style="text-align: center;">${agenda.paciente.nome}</td>
+                                        <td style="text-align: center;">${agenda.profissional.pessoa.nome}</td>
                                         <td style="text-align: center;">${agenda.online ? 'Online' : 'Endereco'}</td>
                                         <td style="text-align: center;">${agenda.dataHoraApresentar}</td>
                                         <td style="text-align: center;">${agenda.profissional.duracaoAtendimento.nomeApresentar}</td>
@@ -59,9 +59,9 @@
                                             </div>
                                         </td>
                                         <td style="text-align: center;">
-                                          <c:if test="${agenda.status == 'ANDAMENTO'}">
-	                                           <button  class="btn btn-success" ng-click="definirAgendamento('${agenda.id}' , 'CONFIRMADO')">Confirmar</button>
-	                                           <button  class="btn btn-danger" ng-click="definirAgendamento('${agenda.id}' , 'REMARCADO')">Remarcar</button>
+                                          <c:if test="${agenda.status == 'ANDAMENTO' || agenda.status == 'CONFIRMADO'}">
+	                                           <button  class="btn btn-danger" ng-click="definirAgendamento('${agenda.id}' , 'CANCELADO')">Cancelar</button>
+	                                           <button  class="btn btn-warning" ng-click="definirAgendamento('${agenda.id}' , 'REMARCADO')">Remarcar</button>
 	                                      </c:if>     
                                            <c:if test="${agenda.online && agenda.status == 'CONFIRMADO'}">
 	                                           <a href="${agenda.urlAtendimentoOnline}" target="_blank">

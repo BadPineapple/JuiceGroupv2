@@ -431,7 +431,8 @@ footer ul li a.line:after {
 
 header {
     padding: 3.2rem 0;
-    background: transparent;
+    background: rgb(255,255,255);
+    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -1650,7 +1651,7 @@ h1.title-gray {
 
 .planos-title {
     border: 1px solid #A6A6A6;
-    height: 21rem;
+    height: 24rem;
     border-radius: 7px 7px 0 0;
     padding: 4rem;
     border-bottom-color: #F6F4F3;
@@ -1692,6 +1693,7 @@ h1.title-gray {
     padding: 2rem 4rem 4rem;
     border-top: none;
     text-align: left;
+    height: 37rem;
 }
 
 .planos-description ul { list-style: none;}
@@ -2693,4 +2695,17 @@ h1.title-gray {
     }
 }
 
+
+
+
+.notice-text {
+    font-size: 1.6rem;
+    line-height: 1.9rem;
+    color: #ff2626;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    font-weight: 600;
+    margin: 3rem 0 0;
+}
 

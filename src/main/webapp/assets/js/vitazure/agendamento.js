@@ -26,8 +26,11 @@ function agendamentoController($scope, $http, $window) {
     $scope.consultarDatasProfissional = function (id, profissional) {
         consultarDatasProfissional($scope, $http, $window , id , profissional);
     };
-    $scope.agendar = function (id) {
-        agendar($scope, $http, $window , id);
+    $scope.efetuarPagamento = function (id ,valorOnline ,valorPresencial) {
+        efetuarPagamento($scope, $http, $window , id,valorOnline ,valorPresencial);
+    };
+     $scope.definirAgendamento = function (idAgenda, situacaoAlterar) {
+        definirAgendamento($scope, $http, $window , idAgenda, situacaoAlterar);
     };
 }
 
@@ -87,12 +90,90 @@ function marcardesmarcar(idProfissional,id) {
 	tipoAgendamento = id;
 }
 
-function agendar($scope, $http, $window , id) {
+function agendar(respostaPagamento ,$scope, $http, $window , id) {
 	var idProfissional = id;
 	var horarioPossivelAtendimento  = horariosDisponiveisAtendimento[idHoraTemp].horaPossivelAtendiemnto;
 	var tipoAtendimento  = tipoAgendamento;
 	var data  = dataSelecionada;
-$http.post("/vitazure/agendar/" +idProfissional+"/"+horarioPossivelAtendimento+"/"+data+"/"+tipoAtendimento)
+	var retornoToken = JSON.stringify({
+    "idProfissional":idProfissional,
+    "horarioPossivelAtendimento":horarioPossivelAtendimento,
+    "dataAtendimento":data,
+    "tipoAtendimento":tipoAtendimento,
+    "token": respostaPagamento.token,
+    "payment_method": respostaPagamento.payment_method,
+  });
+$http.post("/vitazure/agendar/" , retornoToken)
+        .then(function (response) {
+            alert_success(response.data.message, () => {
+				$window.location.href = "/vitazure/telaAgradecimento";
+			});
+        }).catch(function (response) {
+        alert_error(response.data.message);
+    })
+}
+
+
+function efetuarPagamento($scope, $http, $window , id ,valorOnline ,valorPresencial) {
+    var confirma = 0;
+    var tipoAtendimento  = tipoAgendamento;
+    $.ajax({
+        url: 'api/v1/getencryption',
+        type: 'GET',
+        contentType: 'text/plain',
+        error: function (data, textStatus, xhr) {
+            alert(data.responseText + " error");
+            confirma = 0;
+        }
+    }).done(function (data, textStatus, jqXHR) {
+        confirma = 1;
+    }).then(function (data, textStatus, jqXHR) {
+        var ccae6d912a41bfefd569a77b5cd86603cde92e53cdd45813cba9e5bf080b3734 =  jqXHR.responseText;
+        var valorTotal = (tipoAgendamento == 'online' ? valorOnline : valorPresencial) * 100;
+        var button = document.querySelector('button');
+        function handleSuccess(data) {
+            agendar(data ,$scope, $http, $window , id);
+        }
+        function handleError(data) {
+            console.log(data);
+        }
+        if (confirma === 1) {
+            var checkout = new PagarMeCheckout.Checkout({
+                encryption_key: ccae6d912a41bfefd569a77b5cd86603cde92e53cdd45813cba9e5bf080b3734,
+                success: handleSuccess,
+                error: handleError
+            });
+            checkout.open({
+                paymentButtonText: 'Finalizar',
+				amount: valorTotal,
+				maxInstallments: 1,
+				defaultInstallment: 1,
+				customerData: 'true',
+				createToken: 'true',
+				postbackUrl: 'https://www.vitazure.com.br/api/v1/retornoPagarMe',
+				paymentMethods: 'credit_card,pix',
+				uiColor: '#0097D6',
+				boletoDiscountPercentage: 0,
+				boletoExpirationDate: '12/12/2021',
+				pixExpirationDate: '2021-12-31',
+                items: [{
+                    id: id,
+                    title: "Pagamento Agendamento Consulta",
+                    unit_price: 10000,
+                    quantity: 1,
+                    tangible: 'false'
+                }]
+            });
+        }
+    });
+}
+
+function definirAgendamento($scope, $http, $window , idAgenda , situacaoAlterar) {
+var jsonAlterar = JSON.stringify({
+    "idAgenda":idAgenda,
+    "situacaoAlterar":situacaoAlterar
+  });	
+$http.post("/vitazure/alterarSituacaoAgenda" , jsonAlterar)
         .then(function (response) {
             alert_success(response.data.message, () => {
 				$window.location.href = "/vitazure/lista-de-consultas";

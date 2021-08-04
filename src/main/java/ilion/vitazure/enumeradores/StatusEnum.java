@@ -3,8 +3,10 @@ package ilion.vitazure.enumeradores;
 public enum StatusEnum {
 
 	ANDAMENTO("Andamento"),
+	PROCESSAMENTO("Processamento"),
 	CONFIRMADO("Confirmado"),
 	CANCELADO("Cancelado"),
+	CONCLUIDO("Concluido"),
 	REMARCADO("Remarcado");
 	
 	private String nome;

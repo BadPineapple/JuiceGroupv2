@@ -11,29 +11,15 @@
 <body id="index" class="home">
 
     <div id="app">
-        <jsp:include page="includes/include-header.jsp" flush="true" />
-
-        <div class="content-internas">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="title-internas">
-                            <h3>Completar cadastro</h3>
-                            <div class="pages-internas">
-                                <a href="#">
-                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M4.83331 17.3334C3.4526 17.3334 2.33332 16.2141 2.33332 14.8334V9.83342H1.49998C0.757561 9.83342 0.385756 8.9358 0.910726 8.41083L8.41073 0.910826C8.73616 0.585389 9.2638 0.585389 9.58924 0.910826L17.0892 8.41083C17.6142 8.9358 17.2424 9.83342 16.5 9.83342H15.6666V14.8334C15.6666 16.2141 14.5474 17.3334 13.1666 17.3334H4.83331ZM8.99998 2.67858L3.45908 8.21948C3.77507 8.33792 3.99998 8.64272 3.99998 9.00007V14.8334C3.99998 15.2936 4.37308 15.6667 4.83332 15.6667L6.49998 15.6659L6.49998 12.3334C6.49998 11.4129 7.24618 10.6667 8.16665 10.6667H9.83332C10.7538 10.6667 11.5 11.4129 11.5 12.3334L11.5 15.6659L13.1667 15.6667C13.6269 15.6667 14 15.2936 14 14.8334V9.00007C14 8.64272 14.2249 8.33792 14.5409 8.21948L8.99998 2.67858ZM9.83331 12.3334H8.16665L8.16664 15.6659H9.83331L9.83331 12.3334Z" fill="black"/>
-                                    </svg>
-                                    Home     
-                                </a>
-                                <span>></span>
-                                <a href="#">Completar cadastro</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<%--         <jsp:include page="includes/include-header.jsp" flush="true" /> --%>
+		 <jsp:include page="includes/include-header-internas.jsp" flush="true" />
+        <jsp:include page="includes/include-menu-painel.jsp" flush="true" />
+        <c:if test="${pessoa.psicologo}">
+	        <jsp:include page="includes/include-painel-profissional.jsp" flush="true" />
+        </c:if>
+        <c:if test="${pessoa.cliente}">
+           <jsp:include page="includes/include-painel-person.jsp" flush="true" />
+        </c:if>
         <div class="area-white">
             <div class="container">
                 <div class="row">
@@ -54,9 +40,24 @@
 						                     pessoa.genero='${pessoa.genero}';
                           					 pessoa.cliente ='${pessoa.cliente}';
                          					 pessoa.psicologo ='${pessoa.psicologo}';
+                         					 pessoa.foto.id='${pessoa.foto.id}';
+						                     pessoa.foto.link='${pessoa.foto.link}';
                           					 "/>
                           
                             <div class="row">
+                             <c:if test="${pessoa.cliente}">
+                               <div class="col-12">
+                                            <div class="perfil">
+                                                <label for="avatar" class="photo-perfil">
+                                                    <input type="file" name="avatar" id="avatar" style="display: none;">
+                                                    <figure>
+                                                        <img id="img" src="${pessoa.foto.link == null ? '../assets/images/perfil.png' : pessoa.foto.link}" alt="">
+                                                    </figure>
+                                                    <p>Alterar foto</p>
+                                                </label>
+                                            </div>
+                                        </div>
+                              </c:if>           
                                 <div class="col-12">
                                     <div class="input-block">
                                         <label>Nome</label>
@@ -144,7 +145,19 @@
 		})();
 	</script>
 </c:if>
-          
+      <script>
+ $(function(){
+	 $('#avatar').change(function(){
+	 	const file = $(this)[0].files[0]
+	 	const fileReader = new FileReader()
+	 	fileReader.onloadend = function(){
+			$('#img').attr('src',fileReader.result)
+		}
+	 	fileReader.readAsDataURL(file)
+	 })
+ })
+
+</script>    
     </div>
 </body>
 </html>

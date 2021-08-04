@@ -278,12 +278,6 @@ public class SiteController extends CustomErrorController {
 		return "/ilionnet2/vitazure/resultado-de-busca";
 	}
 
-	
-
-	@GetMapping("/pagamento")
-	public String pagamentoPagarMe(HttpServletRequest request) {
-		return "/ilionnet2/vitazure/assinatura";
-	}
 
 	
 }

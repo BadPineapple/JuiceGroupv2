@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.ValidationException;
 
 import org.apache.log4j.Logger;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -103,8 +104,6 @@ public class ProfissionalControlle {
 	      try {
 	    	  if (profissionalVH.getProfissional().getPessoa().getFoto() != null && !profissionalVH.getProfissional().getPessoa().getFoto().getArquivo1().equals("")) {
 	    		  profissionalVH.getProfissional().getPessoa().setFoto(arquivoNegocio.inserir(profissionalVH.getProfissional().getPessoa().getFoto()));
-	    	  }else {
-	    		  profissionalVH.getProfissional().getPessoa().setFoto(null); 
 	    	  }
 	    	  profissionalVH.getProfissional().setPessoa(pessoaNegocio.incluirAtualizar(profissionalVH.getProfissional().getPessoa()));
 	    	  profissionalVH.setProfissional(profissionalNegocio.incluirAtualizar(profissionalVH.getProfissional()));
@@ -260,11 +259,13 @@ public class ProfissionalControlle {
  		 }
  	 }
       
-      @RequestMapping(value = "/vitazure/agendar/{id}/{horarioPossivelAtendimento}/{dataAtendimento}/{tipoAtendimento}", produces = "application/json")
-	  public ResponseEntity<JsonString> agendar(HttpServletRequest request,@PathVariable String id , @PathVariable String horarioPossivelAtendimento ,@PathVariable String dataAtendimento, @PathVariable String tipoAtendimento) {
+      @PostMapping(value = "/vitazure/agendar", produces = "application/json")
+	  @ResponseBody
+	  public ResponseEntity<JsonString> agendar(HttpServletRequest request,@RequestBody String retornoToken) {
 	      try {
 	    	  Pessoa PessoaSessao = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
-	    	  agendaNegocio.incluirAgendaPaciente(id, horarioPossivelAtendimento, dataAtendimento, tipoAtendimento, PessoaSessao);
+	    	  JSONObject jsonRetornoToken = new JSONObject(retornoToken);
+	    	  agendaNegocio.incluirAgendaPaciente(jsonRetornoToken, PessoaSessao);
 	    	  return new ResponseEntity<>(new JsonString("Agenda Gerada com Sucesso!"), HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -272,5 +273,19 @@ public class ProfissionalControlle {
 	    } 
 	  } 
       
+      @PostMapping(value = "/vitazure/alterarSituacaoAgenda", produces = "application/json")
+	  @ResponseBody
+	  public ResponseEntity<JsonString> definirAgendamento(HttpServletRequest request,@RequestBody String jsonAlterar) {
+	      try {
+	    	  JSONObject jsonRetornoToken = new JSONObject(jsonAlterar);
+	    	  Long idAgenda = Long.parseLong(jsonRetornoToken.get("idAgenda").toString());
+	    	  String situacaoAlterar = jsonRetornoToken.get("situacaoAlterar").toString();
+	    	  agendaNegocio.alterarAgenda(idAgenda, situacaoAlterar);
+	    	  return new ResponseEntity<>(new JsonString("Agenda "+situacaoAlterar.toLowerCase()+" com Sucesso!"), HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(new JsonString(e.getMessage()), HttpStatus.BAD_REQUEST);
+	    } 
+	  } 
       
 }

@@ -13,11 +13,8 @@
 	
     <div id="app">
         <jsp:include page="includes/include-header-internas.jsp" flush="true" />
-
         <jsp:include page="includes/include-menu-painel.jsp" flush="true" />
-
         <jsp:include page="includes/include-painel-profissional.jsp" flush="true" />
-
         <div class="area-white">
             <div class="container">
                 <div class="row">
@@ -71,6 +68,13 @@
 										    ProfissionalVH.profissional.habilitarDesconto40='${profissional.habilitarDesconto40}';
 										    ProfissionalVH.profissional.quantidadeConsultaDesconto40Mes='${profissional.quantidadeConsultaDesconto40Mes}';
 										    ProfissionalVH.profissional.avisoFerias='${profissional.avisoFerias}';
+										    ProfissionalVH.profissional.ativo='${profissional.ativo}';
+										    ProfissionalVH.profissional.plano='${profissional.plano}';
+										    ProfissionalVH.profissional.dataInicioPlano='${profissional.dataInicioPlano}';
+										    ProfissionalVH.profissional.dataFimPlano='${profissional.dataFimPlano}';
+										    ProfissionalVH.profissional.tokenTransacaoPlano='${profissional.tokenTransacaoPlano}';
+										    ProfissionalVH.profissional.idRecebedor='${profissional.idRecebedor}';
+										    ProfissionalVH.profissional.idConta='${profissional.idConta}';
 						                    ProfissionalVH.profissional.pessoa.id='${profissional.pessoa.id}';
 						                    ProfissionalVH.profissional.pessoa.nome='${profissional.pessoa.nome}';
 						                    ProfissionalVH.profissional.pessoa.email='${profissional.pessoa.email}';
@@ -86,6 +90,8 @@
 						                    ProfissionalVH.profissional.pessoa.setor='${profissional.pessoa.setor}';
 						                    ProfissionalVH.profissional.pessoa.foto.id='${profissional.pessoa.foto.id}';
 						                    ProfissionalVH.profissional.pessoa.foto.link='${profissional.pessoa.foto.link}';
+						                    ProfissionalVH.profissional.pessoa.foto.layout='${profissional.pessoa.foto.layout}';
+						                    ProfissionalVH.profissional.pessoa.genero='${profissional.pessoa.genero}';
                           					ProfissionalVH.profissional.pessoa.cliente ='${profissional.pessoa.cliente}';
                          					ProfissionalVH.profissional.pessoa.psicologo ='${profissional.pessoa.psicologo}';
                          					ProfissionalVH.formacaoAcademica ='${formacaoAcademica}';
@@ -111,7 +117,7 @@
                                                 <label for="avatar" class="photo-perfil">
                                                     <input type="file" name="avatar" id="avatar" style="display: none;">
                                                     <figure>
-                                                        <img id="img" src="${profissional.pessoa.foto.imagemApresentar == null ? '../assets/images/perfil.png' : profissional.pessoa.foto.link}" alt="">
+                                                        <img id="img" src="${profissional.pessoa.foto.link == null ? '../assets/images/perfil.png' : profissional.pessoa.foto.link}" alt="">
                                                     </figure>
                                                     <p>Alterar foto</p>
                                                 </label>

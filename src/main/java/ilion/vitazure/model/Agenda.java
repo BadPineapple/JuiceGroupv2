@@ -49,6 +49,8 @@ public class Agenda {
 	  
 	  private String horaFinalAtendimento;
 
+	  private String tokenTransacaoPagamentoConsulta;
+
 	  public Long getId() {
 			if (id == null) {
 				id = 0l;
@@ -180,6 +182,15 @@ public class Agenda {
 			return Uteis.formatarDataHora(getDataHoraAgendamento(), "dd/MM/YYYY hh:mm");
 			
 		}
+
+		public String getTokenTransacaoPagamentoConsulta() {
+			return tokenTransacaoPagamentoConsulta;
+		}
+
+		public void setTokenTransacaoPagamentoConsulta(String tokenTransacaoPagamentoConsulta) {
+			this.tokenTransacaoPagamentoConsulta = tokenTransacaoPagamentoConsulta;
+		}
 	  
+		
 	   
 }

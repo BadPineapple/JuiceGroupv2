@@ -84,7 +84,7 @@
 										<div class="horarios-disponiveis">
 											<div class="menu d-none d-md-block" layout="block" id="panelFiltrosSelecionados${profissional.id}">
 											</div>
-											<a href="#" ng-click="agendar('${profissional.id}')"  class="button-secundary">Agendar consulta</a>
+											<a href="#" ng-click="efetuarPagamento('${profissional.id}' , '${profissional.valorConsultaOnline}' , '${profissional.valorConsultaPresencial}')"  class="button-secundary">Agendar consulta</a>
 										</div>
 									</div>
 								</div>
