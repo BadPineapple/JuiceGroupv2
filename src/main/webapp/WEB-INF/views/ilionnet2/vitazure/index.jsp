@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!doctype html>
 <html class="no-js" lang="pt-BR">
@@ -359,73 +360,76 @@
                         <h3>Confira as últimas do Blog</h3>
                     </div>
 
-                    <div class="col-12 col-md-6 col-xl-3">
-                        <div class="post">
-                            <a href="#">
-                                <div class="post-img">
-                                    <figure>
-                                        <img src="assets/images/post-1.jpg" alt="">
-                                    </figure>
-                                </div>
-        
-                                <div class="post-title">
-                                    <p>Transtorno Explosivo Intermitente: causas e tratamentos dos ataques.</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
+                    <c:forEach items="${posts}" var="post">
+                        <div class="col-12 col-md-6 col-xl-3">
+                            <div class="post">
+                                <a href="${post.link}">
+                                    <div class="post-img">
+                                        <figure style=" text-align-last: center">
+                                            <img src="${post.imagem}" alt="" style="max-height: 20.4rem; border-radius: 3px;">
+                                        </figure>
+                                    </div>
 
-                    <div class="col-12 col-md-6 col-xl-3">
-                        <div class="post">
-                            <a href="#">
-                                <div class="post-img">
-                                    <figure>
-                                        <img src="assets/images/post-2.jpg" alt="">
-                                    </figure>
-                                </div>
-        
-                                <div class="post-title">
-                                    <p>Corona blues: um novo conceito de saúde mental na pandemia.</p>
-                                </div>
-                            </a>
+                                    <div class="post-title" style="text-justify: auto">
+                                        <p>${post.titulo}</p>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
-                    </div>
+                    </c:forEach>
+                    <%--<div class="col-12 col-md-6 col-xl-3">--%>
+                        <%--<div class="post">--%>
+                            <%--<a href="#">--%>
+                                <%--<div class="post-img">--%>
+                                    <%--<figure>--%>
+                                        <%--<img src="assets/images/post-2.jpg" alt="">--%>
+                                    <%--</figure>--%>
+                                <%--</div>--%>
+        <%----%>
+                                <%--<div class="post-title">--%>
+                                    <%--<p>Corona blues: um novo conceito de saúde mental na pandemia.</p>--%>
+                                <%--</div>--%>
+                            <%--</a>--%>
+                        <%--</div>--%>
+                    <%--</div>--%>
 
-                    <div class="col-12 col-md-6 col-xl-3">
-                        <div class="post">
-                            <a href="#">
-                                <div class="post-img">
-                                    <figure>
-                                        <img src="assets/images/post-3.jpg" alt="">
-                                    </figure>
-                                </div>
-        
-                                <div class="post-title">
-                                    <p>Masculinidade tóxica: entenda o contexto histórico e seu problema atual</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
+                    <%--<div class="col-12 col-md-6 col-xl-3">--%>
+                        <%--<div class="post">--%>
+                            <%--<a href="#">--%>
+                                <%--<div class="post-img">--%>
+                                    <%--<figure>--%>
+                                        <%--<img src="assets/images/post-3.jpg" alt="">--%>
+                                    <%--</figure>--%>
+                                <%--</div>--%>
+        <%----%>
+                                <%--<div class="post-title">--%>
+                                    <%--<p>Masculinidade tóxica: entenda o contexto histórico e seu problema atual</p>--%>
+                                <%--</div>--%>
+                            <%--</a>--%>
+                        <%--</div>--%>
+                    <%--</div>--%>
 
-                    <div class="col-12 col-md-6 col-xl-3">
-                        <div class="post">
-                            <a href="#">
-                                <div class="post-img">
-                                    <figure>
-                                        <img src="assets/images/post-4.jpg" alt="">
-                                    </figure>
-                                </div>
-        
-                                <div class="post-title">
-                                    <p>Abuso no ambiente de trabalho: como a terapia pode ajudar?</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
+                    <%--<div class="col-12 col-md-6 col-xl-3">--%>
+                        <%--<div class="post">--%>
+                            <%--<a href="#">--%>
+                                <%--<div class="post-img">--%>
+                                    <%--<figure>--%>
+                                        <%--<img src="assets/images/post-4.jpg" alt="">--%>
+                                    <%--</figure>--%>
+                                <%--</div>--%>
+        <%----%>
+                                <%--<div class="post-title">--%>
+                                    <%--<p>Abuso no ambiente de trabalho: como a terapia pode ajudar?</p>--%>
+                                <%--</div>--%>
+                            <%--</a>--%>
+                        <%--</div>--%>
+                    <%--</div>--%>
+
+
 
                     <div class="col-12">
                         <div class="more-post line">
-                            <a href="#">
+                            <a href="https://blog.vitazure.com.br/">
                                 Veja mais posts
 
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -54,121 +54,317 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="toggle-header" style="background: none !important; padding: 0 !important">
+                                    <strong style="padding-left: 0 !important">O que é a Vitazure?</strong>
+                                </div>
+                                <p style=" margin-bottom: 3rem;">A <span style="color: #0097d6;">Vitazure</span> é uma plataforma que conecta profissionais e pacientes, com o uso de recursos tecnológicos.<br> Facilitando que que pessoas encontrarem o profissional certo para suas necessidades, com total segurança e<br> sigilo, tornando suas vidas mais felizes e saudáveis. </p>
+                            </div>
+
+                            <div class="col-12 col-md-4 col-xl-4">
+                                <div class="happy-faces" style="margin-bottom: 5rem;">
+                                    <div class="funciona up-photos">
+                                        <figure class="funciona first-photo">
+                                            <img src="../assets/images/img-1.jpg" alt="">
+                                        </figure>
+
+                                        <figure class="funciona second-photo">
+                                            <img src="../assets/images/img-2.jpg" alt="">
+                                        </figure>
+                                    </div>
+
+                                    <div class="funciona down-photos">
+                                        <figure class="funciona third-photo">
+                                            <img src="../assets/images/img-3.jpg" alt="">
+                                        </figure>
+
+                                        <figure class="funciona fourth-photo">
+                                            <img src="../assets/images/img-4.jpg" alt="">
+                                        </figure>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-8 col-md-8">
+                                <div class="funciona-text">
+                                    <div class="toggle-header" style="background: none !important; padding: 0 !important">
+                                        <strong style="padding-left: 0 !important">Quem faz parte da Vitazure?</strong>
+                                    </div>
+                                    <p>A <span style="color: #0097d6;">Vitazure</span> é formada por pessoas que acreditam e trabalham para oferecer as melhores condições de bem-estar, equilíbrio emocional e físico para as pessoas, possibilitando acesso à saúde por meio de plataforma tecnológica simples, segura, acessível, totalmente online, que conecta pacientes a profissionais especializados em qualquer lugar e a qualquer hora.
+                                    </p>
+
+                                    <span style="color: #0097d6;">Acreditamos que pessoas integrais, fazem escolhas mais saudáveis e transformam o mundo em um lugar melhor para viver. E esse é o nosso propósito.</span>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="buttons-internas">
-                            <a href="#" class="button-secundary">Sou profissional</a>
+                            <a onclick="profissionalAtivo()" class="button-secundary" id="button-profissional">Sou profissional</a>
 
-                            <a href="#" class="button-white">Sou paciente</a>
+                            <a onclick="pacienteAtivo()" class="button-white" id="button-paciente">Sou paciente</a>
                         </div>
 
-                        <div class="match-toggle">
-                            <div class="toggle-header">
-                                <strong>O que é a Vitazure?</strong>
+                        <div id="funciona-profissional" class="painel-ativo">
+
+                            <%--<div class="match-toggle">--%>
+                                <%--<div class="toggle-header">--%>
+                                    <%--<strong>O que é a Vitazure?</strong>--%>
+                                <%--</div>--%>
+                                <%--<div class="toggle-body vitazure">--%>
+
+                                    <%--<p>A Vitazure é uma plataforma queconecta profissionais epacientes, com o uso derecursostecnológicos. Facilitando que pessoas encontrarem o profissional certo para suas necessidades, com total segurança e sigilo, tornando suas vidas mais felizes e saudáveis.</p>--%>
+                                <%--</div>--%>
+                            <%--</div>--%>
+
+                            <%--<div class="match-toggle">--%>
+                                <%--<div class="toggle-header">--%>
+                                    <%--<strong>Quem faz parte da equipe Vitazure?</strong>--%>
+                                <%--</div>--%>
+                                <%--<div class="toggle-body vitazure">--%>
+
+                                    <%--<p>A Vitazure é formada por pessoas que acreditam e trabalham para oferecer as melhores condições de bem-estar, equilíbrio emocional e físico para as pessoas, possibilitando acesso à saúde por meio de plataforma tecnológica simples, segura, acessível, totalmente online, que conecta pacientes a profissionais especializados em qualquer lugar e a qualquer hora.</p><p>Acreditamos que pessoas integrais, fazem escolhas mais saudáveis e transformam o mundo em um lugar melhor para viver. E esse é o nosso propósito.</p>--%>
+
+                                <%--</div>--%>
+                            <%--</div>--%>
+                            <div class="match-toggle">
+                                <div class="toggle-header">
+                                    <strong>Como me cadastrar?</strong>
+                                </div>
+                                <div class="toggle-body vitazure">
+
+                                    <p>Se você está buscando atendimento psicológico, basta clicar no botão abaixo “Quero me cadastrar” e efetuar o seu cadastro. Isso leva menos de 3 minutos. Agora, se você é Psicólogo, basta entrar em “Sou profissional”, no menu superior, efetuar seu cadastro e aguardar o contato de nosso departamento comercial em até 12 horas, simples assim.</p>
+
+                                </div>
                             </div>
-                            <div class="toggle-body vitazure">
-                                
-                                <p>A procura por serviços psicológicos na modalidade online tem crescido desde as primeiras regulamentações, conforme demonstram os estudos temáticos nesta área. Esta tendência de crescimento do uso de TICs no campo da saúde (em especial entre os profissionais de Enfermagem e Medicina) também foi verificada por pesquisa da Agência Nacional de Saúde Suplementar em 2015.
-                                Este contexto de crescimento por serviços com uso de TICs, sofreu um impacto ainda maior quando o mundo foi acometido por uma pandemia de COVID-19, em especial nos primeiros meses de 2020. Neste sentido, torna se mais claro entender os principais impactos nas demandas de saúde mental da população diante da COVID.</p>
-                            
+
+                            <div class="match-toggle">
+                                <div class="toggle-header">
+                                    <strong>A plataforma é segura?</strong>
+                                </div>
+                                <div class="toggle-body vitazure">
+
+                                    <p>É muito segura. Os dados informados por você são tratados de forma confidencial, são criptografados, ou seja, não podem ser lidos por outros recursos tecnológicos. Usamos certificado de segurança SSL, isso dá a segurança para a plataforma, você pode verificar na barra de endereços o conjunto de caracteres ”https”, indicando o uso do recurso.</p>
+
+                                </div>
                             </div>
+
+                            <div class="match-toggle">
+                                <div class="toggle-header">
+                                    <strong>Vou receber lembretes dos meus agendamentos? </strong>
+                                </div>
+                                <div class="toggle-body vitazure">
+
+                                    <p>Sim. Será enviado e-mail e SMS, para o paciente e profissional, com os detalhes do agendamento, logo após a confirmação da autorização de pagamento, assim fica garantidoo recebimento por parte do psicólogo</p>
+
+                                </div>
+                            </div>
+
+                            <div class="match-toggle">
+                                <div class="toggle-header">
+                                    <strong>Serei avaliado pelos meus pacientes?</strong>
+                                </div>
+                                <div class="toggle-body vitazure">
+
+                                    <p>Os profissionais serão avaliados após a realização da consulta/sessão, o paciente será convidado a avaliar o serviço prestado. Para ser bem avaliado é necessário prestar um atendimento de qualidade.</p>
+
+                                </div>
+                            </div>
+
+                            <div class="match-toggle">
+                                <div class="toggle-header">
+                                    <strong>Qual o valor da consulta?</strong>
+                                </div>
+                                <div class="toggle-body vitazure">
+
+                                    <p>Os valores da consulta/sessão são definidos pelos profissionais.Sugerimos que fiquem entre R$ 60,00 e R$ 350,00.</p>
+
+                                </div>
+                            </div>
+
+                            <div class="match-toggle">
+                                <div class="toggle-header">
+                                    <strong>Como eu recebo o valorda consulta?</strong>
+                                </div>
+                                <div class="toggle-body vitazure">
+
+                                    <p>Basta solicitar o resgate do valorno site da plataforma pagadora (pagar.me), observando que os prazos para resgate variam de acordo com a forma de pagamento do paciente, cartão de crédito 30 dias e boleto 48 horas após o pagamento. O profissional tem acesso a área do consultório virtual, com informações dos agendamentos e valores das consultas/sessões pagas.</p>
+
+                                </div>
+                            </div>
+
+                            <div class="match-toggle">
+                                <div class="toggle-header">
+                                    <strong>Como acontece a consulta online?</strong>
+                                </div>
+                                <div class="toggle-body vitazure">
+
+                                    <p>A consulta/sessão acontece como uma video conferência, para inicia-la basta entrar na plataforma e você será direcionado para a área do consultório virtual. Outro modo de acesso é pelo link enviado por e-mail, 30 minutos do início da consulta/sessão.</p>
+
+                                </div>
+                            </div>
+
+                            <div class="match-toggle">
+                                <div class="toggle-header">
+                                    <strong>Como o paciente me encontra?</strong>
+                                </div>
+                                <div class="toggle-body vitazure">
+
+                                    <p>Para que você apareça nas buscas é fundamental que tenhaagendas e horários cadastrados na plataforma. Ter um perfil bemelaborado será importante para que seu paciente decida por contratá-lo. O paciente pode fazer buscas para consulta/sessão online ou presencial.</p>
+
+                                </div>
+                            </div>
+
+                            <div class="match-toggle">
+                                <div class="toggle-header">
+                                    <strong>Qual diferença de agenda online para agenda presencial?</strong>
+                                </div>
+                                <div class="toggle-body vitazure">
+
+                                    <p>Será necessário cadastrar agendas distintas, para aparecer nas buscas de atendimento presencial é necessário o cadastro de uma agenda e para aparecer nas buscas de atendimento online é necessário o cadastro de outra agenda.</p>
+
+                                </div>
+                            </div>
+
+                            <div class="match-toggle">
+                                <div class="toggle-header">
+                                    <strong>As consultas são gravadas?</strong>
+                                </div>
+                                <div class="toggle-body vitazure">
+
+                                    <p>Não. nenhuma consulta é grava em nossa plataforma, somente você e o paciente tem acesso ao consultório no momento da consulta.</p>
+
+                                </div>
+                            </div>
+
+
+                            <!-- End como funciona profissional -->
                         </div>
 
-                        <div class="match-toggle">
-                            <div class="toggle-header">
-                                <strong>Quem faz parte da equipe Vitazure?</strong>
-                            </div>
-                            <div class="toggle-body vitazure">
-                                
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic enim pariatur et accusantium cumque, nostrum neque nulla nihil dolorem harum ipsam esse obcaecati aliquam laboriosam deleniti maxime voluptatem molestias quos culpa a id numquam odio suscipit? Perferendis exercitationem facilis enim aliquam. Amet, dignissimos eius pariatur enim mollitia similique praesentium nostrum vel culpa quod adipisci animi autem cupiditate possimus? Cumque atque repellat quam, accusamus asperiores accusantium consequatur dolore neque blanditiis corrupti, saepe iste enim quidem? Quasi, sint iure! Eius suscipit inventore blanditiis voluptate eum, odit pariatur nam voluptatum deleniti? Quas eveniet provident mollitia totam minima ex neque necessitatibus officia maxime repellat!</p>
-                            
-                            </div>
-                        </div>
+                        <div id="funciona-paciente" class="painel">
+                            <div class="match-toggle">
+                                <div class="toggle-header">
+                                    <strong>Como me cadastrar?</strong>
+                                </div>
+                                <div class="toggle-body vitazure">
 
-                        <div class="match-toggle">
-                            <div class="toggle-header">
-                                <strong>Como me cadastrar?</strong>
-                            </div>
-                            <div class="toggle-body vitazure">
-                                
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic enim pariatur et accusantium cumque, nostrum neque nulla nihil dolorem harum ipsam esse obcaecati aliquam laboriosam deleniti maxime voluptatem molestias quos culpa a id numquam odio suscipit? Perferendis exercitationem facilis enim aliquam. Amet, dignissimos eius pariatur enim mollitia similique praesentium nostrum vel culpa quod adipisci animi autem cupiditate possimus? Cumque atque repellat quam, accusamus asperiores accusantium consequatur dolore neque blanditiis corrupti, saepe iste enim quidem? Quasi, sint iure! Eius suscipit inventore blanditiis voluptate eum, odit pariatur nam voluptatum deleniti? Quas eveniet provident mollitia totam minima ex neque necessitatibus officia maxime repellat!</p>
-                            
-                            </div>
-                        </div>
+                                    <p>Se você está buscando atendimento psicológico, basta clicar no botão abaixo “Quero me cadastrar” e efetuar o seu cadastro. Isso leva menos de 3 minutos. Agora, se você é Psicólogo, basta entrar em “Sou profissional”, no menu superior, efetuar seu cadastro e aguardar o contato de nosso departamento comercial em até 12 horas, simples assim.</p>
 
-                        <div class="match-toggle">
-                            <div class="toggle-header">
-                                <strong>A plataforma é segura?</strong>
+                                </div>
                             </div>
-                            <div class="toggle-body vitazure">
-                                
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic enim pariatur et accusantium cumque, nostrum neque nulla nihil dolorem harum ipsam esse obcaecati aliquam laboriosam deleniti maxime voluptatem molestias quos culpa a id numquam odio suscipit? Perferendis exercitationem facilis enim aliquam. Amet, dignissimos eius pariatur enim mollitia similique praesentium nostrum vel culpa quod adipisci animi autem cupiditate possimus? Cumque atque repellat quam, accusamus asperiores accusantium consequatur dolore neque blanditiis corrupti, saepe iste enim quidem? Quasi, sint iure! Eius suscipit inventore blanditiis voluptate eum, odit pariatur nam voluptatum deleniti? Quas eveniet provident mollitia totam minima ex neque necessitatibus officia maxime repellat!</p>
-                            
-                            </div>
-                        </div>
 
-                        <div class="match-toggle">
-                            <div class="toggle-header">
-                                <strong>Vou receber lembretes dos meus agendamentos? </strong>
-                            </div>
-                            <div class="toggle-body vitazure">
-                                
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic enim pariatur et accusantium cumque, nostrum neque nulla nihil dolorem harum ipsam esse obcaecati aliquam laboriosam deleniti maxime voluptatem molestias quos culpa a id numquam odio suscipit? Perferendis exercitationem facilis enim aliquam. Amet, dignissimos eius pariatur enim mollitia similique praesentium nostrum vel culpa quod adipisci animi autem cupiditate possimus? Cumque atque repellat quam, accusamus asperiores accusantium consequatur dolore neque blanditiis corrupti, saepe iste enim quidem? Quasi, sint iure! Eius suscipit inventore blanditiis voluptate eum, odit pariatur nam voluptatum deleniti? Quas eveniet provident mollitia totam minima ex neque necessitatibus officia maxime repellat!</p>
-                            
-                            </div>
-                        </div>
+                            <div class="match-toggle">
+                                <div class="toggle-header">
+                                    <strong>A plataforma é segura?</strong>
+                                </div>
+                                <div class="toggle-body vitazure">
 
-                        <div class="match-toggle">
-                            <div class="toggle-header">
-                                <strong>Qual o valor da consulta?</strong>
-                            </div>
-                            <div class="toggle-body vitazure">
-                                
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic enim pariatur et accusantium cumque, nostrum neque nulla nihil dolorem harum ipsam esse obcaecati aliquam laboriosam deleniti maxime voluptatem molestias quos culpa a id numquam odio suscipit? Perferendis exercitationem facilis enim aliquam. Amet, dignissimos eius pariatur enim mollitia similique praesentium nostrum vel culpa quod adipisci animi autem cupiditate possimus? Cumque atque repellat quam, accusamus asperiores accusantium consequatur dolore neque blanditiis corrupti, saepe iste enim quidem? Quasi, sint iure! Eius suscipit inventore blanditiis voluptate eum, odit pariatur nam voluptatum deleniti? Quas eveniet provident mollitia totam minima ex neque necessitatibus officia maxime repellat!</p>
-                            
-                            </div>
-                        </div>
+                                    <p>Mantemos o mais alto padrão desegurança. Os dados que você nos informa são tratados de maneira confidencial. Nossos profissionais são selecionados e capacitados, garantimos a máxima qualidade ao indica-lo para você. Nossa plataforma oferece um ambiente extremamente seguro e regular.</p>
 
-                        <div class="match-toggle">
-                            <div class="toggle-header">
-                                <strong>Como é realizado o pagamento?</strong>
+                                </div>
                             </div>
-                            <div class="toggle-body vitazure">
-                                
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic enim pariatur et accusantium cumque, nostrum neque nulla nihil dolorem harum ipsam esse obcaecati aliquam laboriosam deleniti maxime voluptatem molestias quos culpa a id numquam odio suscipit? Perferendis exercitationem facilis enim aliquam. Amet, dignissimos eius pariatur enim mollitia similique praesentium nostrum vel culpa quod adipisci animi autem cupiditate possimus? Cumque atque repellat quam, accusamus asperiores accusantium consequatur dolore neque blanditiis corrupti, saepe iste enim quidem? Quasi, sint iure! Eius suscipit inventore blanditiis voluptate eum, odit pariatur nam voluptatum deleniti? Quas eveniet provident mollitia totam minima ex neque necessitatibus officia maxime repellat!</p>
-                            
-                            </div>
-                        </div>
 
-                        <div class="match-toggle">
-                            <div class="toggle-header">
-                                <strong>Aceitam plano de saúde?</strong>
-                            </div>
-                            <div class="toggle-body vitazure">
-                                
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic enim pariatur et accusantium cumque, nostrum neque nulla nihil dolorem harum ipsam esse obcaecati aliquam laboriosam deleniti maxime voluptatem molestias quos culpa a id numquam odio suscipit? Perferendis exercitationem facilis enim aliquam. Amet, dignissimos eius pariatur enim mollitia similique praesentium nostrum vel culpa quod adipisci animi autem cupiditate possimus? Cumque atque repellat quam, accusamus asperiores accusantium consequatur dolore neque blanditiis corrupti, saepe iste enim quidem? Quasi, sint iure! Eius suscipit inventore blanditiis voluptate eum, odit pariatur nam voluptatum deleniti? Quas eveniet provident mollitia totam minima ex neque necessitatibus officia maxime repellat!</p>
-                            
-                            </div>
-                        </div>
+                            <div class="match-toggle">
+                                <div class="toggle-header">
+                                    <strong>Vou receber lembretes dos meus agendamentos? </strong>
+                                </div>
+                                <div class="toggle-body vitazure">
 
-                        <div class="match-toggle">
-                            <div class="toggle-header">
-                                <strong>A informação do meu cartão de crédito está segura?</strong>
-                            </div>
-                            <div class="toggle-body vitazure">
-                                
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic enim pariatur et accusantium cumque, nostrum neque nulla nihil dolorem harum ipsam esse obcaecati aliquam laboriosam deleniti maxime voluptatem molestias quos culpa a id numquam odio suscipit? Perferendis exercitationem facilis enim aliquam. Amet, dignissimos eius pariatur enim mollitia similique praesentium nostrum vel culpa quod adipisci animi autem cupiditate possimus? Cumque atque repellat quam, accusamus asperiores accusantium consequatur dolore neque blanditiis corrupti, saepe iste enim quidem? Quasi, sint iure! Eius suscipit inventore blanditiis voluptate eum, odit pariatur nam voluptatum deleniti? Quas eveniet provident mollitia totam minima ex neque necessitatibus officia maxime repellat!</p>
-                            
-                            </div>
-                        </div>
+                                    <p>Sim. Será enviado e-mail e um SMS, tanto para o paciente quanto para o respectivo profissional, com os detalhes da consulta/sessão assim que for confirmada.</p>
 
-                        <div class="match-toggle">
-                            <div class="toggle-header">
-                                <strong>E se eu precisar de um atendimento de emergência?</strong>
+                                </div>
                             </div>
-                            <div class="toggle-body vitazure">
-                                
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic enim pariatur et accusantium cumque, nostrum neque nulla nihil dolorem harum ipsam esse obcaecati aliquam laboriosam deleniti maxime voluptatem molestias quos culpa a id numquam odio suscipit? Perferendis exercitationem facilis enim aliquam. Amet, dignissimos eius pariatur enim mollitia similique praesentium nostrum vel culpa quod adipisci animi autem cupiditate possimus? Cumque atque repellat quam, accusamus asperiores accusantium consequatur dolore neque blanditiis corrupti, saepe iste enim quidem? Quasi, sint iure! Eius suscipit inventore blanditiis voluptate eum, odit pariatur nam voluptatum deleniti? Quas eveniet provident mollitia totam minima ex neque necessitatibus officia maxime repellat!</p>
-                            
+
+                            <div class="match-toggle">
+                                <div class="toggle-header">
+                                    <strong>Qual o valor da consulta?</strong>
+                                </div>
+                                <div class="toggle-body vitazure">
+
+                                    <p>Os valores da consulta são definidos pelos profissionais, podem variar de acordo com cada profissional.</p>
+
+                                </div>
                             </div>
+
+                            <div class="match-toggle">
+                                <div class="toggle-header">
+                                    <strong>Como é realizado o pagamento?</strong>
+                                </div>
+                                <div class="toggle-body vitazure">
+
+                                    <p>O pagamento é realizado atravésde cartão de crédito ou boleto bancário dentro da plataforma, com total segurança. Os dados de pagamento, não são armazenados pela plataforma, são usados somente no momento da transação pelo site da Pagar.me.</p>
+
+                                </div>
+                            </div>
+
+                            <div class="match-toggle">
+                                <div class="toggle-header">
+                                    <strong>Aceitam plano de saúde?</strong>
+                                </div>
+                                <div class="toggle-body vitazure">
+
+                                    <p>No momento não atendemos nenhum plano de saúde. No entanto, você pode consultar o contrato com seu plano de saúde, para saber mais sobre reembolso de valores.</p>
+
+                                </div>
+                            </div>
+
+                            <div class="match-toggle">
+                                <div class="toggle-header">
+                                    <strong>A informação do meu cartão de crédito está segura?</strong>
+                                </div>
+                                <div class="toggle-body vitazure">
+
+                                    <p>Está segura. Os dados do seu cartão de crédito não são armazenados pela plataforma, são transmitidos de forma criptografada com segurança para as verificações pela administradora do cartão. Nosso sistema de pagamento é utilizado por grandes corporações, garantindo segurança em todas as transações financeiras.</p>
+
+                                </div>
+                            </div>
+
+                            <div class="match-toggle">
+                                <div class="toggle-header">
+                                    <strong>E se eu precisar de um atendimento de emergência?</strong>
+                                </div>
+                                <div class="toggle-body vitazure">
+
+                                    <p>A Vitazure não oferece tratamento ou aconselhamento imediato para pessoas em crise suicida, em caso de crise ligue para 141 (CVV) ou acesse ww.cvv.org.br, em caso de emergência procure atendimento em um hospital mais próximo.</p>
+
+                                </div>
+                            </div>
+
+                            <div class="match-toggle">
+                                <div class="toggle-header">
+                                    <strong>E se eu estiver descontente com o meu psicólogo?</strong>
+                                </div>
+                                <div class="toggle-body vitazure">
+
+                                    <p>Havendo algum descontentamento com o seu profissional, basta entrar em contato com nossa equipe de atendimento por meio do chat da plataforma. Você será atendido rapidamente, queremos o seu bem-estar.</p>
+
+                                </div>
+                            </div>
+
+                            <div class="match-toggle">
+                                <div class="toggle-header">
+                                    <strong>Como funcionam as consultas/sessões online?</strong>
+                                </div>
+                                <div class="toggle-body vitazure">
+
+                                    <p>As consultas/sessões acontecem por meio do consultório virtual da plataforma Vitazure, são realizadas de forma online. Atendemos os padrões de segurança recomendados, diferentemente de plataformas populares como WhatsApp, Skype e outras, que não possuem proteção sigilo de pacientes. O uso do consultório virtual não exige nenhuma instalação de aplicativo, você consegue entrar diretamente por um link enviado no seu e-mail 15 minutos antes da consulta/sessão ou também diretamente pela plataforma, fazendo seu login.</p>
+
+                                </div>
+                            </div>
+
+                            <div class="match-toggle">
+                                <div class="toggle-header">
+                                    <strong>Posso realizar minha consulta/sessão pelo celular?</strong>
+                                </div>
+                                <div class="toggle-body vitazure">
+
+                                    <p>Pode. A consulta/sessão pode ser realizada pelo computador ou celular.</p>
+
+                                </div>
+                            </div>
+
+                            <!-- End como funciona paciente -->
                         </div>
                     </div>
                 </div>
