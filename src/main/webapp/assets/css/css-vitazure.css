@@ -34,12 +34,12 @@ p {
 }
 
 h1 {
-    font-size: 7.1rem;
+    font-size: 5.54rem;
     line-height: 9rem;
     color: var(--color-text);
     font-weight: 800;
-    margin-top: 20rem;
-    margin-bottom: 3.2rem;
+    margin-top: 14rem;
+    margin-bottom: 3rem;
 }
 
 h2 {

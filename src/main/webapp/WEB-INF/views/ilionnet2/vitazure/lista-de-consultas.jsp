@@ -19,7 +19,7 @@
                 <div class="row">
                     <div class="col-12 text-center">
                         <h2>Minhas Consultas</h2>
-                        <p>Confira suas consultas. É necessário o aceite.</p>
+                        <p>Confira suas consultas.</p>
                     </div>
                     <div class="col-12 col-xl-4">
                         <div class="search">
