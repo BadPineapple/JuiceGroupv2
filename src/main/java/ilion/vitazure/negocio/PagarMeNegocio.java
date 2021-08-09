@@ -3,19 +3,39 @@ package ilion.vitazure.negocio;
 import ilion.me.pagar.BankAccountType;
 import ilion.me.pagar.RecipientStatus;
 import ilion.me.pagar.model.*;
+import ilion.util.Uteis;
+import ilion.util.VLHForm;
+import ilion.util.ValueListInfo;
+import ilion.util.busca.PalavrasChaveCondicoes;
 import ilion.util.persistencia.HibernateUtil;
 import ilion.vitazure.enumeradores.BancoEnum;
+import ilion.vitazure.enumeradores.StatusEnum;
+import ilion.vitazure.model.Agenda;
+import ilion.vitazure.model.PagamentoPagarMe;
+import ilion.vitazure.model.Pessoa;
 import ilion.vitazure.model.Profissional;
+import net.mlw.vlh.ValueList;
 
 import org.springframework.stereotype.Service;
 import org.hibernate.Hibernate;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Disjunction;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import ilion.admin.negocio.PropNegocio;
+import ilion.admin.negocio.Usuario;
 import ilion.admin.negocio.PropEnum;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+
+import javax.transaction.Transactional;
 
 @Service
 @SuppressWarnings("unchecked")
@@ -303,5 +323,62 @@ public class PagarMeNegocio {
   public void salvarRetorno(Postback post) {
 	  hibernateUtil.save(post);
   }
+  
+  @Transactional
+  public void salvarPagamentoPagarMe(PagamentoPagarMe pagamentoPagarMe) {
+	  hibernateUtil.save(pagamentoPagarMe);
+  }
+  
+  public List<PagamentoPagarMe> consultarPagamentoPagarMe(Long codigoPessoa , Boolean profissional){
+		
+		List<PagamentoPagarMe> listPagamentoPagarMe = new ArrayList<PagamentoPagarMe>();
+		DetachedCriteria dc = DetachedCriteria.forClass(PagamentoPagarMe.class);
+		if (profissional) {
+			Profissional prof = profissionalNegocio.consultarPorPessoa(codigoPessoa);
+			dc.add(Restrictions.eq("idProfissional", prof.getId()));
+		}else {
+			dc.add(Restrictions.eq("idPaciente", codigoPessoa));	
+		}
+		listPagamentoPagarMe = (List<PagamentoPagarMe>) hibernateUtil.list(dc);
+		return listPagamentoPagarMe;
+	}
+  
+  public ValueList buscar(VLHForm vlhForm, ValueListInfo valueListInfo , Usuario usuarioSessao) {
+
+		DetachedCriteria dc = DetachedCriteria.forClass(PagamentoPagarMe.class);
+		if (!Uteis.ehNuloOuVazio(vlhForm.getPalavraChave())) {
+			Disjunction disjunction = Restrictions.disjunction();
+			List<String> condicoes = PalavrasChaveCondicoes.nova().comPalavrasChave(vlhForm.getPalavraChave()).gerar();
+			for (String condicao : condicoes) {
+				disjunction.add( Restrictions.ilike("profissional", condicao));
+				disjunction.add( Restrictions.ilike("planoVitazureSelecionado", condicao));
+				disjunction.add( Restrictions.ilike("status", condicao));
+			}
+			Long id = Uteis.converterLong(vlhForm.getPalavraChave());
+			if (id != null) {
+				disjunction.add(Restrictions.eq("id", id));
+				disjunction.add(Restrictions.eq("idPaciente", id));
+				disjunction.add(Restrictions.eq("agenda", id));
+			}
+			Integer idTransacao = Uteis.converterInteger(vlhForm.getPalavraChave());
+			if (idTransacao != null) {
+				disjunction.add(Restrictions.eq("idTransacao", idTransacao));
+			}
+			dc.add(disjunction);
+		}
+
+		StatusEnum statusEnum = StatusEnum.fromString(vlhForm.getStatus());
+
+		if (statusEnum != null) {
+			dc.add(Restrictions.eq("status", statusEnum));
+		}
+		
+		ValueList notificacaos = hibernateUtil.consultarValueList(dc, org.hibernate.criterion.Order.desc("id"), valueListInfo);
+
+		return notificacaos;
+
+	}
+  
+  
   
 }

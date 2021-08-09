@@ -68,6 +68,8 @@
 										    ProfissionalVH.profissional.habilitarDesconto40='${profissional.habilitarDesconto40}';
 										    ProfissionalVH.profissional.quantidadeConsultaDesconto40Mes='${profissional.quantidadeConsultaDesconto40Mes}';
 										    ProfissionalVH.profissional.avisoFerias='${profissional.avisoFerias}';
+										    ProfissionalVH.profissional.dataInicioAvisoFerias='${profissional.dataInicioAvisoFerias}';
+										    ProfissionalVH.profissional.dataFimAvisoFerias='${profissional.dataFimAvisoFerias}';
 										    ProfissionalVH.profissional.ativo='${profissional.ativo}';
 										    ProfissionalVH.profissional.plano='${profissional.plano}';
 										    ProfissionalVH.profissional.dataInicioPlano='${profissional.dataInicioPlano}';
@@ -103,6 +105,7 @@
                          					especialidadeAtendimento();
                          					temasAtendimento();
                          					horarioAtendimento();
+                         					apresentarCampoData('${profissional.avisoFerias}');
                           					 "/>
                             <div class="match-toggle">
                                 <div class="toggle-header">
@@ -806,11 +809,23 @@
 
                                         <div class="col-12">
                                             <div class="checkbox">
-                                                <input type="checkbox" ng-model="ProfissionalVH.profissional.avisoFerias" id="avisoFerias" ng-checked="${profissional.avisoFerias}"/>
+                                                <input type="checkbox" ng-model="ProfissionalVH.profissional.avisoFerias" id="avisoFerias" ng-checked="${profissional.avisoFerias}" onclick="apresentarCampoData(this.checked)"/>
                                                 <label>Incluir data início e data fim do afastamento</label>
                                             </div>
                                         </div>
-
+											<div class="col-6" style="padding-top: 20px;display:none;" id="divCampoDataInicialAviso">
+			                                    <div class="input-block">
+			                                        <label>Data Inicio</label>
+			                                        <input type="text" data-mask="00/00/0000" ng-model="ProfissionalVH.profissional.dataInicioAvisoFerias"/>
+			                                    </div>
+			                                </div>
+											
+											<div class="col-6" style="padding-top: 20px;display:none;" id="divCampoFinalDataAviso">
+			                                    <div class="input-block">
+			                                        <label>Data Fim</label>
+			                                        <input type="text" data-mask="00/00/0000" ng-model="ProfissionalVH.profissional.dataFimAvisoFerias"/>
+			                                    </div>
+			                                </div>
                                         <div class="col-12">
                                             <button class="button-secundary checkbox-button" ng-click="perfilProfissional()" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Salvar</button>
                                         </div>
@@ -866,7 +881,17 @@ $('.valorMonetario').mask('#.##0.00', {reverse: true});
 	 	fileReader.readAsDataURL(file)
 	 })
  })
-
+</script>
+<script>
+  function apresentarCampoData(campo){
+	  if(campo == true || campo == 'true'){
+		document.getElementById("divCampoDataInicialAviso").style.display = "inline-block";
+		document.getElementById("divCampoFinalDataAviso").style.display = "inline-block";
+	  }else{
+		document.getElementById("divCampoDataInicialAviso").style.display = "none"; 
+		document.getElementById("divCampoFinalDataAviso").style.display = "none"; 
+	  }
+  }
 </script>
     </div>
 </body>

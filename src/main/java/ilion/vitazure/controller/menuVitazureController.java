@@ -33,6 +33,7 @@ import ilion.vitazure.model.Profissional;
 import ilion.vitazure.negocio.AgendaNegocio;
 import ilion.vitazure.negocio.EnderecoNegocio;
 import ilion.vitazure.negocio.FormacaoAcademicaNegocio;
+import ilion.vitazure.negocio.PagarMeNegocio;
 import ilion.vitazure.negocio.PessoaNegocio;
 import ilion.vitazure.negocio.ProfissionalNegocio;
 import ilion.vitazure.negocio.ProfissionalVH;
@@ -55,6 +56,9 @@ public class menuVitazureController  extends CustomErrorController{
 	
 	@Autowired
 	private AgendaNegocio agendaNegocio;
+	
+	@Autowired
+	private PagarMeNegocio pagarMeNegocio;
 	
 	@RequestMapping("/cliente")
 	@UsuarioLogado()
@@ -176,10 +180,22 @@ public class menuVitazureController  extends CustomErrorController{
 		
 		VLHForm vlhForm = VLHForm.getVLHSession("agendaLista", request);
 		Usuario usuarioSessao = (Usuario) request.getSession().getAttribute("usuarioSessao");
-		ValueList agendas = agendaNegocio.buscar(vlhForm, new ValueListInfo(vlhForm) , usuarioSessao);
+		ValueList agendas = agendaNegocio.buscar(vlhForm, new ValueListInfo(vlhForm) , usuarioSessao , null);
 		request.setAttribute("agendas", agendas);
 		request.setAttribute("vlhForm", vlhForm);
 		
 		return "/ilionnet/modulos/vitazure/agendaCons";
+	}
+	@RequestMapping("/movimentacoes")
+	@UsuarioLogado()
+	public String movimentacoesCons(HttpServletRequest request) {
+		
+		VLHForm vlhForm = VLHForm.getVLHSession("movimentacoesLista", request);
+		Usuario usuarioSessao = (Usuario) request.getSession().getAttribute("usuarioSessao");
+		ValueList listPagamentos = pagarMeNegocio.buscar(vlhForm, new ValueListInfo(vlhForm) , usuarioSessao);
+		request.setAttribute("listPagamentos", listPagamentos);
+		request.setAttribute("vlhForm", vlhForm);
+		
+		return "/ilionnet/modulos/vitazure/movimentacoesCons";
 	}
 }

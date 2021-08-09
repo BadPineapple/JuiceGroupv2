@@ -142,7 +142,7 @@ public class ProfissionalControlle {
       @GetMapping("/vitazure/listaProfissionais")
 	  	public String souProfissional(HttpServletRequest request) {
 	  		Pessoa PessoaSessao = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
-	  		List<Profissional> lisProfissional = profissionalNegocio.consultarProfissionais();
+	  		List<Profissional> lisProfissional = profissionalNegocio.consultarProfissionaisAtivos();
 	  		request.setAttribute("pessoa", PessoaSessao);
 	  		request.setAttribute("areaRestrita", true);
 	  		consultarDataDisponivelProfissionais(lisProfissional , false , false);
@@ -225,12 +225,17 @@ public class ProfissionalControlle {
     	    	    horarioPossivelAtendimentoInicial.setHoraPossivelAtendiemnto(horaInicio);
     	    	    horarioPossivelAtendimentoInicial.setDiaSemanaEnum(horarioAtendimento.getDiaSemana());
     	    	    horarioPossivelAtendimentoInicial.setCodigoProfissional(profissional.getId());
-	            	listHorarioPossivelAtendimento.add(horarioPossivelAtendimentoInicial);
+    	    	    horarioPossivelAtendimentoInicial.setEnderecoatendimento(horarioAtendimento.getEnderecoAtendimento().getLogradouro().concat(" - ").concat(horarioAtendimento.getEnderecoAtendimento().getComplemento())
+    	    	    		.concat(" - ").concat(horarioAtendimento.getEnderecoAtendimento().getBairro().concat(" - ").concat(horarioAtendimento.getEnderecoAtendimento().getCidade()).concat(" - ").concat(horarioAtendimento.getEnderecoAtendimento().getEstado().getNome())));
+    	    	    horarioPossivelAtendimentoInicial.setLinkGoogleMaps(horarioAtendimento.getEnderecoAtendimento().getLinkGoogleMaps());
+    	    	    listHorarioPossivelAtendimento.add(horarioPossivelAtendimentoInicial);
     	            while (x <= quantidadePossiveisAtendimento) {
     	            	HorarioPossivelAtendimento horarioPossivelAtendimento = new HorarioPossivelAtendimento();
     	            	horarioPossivelAtendimento.setHoraPossivelAtendiemnto(Uteis.calculodeHoraSemIntervalo(horaInicio, 1, Integer.parseInt(profissional.getDuracaoAtendimento().getNome())));
     	            	horarioPossivelAtendimento.setDiaSemanaEnum(horarioAtendimento.getDiaSemana());
     	            	horarioPossivelAtendimento.setCodigoProfissional(profissional.getId());
+    	            	horarioPossivelAtendimento.setEnderecoatendimento(horarioAtendimento.getEnderecoAtendimento().getLogradouro().concat(" - ").concat(horarioAtendimento.getEnderecoAtendimento().getComplemento()).concat(" - ").concat(horarioAtendimento.getEnderecoAtendimento().getBairro()));
+    	            	horarioPossivelAtendimento.setLinkGoogleMaps(horarioAtendimento.getEnderecoAtendimento().getLinkGoogleMaps());
     	            	listHorarioPossivelAtendimento.add(horarioPossivelAtendimento);
     	            	horaInicio = horarioPossivelAtendimento.getHoraPossivelAtendiemnto();
     	                x++;

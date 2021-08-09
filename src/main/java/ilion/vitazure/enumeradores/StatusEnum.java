@@ -2,11 +2,12 @@ package ilion.vitazure.enumeradores;
 
 public enum StatusEnum {
 
-	ANDAMENTO("Andamento"),
+	PENDENTE("Pendente"),
 	PROCESSAMENTO("Processamento"),
 	CONFIRMADO("Confirmado"),
 	CANCELADO("Cancelado"),
 	CONCLUIDO("Concluido"),
+	NAO_ENCONTRATO("NO"),
 	REMARCADO("Remarcado");
 	
 	private String nome;
@@ -30,6 +31,15 @@ public enum StatusEnum {
 			}
 		}
 		return null;
+	}
+	
+	public static StatusEnum fromStringConsulta(String nome) {
+		for (StatusEnum item : VALUES) {
+			if( item.nome.equals(nome) || item.toString().equals(nome.toUpperCase())){
+				return item;
+			}
+		}
+		return StatusEnum.NAO_ENCONTRATO;
 	}
 	
 	

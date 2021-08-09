@@ -7,13 +7,14 @@
 	<jsp:include page="includes/include-head.jsp" flush="true" />
 	<script	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 	<script src="../assets/js/vitazure/agendamento.js"></script>
+	<link rel="stylesheet" type="text/css" href="<ilion:url/>ilionnet/pmd-admin/assets/css/bootstrap.min.css">
 </head>
 
 <body id="index" class="home">
     <div id="app">
         <jsp:include page="includes/include-header-internas.jsp" flush="true" />
         <jsp:include page="includes/include-menu-painel.jsp" flush="true" />
-        <jsp:include page="includes/include-painel-person.jsp" flush="true" />
+        <jsp:include page="includes/include-painel-profissional.jsp" flush="true" />
         <div class="area-white">
             <div class="container">
                 <div class="row">
@@ -21,14 +22,23 @@
                         <h2>Minhas Consultas</h2>
                         <p>Confira suas consultas. É necessário o aceite.</p>
                     </div>
-                    <div class="col-12 col-xl-4">
+                    <div class="col-12 col-xl-12">
                         <div class="search">
-                            <form>
-                                <input type="text" placeholder="Buscar">
-                                <button href="#" class="search-button">
-                                    <img src="images/search.png" alt="">
-                                </button>
-                            </form>
+                            <form class="form-inline" method="get" action="?">
+								<div class="col-12">
+							      <input name="sp" type="hidden" value="true"/>
+							      <input name="pagingPage" type="hidden" value="1"/>
+								      <div class="col-md-10 col-lg-10 col-sm-12">
+								          <div class="form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed" style="width: 100% !important;">
+								           	<label for="name" class="control-label">Palavra-Chave</label>
+											<input type="Large" name="palavraChave" id="palavraChave" class="form-control input-group-lg" style="width: 100% !important;"/>
+										</div> 
+									</div>
+									<div class="col-md-2 col-lg-2 col-sm-12 text-center" style="padding-top: 20px;">	
+									  <button class="btn btn-primary" style="height: 45px;width: 100%;">Buscar</button>
+									</div>  
+								</div>	
+								</form>
                         </div>
                     </div>
 
@@ -59,7 +69,7 @@
                                             </div>
                                         </td>
                                         <td style="text-align: center;">
-                                          <c:if test="${agenda.status == 'ANDAMENTO' || agenda.status == 'CONFIRMADO'}">
+                                          <c:if test="${agenda.status == 'PENDENTE' || agenda.status == 'CONFIRMADO'}">
 	                                           <button  class="btn btn-danger" ng-click="definirAgendamento('${agenda.id}' , 'CANCELADO')">Cancelar</button>
 	                                           <button  class="btn btn-warning" ng-click="definirAgendamento('${agenda.id}' , 'REMARCADO')">Remarcar</button>
 	                                      </c:if>     
@@ -73,7 +83,12 @@
     							</c:forEach>
                                 </tbody>
                             </table>
-                        </div>
+                       </div>
+                         <div class="row" >
+		            <div class="col-md-12" >
+		             	<ilion:vlhPagination valueListInfo="${listAgendas.valueListInfo}" navCssClass="pull-right"/>
+				    </div>
+			    </div>
                     </div>
                 </div>
             </div>

@@ -86,6 +86,7 @@ public class ApplicationContextConfig {
     sessionFactory.addAnnotatedClass(ilion.vitazure.model.TemaTrabalho.class);
     sessionFactory.addAnnotatedClass(ilion.vitazure.model.HorarioAtendimento.class);
     sessionFactory.addAnnotatedClass(ilion.vitazure.model.Agenda.class);
+    sessionFactory.addAnnotatedClass(ilion.vitazure.model.PagamentoPagarMe.class);
     sessionFactory.addAnnotatedClass(ilion.me.pagar.model.Postback.class);
     
     return sessionFactory.buildSessionFactory();

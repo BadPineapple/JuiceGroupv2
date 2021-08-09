@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ include file="/ilionnet/taglibs.jsp"%>
 <!doctype html>
 <html class="no-js" lang="pt-BR" ng-app="buscaProfissionalApp" ng-controller="BuscaProfissionalController">
 <head>
@@ -13,13 +14,14 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12 col-xl-9">
-                        <h1 class="title-gray">Fale com seu<br/> Psicólogo Online do<br/> conforto de sua casa.</h1>
-                        <p>Procure por categoria profissional ou especialidade.</p>
+                        <h1 class="title-gray">Fale com seu<br/> Psicólogo Online de<br/> forma segura e de<br/> qualquer lugar.</h1>
+                        <p>Busque por profissional ou especialidade.</p>
                         <form ng-submit="consultarProfissional()"  class="form-highlight">
                             <select ng-model="tipoProfissional">
-                                <option value="">Tipo de profissional</option>
+                                <option value="">Profissional</option>
                                 <option value="psicologo">Psicólogo</option>
-                                <option value="psicanalista">Psicanalista</option>
+                                <option value="medico">Médico</option>
+                                <option value="psiquiatra">Psiquiatra</option>
                             </select>
 
                             <select ng-model="especialista">
@@ -130,18 +132,18 @@
 
                             <div class="consulta-title">
                                 <strong>Converse</strong>
-                                <p>Fale por videoconsulta com seu psicólogo.</p>
+                                <p>Fale por videoconsulta com seu psicólogo, com sigilo e segurança.</p>
                             </div>
                         </div>
                     </div>
 
                     <div class="col-12 text-center">
-                        <a href="#" class="button-secundary button-consulta">Agendar minha consulta</a>
+                        <a href="<ilion:url/>cadastre-se" class="button-secundary button-consulta">Agendar minha consulta</a>
 
                         <div class="psicologia-online">
                             <h2>Psicologia Online</h2>
 
-                            <p style="padding: 1rem 3rem;">O atendimento psicológico online é um serviço realizado por um psicólogo online, via vídeo. Trata-se de uma abordagem equivalente a psicoterapia presencial. Desde novembro de 2018 o atendimento online é permitido pelo Consegui Federal de Psicologia sem limite de sessões. As sessões duram 50 minutos e são feitas via video mediante agendamento e pagamento prévios. Esse serviço não é indicado para casos de saúde graves. Crianças e menores de 18 anos precisam de autorização por escrito de um responsável.</p>
+                            <p style="padding: 1rem 3rem;">O atendimento psicológico online é um serviço realizado por um psicólogo online, via vídeo. Trata-se de uma abordagem equivalente a psicoterapia presencial. Desde novembro de 2018 o atendimento online é permitido pelo Conselho Federal de Psicologia, Resolução CFP 11/2018, sem limite de sessões. As sessões duram até 50 minutos e são feitas via vídeo mediante agendamento e pagamento prévios. Esse serviço não é indicado para casos de saúde graves. Crianças e menores de 18 anos precisam de autorização por escrito de um responsável.</p>
                         </div>
                     </div>
                 </div>

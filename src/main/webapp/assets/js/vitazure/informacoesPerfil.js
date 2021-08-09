@@ -102,6 +102,9 @@ function informacoesPerfilController($scope, $http, $window) {
 	$scope.salvarConta = function () {
     	salvarConta($scope, $http, $window);
 	}
+	$scope.apresentarCampoData = function (apresentarCampo) {
+    	apresentarCampoData(apresentarCampo);
+	}
 }
 
 function perfilProfissional($scope, $http, $window) {
@@ -435,3 +438,13 @@ function salvarConta($scope, $http, $window) {
 
 
 };
+
+function apresentarCampoData(campo){
+	  if(campo === 'true' || campo){
+		document.getElementById("divCampoDataInicialAviso").style.display = "inline-block";
+		document.getElementById("divCampoFinalDataAviso").style.display = "inline-block";
+	  }else{
+		document.getElementById("divCampoDataInicialAviso").style.display = "none"; 
+		document.getElementById("divCampoFinalDataAviso").style.display = "none"; 
+	  }
+  }

@@ -1,9 +1,14 @@
 package ilion.gc.site.controller;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.swing.text.html.parser.Entity;
@@ -30,10 +35,16 @@ import ilion.arquivo.negocio.ArquivoNegocio;
 import ilion.gc.negocio.Artigo;
 import ilion.gc.negocio.ArtigoSiteNegocio;
 import ilion.gc.taglibs.ArtigoParamsVO;
+import ilion.util.Uteis;
 import ilion.util.contexto.autorizacao.AcessoLivre;
 import ilion.util.contexto.autorizacao.PessoaLogada;
+import ilion.vitazure.model.HorarioAtendimento;
 import ilion.vitazure.model.Pessoa;
+import ilion.vitazure.model.PostBlog;
+import ilion.vitazure.model.Profissional;
+import ilion.vitazure.negocio.HorarioAtendimentoNegocio;
 import ilion.vitazure.negocio.PessoaNegocio;
+import ilion.vitazure.negocio.ProfissionalNegocio;
 import sun.java2d.pipe.SpanShapeRenderer;
 
 @Controller
@@ -54,6 +65,12 @@ public class SiteController extends CustomErrorController {
 	@Autowired
 	private PessoaNegocio  pessoaNegocio;
 	
+	@Autowired
+	private ProfissionalNegocio profissionalNegocio;
+	
+	@Autowired
+	private HorarioAtendimentoNegocio horarioNegocio;
+	
 	@GetMapping(value = { "/",})
 	public String aguarde(HttpServletRequest request) {
 		return "/aguarde";
@@ -63,6 +80,70 @@ public class SiteController extends CustomErrorController {
 		Pessoa PessoaSessao = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
 		request.setAttribute("pessoa", PessoaSessao);
 		request.setAttribute("areaRestrita", false);
+		
+		String xml = Uteis.getHtml("https://blog.vitazure.com.br/feed/");
+
+		Collection<PostBlog> posts = new ArrayList<PostBlog>();
+
+		int index = 0;
+
+		for (int i = 0; i < 4; i++) {
+
+			if (xml.indexOf("</title>", index) != -1) {
+
+				String item = xml.substring(xml.indexOf("<item>", index) + 7, xml.indexOf("</item>", index));
+
+
+				String titulo = item.substring(item.indexOf("<title>")+7, item.indexOf("</title>"));
+
+
+				String link = item.substring(item.indexOf("<link>")+6, item.indexOf("</link>"));
+
+
+				String src;
+
+
+				int indexI1 = item.indexOf("src=\"")+5;
+
+				int indexI2 = item.indexOf("g\"")+1;
+
+				if (indexI2 != 0) {
+
+					src = item.substring(indexI1, indexI2);
+
+				}else {
+
+					src = "";
+
+				}
+
+
+				byte[] bytes = titulo.getBytes(StandardCharsets.ISO_8859_1);
+
+
+				titulo = new String(bytes, StandardCharsets.UTF_8);
+
+
+				PostBlog post = new PostBlog(titulo, link, src);
+
+
+				posts.add(post);
+
+
+				index = xml.indexOf("</item>", index) + 1;
+
+			} else {
+
+				break;
+
+			}
+
+
+		}
+
+		request.setAttribute("posts", posts);
+
+		
 		return "/ilionnet2/vitazure/index";
 	}
 
@@ -246,8 +327,9 @@ public class SiteController extends CustomErrorController {
 	
 	@RequestMapping("/resultado-de-busca/{tipoProfissional}/{especialista}")
 	public String buscaProfissional(HttpServletRequest request,@PathVariable String tipoProfissional,@PathVariable String especialista) {
-		List<Pessoa> listPessoa = pessoaNegocio.consultarProfissionais("");
-		request.getSession().setAttribute("listPessoa", listPessoa);
+		List<Profissional> listProfissionais = profissionalNegocio.consultarProfissionaisAtivos();
+		consultarDataDisponivelProfissionais(listProfissionais , false , false);
+		request.getSession().setAttribute("listProfissionais", listProfissionais);
 		return "/ilionnet2/vitazure/resultado-de-busca";
 	}
 	@GetMapping("/registre-se-como-psicologo")
@@ -270,14 +352,34 @@ public class SiteController extends CustomErrorController {
 	@GetMapping("/listaProfissionais")
 	public String consultarProfissionais(HttpServletRequest request) {
 		request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
-		Pessoa PessoaSessao = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
-		List<Pessoa> listPessoa = (List<Pessoa>) request.getSession().getAttribute("listPessoa");
-		request.setAttribute("pessoa", PessoaSessao);
-		request.setAttribute("listPessoa", listPessoa);
+		List<Profissional> listProfissionais = (List<Profissional>) request.getSession().getAttribute("listProfissionais");
+		request.setAttribute("listProfissionais", listProfissionais);
 		request.setAttribute("areaRestrita", false);
-		return "/ilionnet2/vitazure/resultado-de-busca";
+		return "/ilionnet2/vitazure/resultado-busca_aberta";
 	}
 
+	
+	private List<Profissional> consultarDataDisponivelProfissionais(List<Profissional> lisProfissional , Boolean atendimentoOnline , Boolean atendimentoPresencial) {
+  	  List<Date> lista = new ArrayList<Date>();
+  	  
+  	  int diasIncrementado = 0;
+  	  while (diasIncrementado  < 60){
+  		  lista.add(Uteis.acrescentar(new Date(), Calendar.DATE, diasIncrementado));
+  		  diasIncrementado++;
+  	  }
+  	  lisProfissional.stream().forEach(profissional -> {
+  		  List<HorarioAtendimento> listaHorarioatendimento = horarioNegocio.consultarHorariosAtendimentoPorProfissional(profissional.getId() , atendimentoOnline , atendimentoPresencial);
+  		  List<Date> datasPossivelAgendamento = lista.stream()
+  				  .filter( o1 -> {
+  					  return listaHorarioatendimento.stream()
+  							  .map(HorarioAtendimento::getDiaSemana)
+  							  .anyMatch(i2 -> i2.getValue() == o1.getDay());
+  				  }).collect(Collectors.toList());
+  		  profissional.getDatasPossivelAgendamento().addAll(datasPossivelAgendamento);
+  	  });
+  	  return lisProfissional;
+  	  
+    }
 
 	
 }

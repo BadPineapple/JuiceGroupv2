@@ -1,16 +1,21 @@
 package ilion.vitazure.controller;
 
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 
 import ilion.me.pagar.model.*;
 import ilion.util.json.JsonString;
+import ilion.vitazure.model.Agenda;
+import ilion.vitazure.model.PagamentoPagarMe;
 import ilion.vitazure.model.Pessoa;
 import ilion.vitazure.model.Profissional;
+import ilion.vitazure.negocio.AgendaNegocio;
 import ilion.vitazure.negocio.PagarMeNegocio;
 import ilion.vitazure.negocio.ProfissionalNegocio;
 
@@ -42,6 +47,10 @@ public class PagarMeController {
   
   @Autowired
   private ProfissionalNegocio profissionalNegocio;
+  
+  @Autowired
+  private AgendaNegocio agendaNegocio;
+  
 
   private String jsonString;
 
@@ -120,17 +129,18 @@ public class PagarMeController {
 			profissional.setPlano(teste.get("plano").toString());
 			profissional.setDataFimPlano(Uteis.formatarDataHora(Uteis.acrescentar(new Date(), Calendar.DATE, profissional.getQuantidadesDiasVencimentoPlano()) , "dd-MM-YYYY"));
 			profissional.setTokenTransacaoPlano(token);
-			
+			profissional.setIdTransacao(tx.getId());
 			profissionalNegocio.incluirAtualizar(profissional);
-			
 			Transaction capturarTransacao = new Transaction().find(tx.getId());
-
 			capturarTransacao.capture(tx.getAmount());
+			PagamentoPagarMe pagamentoPagarMe = new PagamentoPagarMe();
+			pagamentoPagarMe = pagamentoPagarMe.pagamento(capturarTransacao, null, profissional);
+			pagarMeNegocio.salvarPagamentoPagarMe(pagamentoPagarMe);
 			return new ResponseEntity<>("Incluido Plano com Sucesso", HttpStatus.OK);
 	  }
 	  catch (Exception e) {
 		  return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 	  }
   }
-
+  
 }

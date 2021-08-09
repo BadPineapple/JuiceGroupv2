@@ -37,59 +37,77 @@
 					<form ng-submit="submitProfissional()">
 						          <angular-initializer
 						            ng-init="profissional.id='${profissional.id}';
-						                    profissional.documentoCrpCrm='${profissional.documentoCrpCrm}';
-						                    profissional.cadastroEpsi='${profissional.cadastroEpsi}';
-						                    profissional.tituloProfissional='${profissional.tituloProfissional}';
-						                    profissional.tipoProfissional='${profissional.tipoProfissional}';
-						                    profissional.especialidade='${profissional.especialidade}';
-						                    profissional.temasTrabalho='${profissional.temasTrabalho}';
-						                    profissional.duracaoAtendimento='${profissional.duracaoAtendimento}';
-						                    profissional.biografia='${profissional.biografia}';
-						                    profissional.duracaoAtendimentoValor='${profissional.duracaoAtendimentoValor}';
-						                    profissional.valorConsultaOnline='${profissional.valorConsultaOnline}';
-						                    profissional.valorConsultaPresencial='${profissional.valorConsultaPresencial}';
-						                    profissional.tempoAntecendencia='${profissional.tempoAntecendencia}';
-						                    profissional.tipoConta='${profissional.tipoConta}';
-						                    profissional.banco='${profissional.banco}';
-						                    profissional.agencia='${profissional.agencia}';
-						                    profissional.conta='${profissional.conta}';
-     					                    profissional.digitoVerificador='${profissional.digitoVerificador}';
-						                    profissional.nomeFavorecido='${profissional.nomeFavorecido}';
-										    profissional.convenio40='${profissional.convenio40}';
-										    profissional.convenio50='${profissional.convenio50}';
-										    profissional.convenio60='${profissional.convenio60}';
-										    profissional.pacote2com5Desconto='${profissional.pacote2com5Desconto}';
-										    profissional.pacote3com10Desconto='${profissional.pacote3com10Desconto}';
-										    profissional.pacote4com15Desconto='${profissional.pacote4com15Desconto}';
-										    profissional.primeiraConsultaCortesia='${profissional.primeiraConsultaCortesia}';
-										    profissional.quantidadeConsultaCortesiaMes='${profissional.quantidadeConsultaCortesiaMes}';
-										    profissional.atendimentoPorLibras='${profissional.atendimentoPorLibras}';
-										    profissional.habilitarDesconto40='${profissional.habilitarDesconto40}';
-										    profissional.quantidadeConsultaDesconto40Mes='${profissional.quantidadeConsultaDesconto40Mes}';
-										    profissional.avisoFerias='${profissional.avisoFerias}';
-						                    profissional.pessoa.id='${profissional.pessoa.id}';
-						                    profissional.pessoa.nome='${profissional.pessoa.nome}';
-						                    profissional.pessoa.email='${profissional.pessoa.email}';
-						                    profissional.pessoa.telefone='${profissional.pessoa.telefone}';
-						                    profissional.pessoa.celular='${profissional.pessoa.celular}';
-						                    profissional.pessoa.senha='${profissional.pessoa.senha}';
-						                    profissional.pessoa.dataNascimento='${profissional.pessoa.dataNascimento}';
-						                    profissional.pessoa.cpf='${profissional.pessoa.cpf}';
-						                    profissional.pessoa.cep='${profissional.pessoa.cep}';
-						                    profissional.pessoa.cidade='${profissional.pessoa.cidade}';
-						                    profissional.pessoa.estado='${profissional.pessoa.estado}';
-						                    profissional.pessoa.endereco='${profissional.pessoa.endereco}';
-						                    profissional.pessoa.setor='${profissional.pessoa.setor}';
-						                    profissional.pessoa.foto.id='${profissional.pessoa.foto.id}';
-						                    profissional.pessoa.foto.link='${profissional.pessoa.foto.link}';
-                          					profissional.pessoa.cliente ='${profissional.pessoa.cliente}';
-                         					profissional.pessoa.psicologo ='${profissional.pessoa.psicologo}';
+						                     profissional.documentoCrpCrm='${profissional.documentoCrpCrm}';
+						                     profissional.cadastroEpsi='${profissional.cadastroEpsi}';
+						                     profissional.tituloProfissional='${profissional.tituloProfissional}';
+						                     profissional.tipoProfissional='${profissional.tipoProfissional}';
+						                     profissional.especialidade='${profissional.especialidade}';
+						                     profissional.temasTrabalho='${profissional.temasTrabalho}';
+						                     profissional.duracaoAtendimento='${profissional.duracaoAtendimento}';
+						                     profissional.biografia='${profissional.biografia}';
+						                     profissional.duracaoAtendimentoValor='${profissional.duracaoAtendimentoValor}';
+						                     profissional.valorConsultaOnline='${profissional.valorConsultaOnline}';
+						                     profissional.valorConsultaPresencial='${profissional.valorConsultaPresencial}';
+						                     profissional.tempoAntecendencia='${profissional.tempoAntecendencia}';
+						                     profissional.adolescentes='${profissional.adolescentes}';
+						                     profissional.adultos='${profissional.adultos}';
+						                     profissional.casais='${profissional.casais}';
+						                     profissional.idosos='${profissional.idosos}';
+						                     profissional.tipoConta='${profissional.tipoConta}';
+						                     profissional.banco='${profissional.banco}';
+						                     profissional.agencia='${profissional.agencia}';
+						                     profissional.conta='${profissional.conta}';
+     					                     profissional.digitoVerificador='${profissional.digitoVerificador}';
+						                     profissional.nomeFavorecido='${profissional.nomeFavorecido}';
+										     profissional.convenio40='${profissional.convenio40}';
+										     profissional.convenio50='${profissional.convenio50}';
+										     profissional.convenio60='${profissional.convenio60}';
+										     profissional.pacote2com5Desconto='${profissional.pacote2com5Desconto}';
+										     profissional.pacote3com10Desconto='${profissional.pacote3com10Desconto}';
+										     profissional.pacote4com15Desconto='${profissional.pacote4com15Desconto}';
+										     profissional.primeiraConsultaCortesia='${profissional.primeiraConsultaCortesia}';
+										     profissional.quantidadeConsultaCortesiaMes='${profissional.quantidadeConsultaCortesiaMes}';
+										     profissional.atendimentoPorLibras='${profissional.atendimentoPorLibras}';
+										     profissional.habilitarDesconto40='${profissional.habilitarDesconto40}';
+										     profissional.quantidadeConsultaDesconto40Mes='${profissional.quantidadeConsultaDesconto40Mes}';
+										     profissional.avisoFerias='${profissional.avisoFerias}';
+										     profissional.dataInicioAvisoFerias='${profissional.dataInicioAvisoFerias}';
+										     profissional.dataFimAvisoFerias='${profissional.dataFimAvisoFerias}';
+										     profissional.ativo='${profissional.ativo}';
+										     profissional.plano='${profissional.plano}';
+										     profissional.dataInicioPlano='${profissional.dataInicioPlano}';
+										     profissional.dataFimPlano='${profissional.dataFimPlano}';
+										     profissional.tokenTransacaoPlano='${profissional.tokenTransacaoPlano}';
+										     profissional.idRecebedor='${profissional.idRecebedor}';
+										     profissional.idConta='${profissional.idConta}';
+						                     profissional.pessoa.id='${profissional.pessoa.id}';
+						                     profissional.pessoa.nome='${profissional.pessoa.nome}';
+						                     profissional.pessoa.email='${profissional.pessoa.email}';
+						                     profissional.pessoa.telefone='${profissional.pessoa.telefone}';
+						                     profissional.pessoa.celular='${profissional.pessoa.celular}';
+						                     profissional.pessoa.senha='${profissional.pessoa.senha}';
+						                     profissional.pessoa.dataNascimento='${profissional.pessoa.dataNascimento}';
+						                     profissional.pessoa.cpf='${profissional.pessoa.cpf}';
+						                     profissional.pessoa.cep='${profissional.pessoa.cep}';
+						                     profissional.pessoa.cidade='${profissional.pessoa.cidade}';
+						                     profissional.pessoa.estado='${profissional.pessoa.estado}';
+						                     profissional.pessoa.endereco='${profissional.pessoa.endereco}';
+						                     profissional.pessoa.setor='${profissional.pessoa.setor}';
+						                     profissional.pessoa.foto.id='${profissional.pessoa.foto.id}';
+						                     profissional.pessoa.foto.link='${profissional.pessoa.foto.link}';
+						                     profissional.pessoa.foto.layout='${profissional.pessoa.foto.layout}';
+						                     profissional.pessoa.genero='${profissional.pessoa.genero}';
+                          					 profissional.pessoa.cliente ='${profissional.pessoa.cliente}';
+                         					 profissional.pessoa.psicologo ='${profissional.pessoa.psicologo}';
+                         					 formacaoAcademica ='${formacaoAcademica}';
+                         					 enderecoAtendimento ='';
+                         					descricaoFormacao ='${descricaoFormacao}';
                          					formacaoAcademica ='${formacaoAcademica}';
                          					enderecoAtendimento ='${enderecoAtendimento}';
 						                     "/>
 							<div class="row">
 						          <div class="col-md-12 col-lg-12 col-sm-12">
-						            <div class="col-md-6 col-lg-6 col-sm-12">
+						            <div class="col-md-4 col-lg-4 col-sm-12">
 						              <div class="  form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed">
 						                <label for="nome" class="control-label">Nome</label>
 						                <input type="text" id="nome" ng-model="profissional.pessoa.nome" class="form-control input-group-lg" required/>
@@ -107,6 +125,15 @@
 						                <input type="text" class="form-control" data-mask="00/00/0000"  id="dataAniversario"  ng-model="profissional.pessoa.dataNascimento" ng-blur="">
 						              </div>
 						         	</div>
+						         	 <div class="col-md-2 col-lg-2 col-sm-12">
+                                            <div class="form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed">
+                                                <label class="control-label">Situação</label>
+                                                <select ng-model="profissional.ativo" class="form-control input-group-lg">
+				   							          <option value="true">Ativo</option>
+				   							          <option value="false">Inativo</option>
+									           </select>
+                                            </div>
+                                        </div>
 					       		 </div>
 					       		 
 					       		 <div class="col-md-12 col-lg-12 col-sm-12">
@@ -140,24 +167,6 @@
 						              <div class="  form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed">
 						                <label for="cep" class="control-label">CEP</label>
 						                <input type="Large" id="cep" ng-model="profissional.pessoa.cep" data-mask="00.000-000" class="form-control input-group-lg" required/>
-						              </div>
-						            </div>
-						             <div class="col-md-3 col-lg-3 col-sm-12">
-								        <div class="  form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed">
-								           <label for="endereco" class="control-label">Endereco</label>
-								           <input type="Large" id="endereco" ng-model="profissional.pessoa.endereco" class="form-control input-group-lg" required/>
-								        </div>
-								    </div>
-						            <div class="col-md-3 col-lg-3 col-sm-12">
-						              <div class="  form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed">
-						                <label for="setor" class="control-label">Bairro</label>
-						                <input type="Large" id="setor" ng-model="profissional.pessoa.setor" class="form-control input-group-lg"/>
-						              </div>
-						            </div>
-						            <div class="col-md-3 col-lg-3 col-sm-12">
-						              <div class="form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed">
-						                <label for="cidade" class="control-label">Cidade</label>
-						                <input type="Large" id="cidade" ng-model="profissional.pessoa.cidade" class="form-control input-group-lg"/>
 						              </div>
 						            </div>
 							</div>

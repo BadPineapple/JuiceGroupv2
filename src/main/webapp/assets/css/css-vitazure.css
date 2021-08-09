@@ -181,6 +181,7 @@ footer ul li a.line:after {
     color: #ffffff;
     background: var(--color-primary);
     text-decoration: none;
+    cursor: pointer;
 }
 
 .button-white:hover {
@@ -188,6 +189,7 @@ footer ul li a.line:after {
     background: var(--color-primary);
     border-color: transparent;
     text-decoration: none;
+    cursor: pointer;
 }
 
 .form-highlight select {
@@ -537,16 +539,35 @@ header.active {
     margin-bottom: 2rem;
 }
 
+.funciona.up-photos {
+    justify-content: center;
+}
+
+.funciona.down-photos {
+    justify-content: center;
+}
+
+
 .first-photo {
     width: 25rem;
     height: 33.4rem;
     margin-right: 2rem;
 }
 
+.funciona.first-photo {
+    width: 10rem;
+    height: 14rem;
+}
+
 .second-photo {
     width: 27rem;
     height: 27rem;
     margin-right: 2rem;
+}
+
+.funciona.second-photo {
+    width: 11rem;
+    height: 11rem;
 }
 
 .up-photos img {
@@ -567,10 +588,20 @@ header.active {
     margin-right: 2rem;
 }
 
+.funciona.third-photo {
+    width: 6rem;
+    height: 12rem;
+}
+
 .fourth-photo {
     width: 35.6rem;
     height: 35.6rem;
     margin-right: 2rem;
+}
+
+.funciona.fourth-photo {
+    width: 15rem;
+    height: 15rem;
 }
 
 .down-photos img {
@@ -2707,5 +2738,33 @@ h1.title-gray {
     justify-content: center;
     font-weight: 600;
     margin: 3rem 0 0;
+}
+
+.funciona-text {
+    margin-top: 7rem;
+}
+
+.funciona-text span {
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+    font-weight: 600;
+    font-style: italic;
+}
+
+.painel {
+    display: none !important;
+    transition: all .3s ease-in-out;
+}
+
+.painel-ativo {
+    transition: all .3s ease-in-out;
+}
+
+.buttons-internas > .button-secundary {
+    margin: 0;
+}
+
+.buttons-internas > .button-white {
+    font-weight: 400;
 }
 

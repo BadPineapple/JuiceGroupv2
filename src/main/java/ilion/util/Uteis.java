@@ -22,6 +22,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -172,6 +173,15 @@ public class Uteis {
 
 		simpleDateFormat.applyPattern(pattern);
 		return simpleDateFormat.format(data);
+	}
+	public static String formatarDateTime(DateTime data, String pattern) {
+		if (data == null)
+			return "";
+		
+		String teste = data.toString();
+		Date opa =  converterDataHora(teste, "dd/MM/YYYY");
+		DateTimeFormatter formato = DateTimeFormatter.ofPattern(pattern); 
+		return simpleDateFormat.format(opa);
 	}
 
 	public static Date converterDataHora(String dataString, String pattern) {
@@ -1483,8 +1493,8 @@ public class Uteis {
 
     }
 		simpleDateFormat.applyPattern(pattern);
-		String bosta = simpleDateFormat.format(data);
-		return etaLele.concat(bosta);
+		String convert = simpleDateFormat.format(data);
+		return etaLele.concat(convert);
 	}
 	
 	public static Date converterHoraEmDate(String Hora , String pattern) {
@@ -1557,4 +1567,19 @@ public class Uteis {
 	
 	}
 	
+	public static Date highDateTime(Date date) {
+		Calendar aux = Calendar.getInstance();
+		aux.setTime(date);
+		toOnlyDate(aux); //zera os parametros de hour,min,sec,milisec
+		aux.roll(Calendar.DATE, true); //vai para o dia seguinte
+		aux.roll(Calendar.MILLISECOND, false); //reduz 1 milisegundo
+		return aux.getTime();
+	}
+	
+	public static void toOnlyDate(Calendar date) {
+		date.set(Calendar.HOUR_OF_DAY, 0);
+		date.set(Calendar.MINUTE, 0);
+		date.set(Calendar.SECOND, 0);
+		date.set(Calendar.MILLISECOND, 0);
+		}
 }

@@ -1,3 +1,4 @@
+<%@ include file="/ilionnet/taglibs.jsp"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="pt-BR"> <![endif]-->
@@ -66,7 +67,7 @@
                     <div class="col-12 col-md-6 col-xl-6">
                         <div class="cellphone">
                             <figure>
-                                <img src="images/cellphone.jpg" alt="">
+                                <img src="../assets/images/cellphone.jpg" alt="">
                             </figure>
                         </div>
                     </div>
@@ -77,7 +78,7 @@
     
                             <p>Multiplique sua capacidade de atendimento com a consulta online e alcance qualquer paciente, em qualquer lugar. Sem taxa de mensalidade, com repasse de uma porcentagem do valor da consulta conforme modelo de atendimento: particular, empresas conveniadas ou planos de saúde (valores são abordados apenas no processo de seleção).</p>
     
-                            <a href="#" class="button-secundary">Quero fazer parte!</a>
+                            <a href="<ilion:url/>cadastre-se"" class="button-secundary">Quero fazer parte!</a>
                         </div>
                     </div>
     
@@ -89,17 +90,17 @@
                                 <div class="col-12 col-md-6 col-xl-6">
                                     <div class="vantagens-img">
                                         <figure>
-                                            <img src="images/img-3.jpg" alt="">
+                                            <img src="../assets/images/img-3.jpg" alt="">
                                         </figure>
             
                                         <figure>
-                                            <img src="images/img-5.jpg" alt="">
+                                            <img src="../assets/images/img-5.jpg" alt="">
                                         </figure>
                                     </div>
     
                                     <div class="vantagens-video">
                                         <figure>
-                                            <img src="images/exemplo-video.jpg" alt="">
+                                            <img src="../assets/images/exemplo-video.jpg" alt="">
                                         </figure>
                                     </div>
                                 </div>
@@ -108,7 +109,7 @@
                                     <div class="vantagens-list">
                                         <div class="list">
                                             <span>
-                                                <img src="images/blue-dot.png" alt="">
+                                                <img src="../assets/images/blue-dot.png" alt="">
                                                 Seja Flexível
                                             </span>
         
@@ -117,7 +118,7 @@
                                         
                                         <div class="list">
                                             <span>
-                                                <img src="images/pink-dot.png" alt="">
+                                                <img src="../assets/images/pink-dot.png" alt="">
                                                 Baixo Custo
                                             </span>
         
@@ -126,7 +127,7 @@
     
                                         <div class="list">
                                             <span>
-                                                <img src="images/green-dot.png" alt="">
+                                                <img src="../assets/images/green-dot.png" alt="">
                                                 Seguro
                                             </span>
         

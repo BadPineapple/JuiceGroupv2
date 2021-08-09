@@ -7,6 +7,8 @@ public class HorarioPossivelAtendimento {
 	private String horaPossivelAtendiemnto;
 	private DiasSemanaEnum diaSemanaEnum;
 	private Long codigoProfissional;
+	private String enderecoatendimento;
+	private String linkGoogleMaps;
 	
 	public String getHoraPossivelAtendiemnto() {
 		return horaPossivelAtendiemnto;
@@ -25,6 +27,18 @@ public class HorarioPossivelAtendimento {
 	}
 	public void setCodigoProfissional(Long codigoProfissional) {
 		this.codigoProfissional = codigoProfissional;
+	}
+	public String getEnderecoatendimento() {
+		return enderecoatendimento;
+	}
+	public void setEnderecoatendimento(String enderecoatendimento) {
+		this.enderecoatendimento = enderecoatendimento;
+	}
+	public String getLinkGoogleMaps() {
+		return linkGoogleMaps;
+	}
+	public void setLinkGoogleMaps(String linkGoogleMaps) {
+		this.linkGoogleMaps = linkGoogleMaps;
 	}
 	
 	

@@ -3,6 +3,7 @@ package ilion.vitazure.model;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -39,6 +40,8 @@ public class Agenda {
 	  private Boolean presencial;
 	  
 	  private String urlAtendimentoOnline;
+	 
+	  private String hostUrlAtendimentoOnline;
 	  
 	  @Enumerated(EnumType.STRING)
 	  private StatusEnum status;
@@ -50,6 +53,8 @@ public class Agenda {
 	  private String horaFinalAtendimento;
 
 	  private String tokenTransacaoPagamentoConsulta;
+	  
+	  private Integer idTransacao;
 
 	  public Long getId() {
 			if (id == null) {
@@ -127,7 +132,7 @@ public class Agenda {
 	
 		public StatusEnum getStatus() {
 			if (status == null) {
-				status = StatusEnum.ANDAMENTO;
+				status = StatusEnum.PENDENTE;
 			}
 			return status;
 		}
@@ -190,7 +195,24 @@ public class Agenda {
 		public void setTokenTransacaoPagamentoConsulta(String tokenTransacaoPagamentoConsulta) {
 			this.tokenTransacaoPagamentoConsulta = tokenTransacaoPagamentoConsulta;
 		}
+
+		public Integer getIdTransacao() {
+			return idTransacao;
+		}
+
+		public void setIdTransacao(Integer idTransacao) {
+			this.idTransacao = idTransacao;
+		}
+
+		public String getHostUrlAtendimentoOnline() {
+			return hostUrlAtendimentoOnline;
+		}
+
+		public void setHostUrlAtendimentoOnline(String hostUrlAtendimentoOnline) {
+			this.hostUrlAtendimentoOnline = hostUrlAtendimentoOnline;
+		}
 	  
+		
 		
 	   
 }

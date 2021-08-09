@@ -42,7 +42,7 @@ function chamada (valor, item, id) {
 				customerData: 'true',
 				createToken: 'true',
 				postbackUrl: 'https://www.vitazure.com.br/api/v1/retornoPagarMe',
-				paymentMethods: 'credit_card,pix',
+				paymentMethods: 'credit_card',
 				uiColor: '#0097D6',
 				boletoDiscountPercentage: 0,
 				boletoExpirationDate: '12/12/2021',

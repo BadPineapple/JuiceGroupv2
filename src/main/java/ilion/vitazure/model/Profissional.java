@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -133,11 +134,17 @@ public class Profissional implements Serializable{
 	  
 	  private String tokenTransacaoPlano;
 	  
+	  private Integer idTransacao;
+	  
 	  @Transient
 	  List<Date> datasPossivelAgendamento;
 	  
 	  @Transient
 	  List<HorarioPossivelAtendimento> horarioPossivelAtendimento;
+	  
+	  private String dataInicioAvisoFerias;
+
+	  private String dataFimAvisoFerias;
 	  
 
 	public Long getId() {
@@ -554,6 +561,40 @@ public class Profissional implements Serializable{
 	public void setTokenTransacaoPlano(String tokenTransacaoPlano) {
 		this.tokenTransacaoPlano = tokenTransacaoPlano;
 	}
+
+	public Integer getIdTransacao() {
+		return idTransacao;
+	}
+
+	public void setIdTransacao(Integer idTransacao) {
+		this.idTransacao = idTransacao;
+	}
 	 
+	public String getBiografiaApresentar() {
+		if (getBiografia().length() >= 200) {
+			String retorno = getBiografia().substring(0, 200);
+			return retorno.concat(" ...");
+		}
+		return getBiografia();
+	}
+
+	public String getDataInicioAvisoFerias() {
+		return dataInicioAvisoFerias;
+	}
+
+	public void setDataInicioAvisoFerias(String dataInicioAvisoFerias) {
+		this.dataInicioAvisoFerias = dataInicioAvisoFerias;
+	}
+
+	public String getDataFimAvisoFerias() {
+		return dataFimAvisoFerias;
+	}
+
+	public void setDataFimAvisoFerias(String dataFimAvisoFerias) {
+		this.dataFimAvisoFerias = dataFimAvisoFerias;
+	}
 	
+	public String getPlanoApresentar() {
+	  return getPlano().equals("plano_mensal") ? "Mensal" : getPlano().equals("plano_semestral") ? "Semestral" :  "Anual";
+	}
 }

@@ -1,10 +1,13 @@
 package ilion.vitazure.negocio;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Disjunction;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.Subqueries;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -93,6 +96,22 @@ public class ProfissionalNegocio {
 
 		return notificacaos;
 
+	}
+	
+	public List<Profissional> consultarProfissionaisAtivos() {
+		
+		DetachedCriteria subquery = DetachedCriteria.forClass(Profissional.class);
+		subquery.add( Restrictions.eq("avisoFerias", Boolean.TRUE)).add(Restrictions.ge("dataInicioAvisoFerias", Uteis.formatarDataHora(new Date(), "dd/MM/YYY")))
+		.add(Restrictions.le("dataFimAvisoFerias", Uteis.formatarDataHora(new Date(), "dd/MM/YYY")));
+		subquery.setProjection(Projections.property("id"));
+		List list =  hibernateUtil.list(subquery);
+		System.out.println("____________________________________________________________________________");
+		DetachedCriteria dc = DetachedCriteria.forClass(Profissional.class);
+		dc.add(Restrictions.eq("ativo", Boolean.TRUE));
+        if (!list.isEmpty()) {
+        	dc.add(Restrictions.not(Restrictions.in("id", list)));
+		}
+		return (List<Profissional>) hibernateUtil.list(dc);
 	}
 	
 }

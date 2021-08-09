@@ -20,6 +20,14 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.google.gson.Gson;
 
+import ilion.admin.negocio.PropEnum;
+import ilion.admin.negocio.PropNegocio;
+import ilion.admin.negocio.Usuario;
+import ilion.me.pagar.exception.PagarMeException;
+import ilion.me.pagar.model.PagarMe;
+import ilion.me.pagar.model.Transaction;
+import ilion.util.VLHForm;
+import ilion.util.ValueListInfo;
 import ilion.util.contexto.autorizacao.PessoaLogada;
 import ilion.vitazure.enumeradores.BancoEnum;
 import ilion.vitazure.enumeradores.DiasSemanaEnum;
@@ -36,6 +44,7 @@ import ilion.vitazure.model.EnderecoAtendimento;
 import ilion.vitazure.model.Especialidade;
 import ilion.vitazure.model.FormacaoAcademica;
 import ilion.vitazure.model.HorarioAtendimento;
+import ilion.vitazure.model.PagamentoPagarMe;
 import ilion.vitazure.model.Pessoa;
 import ilion.vitazure.model.Profissional;
 import ilion.vitazure.model.TemaTrabalho;
@@ -44,9 +53,11 @@ import ilion.vitazure.negocio.EnderecoNegocio;
 import ilion.vitazure.negocio.EspecialidadeNegocio;
 import ilion.vitazure.negocio.FormacaoAcademicaNegocio;
 import ilion.vitazure.negocio.HorarioAtendimentoNegocio;
+import ilion.vitazure.negocio.PagarMeNegocio;
 import ilion.vitazure.negocio.PessoaNegocio;
 import ilion.vitazure.negocio.ProfissionalNegocio;
 import ilion.vitazure.negocio.TemaAtendimentoNegocio;
+import net.mlw.vlh.ValueList;
 
 @Controller
 @SessionAttributes("usuario")
@@ -76,6 +87,12 @@ public class VitazureController {
 	
 	@Autowired
 	private AgendaNegocio agendaNegocio;
+	
+	@Autowired
+	private PropNegocio propNegocio;
+	
+	@Autowired
+	private PagarMeNegocio pagarMeNegocio;
 	
 	private Gson gson = new Gson();
 
@@ -178,13 +195,15 @@ public class VitazureController {
 			
 			return "/ilionnet2/vitazure/completar-cadastro";
 			
-		}
-	 @GetMapping("/vitazure/lista-de-consultas")
+	 }
+	 @RequestMapping("/vitazure/lista-de-consultas")
 	 public String listaConsulta(ModelMap modelMap, HttpServletRequest request) {
 		 Pessoa pessoa = (Pessoa) request.getSession().getAttribute("pessoaSessao");
 		 modelMap.addAttribute("pessoa", pessoa);
-		 List<Agenda> listAgendas = new ArrayList<Agenda>();
-		 listAgendas.addAll(agendaNegocio.consultarAgenda(pessoa));
+		 VLHForm vlhForm = VLHForm.getVLHSession("agendaLista", request);
+		 vlhForm.setPagingNumberPer(10);
+		 ValueList listAgendas = agendaNegocio.buscar(vlhForm, new ValueListInfo(vlhForm) , null,pessoa);
+		 request.setAttribute("vlhForm", vlhForm);
 		 request.setAttribute("listAgendas", listAgendas);
 		 if (pessoa.getCliente()) {
 			 return "/ilionnet2/vitazure/lista-de-consultas-paciente";
@@ -207,4 +226,37 @@ public class VitazureController {
 			return "/ilionnet2/vitazure/assinatura";
 		}
 	
+	  @GetMapping("/vitazure/consultaTrasacoes")
+	  public String consultaTransacoes(ModelMap modelMap,HttpServletRequest request) {
+	    Pessoa pessoa = (Pessoa) request.getSession().getAttribute("pessoaSessao");
+	    List<PagamentoPagarMe> listPagamentos = new ArrayList<PagamentoPagarMe>();
+	    listPagamentos.addAll(pagarMeNegocio.consultarPagamentoPagarMe(pessoa.getId(), pessoa.getPsicologo()));
+	    modelMap.addAttribute("pessoa", pessoa);
+	    request.setAttribute("listPagamentos", listPagamentos);
+	    if (pessoa.getPsicologo()) {
+	    	return "/ilionnet2/vitazure/historicoPagamento_profissional";    
+		}
+	    return "/ilionnet2/vitazure/historicoPagamento_cliente";    
+	  }
+	  
+	  @GetMapping("/vitazure/minhaAssinatura")
+		public String meuPlano(ModelMap modelMap, HttpServletRequest request) {
+			Pessoa pessoa = (Pessoa) request.getSession().getAttribute("pessoaSessao");
+			Profissional profissional = new Profissional();
+			profissional = profissionalNegocio.consultarPorPessoa(pessoa.getId());
+			modelMap.addAttribute("pessoa", pessoa);
+			modelMap.addAttribute("profissional", profissional);
+			return "/ilionnet2/vitazure/minhaAssinatura";
+			
+		}
+	  @GetMapping("/vitazure/alteraMinhaAssinatura")
+	  public String alteraMinhaAssinatura(ModelMap modelMap, HttpServletRequest request) {
+		  Pessoa pessoa = (Pessoa) request.getSession().getAttribute("pessoaSessao");
+		  Profissional profissional = new Profissional();
+		  profissional = profissionalNegocio.consultarPorPessoa(pessoa.getId());
+		  modelMap.addAttribute("pessoa", pessoa);
+		  modelMap.addAttribute("profissional", profissional);
+		  return "/ilionnet2/vitazure/assinatura";
+		  
+	  }
 }

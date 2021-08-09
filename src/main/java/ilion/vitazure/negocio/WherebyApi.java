@@ -13,6 +13,8 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +29,7 @@ public class WherebyApi {
 	 @Autowired
 	 private PropNegocio propNegocio;
 
-	public String gerarLinkAtendimentoOnline(Profissional profissional , Agenda agenda) {
+	public void gerarLinkAtendimentoOnline(Profissional profissional , Agenda agenda) throws JSONException {
 		
 		HttpClient httpClient = HttpClientBuilder.create().build();
 		String API_KEY = propNegocio.findValueById(PropEnum.API_KEY_WHEREBY);
@@ -45,11 +47,11 @@ public class WherebyApi {
 
 		try {
 			HttpPost requestJson = new HttpPost(URL_API);
-
-			StringEntity params = new StringEntity("{\"isLocked\": true, \"startDate\": \"" + startDate + "T" + startHour + ".000Z" + "\", \"endDate\": " +
-							" \"" + endDate + "T" + endHour + ".000Z" + "\"," +
-							" \"fields\": [\"https://vitazure.whereby.com/\"]}");
-
+			
+			StringEntity params = new StringEntity("{\"roomNamePattern\": \"human-short\", \"startDate\": \"" + startDate + "T" + startHour + ".000Z" + "\", \"endDate\": " +
+					" \"" + endDate + "T" + endHour + ".000Z" + "\"," +
+					" \"fields\": [\"hostRoomUrl\"]}");
+			
 			requestJson.addHeader("authorization", "Bearer " + API_KEY);
 			requestJson.addHeader("content-type", "application/json");
 			requestJson.setEntity(params);
@@ -57,16 +59,17 @@ public class WherebyApi {
 			HttpResponse responseJson = httpClient.execute(requestJson); //Possíveis retornos "200" OK "401" Autenticação incorreta
 
 			String responseString = EntityUtils.toString(responseJson.getEntity());
-
-			String iframeSource = responseString.substring(responseString.indexOf("https:"), responseString.lastIndexOf("\",")); //Pega a url da resposta
-			String configuracaoSalaAtendimento = "?embed&logo=on";
-			String meetingId = responseString.substring(responseString.indexOf("Id\":\"") + 5, responseString.lastIndexOf("}") -1); //Pega a url da resposta
 			
-			agenda.setUrlAtendimentoOnline(iframeSource.concat(configuracaoSalaAtendimento));
-			agenda.setMeetingId(meetingId);
-			agenda.setHoraFinalAtendimento(endHour);
-			return iframeSource;
-
+			if (responseJson.getStatusLine().getStatusCode() == 201) {
+				JSONObject json = new JSONObject(responseString);
+				String configuracaoSalaAtendimento = "?embed&logo=on";
+				String roomUrl = json.get("roomUrl").toString();
+				String roomHostUrl = json.get("hostRoomUrl").toString();
+				agenda.setUrlAtendimentoOnline(roomUrl.concat(configuracaoSalaAtendimento));
+				agenda.setHostUrlAtendimentoOnline(roomHostUrl.concat(configuracaoSalaAtendimento));
+				agenda.setMeetingId(json.get("meetingId").toString());
+				agenda.setHoraFinalAtendimento(endHour);
+			}
 
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();
@@ -74,7 +77,6 @@ public class WherebyApi {
 			e.printStackTrace();
 		}
 
-		return "";
 	}
 	
 	

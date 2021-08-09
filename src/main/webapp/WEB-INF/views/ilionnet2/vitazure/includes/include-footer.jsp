@@ -11,15 +11,15 @@
 
                 <div class="footer-up-menu">
                     <ul>
-                        <li><a href="index.jsp" class="line">Home</a></li>
+                        <li><a href="https://www.vitazure.com.br/home" class="line">Home</a></li>
 
-                        <li><a href="como-funcionas.jsp" class="line">Como funciona</a></li>
+                        <li><a href="https://www.vitazure.com.br/como-funciona" class="line">Como funciona</a></li>
 
-                        <li><a href="aqui-e-para-voce.jsp" class="line">Aqui � pra voc�</a></li>
+                        <li><a href="https://www.vitazure.com.br/aqui-e-para-voce" class="line">Aqui &eacute; pra voc&ecirc;</a></li>
 
-                        <li><a href="sou-profissional.jsp" class="line">Sou psic�logo</a></li>
+                        <li><a href="https://www.vitazure.com.br/sou-profissional" class="line">Sou profissional</a></li>
 
-                        <li><a href="para-sua-empresa.jsp" class="line">Para sua empresa</a></li>
+                        <li><a href="https://www.vitazure.com.br/para-sua-empresa" class="line">Aqui &eacute; para sua empresa</a></li>
 
                         <li><a href="#" class="line">Entre em contato</a></li>
                     </ul>
@@ -27,37 +27,37 @@
 
                 <div class="footer-down-menu">
                     <ul>
-                        <li><a href="#" class="line">Pol�tica de cancelamento</a></li>
+                        <li><a href="#" class="line">Pol&iacute;tica de cancelamento</a></li>
 
-                        <li><a href="#" class="line">Pol�tica de privacidade</a></li>
+                        <li><a href="#" class="line">Pol&iacute;tica de privacidade</a></li>
 
                         <li><a href="#" class="line">Termos de uso</a></li>
 
-                        <li><a href="#" class="line">C�digo de �tica</a></li>
+                        <li><a href="#" class="line">C&oacute;digo de &eacute;tica</a></li>
                     </ul>
                 </div>
             </div>
 
             <div class="col-12">
                 <div class="copyright">
-                    <p>� 2021. Todos os direitos reservados.</p>
+                    <p>&copy; 2021. Todos os direitos reservados.</p>
 
                     <div class="redes-sociais">
-                        <a href="#">
+                        <a href="http://instagram.com/vitazure" target="_blank">
                             <figure>
                                 <img src="../../assets/images/instagram.png" alt="">
                             </figure>
                         </a>
 
-                        <a href="#">
+                        <a href="http://blog.vitazure.com.br/" target="_blank">
                             <figure>
-                                <img src="../../assets/images/twitter.png" alt="">
+                                <img src="../../assets/images/icon-blog.png" alt="">
                             </figure>
                         </a>
 
-                        <a href="#">
+                        <a href="https://www.youtube.com/channel/vitazure" target="_blank">
                             <figure>
-                                <img src="../../assets/images/youtube.png" alt="">
+                                <img src="../../assets/images/youtube.png" alt="" style="width: 30px">
                             </figure>
                         </a>
                     </div>
@@ -72,9 +72,9 @@
     
         <li><a href="<ilion:url/>home">Home</a></li>
         <li><a href="<ilion:url/>como-funciona" class="line">Como funciona</a></li>
-        <li><a href="<ilion:url/>aqui-e-para-voce" class="line">Aqui � para voc�</a></li>
+        <li><a href="<ilion:url/>aqui-e-para-voce" class="line">Aqui &eacute; pra voc&ecirc;</a></li>
         <li><a href="<ilion:url/>sou-profissional" class="line">Sou Profissional</a></li>
-        <li><a href="<ilion:url/>para-sua-empresa" class="line">Para sua empresa</a></li>
+        <li><a href="<ilion:url/>para-sua-empresa" class="line">Aqui &eacute; para sua empresa</a></li>
         <c:if test="${pessoa == null}">
          <li><a href="<ilion:url/>entrar">Entrar</a></li>
          <li><a href="<ilion:url/>cadastre-se">Crie sua conta</a></li>
@@ -110,13 +110,9 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-<<<<<<< HEAD
 <script src="../../assets/js/calendario.js"></script>
-=======
-<script src="../assets/js/calendario.js"></script>
 <script src="https://assets.pagar.me/checkout/1.1.0/checkout.js"></script>
-<script src="../assets/js/pagar-me.js"></script>
->>>>>>> 916c9ae55ed0e23f5f5ddc023322c3acd6c037d8
+<script src="../../assets/js/pagar-me.js"></script>
     
 <script>
     Mmenu.configs.offCanvas.page.selector = "#app";

@@ -32,6 +32,9 @@ function agendamentoController($scope, $http, $window) {
      $scope.definirAgendamento = function (idAgenda, situacaoAlterar) {
         definirAgendamento($scope, $http, $window , idAgenda, situacaoAlterar);
     };
+     $scope.consultarAgenda = function () {
+        consultarAgenda($scope, $http, $window);
+    };
 }
 
 function consultarDatasProfissional($scope, $http, $window , id , profissional) {
@@ -47,7 +50,12 @@ function consultarDatasProfissional($scope, $http, $window , id , profissional) 
         .then(function (response) {
 	           var idExcluir = "#panelFiltrosSelecionados"+profissional+" a";
            		$(idExcluir).remove();
-	                horariosDisponiveisAtendimento = new Array();
+	            horariosDisponiveisAtendimento = new Array();
+                 horariosDisponiveisAtendimento = new Array();
+			   var enderecoProfissional = "#enderecoProfissional"+profissional+" strong";
+		       var enderecoLinkLocaliazacaoProfissional = "#enderecoLinkLocaliazacaoProfissional"+profissional +" a";
+		       $(enderecoProfissional).remove();
+		       $(enderecoLinkLocaliazacaoProfissional).remove();
            		 for (var i = 0; i < response.data.length; i++) {
            		    horariosDisponiveisAtendimento.push(response.data[i]);
     			}
@@ -62,7 +70,7 @@ function AdicionarHorariosDisponiveis(item, indice){
 	    var idIncluir = "#panelFiltrosSelecionados"+item.codigoProfissional;
         var idHora = indice+"/"+item.codigoProfissional;
 		$(idIncluir).append(
-			"<a type='text' id='"+idHora+"'  onclick='selecionarHora("+indice+","+item.codigoProfissional+" )' class='line' style='background: #B8DFED;border-radius: 10px;text-align: center; margin: 10px 10px;transition: all .3s ease-in-out;padding: 5px; width: 74px;font-size: 1.6rem;line-height: 2rem;font-weight: 700;'>"+
+			"<a type='text' id='"+idHora+"'  onclick='selecionarHora("+indice+","+item.codigoProfissional+" )' class='line' style='cursor: pointer;background: #B8DFED;border-radius: 10px;text-align: center; margin: 10px 10px;transition: all .3s ease-in-out;padding: 5px; width: 74px;font-size: 1.6rem;line-height: 2rem;font-weight: 700;'>"+
 			  item.horaPossivelAtendiemnto+
 			"</a>"
 			);	
@@ -75,16 +83,39 @@ function selecionarHora(id , codigoProfissional){
 	  document.getElementById(idTempSelecionado).style = "background: #B8DFED;border-radius: 10px;text-align: center; margin: 10px 10px;transition: all .3s ease-in-out;padding: 5px; width: 74px;font-size: 1.6rem;line-height: 2rem;font-weight: 700;";
 	} 
 	 idHoraTemp = id;
-      idTempSelecionado = idHora;
+     idTempSelecionado = idHora;
+      var enderecoProfissional = "#enderecoProfissional"+codigoProfissional+" strong";
+      var enderecoLinkLocaliazacaoProfissional = "#enderecoLinkLocaliazacaoProfissional"+codigoProfissional +" a";
+      $(enderecoProfissional).remove();
+      $(enderecoLinkLocaliazacaoProfissional).remove();
+	for (var i = 0; i < horariosDisponiveisAtendimento.length; i++) {
+        if(id == i){
+	       var enderecoProfissional = "#enderecoProfissional"+codigoProfissional;
+	       $(enderecoProfissional).append(
+	          "<strong style='font-size: 15px;'>"+horariosDisponiveisAtendimento[i].enderecoatendimento+"</strong>"
+			);
+		   var enderecoLinkLocaliazacaoProfissional = "#enderecoLinkLocaliazacaoProfissional"+codigoProfissional;		
+	       $(enderecoLinkLocaliazacaoProfissional).append(
+	          "<a href='"+horariosDisponiveisAtendimento[i].linkGoogleMaps+"' target='_blank' class='localizacao line'>"+
+	             "<img src='../../assets/images/localizacao.png'>"+
+	             "Confira localização no Mapa "+
+	           "</a>"
+			);	
+        }
+    }
 };
 
 function marcardesmarcar(idProfissional,id) {
 	if(id == 'online'){
   		 document.getElementById(idProfissional+'.online').className = "active marcar"
          document.getElementById(idProfissional+'.presencial').className = ""
+         document.getElementById(idProfissional+'.valorOnline').style.display = "inline-block";
+		document.getElementById(idProfissional+'.valorPresencial').style.display = "none";
 	}else{
 		 document.getElementById(idProfissional+'.online').className = ""
          document.getElementById(idProfissional+'.presencial').className = "active marcar"
+		 document.getElementById(idProfissional+'.valorOnline').style.display = "none";
+		 document.getElementById(idProfissional+'.valorPresencial').style.display = "inline-block";
 	}
 	
 	tipoAgendamento = id;
@@ -118,7 +149,7 @@ function efetuarPagamento($scope, $http, $window , id ,valorOnline ,valorPresenc
     var confirma = 0;
     var tipoAtendimento  = tipoAgendamento;
     $.ajax({
-        url: 'api/v1/getencryption',
+        url: '../api/v1/getencryption',
         type: 'GET',
         contentType: 'text/plain',
         error: function (data, textStatus, xhr) {
@@ -151,7 +182,7 @@ function efetuarPagamento($scope, $http, $window , id ,valorOnline ,valorPresenc
 				customerData: 'true',
 				createToken: 'true',
 				postbackUrl: 'https://www.vitazure.com.br/api/v1/retornoPagarMe',
-				paymentMethods: 'credit_card,pix',
+				paymentMethods: 'credit_card',
 				uiColor: '#0097D6',
 				boletoDiscountPercentage: 0,
 				boletoExpirationDate: '12/12/2021',
@@ -182,3 +213,13 @@ $http.post("/vitazure/alterarSituacaoAgenda" , jsonAlterar)
         alert_error(response.data.message);
     })
 }
+
+function consultarAgenda($scope, $http, $window) {
+	
+	$http.get("/vitazure/consultarDatasProfissional/"+id+"/"+profissional)
+        .then(function (response) {
+        }).catch(function (response) {
+          alert(response);
+    })
+}
+

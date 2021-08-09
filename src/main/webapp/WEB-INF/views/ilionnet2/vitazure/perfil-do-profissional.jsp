@@ -22,20 +22,25 @@
                                         <figure>
                                             <img src="${profissional.pessoa.foto.imagemApresentar == null ? '../assets/images/perfil.png' : profissional.pessoa.foto.link}" alt="">
                                         </figure>
-                                        <div class="valor-consulta">
-                                            <p>R$<span>${profissional.valorConsultaOnline}</span></p>
-                                        </div>
-                                        <div class="tempo-consulta">
-                                            <p>50 min</p>
-
-                                            <p style="font-size: 1.8rem;">${profissional.pessoa.cidade} - ${profissional.pessoa.estado}</p>
-                                        </div>
-                                        <div class="compartilhar-perfil">
-                                            <a href="#" class="line">
-                                                <img src="../../assets/images/compartilhar.png" alt="">
-                                                Compartilhar Perfil
-                                            </a>
-                                        </div>
+                                        <div class="valor-consulta" id="${profissional.id}.valorOnline" style="display:none;">
+												<p>
+													R$<span>${profissional.valorConsultaOnline}</span>
+												</p>
+											</div>
+											<div class="valor-consulta" id="${profissional.id}.valorPresencial">
+												<p>
+													R$<span>${profissional.valorConsultaPresencial}</span>
+												</p>
+											</div>
+											<div class="tempo-consulta">
+												<p>${profissional.duracaoAtendimento.nomeApresentar}</p>
+											</div>
+<!--                                         <div class="compartilhar-perfil"> -->
+<!--                                             <a href="#" class="line"> -->
+<!--                                                 <img src="../../assets/images/compartilhar.png" alt=""> -->
+<!--                                                 Compartilhar Perfil -->
+<!--                                             </a> -->
+<!--                                         </div> -->
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-4 col-xl-5">
@@ -95,13 +100,11 @@
 										<div class="horarios-disponiveis">
 											<div class="menu d-none d-md-block" layout="block" id="panelFiltrosSelecionados${profissional.id}">
 											</div>
-											 <strong>Rua Expedicionário Lellis, 1500 - Centro,<br/> Sertãozinho - SP, 14160-750</strong>
-
-                                        <a href="https://goo.gl/maps/eMWSQnXSzewP1TxW8" target="_blank" class="localizacao line">
-                                            <img src="../../assets/images/localizacao.png" alt="">
-                                            Confira localização no Mapa
-                                        </a>
-											<a href="#" ng-click="agendar('${profissional.id}')"  class="button-secundary">Agendar consulta</a>
+											<div id="enderecoProfissional${profissional.id}" class="col-12" style="padding-top: 15px;">
+											</div>
+											<div id="enderecoLinkLocaliazacaoProfissional${profissional.id}" class="col-12" style="padding-top: 10px;">
+											</div>
+											<a href="#" ng-click="efetuarPagamento('${profissional.id}' , '${profissional.valorConsultaOnline}' , '${profissional.valorConsultaPresencial}')" class="button-secundary">Agendar consulta</a>
 										</div>
                                 </div>
                             </div>

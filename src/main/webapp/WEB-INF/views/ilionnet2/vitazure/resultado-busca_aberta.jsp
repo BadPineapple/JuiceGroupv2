@@ -10,8 +10,6 @@
 <body id="index" class="home">
 	<div id="app">
 		<jsp:include page="includes/include-header-internas.jsp" flush="true" />
-		<jsp:include page="includes/include-menu-painel.jsp" flush="true" />
-		<jsp:include page="includes/include-painel-person.jsp" flush="true" />
 		<div class="area-white">
 			<div class="container">
 				<angular-initializer ng-init="online='true';idTemp = ''; agenda = '';" />
@@ -56,7 +54,7 @@
 										<div class="psicologo-description">
 											<strong>Sobre min:</strong>
 											<p >${profissional.biografiaApresentar}</p>
-											<a href="<ilion:url/>vitazure/perfil-do-profissional/${profissional.id}" class="button-perfil">Perfil Completo</a>
+<%-- 											<a href="<ilion:url/>vitazure/perfil-do-profissional/${profissional.id}" class="button-perfil">Perfil Completo</a> --%>
 										</div>
 									</div>
 
@@ -88,7 +86,7 @@
 											</div>
 											<div id="enderecoLinkLocaliazacaoProfissional${profissional.id}" class="col-12" style="padding-top: 10px;">
 											</div>
-											<a href="#" ng-click="efetuarPagamento('${profissional.id}' , '${profissional.valorConsultaOnline}' , '${profissional.valorConsultaPresencial}')" class="button-secundary">Agendar consulta</a>
+											<a href="<ilion:url/>entrar" class="button-secundary">Agendar consulta</a>
 										</div>
 									</div>
 								</div>

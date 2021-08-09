@@ -15,7 +15,7 @@
      <i class="far fa-calendar-alt" style="font-size: 25px;"></i>
     </i>
 
-    <span class="media-body">Agenda</span>
+    <span class="media-body">Agendamentos</span>
 
    </a>
 
@@ -32,7 +32,21 @@
 
    </a>
 
-  </li>  
+</li>  
+
+<li>
+
+   <a class="pmd-ripple-effect" href="<ilion:url/>movimentacoes">
+
+    <i class="media-left media-middle">
+     <i class="far fa-file-alt" style="font-size: 25px;"></i>
+    </i>
+
+    <span class="media-body">Movimentações</span>
+
+   </a>
+
+</li> 
   
 <li>
 
