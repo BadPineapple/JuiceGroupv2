@@ -27,7 +27,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12  col-md-9 offset-md-3 col-xl-9 offset-xl-3">
-                        <h2 class="title-gray">Aumente a produtividade e a qualidade de vida de seus funcionários e/ou beneficiários.</h2>
+                        <h2 class="title-gray">Eleve a produtividade e a qualidade de vida de seus colaboradores.</h2>
 
                         <div class="sou-profissional-button">
                             <a href="#" class="button-secundary button-consulta">Quero saber mais.</a>
