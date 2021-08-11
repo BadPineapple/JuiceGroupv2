@@ -3,6 +3,7 @@ package ilion.vitazure.negocio;
 import ilion.me.pagar.BankAccountType;
 import ilion.me.pagar.RecipientStatus;
 import ilion.me.pagar.model.*;
+import ilion.me.pagar.model.Recipient.TransferInterval;
 import ilion.util.Uteis;
 import ilion.util.VLHForm;
 import ilion.util.ValueListInfo;
@@ -158,7 +159,11 @@ public class PagarMeNegocio {
     PagarMe.init(propNegocio.findValueById(PropEnum.PAGAR_ME_API_KEY));
 
     try {
-      return new Recipient().find(profissional.getIdRecebedor());
+	    if (profissional.getIdRecebedor() != null || profissional.getIdRecebedor().equals("")) {
+	    	return new Recipient();
+		}else {
+			return new Recipient().find(profissional.getIdRecebedor());
+		}
     }
     catch(PagarMeException e) {
       return new Recipient();
@@ -336,6 +341,7 @@ public class PagarMeNegocio {
 		if (profissional) {
 			Profissional prof = profissionalNegocio.consultarPorPessoa(codigoPessoa);
 			dc.add(Restrictions.eq("idProfissional", prof.getId()));
+			dc.add(Restrictions.isNotNull("agenda"));
 		}else {
 			dc.add(Restrictions.eq("idPaciente", codigoPessoa));	
 		}

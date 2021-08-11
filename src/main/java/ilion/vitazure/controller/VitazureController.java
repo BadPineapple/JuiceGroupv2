@@ -196,6 +196,7 @@ public class VitazureController {
 			return "/ilionnet2/vitazure/completar-cadastro";
 			
 	 }
+	
 	 @RequestMapping("/vitazure/lista-de-consultas")
 	 public String listaConsulta(ModelMap modelMap, HttpServletRequest request) {
 		 Pessoa pessoa = (Pessoa) request.getSession().getAttribute("pessoaSessao");

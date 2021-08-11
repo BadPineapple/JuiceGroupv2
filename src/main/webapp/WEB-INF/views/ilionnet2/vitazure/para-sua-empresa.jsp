@@ -1,20 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ include file="/ilionnet/taglibs.jsp"%>
 <!doctype html>
-<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="pt-BR"> <![endif]-->
-<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="pt-BR" <![endif]-->
-<!--[if IE 8]>    <html class="no-js lt-ie9" lang="pt-BR"> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js" lang="pt-BR">
-<!--<![endif]-->
+<html class="no-js" lang="pt-BR" ng-app="contatoApp" ng-controller="ContatoController">
 
 <head>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-	<meta name="author" content="Ilion" />
-	
-	<title>Vitazure</title>
-	
 	<jsp:include page="includes/include-head.jsp" flush="true" />
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>	
+	<script src="../assets/js/vitazure/contatoForm.js"></script>
 	
 </head>
 
@@ -61,38 +53,38 @@
                     </div>
 
                     <div class="col-12  col-md-6 col-xl-6">
-                        <form class="form-default">
+                        <form class="form-default"  ng-submit="submit()"  id="contatoApp">
                             <div class="row">
                                 <div class="col-12">
                                     <div class="input-block">
                                         <label>Nome</label>
-                                        <input type="text" placeholder="Nome" required />
+                                        <input type="text" ng-model="contato.nome" placeholder="Nome" required />
                                     </div>
                                 </div>
 
                                 <div class="col-12">
                                     <div class="input-block">
                                         <label>E-mail</label>
-                                        <input type="text" placeholder="E-mail" required />
+                                        <input type="text" ng-model="contato.email" placeholder="E-mail" required />
                                     </div>
                                 </div>
 
                                 <div class="col-12">
                                     <div class="input-block">
                                         <label>Telefone</label>
-                                        <input type="text" placeholder="55 (00) 0000-0000" required />
+                                        <input type="text" ng-model="contato.telefone" data-mask="(00)0000-0000" placeholder="(00) 0000-0000" required />
                                     </div>
                                 </div>
 
                                 <div class="col-12">
                                     <div class="input-block">
                                         <label>Mensagem</label>
-                                        <textarea cols="20" rows="5" placeholder="Informe seu texto aqui."></textarea>
+                                        <textarea cols="20" rows="5" ng-model="contato.mensagem" placeholder="Informe seu texto aqui."></textarea>
                                     </div>
                                 </div>
 
                                 <div class="col-12">
-                                    <button class="button-secundary" style="font-size: 1.6rem;">Enviar mensagem</button>
+                                    <button class="button-secundary" type="submit" style="font-size: 1.6rem;">Enviar mensagem</button>
                                 </div>
                             </div>
                         </form>
@@ -108,6 +100,31 @@
         </div>
 
         <jsp:include page="includes/include-footer.jsp" flush="true" />
+         <script src="../assets/js/bundle.libs.ilionnet.js"></script>
+			<script src="../assets/js/bundle.scripts.ilionnet.js"></script>
+			<script src="../assets/js/bundle.libs.angular.js"></script>
+            
+            <c:if test="${param.m == 'ok'}">
+	<button 
+		type="button" 
+		data-positionX="right" 
+		data-positionY="top" 
+		data-effect="fadeInUp" 
+		data-message="Dados gravados com sucesso."
+		data-type="success" 
+		class="btn pmd-ripple-effect btn-success pmd-z-depth pmd-alert-toggle"
+		id="alertSucess"
+		style="display:none;">
+		Sucesso
+	</button>
+	<script type="text/javascript">
+		(function() {
+			setTimeout(function() {
+				$('#alertSucess').click();
+			}, 300);
+		})();
+	</script>
+</c:if>
     </div>
 </body>
 </html>

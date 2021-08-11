@@ -1,7 +1,7 @@
 function chamada (valor, item, id) {
     var confirma = 0;
     $.ajax({
-        url: 'api/v1/getencryption',
+        url: '/api/v1/getencryption',
         type: 'GET',
         contentType: 'text/plain',
         error: function (data, textStatus, xhr) {

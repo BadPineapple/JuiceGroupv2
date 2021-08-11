@@ -134,6 +134,7 @@ function agendar(respostaPagamento ,$scope, $http, $window , id) {
     "token": respostaPagamento.token,
     "payment_method": respostaPagamento.payment_method,
   });
+
 $http.post("/vitazure/agendar/" , retornoToken)
         .then(function (response) {
             alert_success(response.data.message, () => {
@@ -149,7 +150,7 @@ function efetuarPagamento($scope, $http, $window , id ,valorOnline ,valorPresenc
     var confirma = 0;
     var tipoAtendimento  = tipoAgendamento;
     $.ajax({
-        url: '../api/v1/getencryption',
+        url: '/api/v1/getencryption',
         type: 'GET',
         contentType: 'text/plain',
         error: function (data, textStatus, xhr) {

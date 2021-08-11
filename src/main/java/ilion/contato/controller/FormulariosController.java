@@ -60,13 +60,6 @@ public class FormulariosController {
 	@RequestMapping("/rest/contato-registrar")
 	public void contatoFormJson(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		/*
-		 * String gRecaptchaResponse = request.getParameter("gRecaptchaResponse");
-		 * 
-		 * if( ! RecaptchaUtil.isValid(gRecaptchaResponse) ) { return
-		 * RespostaStatus.erroComMensagem( "Responda Não Sou Robô!" ); }
-		 */
-		
 		String json = Uteis.bodyToString(request);
 		
 		ContatoVH contatoVH = (ContatoVH) GSONUteis.getInstance().fromJson(json, ContatoVH.class);

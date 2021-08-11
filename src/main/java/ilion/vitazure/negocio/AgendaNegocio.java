@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ilion.admin.negocio.PropEnum;
 import ilion.admin.negocio.PropNegocio;
 import ilion.admin.negocio.Usuario;
+import ilion.email.negocio.EmailSender;
 import ilion.me.pagar.model.PagarMe;
 import ilion.me.pagar.model.PagarMeException;
 import ilion.me.pagar.model.SplitRule;
@@ -54,9 +55,12 @@ public class AgendaNegocio {
 	@Autowired
 	private PagarMeNegocio pagarMeNegocio;
 	
+	@Autowired
+	private EnvioEmailConsulta envioEmailConsulta;
+	
 	
 	@Transactional
-	public Agenda incluirAgendaPaciente(JSONObject jsonRetornoToken , Pessoa paciente) throws NumberFormatException, JSONException, PagarMeException {
+	public Agenda incluirAgendaPaciente(JSONObject jsonRetornoToken , Pessoa paciente) throws Exception {
 		
 		try {
 			PagarMe.init(propNegocio.findValueById(PropEnum.PAGAR_ME_API_KEY));
@@ -82,6 +86,9 @@ public class AgendaNegocio {
 			PagamentoPagarMe pagamentoPagarMe = new PagamentoPagarMe();
 			pagamentoPagarMe = pagamentoPagarMe.pagamento(capturarTransacao, agenda, null);
 			pagarMeNegocio.salvarPagamentoPagarMe(pagamentoPagarMe);
+			
+			envioEmailConsulta.enviar(agenda);
+			
 			return agenda;
 		} catch (ParseException e) {
 			e.printStackTrace();

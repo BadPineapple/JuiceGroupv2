@@ -42,6 +42,8 @@ public class PessoaController {
 	      try {
 	    	  if (pessoa.getFoto() != null && !pessoa.getFoto().getArquivo1().equals("")) {
 	    		  pessoa.setFoto(arquivoNegocio.inserir(pessoa.getFoto()));
+	    	  }else if(pessoa.getFoto() == null || pessoa.getFoto().getId().equals("")) {
+	    		  pessoa.setFoto(null);
 	    	  }
 	    	  pessoa = pessoaNegocio.incluirAtualizar(pessoa);
 	    	  request.getSession().setAttribute(PessoaNegocio.ATRIBUTO_SESSAO, pessoa);

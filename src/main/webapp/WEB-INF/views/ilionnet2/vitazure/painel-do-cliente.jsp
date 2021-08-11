@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ include file="/ilionnet/taglibs.jsp"%>
 <!doctype html>
-<html class="no-js" lang="pt-BR">
+<html class="no-js" lang="pt-BR" ng-app="buscaProfissionalApp" ng-controller="BuscaProfissionalController">
 <head>
 	<jsp:include page="includes/include-head.jsp" flush="true" />
+	<script	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+	<script src="../assets/js/vitazure/buscaProfissional.js"></script>
 </head>
 
 <body id="index" class="home">
@@ -30,7 +33,7 @@
                         <form class="form-opcoes">
                             <div class="row">
                                 <div class="col-12 col-md-6 col-xl-6">
-                                    <select>
+                                    <select ng-model="tipoProfissional">
                                         <option value="">Tipo de profissional</option>
                                         <option value="psicologo">Psicólogo</option>
                                         <option value="psicanalista">Psicanalista</option>
@@ -38,7 +41,7 @@
                                 </div>
 
                                 <div class="col-12 col-md-6 col-xl-6">
-                                    <select>
+                                    <select ng-model="estado">
                                         <option value="">Estado</option>
                                         <option value="SC">SC</option>
                                         <option value="RJ">RJ</option>
@@ -48,7 +51,7 @@
 
                                 <div class="col-12 col-md-6 col-xl-6">
 
-                                    <select>
+                                    <select ng-model="especialidade">
                                         <option value="">Especialidade</option>
                                         <option value="psicologico">Psicológico</option>
                                         <option value="psicanalise">Psicanílise</option>
@@ -58,7 +61,7 @@
                                 <div class="col-12 col-md-6 col-xl-6">
 
                                     
-                                    <select>
+                                    <select ng-model="cidade">
                                         <option value="">Cidade</option>
                                         <option value="Rio de Janeiro">Rio de Janeiro</option>
                                         <option value="São Paulo">São Paulo</option>
@@ -111,6 +114,30 @@
         </div>
 
         <jsp:include page="includes/include-footer.jsp" flush="true" />
+        <script src="../assets/js/bundle.libs.ilionnet.js"></script>
+			<script src="../assets/js/bundle.scripts.ilionnet.js"></script>
+			<script src="../assets/js/bundle.libs.angular.js"></script>
+            
+            <c:if test="${param.m == 'ok'}">
+	<button 
+		type="button" 
+		data-positionX="right" 
+		data-positionY="top" 
+		data-effect="fadeInUp" 
+		data-type="success" 
+		class="btn pmd-ripple-effect btn-success pmd-z-depth pmd-alert-toggle"
+		id="alertSucess"
+		style="display:none;">
+		Sucesso
+	</button>
+	<script type="text/javascript">
+		(function() {
+			setTimeout(function() {
+				$('#alertSucess').click();
+			}, 300);
+		})();
+	</script>
+</c:if>
     </div>
 </body>
 </html>

@@ -44,8 +44,8 @@
         <div class="area-white" id="area-white">
             <div class="container">
                 <div class="row">
-                    <div class="col-12 titulo">
-                        <h1 style="font-family: 'Oswald', sans-serif;font-size: 45px;font-weight: 300;margin: 0;padding: 0;">Minha Assinatura</h1>
+                    <div class="col-12 text-center">
+                        <h3 style="padding-bottom: 52px;">Minha Assinatura</h3>
                     </div>
 					<div class="col-12 col-md-12 col-xl-12 divDadosAssinatura">
 	                    <div class="col-12 col-md-4 col-xl-4 dados-assinatura">Vigência:<br><span id="data-inicio">${profissional.planoApresentar}</span></div>

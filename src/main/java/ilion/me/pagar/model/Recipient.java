@@ -190,7 +190,7 @@ public class Recipient  extends PagarMeModel<String> {
 
         final PagarMeRequest request = new PagarMeRequest(HttpMethod.GET,
                 String.format("/%s/%s", getClassName(), id));
-
+        System.out.println(request.execute().toString());
         final Recipient other = JSONUtils.getAsObject((JsonObject) request.execute(), Recipient.class);
         copy(other);
         flush();

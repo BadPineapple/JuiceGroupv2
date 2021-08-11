@@ -104,6 +104,8 @@ public class ProfissionalControlle {
 	      try {
 	    	  if (profissionalVH.getProfissional().getPessoa().getFoto() != null && !profissionalVH.getProfissional().getPessoa().getFoto().getArquivo1().equals("")) {
 	    		  profissionalVH.getProfissional().getPessoa().setFoto(arquivoNegocio.inserir(profissionalVH.getProfissional().getPessoa().getFoto()));
+	    	  }else if(profissionalVH.getProfissional().getPessoa().getFoto() == null || profissionalVH.getProfissional().getPessoa().getFoto().getId().equals("")) {
+	    		  profissionalVH.getProfissional().getPessoa().setFoto(null);
 	    	  }
 	    	  profissionalVH.getProfissional().setPessoa(pessoaNegocio.incluirAtualizar(profissionalVH.getProfissional().getPessoa()));
 	    	  profissionalVH.setProfissional(profissionalNegocio.incluirAtualizar(profissionalVH.getProfissional()));

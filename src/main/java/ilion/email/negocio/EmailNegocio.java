@@ -126,17 +126,7 @@ public class EmailNegocio {
   @Transactional
   @CacheEvict(value = "emails.qtd.para.envio", allEntries = true)
   public void adicionarEmail(Email email) {
-
-//    if (jaAdicionadoParaEnvio(email)) {
-//
-//      logger.info("Email já adicionado anteriormente. " + email);
-//
-//    } else {
-
       hibernateUtil.save(email);
-
-//    }
-
   }
 
   @Transactional

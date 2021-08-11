@@ -1,15 +1,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ include file="/ilionnet/taglibs.jsp"%>
 <!doctype html>
-<html class="no-js" lang="pt-BR">
+<html class="no-js" lang="pt-BR" ng-app="buscaProfissionalApp" ng-controller="BuscaProfissionalController">
 
 <head>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-	<meta name="author" content="Ilion" />
-	<link rel="icon" type="image/png" sizes="32x32" href="../assets/images/logo-square.png">
-	<title>Vitazure</title>
 	<jsp:include page="includes/include-head.jsp" flush="true" />
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>	
+	<script src="../assets/js/vitazure/buscaProfissional.js"></script>
 	
 </head>
 
@@ -26,20 +24,19 @@
 
                         <p>Faça sua consulta pelo celular, tablet ou computador, a qualquer hora com privacidade e segurança garantidas.</p>
 
-                        <form class="form-highlight">
-                            <select>
+                        <form ng-submit="consultarProfissional()" class="form-highlight">
+                            <select ng-model="tipoProfissional">
                                 <option value="">Tipo de profissional</option>
                                 <option value="psicologo">Psicólogo</option>
                                 <option value="psicanalista">Psicanalista</option>
                             </select>
 
-                            <select>
+                            <select ng-model="especialista">
                                 <option value="">Especialidade</option>
                                 <option value="psicologico">Psicológico</option>
                                 <option value="psicanalise">Psicanálise</option>
                             </select>
-
-                            <button class="button-secundary">Buscar</button>
+                            <button type="submit" class="button-secundary">Buscar</button>
                         </form>
                     </div>
                 </div>
@@ -83,7 +80,7 @@
 
                             <p>Você é um psicólogo?</p>
 
-                            <a href="#" class="button-purple line">
+                            <a href="<ilion:url/>cadastre-se" class="button-purple line">
                                 Junte-se a nós
 
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -443,6 +440,31 @@
         </div>
 
         <jsp:include page="includes/include-footer.jsp" flush="true" />
+         <script src="../assets/js/bundle.libs.ilionnet.js"></script>
+			<script src="../assets/js/bundle.scripts.ilionnet.js"></script>
+			<script src="../assets/js/bundle.libs.angular.js"></script>
+            
+            <c:if test="${param.m == 'ok'}">
+	<button 
+		type="button" 
+		data-positionX="right" 
+		data-positionY="top" 
+		data-effect="fadeInUp" 
+		data-message="Dados gravados com sucesso."
+		data-type="success" 
+		class="btn pmd-ripple-effect btn-success pmd-z-depth pmd-alert-toggle"
+		id="alertSucess"
+		style="display:none;">
+		Sucesso
+	</button>
+	<script type="text/javascript">
+		(function() {
+			setTimeout(function() {
+				$('#alertSucess').click();
+			}, 300);
+		})();
+	</script>
+</c:if>
     </div>
 </body>
 </html>

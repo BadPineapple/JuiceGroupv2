@@ -54,7 +54,7 @@ public class PagarMeController {
 
   private String jsonString;
 
-  @GetMapping(value = "/vitazure/api/v1/getencryption", produces = "application/x-www-form-urlencoded")
+  @GetMapping(value = "/api/v1/getencryption", produces = "application/x-www-form-urlencoded")
   @ResponseBody
   public ResponseEntity<String> getAPI(HttpServletRequest request) {
 
