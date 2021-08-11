@@ -70,7 +70,7 @@
                         <span class="new-cadastro">
                             Ainda não possui cadastro?
                             <div class="button-blue line">
-                                <a href="#">Cadastre-se aqui</a>
+                                <a href="cadastre-se">Cadastre-se aqui</a>
                             </div>
                         </span>
                     </div>

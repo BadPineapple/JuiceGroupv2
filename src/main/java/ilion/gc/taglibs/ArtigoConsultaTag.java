@@ -57,7 +57,7 @@ public class ArtigoConsultaTag extends TagSupport {
 	
 	public int doStartTag() {
 		
-		if( Uteis.ehNuloOuVazio(site, categoria) ) {
+		if( Uteis.ehNuloOuVazio(categoria) ) {
 			return SKIP_BODY;
 		}
 		

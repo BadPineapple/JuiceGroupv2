@@ -389,7 +389,7 @@ public class Arquivo implements Serializable {
 		if( tipo.equals(new Byte("3")) || 
 				tipo.equals(new Byte("4")) || 
 				tipo.equals(new Byte("7"))) {
-			url = pathArquivos+"downloads/"+arquivo1;
+			url = pathArquivos+"arquivos/downloads/"+arquivo1;
 		} else {
 			url = pathArquivos+arquivo1;
 		}

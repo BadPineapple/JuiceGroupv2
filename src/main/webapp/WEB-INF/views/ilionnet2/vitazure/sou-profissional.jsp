@@ -77,7 +77,7 @@
     
                             <p>Multiplique sua capacidade de atendimento com a consulta online e alcance qualquer paciente, em qualquer lugar. Faça uso do consultório online por um valor fixo mensal, muito mais baixo que o presencial.</p>
     
-                            <a href="#" class="button-secundary">Quero fazer parte!</a>
+                            <a href="cadastre-se" class="button-secundary">Quero fazer parte!</a>
                         </div>
                     </div>
     
@@ -174,7 +174,7 @@
                                     <div class="happy-faces">
                                         <div class="up-photos lista-cadastro">
                                             <figure class="first-photo lista-cadastro">
-                                                <img src="../assets/images/img-cadastro-1.jpg" alt="">
+                                                <img src="../assets/images/img-3.jpg" alt="">
                                             </figure>
 
                                             <figure class="second-photo lista-cadastro">
@@ -191,7 +191,7 @@
                                 </div>
                                 <div class="col-12 text-center">
                                     <div class="cellphone-right" style="margin: 0;">
-                                        <a href="registre-se-como-cliente.jsp" class="button-secundary">Crie sua conta</a>
+                                        <a href="cadastre-se" class="button-secundary">Crie sua conta</a>
                                     </div>
                                 </div>
                             </div>
