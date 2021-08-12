@@ -28,25 +28,56 @@
                 <div class="footer-down-menu">
                     <ul>
 
-                        <%--<ilion:artigoConsulta categoria="codigo-de-etica" artigo="codigo-de-etica" order="posicao" varRetorno="art3"/>--%>
-                        <ilion:arquivoConsulta nomeClasse="Artigo" idObjeto="208" layout="lateral" varRetorno="arq3"/>
+                        <ilion:artigoConsulta categoria="documentos" artigo="pdf" order="posicao" varRetorno="artigo"/>
+                        <ilion:arquivoLista nomeClasse="Artigo" idObjeto="212" codigo="" varRetorno="arquivos"/>
 
-                        <li><a href="${arq3.url}" class="line">Código de ética profissional do Psicólogo</a></li>
+                        <c:forEach items="${arquivos}" var="arq">
+                            <c:if test="${arq.title == \"Codigo de ética\"}">
 
-                        <%--<ilion:artigoConsulta site="vitazure" categoria="politica-de-cancelamento" artigo="politica-de-cancelamento" order="posicao" varRetorno="art"/>--%>
-                        <ilion:arquivoConsulta nomeClasse="Artigo" idObjeto="209" layout="lateral" varRetorno="arq"/>
+                                <li><a href="${arq.url}" class="line">Código de ética profissional do Psicólogo</a></li>
 
-                        <li><a href="${arq.url}" class="line">Resolução CFP nº 11/2018</a></li>
+                            </c:if>
 
-                        <%--<ilion:artigoConsulta categoria="termos-de-uso" artigo="termos-de-uso" order="posicao" varRetorno="art2"/>--%>
-                        <ilion:arquivoConsulta nomeClasse="Artigo" idObjeto="211" layout="lateral" varRetorno="arq2"/>
+                            <c:if test="${arq.title == \"Resolução\"}">
 
-                        <li><a href="${arq2.url}" class="line">Termos e condições de uso</a></li>
+                                <li><a href="${arq.url}" class="line">Resolução CFP n 11/2018</a></li>
 
-                        <%--<ilion:artigoConsulta categoria="politica-de-privacidade" artigo="privacidade" order="posicao" varRetorno="art1"/>--%>
-                        <ilion:arquivoConsulta nomeClasse="Artigo" idObjeto="210" layout="lateral" varRetorno="arq1"/>
+                            </c:if>
 
-                        <li><a href="${arq1.url}" class="line">Política de privacidade</a></li>
+                            <c:if test="${arq.title == \"Termos e condições\"}">
+
+                                <li><a href="${arq.url}" class="line">Termos e condições de uso</a></li>
+
+                            </c:if>
+
+                            <c:if test="${arq.title == \"Política de privacidade\"}">
+
+                                <li><a href="${arq.url}" class="line">Política de privacidade</a></li>
+
+                            </c:if>
+                        </c:forEach>
+
+
+
+                        <%--&lt;%&ndash;<ilion:artigoConsulta categoria="codigo-de-etica" artigo="codigo-de-etica" order="posicao" varRetorno="art3"/>&ndash;%&gt;--%>
+                        <%--<ilion:arquivoConsulta nomeClasse="Artigo" idObjeto="208" layout="lateral" varRetorno="arq3"/>--%>
+
+                        <%--<li><a href="${arq3.url}" class="line">Código de ética profissional do Psicólogo</a></li>--%>
+
+                        <%--&lt;%&ndash;<ilion:artigoConsulta site="vitazure" categoria="politica-de-cancelamento" artigo="politica-de-cancelamento" order="posicao" varRetorno="art"/>&ndash;%&gt;--%>
+                        <%--<ilion:arquivoConsulta nomeClasse="Artigo" idObjeto="209" layout="lateral" varRetorno="arq"/>--%>
+
+                        <%--<li><a href="${arq.url}" class="line">Resolução CFP nº 11/2018</a></li>--%>
+
+                        <%--&lt;%&ndash;<ilion:artigoConsulta categoria="termos-de-uso" artigo="termos-de-uso" order="posicao" varRetorno="art2"/>&ndash;%&gt;--%>
+                        <%--<ilion:arquivoConsulta nomeClasse="Artigo" idObjeto="211" layout="lateral" varRetorno="arq2"/>--%>
+
+                        <%--<li><a href="${arq2.url}" class="line">Termos e condições de uso</a></li>--%>
+
+                        <%--&lt;%&ndash;<ilion:artigoConsulta categoria="politica-de-privacidade" artigo="privacidade" order="posicao" varRetorno="art1"/>&ndash;%&gt;--%>
+                        <%--<ilion:arquivoConsulta nomeClasse="Artigo" idObjeto="210" layout="lateral" varRetorno="arq1"/>--%>
+
+                        <%--<li><a href="${arq1.url}" class="line">Política de privacidade</a></li>--%>
 
 
 
