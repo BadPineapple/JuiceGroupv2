@@ -93,8 +93,19 @@
                                                 <div class="button-blue line">
 
                                                     <%--<ilion:artigoConsulta categoria="termos-de-uso" artigo="termos-de-uso-vitazure" order="posicao" varRetorno="art"/>--%>
-                                                    <ilion:arquivoConsulta nomeClasse="Artigo" idObjeto="211" layout="lateral" varRetorno="arq"/>
-                                                    <a href="${arq.url}" target="_blank" >&nbsp;&nbsp;&nbsp;&nbsp;Termos e condições de uso.</a>
+                                                    <ilion:arquivoCategoriaLista categoria="documentos" order="posicao" layout="lateral" varRetorno="art"/>
+
+                                                        <c:forEach var="arq" items="${art}">
+
+                                                            <c:if test="${arq.title == \"Termos e condições\"}">
+
+                                                                <c:set var="arqTermos" value="${arq.url}"/>
+
+                                                            </c:if>
+
+                                                        </c:forEach>
+
+                                                    <a href="${arqTermos}" target="_blank" >&nbsp;&nbsp;&nbsp;&nbsp;Termos e condições de uso.</a>
                                                 </div>
                                             </span>
                                         </div>
