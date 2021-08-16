@@ -58,9 +58,9 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="toggle-header" style="background: none !important; padding: 0 !important">
-                                    <strong style="padding-left: 0 !important">O que é a Vitazure?</strong>
+                                    <strong style="padding-left: 0 !important; cursor: default">O que é a Vitazure?</strong>
                                 </div>
-                                <p style=" margin-bottom: 3rem;">A <span style="color: #0097d6;">Vitazure</span> é uma plataforma que conecta profissionais e pacientes, com o uso de recursos tecnológicos.<br> Facilitando que que pessoas encontrarem o profissional certo para suas necessidades, com total segurança e<br> sigilo, tornando suas vidas mais felizes e saudáveis. </p>
+                                <p style=" margin-bottom: 3rem;">A <span style="color: #0097d6;">Vitazure</span> é uma plataforma que conecta profissionais e pacientes, com o uso de recursos tecnológicos,<br> facilitando que pessoas encontrem o profissional certo para suas necessidades, com total segurança e<br> sigilo, tornando suas vidas mais felizes e saudáveis. </p>
                             </div>
 
                             <div class="col-12 col-md-4 col-xl-4">
@@ -89,13 +89,13 @@
 
                             <div class="col-12 col-md-8 col-md-8">
                                 <div class="funciona-text">
-                                    <div class="toggle-header" style="background: none !important; padding: 0 !important">
+                                    <div class="toggle-header" style="background: none !important; padding: 0 !important; cursor: default;">
                                         <strong style="padding-left: 0 !important">Quem faz parte da Vitazure?</strong>
                                     </div>
-                                    <p>A <span style="color: #0097d6;">Vitazure</span> é formada por pessoas que acreditam e trabalham para oferecer as melhores condições de bem-estar, equilíbrio emocional e físico para as pessoas, possibilitando acesso à saúde por meio de plataforma tecnológica simples, segura, acessível, totalmente online, que conecta pacientes a profissionais especializados em qualquer lugar e a qualquer hora.
+                                    <p>A <span style="color: #0097d6; font-style: normal">Vitazure</span> é formada por pessoas que acreditam e trabalham para oferecer as melhores condições de bem-estar, equilíbrio emocional e físico para as pessoas, possibilitando acesso à saúde por meio de plataforma tecnológica simples, segura, acessível, totalmente online, que conecta pacientes a profissionais especializados em qualquer lugar e a qualquer hora.
                                     </p>
 
-                                    <span style="color: #0097d6;">Acreditamos que pessoas integrais, fazem escolhas mais saudáveis e transformam o mundo em um lugar melhor para viver. E esse é o nosso propósito.</span>
+                                    <span style="color: #0097d6; font-style: normal">Acreditamos que pessoas integrais, fazem escolhas mais saudáveis e transformam o mundo em um lugar melhor para viver. E esse é o nosso propósito.</span>
                                 </div>
                             </div>
                         </div>
@@ -135,6 +135,8 @@
                                 <div class="toggle-body vitazure">
 
                                     <p>Se você está buscando atendimento psicológico, basta clicar no botão abaixo “Quero me cadastrar” e efetuar o seu cadastro. Isso leva menos de 3 minutos. Agora, se você é Psicólogo, basta entrar em “Sou profissional”, no menu superior, efetuar seu cadastro e aguardar o contato de nosso departamento comercial em até 12 horas, simples assim.</p>
+
+                                    <a href="http://localhost:8080/cadastre-se" class="button-secundary">Quero em cadastrar</a>
 
                                 </div>
                             </div>
@@ -178,18 +180,18 @@
                                 </div>
                                 <div class="toggle-body vitazure">
 
-                                    <p>Os valores da consulta/sessão são definidos pelos profissionais.Sugerimos que fiquem entre R$ 60,00 e R$ 350,00.</p>
+                                    <p>Os valores das consultas/sessões são definidos pelos profissionais. Pesquise o valor que considere mais adequado para você. Normalmente o custo de uma consulta aqui na <span style="color: #0097d6;">Vitazure</span> é menor do que o cobrado em um consultório convencional.</p>
 
                                 </div>
                             </div>
 
                             <div class="match-toggle">
                                 <div class="toggle-header">
-                                    <strong>Como eu recebo o valorda consulta?</strong>
+                                    <strong>Como eu recebo o valor da consulta?</strong>
                                 </div>
                                 <div class="toggle-body vitazure">
 
-                                    <p>Basta solicitar o resgate do valorno site da plataforma pagadora (pagar.me), observando que os prazos para resgate variam de acordo com a forma de pagamento do paciente, cartão de crédito 30 dias e boleto 48 horas após o pagamento. O profissional tem acesso a área do consultório virtual, com informações dos agendamentos e valores das consultas/sessões pagas.</p>
+                                    <p>Basta solicitar o resgate do valor no site da plataforma pagadora (pagar.me), observando que os prazos para resgate variam de acordo com a forma de pagamento do paciente, cartão de crédito 30 dias após o pagamento. O profissional tem acesso a área do consultório virtual, com informações dos agendamentos e valores das consultas/sessões pagas.</p>
 
                                 </div>
                             </div>
@@ -211,7 +213,7 @@
                                 </div>
                                 <div class="toggle-body vitazure">
 
-                                    <p>Para que você apareça nas buscas é fundamental que tenhaagendas e horários cadastrados na plataforma. Ter um perfil bemelaborado será importante para que seu paciente decida por contratá-lo. O paciente pode fazer buscas para consulta/sessão online ou presencial.</p>
+                                    <p>Para que você apareça nas buscas é fundamental que tenha agendas e horários cadastrados na plataforma. Ter um perfil bem elaborado será importante para que seu paciente decida por contratá-lo. O paciente pode fazer buscas para consulta/sessão online ou presencial.</p>
 
                                 </div>
                             </div>
@@ -233,7 +235,7 @@
                                 </div>
                                 <div class="toggle-body vitazure">
 
-                                    <p>Não. nenhuma consulta é grava em nossa plataforma, somente você e o paciente tem acesso ao consultório no momento da consulta.</p>
+                                    <p>Não. Nenhuma consulta é gravada em nossa plataforma, somente você e o paciente tem acesso ao consultório no momento da consulta.</p>
 
                                 </div>
                             </div>
@@ -250,6 +252,8 @@
                                 <div class="toggle-body vitazure">
 
                                     <p>Se você está buscando atendimento psicológico, basta clicar no botão abaixo “Quero me cadastrar” e efetuar o seu cadastro. Isso leva menos de 3 minutos. Agora, se você é Psicólogo, basta entrar em “Sou profissional”, no menu superior, efetuar seu cadastro e aguardar o contato de nosso departamento comercial em até 12 horas, simples assim.</p>
+
+                                    <a href="http://localhost:8080/cadastre-se" class="button-secundary">Quero em cadastrar</a>
 
                                 </div>
                             </div>
@@ -271,7 +275,7 @@
                                 </div>
                                 <div class="toggle-body vitazure">
 
-                                    <p>Sim. Será enviado e-mail e um SMS, tanto para o paciente quanto para o respectivo profissional, com os detalhes da consulta/sessão assim que for confirmada.</p>
+                                    <p>Sim. Será enviado e-mail e SMS, para o paciente e profissional, com os detalhes do agendamento, logo após a confirmação da autorização de pagamento, assim fica garantido o recebimento por parte do psicólogo.</p>
 
                                 </div>
                             </div>

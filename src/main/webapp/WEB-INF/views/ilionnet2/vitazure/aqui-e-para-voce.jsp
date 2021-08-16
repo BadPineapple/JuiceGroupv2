@@ -14,14 +14,14 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12 col-xl-9">
-                        <h1 class="title-gray">Fale com seu<br/> Psicólogo Online de<br/> forma segura e de<br/> qualquer lugar.</h1>
+                        <h1 class="title-gray">Fale com seu<br/> Psicólogo de<br/> forma segura e de<br/> qualquer lugar.</h1>
                         <p>Busque por profissional ou especialidade.</p>
                         <form ng-submit="consultarProfissional()"  class="form-highlight">
                             <select ng-model="tipoProfissional">
                                 <option value="">Profissional</option>
                                 <option value="psicologo">Psicólogo</option>
-                                <option value="medico">Médico</option>
-                                <option value="psiquiatra">Psiquiatra</option>
+                                <%--<option value="medico">Médico</option>--%>
+                                <%--<option value="psiquiatra">Psiquiatra</option>--%>
                             </select>
 
                             <select ng-model="especialista">
@@ -143,7 +143,7 @@
                         <div class="psicologia-online">
                             <h2>Psicologia Online</h2>
 
-                            <p style="padding: 1rem 3rem;">O atendimento psicológico online é um serviço realizado por um psicólogo online, via vídeo. Trata-se de uma abordagem equivalente a psicoterapia presencial. Desde novembro de 2018 o atendimento online é permitido pelo Conselho Federal de Psicologia, Resolução CFP 11/2018, sem limite de sessões. As sessões duram até 50 minutos e são feitas via vídeo mediante agendamento e pagamento prévios. Esse serviço não é indicado para casos de saúde graves. Crianças e menores de 18 anos precisam de autorização por escrito de um responsável.</p>
+                            <p style="padding: 1rem 3rem;">O atendimento psicológico online é uma abordagem equivalente a psicoterapia presencial e desde novembro de 2018 tal prática é permitida pelo Conselho Federal de Psicologia, conforme Resolução CFP 11/2018. As sessões duram até 50 minutos, são conduzidas através de teleatendimento, em ambiente seguro e de privacidade, mediante agendamento e pagamento prévios.  Esse serviço não é indicado para casos de saúde graves. Crianças e menores de 18 anos precisam de autorização por escrito do seu responsável.</p>
                         </div>
                     </div>
                 </div>

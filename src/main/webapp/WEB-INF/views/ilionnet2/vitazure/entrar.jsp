@@ -77,7 +77,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="title-internas">
-                            <h3>Login</h3>
+                            <h3>Entrar</h3>
     
                             <div class="pages-internas">
                                 <a href="#">

@@ -29,7 +29,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12 col-md-9 offset-md-3 col-xl-9 offset-xl-3">
-                        <h1 class="title-gray">Sua carreira está prestes a decolar, venha fazer parte da Vitazure e nós cuidaremos do resto.</h1>
+                        <h1 class="title-gray">Sua carreira está prestes a decolar, venha fazer parte da <span style="color: #0097d6; font-style: normal">Vitazure</span> e nós cuidaremos do resto.</h1>
     
                         <p>Estamos muito felizes que você esteja próximo de se juntar a nós, atualmente temos clientes prontos para trabalhar com você. Em breve, você terá acesso à nossa maravilhosa comunidade de profissionais.</p>
     
@@ -136,7 +136,7 @@
                                     </div>
                                 </div>
                                 <div class="col-12 text-center">
-                                    <h2 style="margin: 10rem 0 8rem;">Para participar da rede<br> Vitazure,todos os profissionais<br> devem possuir o seguinte:</h2>
+                                    <h2 style="margin: 10rem 0 8rem;">Para participar da rede<br> <span style="color: #0097d6; font-style: normal">Vitazure</span>,todos os profissionais<br> devem possuir o seguinte:</h2>
                                 </div>
                                 <div class="col-12 col-md-5 col-xl-5">
                                     <div class="cadastro-profissional">
@@ -149,7 +149,7 @@
                                         <div class="lista-cadastro">
                                             <span>2.</span>
 
-                                            <p>Cadastro aprovado ou já enviei o<br> pedido de cadastro no&nbsp;E-Psi;</p>
+                                            <p>Cadastro aprovado ou já ter solicitado junto ao Conselho Regional de Psicologia o cadastro relativo ao<br/> e-PSI;</p>
                                         </div>
 
                                         <div class="lista-cadastro">

@@ -76,7 +76,7 @@
 
                             <h5>Conheça nossa rede de profissionais licenciados</h5>
 
-                            <p>Nossa rede de profissionais cobre uma variedade de especialidades para atender às suas necessidades específicas. São Profissionais graduados e registrados no Conselho Federal de Psicologia, autorizados (e-Psi) a atender por meio da Videoconferência. São Profissionais que passam por processo criterioso de credenciamento, sujeitos a rigoroso código de ética e sigilo.</p>
+                            <p>Nossa rede de profissionais cobre uma variedade de especialidades para atender às suas necessidades específicas. São Profissionais graduados e registrados no Conselho Federal de Psicologia, autorizados (e-Psi) a prestarem serviços por meio de Tecnologias da Informação e da Comunicação (TIC). São Profissionais que passam por processo criterioso de credenciamento, sujeitos a rigoroso código de ética e sigilo.</p>
 
                             <p>Você é um psicólogo?</p>
 
@@ -91,33 +91,36 @@
                         </div>
                     </div>
 
-                    <div class="col-12">
-                        <div class="parceiros text-center">
-                            <p>Instituições parceiras</p>
 
-                            <div class="partners">
-                                <figure>
-                                    <img src="assets/images/ufg.png" alt="">
-                                </figure>
+                    <%-- TODO: NOVAS LOGOS SERÃO INCLUÍDAS POSTERIORMENTE -->
 
-                                <figure>
-                                    <img src="assets/images/puc.png" alt="">
-                                </figure>
+                    <%--<div class="col-12">--%>
+                        <%--<div class="parceiros text-center">--%>
+                            <%--<p>Instituições parceiras</p>--%>
 
-                                <figure>
-                                    <img src="assets/images/google.png" alt="">
-                                </figure>
+                            <%--<div class="partners">--%>
+                                <%--<figure>--%>
+                                    <%--<img src="assets/images/ufg.png" alt="">--%>
+                                <%--</figure>--%>
 
-                                <figure>
-                                    <img src="assets/images/unip.png" alt="">
-                                </figure>
+                                <%--<figure>--%>
+                                    <%--<img src="assets/images/puc.png" alt="">--%>
+                                <%--</figure>--%>
 
-                                <figure>
-                                    <img src="assets/images/rede.png" alt="">
-                                </figure>
-                            </div>
-                        </div>
-                    </div>
+                                <%--<figure>--%>
+                                    <%--<img src="assets/images/google.png" alt="">--%>
+                                <%--</figure>--%>
+
+                                <%--<figure>--%>
+                                    <%--<img src="assets/images/unip.png" alt="">--%>
+                                <%--</figure>--%>
+
+                                <%--<figure>--%>
+                                    <%--<img src="assets/images/rede.png" alt="">--%>
+                                <%--</figure>--%>
+                            <%--</div>--%>
+                        <%--</div>--%>
+                    <%--</div>--%>
                 </div>
             </div>
         </div>
