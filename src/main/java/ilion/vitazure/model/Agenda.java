@@ -1,6 +1,7 @@
 package ilion.vitazure.model;
 
 import java.math.BigDecimal;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -185,7 +186,6 @@ public class Agenda {
 	  
 		public String getDataHoraApresentar() {
 			return Uteis.formatarDataHora(getDataHoraAgendamento(), "dd/MM/YYYY hh:mm");
-			
 		}
 
 		public String getTokenTransacaoPagamentoConsulta() {
@@ -211,8 +211,21 @@ public class Agenda {
 		public void setHostUrlAtendimentoOnline(String hostUrlAtendimentoOnline) {
 			this.hostUrlAtendimentoOnline = hostUrlAtendimentoOnline;
 		}
-	  
 		
+		public String getDataHoraLiberarLink() {
+			return Uteis.formatarDataHora(Uteis.subtrair(getDataHoraAgendamento(), Calendar.MINUTE, 30), "hh:mm");
+		}
+		public String getDataHoraBloquearLink() {
+			return Uteis.formatarDataHora(Uteis.acrescentar(getDataHoraAgendamento(), Calendar.MINUTE, 5), "hh:mm");
+		}
+		public String getDataHoraAlterAtendimento() {
+			return Uteis.formatarDataHora(Uteis.subtrair(getDataHoraAgendamento(), Calendar.MINUTE, 5), "hh:mm");
+		}
+		
+		@Override
+		public String toString() {
+			return "Agenda[{" + id + "," + getDataHoraLiberarLink() + ","+getDataHoraBloquearLink() + ","+getDataHoraAlterAtendimento() + ","+ urlAtendimentoOnline + "}]";
+		}
 		
 	   
 }

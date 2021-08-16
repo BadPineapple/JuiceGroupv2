@@ -39,7 +39,6 @@
 						            ng-init="profissional.id='${profissional.id}';
 						                     profissional.documentoCrpCrm='${profissional.documentoCrpCrm}';
 						                     profissional.cadastroEpsi='${profissional.cadastroEpsi}';
-						                     profissional.tituloProfissional='${profissional.tituloProfissional}';
 						                     profissional.tipoProfissional='${profissional.tipoProfissional}';
 						                     profissional.especialidade='${profissional.especialidade}';
 						                     profissional.temasTrabalho='${profissional.temasTrabalho}';
@@ -172,28 +171,22 @@
 							</div>
 							
 							<div class="col-md-12 col-lg-12 col-sm-12">
-							          <div class="col-md-3 col-lg-3 col-sm-12">
+							          <div class="col-md-4 col-lg-4 col-sm-12">
                                             <div class="form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed">
                                                 <label class="control-label">Documento do (CRP/CRM)</label>
                                                 <input type="text" ng-model="profissional.documentoCrpCrm"  class="form-control input-group-lg"/>
                                             </div>
                                         </div>
 
-                                        <div class="col-md-3 col-lg-3 col-sm-12">
+                                        <div class="col-md-4 col-lg-4 col-sm-12">
                                             <div class="form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed">
                                                 <label class="control-label">Cadastro do E-Psi</label>
                                                 <input type="text" ng-model="profissional.cadastroEpsi"  class="form-control input-group-lg"/>
                                             </div>
                                         </div>
 
-                                        <div class="col-md-3 col-lg-3 col-sm-12">
-                                            <div class="form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed">
-                                                <label class="control-label">Título Profissional</label>
-                                                <input type="text" ng-model="profissional.tituloProfissional"  class="form-control input-group-lg"/>
-                                            </div>
-                                        </div>
 
-                                        <div class="col-md-3 col-lg-3 col-sm-12">
+                                        <div class="col-md-4 col-lg-4 col-sm-12">
                                             <div class="form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed">
                                                 <label class="control-label">Tipo Profissional</label>
                                                 <select ng-model="profissional.tipoProfissional" class="form-control input-group-lg">

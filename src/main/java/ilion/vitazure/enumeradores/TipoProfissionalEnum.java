@@ -4,7 +4,7 @@ public enum TipoProfissionalEnum {
 	
 	NAO_INFORMADO("",""),
 	PSICOLOGO("PSICOLOGO","Psicólogo"),
-	PSIQUIATRA("PSIQUIATRA","Psiquiatra"),
+//	PSIQUIATRA("PSIQUIATRA","Psiquiatra"),
 	MEDICO("MEDICO","Médico");	
 	
 	private String nome;

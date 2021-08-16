@@ -21,43 +21,59 @@
 
                         <li><a href="https://www.vitazure.com.br/para-sua-empresa" class="line">Aqui &eacute; para sua empresa</a></li>
 
+
                         <li><a href="#" class="line">Entre em contato</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-down-menu">
                     <ul>
-                        <li><a href="#" class="line">Pol&iacute;tica de cancelamento</a></li>
 
-                        <li><a href="#" class="line">Pol&iacute;tica de privacidade</a></li>
+                        <%--<ilion:artigoConsulta categoria="codigo-de-etica" artigo="codigo-de-etica" order="posicao" varRetorno="art3"/>--%>
+                        <ilion:arquivoConsulta nomeClasse="Artigo" idObjeto="208" layout="lateral" varRetorno="arq3"/>
 
-                        <li><a href="#" class="line">Termos de uso</a></li>
+                        <li><a href="${arq3.url}" class="line" target="_blank">Código de ética profissional do Psicólogo</a></li>
 
-                        <li><a href="#" class="line">C&oacute;digo de &eacute;tica</a></li>
+                        <%--<ilion:artigoConsulta site="vitazure" categoria="politica-de-cancelamento" artigo="politica-de-cancelamento" order="posicao" varRetorno="art"/>--%>
+                        <ilion:arquivoConsulta nomeClasse="Artigo" idObjeto="209" layout="lateral" varRetorno="arq"/>
+
+                        <li><a href="${arq.url}" class="line" target="_blank">Resolução CFP nº 11/2018</a></li>
+
+                        <%--<ilion:artigoConsulta categoria="termos-de-uso" artigo="termos-de-uso" order="posicao" varRetorno="art2"/>--%>
+                        <ilion:arquivoConsulta nomeClasse="Artigo" idObjeto="211" layout="lateral" varRetorno="arq2"/>
+
+                        <li><a href="${arq2.url}" class="line" target="_blank">Termos e condições de uso</a></li>
+
+                        <%--<ilion:artigoConsulta categoria="politica-de-privacidade" artigo="privacidade" order="posicao" varRetorno="art1"/>--%>
+                        <ilion:arquivoConsulta nomeClasse="Artigo" idObjeto="210" layout="lateral" varRetorno="arq1"/>
+
+                        <li><a href="${arq1.url}" class="line" target="_blank">Política de privacidade</a></li>
+
                     </ul>
                 </div>
             </div>
 
             <div class="col-12">
                 <div class="copyright">
+
                     <p>&copy; 2021. Todos os direitos reservados.</p>
 
                     <div class="redes-sociais">
                         <a href="http://instagram.com/vitazure" target="_blank">
                             <figure>
-                                <img src="../../assets/images/instagram.png" alt="">
+                                <img src="../assets/images/instagram.png" alt="">
                             </figure>
                         </a>
 
                         <a href="http://blog.vitazure.com.br/" target="_blank">
                             <figure>
-                                <img src="../../assets/images/icon-blog.png" alt="">
+                                <img src="../assets/images/icon-blog.png" alt="">
                             </figure>
                         </a>
 
                         <a href="https://www.youtube.com/channel/vitazure" target="_blank">
                             <figure>
-                                <img src="../../assets/images/youtube.png" alt="" style="width: 30px">
+                                <img src="../assets/images/youtube.png" alt="" style="width: 30px">
                             </figure>
                         </a>
                     </div>
@@ -69,7 +85,6 @@
 
 <nav id="menu">
     <ul>
-    
         <li><a href="<ilion:url/>home">Home</a></li>
         <li><a href="<ilion:url/>como-funciona" class="line">Como funciona</a></li>
         <li><a href="<ilion:url/>aqui-e-para-voce" class="line">Aqui &eacute; pra voc&ecirc;</a></li>
@@ -110,7 +125,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-<script src="../../assets/js/calendario.js"></script>
+<!-- <script src="../../assets/js/calendario.js"></script> -->
 <script src="https://assets.pagar.me/checkout/1.1.0/checkout.js"></script>
 <script src="../../assets/js/pagar-me.js"></script>
     

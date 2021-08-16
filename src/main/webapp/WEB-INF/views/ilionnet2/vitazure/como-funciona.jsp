@@ -366,6 +366,11 @@
 
                             <!-- End como funciona paciente -->
                         </div>
+                        <div class="img-responsavel">
+                            <figure>
+                                <img src="../assets/images/responsavel-tecnico.jpg" alt="">
+                            </figure>
+                        </div>
                     </div>
                 </div>
             </div>

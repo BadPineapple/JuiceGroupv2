@@ -117,10 +117,9 @@ public class ProfissionalControlle {
 	    	  return new ResponseEntity<>(new JsonString("Perfil Profissional Atualizado!"), HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>(new JsonString(e.getMessage()), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(new JsonString(Uteis.tratamentoMensagemErro(e)), HttpStatus.BAD_REQUEST);
 	    } 
 	  }
-      
       
       @PostMapping(value = "/vitazure/imagem", produces = "application/json")
 	  @ResponseBody
@@ -145,6 +144,8 @@ public class ProfissionalControlle {
 	  	public String souProfissional(HttpServletRequest request) {
 	  		Pessoa PessoaSessao = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
 	  		List<Profissional> lisProfissional = profissionalNegocio.consultarProfissionaisAtivos();
+	  		List<Agenda> listAgendaDia = agendaNegocio.consultarAgendaDia(PessoaSessao);
+	  		request.setAttribute("agendaDia", listAgendaDia);
 	  		request.setAttribute("pessoa", PessoaSessao);
 	  		request.setAttribute("areaRestrita", true);
 	  		consultarDataDisponivelProfissionais(lisProfissional , false , false);
@@ -156,6 +157,8 @@ public class ProfissionalControlle {
 	  	public String perfilProfissional(HttpServletRequest request ,@PathVariable Long id) {
 	  		Pessoa PessoaSessao = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
 	  		Profissional profissional = profissionalNegocio.consultarPorId(id);
+	  		List<Agenda> listAgendaDia = agendaNegocio.consultarAgendaDia(PessoaSessao);
+	  		request.setAttribute("agendaDia", listAgendaDia);
 	  		request.setAttribute("pessoa", PessoaSessao);
 	  		request.setAttribute("areaRestrita", true);
 	  		consultarDataDisponivelProfissional(profissional , false , false);
@@ -271,9 +274,11 @@ public class ProfissionalControlle {
 	  public ResponseEntity<JsonString> agendar(HttpServletRequest request,@RequestBody String retornoToken) {
 	      try {
 	    	  Pessoa PessoaSessao = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
+	    	  List<Agenda> listAgendaDia = agendaNegocio.consultarAgendaDia(PessoaSessao);
+		  	  request.setAttribute("agendaDia", listAgendaDia);
 	    	  JSONObject jsonRetornoToken = new JSONObject(retornoToken);
 	    	  agendaNegocio.incluirAgendaPaciente(jsonRetornoToken, PessoaSessao);
-	    	  return new ResponseEntity<>(new JsonString("Agenda Gerada com Sucesso!"), HttpStatus.OK);
+	    	  return new ResponseEntity<>(new JsonString("Agendamento realizado com sucesso."), HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<>(new JsonString(e.getMessage()), HttpStatus.BAD_REQUEST);

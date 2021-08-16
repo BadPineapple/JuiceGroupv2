@@ -18,6 +18,7 @@ function chamada (valor, item, id) {
         var button = document.querySelector('button');
 
         function handleSuccess(data) {
+	        document.getElementById("spinner").style.display = "inline-block";
             salvarTransacao(data , item);
         }
 
@@ -72,10 +73,17 @@ function salvarTransacao(data , plano){
 	    data: retornoToken,
 	    contentType: "application/json",
 	    success: function(response) {
+		   document.getElementById("spinner").style.display = "none";
+           alert(window.location.href);
 	        window.location.reload();
 	    },
 	    error: function(error) {
-	        window.location.reload();
+		document.getElementById("spinner").style.display = "none";
+		    if(window.location.href.indexOf("alteraMinhaAssinatura")){
+			   window.location.href = "/vitazure/minhaAssinatura";
+			} else{
+	          window.location.reload();
+			}
 	    }
 	  });
 }

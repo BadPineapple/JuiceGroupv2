@@ -5,6 +5,69 @@
 	<jsp:include page="includes/include-head.jsp" flush="true" />
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>	
 	<script src="../assets/js/vitazure/loginVitazure.js"></script>	
+	<style>
+	
+	.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+	
+	.modal-content {
+	    background-color: #fefefe;
+	    margin: auto;
+	    padding: 20px;
+	    border: 1px solid #888;
+	    width: 80%;
+	    max-width: 500px;
+	    margin: 1.75rem auto;
+	}
+
+.modal-header {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    border-bottom: 1px solid #dee2e6;
+    border-top-left-radius: calc(.3rem - 1px);
+    border-top-right-radius: calc(.3rem - 1px);
+    padding: 0;
+}
+
+.input {
+    border: none;
+    border-bottom: .1rem solid #888888;
+    display: block;
+    margin: 1rem 0;
+    padding: .5rem 0;
+    width: 350px;
+}
+
+.btn {
+    background-color: rgb(24,40,130);
+    border: 0;
+    border-radius: .5rem;
+    color: #ffffff;
+    cursor: pointer;
+    font: 400 1rem Roboto;
+    padding: 1rem 2rem;
+}
+
+.close {
+  font-size: 2.5rem;
+}
+	
+	</style>
 </head>
 <body id="index" class="home">
     <div id="app">
@@ -58,26 +121,53 @@
                                 </div>
     
                                 <div class="col-12">
-                                    <button class="button-secundary" type="submit" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Entrar</button>
+                                    <button class="button-secundary" type="submit" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem;text-transform: uppercase;">Entrar</button>
                                 </div>
                             </div>
                         </form>
     
                         <div class="button-blue line">
-                            <a href="#">Esqueci minha senha</a>
+                            <a id="myBtn" href="#">Esqueci minha senha</a>
+                            <div id="myModal" class="modal">
+						  <div class="modal-content col-md-12">
+							    <div class="modal-header">
+						          <h4>Esqueci minha senha</h4>
+						          <div id="modalBtnClick" class="close" data-dismiss="modal"><i class="fas fa-times"></i></div>
+						        </div>
+							    <div class="modal-body" style="width:100%;">
+						          <div class="col-md-12">
+						              <form>
+						                <div class="form-group">
+						                  <div>
+						                    <input type="email"
+						                           class="form-control input"
+						                           id="emailCadastro"
+						                           name="email"
+						                           ng-model="email"
+						                           placeholder="Informe seu e-mail"
+						                           required="required"
+						                           style="width: 100%;font-size: 17px;">
+						                    <p>&nbsp;</p>
+						                    <button class="btn button-secundary" ng-click="esqueceuSenha()" style="width:100%;font-size: 1.8rem; height: 5.4rem;background-color: #0097d6; text-transform: uppercase;">Enviar</button>
+						                  </div>
+						                </div>
+						              </form>
+						          </div>
+			        		</div>
+						  </div>
+					</div>
                         </div>
     
                         <span class="new-cadastro">
                             Ainda não possui cadastro?
                             <div class="button-blue line">
-                                <a href="#">Cadastre-se aqui</a>
+                                <a href="cadastre-se">Cadastre-se aqui</a>
                             </div>
                         </span>
                     </div>
                 </div>
             </div>
         </div>
-    
         <jsp:include page="includes/include-footer.jsp" flush="true" />
         <script src="../assets/js/bundle.libs.ilionnet.js"></script>
 			<script src="../assets/js/bundle.scripts.ilionnet.js"></script>
@@ -104,6 +194,23 @@
 		})();
 	</script>
 </c:if>
+ <script>
+		var modal = document.getElementById("myModal");
+		
+		var btn = document.getElementById("myBtn");
+		
+		var span = document.getElementsByClassName("close")[0];
+		
+		btn.onclick = function() {
+		  modal.style.display = "block";
+		}
+		
+		span.onclick = function() {
+		  modal.style.display = "none";
+		}
+
+</script>
+
     </div>
 </body>
 </html>

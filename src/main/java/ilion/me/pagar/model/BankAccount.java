@@ -6,6 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
 import ilion.me.pagar.util.JSONUtils;
 
+import javax.persistence.Transient;
 import javax.ws.rs.HttpMethod;
 import java.util.Collection;
 import ilion.me.pagar.BankAccountType;
@@ -47,6 +48,9 @@ public class BankAccount extends PagarMeModel<Integer> {
     @Expose
     @SerializedName("type")
     private BankAccountType type;
+    
+    @Transient
+    private String mensagemErro;
 
     public Boolean isChargeTransferFees() {
         return chargeTransferFees;
@@ -189,4 +193,14 @@ public class BankAccount extends PagarMeModel<Integer> {
         @SerializedName("cnpj")
         CNPJ
     }
+
+	public String getMensagemErro() {
+		return mensagemErro;
+	}
+
+	public void setMensagemErro(String mensagemErro) {
+		this.mensagemErro = mensagemErro;
+	}
+    
+    
 }

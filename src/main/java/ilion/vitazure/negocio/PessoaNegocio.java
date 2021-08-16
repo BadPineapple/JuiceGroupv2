@@ -9,13 +9,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ilion.SpringApplicationContext;
+import ilion.admin.negocio.EnviarSenhaEmailThread;
+import ilion.admin.negocio.PropEnum;
+import ilion.admin.negocio.PropNegocio;
 import ilion.admin.negocio.Usuario;
+import ilion.email.negocio.Email;
+import ilion.email.negocio.EmailSenderFactory;
 import ilion.util.StatusEnum;
 import ilion.util.StringUtil;
 import ilion.util.Uteis;
 import ilion.util.VLHForm;
 import ilion.util.ValueListInfo;
 import ilion.util.busca.PalavrasChaveCondicoes;
+import ilion.util.exceptions.EmailInvalidoException;
 import ilion.util.exceptions.ValidacaoException;
 import ilion.util.persistencia.HibernateUtil;
 import ilion.vitazure.model.Pessoa;
@@ -28,7 +35,12 @@ public class PessoaNegocio {
 	@Autowired
 	private HibernateUtil hibernateUtil;
 	
+	@Autowired
+	private PropNegocio propNegocio;
+	
 	public final static String ATRIBUTO_SESSAO = "pessoaSessao";
+	
+	public final static String AGENDA_SESSAO = "agendaPessoa";
 	
 	public Pessoa consultarPorId(Long id) {
 		return (Pessoa) hibernateUtil.findById(Pessoa.class, id);
@@ -160,6 +172,54 @@ public class PessoaNegocio {
 		}
 
 		return hibernateUtil.possuiRegistros(dc);
+	}
+	
+public void enviarSenhaEmail(String email) throws Exception {
+		
+		if( Uteis.ehNuloOuVazio(email) ) {
+			throw new EmailInvalidoException();
+    	}
+    	
+    	if( ! Uteis.ehEmailValido(email) ) {
+    		throw new EmailInvalidoException();
+    	}
+    	
+    	Pessoa pessoaVO = consultarPorEmail(email);
+    	
+    	if( pessoaVO == null) {
+    		throw new ValidacaoException("Usuário não encontrado.");
+    	} 
+    	
+    	EnviarEmailTheread.novo(pessoaVO);
+		
+	}
+	
+	public void esqueciMinhaSenhaEmail(Pessoa pessoaVO) throws Exception {
+		
+		String urlProp = propNegocio.findValueById(PropEnum.URL);
+		String nomeEmpresaProp = propNegocio.findValueById(PropEnum.NOME_EMPRESA);
+		
+		String url = urlProp+"/ilionnet/templateEsqueciSenha?id="+pessoaVO.getId();
+		
+		String assunto = "Envio de senha por e-mail - "+nomeEmpresaProp;
+		
+		String html = Uteis.getHtml(url);
+		
+		String senha = pessoaVO.getSenha();
+		senha = StringUtil.decodePassword(senha);
+		
+		html = html.replaceAll("#senha#", senha);
+		
+		Email e = new Email();
+		
+		e.setToEmail(pessoaVO.getEmail());
+		e.setToName(pessoaVO.getNome());
+		e.setSubject(assunto);
+		e.setMessage(html);
+		
+		EmailSenderFactory emailSenderFactory = 
+				SpringApplicationContext.getBean(EmailSenderFactory.class);
+		emailSenderFactory.getInstance().send(e);
 	}
 	
 }

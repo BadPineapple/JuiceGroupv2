@@ -21,8 +21,7 @@ public class TemaTrabalho {
 	  @SequenceGenerator(name = "temaTrabalho_id_seq", sequenceName = "temaTrabalho_id_seq", allocationSize = 1)
 	  private Long id;
 	  
-	  @Enumerated(EnumType.STRING)
-	  private TemasTrabalhoEnum tema;
+	  private String tema;
 	  
 	  @ManyToOne
 	  private Profissional profissional;
@@ -38,11 +37,11 @@ public class TemaTrabalho {
 			this.id = id;
 		}
 	
-		public TemasTrabalhoEnum getTema() {
+		public String getTema() {
 			return tema;
 		}
 	
-		public void setTema(TemasTrabalhoEnum tema) {
+		public void setTema(String tema) {
 			this.tema = tema;
 		}
 

@@ -3,7 +3,6 @@ package ilion.vitazure.enumeradores;
 public enum TemasTrabalhoEnum {
 	
 	NAO_INFORMADO(""),
-	RELACIONAMENTO("relacionamento"),
 	ACOMPANHAMENTO_PSICOLOGICO_GRAVIDEZ("Acompanhamento psicológico de gravidez"),
 	ACOMPANHAMENTO_PSICOLOGICO_IDOSO("Acompanhamento psicológico de idosos"),
 	ADAPTACAO_HOME_OFFICE("Adaptação ao home office"),
@@ -48,6 +47,7 @@ public enum TemasTrabalhoEnum {
 	REABILITACAO_COGNITIVA("Reabilitação cognitiva"),
 	REABILITACAO_NEUROPSICOLOGIA("Reabilitação neuropsicológica"),
 	RECRUTAMENTO_SELECAO_PESSOA("Recrutamento e seleção de pessoal"),
+	RELACIONAMENTO("Relacionamento"),
 	RELACIONAMENTO_AFETIVO("Relacionamentos afetivos"),
 	SAUDE_MENTAL("Saúde mental"),
 	SEXUALIDADE_IDENTIDADE_GENERO("Sexualidade e identidade de gênero"),

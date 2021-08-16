@@ -2,6 +2,7 @@ package ilion.vitazure.controller;
 
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -100,6 +101,7 @@ public class VitazureController {
 	@GetMapping("/vitazure/informacoes-perfil")
 	public String carregar(ModelMap modelMap, HttpServletRequest request) {
 		Pessoa pessoa = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
+		List<Agenda> listAgendaDia = agendaNegocio.consultarAgendaDia(pessoa);
 		pessoa = pessoaNegocio.consultarPorId(pessoa.getId());
 		Profissional profissional = new Profissional();
 		profissional = profissionalNegocio.consultarPorPessoa(pessoa.getId());
@@ -107,6 +109,7 @@ public class VitazureController {
 			profissional.setPessoa(pessoa);
 		}
 		modelMap.addAttribute("pessoa", pessoa);
+		modelMap.addAttribute("agendaDia", listAgendaDia);
 		if (pessoa.getCpf().equals("")) {
 			request.setAttribute("estados", EstadoEnum.values());
 			return "/ilionnet2/vitazure/completar-cadastro";
@@ -127,6 +130,7 @@ public class VitazureController {
 			request.setAttribute("tempoAntecendencia", TempoAntecendenciaEnum.values());
 			request.setAttribute("diasSemana", DiasSemanaEnum.values());
 			request.setAttribute("profissional", profissional);
+			request.setAttribute("informacacaoPerfil", true);
 			request.setAttribute("enderecoAtendimento", enderecoNegocio.consultarEnderecoPorPessoa(profissional.getId()));
 			return "/ilionnet2/vitazure/informacoes-perfil";
 		}
@@ -169,8 +173,8 @@ public class VitazureController {
 	 @RequestMapping("/vitazure/temasAtendimento/{id}")
 	 public  ResponseEntity<String> consultaTemasAtendimento(@PathVariable String id) {
 		 try {
-			 List<TemaTrabalho> temaTrabalho = temaNegocio.consultarTemasPorProfissional(Long.valueOf(id));
-			 return new ResponseEntity<>(gson.toJson(temaTrabalho), HttpStatus.OK);
+			 List<TemaTrabalho> temaTrabalhoEnum = temaNegocio.consultarTemasPorProfissional(Long.valueOf(id));
+			 return new ResponseEntity<>(gson.toJson(temaTrabalhoEnum), HttpStatus.OK);
 		 } catch (Exception e) {
 			 return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		 }
@@ -190,9 +194,9 @@ public class VitazureController {
 	 @GetMapping("/vitazure/meuCadastro")
 		public String meuCadastro(ModelMap modelMap, HttpServletRequest request) {
 			Pessoa pessoa = (Pessoa) request.getSession().getAttribute("pessoaSessao");
-			
+			List<Agenda> listAgendaDia = agendaNegocio.consultarAgendaDia(pessoa);
+			modelMap.addAttribute("agendaDia", listAgendaDia);
 			modelMap.addAttribute("pessoa", pessoa);
-			
 			return "/ilionnet2/vitazure/completar-cadastro";
 			
 	 }
@@ -201,6 +205,8 @@ public class VitazureController {
 	 public String listaConsulta(ModelMap modelMap, HttpServletRequest request) {
 		 Pessoa pessoa = (Pessoa) request.getSession().getAttribute("pessoaSessao");
 		 modelMap.addAttribute("pessoa", pessoa);
+		 List<Agenda> listAgendaDia = agendaNegocio.consultarAgendaDia(pessoa);
+		 modelMap.addAttribute("agendaDia", listAgendaDia);
 		 VLHForm vlhForm = VLHForm.getVLHSession("agendaLista", request);
 		 vlhForm.setPagingNumberPer(10);
 		 ValueList listAgendas = agendaNegocio.buscar(vlhForm, new ValueListInfo(vlhForm) , null,pessoa);
@@ -224,12 +230,16 @@ public class VitazureController {
 	 public String pagamentoPagarMe(ModelMap modelMap, HttpServletRequest request) {
 		 Pessoa pessoa = (Pessoa) request.getSession().getAttribute("pessoaSessao");
 		 modelMap.addAttribute("pessoa", pessoa);
+		 List<Agenda> listAgendaDia = agendaNegocio.consultarAgendaDia(pessoa);
+		modelMap.addAttribute("agendaDia", listAgendaDia);
 			return "/ilionnet2/vitazure/assinatura";
 		}
 	
 	  @GetMapping("/vitazure/consultaTrasacoes")
 	  public String consultaTransacoes(ModelMap modelMap,HttpServletRequest request) {
 	    Pessoa pessoa = (Pessoa) request.getSession().getAttribute("pessoaSessao");
+	    List<Agenda> listAgendaDia = agendaNegocio.consultarAgendaDia(pessoa);
+		modelMap.addAttribute("agendaDia", listAgendaDia);
 	    List<PagamentoPagarMe> listPagamentos = new ArrayList<PagamentoPagarMe>();
 	    listPagamentos.addAll(pagarMeNegocio.consultarPagamentoPagarMe(pessoa.getId(), pessoa.getPsicologo()));
 	    modelMap.addAttribute("pessoa", pessoa);
@@ -243,6 +253,8 @@ public class VitazureController {
 	  @GetMapping("/vitazure/minhaAssinatura")
 		public String meuPlano(ModelMap modelMap, HttpServletRequest request) {
 			Pessoa pessoa = (Pessoa) request.getSession().getAttribute("pessoaSessao");
+			List<Agenda> listAgendaDia = agendaNegocio.consultarAgendaDia(pessoa);
+			modelMap.addAttribute("agendaDia", listAgendaDia);
 			Profissional profissional = new Profissional();
 			profissional = profissionalNegocio.consultarPorPessoa(pessoa.getId());
 			modelMap.addAttribute("pessoa", pessoa);
@@ -253,6 +265,8 @@ public class VitazureController {
 	  @GetMapping("/vitazure/alteraMinhaAssinatura")
 	  public String alteraMinhaAssinatura(ModelMap modelMap, HttpServletRequest request) {
 		  Pessoa pessoa = (Pessoa) request.getSession().getAttribute("pessoaSessao");
+		  List<Agenda> listAgendaDia = agendaNegocio.consultarAgendaDia(pessoa);
+		  modelMap.addAttribute("agendaDia", listAgendaDia);
 		  Profissional profissional = new Profissional();
 		  profissional = profissionalNegocio.consultarPorPessoa(pessoa.getId());
 		  modelMap.addAttribute("pessoa", pessoa);

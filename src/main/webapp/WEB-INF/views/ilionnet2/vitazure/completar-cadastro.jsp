@@ -88,7 +88,7 @@
                                 <div class="col-12">
                                     <div class="input-block">
                                         <label>Telefone</label>
-                                        <input type="text" data-mask="(00)0000-0000" ng-model="pessoa.telefone" required/>
+                                        <input type="text" data-mask="(00)0000-0000" ng-model="pessoa.telefone"/>
                                     </div>
                                 </div>
                                 <div class="col-12">

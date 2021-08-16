@@ -24,6 +24,10 @@ public class ProfissionalVH {
 
 	private List<TemaTrabalho> temasTrabalho;
 
+	private List<String> temas;
+	
+	private Especialidade especialidadeAdicionar;
+	
 	public Profissional getProfissional() {
 		return profissional;
 	}
@@ -85,6 +89,22 @@ public class ProfissionalVH {
 
 	public void setTemasTrabalho(List<TemaTrabalho> temasTrabalho) {
 		this.temasTrabalho = temasTrabalho;
+	}
+
+	public Especialidade getEspecialidadeAdicionar() {
+		return especialidadeAdicionar;
+	}
+
+	public void setEspecialidadeAdicionar(Especialidade especialidadeAdicionar) {
+		this.especialidadeAdicionar = especialidadeAdicionar;
+	}
+
+	public List<String> getTemas() {
+		return temas;
+	}
+
+	public void setTemas(List<String> temas) {
+		this.temas = temas;
 	}
 
 	

@@ -4,8 +4,8 @@ public enum TempoAntecendenciaEnum {
 	
 	NAO_INFORMADO("",""),
 	UMA("1","1 Hora"),
-	DUAS("2","2 Hora"),
-	TREIS("3","3 Hora");
+	DUAS("2","2 Horas"),
+	TREIS("3","3 Horas");
 	
 	private String nome;
 	

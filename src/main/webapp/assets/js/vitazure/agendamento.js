@@ -138,6 +138,7 @@ function agendar(respostaPagamento ,$scope, $http, $window , id) {
 $http.post("/vitazure/agendar/" , retornoToken)
         .then(function (response) {
             alert_success(response.data.message, () => {
+	            document.getElementById("spinner").style.display = "none";
 				$window.location.href = "/vitazure/telaAgradecimento";
 			});
         }).catch(function (response) {
@@ -149,6 +150,7 @@ $http.post("/vitazure/agendar/" , retornoToken)
 function efetuarPagamento($scope, $http, $window , id ,valorOnline ,valorPresencial) {
     var confirma = 0;
     var tipoAtendimento  = tipoAgendamento;
+    document.getElementById("spinner").style.display = "inline-block";
     $.ajax({
         url: '/api/v1/getencryption',
         type: 'GET',
@@ -164,6 +166,7 @@ function efetuarPagamento($scope, $http, $window , id ,valorOnline ,valorPresenc
         var valorTotal = (tipoAgendamento == 'online' ? valorOnline : valorPresencial) * 100;
         var button = document.querySelector('button');
         function handleSuccess(data) {
+	        document.getElementById("spinner").style.display = "inline-block";
             agendar(data ,$scope, $http, $window , id);
         }
         function handleError(data) {
@@ -175,6 +178,7 @@ function efetuarPagamento($scope, $http, $window , id ,valorOnline ,valorPresenc
                 success: handleSuccess,
                 error: handleError
             });
+            document.getElementById("spinner").style.display = "none";
             checkout.open({
                 paymentButtonText: 'Finalizar',
 				amount: valorTotal,

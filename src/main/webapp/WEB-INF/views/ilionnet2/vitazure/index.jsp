@@ -20,7 +20,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12 col-md-7 col-xl-7">
-                        <h1>Seu psicólogo e terapia online!</h1>
+                        <h1>Alcance uma vida saudável com a terapia online <span style="color: #0097d6;">Vitazure</span></h1>
 
                         <p>Faça sua consulta pelo celular, tablet ou computador, a qualquer hora com privacidade e segurança garantidas.</p>
 
@@ -74,9 +74,9 @@
                         <div class="join-us">
                             <p><span>Prático</span> <span>Seguro</span> <span>Ecônomico</span></p>
 
-                            <h5>Conheça nossos profissionais licenciados</h5>
+                            <h5>Conheça nossa rede de profissionais licenciados</h5>
 
-                            <p>Psicólogos(as), profissionais graduados e registrados no Conselho de Psicologia para o exercício profissional da Psicologia, com cadastro específico (e-Psi) para atendimento por meio de TICs. Todos passam por um processo seguro de verificação e credenciamento na plataforma, além de aderirem a rigorosos códigos de ética e sigilo.</p>
+                            <p>Nossa rede de profissionais cobre uma variedade de especialidades para atender às suas necessidades específicas. São Profissionais graduados e registrados no Conselho Federal de Psicologia, autorizados (e-Psi) a atender por meio da Videoconferência. São Profissionais que passam por processo criterioso de credenciamento, sujeitos a rigoroso código de ética e sigilo.</p>
 
                             <p>Você é um psicólogo?</p>
 

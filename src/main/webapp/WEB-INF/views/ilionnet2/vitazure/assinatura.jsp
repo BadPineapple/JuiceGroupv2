@@ -19,10 +19,8 @@
                         <h3>Assinatura</h3>
                         <p>Escolha um plano que melhor atende às suas expectativas.</p>
                         <span class="notice-text">
-                            Todos os agendamentos seguem o horário de Brasília - HH:MM
-                            <figure>
-                                <img src="../assets/images/time.png" alt="">
-                            </figure>
+                            Todos os agendamentos seguem o horário de Brasília - 
+                             <div id="hora" style="padding-left: 4px;"></div>
                         </span>
                         <div class="planos">
                             <div class="row">
@@ -39,7 +37,7 @@
                                         </div>
 
                                         <div class="planos-description">
-                                            <ul>
+                                            <ul style="padding-bottom: 20px;">
                                                 <li>Agendamento online ilimitado</li>
 
                                                 <li>Anúncio de perfil no portal</li>
@@ -130,6 +128,45 @@
             </div>
         </div>
         <jsp:include page="includes/include-footer.jsp" flush="true" />
+        <script src="../assets/js/bundle.libs.ilionnet.js"></script>
+			<script src="../assets/js/bundle.scripts.ilionnet.js"></script>
+			<script src="../assets/js/bundle.libs.angular.js"></script>
+          <c:if test="${param.m == 'ok'}">
+	<button 
+		type="button" 
+		data-positionX="right" 
+		data-positionY="top" 
+		data-effect="fadeInUp" 
+		data-message="Dados gravados com sucesso."
+		data-type="success" 
+		class="btn pmd-ripple-effect btn-success pmd-z-depth pmd-alert-toggle"
+		id="alertSucess"
+		style="display:none;">
+		Sucesso
+	</button>
+	<script type="text/javascript">
+		(function() {
+			setTimeout(function() {
+				$('#alertSucess').click();
+			}, 300);
+		})();
+	</script>
+</c:if>
     </div>
+    
+    <script>
+    var myVar = setInterval(myTimer ,1000);
+    function myTimer() {
+        var d = new Date(), displayDate;
+       if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
+          displayDate = d.toLocaleTimeString('pt-BR');
+       } else {
+          displayDate = d.toLocaleTimeString('pt-BR', {timeZone: 'America/Belem'});
+       }
+          document.getElementById("hora").innerHTML = displayDate.substr(0, 5);
+    }
+    
+    </script>
+    
 </body>
 </html>

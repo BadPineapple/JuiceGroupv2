@@ -29,9 +29,9 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12 col-md-9 offset-md-3 col-xl-9 offset-xl-3">
-                        <h1 class="title-gray">Prepare-se: apartir de agora daremos início ao seu futuro!</h1>
+                        <h1 class="title-gray">Sua carreira está prestes a decolar, venha fazer parte da Vitazure e nós cuidaremos do resto.</h1>
     
-                        <p>Nos últimos meses vivenciamos transformações que, em uma situação dita normal levariam anos para acontecer. Novas tecnologias, novos conceitos, novos valores. A verdade é que o mundo nunca mais será o mesmo. As pessoas estão descobrindo e aproveitando diferentes formas de realizar suas atividades diárias. E o atendimento de saúde online, que já era uma tendência, se tornou uma realidade. </p>
+                        <p>Estamos muito felizes que você esteja próximo de se juntar a nós, atualmente temos clientes prontos para trabalhar com você. Em breve, você terá acesso à nossa maravilhosa comunidade de profissionais.</p>
     
                         <div class="sou-profissional-button">
                             <a href="#" class="button-secundary button-consulta">Quero saber mais.</a>
@@ -76,7 +76,7 @@
                         <div class="cellphone-right">
                             <h5>Mais do que atendimento virtual, um consultório online</h5>
     
-                            <p>Multiplique sua capacidade de atendimento com a consulta online e alcance qualquer paciente, em qualquer lugar. Sem taxa de mensalidade, com repasse de uma porcentagem do valor da consulta conforme modelo de atendimento: particular, empresas conveniadas ou planos de saúde (valores são abordados apenas no processo de seleção).</p>
+                            <p>Multiplique sua capacidade de atendimento com a consulta online e alcance qualquer paciente, em qualquer lugar. Faça uso do consultório online por um valor fixo mensal, muito mais baixo que o presencial.</p>
     
                             <a href="<ilion:url/>cadastre-se"" class="button-secundary">Quero fazer parte!</a>
                         </div>
@@ -133,6 +133,66 @@
         
                                             <p>Nossa plataforma possui certificados de segurança internacionais impossibilitando o vazamento de informações durante a seção e garantindo a segurança dos dados!</p>  
                                         </div> 
+                                    </div>
+                                </div>
+                                <div class="col-12 text-center">
+                                    <h2 style="margin: 10rem 0 8rem;">Para participar da rede<br> Vitazure,todos os profissionais<br> devem possuir o seguinte:</h2>
+                                </div>
+                                <div class="col-12 col-md-5 col-xl-5">
+                                    <div class="cadastro-profissional">
+                                        <div class="lista-cadastro">
+                                            <span>1.</span>
+
+                                            <p>Cadastro no Conselho Regional<br> de Psicologia ativo;</p>
+                                        </div>
+
+                                        <div class="lista-cadastro">
+                                            <span>2.</span>
+
+                                            <p>Cadastro aprovado ou já enviei o<br> pedido de cadastro no&nbsp;E-Psi;</p>
+                                        </div>
+
+                                        <div class="lista-cadastro">
+                                            <span>3.</span>
+
+                                            <p>Cadastro na plataforma<br> Vitazure;</p>
+                                        </div>
+
+                                        <div class="lista-cadastro">
+                                            <span>4.</span>
+
+                                            <p>Assinatura trimestral, semestral<br> ou anual na plataforma;</p>
+                                        </div>
+
+                                        <div class="lista-cadastro">
+                                            <span>5.</span>
+
+                                            <p style="transform: translateY(0px);">Conexão de internet confiável.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-6 offset-md-1 offsrt-xl-1">
+                                    <div class="happy-faces">
+                                        <div class="up-photos lista-cadastro">
+                                            <figure class="first-photo lista-cadastro">
+                                                <img src="../assets/images/img-3.jpg" alt="">
+                                            </figure>
+
+                                            <figure class="second-photo lista-cadastro">
+                                                <img src="../assets/images/img-cadastro-2.jpg" alt="">
+                                            </figure>
+                                        </div>
+
+                                        <div class="down-photos lista-cadastro">
+                                            <figure class="third-photo lista-cadastro">
+                                                <img src="../assets/images/img-cadastro-3.jpg" alt="">
+                                            </figure>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 text-center">
+                                    <div class="cellphone-right" style="margin: 0;">
+                                        <a href="cadastre-se" class="button-secundary">Crie sua conta</a>
                                     </div>
                                 </div>
                             </div>

@@ -1,8 +1,6 @@
 package ilion.gc.site.controller;
 
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -11,16 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.swing.text.html.parser.Entity;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.util.EntityUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,7 +26,6 @@ import ilion.gc.negocio.ArtigoSiteNegocio;
 import ilion.gc.taglibs.ArtigoParamsVO;
 import ilion.util.Uteis;
 import ilion.util.contexto.autorizacao.AcessoLivre;
-import ilion.util.contexto.autorizacao.PessoaLogada;
 import ilion.vitazure.model.HorarioAtendimento;
 import ilion.vitazure.model.Pessoa;
 import ilion.vitazure.model.PostBlog;
@@ -45,7 +33,6 @@ import ilion.vitazure.model.Profissional;
 import ilion.vitazure.negocio.HorarioAtendimentoNegocio;
 import ilion.vitazure.negocio.PessoaNegocio;
 import ilion.vitazure.negocio.ProfissionalNegocio;
-import sun.java2d.pipe.SpanShapeRenderer;
 
 @Controller
 @AcessoLivre
@@ -80,7 +67,7 @@ public class SiteController extends CustomErrorController {
 		Pessoa PessoaSessao = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
 		request.setAttribute("pessoa", PessoaSessao);
 		request.setAttribute("areaRestrita", false);
-		
+
 		String xml = Uteis.getHtml("https://blog.vitazure.com.br/feed/");
 
 		Collection<PostBlog> posts = new ArrayList<PostBlog>();
@@ -88,62 +75,41 @@ public class SiteController extends CustomErrorController {
 		int index = 0;
 
 		for (int i = 0; i < 4; i++) {
-
 			if (xml.indexOf("</title>", index) != -1) {
-
 				String item = xml.substring(xml.indexOf("<item>", index) + 7, xml.indexOf("</item>", index));
-
 
 				String titulo = item.substring(item.indexOf("<title>")+7, item.indexOf("</title>"));
 
-
 				String link = item.substring(item.indexOf("<link>")+6, item.indexOf("</link>"));
-
 
 				String src;
 
-
 				int indexI1 = item.indexOf("src=\"")+5;
-
 				int indexI2 = item.indexOf("g\"")+1;
-
 				if (indexI2 != 0) {
-
 					src = item.substring(indexI1, indexI2);
-
 				}else {
-
 					src = "";
-
 				}
-
 
 				byte[] bytes = titulo.getBytes(StandardCharsets.ISO_8859_1);
 
-
 				titulo = new String(bytes, StandardCharsets.UTF_8);
-
 
 				PostBlog post = new PostBlog(titulo, link, src);
 
-
 				posts.add(post);
 
-
 				index = xml.indexOf("</item>", index) + 1;
-
 			} else {
-
 				break;
-
 			}
-
 
 		}
 
+
 		request.setAttribute("posts", posts);
 
-		
 		return "/ilionnet2/vitazure/index";
 	}
 

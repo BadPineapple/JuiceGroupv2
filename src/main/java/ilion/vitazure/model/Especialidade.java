@@ -21,8 +21,7 @@ public class Especialidade {
 	  @SequenceGenerator(name = "especialidade_id_seq", sequenceName = "especialidade_id_seq", allocationSize = 1)
 	  private Long id;
 	 
-	 @Enumerated(EnumType.STRING)
-	  private EspecialidadesEnum especialidade;
+	  private String especialidade;
 	  
 	  @ManyToOne
 	  private Profissional profissional;
@@ -38,11 +37,11 @@ public class Especialidade {
 		this.id = id;
 	}
 
-	public EspecialidadesEnum getEspecialidade() {
+	public String getEspecialidade() {
 		return especialidade;
 	}
 
-	public void setEspecialidade(EspecialidadesEnum especialidade) {
+	public void setEspecialidade(String especialidade) {
 		this.especialidade = especialidade;
 	}
 	 

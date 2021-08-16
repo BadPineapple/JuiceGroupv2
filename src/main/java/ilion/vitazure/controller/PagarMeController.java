@@ -72,7 +72,7 @@ public class PagarMeController {
   @ResponseBody
   public ResponseEntity<JsonString> salvarCartao(HttpServletRequest request, @RequestBody Profissional profissional) {
     try {
-
+    	
     String resposta = pagarMeNegocio.cadastraRecebedor(profissional);
 
     if(resposta.contains("Erro")) {
@@ -80,7 +80,7 @@ public class PagarMeController {
     }
       return new ResponseEntity<>(new JsonString("Conta cadastrada com sucesso"), HttpStatus.OK);
     }catch (Exception e) {
-      return new ResponseEntity<>(new JsonString("Erro ao cadastrar a conta, verifique as informações"), HttpStatus.BAD_REQUEST);
+      return new ResponseEntity<>(new JsonString(e.getMessage()), HttpStatus.BAD_REQUEST);
     }
 
   }

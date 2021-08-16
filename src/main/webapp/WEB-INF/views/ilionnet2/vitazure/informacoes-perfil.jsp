@@ -6,11 +6,20 @@
 	<jsp:include page="includes/include-head.jsp" flush="true" />
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>	
 	<script src="../assets/js/vitazure/informacoesPerfil.js"></script>
+	<script type="text/javascript" src="<c:url value='/ilionnet/design/script/jquery/jquery.js'/>"></script>
 	<script src="../assets/js/vitazure/cep.js"></script>
+	<script type="text/javascript" src="<c:url value='../ilionnet/design/script/tiny_mce/tiny_mce.js'/>"></script>
+<script type="text/javascript" src="<c:url value='../ilionnet/design/script/funcoesTinyMCE.js'/>"></script>
+<script type="text/javascript" src="../ilionnet/design/script/CalendarPopup.js"></script>
+<script type="text/javascript" src="../ilionnet/design/script/common.js"></script>
+	<script type="text/javascript">
+	document.write(getCalendarStyles());
+	var cal1x = new CalendarPopup("testdiv1");
+	</script>
+		<div id="testdiv1" style="position:absolute;visibility:hidden;background-color:white;layer-background-color:white;z-index:10000;"></div>
 </head>
 
 <body>
-	
     <div id="app">
         <jsp:include page="includes/include-header-internas.jsp" flush="true" />
         <jsp:include page="includes/include-menu-painel.jsp" flush="true" />
@@ -106,12 +115,14 @@
                          					temasAtendimento();
                          					horarioAtendimento();
                          					apresentarCampoData('${profissional.avisoFerias}');
+                         					apresentarCampoConsulta40Mes('${profissional.habilitarDesconto40}');
+                         					apresentarPrimeiraConsultaCortesia('${profissional.primeiraConsultaCortesia}');
+                         					
                           					 "/>
                             <div class="match-toggle">
                                 <div class="toggle-header">
                                     <strong>Dados Profissional</strong>
                                 </div>
-    
                                 <div class="toggle-body">
                                     <p>Preencha aqui os dados importantes para a exibição do seu perfil. Essas informações serão apresentadas para o paciente.</p>
                                     <div class="row">
@@ -124,6 +135,7 @@
                                                     </figure>
                                                     <p>Alterar foto</p>
                                                 </label>
+                                                <p>Tamanho Maximo da Imagem 500Kb</p>
                                             </div>
                                         </div>
 
@@ -136,7 +148,7 @@
 
                                         <div class="col-12 col-md-6 col-xl-6">
                                             <div class="input-block">
-                                                <label>Cadastro do E-Psi</label>
+                                                <label>Cadastro do e-Psi</label>
                                                 <input type="text" ng-model="ProfissionalVH.profissional.cadastroEpsi"  />
                                             </div>
                                         </div>
@@ -156,8 +168,8 @@
                                                 <label>Especialidade</label>
                                                 <select ng-model="especialidade" class="form-control input-sm" style="width: 95%">
 													<c:forEach var="especialidade" items="${especialidades}">
-				   							           <option  ng-if="ProfissionalVH.profissional.tipoProfissional == 'PSICOLOGO' && ${especialidade.tipoProfissional == 'PSICOLOGO'}" value="${especialidade}">${especialidade.valor}</option>
-				   							           <option  ng-if="ProfissionalVH.profissional.tipoProfissional == 'MEDICO' && ${especialidade.tipoProfissional == 'MEDICO'}" value="${especialidade}">${especialidade.valor}</option>
+				   							           <option  ng-if="ProfissionalVH.profissional.tipoProfissional == 'PSICOLOGO' && ${especialidade.tipoProfissional == 'PSICOLOGO'}" value="${especialidade.valor}">${especialidade.valor}</option>
+				   							           <option  ng-if="ProfissionalVH.profissional.tipoProfissional == 'MEDICO' && ${especialidade.tipoProfissional == 'MEDICO'}" value="${especialidade.valor}">${especialidade.valor}</option>
 										            </c:forEach>
 									           </select>
 									           <a class="btn pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-default btn-sm" style="position: absolute;left: 94%;top: 32px;"  ng-click =adicionarEspecialidades()>
@@ -177,7 +189,7 @@
 	                                                <label>Temas de Trabalho</label>
 	                                               <select ng-model="temasTrabalho" class="form-control input-sm" style="width: 95%">
 														<c:forEach var="temas" items="${temasTrabalho}">
-					   							          <option  value="${temas}">${temas.valor}</option>
+					   							          <option  value="${temas.valor}">${temas.valor}</option>
 											            </c:forEach>
 										           </select>
 	                                            <a class="btn pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-default btn-sm" style="position: absolute;left: 94%;top: 32px;"  ng-click =adicionarTemas()>
@@ -285,6 +297,9 @@
                                                 <textarea cols="20" rows="5" ng-model="ProfissionalVH.profissional.biografia" placeholder="Informe aqui sua vida profissional. Procure ser mais claro possível." style="color: #A6A6A6"></textarea>
                                             </div>
                                         </div>
+                                        <div class="col-12">
+                                                    <button class="button-secundary checkbox-button" ng-click="perfilProfissional()" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Salvar</button>
+                                         </div>
                                       </div>
                                   </div>      
     						</div>
@@ -311,7 +326,7 @@
                                                 <div class="col-12 col-md-6 col-xl-6">
                                                     <div class="input-block">
                                                         <label>CEP</label>
-                                                        <input type="text" ng-model="cep" onblur="buscaEndereco(this.value)" id="cep" data-mask="00.000-000"  />
+                                                        <input type="text" ng-model="cep" onblur="buscaEndereco(this.value)" id="cep" data-mask="00.000-000"/>
                                                     </div>
                                                 </div>
 
@@ -445,13 +460,13 @@
                                         <div class="col-12 col-md-4 col-xl-4">
                                                     <div class="input-block">
                                                         <label>Hora Inicio</label>
-                                                        <input type="text" ng-model="horaInicio" data-mask="00:00"  />
+                                                        <input type="text" ng-model="horaInicio" id="horaInicio" data-mask="00:00"  onchange="validarHora(this.value,'horaInicio')"/>
                                                     </div>
                                          </div>
                                         <div class="col-12 col-md-4 col-xl-4">
                                                     <div class="input-block">
                                                         <label>Hora Fim</label>
-                                                        <input type="text" ng-model="horaFim" data-mask="00:00"  />
+                                                        <input type="text" ng-model="horaFim" id="horaFim" data-mask="00:00"  onchange="validarHora(this.value ,'horaFim')"/>
                                                     </div>
                                          </div>
                                         <div class="col-12 col-md-12 col-xl-12">
@@ -525,7 +540,7 @@
                                         </div>
                                         <div class="col-12">
                                             <div class="input-block">
-                                                <label>Tempo de antecendencia:</label>
+                                                <label>Tempo minimo de antecendencia:</label>
                                                 <select ng-model="ProfissionalVH.profissional.tempoAntecendencia" class="form-control input-sm">
 													<c:forEach var="tempo" items="${tempoAntecendencia}">
 				   							          <option value="${tempo}">${tempo.valor}</option>
@@ -552,11 +567,11 @@
 
                                         <div class="col-12">
                                             <div class="toogle-title">
-                                                <p>O Pagar.me é um sistema seguro de recebimento de valores. Para que você tenha acesso aos valores pagos pelo seus pacientes você deve preencher os dados abaixo. Os valores serão resgatados diariamente em até 48h após pagamento por boletos e 30 dias após pagamento por cartões de crédito em sua conta configurada.</p>
+                                                <p>O Pagar.me é um sistema seguro de recebimento de valores. Para que você tenha acesso aos valores pagos pelos seus pacientes você deve preencher os dados abaixo. Os valores serão resgatados semanalmente, sendo 30 dias após pagamento por cartões de crédito em sua conta configurada.</p>
 
                                                 <img src="../assets/images/pagar-me.jpeg" alt="" style="width: 35%;">
 
-                                                <p>Qualquer dúvida à respeito dos seus pagamentos, por favor enviar e-mail para contato@vitazure.com.br</p>
+                                                <p>Qualquer dúvida a respeito dos seus pagamentos, por favor enviar e-mail para atendimento@vitazure.com.br</p>
                                             </div>
                                         </div>
 
@@ -585,28 +600,28 @@
                                         <div class="col-12">
                                             <div class="input-block">
                                                 <label>Agência:</label>
-                                                <input type="text" ng-model="ProfissionalVH.profissional.agencia"   />
+                                                <input type="text" ng-model="ProfissionalVH.profissional.agencia"  data-mask="0000"/>
                                             </div>
                                         </div>
         
                                         <div class="col-12">
                                             <div class="input-block">
                                                 <label>Conta:</label>
-                                                <input type="text" ng-model="ProfissionalVH.profissional.conta"   />
+                                                <input type="text" ng-model="ProfissionalVH.profissional.conta"   data-mask="0000000000000"/>
                                             </div>
                                         </div>
         
                                         <div class="col-12">
                                             <div class="input-block">
                                                 <label>Conta (dígito verificador):</label>
-                                                <input type="text" ng-model="ProfissionalVH.profissional.digitoVerificador" />
+                                                <input type="text" ng-model="ProfissionalVH.profissional.digitoVerificador" data-mask="0"/>
                                             </div>
                                         </div>
         
                                         <div class="col-12">
                                             <div class="input-block">
                                                 <label>Nome do favorecido</label>
-                                                <input type="text" ng-model="ProfissionalVH.profissional.nomeFavorecido"   />
+                                                <input type="text" ng-model="ProfissionalVH.profissional.nomeFavorecido"/>
                                             </div>
                                         </div>
 
@@ -729,11 +744,12 @@
 
                                         <div class="col-12">
                                             <div class="checkbox">
-                                                <input type="checkbox" ng-model="ProfissionalVH.profissional.primeiraConsultaCortesia" id="primeiraConsultaCortesia" ng-checked="${profissional.primeiraConsultaCortesia}"/>
+                                                <input type="checkbox" ng-model="ProfissionalVH.profissional.primeiraConsultaCortesia" id="primeiraConsultaCortesia" ng-checked="${profissional.primeiraConsultaCortesia}" onclick="apresentarPrimeiraConsultaCortesia(this.checked)"/>
                                                 <label>Habilitar opção para uma primeira consulta cortesia dos novos pacientes</label>
                                             </div>
-    
-                                            <p>Quantidade de consultas cortesias no mês:    <input type="text" style="width: 32px;" ng-model="ProfissionalVH.profissional.quantidadeConsultaCortesiaMes"/></p>
+                                            <div class="col-12" style="display:none;" id="divPrimeiraConsultaCortesia">
+                                             <p>Quantidade de consultas cortesias no mês: <input type="text" id="quantidadeConsultaCortesiaMes" style="width: 32px;text-align: center;" onchange="validarQuantidadeCortesiaMes(this.value)" ng-model="ProfissionalVH.profissional.quantidadeConsultaCortesiaMes" data-mask="00"/></p>
+                                       		</div>
                                         </div>
 
                                         <div class="col-12">
@@ -758,7 +774,6 @@
                                                 <label>Confirmar que atende em Libras</label>
                                             </div>
                                         </div>
-
                                         <div class="col-12">
                                             <button class="button-secundary checkbox-button" ng-click="perfilProfissional()" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Salvar</button>
                                         </div>
@@ -781,11 +796,12 @@
 
                                         <div class="col-12">
                                             <div class="checkbox">
-                                                <input type="checkbox" ng-model="ProfissionalVH.profissional.habilitarDesconto40" id="habilitarDesconto40" ng-checked="${profissional.habilitarDesconto40}" />
+                                                <input type="checkbox" ng-model="ProfissionalVH.profissional.habilitarDesconto40" id="habilitarDesconto40" ng-checked="${profissional.habilitarDesconto40}" onclick="apresentarCampoConsulta40Mes(this.checked)"/>
                                                 <label>Habilitar desconto de R$40,00</label>
                                             </div>
-    
-                                            <p>Quantidade de consultas cortesias no mês: <input type="text" style="width: 32px;" ng-model="ProfissionalVH.profissional.quantidadeConsultaDesconto40Mes"/></p>
+    										<div class="col-12" style="display:none;" id="divQuantidadeConsulta40Mes">
+                                               <p>Quantidade de consultas cortesias no mês: <input type="text" id="quantidadeConsultaDesconto40Mes" onchange="validarQuantidadeConsultaDesconto40Mes(this.value)" style="width: 32px;text-align: center;" ng-model="ProfissionalVH.profissional.quantidadeConsultaDesconto40Mes"/></p>
+                                            </div>   
                                         </div>
 
                                         <div class="col-12">
@@ -803,7 +819,7 @@
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="toogle-title">
-                                                <p>Se marcado essa opção todos seus horários ficarão inativos, impossibilitando um possível agendamento de paciente. Essa opção é geralmente utilizada quando o psicólogo vai sair de férias. A sua assinatura do Vitazure não será pausada as cobranças das mensalidades vão ocorrer da mesma forma.</p>
+                                                <p>Se marcado essa opção todos seus horários ficarão indisponíveis, impossibilitando o agendamento de paciente. Essa opção é geralmente utilizada quando o profissional vai sair de férias e/ou afastar-se por um período determinado. A sua assinatura do Vitazure não será pausada as cobranças das mensalidades vão ocorrer da mesma forma.</p>
                                             </div>
                                         </div>
 
@@ -816,14 +832,21 @@
 											<div class="col-6" style="padding-top: 20px;display:none;" id="divCampoDataInicialAviso">
 			                                    <div class="input-block">
 			                                        <label>Data Inicio</label>
-			                                        <input type="text" data-mask="00/00/0000" ng-model="ProfissionalVH.profissional.dataInicioAvisoFerias"/>
+			                                        <input type="text" data-mask="00/00/0000" ng-model="ProfissionalVH.profissional.dataInicioAvisoFerias" id="dataInicioAvisoFerias"/>
+			                                        <a href="javascript:;" style="position: absolute;left: 86%;top: 55%;" onClick="cal1x.select(document.getElementById('dataInicioAvisoFerias'),'linkDataInicioAvisoFerias','dd/MM/yyyy'); return false;" id="linkDataInicioAvisoFerias" name="linkDataInicioAvisoFerias">
+			                                           <i class="fas fa-calendar-week" style="font-size: 20px;"></i>
+			                                        </a>
 			                                    </div>
 			                                </div>
 											
 											<div class="col-6" style="padding-top: 20px;display:none;" id="divCampoFinalDataAviso">
-			                                    <div class="input-block">
+			                                    
+			                                       <div class="input-block">
 			                                        <label>Data Fim</label>
-			                                        <input type="text" data-mask="00/00/0000" ng-model="ProfissionalVH.profissional.dataFimAvisoFerias"/>
+			                                        <input type="text" data-mask="00/00/0000" ng-model="ProfissionalVH.profissional.dataFimAvisoFerias" id="dataFimAvisoFerias"/>
+			                                        <a href="javascript:;" style="position: absolute;left: 86%;top: 55%;" onClick="cal1x.select(document.getElementById('dataFimAvisoFerias'),'linkDataFimAvisoFerias','dd/MM/yyyy'); return false;" id="linkDataFimAvisoFerias" name="linkDataFimAvisoFerias">
+			                                           <i class="fas fa-calendar-week" style="font-size: 20px;"></i>
+			                                        </a>
 			                                    </div>
 			                                </div>
                                         <div class="col-12">
@@ -892,6 +915,23 @@ $('.valorMonetario').mask('#.##0.00', {reverse: true});
 		document.getElementById("divCampoFinalDataAviso").style.display = "none"; 
 	  }
   }
+</script>
+
+<script>
+function validarQuantidadeCortesiaMes(valor){
+	if (valor == 0 || valor == null) {
+		alert("Quantidade Tem que Ser Maior que Zero.");
+		document.getElementById("quantidadeConsultaCortesiaMes").value = "1";
+	}
+	
+}
+function validarQuantidadeConsultaDesconto40Mes(valor){
+	if (valor == 0 || valor == null) {
+		alert("Quantidade Tem que Ser Maior que Zero.");
+		document.getElementById("quantidadeConsultaDesconto40Mes").value = "1";
+	}
+	
+}
 </script>
     </div>
 </body>

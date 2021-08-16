@@ -1,9 +1,33 @@
 package ilion.vitazure.negocio;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Disjunction;
+import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import ilion.admin.negocio.PropEnum;
+import ilion.admin.negocio.PropNegocio;
+import ilion.admin.negocio.Usuario;
 import ilion.me.pagar.BankAccountType;
 import ilion.me.pagar.RecipientStatus;
-import ilion.me.pagar.model.*;
-import ilion.me.pagar.model.Recipient.TransferInterval;
+import ilion.me.pagar.model.BankAccount;
+import ilion.me.pagar.model.Item;
+import ilion.me.pagar.model.PagarMe;
+import ilion.me.pagar.model.PagarMeError;
+import ilion.me.pagar.model.PagarMeException;
+import ilion.me.pagar.model.Plan;
+import ilion.me.pagar.model.Postback;
+import ilion.me.pagar.model.Recipient;
+import ilion.me.pagar.model.SplitRule;
+import ilion.me.pagar.model.Subscription;
+import ilion.me.pagar.model.Transaction;
 import ilion.util.Uteis;
 import ilion.util.VLHForm;
 import ilion.util.ValueListInfo;
@@ -11,32 +35,9 @@ import ilion.util.busca.PalavrasChaveCondicoes;
 import ilion.util.persistencia.HibernateUtil;
 import ilion.vitazure.enumeradores.BancoEnum;
 import ilion.vitazure.enumeradores.StatusEnum;
-import ilion.vitazure.model.Agenda;
 import ilion.vitazure.model.PagamentoPagarMe;
-import ilion.vitazure.model.Pessoa;
 import ilion.vitazure.model.Profissional;
 import net.mlw.vlh.ValueList;
-
-import org.springframework.stereotype.Service;
-import org.hibernate.Hibernate;
-import org.hibernate.criterion.DetachedCriteria;
-import org.hibernate.criterion.Disjunction;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Restrictions;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import ilion.admin.negocio.PropNegocio;
-import ilion.admin.negocio.Usuario;
-import ilion.admin.negocio.PropEnum;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
-
-import javax.transaction.Transactional;
 
 @Service
 @SuppressWarnings("unchecked")
@@ -52,15 +53,17 @@ public class PagarMeNegocio {
   private HibernateUtil hibernateUtil;
 
 
-  public String cadastraRecebedor (Profissional profissional) {
-
-    BankAccount account = cadastraConta(profissional);
+  public String cadastraRecebedor (Profissional profissional) throws Exception{
+    
+	  validarCampos(profissional);  
+	  
+	try {
+         BankAccount account = cadastraConta(profissional);
 
     if(account == null) {
       return "Erro ao cadastrar conta bancária";
     }
 
-    try {
 
       PagarMe.init(propNegocio.findValueById(PropEnum.PAGAR_ME_API_KEY));
 
@@ -86,16 +89,39 @@ public class PagarMeNegocio {
       return "Cadastrado com sucesso";
     }
     catch(PagarMeException e) {
-      return "Erro ao cadastrar recebedor";
+      return tratamentoErroPagarMe(e.getErrors());
     }
 
   }
 
-  private BankAccount cadastraConta(Profissional profissional) {
+  
+  private void validarCampos(Profissional profissional) throws Exception {
+	  
+	  if (profissional.getAgencia().trim().equals("")) {
+		  throw new Exception("Agencia Não Informada.");
+	  }else if (profissional.getConta().trim().equals("")) {
+		  throw new Exception("Conta Não Informada.");
+	  }else if (profissional.getDigitoVerificador().trim().equals("")) {
+		  throw new Exception("Digito Verificador Não Informada.");
+	  }else if (profissional.getNomeFavorecido().trim().equals("")) {
+		  throw new Exception("Nome Valorecido Não Informada.");
+	  }
+	  
+  }
+  
+  private String tratamentoErroPagarMe(Collection<PagarMeError> erros) {
+	StringBuilder ErroTransacao = new StringBuilder();
+	ErroTransacao.append("Erro Ao Salvar Cadastro ");
+	erros.stream().forEach(pagarMeError -> ErroTransacao.append(pagarMeError.getMessage()).append(" ").append(pagarMeError.getParameterName()));
+	return ErroTransacao.toString();
+	
+  }
+  
+  
+  private BankAccount cadastraConta(Profissional profissional) throws PagarMeException {
 
     PagarMe.init(propNegocio.findValueById(PropEnum.PAGAR_ME_API_KEY));
 
-    try {
       BankAccount account = consultaConta(profissional.getPessoa().getId());
 
       if(account != null) {
@@ -124,11 +150,6 @@ public class PagarMeNegocio {
         return null;
       }
       return account;
-    }
-    catch (PagarMeException e) {
-      return null;
-    }
-
   }
 
   private BankAccount consultaConta(Long idPessoa) {

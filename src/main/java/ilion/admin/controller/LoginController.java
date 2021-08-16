@@ -16,6 +16,8 @@ import ilion.gc.util.UteisGC;
 import ilion.util.Uteis;
 import ilion.util.contexto.autorizacao.AcessoLivre;
 import ilion.util.exceptions.ValidacaoException;
+import ilion.vitazure.model.Pessoa;
+import ilion.vitazure.negocio.PessoaNegocio;
 
 @Controller
 @AcessoLivre
@@ -25,6 +27,9 @@ public class LoginController extends CustomErrorController {
 	
 	@Autowired
 	private UsuarioNegocio usuarioNegocio;
+	
+	@Autowired
+	private PessoaNegocio pessoaNegocio;
 	
 	@RequestMapping("/ilionnet")
     public String redirectLogin(HttpServletRequest request) {
@@ -138,6 +143,25 @@ public class LoginController extends CustomErrorController {
         Boolean inserido = usuarioNegocio.inserirDadosIniciais();
     	
         return "redirect:/ilionnet/login?m=inserido-"+inserido;
+    }
+    
+    @RequestMapping("/ilionnet/templateEsqueciSenha")
+    public String esqueciMinhaSenhaEmail(Long id, ModelMap modelMap) {
+    	
+    	if(id == null) {
+    		return null;
+    	}
+    	
+    	Pessoa pessoa = (Pessoa) pessoaNegocio.consultarPorId(id);
+    	
+    	if(pessoa == null) {
+    		logger.error("usuário não encontrado: id: "+id);
+    		return null;
+    	}
+    	
+    	modelMap.addAttribute("pessoa", pessoa);
+    	
+    	return "/ilionnet/modulos/admin/usuario-senha-email";
     }
     
 }

@@ -1582,4 +1582,22 @@ public class Uteis {
 		date.set(Calendar.SECOND, 0);
 		date.set(Calendar.MILLISECOND, 0);
 		}
+	
+	public static String tratamentoMensagemErro(Exception exeption) {
+			
+			if (exeption.getMessage() == null) {
+				return "Aconteceu um problema inesperado, informe ao administrador e o mesmo será solucionado.";
+			}
+			
+	        if (exeption.getCause().getCause().toString().contains("table")) {
+	           String table = "";
+	           table = exeption.getCause().getCause().toString().substring(exeption.getCause().getCause().toString().lastIndexOf("table")+6, exeption.getCause().getCause().toString().length());
+			   table = table.substring(table.indexOf("\"")+1, table.length());
+			   table = table.substring(0, table.indexOf("\""));
+			   return "Valor Referenciado com a Tabela "+  table;
+			}
+		
+		return exeption.getMessage();
+	}
+	
 }

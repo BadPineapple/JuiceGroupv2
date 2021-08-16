@@ -41,6 +41,10 @@
 
 .show {display: block;}
 </style>
+<div class="divSpinner" id="spinner">   
+   <img alt="" src="../../assets/images/logo-square.png" style="width: 126px;position: relative;top: 167px;left: 49%;">
+   <div class="spinner"></div>
+</div>
     <div class="container">
         <div class="row">
             <div class="col-6 col-md-8 col-xl-8">

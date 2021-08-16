@@ -18,9 +18,70 @@
             </div>
             <div class="col-12 col-md-6 col-xl-6">
                 <div class="entrar-consulta">
-                    <a href="https://vitazure.whereby.com/634ec6d1-a49c-439e-a41d-9f8fa52c1122?embed&logo=on" target="_blank" class="button-secundary">Entrar na consulta</a>
+                    <input type="text" value="${agendaDia}" id="agendaDia" style="display: contents;"/>
+                    <a href="" target="_blank" id="linkAcesso" class="not-active button-secundary">Entrar na consulta</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<style>
+.not-active {
+  pointer-events: none;
+  cursor: default;
+  text-decoration: none;
+  color: #f3f3f3;
+  background: #ddd;
+}
+</style>
+
+<script>
+
+class Agenda{
+  constructor(agenda) {
+	const agendaVO = agenda.split(',');  
+    this.id = agendaVO[0];
+    this.horaLiberar = agendaVO[1];
+    this.horaBloquear = agendaVO[2];
+    this.horaAlert = agendaVO[3];
+    this.url = agendaVO[4];
+    this.liberadoAcessoa = false;
+  }
+}
+
+ var agendas = new Array();
+    var myVar = setInterval(myTimer ,2000);
+    function myTimer() {
+        var d = new Date(), displayDate;
+       if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
+          displayDate = d.toLocaleTimeString('pt-BR');
+       } else {
+          displayDate = d.toLocaleTimeString('pt-BR', {timeZone: 'America/Belem'});
+       }
+            agendas = new Array();      
+            var opa = document.getElementById("agendaDia").value;
+            const agendaVO = opa.split('Agenda[');
+            var maisTeste = agendaVO[0];
+            agendaVO.forEach(eu);
+            for (var i = 0; i < agendas.length; i++) {
+            	if (displayDate.substr(0, 5) >= agendas[i].horaLiberar &&  displayDate.substr(0, 5) < agendas[i].horaBloquear) {
+            		document.getElementById("linkAcesso").className = "button-secundary";
+            		document.getElementById("linkAcesso").href = agendas[i].url;
+				}
+            }
+    };
+    
+	
+
+function eu(item, indice){
+	if (indice > 0) {
+    	var io = item.replace('{','').replace('}]]','').replace('}],','');
+	    const agendaVO = io.split(',');
+	    var agenda = new Agenda(io);
+	    agendas.push(agenda);
+	}
+};
+    
+    
+    </script>

@@ -20,11 +20,38 @@
 
 	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 	<script src="../../assets/js/vitazure/como-funciona.js"></script>
-	
 	<link rel="stylesheet" href="../../assets/css/all.css">
 	
 	<link rel="icon" type="image/png" sizes="32x32" href="../../assets/images/logo-square.png">
 	<title>Vitazure</title>
 
-
-
+<style type="text/css">
+  .spinner{
+	  border-top: 8px solid rgba(0,0,0,.1);
+      border-top-color: rgba(0, 0, 0, 0.1);
+	  border-top-color: #40b2e2;
+      height: 200px;
+      width: 200px;
+      border-radius: 50%;
+      animation: spin 2s linear infinite;
+      position: relative;
+      left: 47%;
+  }
+  @keyframes spin {
+    to {transform : rotate(360deg);}
+  }
+  
+  .divSpinner{
+      display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+</style>

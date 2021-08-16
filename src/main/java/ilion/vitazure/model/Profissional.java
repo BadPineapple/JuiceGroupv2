@@ -413,6 +413,9 @@ public class Profissional implements Serializable{
 	}
 
 	public Integer getQuantidadeConsultaCortesiaMes() {
+		if (quantidadeConsultaCortesiaMes == null) {
+			quantidadeConsultaCortesiaMes = 1;
+		}
 		return quantidadeConsultaCortesiaMes;
 	}
 
@@ -437,6 +440,9 @@ public class Profissional implements Serializable{
 	}
 
 	public Integer getQuantidadeConsultaDesconto40Mes() {
+		if (quantidadeConsultaDesconto40Mes == null) {
+			quantidadeConsultaDesconto40Mes = 1;
+		}
 		return quantidadeConsultaDesconto40Mes;
 	}
 

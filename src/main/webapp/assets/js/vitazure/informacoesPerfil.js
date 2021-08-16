@@ -62,6 +62,9 @@ class HorarioAtenimento{
 
 
 function informacoesPerfilController($scope, $http, $window) {
+   
+    $scope.contatos = new Array();
+
     $scope.perfilProfissional = function () {
         perfilProfissional($scope, $http, $window);
     };
@@ -105,6 +108,13 @@ function informacoesPerfilController($scope, $http, $window) {
 	$scope.apresentarCampoData = function (apresentarCampo) {
     	apresentarCampoData(apresentarCampo);
 	}
+	$scope.apresentarCampoConsulta40Mes = function (apresentarCampo) {
+    	apresentarCampoConsulta40Mes(apresentarCampo);
+	}
+	$scope.apresentarPrimeiraConsultaCortesia = function (apresentarCampo) {
+    	apresentarPrimeiraConsultaCortesia(apresentarCampo);
+	}
+	
 }
 
 function perfilProfissional($scope, $http, $window) {
@@ -119,6 +129,8 @@ function perfilProfissional($scope, $http, $window) {
 	$scope.ProfissionalVH.profissional.convenio40 = document.getElementById("convenio40").checked;
 	$scope.ProfissionalVH.profissional.convenio50 = document.getElementById("convenio50").checked;
 	$scope.ProfissionalVH.profissional.convenio60 = document.getElementById("convenio60").checked;
+	$scope.ProfissionalVH.profissional.dataInicioAvisoFerias = document.getElementById("dataInicioAvisoFerias").value;
+	$scope.ProfissionalVH.profissional.dataFimAvisoFerias = document.getElementById("dataFimAvisoFerias").value;
 	$scope.ProfissionalVH.formacaoAcademica = formacaoInformadas;
 	$scope.ProfissionalVH.enderecoAtendimento = endercosInformadas;
 	$scope.ProfissionalVH.especialidade = especialidadeAtendimentos;
@@ -136,27 +148,6 @@ $http.post("/vitazure/perfilProfissional", $scope.ProfissionalVH)
         }).catch(function (response) {
         alert_error(response.data.message);
     })
-}
-
-function salvarConta($scope, $http, $window) {
-    window.onload = function() {
-        $scope.profissional.tipoConta = document.getElementById("tipoConta").checked;
-        $scope.profissional.banco = document.getElementById("banco").checked;
-        $scope.profissional.agencia = document.getElementById("agencia").checked;
-        $scope.profissional.conta = document.getElementById("conta").checked;
-        $scope.profissional.digitoVerificador = document.getElementById("digitoVerificador").checked;
-        $scope.profissional.nomeFavorecido = document.getElementById("nomeFavorecido").checked;
-    };
-
-    $http.post("/api/v1/registrar-cartao", $scope.ProfissionalVH.profissional)
-        .then(function (response) {
-            alert_success(response.data.message, () => {
-                $window.location.href = "/vitazure/informacoes-perfil";
-        });
-        }).catch(function (response) {
-        alert_error(response.data.message);
-    })
-
 }
 
 $(function ($scope) {
@@ -192,17 +183,29 @@ function uploadData($scope , formdata) {
            toast_success('Ótimo', 'Upload foi concluído com sucesso!');
         }, error: function (response) {
             console.log("Erro!!" + response.responseText);
-            alert_error(response.responseText);
+            if(response.responseText.includes('exceeds the configured maximum')){
+			  alert_error("Erro ao Incluir a Imagem verifique o Tamanho da Imagem Esta Dentro do Limite Permitido");
+			}else{
+              alert_error(response.responseText);
+			}
         }
     });
 }
 
 function adicionar($scope, $http, $window) {
-   	const formacaoAcademica = new FormacaoAcademica($scope.formacao , $scope.descricaoFormacao) 
-	formacaoInformadas.push(formacaoAcademica);
-	$("#tblCadastro td").remove();
-    formacaoInformadas.forEach(AdicionarTabela);
-	
+	if($scope.formacao == 'undefined' || $scope.formacao == null || $scope.formacao == ''){
+		 alert_error("Informar Formação");
+	 }else if($scope.descricaoFormacao == 'undefined' || $scope.descricaoFormacao == null || $scope.descricaoFormacao == ''){
+		 alert_error("Informar Descrição Formação");
+	 }
+     else{
+	   	const formacaoAcademica = new FormacaoAcademica($scope.formacao , $scope.descricaoFormacao) 
+		formacaoInformadas.push(formacaoAcademica);
+		$("#tblCadastro td").remove();
+	    formacaoInformadas.forEach(AdicionarTabela);
+		$scope.descricaoFormacao = '';
+		$scope.formacao = '';
+	 }
 }
 
 function AdicionarTabela(item, indice){
@@ -222,19 +225,41 @@ function Excluir(x){
 };
 
 
+function validarCamposEnderecoAtendimento(){
+  if(document.getElementById("cep").value == 'undefined' || document.getElementById("cep").value == null || document.getElementById("cep").value == ''){
+	alert_error("Informar CEP");
+	return false;
+  }else if(document.getElementById("uf").value == 'undefined' || document.getElementById("uf").value == null || document.getElementById("uf").value == ''){
+	alert_error("Informar Estado");
+	return false;
+  }else  if(document.getElementById("logradouro").value == 'undefined' || document.getElementById("logradouro").value == null || document.getElementById("logradouro").value == ''){
+	alert_error("Informar Logradouro");
+	return false;
+  }else  if(document.getElementById("cidade").value == 'undefined' || document.getElementById("cidade").value == null || document.getElementById("cidade").value == ''){
+	alert_error("Informar Cidade");
+	return false;
+  }else if(document.getElementById("bairro").value == 'undefined' || document.getElementById("bairro").value == null || document.getElementById("bairro").value == ''){
+	alert_error("Informar Bairro");
+	return false;
+  }
+   return true;
+}
+
 function adicionarEndereco($scope, $http, $window) {
-   	const enderecoAtendimento = new EnderecoAtendimento(document.getElementById("linkGoogleMaps").value,document.getElementById("uf").value,document.getElementById("logradouro").value,document.getElementById("complemento").value,document.getElementById("cep").value,document.getElementById("cidade").value,document.getElementById("bairro").value,document.getElementById("numero").value) 
-	endercosInformadas.push(enderecoAtendimento);
-	$("#tblCadastroEndereco td").remove();
-    endercosInformadas.forEach(AdicionarTabelaEndereco);
-	document.getElementById("linkGoogleMaps").value = "";
-	document.getElementById("uf").value = "";
-	document.getElementById("logradouro").value = "";
-	document.getElementById("complemento").value = "";
-	document.getElementById("cep").value = "";
-	document.getElementById("cidade").value = "";
-	document.getElementById("bairro").value = "";
-	document.getElementById("numero").value = "";
+    if(validarCamposEnderecoAtendimento()){
+	    const enderecoAtendimento = new EnderecoAtendimento(document.getElementById("linkGoogleMaps").value,document.getElementById("uf").value,document.getElementById("logradouro").value,document.getElementById("complemento").value,document.getElementById("cep").value,document.getElementById("cidade").value,document.getElementById("bairro").value,document.getElementById("numero").value) 
+		endercosInformadas.push(enderecoAtendimento);
+		$("#tblCadastroEndereco td").remove();
+	    endercosInformadas.forEach(AdicionarTabelaEndereco);
+		document.getElementById("linkGoogleMaps").value = "";
+		document.getElementById("uf").value = "";
+		document.getElementById("logradouro").value = "";
+		document.getElementById("complemento").value = "";
+		document.getElementById("cep").value = "";
+		document.getElementById("cidade").value = "";
+		document.getElementById("bairro").value = "";
+		document.getElementById("numero").value = "";
+    }	
 }
 
 function AdicionarTabelaEndereco(item, indice){
@@ -332,10 +357,14 @@ function horarioAtendimento($scope, $http, $window) {
 };
 
 function adicionarTemas($scope, $http, $window){
-	const tema = new TemasTrabalho($scope.temasTrabalho);
-	  temas.push(tema);
+	if($scope.temasTrabalho == 'undefined' || $scope.temasTrabalho == null){
+		 alert_error("Selecionar Item Para Adicionar");
+	  }else{
+	  const tema = new TemasTrabalho($scope.temasTrabalho);
+	  validarTemaAdicionado(tema);
 	  $("#panelFiltrosSelecionados a").remove();
       temas.forEach(AdicionarTabelaTema);
+	}
 }
 
 function AdicionarTabelaTema(item, indice){
@@ -353,11 +382,46 @@ function ExcluirTema(x){
 };
 
 function adicionarHorarioAtendimento($scope, $http, $window) {
-   	const horarioAtendimento = new HorarioAtenimento($scope.diaSemana,$scope.horaInicio,$scope.horaFim,$scope.horaAlmocoInicio,$scope.horaAlmocoFim,$scope.atendimentoOnline , $scope.enderecoSemanaHorario , $scope.atendimentoPresencial) 
-	horarioAtendimentos.push(horarioAtendimento);
-	$("#tblCadastroHorarioAtendimento td").remove();
-    horarioAtendimentos.forEach(AdicionarTabelaHorarioAtendimento);
+	if(validarCampos($scope.diaSemana,$scope.horaInicio,$scope.horaFim,$scope.atendimentoOnline , $scope.enderecoSemanaHorario , $scope.atendimentoPresencial)){
+	   	const horarioAtendimento = new HorarioAtenimento($scope.diaSemana,$scope.horaInicio,$scope.horaFim,$scope.horaAlmocoInicio,$scope.horaAlmocoFim,$scope.atendimentoOnline , $scope.enderecoSemanaHorario , $scope.atendimentoPresencial) 
+		horarioAtendimentos.push(horarioAtendimento);
+		$("#tblCadastroHorarioAtendimento td").remove();
+	    horarioAtendimentos.forEach(AdicionarTabelaHorarioAtendimento);
+        $scope.diaSemana = '';
+        $scope.horaInicio= '';
+        $scope.horaFim= '';
+        $scope.atendimentoOnline = false; 
+        $scope.enderecoSemanaHorario = '';
+        $scope.atendimentoPresencial = false;
+    }
 	
+}
+
+function validarCampos(diaSemana,horaInicio,horaFim, atendimentoOnline , enderecoSemanaHorario , atendimentoPresencial){
+	if(diaSemana == 'undefined' || diaSemana == null || diaSemana == ''){
+		alert_error("Informar Dia da Semana");
+		return false;
+	}else if(horaInicio == 'undefined' || horaInicio == null || horaInicio == ''){
+		alert_error("Informar Hora Inicio");
+		return false;
+	}else if(horaFim == 'undefined' || horaFim == null || horaFim == ''){
+		alert_error("Informar Hora Fim");
+		return false;
+	}else if(enderecoSemanaHorario == 'undefined' || enderecoSemanaHorario == null || enderecoSemanaHorario == ''){
+		alert_error("Informar Endereço Atendimento");
+		return false;
+	}else if((atendimentoOnline == 'undefined' && atendimentoPresencial == 'undefined') || (atendimentoOnline == null && atendimentoPresencial == null) || (atendimentoOnline == false && atendimentoPresencial  == false)){
+		alert_error("Informar Tipo Atendimento Online ou Presencial");
+		return false;
+	}
+//	for(var i = 0; i < horarioAtendimentos.length; i++){
+//		if(diaSemana == horarioAtendimentos[i].diaSemana && (horaInicio > horarioAtendimentos[i].horaInicio && horaInicio < horarioAtendimentos[i].horaFim && horaFim > horarioAtendimentos[i].horaInicio && horaFim < horarioAtendimentos[i].horaFim)){
+//			alert("Ja Existe")
+//			return false;
+//		}
+//	}
+	
+	return true;
 }
 
 function AdicionarTabelaHorarioAtendimento(item, indice){
@@ -381,11 +445,17 @@ function ExcluirHorarioAtendimento(x){
 };
 
 function adicionarEspecialidades($scope, $http, $window){
+	  if($scope.especialidade == 'undefined' || $scope.especialidade == null){
+		 alert_error("Selecionar Item Para Adicionar");
+	  }else{
 	  const valor = new Especialidade($scope.especialidade);
-	  especialidadeAtendimentos.push(valor);
+	  validarEspecialidadeAdicionado(valor);
 	  $("#panelFiltrosEspecialidades a").remove();
       especialidadeAtendimentos.forEach(AdicionarTabelaEspecialidades);
+	}
 }
+
+
 
 function AdicionarTabelaEspecialidades(item, indice){
 		$("#panelFiltrosEspecialidades").append(
@@ -416,25 +486,26 @@ function salvarConta($scope, $http, $window) {
         $scope.profissional.digitoVerificador = document.getElementById("digitoVerificador").checked;
 
         $scope.profissional.nomeFavorecido = document.getElementById("nomeFavorecido").checked;
-
+	
     };
 
-
+	document.getElementById("spinner").style.display = "inline-block";
+	
     $http.post("/api/v1/registrar-cartao", $scope.ProfissionalVH.profissional)
 
         .then(function (response) {
-
+			document.getElementById("spinner").style.display = "none";
             alert_success(response.data.message, () => {
-
                 $window.location.href = "/vitazure/informacoes-perfil";
-
-        });
+        });					
 
         }).catch(function (response) {
-
+        document.getElementById("spinner").style.display = "none";
         alert_error(response.data.message);
 
     })
+
+
 
 
 };
@@ -448,3 +519,67 @@ function apresentarCampoData(campo){
 		document.getElementById("divCampoFinalDataAviso").style.display = "none"; 
 	  }
   }
+function apresentarCampoConsulta40Mes(campo){
+	  if(campo === 'true' || document.getElementById("habilitarDesconto40").checked){
+		document.getElementById("divQuantidadeConsulta40Mes").style.display = "inline-block";
+	  }else{
+		document.getElementById("divQuantidadeConsulta40Mes").style.display = "none"; 
+	  }
+}
+
+function apresentarPrimeiraConsultaCortesia(campo){
+	  if(campo === 'true' || document.getElementById("primeiraConsultaCortesia").checked){
+		document.getElementById("divPrimeiraConsultaCortesia").style.display = "inline-block";
+	  }else{
+		document.getElementById("divPrimeiraConsultaCortesia").style.display = "none"; 
+	  }
+}
+
+function validarHora(valor , campoInformado){
+	if(valor.length < 5){
+		alert_error("Verificar Valor Informado");
+		document.getElementById(campoInformado).value = "";
+	}else if(valor.substring(0,2) > 23){
+		alert_error("Verificar Valor Informado");
+		document.getElementById(campoInformado).value = "";
+	}else if(valor.substring(3,5) > 59){
+		alert_error("Verificar Valor Informado");
+		document.getElementById(campoInformado).value = "";
+	}
+	
+}
+
+
+function validarEspecialidadeAdicionado(obj){
+	let jaAdicionado = false;	
+	for(var i = 0; i < especialidadeAtendimentos.length; i++){
+         if(especialidadeAtendimentos[i].especialidade == obj.especialidade){
+         	jaAdicionado = true;
+         }   
+      }
+
+    if(!jaAdicionado){
+      especialidadeAtendimentos.push(obj);	
+    }else{
+      alert_error('Especialidade já adicionada');	
+    }
+
+};
+function validarTemaAdicionado(obj){
+	let jaAdicionado = false;	
+	for(var i = 0; i < temas.length; i++){
+         if(temas[i].tema == obj.tema){
+         	jaAdicionado = true;
+         }   
+      }
+
+    if(!jaAdicionado){
+      temas.push(obj);	
+    }else{
+      alert_error('Tema já adicionada');	
+    }
+
+};
+
+
+
