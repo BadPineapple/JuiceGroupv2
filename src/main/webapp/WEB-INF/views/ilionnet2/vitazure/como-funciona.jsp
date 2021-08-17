@@ -106,6 +106,8 @@
                             <a onclick="pacienteAtivo()" class="button-white" id="button-paciente">Sou paciente</a>
                         </div>
 
+                        <!-- Inicio como funciona profissional -->
+
                         <div id="funciona-profissional" class="painel-ativo">
 
                             <%--<div class="match-toggle">--%>
@@ -244,6 +246,8 @@
                             <!-- End como funciona profissional -->
                         </div>
 
+                        <!-- Inicio como funciona paciente -->
+
                         <div id="funciona-paciente" class="painel">
                             <div class="match-toggle">
                                 <div class="toggle-header">
@@ -264,7 +268,7 @@
                                 </div>
                                 <div class="toggle-body vitazure">
 
-                                    <p>Mantemos o mais alto padrão de segurança. Os dados que você nos informa são tratados de maneira confidencial. Nossos profissionais são selecionados e capacitados, garantimos a máxima qualidade ao indica-lo para você. Nossa plataforma oferece um ambiente extremamente seguro e regular.</p>
+                                    <p>Mantemos o mais alto padrão de segurança. Os dados que você nos informa são tratados de maneira confidencial. Nossos profissionais são selecionados e capacitados, garantimos a máxima qualidade ao indicá-los para você. Nossa plataforma oferece um ambiente extremamente seguro e regular.</p>
 
                                 </div>
                             </div>
@@ -297,7 +301,7 @@
                                 </div>
                                 <div class="toggle-body vitazure">
 
-                                    <p>O pagamento é realizado atravésde cartão de crédito ou boleto bancário dentro da plataforma, com total segurança. Os dados de pagamento, não são armazenados pela plataforma, são usados somente no momento da transação pelo site da Pagar.me.</p>
+                                    <p>O pagamento é realizado através de cartão de crédito ou boleto bancário dentro da plataforma, com total segurança. Os dados de pagamento, não são armazenados pela plataforma, são usados somente no momento da transação pelo site da Pagar.me.</p>
 
                                 </div>
                             </div>
