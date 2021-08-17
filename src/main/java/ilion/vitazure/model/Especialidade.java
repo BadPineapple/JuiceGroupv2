@@ -55,6 +55,23 @@ public class Especialidade {
 	public void setProfissional(Profissional profissional) {
 		this.profissional = profissional;
 	}
-	  
 
+	public String getEspecialidadeFormatada() {
+		String esp = this.especialidade;
+
+		char initial = esp.charAt(0);
+
+		int index = esp.indexOf("_");
+
+		StringBuilder newString = new StringBuilder(esp.toLowerCase());
+
+		if (index >= 0) {
+
+			newString.setCharAt(index, ' ');
+		}
+
+		newString.setCharAt(0, initial);
+
+		return newString.toString();
+	}
 }

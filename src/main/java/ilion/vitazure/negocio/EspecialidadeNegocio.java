@@ -1,5 +1,6 @@
 package ilion.vitazure.negocio;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -80,6 +81,12 @@ public class EspecialidadeNegocio {
 		DetachedCriteria dc = DetachedCriteria.forClass(Especialidade.class);
 		dc.createAlias("profissional", "p");
 		dc.add(Restrictions.eq("p.id", idProfissional));
+		return (List<Especialidade>) hibernateUtil.list(dc);
+	}
+
+	public List<Especialidade> consultarTodasEspecialidades() {
+		DetachedCriteria dc = DetachedCriteria.forClass(Especialidade.class);
+
 		return (List<Especialidade>) hibernateUtil.list(dc);
 	}
 	

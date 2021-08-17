@@ -26,8 +26,11 @@
 
                             <select ng-model="especialista">
                                 <option value="">Especialidade</option>
-                                <option value="psicologico">Psicológico</option>
-                                <option value="psicanalise">Psicanálise</option>
+                                <%--<option value="psicologico">Psicológico</option>--%>
+                                <%--<option value="psicanalise">Psicanálise</option>--%>
+                                <c:forEach items="${especialidades}" var="especialidade">
+                                    <option value="${especialidade}">${especialidade}</option>
+                                </c:forEach>
                             </select>
                             <button type="submit" class="button-secundary">Buscar</button>
                         </form>

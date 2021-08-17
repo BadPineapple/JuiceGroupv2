@@ -10,6 +10,8 @@ import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
+import ilion.vitazure.model.*;
+import ilion.vitazure.negocio.EspecialidadeNegocio;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,10 +28,6 @@ import ilion.gc.negocio.ArtigoSiteNegocio;
 import ilion.gc.taglibs.ArtigoParamsVO;
 import ilion.util.Uteis;
 import ilion.util.contexto.autorizacao.AcessoLivre;
-import ilion.vitazure.model.HorarioAtendimento;
-import ilion.vitazure.model.Pessoa;
-import ilion.vitazure.model.PostBlog;
-import ilion.vitazure.model.Profissional;
 import ilion.vitazure.negocio.HorarioAtendimentoNegocio;
 import ilion.vitazure.negocio.PessoaNegocio;
 import ilion.vitazure.negocio.ProfissionalNegocio;
@@ -57,6 +55,9 @@ public class SiteController extends CustomErrorController {
 	
 	@Autowired
 	private HorarioAtendimentoNegocio horarioNegocio;
+
+	@Autowired
+	private EspecialidadeNegocio especialidadeNegocio;
 	
 	@GetMapping(value = { "/",})
 	public String aguarde(HttpServletRequest request) {
@@ -274,6 +275,19 @@ public class SiteController extends CustomErrorController {
 		Pessoa PessoaSessao = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
 		request.setAttribute("pessoa", PessoaSessao);
 		request.setAttribute("areaRestrita", false);
+
+		List<Especialidade> especialidades = especialidadeNegocio.consultarTodasEspecialidades();
+
+		List<String> espNew = new ArrayList<>();
+
+		for (Especialidade esp : especialidades) {
+			String espName = esp.getEspecialidadeFormatada();
+
+			espNew.add(espName);
+		}
+
+		request.setAttribute("especialidades", espNew);
+
 		return "/ilionnet2/vitazure/aqui-e-para-voce";
 	}
 	@GetMapping("/para-sua-empresa")
