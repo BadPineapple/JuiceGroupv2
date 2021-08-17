@@ -35,8 +35,9 @@
                                 <div class="col-12 col-md-6 col-xl-6">
                                     <select ng-model="tipoProfissional">
                                         <option value="">Tipo de profissional</option>
-                                        <option value="psicologo">Psicólogo</option>
-                                        <option value="psicanalista">Psicanalista</option>
+                                        <c:forEach var="tipoProfissional" items="${tiposProfissional}">
+                                            <option ng-if="${tipoProfissional == 'PSICOLOGO'}" value="${tipoProfissional}">${tipoProfissional.valor}</option>
+                                        </c:forEach>
                                     </select>
                                 </div>
 
@@ -51,10 +52,11 @@
 
                                 <div class="col-12 col-md-6 col-xl-6">
 
-                                    <select ng-model="especialidade">
+                                    <select ng-model="especialista">
                                         <option value="">Especialidade</option>
-                                        <option value="psicologico">Psicológico</option>
-                                        <option value="psicanalise">Psicanílise</option>
+                                        <c:forEach items="${especialidades}" var="especialidade">
+                                            <option ng-if="tipoProfissional == 'PSICOLOGO' && ${especialidade.tipoProfissional == 'PSICOLOGO'}" value="${especialidade.valor}">${especialidade.valor}</option>
+                                        </c:forEach>
                                     </select>
                                 </div>
 

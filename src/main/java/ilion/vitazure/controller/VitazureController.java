@@ -114,6 +114,10 @@ public class VitazureController {
 			request.setAttribute("estados", EstadoEnum.values());
 			return "/ilionnet2/vitazure/completar-cadastro";
 		}else if(pessoa.getCliente()) {
+
+			request.setAttribute("tiposProfissional", TipoProfissionalEnum.values());
+			request.setAttribute("especialidades", EspecialidadesEnum.values());
+
 			return "/ilionnet2/vitazure/painel-do-cliente";
 		}else if (pessoa.getPsicologo() && (profissional.getAtivo() == null || !profissional.getAtivo())) {
 				return "/ilionnet2/vitazure/assinatura";

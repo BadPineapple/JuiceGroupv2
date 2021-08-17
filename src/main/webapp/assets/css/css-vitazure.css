@@ -194,6 +194,7 @@ footer ul li a.line:after {
 
 .form-highlight select {
     height: 4rem;
+    width: 20rem;
     line-height: 4rem;
     padding: 0 4rem 0 1.5rem;
     font-size: 1.4rem;

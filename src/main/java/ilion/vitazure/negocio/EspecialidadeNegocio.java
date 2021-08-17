@@ -83,12 +83,6 @@ public class EspecialidadeNegocio {
 		dc.add(Restrictions.eq("p.id", idProfissional));
 		return (List<Especialidade>) hibernateUtil.list(dc);
 	}
-
-	public List<Especialidade> consultarTodasEspecialidades() {
-		DetachedCriteria dc = DetachedCriteria.forClass(Especialidade.class);
-
-		return (List<Especialidade>) hibernateUtil.list(dc);
-	}
 	
 	@Transactional
 	public void excluir(Especialidade especialidade) {

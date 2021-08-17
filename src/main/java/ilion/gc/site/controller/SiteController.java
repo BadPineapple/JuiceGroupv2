@@ -10,6 +10,8 @@ import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
+import ilion.vitazure.enumeradores.EspecialidadesEnum;
+import ilion.vitazure.enumeradores.TipoProfissionalEnum;
 import ilion.vitazure.model.*;
 import ilion.vitazure.negocio.EspecialidadeNegocio;
 import org.apache.log4j.Logger;
@@ -108,7 +110,8 @@ public class SiteController extends CustomErrorController {
 
 		}
 
-
+		request.setAttribute("especialidades", EspecialidadesEnum.values());
+		request.setAttribute("tiposProfissional", TipoProfissionalEnum.values());
 		request.setAttribute("posts", posts);
 
 		return "/ilionnet2/vitazure/index";
@@ -276,17 +279,8 @@ public class SiteController extends CustomErrorController {
 		request.setAttribute("pessoa", PessoaSessao);
 		request.setAttribute("areaRestrita", false);
 
-		List<Especialidade> especialidades = especialidadeNegocio.consultarTodasEspecialidades();
-
-		List<String> espNew = new ArrayList<>();
-
-		for (Especialidade esp : especialidades) {
-			String espName = esp.getEspecialidadeFormatada();
-
-			espNew.add(espName);
-		}
-
-		request.setAttribute("especialidades", espNew);
+		request.setAttribute("especialidades", EspecialidadesEnum.values());
+		request.setAttribute("tiposProfissional", TipoProfissionalEnum.values());
 
 		return "/ilionnet2/vitazure/aqui-e-para-voce";
 	}
