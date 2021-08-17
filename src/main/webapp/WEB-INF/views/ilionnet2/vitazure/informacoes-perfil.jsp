@@ -16,6 +16,49 @@
 	document.write(getCalendarStyles());
 	var cal1x = new CalendarPopup("testdiv1");
 	</script>
+	<style>
+	
+	.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+	
+	.modal-content {
+	    background-color: #fefefe;
+	    margin: auto;
+	    padding: 20px;
+	    border: 1px solid #888;
+	    width: 80%;
+	    max-width: 500px;
+	    margin: 1.75rem auto;
+	}
+
+.modal-header {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    border-bottom: 1px solid #dee2e6;
+    border-top-left-radius: calc(.3rem - 1px);
+    border-top-right-radius: calc(.3rem - 1px);
+    padding: 0;
+}
+.close {
+  font-size: 2.5rem;
+}
+	
+	</style>
 		<div id="testdiv1" style="position:absolute;visibility:hidden;background-color:white;layer-background-color:white;z-index:10000;"></div>
 </head>
 
@@ -298,7 +341,7 @@
                                             </div>
                                         </div>
                                         <div class="col-12">
-                                                    <button class="button-secundary checkbox-button" ng-click="perfilProfissional()" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Salvar</button>
+                                                    <button class="button-secundary checkbox-button"  ng-click="validarCampo(ProfissionalVH.profissional.biografia)" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Salvar</button>
                                          </div>
                                       </div>
                                   </div>      
@@ -397,6 +440,26 @@
 											      <tbody style="font-size: 15px;">
 											      </tbody>
 											   </table>
+                            <div id="myModal" class="modal">
+						  <div class="modal-content col-md-12">
+							    <div class="modal-header">
+						          <h4>Deseja Realmente Excluir?</h4>
+						          <div id="modalBtnClick" class="close" data-dismiss="modal"><i class="fas fa-times"></i></div>
+						        </div>
+							    <div class="modal-body" style="width:100%;padding: 33px;">
+						              <form>
+						                <div class="row" style="text-align: center;">						                
+						                  <div class="col-12 col-md-6 col-xl-6">
+						                     <button class="btn btn-success" ng-click="excluirEndereco()" style="width: 70%;height: 38px;font-size: 15px;">Sim</button>
+						                  </div>
+						                  <div class="col-12 col-md-6 col-xl-6">
+						                    <button class="btn btn-danger" onclick="fecharModal()" style="width: 70%;height: 38px;font-size: 15px;">Não</button>
+						                  </div>
+						                </div>
+						              </form>
+						  </div>
+					</div>
+                        </div>
 						            	</div>
 						            </div>	
 
@@ -796,11 +859,11 @@
 
                                         <div class="col-12">
                                             <div class="checkbox">
-                                                <input type="checkbox" ng-model="ProfissionalVH.profissional.habilitarDesconto40" id="habilitarDesconto40" ng-checked="${profissional.habilitarDesconto40}" onclick="apresentarCampoConsulta40Mes(this.checked)"/>
+                                                <input type="checkbox" ng-model="ProfissionalVH.profissional.habilitarDesconto40" id="habilitarDesconto40" ng-checked="${profissional.habilitarDesconto40}" onclick="apresentarCampoConsulta40Mes(this.checked)" />
                                                 <label>Habilitar desconto de R$40,00</label>
                                             </div>
     										<div class="col-12" style="display:none;" id="divQuantidadeConsulta40Mes">
-                                               <p>Quantidade de consultas cortesias no mês: <input type="text" id="quantidadeConsultaDesconto40Mes" onchange="validarQuantidadeConsultaDesconto40Mes(this.value)" style="width: 32px;text-align: center;" ng-model="ProfissionalVH.profissional.quantidadeConsultaDesconto40Mes"/></p>
+                                               <p>Quantidade de consultas cortesias no mês: <input type="text" id="quantidadeConsultaDesconto40Mes" onchange="validarQuantidadeConsultaDesconto40Mes(this.value)" style="width: 32px;text-align: center;" ng-model="ProfissionalVH.profissional.quantidadeConsultaDesconto40Mes" data-mask="00"/></p>
                                             </div>   
                                         </div>
 
@@ -850,7 +913,7 @@
 			                                    </div>
 			                                </div>
                                         <div class="col-12">
-                                            <button class="button-secundary checkbox-button" ng-click="perfilProfissional()" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Salvar</button>
+                                            <button class="button-secundary checkbox-button" ng-click="validarCampoFerias()" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Salvar</button>
                                         </div>
                                     </div>
                                 </div>
@@ -920,19 +983,20 @@ $('.valorMonetario').mask('#.##0.00', {reverse: true});
 <script>
 function validarQuantidadeCortesiaMes(valor){
 	if (valor == 0 || valor == null) {
-		alert("Quantidade Tem que Ser Maior que Zero.");
+		alert("Quantidade de consultas cortesias no mês: dever ser maior que zero.");
 		document.getElementById("quantidadeConsultaCortesiaMes").value = "1";
 	}
 	
 }
 function validarQuantidadeConsultaDesconto40Mes(valor){
 	if (valor == 0 || valor == null) {
-		alert("Quantidade Tem que Ser Maior que Zero.");
+		alert("Quantidade de consultas com desconto no mês: dever ser maior que zero.");
 		document.getElementById("quantidadeConsultaDesconto40Mes").value = "1";
 	}
 	
 }
 </script>
+
     </div>
 </body>
 </html>

@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ilion.util.persistencia.HibernateUtil;
 import ilion.vitazure.model.EnderecoAtendimento;
 import ilion.vitazure.model.FormacaoAcademica;
+import ilion.vitazure.model.Pessoa;
 import ilion.vitazure.model.Profissional;
 
 @Service
@@ -29,6 +30,10 @@ public class EnderecoNegocio {
 			return new EnderecoAtendimento();
 		}
 		return enderecoAtendimento;
+	}
+	
+	public EnderecoAtendimento consultarPorId(Long id) {
+		return (EnderecoAtendimento) hibernateUtil.findById(EnderecoAtendimento.class, id);
 	}
 	
 	@Transactional

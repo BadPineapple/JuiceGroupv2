@@ -35,6 +35,7 @@ import ilion.util.busca.PalavrasChaveCondicoes;
 import ilion.util.persistencia.HibernateUtil;
 import ilion.vitazure.enumeradores.BancoEnum;
 import ilion.vitazure.enumeradores.StatusEnum;
+import ilion.vitazure.enumeradores.TipoContaEnum;
 import ilion.vitazure.model.PagamentoPagarMe;
 import ilion.vitazure.model.Profissional;
 import net.mlw.vlh.ValueList;
@@ -98,21 +99,30 @@ public class PagarMeNegocio {
   private void validarCampos(Profissional profissional) throws Exception {
 	  
 	  if (profissional.getAgencia().trim().equals("")) {
-		  throw new Exception("Agencia Não Informada.");
+		  throw new Exception("Agência não informada.");
 	  }else if (profissional.getConta().trim().equals("")) {
-		  throw new Exception("Conta Não Informada.");
+		  throw new Exception("Conta não informada.");
 	  }else if (profissional.getDigitoVerificador().trim().equals("")) {
-		  throw new Exception("Digito Verificador Não Informada.");
+		  throw new Exception("Digito Verificador não informada.");
 	  }else if (profissional.getNomeFavorecido().trim().equals("")) {
-		  throw new Exception("Nome Valorecido Não Informada.");
-	  }
+		  throw new Exception("Nome Valorecido não informada.");
+	  }else if (profissional.getBanco() == BancoEnum.NAO_INFORMADO) {
+	      throw new Exception("Banco não informada.");
+      }else if (profissional.getTipoConta() == TipoContaEnum.NAO_INFORMADO) {
+	      throw new Exception("Tipo Conta não informada.");
+      }
 	  
   }
   
   private String tratamentoErroPagarMe(Collection<PagarMeError> erros) {
 	StringBuilder ErroTransacao = new StringBuilder();
-	ErroTransacao.append("Erro Ao Salvar Cadastro ");
+	ErroTransacao.append("Erro ao salvar cadastro ");
 	erros.stream().forEach(pagarMeError -> ErroTransacao.append(pagarMeError.getMessage()).append(" ").append(pagarMeError.getParameterName()));
+	if(ErroTransacao.toString().contains("conta")) {
+		return "Problema com os dados da conta";
+	}else if(ErroTransacao.toString().contains("agencia")) {
+		return "Problema com os dados da agência";
+	}
 	return ErroTransacao.toString();
 	
   }

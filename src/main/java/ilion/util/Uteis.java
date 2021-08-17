@@ -1600,4 +1600,14 @@ public class Uteis {
 		return exeption.getMessage();
 	}
 	
+	public static String formatDataLocateBrasil(Date data, String pattern) {
+		if (data != null) {
+			SimpleDateFormat formatador = new SimpleDateFormat(pattern, new Locale("pt", "BR"));
+			String teste = formatador.format(data);
+			return teste;
+		}
+		return "";
+	}
+
+	
 }

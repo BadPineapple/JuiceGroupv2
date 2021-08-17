@@ -10,6 +10,9 @@ var horarioAtendimentos = new Array();
 
 var especialidadeAtendimentos = new Array();
 
+var idEnderecoExcluir;
+var indiceEnderecoExcluir;
+
 var temas = new Array();
 
 
@@ -114,6 +117,15 @@ function informacoesPerfilController($scope, $http, $window) {
 	$scope.apresentarPrimeiraConsultaCortesia = function (apresentarCampo) {
     	apresentarPrimeiraConsultaCortesia(apresentarCampo);
 	}
+	$scope.validarCampo = function (apresentarCampo) {
+    	validarCampo(apresentarCampo , $scope, $http, $window);
+	}
+	$scope.validarCampoFerias = function () {
+    	validarCampoFerias($scope, $http, $window);
+	}
+	$scope.excluirEndereco = function () {
+    	ExcluirEndereco($scope, $http, $window);
+	}
 	
 }
 
@@ -129,8 +141,13 @@ function perfilProfissional($scope, $http, $window) {
 	$scope.ProfissionalVH.profissional.convenio40 = document.getElementById("convenio40").checked;
 	$scope.ProfissionalVH.profissional.convenio50 = document.getElementById("convenio50").checked;
 	$scope.ProfissionalVH.profissional.convenio60 = document.getElementById("convenio60").checked;
-	$scope.ProfissionalVH.profissional.dataInicioAvisoFerias = document.getElementById("dataInicioAvisoFerias").value;
-	$scope.ProfissionalVH.profissional.dataFimAvisoFerias = document.getElementById("dataFimAvisoFerias").value;
+	if($scope.ProfissionalVH.profissional.avisoFerias){
+	 $scope.ProfissionalVH.profissional.dataInicioAvisoFerias = document.getElementById("dataInicioAvisoFerias").value;
+	 $scope.ProfissionalVH.profissional.dataFimAvisoFerias = document.getElementById("dataFimAvisoFerias").value;		
+	}else{
+	 $scope.ProfissionalVH.profissional.dataInicioAvisoFerias = '';
+	 $scope.ProfissionalVH.profissional.dataFimAvisoFerias = '';	
+	}
 	$scope.ProfissionalVH.formacaoAcademica = formacaoInformadas;
 	$scope.ProfissionalVH.enderecoAtendimento = endercosInformadas;
 	$scope.ProfissionalVH.especialidade = especialidadeAtendimentos;
@@ -167,7 +184,7 @@ $(function ($scope) {
         });
         uploadData($scope , fd);
     });
-});
+});				
 
 function uploadData($scope , formdata) {
     $.ajax({
@@ -183,8 +200,8 @@ function uploadData($scope , formdata) {
            toast_success('Ótimo', 'Upload foi concluído com sucesso!');
         }, error: function (response) {
             console.log("Erro!!" + response.responseText);
-            if(response.responseText.includes('exceeds the configured maximum')){
-			  alert_error("Erro ao Incluir a Imagem verifique o Tamanho da Imagem Esta Dentro do Limite Permitido");
+            if(response.responseText.includes('exceeds the configured maximum') || response.responseText.includes('403')){
+			  alert_error("Erro ao incluir a imagem verifique o tamanho da imagem esta dentro do limite permitido");
 			}else{
               alert_error(response.responseText);
 			}
@@ -272,18 +289,51 @@ function AdicionarTabelaEndereco(item, indice){
 			"<td align='center'>"+item.cidade+"</td>"+
 //			"<td align='center'>"+item.estado+"</td>"+
 			"<td align='center'>"+item.linkGoogleMaps+"</td>"+
-			"<td align='center'><a  id='btn-excluir' onclick='ExcluirEndereco("+indice+")' style='color: red;'><i class='fas fa-trash'></i></a></td>"+
+			"<td align='center'><a  id='myBtn' onclick='abrirModal("+indice+")' style='color: red;'><i class='fas fa-trash'></i></a></td>"+
 			"</tr>");
 		
 };
 
-function ExcluirEndereco(x){
-	    endercosInformadas.splice(x, 1);
+function ExcluirEndereco($scope, $http, $window){
+	if(idEnderecoExcluir == 'undefined' || idEnderecoExcluir == null || idEnderecoExcluir == 0){
+	   endercosInformadas.splice(indiceEnderecoExcluir, 1);
 	     $("#tblCadastroEndereco td").remove();
-	    endercosInformadas.forEach(AdicionarTabelaEndereco);
+	     endercosInformadas.forEach(AdicionarTabelaEndereco);
+         fecharModal();
+		
+	}else{
+		$http.get("/vitazure/excluirEndereco/"+idEnderecoExcluir)
+        .then(function (response) {
+           		 endercosInformadas.splice(indiceEnderecoExcluir, 1);
+	            $("#tblCadastroEndereco td").remove();
+	            endercosInformadas.forEach(AdicionarTabelaEndereco);
+                fecharModal();
+                 alert_success(response.data);
+        }).catch(function (response) {
+        alert_error("Não foi possível excluir o endereço, pois está vinculado a um horário de atendimento.");
+        fecharModal();
+    })	
+	}	
+	   
 };
 
 
+function abrirModal(x){
+	idEnderecoExcluir = endercosInformadas[x].id;
+	indiceEnderecoExcluir = x;
+	var modal = document.getElementById("myModal");		
+		var btn = document.getElementById("myBtn");		
+		var span = document.getElementsByClassName("close")[0];
+		  modal.style.display = "block";
+       span.onclick = function() {
+		  modal.style.display = "none";
+		}
+}
+
+function fecharModal(){
+	var modal = document.getElementById("myModal");
+	modal.style.display = "none";	
+}
 
 
 function formacaoProfissional($scope, $http, $window) {
@@ -537,13 +587,13 @@ function apresentarPrimeiraConsultaCortesia(campo){
 
 function validarHora(valor , campoInformado){
 	if(valor.length < 5){
-		alert_error("Verificar Valor Informado");
+		alert_error("Verificar Valor Informado.");
 		document.getElementById(campoInformado).value = "";
 	}else if(valor.substring(0,2) > 23){
-		alert_error("Verificar Valor Informado");
+		alert_error("Verificar Valor Informado.");
 		document.getElementById(campoInformado).value = "";
 	}else if(valor.substring(3,5) > 59){
-		alert_error("Verificar Valor Informado");
+		alert_error("Verificar Valor Informado.");
 		document.getElementById(campoInformado).value = "";
 	}
 	
@@ -581,5 +631,23 @@ function validarTemaAdicionado(obj){
 
 };
 
+function validarCampo(campo , $scope, $http, $window){
+	if(campo == 'undefined' || campo == null || campo == ''){
+		alert_error("Informar sobre mim.");
+	}else{
+		perfilProfissional($scope, $http, $window);
+	}
+}
+function validarCampoFerias($scope, $http, $window){
+		
+	if(document.getElementById("avisoFerias").checked && (document.getElementById("dataInicioAvisoFerias").value == 'undefined' || document.getElementById("dataInicioAvisoFerias").value == null || document.getElementById("dataInicioAvisoFerias").value == '')){
+		alert_error("Informar data inicio férias.");
+	}else if(document.getElementById("avisoFerias").checked && (document.getElementById("dataFimAvisoFerias").value == 'undefined' || document.getElementById("dataFimAvisoFerias").value == null || document.getElementById("dataFimAvisoFerias").value == '')){
+		alert_error("Informar data fim férias.");
+	}
+	else{
+		perfilProfissional($scope, $http, $window);
+	}
+}
 
 

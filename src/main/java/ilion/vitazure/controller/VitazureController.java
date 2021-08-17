@@ -114,6 +114,8 @@ public class VitazureController {
 			request.setAttribute("estados", EstadoEnum.values());
 			return "/ilionnet2/vitazure/completar-cadastro";
 		}else if(pessoa.getCliente()) {
+			request.setAttribute("tiposProfissional", TipoProfissionalEnum.values());
+			request.setAttribute("especialidades", EspecialidadesEnum.values());
 			return "/ilionnet2/vitazure/painel-do-cliente";
 		}else if (pessoa.getPsicologo() && (profissional.getAtivo() == null || !profissional.getAtivo())) {
 				return "/ilionnet2/vitazure/assinatura";
@@ -150,6 +152,18 @@ public class VitazureController {
 			    return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 			}
 		}
+	 
+	 @RequestMapping("/vitazure/excluirEndereco/{id}")
+	 public  ResponseEntity<String> excluirEndereco(@PathVariable String id) {
+		 try {
+			 EnderecoAtendimento enderecoAtendimento = enderecoNegocio.consultarPorId(Long.parseLong(id));
+			 enderecoNegocio.excluir(enderecoAtendimento);
+			 return new ResponseEntity<>(gson.toJson("Endereço Excluído Com Sucesso."), HttpStatus.OK);
+		 } catch (Exception e) {
+			 return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		 }
+	 }
+	 
 	 @RequestMapping("/vitazure/enderecoAtendimento/{id}")
 	 public  ResponseEntity<String> consultaEnderecosAtendimento(@PathVariable String id) {
 		 try {
@@ -274,4 +288,5 @@ public class VitazureController {
 		  return "/ilionnet2/vitazure/assinatura";
 		  
 	  }
+	  
 }

@@ -36,7 +36,7 @@ public class WherebyApi {
 		String URL_API = propNegocio.findValueById(PropEnum.URL_API_WHEREBY);
 
 		SimpleDateFormat sdfData = new SimpleDateFormat("yyyy-MM-dd");
-		SimpleDateFormat sdfHora = new SimpleDateFormat("hh:mm:ss");
+		SimpleDateFormat sdfHora = new SimpleDateFormat("HH:mm:ss");
 
 		//Formatação padrão da data yyyy-MM-ddThh-mm-ss.000Z
 		String startDate = sdfData.format(new Date(agenda.getDataHoraAgendamento().getTime()));

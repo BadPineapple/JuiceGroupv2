@@ -220,7 +220,7 @@ public class ProfissionalControlle {
     	  List<HorarioAtendimento> listaHorarioatendimento = horarioNegocio.consultarHorariosAtendimentoPorProfissional(profissional.getId() , atendimentoOnline , atendimentoPresencial);
     	  List<HorarioPossivelAtendimento> listHorarioPossivelAtendimento = new ArrayList<HorarioPossivelAtendimento>();
     	  listaHorarioatendimento.stream().filter(a-> a.getDiaSemana().getValue() == dataConsulta.getDay()).forEach(horarioAtendimento -> {
-    		  Integer quantidadeMinutosAtendimento = Uteis.diferencaEmMinutos(Uteis.converterHoraEmDate(horarioAtendimento.getHoraFim(), "hh:mm") , Uteis.converterHoraEmDate(horarioAtendimento.getHoraInicio(), "hh:mm"));
+    		  Integer quantidadeMinutosAtendimento = Uteis.diferencaEmMinutos(Uteis.converterHoraEmDate(horarioAtendimento.getHoraFim(), "HH:mm") , Uteis.converterHoraEmDate(horarioAtendimento.getHoraInicio(), "HH:mm"));
     	      Integer quantidadePossiveisAtendimento = quantidadeMinutosAtendimento / Integer.parseInt(profissional.getDuracaoAtendimento().getNome());
     	      int x = 1;
     	      String horaInicio = horarioAtendimento.getHoraInicio();

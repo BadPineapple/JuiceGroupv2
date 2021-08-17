@@ -185,7 +185,7 @@ public class Agenda {
 		}	
 	  
 		public String getDataHoraApresentar() {
-			return Uteis.formatarDataHora(getDataHoraAgendamento(), "dd/MM/YYYY hh:mm");
+			return Uteis.formatDataLocateBrasil(getDataHoraAgendamento(), "dd/MM/YYYY HH:mm");
 		}
 
 		public String getTokenTransacaoPagamentoConsulta() {
@@ -213,13 +213,13 @@ public class Agenda {
 		}
 		
 		public String getDataHoraLiberarLink() {
-			return Uteis.formatarDataHora(Uteis.subtrair(getDataHoraAgendamento(), Calendar.MINUTE, 30), "hh:mm");
+			return Uteis.formatarDataHora(Uteis.subtrair(getDataHoraAgendamento(), Calendar.MINUTE, 30), "HH:mm");
 		}
 		public String getDataHoraBloquearLink() {
-			return Uteis.formatarDataHora(Uteis.acrescentar(getDataHoraAgendamento(), Calendar.MINUTE, 5), "hh:mm");
+			return Uteis.formatarDataHora(Uteis.acrescentar(getDataHoraAgendamento(), Calendar.MINUTE, 5), "HH:mm");
 		}
 		public String getDataHoraAlterAtendimento() {
-			return Uteis.formatarDataHora(Uteis.subtrair(getDataHoraAgendamento(), Calendar.MINUTE, 5), "hh:mm");
+			return Uteis.formatarDataHora(Uteis.subtrair(getDataHoraAgendamento(), Calendar.MINUTE, 5), "HH:mm");
 		}
 		
 		@Override
