@@ -55,6 +55,5 @@ public class Especialidade {
 	public void setProfissional(Profissional profissional) {
 		this.profissional = profissional;
 	}
-	  
 
 }

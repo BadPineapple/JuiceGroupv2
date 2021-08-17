@@ -11,6 +11,7 @@
     <div id="app">
         <jsp:include page="includes/include-header.jsp" flush="true" />
         <div class="banner-content banner-internas">
+
             <div class="container">
                 <div class="row">
                     <div class="col-12 col-xl-9">
@@ -18,16 +19,21 @@
                         <p>Busque por profissional ou especialidade.</p>
                         <form ng-submit="consultarProfissional()"  class="form-highlight">
                             <select ng-model="tipoProfissional">
-                                <option value="">Profissional</option>
-                                <option value="psicologo">Psicólogo</option>
+                                <option value="">Tipo de profissional</option>
+                                <c:forEach var="tipoProfissional" items="${tiposProfissional}">
+                                    <option ng-if="${tipoProfissional == 'PSICOLOGO'}" value="${tipoProfissional}">${tipoProfissional.valor}</option>
+                                </c:forEach>
                                 <%--<option value="medico">Médico</option>--%>
                                 <%--<option value="psiquiatra">Psiquiatra</option>--%>
                             </select>
 
                             <select ng-model="especialista">
                                 <option value="">Especialidade</option>
-                                <option value="psicologico">Psicológico</option>
-                                <option value="psicanalise">Psicanálise</option>
+                                <%--<option value="psicologico">Psicológico</option>--%>
+                                <%--<option value="psicanalise">Psicanálise</option>--%>
+                                <c:forEach items="${especialidades}" var="especialidade">
+                                    <option ng-if="tipoProfissional == 'PSICOLOGO' && ${especialidade.tipoProfissional == 'PSICOLOGO'}" value="${especialidade.valor}">${especialidade.valor}</option>
+                                </c:forEach>
                             </select>
                             <button type="submit" class="button-secundary">Buscar</button>
                         </form>

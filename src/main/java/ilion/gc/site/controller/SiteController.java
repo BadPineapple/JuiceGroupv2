@@ -10,6 +10,10 @@ import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
+import ilion.vitazure.enumeradores.EspecialidadesEnum;
+import ilion.vitazure.enumeradores.TipoProfissionalEnum;
+import ilion.vitazure.model.*;
+import ilion.vitazure.negocio.EspecialidadeNegocio;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,10 +30,6 @@ import ilion.gc.negocio.ArtigoSiteNegocio;
 import ilion.gc.taglibs.ArtigoParamsVO;
 import ilion.util.Uteis;
 import ilion.util.contexto.autorizacao.AcessoLivre;
-import ilion.vitazure.model.HorarioAtendimento;
-import ilion.vitazure.model.Pessoa;
-import ilion.vitazure.model.PostBlog;
-import ilion.vitazure.model.Profissional;
 import ilion.vitazure.negocio.HorarioAtendimentoNegocio;
 import ilion.vitazure.negocio.PessoaNegocio;
 import ilion.vitazure.negocio.ProfissionalNegocio;
@@ -57,6 +57,9 @@ public class SiteController extends CustomErrorController {
 	
 	@Autowired
 	private HorarioAtendimentoNegocio horarioNegocio;
+
+	@Autowired
+	private EspecialidadeNegocio especialidadeNegocio;
 	
 	@GetMapping(value = { "/",})
 	public String aguarde(HttpServletRequest request) {
@@ -107,7 +110,8 @@ public class SiteController extends CustomErrorController {
 
 		}
 
-
+		request.setAttribute("especialidades", EspecialidadesEnum.values());
+		request.setAttribute("tiposProfissional", TipoProfissionalEnum.values());
 		request.setAttribute("posts", posts);
 
 		return "/ilionnet2/vitazure/index";
@@ -274,6 +278,10 @@ public class SiteController extends CustomErrorController {
 		Pessoa PessoaSessao = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
 		request.setAttribute("pessoa", PessoaSessao);
 		request.setAttribute("areaRestrita", false);
+
+		request.setAttribute("especialidades", EspecialidadesEnum.values());
+		request.setAttribute("tiposProfissional", TipoProfissionalEnum.values());
+
 		return "/ilionnet2/vitazure/aqui-e-para-voce";
 	}
 	@GetMapping("/para-sua-empresa")

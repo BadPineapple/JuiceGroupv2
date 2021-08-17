@@ -29,7 +29,7 @@
 
                                 <span>></span>
 
-                                <a href="#">Complete seu cadastro</a>
+                                <a href="#">Crie sua conta</a>
                             </div>
                         </div>
                     </div>
