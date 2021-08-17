@@ -90,7 +90,7 @@
                                 <div class="col-12 col-md-6 col-xl-6">
                                     <div class="vantagens-img">
                                         <figure>
-                                            <img src="../assets/images/img-3.jpg" alt="">
+                                            <img src="../assets/images/diversidade.jpg" alt="">
                                         </figure>
             
                                         <figure>

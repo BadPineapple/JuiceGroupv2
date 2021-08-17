@@ -199,7 +199,7 @@
                                 <div class="testimonial-person">
                                     <div class="person-img">
                                         <figure>
-                                            <img src="assets/images/person-2.png" alt="">
+                                            <img src="assets/images/jose-henrique.png" alt="">
                                         </figure>
                                     </div>
         
