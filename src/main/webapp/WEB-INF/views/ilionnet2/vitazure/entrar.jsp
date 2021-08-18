@@ -148,7 +148,7 @@
 						                           required="required"
 						                           style="width: 100%;font-size: 17px;">
 						                    <p>&nbsp;</p>
-						                    <button class="btn button-secundary" ng-click="esqueceuSenha()" style="width:100%;font-size: 1.8rem; height: 5.4rem;background-color: #0097d6; text-transform: uppercase;">Enviar</button>
+						                    <button class="btn button-secundary" ng-click="esqueceuSenha()" style="width:100%;font-size: 1.8rem; height: 5.4rem;background-color: #0097d6; text-transform: uppercase;font-family: inherit;">Enviar</button>
 						                  </div>
 						                </div>
 						              </form>

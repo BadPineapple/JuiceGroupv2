@@ -73,6 +73,9 @@ class Agenda{
        }
             agendas = new Array();      
             var opa = document.getElementById("agendaDia").value;
+            if(document.getElementById("hora") != null){
+              document.getElementById("hora").innerHTML = displayDate.substr(0, 5);
+            }
             const agendaVO = opa.split('Agenda[');
             var maisTeste = agendaVO[0];
             agendaVO.forEach(eu);

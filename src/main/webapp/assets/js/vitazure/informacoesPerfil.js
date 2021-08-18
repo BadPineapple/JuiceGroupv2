@@ -200,7 +200,7 @@ function uploadData($scope , formdata) {
            toast_success('Ótimo', 'Upload foi concluído com sucesso!');
         }, error: function (response) {
             console.log("Erro!!" + response.responseText);
-            if(response.responseText.includes('exceeds the configured maximum') || response.responseText.includes('403')){
+            if(response.responseText.includes('exceeds the configured maximum') || response.responseText.includes('413')){
 			  alert_error("Erro ao incluir a imagem verifique o tamanho da imagem esta dentro do limite permitido");
 			}else{
               alert_error(response.responseText);

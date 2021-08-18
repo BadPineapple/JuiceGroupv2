@@ -573,6 +573,7 @@
 											      </tbody>
 											   </table>
 						            	</div>
+						            	
 						            </div>	
                                         
                                         <div class="col-12">

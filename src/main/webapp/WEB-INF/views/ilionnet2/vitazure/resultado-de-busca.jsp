@@ -17,6 +17,10 @@
 				<angular-initializer ng-init="online='true';idTemp = ''; agenda = '';" />
 				<div class="row">
 					<div class="col-12">
+							<span class="notice-text" style="padding-bottom: 24px;">
+                            Todos os agendamentos seguem o horário de Brasília - 
+                             <div id="hora" style="padding-left: 4px;"></div>
+                        </span>
 						<h4 style="font-weight: 800; margin-bottom: 4.8rem;">Sugerimos
 							os profissionais listados abaixo:</h4>
 						<c:forEach var="profissional" items="${listProfissionais}">
@@ -103,6 +107,18 @@
 		<script src="../assets/js/bundle.libs.ilionnet.js"></script>
 		<script src="../assets/js/bundle.scripts.ilionnet.js"></script>
 		<script src="../assets/js/bundle.libs.angular.js"></script>
+		 <script>
+		    var myVar = setInterval(myTimer ,1000);
+		    function myTimer() {
+		        var d = new Date(), displayDate;
+		       if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
+		          displayDate = d.toLocaleTimeString('pt-BR');
+		       } else {
+		          displayDate = d.toLocaleTimeString('pt-BR', {timeZone: 'America/Belem'});
+		       }
+		          document.getElementById("hora").innerHTML = displayDate.substr(0, 5);
+		    }
+    </script>
 	</div>
 	
 </body>

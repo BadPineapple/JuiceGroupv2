@@ -21,6 +21,10 @@
                     <div class="col-12 text-center">
                         <h2>Minhas Consultas</h2>
                         <p>Confira suas consultas.</p>
+                    <span class="notice-text">
+                            Todos os agendamentos seguem o horário de Brasília - 
+                             <div id="hora" style="padding-left: 4px;"></div>
+                        </span>
                     </div>
                     <div class="col-12 col-xl-12">
                         <div class="search">
@@ -73,11 +77,11 @@
 	                                           <button  class="btn btn-success" ng-click="definirAgendamento('${agenda.id}' , 'CONFIRMADO')">Confirmar</button>
 	                                           <button  class="btn btn-danger" ng-click="definirAgendamento('${agenda.id}' , 'REMARCADO')">Remarcar</button>
 	                                      </c:if>     
-                                           <c:if test="${agenda.online && agenda.status == 'CONFIRMADO'}">
-	                                           <a href="${agenda.hostUrlAtendimentoOnline}" target="_blank">
-	                                             <button  class="btn btn-primary" >Entrar Consulta</button>
-	                                           </a>  
-                                           </c:if>
+<%--                                            <c:if test="${agenda.online && agenda.status == 'CONFIRMADO'}"> --%>
+<%-- 	                                           <a href="${agenda.hostUrlAtendimentoOnline}" target="_blank"> --%>
+<!-- 	                                             <button  class="btn btn-primary" >Entrar Consulta</button> -->
+<!-- 	                                           </a>   -->
+<%--                                            </c:if> --%>
                                         </td>
                                     </tr>
     							</c:forEach>

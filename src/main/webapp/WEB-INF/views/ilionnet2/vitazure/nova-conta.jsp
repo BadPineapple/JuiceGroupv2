@@ -87,9 +87,9 @@
 
                                     <div class="col-12">
                                         <div class="termos">
-                                            <input type="checkbox" required />
+                                            <input type="checkbox" required oninvalid="this.setCustomValidity('Marque esta caixa para continuar')" />
                                             <span class="new-cadastro">
-                                                Marque esta caixa para continuar  
+                                                Eu declaro que li e concordo com os 
                                                 <div class="button-blue line">
 
                                                     <%--<ilion:artigoConsulta categoria="termos-de-uso" artigo="termos-de-uso-vitazure" order="posicao" varRetorno="art"/>--%>

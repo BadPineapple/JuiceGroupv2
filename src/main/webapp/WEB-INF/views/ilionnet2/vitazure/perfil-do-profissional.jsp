@@ -56,7 +56,7 @@
                                         <p>Temas de Trabalho</p>
                                         <c:forEach var="temas" items="${temasTrabalho}">
 	                                        <span class="tipos-temas">
-	                                           ${temas.tema.valor}
+	                                           ${temas.tema}
 	                                        </span>
 										</c:forEach>
                                     </div>
