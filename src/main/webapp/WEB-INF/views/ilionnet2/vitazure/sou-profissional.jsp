@@ -34,7 +34,7 @@
                         <p>Estamos muito felizes que você esteja próximo de se juntar a nós, atualmente temos clientes prontos para trabalhar com você. Em breve, você terá acesso à nossa maravilhosa comunidade de profissionais.</p>
     
                         <div class="sou-profissional-button">
-                            <a href="#" class="button-secundary button-consulta">Quero saber mais.</a>
+                            <a href="#vantagens" class="button-secundary button-consulta">Quero saber mais.</a>
                         </div>
                     </div>
                 </div>
@@ -78,11 +78,12 @@
     
                             <p>Multiplique sua capacidade de atendimento com a consulta online e alcance qualquer paciente, em qualquer lugar. Faça uso do consultório online por um valor fixo mensal, muito mais baixo que o presencial.</p>
     
-                            <a href="<ilion:url/>cadastre-se"" class="button-secundary">Quero fazer parte!</a>
+                            <a href="<ilion:url/>cadastre-se" class="button-secundary">Quero fazer parte!</a>
                         </div>
+                        <div id="vantagens" style="display: block !important"></div>
                     </div>
     
-                    <div class="col-12">
+                    <div class="col-12" >
                         <div class="vantagens">
                             <h2>Veja algumas vantagens<br/> de fazer parte</h2>
     

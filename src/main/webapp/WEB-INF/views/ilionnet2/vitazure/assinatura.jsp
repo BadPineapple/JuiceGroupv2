@@ -32,13 +32,12 @@
 											<p class="price" style="transform: scale(0.5); margin-top: -10px; margin-left: -85px; margin-bottom: -12px; color: #c1c1c1;"><span style="text-decoration: line-through;">de R$ 120,00</span></p>
                                             <p class="price">R$ <span>89,00</span></p>
 
-                                            <p>Cobrado mensalmente no cartão de crédito, não usa o limite do seu cartão.
-                                                </p>
+                                            <p>Cobrado mensalmente no cartão de crédito.</p>
                                         </div>
 
                                         <div class="planos-description">
                                             <ul style="padding-bottom: 20px;">
-                                                <li>Agendamento online ilimitado</li>
+                                                <li>Agendamento online e presencial ilimitado</li>
 
                                                 <li>Anúncio de perfil no portal</li>
 
@@ -60,7 +59,7 @@
                                 <div class="col-12 col-md-4 col-xl-4 text-left">
                                     <div class="box-plano plano-semestral">
                                         <div class="planos-title semestral">
-                                            <strong>Plano semestral</strong>
+                                            <strong>Plano Semestral</strong>
 
                                             <p class="price" style="transform: scale(0.5); margin-top: -10px; margin-left: -85px; margin-bottom: -12px; color: #c1c1c1;"><span style="text-decoration: line-through;">de R$ 720,00</span></p>
                                             <p class="price">R$ <span>469,69</span></p>

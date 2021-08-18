@@ -88,13 +88,13 @@
                                 <div class="col-12">
                                     <div class="input-block">
                                         <label>Telefone</label>
-                                        <input type="text" data-mask="(00)0000-0000" ng-model="pessoa.telefone"/>
+                                        <input type="text" data-mask="(00) 00000-0000" ng-model="pessoa.telefone"/>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="input-block">
                                         <label>Celular</label>
-                                        <input type="text" data-mask="(00)00000-0000" ng-model="pessoa.celular" required/>
+                                        <input type="text" data-mask="(00) 00000-0000" ng-model="pessoa.celular" required/>
                                     </div>
                                 </div>
                                 <div class="col-12">

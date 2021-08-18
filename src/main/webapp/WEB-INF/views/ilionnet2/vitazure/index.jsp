@@ -94,35 +94,26 @@
                     </div>
 
 
-                    <%-- TODO: NOVAS LOGOS SERÃO INCLUÍDAS POSTERIORMENTE -->
+                    <div class="col-12">
+                        <div class="parceiros text-center">
+                            <p>Instituições parceiras</p>
 
-                    <%--<div class="col-12">--%>
-                        <%--<div class="parceiros text-center">--%>
-                            <%--<p>Instituições parceiras</p>--%>
+                            <div class="partners">
+                                <figure>
+                                    <img src="assets/images/inpro.png" alt="Instituto Projeção">
+                                </figure>
 
-                            <%--<div class="partners">--%>
-                                <%--<figure>--%>
-                                    <%--<img src="assets/images/ufg.png" alt="">--%>
-                                <%--</figure>--%>
+                                <figure>
+                                    <img src="assets/images/sebrae.png" alt="Sebrae">
+                                </figure>
 
-                                <%--<figure>--%>
-                                    <%--<img src="assets/images/puc.png" alt="">--%>
-                                <%--</figure>--%>
+                                <figure>
+                                    <img src="assets/images/linea.png" alt="Linea">
+                                </figure>
 
-                                <%--<figure>--%>
-                                    <%--<img src="assets/images/google.png" alt="">--%>
-                                <%--</figure>--%>
-
-                                <%--<figure>--%>
-                                    <%--<img src="assets/images/unip.png" alt="">--%>
-                                <%--</figure>--%>
-
-                                <%--<figure>--%>
-                                    <%--<img src="assets/images/rede.png" alt="">--%>
-                                <%--</figure>--%>
-                            <%--</div>--%>
-                        <%--</div>--%>
-                    <%--</div>--%>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

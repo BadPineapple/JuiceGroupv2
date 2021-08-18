@@ -4,7 +4,10 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import ilion.email.negocio.EmailNegocio;
+import ilion.util.Uteis;
 import org.apache.log4j.Logger;
+import org.hibernate.validator.internal.constraintvalidators.hv.EmailValidator;
 import org.springframework.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -53,8 +56,35 @@ public class PessoaController {
 	    	  if (pessoa.getFoto() != null && !pessoa.getFoto().getArquivo1().equals("")) {
 	    		  pessoa.setFoto(arquivoNegocio.inserir(pessoa.getFoto()));
 	    	  }else if(pessoa.getFoto() == null || pessoa.getFoto().getId().equals("")) {
-	    		  pessoa.setFoto(null);
-	    	  }
+						pessoa.setFoto(null);
+					}
+
+	    	  if (!Uteis.ehEmailValido(pessoa.getEmail())) {
+	    	  	return new ResponseEntity<>(new JsonString("E-mail informado inválido."), HttpStatus.BAD_REQUEST);
+					}
+
+	    	  if (!(pessoa.getCelular().matches("^\\((?:[14689][1-9]|2[12478]|3[1234578]|5[1345]|7[134579])\\) (?:[2-8]|9[1-9])[0-9]{3}-[0-9]{4}$"))) {
+	    	  	return new ResponseEntity<>(new JsonString("Número de telefone inválido. Verifique se o DDD está correto"), HttpStatus.BAD_REQUEST);
+					}
+
+	    	  Boolean containNumber = false;
+					Boolean containUpperCase = false;
+
+					char[] chars = pessoa.getSenha().toCharArray();
+					StringBuilder sb = new StringBuilder();
+					for(char c : chars){
+						if(Character.isDigit(c)){
+							containNumber = true;
+						}
+						if(Character.isUpperCase(c)) {
+							containUpperCase = true;
+						}
+					}
+
+	    	  if (pessoa.getSenha().length() < 8 || !containNumber || !containUpperCase) {
+	    	  	return new ResponseEntity<>(new JsonString("A senha deve conter no mínimo 8 caracteres, uma letra maiúscula e um número."), HttpStatus.BAD_REQUEST);
+					}
+
 	    	  pessoa = pessoaNegocio.incluirAtualizar(pessoa);
 	    	  request.getSession().setAttribute(PessoaNegocio.ATRIBUTO_SESSAO, pessoa);
 			return new ResponseEntity<>(new JsonString("Cadastro salvo com sucesso!"), HttpStatus.OK);
