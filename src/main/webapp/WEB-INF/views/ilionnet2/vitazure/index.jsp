@@ -111,7 +111,7 @@
 
         <h4>Aviso de Cookies</h4>
         <p>
-            Nós usamos cookies e outras tecnologias semelhantes para melhorar a sua experiência em nossos serviços, personalizar publicidade e recomendar conteúdo de seu interesse. Ao utilizar nossos serviços, você concorda com tal monitoramento descrito em nossa <a href=""${arqPolitica}">Política de Privacidade</a>
+            Nós usamos cookies e outras tecnologias semelhantes para melhorar a sua experiência em nossos serviços, personalizar publicidade e recomendar conteúdo de seu interesse. Ao utilizar nossos serviços, você concorda com tal monitoramento descrito em nossa <a href="${arqPolitica}" target="_blank">Política de Privacidade</a>
         </p>
     </div>
     <button class="btn btn-lg btn-primary" onclick="closePolicy()">Entendi</button>
