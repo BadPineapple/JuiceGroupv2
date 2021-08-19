@@ -12,7 +12,139 @@
 </head>
 
 <body id="index" class="home">
-	
+<style>
+    .show-policy {
+        margin-bottom: 0px;
+    }
+
+    .hidde-policy {
+        margin-bottom: -1000px;
+    }
+
+    .privacy-policy-modal {
+        align-items: center;
+        background: #ffffff;
+        bottom: 0;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, .2);
+        display: flex;
+        justify-content: space-between;
+        padding: .5rem 20rem;
+        position: fixed;
+        transition: .5s;
+        width: 100vw;
+        z-index: 2147483647;
+    }
+    .privacy-policy-text {
+        grid-area: text;
+        width: 70%;
+    }
+
+    .privacy-policy-text h4 {
+        margin: 1rem 0;
+    }
+
+    .button-accept,
+    .button-accept:hover {
+        background: #2b6199;
+        border-radius: 0;
+        color: #ffffff;
+        grid-area: button;
+        transition: .5s;
+        width: 150px;
+    }
+
+    .button-accept:hover {
+        background: #2b6199;
+        color: #ffffff;
+        transform: scale(1.1);
+        width: 150px;
+    }
+
+    @media (max-width: 768px) {
+        .privacy-policy-modal {
+            display: grid!important;
+            grid-template-areas:
+                "text"
+                "button"
+        ;
+            grid-template-rows: 1fr 1fr;
+            height: 200px;
+            padding: 0rem 2rem;
+        }
+
+        .privacy-policy-text {
+            padding: 0 .5rem;
+            width: 100%!important;
+        }
+
+        .button-accept,
+        .button-accept:hover {
+            width: 100%!important;
+        }
+
+        @media (max-width: 501px) {
+            .privacy-policy-modal {
+                height: 270px;
+            }
+        }
+
+        @media (max-width: 608px) and (min-width: 500px) {
+            .privacy-policy-modal {
+                height: 220px;
+            }
+        }
+    }
+</style>
+
+<div class="privacy-policy-modal show-policy">
+    <div class="privacy-policy-text">
+
+        <ilion:arquivoCategoriaLista categoria="documentos" order="posicao" layout="lateral" varRetorno="art"/>
+
+        <c:forEach items="${art}" var="arq">
+
+            <c:if test="${arq.title == \"Política de privacidade\"}">
+                <c:set var="arqPolitica" value="${arq.url}"/>
+            </c:if>
+
+        </c:forEach>
+
+        <h4>Aviso de Cookies</h4>
+        <p>
+            Nós usamos cookies e outras tecnologias semelhantes para melhorar a sua experiência em nossos serviços, personalizar publicidade e recomendar conteúdo de seu interesse. Ao utilizar nossos serviços, você concorda com tal monitoramento descrito em nossa <a href=""${arqPolitica}">Política de Privacidade</a>
+        </p>
+    </div>
+    <button class="btn btn-lg btn-primary" onclick="closePolicy()">Entendi</button>
+</div>
+
+<script>
+    function showPolicy() {
+        setTimeout(function() {
+            var modal = document.querySelector('.privacy-policy-modal');
+            modal.classList.add('show-policy');
+            modal.classList.remove('hidde-policy');
+        }, 2000)
+    }
+    function closePolicy() {
+        var modal = document.querySelector('.privacy-policy-modal');
+        modal.classList.add('hidde-policy');
+        modal.classList.remove('show-policy');
+        lastAccept();
+    }
+    function lastAccept() {
+        localStorage.setItem('lastAccept', 'true');
+    }
+    function onceADay() {
+        if (localStorage.getItem('lastAccept') !== 'true') {
+            showPolicy();
+        }else {
+            closePolicy();
+        }
+    }
+    onceADay();
+    console.log("teste: " + localStorage.getItem('lastAccept'));
+</script>
+
     <div id=app>
         <jsp:include page="includes/include-header.jsp" flush="true" />
     
