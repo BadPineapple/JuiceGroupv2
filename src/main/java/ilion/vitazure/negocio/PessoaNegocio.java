@@ -91,6 +91,10 @@ public class PessoaNegocio {
 			throw new ValidacaoException("Senha não confere.");
 		}
 		
+		if (pessoaVO.getConfirmado() == null || !pessoaVO.getConfirmado()) {
+			throw new ValidacaoException("Usuario ainda não foi ativado, link de ativação enviado no e-mail cadastrado.");
+		}
+		
 		return pessoaVO;
 	}
 	
@@ -221,5 +225,29 @@ public void enviarSenhaEmail(String email) throws Exception {
 				SpringApplicationContext.getBean(EmailSenderFactory.class);
 		emailSenderFactory.getInstance().send(e);
 	}
+	
+	
+	public void enviarEmailAtivacao(Pessoa pessoa) throws Exception {
+	    	EnvioEmailConfirmacao.novo(pessoa);
+	}
+	
+public void emailAtivacao(Pessoa pessoaVO) throws Exception {
+		
+		String urlProp = propNegocio.findValueById(PropEnum.URL);
+		String nomeEmpresaProp = propNegocio.findValueById(PropEnum.NOME_EMPRESA);
+		String url = urlProp+"/ilionnet/templateConfirmacao?id="+pessoaVO.getId();
+		String assunto = "Ativação - "+nomeEmpresaProp;
+		String html = Uteis.getHtml(url);
+		Email e = new Email();
+		e.setToEmail(pessoaVO.getEmail());
+		e.setToName(pessoaVO.getNome());
+		e.setSubject(assunto);
+		e.setMessage(html);
+		
+		EmailSenderFactory emailSenderFactory = 
+				SpringApplicationContext.getBean(EmailSenderFactory.class);
+		emailSenderFactory.getInstance().send(e);
+	}
+	
 	
 }

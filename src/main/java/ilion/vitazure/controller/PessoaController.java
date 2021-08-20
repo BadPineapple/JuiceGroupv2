@@ -86,8 +86,9 @@ public class PessoaController {
 					}
 
 	    	  pessoa = pessoaNegocio.incluirAtualizar(pessoa);
+	    	  pessoaNegocio.enviarEmailAtivacao(pessoa);
 	    	  request.getSession().setAttribute(PessoaNegocio.ATRIBUTO_SESSAO, pessoa);
-			return new ResponseEntity<>(new JsonString("Cadastro salvo com sucesso!"), HttpStatus.OK);
+			return new ResponseEntity<>(new JsonString("Enviado no e-mail cadastrado um link para ativação do seu cadastro."), HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<>(new JsonString(e.getMessage()), HttpStatus.BAD_REQUEST);

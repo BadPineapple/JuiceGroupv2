@@ -13,6 +13,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import ilion.arquivo.negocio.Arquivo;
+import ilion.util.StringUtil;
 
 @Entity
 @Table(name = "pessoa")
@@ -36,6 +37,7 @@ public class Pessoa implements Serializable{
 	  private String endereco;
 	  private Boolean cliente;
 	  private Boolean psicologo;
+	  private Boolean confirmado;
 	  
 	  @ManyToOne
 	  @JoinColumn(nullable = true)
@@ -200,9 +202,18 @@ public class Pessoa implements Serializable{
 	public void setGenero(String genero) {
 		this.genero = genero;
 	}
+	
+	public Boolean getConfirmado() {
+		return confirmado;
+	}
+	public void setConfirmado(Boolean confirmado) {
+		this.confirmado = confirmado;
+	}
 	  
 	  
-	  
+	public String getToken() {
+		return StringUtil.encodePassword(getEmail());
+	}
 	  
 	  
 	

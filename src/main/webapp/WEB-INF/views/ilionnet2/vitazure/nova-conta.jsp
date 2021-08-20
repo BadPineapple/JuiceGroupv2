@@ -6,6 +6,18 @@
 	<jsp:include page="includes/include-head.jsp" flush="true" />
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>	
 	<script src="../assets/js/vitazure/cadastroPessoa.js"></script>
+	
+	<style>
+	  .not-active {
+		  pointer-events: none;
+		  cursor: default;
+		  text-decoration: none;
+		  color: #f3f3f3;
+		  background: #ddd;
+		}
+		
+	</style>
+	
 </head>
 
 <body id="index" class="home">
@@ -67,7 +79,7 @@
                                     <div class="col-12">
                                         <div class="input-block">
                                             <label>Celular</label>
-                                            <input type="text" placeholder="(00) 0000 0000" data-mask="(00) 00000-0000" ng-model="pessoa.celular" required />
+                                            <input type="text" placeholder="(00) 0000 0000" data-mask="(00) 00000-0000" ng-model="pessoa.celular" id="txtCelular" required onblur="validarDDD(this.value)"/>
                                         </div>
                                     </div>
 
@@ -81,13 +93,21 @@
                                     <div class="col-12">
                                         <div class="input-block">
                                             <label>Senha</label>
-                                            <input type="text" ng-model="pessoa.senha" required />
+                                            <input type="text" ng-model="pessoa.senha" required onblur="validarSenha(this.value)" maxlength="8">
+                                              <i class="far fa-info-circle" data-toggle="tooltip" data-html="true" style="font-size: 28px;position: absolute;top: 34px;left: 89%;" title="Senha com 8 caracteres, pelo menos uma letra maiúscula e um número"></i>
+                                            </input>
+                                            
+                                            <div id="divNivelSenha" style="border: 1px solid;width: 100%;height: 30px;border-radius: 8px;display: none;">
+                                               <div id="nivelSenhaFraca" style="background: red;width: 35%;height: 28px;text-align: center;position: absolute;border-radius: 8px;display: none;"><p style="position: relative;top: -10px;color: white;">Fraca</p></div>
+                                               <div id="nivelSenhaMedia" style="background: #e3e025;width: 70%;height: 28px;text-align: center;position: absolute;border-radius: 8px;display: none;"><p style="position: relative;top: -10px;color: white;">Média</p></div>
+                                               <div id="nivelSenhaForte" style="background: green;width: 94%;height: 28px;text-align: center;position: absolute;border-radius: 8px;display: none;"><p style="position: relative;top: -10px;color: white;">Forte</p></div>
+                                            </div>   
                                         </div>
                                     </div>
 
                                     <div class="col-12">
                                         <div class="termos">
-                                            <input type="checkbox" required oninvalid="this.setCustomValidity('Marque esta caixa para continuar')" />
+                                            <input type="checkbox" required oninvalid="this.setCustomValidity('Marque esta caixa para continuar')" onchange="try{setCustomValidity('')}catch(e){}"/>
                                             <span class="new-cadastro">
                                                 Eu declaro que li e concordo com os 
                                                 <div class="button-blue line">
@@ -112,7 +132,7 @@
                                     </div>
 
                                     <div class="col-12">
-                                        <button type="submit" class="button-secundary" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Criar conta</button>
+                                        <button type="submit" id="criarusuario" class="not-active button-secundary" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Criar conta</button>
                                     </div>
                                 </div>
                             </form>
@@ -154,6 +174,53 @@
 		})();
 	</script>
 </c:if>
+
+<script>
+function validarDDD(telefone) {
+	if(telefone.length < 15){
+    	document.getElementById('txtCelular').value="";       
+    	alert("Telefone Inválido");
+	}else if(telefone.substring(1,3) < 11){
+		document.getElementById('txtCelular').value="";       
+    	alert("Telefone Inválido");
+	}	
+	
+}
+
+function validarSenha(senha){
+	var numero = senha.match(/[0-9]+/);
+	var maiuscula = senha.match(/[A-Z]+/);
+		var divNivelSenha = document.getElementById("divNivelSenha");
+		var nivelFraco = document.getElementById("nivelSenhaFraca");
+		var nivelMedia = document.getElementById("nivelSenhaMedia");
+		var nivelForte = document.getElementById("nivelSenhaForte");
+		document.getElementById("criarusuario").className = "not-active button-secundary";
+	if(senha.length < 8){
+		divNivelSenha.style.display = "block";
+		nivelFraco.style.display = "block";
+		nivelMedia.style.display = "none";
+		nivelForte.style.display = "none";
+		document.getElementById("criarusuario").className = "not-active button-secundary";
+		return false;
+	}else if(numero == null || maiuscula == null){
+		divNivelSenha.style.display = "block";
+		nivelFraco.style.display = "none";
+		nivelMedia.style.display = "block";
+		nivelForte.style.display = "none";
+		document.getElementById("criarusuario").className = "not-active button-secundary";
+		return false;
+	}else if(senha.length >= 8 && numero.length  > 0 && maiuscula.length  > 0){
+		divNivelSenha.style.display = "block";
+		nivelFraco.style.display = "none";
+		nivelMedia.style.display = "none";
+		nivelForte.style.display = "block";
+		document.getElementById("criarusuario").className = "button-secundary";
+		return false;
+	}
+	
+}
+</script>
+
     </div>
 </body>
 </html>

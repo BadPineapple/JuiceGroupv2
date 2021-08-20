@@ -6,6 +6,24 @@
 	<jsp:include page="includes/include-head.jsp" flush="true" />
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>	
 	<script src="../assets/js/vitazure/cadastroPessoa.js"></script>	
+	<script type="text/javascript" src="<c:url value='../ilionnet/design/script/tiny_mce/tiny_mce.js'/>"></script>
+<script type="text/javascript" src="<c:url value='../ilionnet/design/script/funcoesTinyMCE.js'/>"></script>
+<script type="text/javascript" src="../ilionnet/design/script/CalendarPopup.js"></script>
+<script type="text/javascript" src="../ilionnet/design/script/common.js"></script>
+<script type="text/javascript">
+	document.write(getCalendarStyles());
+	var cal1x = new CalendarPopup("testdiv1");
+	</script>
+	<style>
+	  .not-active {
+		  pointer-events: none;
+		  cursor: default;
+		  text-decoration: none;
+		  color: #f3f3f3;
+		  background: #ddd;
+		}
+	</style>
+	<div id="testdiv1" style="position:absolute;visibility:hidden;background-color:white;layer-background-color:white;z-index:10000;" ></div>
 </head>
 
 <body id="index" class="home">
@@ -76,37 +94,40 @@
                                 <div class="col-12">
                                     <div class="input-block">
                                         <label>CPF</label>
-                                        <input type="text" data-mask="000.000.000-00" ng-model="pessoa.cpf" required />
+                                        <input type="text" data-mask="000.000.000-00" ng-model="pessoa.cpf" id="cpf" required onblur="validarCPF(this.value)"/>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="input-block">
                                         <label>Data de Nascimento</label>
-                                        <input type="text" data-mask="00/00/0000" ng-model="pessoa.dataNascimento" required/>
+                                        <input type="text" data-mask="00/00/0000" ng-model="pessoa.dataNascimento" id="dataNasc" onblur="validarDataMaiorAtual(this.value)" required/>
+                                        <a href="javascript:;" onblur="validarDataMaiorAtual(this.value)" style="position: absolute;left: 86%;top: 45%;" onClick="cal1x.select(document.getElementById('dataNasc'),'linkDataNasc','dd/MM/yyyy'); return false;" id="linkDataNasc" name="linkDataNasc">
+			                                           <i class="fas fa-calendar-week" style="font-size: 20px;"></i>
+			                                        </a>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="input-block">
                                         <label>Telefone</label>
-                                        <input type="text" data-mask="(00) 00000-0000" ng-model="pessoa.telefone"/>
+                                        <input type="text" data-mask="(00) 00000-0000" ng-model="pessoa.telefone" id="telefone" onblur="validarDDD(this.value , 'telefone')"/>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="input-block">
                                         <label>Celular</label>
-                                        <input type="text" data-mask="(00) 00000-0000" ng-model="pessoa.celular" required/>
+                                        <input type="text" data-mask="(00) 00000-0000" ng-model="pessoa.celular" id="celular" onblur="validarDDD(this.value , 'celular')" required/>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="input-block">
                                         <label>Email</label>
-                                        <input type="text" ng-model="pessoa.email" required/>
+                                        <input type="text" ng-model="pessoa.email" class="not-active" required/>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="input-block">
                                         <label>CEP</label>
-                                        <input type="text" data-mask="00000-000" ng-model="pessoa.cep" required />
+                                        <input type="text" data-mask="00.000-000" ng-model="pessoa.cep" id="cep" required onblur="validarCep(this.value)"/>
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -157,7 +178,54 @@
 	 })
  })
 
-</script>    
+</script>
+
+
+<script>
+
+function validarCPF(cpf) {
+	if(!cpfValido(cpf)){
+		alert("CPF inválido.")
+		document.getElementById('cpf').value=""; 
+	}
+}
+
+function cpfValido(cpf) {	
+	cpf = cpf.replace(/[^\d]+/g,'');	
+	if(cpf == '') return false;	
+	if (cpf.length != 11 || 
+		cpf == "00000000000" || 
+		cpf == "11111111111" || 
+		cpf == "22222222222" || 
+		cpf == "33333333333" || 
+		cpf == "44444444444" || 
+		cpf == "55555555555" || 
+		cpf == "66666666666" || 
+		cpf == "77777777777" || 
+		cpf == "88888888888" || 
+		cpf == "99999999999")
+			return false;		
+	add = 0;	
+	for (i=0; i < 9; i ++)		
+		add += parseInt(cpf.charAt(i)) * (10 - i);	
+		rev = 11 - (add % 11);	
+		if (rev == 10 || rev == 11)		
+			rev = 0;	
+		if (rev != parseInt(cpf.charAt(9)))		
+			return false;		
+	add = 0;	
+	for (i = 0; i < 10; i ++)		
+		add += parseInt(cpf.charAt(i)) * (11 - i);	
+	rev = 11 - (add % 11);	
+	if (rev == 10 || rev == 11)	
+		rev = 0;	
+	if (rev != parseInt(cpf.charAt(10)))
+		return false;		
+	return true;   
+}
+
+</script>
+    
     </div>
 </body>
 </html>

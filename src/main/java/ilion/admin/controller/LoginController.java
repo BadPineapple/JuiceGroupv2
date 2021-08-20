@@ -13,6 +13,7 @@ import ilion.CustomErrorController;
 import ilion.admin.negocio.Usuario;
 import ilion.admin.negocio.UsuarioNegocio;
 import ilion.gc.util.UteisGC;
+import ilion.util.StringUtil;
 import ilion.util.Uteis;
 import ilion.util.contexto.autorizacao.AcessoLivre;
 import ilion.util.exceptions.ValidacaoException;
@@ -163,5 +164,29 @@ public class LoginController extends CustomErrorController {
     	
     	return "/ilionnet/modulos/admin/usuario-senha-email";
     }
+    
+    @RequestMapping("/ilionnet/templateConfirmacao")
+    public String templateConfirmacao(Long id, ModelMap modelMap) {
+    	
+    	if(id == null) {
+    		return null;
+    	}
+    	Pessoa pessoa = (Pessoa) pessoaNegocio.consultarPorId(id);
+    	modelMap.addAttribute("pessoa", pessoa);
+    	return "/ilionnet/modulos/admin/confirmacao";
+    }
+    
+    @RequestMapping("/ilionnet/confirmacao")
+    public String confirmacao(String token, ModelMap modelMap) {
+    	try {
+	    	Pessoa pessoa = (Pessoa) pessoaNegocio.consultarPorEmail(StringUtil.decodePassword(token));
+	    	pessoa.setConfirmado(Boolean.TRUE);
+			pessoa = pessoaNegocio.incluirAtualizar(pessoa);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	return "/ilionnet2/vitazure/confirmacaoEmail";
+    }
+    
     
 }

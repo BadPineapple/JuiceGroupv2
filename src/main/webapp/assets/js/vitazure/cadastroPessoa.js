@@ -25,7 +25,7 @@ function post($scope, $http, $window) {
     $http.post("/vitazure/pessoa", $scope.pessoa)
         .then(function (response) {
             alert_success(response.data.message, () => {
-                $window.location.href = "/vitazure/informacoes-perfil";
+                $window.location.href = "/cadastre-se";
             });
         }).catch(function (response) {
         alert_error(response.data.message);
@@ -68,4 +68,52 @@ function uploadData($scope , formdata) {
             alert_error(response.responseText);
         }
     });
+}
+
+
+function validarCep(e) {
+	let valorCep = e;
+	if( ! valorCep || valorCep.trim() == '' || valorCep.length < 10 ) {
+		alert('Problema no Cep Informado.');
+		return;
+	}
+
+	let urlService = 'https://viacep.com.br/ws/' + valorCep.replace(/[.-]/, "") + '/json/'
+	
+	$.get(urlService, _processaRetornoCep);
+	
+}
+
+function _processaRetornoCep(retorno) {
+	if(retorno.erro){
+		alert('Problema no Cep Informado.');
+		document.getElementById('cep').value=""; 
+	}	
+}
+
+function validarDDD(telefone , id) {
+	if(telefone.length < 15){
+    	document.getElementById(id).value="";       
+    	alert("Telefone Inválido");
+	}else if(telefone.substring(1,3) < 11){
+		document.getElementById(id).value="";       
+    	alert("Telefone Inválido");
+	}	
+	
+}
+
+function validarDataMaiorAtual(data){
+	  let partes = data.split('/') 
+	  let dataAtual = new Date()
+      var anoAtual = dataAtual.getFullYear();
+       var idade = anoAtual - partes[2];      
+	  data2 = new Date(partes[2], partes[1] - 1, partes[0])
+	 var RegExPattern = /^((((0?[1-9]|[12]\d|3[01])[\.\-\/](0?[13578]|1[02])      [\.\-\/]((1[6-9]|[2-9]\d)?\d{2}))|((0?[1-9]|[12]\d|31)[\.\-\/](0?[13456789]|1[012])[\.\-\/]((1[6-9]|[2-9]\d)?\d{2}))|((0?[1-9]|1\d|2[0-8])[\.\-\/]0?2[\.\-\/]((1[6-9]|[2-9]\d)?\d{2}))|(29[\.\-\/]0?2[\.\-\/]((1[6-9]|[2-9]\d)?(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00)|00)))|(((0[1-9]|[12]\d|3[01])(0[13578]|1[02])((1[6-9]|[2-9]\d)?\d{2}))|((0[1-9]|[12]\d|30)(0[13456789]|1[012])((1[6-9]|[2-9]\d)?\d{2}))|((0[1-9]|1\d|2[0-8])02((1[6-9]|[2-9]\d)?\d{2}))|(2902((1[6-9]|[2-9]\d)?(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00)|00))))$/;
+     if (((!((data.match(RegExPattern)))) && ( data != "" )) || data2 >= dataAtual) {
+          alert_error('Data informada esta inválida.');
+          document.getElementById('dataNasc').value = '';
+     }else if(idade < 18){
+	   alert_error('Menor de 18 anos não pode ser cadastrado.');
+       document.getElementById('dataNasc').value = '';
+}
 }
