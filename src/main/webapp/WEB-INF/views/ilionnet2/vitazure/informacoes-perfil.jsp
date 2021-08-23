@@ -79,6 +79,7 @@
                         <form class="form-default">
                           <angular-initializer ng-init="ProfissionalVH.profissional.id='${profissional.id}';
 						                    ProfissionalVH.profissional.documentoCrpCrm='${profissional.documentoCrpCrm}';
+						                    ProfissionalVH.profissional.conselhoProfissional='${profissional.conselhoProfissional}';
 						                    ProfissionalVH.profissional.cadastroEpsi='${profissional.cadastroEpsi}';
 						                    ProfissionalVH.profissional.tituloProfissional='${profissional.tituloProfissional}';
 						                    ProfissionalVH.profissional.tipoProfissional='${profissional.tipoProfissional}';
@@ -185,8 +186,19 @@
                                                     </figure>
                                                     <p>Alterar foto</p>
                                                 </label>
-                                                <p>Tamanho Maximo da Imagem 500Kb</p>
+                                                <p>Tamanho Máximo da Imagem 500Kb</p>
                                             </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                          <div class="input-block">
+                                            <label>Tipo Profissional</label>
+                                            <select ng-model="ProfissionalVH.profissional.tipoProfissional" class="form-control input-sm" id="tipoProfissional">
+                                              <c:forEach var="tipoProfissional" items="${tiposProfissional}">
+                                                <option value="${tipoProfissional}">${tipoProfissional.valor}</option>
+                                              </c:forEach>
+                                            </select>
+                                          </div>
                                         </div>
 
                                         <div class="col-12 col-md-6 col-xl-6">
@@ -203,16 +215,19 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-12">
-                                            <div class="input-block">
-                                                <label>Tipo Profissional</label>
-                                                <select ng-model="ProfissionalVH.profissional.tipoProfissional" class="form-control input-sm" id="tipoProfissional">
-													<c:forEach var="tipoProfissional" items="${tiposProfissional}">
-				   							          <option value="${tipoProfissional}">${tipoProfissional.valor}</option>
-										            </c:forEach>
-									           </select>
-                                            </div>
+                                        <div class="col-12 col-md-6 col-xl-6">
+                                          <div class="input-block">
+                                            <label>Conselho profissional</label>
+                                            <select ng-model="ProfissionalVH.profissional.conselhoProfissional" required>
+                                              <c:forEach items="${conselhoProfissional}" var="conselho">
+                                                <option ng-if="ProfissionalVH.profissional.tipoProfissional == 'PSICOLOGO'" value="${conselho}">${conselho.valor} - ${conselho.CRP}</option>
+                                                <option ng-if="ProfissionalVH.profissional.tipoProfissional == 'MEDICO'" value="${conselho}">${conselho.valor} - ${conselho.CRM}</option>
+                                              </c:forEach>
+                                            </select>
+                                          </div>
                                         </div>
+
+
                                         <div class="col-12 col-md-12 col-xl-12">
                                             <div class="input-block">
                                                 <label>Especialidade</label>

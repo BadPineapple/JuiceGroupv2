@@ -21,10 +21,6 @@
                     <div class="col-12 text-center">
                         <h2>Minhas Consultas</h2>
                         <p>Confira suas consultas.</p>
-                    <span class="notice-text">
-                            Todos os agendamentos seguem o horário de Brasília - 
-                             <div id="hora" style="padding-left: 4px;"></div>
-                        </span>
                     </div>
                     <div class="col-12 col-xl-12">
                         <div class="search">

@@ -1273,7 +1273,6 @@ h1.title-gray {
     line-height: 3rem;
     font-weight: 800;
     color: #806C47;
-    margin-bottom: 2rem;
 }
 
 .valor-consulta span {
@@ -2746,7 +2745,6 @@ h1.title-gray {
     flex-direction: row;
     justify-content: center;
     font-weight: 600;
-    margin: 3rem 0 0;
 }
 
 .funciona-text {

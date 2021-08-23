@@ -137,6 +137,7 @@ function informacoesPerfilController($scope, $http, $window) {
 
 function perfilProfissional(menu,$scope, $http, $window) {
 
+	// $scope.ProfissionalVH.profissional.conselhoProfissional = document.getElementById("conselhoProfissional").checked;
 	$scope.ProfissionalVH.profissional.avisoFerias = document.getElementById("avisoFerias").checked;
 	$scope.ProfissionalVH.profissional.habilitarDesconto40 = document.getElementById("habilitarDesconto40").checked;
 	$scope.ProfissionalVH.profissional.atendimentoPorLibras = document.getElementById("atendimentoPorLibras").checked;

@@ -30,9 +30,16 @@
             </div>
             <div class="col-12 col-md-4 col-xl-4">
                 <div class="entrar-consulta">
-				<input type="text" value="${agendaDia}" id="agendaDia" style="display: contents;"/>
+				            <input type="text" value="${agendaDia}" id="agendaDia" style="display: contents;"/>
                     <a href="" target="_blank" id="linkAcesso" class="not-active button-secundary">Entrar na consulta</a>
                 </div>
+            </div>
+            <div style="width: 100%; padding-bottom: 5px;
+">
+                <span class="notice-text">
+                            Todos os agendamentos seguem o horário de Brasília -
+                             <div id="hora" style="padding-left: 4px;"></div>
+                        </span>
             </div>
         </div>
     </div>

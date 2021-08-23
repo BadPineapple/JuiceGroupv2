@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import ilion.vitazure.enumeradores.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,16 +31,6 @@ import ilion.me.pagar.model.Transaction;
 import ilion.util.VLHForm;
 import ilion.util.ValueListInfo;
 import ilion.util.contexto.autorizacao.PessoaLogada;
-import ilion.vitazure.enumeradores.BancoEnum;
-import ilion.vitazure.enumeradores.DiasSemanaEnum;
-import ilion.vitazure.enumeradores.DuracaoAtendimentoEnum;
-import ilion.vitazure.enumeradores.EspecialidadesEnum;
-import ilion.vitazure.enumeradores.EstadoEnum;
-import ilion.vitazure.enumeradores.FormacaoEnum;
-import ilion.vitazure.enumeradores.TemasTrabalhoEnum;
-import ilion.vitazure.enumeradores.TempoAntecendenciaEnum;
-import ilion.vitazure.enumeradores.TipoContaEnum;
-import ilion.vitazure.enumeradores.TipoProfissionalEnum;
 import ilion.vitazure.model.Agenda;
 import ilion.vitazure.model.EnderecoAtendimento;
 import ilion.vitazure.model.Especialidade;
@@ -120,6 +111,7 @@ public class VitazureController {
 		}else if (pessoa.getPsicologo() && (profissional.getAtivo() == null || !profissional.getAtivo())) {
 				return "/ilionnet2/vitazure/assinatura";
 		}else {
+			request.setAttribute("conselhoProfissional", ConselhoProfissionalEnum.values());
 			request.setAttribute("estados", EstadoEnum.values());
 			request.setAttribute("tiposProfissional", TipoProfissionalEnum.values());
 			request.setAttribute("especialidades", EspecialidadesEnum.values());

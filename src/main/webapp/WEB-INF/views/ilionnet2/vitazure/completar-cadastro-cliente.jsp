@@ -38,7 +38,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12 text-center">
-                        <h3>Cliente complete seu cadastro</h3>
+                        <h3>Complete seu cadastro</h3>
                     </div>
                     <div class="col-12 col-md-6 offset-md-3 col-xl-6 offset-xl-3">
                         <form class="form-default" style="padding: 3rem 0; font-weight: 800;">

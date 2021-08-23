@@ -20,13 +20,7 @@ import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import ilion.vitazure.enumeradores.BancoEnum;
-import ilion.vitazure.enumeradores.DuracaoAtendimentoEnum;
-import ilion.vitazure.enumeradores.EspecialidadesEnum;
-import ilion.vitazure.enumeradores.TemasTrabalhoEnum;
-import ilion.vitazure.enumeradores.TempoAntecendenciaEnum;
-import ilion.vitazure.enumeradores.TipoContaEnum;
-import ilion.vitazure.enumeradores.TipoProfissionalEnum;
+import ilion.vitazure.enumeradores.*;
 
 @Entity
 @Table(name = "profissional")
@@ -49,6 +43,9 @@ public class Profissional implements Serializable{
 	  private String dataFimPlano;
 	  
 	  private String documentoCrpCrm;
+
+	  @Enumerated(EnumType.STRING)
+	  private ConselhoProfissionalEnum conselhoProfissional;
 	  
 	  private String cadastroEpsi;
 
@@ -207,6 +204,17 @@ public class Profissional implements Serializable{
 
 	public void setDocumentoCrpCrm(String documentoCrpCrm) {
 		this.documentoCrpCrm = documentoCrpCrm;
+	}
+
+	public ConselhoProfissionalEnum getConselhoProfissional() {
+		if (conselhoProfissional == null) {
+			conselhoProfissional = ConselhoProfissionalEnum.NAO_INFORMADO;
+		}
+		return conselhoProfissional;
+	}
+
+	public void setConselhoProfissional(ConselhoProfissionalEnum conselhoProfissional) {
+		this.conselhoProfissional = conselhoProfissional;
 	}
 
 	public String getCadastroEpsi() {
