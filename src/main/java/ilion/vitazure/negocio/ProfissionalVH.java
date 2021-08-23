@@ -28,6 +28,8 @@ public class ProfissionalVH {
 	
 	private Especialidade especialidadeAdicionar;
 	
+	private String menuValidar;
+	
 	public Profissional getProfissional() {
 		return profissional;
 	}
@@ -107,9 +109,13 @@ public class ProfissionalVH {
 		this.temas = temas;
 	}
 
-	
-	
-	
-	
+	public String getMenuValidar() {
+		return menuValidar;
+	}
+
+	public void setMenuValidar(String menuValidar) {
+		this.menuValidar = menuValidar;
+	}
+
 	
 }

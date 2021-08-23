@@ -64,8 +64,11 @@ function uploadData($scope , formdata) {
            arquivos = response;
            toast_success('Ótimo', 'Upload foi concluído com sucesso!');
         }, error: function (response) {
-            console.log("Erro!!" + response.responseText);
-            alert_error(response.responseText);
+            if(response.responseText.includes('exceeds the configured maximum') || response.responseText.includes('413')){
+			  alert_error("Verifique o tamanho da imagem esta dentro do limite permitido");
+			}else{
+              alert_error(response.responseText);
+			}
         }
     });
 }
@@ -92,7 +95,7 @@ function _processaRetornoCep(retorno) {
 }
 
 function validarDDD(telefone , id) {
-	if(telefone.length < 15){
+	if(telefone.length < 13){
     	document.getElementById(id).value="";       
     	alert("Telefone Inválido");
 	}else if(telefone.substring(1,3) < 11){

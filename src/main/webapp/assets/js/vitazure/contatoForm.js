@@ -2,9 +2,7 @@ var contatoApp = angular.module('contatoApp', []);
 
 contatoApp.controller('ContatoController', contatoController);
 
-$scope.contato = {};
-
-$scope.regEmail = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+var regEmail = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 
 function contatoController($scope, $http, $window , $timeout) {
     $scope.submit = function () {
@@ -49,54 +47,13 @@ function submit($scope, $http, $window , $timeout) {
         .then(function (response) {
             alert_success(response.data.message, () => {
 	            'Obrigado pelo seu contato.'
-				$window.location.href = "/vitazure/informacoes-perfil";
 			});
         }).catch(function (response) {
         alert_error(response.data.message);
     })
 }
 
-        $http({
-            method: "POST",
-            url: `${ENDERECO_SITE}/rest/contato-registrar`,
-            headers: {
-                'Content-Type': 'application/json;charset=utf8'
-            },
-            params: {
-            },
-            data: $scope.contato
-        }).then(function (response) {
 
-            $scope.sending = false;
-            $scope.contato = {
-                tipo: 'CONTATO'
-            };
-
-            setTimeout(() => {
-                Swal.fire({
-                    title: 'Obrigado pelo seu contato.',
-                    text: '',
-                    icon: 'success',
-                    confirmButtonText: 'OK'
-                });
-            }, 100);
-            
-        }, function (error) {
-        	
-            $scope.sending = false;
-            console.log('error: ', error);
-            //alert(error.data.message);
-            Swal.fire({
-                title: 'Atenção!',
-                text: 'Ocorreu um erro, por favor tente novamente.',
-                icon: 'error',
-                confirmButtonText: 'OK'
-            });
-
-        });
-
-
-	};
 
 (function() {
 	

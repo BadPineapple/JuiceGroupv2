@@ -322,6 +322,11 @@ public class SiteController extends CustomErrorController {
 	public String entrar(HttpServletRequest request) {
 		return "/ilionnet2/vitazure/entrar";
 	}
+	@GetMapping("/entreContato")
+	public String entreContato(HttpServletRequest request) {
+		return "/ilionnet2/vitazure/entreContato";
+	}
+	
 	
 	@GetMapping("/listaProfissionais")
 	public String consultarProfissionais(HttpServletRequest request) {

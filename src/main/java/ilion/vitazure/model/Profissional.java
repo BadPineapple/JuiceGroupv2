@@ -525,6 +525,9 @@ public class Profissional implements Serializable{
 	}
 
 	public Boolean getAdolescentes() {
+		if (adolescentes == null) {
+			adolescentes = Boolean.FALSE;
+		}
 		return adolescentes;
 	}
 
@@ -533,6 +536,9 @@ public class Profissional implements Serializable{
 	}
 
 	public Boolean getAdultos() {
+		if (adultos == null) {
+			adultos = Boolean.FALSE;
+		}
 		return adultos;
 	}
 
@@ -541,6 +547,9 @@ public class Profissional implements Serializable{
 	}
 
 	public Boolean getCasais() {
+		if (casais == null) {
+			casais = Boolean.FALSE;
+		}
 		return casais;
 	}
 
@@ -549,6 +558,9 @@ public class Profissional implements Serializable{
 	}
 
 	public Boolean getIdosos() {
+		if (idosos == null) {
+			idosos = Boolean.FALSE;
+		}
 		return idosos;
 	}
 

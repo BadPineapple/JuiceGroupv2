@@ -1589,7 +1589,7 @@ public class Uteis {
 				return "Aconteceu um problema inesperado, informe ao administrador e o mesmo será solucionado.";
 			}
 			
-	        if (exeption.getCause().getCause().toString().contains("table")) {
+	        if (exeption.getCause() != null && exeption.getCause().getCause().toString().contains("table")) {
 	           String table = "";
 	           table = exeption.getCause().getCause().toString().substring(exeption.getCause().getCause().toString().lastIndexOf("table")+6, exeption.getCause().getCause().toString().length());
 			   table = table.substring(table.indexOf("\"")+1, table.length());

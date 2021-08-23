@@ -21,12 +21,14 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ValidationUtils;
 
+import ilion.SpringApplicationContext;
 import ilion.admin.negocio.PropEnum;
 import ilion.admin.negocio.PropNegocio;
 import ilion.arquivo.negocio.ArquivoUteis;
 import ilion.contato.controller.ContatoVH;
 import ilion.email.negocio.Email;
 import ilion.email.negocio.EmailNegocio;
+import ilion.email.negocio.EmailSenderFactory;
 import ilion.util.Uteis;
 import ilion.util.VLHForm;
 import ilion.util.ValueListInfo;
@@ -746,11 +748,15 @@ public class ContatoNegocio {
 			e.setToName(propNegocio.findValueById(PropEnum.NOME_EMPRESA));
 			e.setToEmail(emailTo);
 			e.setReplyToEmail(contato.getEmail());
-			e.setReplyToName(contato.getNome());
+			e.setToName(contato.getNome());
 			e.setSubject(assunto);
-			e.setMessage(sb.toString());
-
-			emailNegocio.adicionarEmail(e);
+			e.setMessage(sb.toString());			
+			
+			EmailSenderFactory emailSenderFactory = 
+					SpringApplicationContext.getBean(EmailSenderFactory.class);
+			emailSenderFactory.getInstance().send(e);
+			
+			
 
 		}
 

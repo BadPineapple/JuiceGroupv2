@@ -86,14 +86,14 @@
 						                    ProfissionalVH.profissional.temasTrabalho='${profissional.temasTrabalho}';
 						                    ProfissionalVH.profissional.duracaoAtendimento='${profissional.duracaoAtendimento}';
 						                    ProfissionalVH.profissional.biografia='${profissional.biografia}';
-						                    linkGoogleMaps='${linkGoogleMaps}';
-						                    estado='${estado}';
-						                    logradouro='${logradouro}';
-						                    complemento='${complemento}';
-						                    cep='${cep}';
-						                    cidade='${cidade}';
-						                    bairro='${bairro}';
-						                    numero='${numero}';
+						                    linkGoogleMaps='';
+						                    estado='';
+						                    logradouro='';
+						                    complemento='';
+						                    cep='';
+						                    cidade='';
+						                    bairro='';
+						                    numero='';						                    
 						                    ProfissionalVH.profissional.duracaoAtendimentoValor='${profissional.duracaoAtendimentoValor}';
 						                    ProfissionalVH.profissional.valorConsultaOnline='${profissional.valorConsultaOnline}';
 						                    ProfissionalVH.profissional.valorConsultaPresencial='${profissional.valorConsultaPresencial}';
@@ -148,8 +148,10 @@
 						                    ProfissionalVH.profissional.pessoa.genero='${profissional.pessoa.genero}';
                           					ProfissionalVH.profissional.pessoa.cliente ='${profissional.pessoa.cliente}';
                          					ProfissionalVH.profissional.pessoa.psicologo ='${profissional.pessoa.psicologo}';
+                         					ProfissionalVH.profissional.pessoa.confirmado='${profissional.pessoa.confirmado}';
                          					ProfissionalVH.formacaoAcademica ='${formacaoAcademica}';
                          					ProfissionalVH.enderecoAtendimento ='';
+                         					ProfissionalVH.menuValidar= '';
                          					descricaoFormacao ='${descricaoFormacao}';
                          					formacao ='${formacao}';
                          					formacaoProfissional();
@@ -160,7 +162,12 @@
                          					apresentarCampoData('${profissional.avisoFerias}');
                          					apresentarCampoConsulta40Mes('${profissional.habilitarDesconto40}');
                          					apresentarPrimeiraConsultaCortesia('${profissional.primeiraConsultaCortesia}');
-                         					
+                         					diaSemana='';
+                         					horaInicio='';
+                         					horaFim='';
+                         					enderecoSemanaHorario='';
+                         					atendimentoOnline='false';
+                         					atendimentoPresencial='false';
                           					 "/>
                             <div class="match-toggle">
                                 <div class="toggle-header">
@@ -185,7 +192,7 @@
                                         <div class="col-12 col-md-6 col-xl-6">
                                             <div class="input-block">
                                                 <label>Documento do (CRP/CRM)</label>
-                                                <input type="text" ng-model="ProfissionalVH.profissional.documentoCrpCrm"  />
+                                                <input type="text" ng-model="ProfissionalVH.profissional.documentoCrpCrm"/>
                                             </div>
                                         </div>
 
@@ -266,7 +273,7 @@
 	                                                <label>idosos</label>
 	                                            </div>
  										<div class="col-12">
-                                                    <button class="button-secundary checkbox-button" ng-click="perfilProfissional()" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Salvar</button>
+                                                    <button class="button-secundary checkbox-button" ng-click="perfilProfissional('dadosProfissional')" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Salvar</button>
                                          </div>
                                     </div>
                                 </div>
@@ -321,7 +328,7 @@
 						            	</div>
 						            </div>	
                                           <div class="col-12">
-                                                    <button class="button-secundary checkbox-button" ng-click="perfilProfissional()" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Salvar</button>
+                                                    <button class="button-secundary checkbox-button" ng-click="perfilProfissional('formacao')" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Salvar</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -421,7 +428,7 @@
 
                                                 <div class="col-12 col-md-6 col-xl-6">
                                                     <div class="input-block">
-                                                        <label>Link do Gogle Maps</label>
+                                                        <label>Link do Google Maps</label>
                                                         <input type="text" ng-model="linkGoogleMaps" id="linkGoogleMaps"  />
                                                     </div>
                                                 </div>
@@ -464,13 +471,13 @@
 						            </div>	
 
                                                 <div class="col-12">
-                                                    <button class="button-secundary checkbox-button" ng-click="perfilProfissional()" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Salvar</button>
+                                                    <button class="button-secundary checkbox-button" ng-click="salvarListEndereco()" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Salvar</button>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-    						
+    						</div>
     					<div class="match-toggle">
                                 <div class="toggle-header">
                                     <strong>Tempo de duração do atendimento</strong>
@@ -487,7 +494,7 @@
 		                                            </div>
 		                                        </div>
 		 										<div class="col-12">
-		                                                    <button class="button-secundary checkbox-button" ng-click="perfilProfissional()" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Salvar</button>
+		                                                    <button class="button-secundary checkbox-button" ng-click="perfilProfissional('tempoDuracao')" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Salvar</button>
                                          </div>
                                       </div>
                           </div>               
@@ -495,13 +502,13 @@
     						
     						<div class="match-toggle">
                                 <div class="toggle-header">
-                                    <strong>Horario Atendimento</strong>
+                                    <strong>Horário Atendimento</strong>
                                 </div>
                                 <div class="toggle-body vitazure">
                                   <div class="col-12">
                                         <div class="input-title">
                                                 <div class="col-md-11 col-lg-11 col-sm-12">
-                                                  <p>Horario Atendimento</p>
+                                                  <p>Horário Atendimento</p>
                                                 </div>  
                                                 <div class="col-md-1 col-lg-1 col-sm-12" style="margin-top: 28px;">
 														<a class="btn pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-default btn-sm"  ng-click =adicionarHorarioAtendimento()>
@@ -522,7 +529,7 @@
                                                 </div>
                                         <div class="col-12 col-md-4 col-xl-4">
                                                     <div class="input-block">
-                                                        <label>Hora Inicio</label>
+                                                        <label>Hora Início</label>
                                                         <input type="text" ng-model="horaInicio" id="horaInicio" data-mask="00:00"  onchange="validarHora(this.value,'horaInicio')"/>
                                                     </div>
                                          </div>
@@ -577,7 +584,7 @@
 						            </div>	
                                         
                                         <div class="col-12">
-                                            <button class="button-secundary checkbox-button" ng-click="perfilProfissional()" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Salvar</button>
+                                            <button class="button-secundary checkbox-button" ng-click="salvarListEnderecoAtendimento()" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Salvar</button>
                                         </div>
                                     </div>
                                   </div>  
@@ -615,7 +622,7 @@
                                             </div>
                                         </div>
                                         <div class="col-12">
-                                            <button class="button-secundary checkbox-button" ng-click="perfilProfissional()" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Salvar</button>
+                                            <button class="button-secundary checkbox-button" ng-click="perfilProfissional('')" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Salvar</button>
                                         </div>
                                     </div>
                                 </div>
@@ -744,7 +751,7 @@
                                         </div>
 
                                         <div class="col-12">
-                                            <button class="button-secundary checkbox-button" ng-click="perfilProfissional()" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Salvar</button>
+                                            <button class="button-secundary checkbox-button" ng-click="perfilProfissional('')" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Salvar</button>
                                         </div>
                                     </div>
                                 </div>
@@ -786,7 +793,7 @@
                                         </div>
 
                                         <div class="col-12">
-                                            <button class="button-secundary checkbox-button" ng-click="perfilProfissional()" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Salvar</button>
+                                            <button class="button-secundary checkbox-button" ng-click="perfilProfissional('')" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Salvar</button>
                                         </div>
                                     </div>
                                 </div>
@@ -817,7 +824,7 @@
                                         </div>
 
                                         <div class="col-12">
-                                            <button class="button-secundary checkbox-button" ng-click="perfilProfissional()" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Salvar</button>
+                                            <button class="button-secundary checkbox-button" ng-click="perfilProfissional('')" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Salvar</button>
                                         </div>
                                     </div>
                                 </div>
@@ -839,7 +846,7 @@
                                             </div>
                                         </div>
                                         <div class="col-12">
-                                            <button class="button-secundary checkbox-button" ng-click="perfilProfissional()" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Salvar</button>
+                                            <button class="button-secundary checkbox-button" ng-click="perfilProfissional('')" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Salvar</button>
                                         </div>
                                     </div>
                                 </div>
@@ -869,7 +876,7 @@
                                         </div>
 
                                         <div class="col-12">
-                                            <button class="button-secundary checkbox-button" ng-click="perfilProfissional()" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Salvar</button>
+                                            <button class="button-secundary checkbox-button" ng-click="perfilProfissional('')" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Salvar</button>
                                         </div>
                                     </div>
                                 </div>
@@ -954,20 +961,22 @@
 	</script>
 </c:if>
 <script>
-$('.valorMonetario').mask('#.##0.00', {reverse: true});
+$('.valorMonetario').mask('#.##0,00', {reverse: true});
 </script>
 
 <script>
- $(function(){
+$(function(){
 	 $('#avatar').change(function(){
 	 	const file = $(this)[0].files[0]
-	 	const fileReader = new FileReader()
-	 	fileReader.onloadend = function(){
-			$('#img').attr('src',fileReader.result)
-		}
-	 	fileReader.readAsDataURL(file)
+	 	if(file.size <= '500000'){	 		
+		 	const fileReader = new FileReader()
+		 	fileReader.onloadend = function(){
+				$('#img').attr('src',fileReader.result)
+			}
+		 	fileReader.readAsDataURL(file)
+	 	}
 	 })
- })
+})
 </script>
 <script>
   function apresentarCampoData(campo){

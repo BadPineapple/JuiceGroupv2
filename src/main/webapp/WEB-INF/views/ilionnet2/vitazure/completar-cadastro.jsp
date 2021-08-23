@@ -42,7 +42,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12 text-center">
-                        <h3>${pessoa.psicologo ? 'Profissional' : 'Cliente'} complete seu cadastro</h3>
+                        <h3>Complete seu cadastro</h3>
                     </div>
                     <div class="col-12 col-md-6 offset-md-3 col-xl-6 offset-xl-3">
                         <form ng-submit="submit()" class="form-default" style="padding: 3rem 0; font-weight: 800;">
@@ -60,6 +60,7 @@
                          					 pessoa.psicologo ='${pessoa.psicologo}';
                          					 pessoa.foto.id='${pessoa.foto.id}';
 						                     pessoa.foto.link='${pessoa.foto.link}';
+						                     ProfissionalVH.profissional.pessoa.confirmado='${profissional.pessoa.confirmado}';
                           					 "/>
                           
                             <div class="row">
@@ -73,6 +74,7 @@
                                                     </figure>
                                                     <p>Alterar foto</p>
                                                 </label>
+                                                <p>Tamanho Maximo da Imagem 500Kb</p>
                                             </div>
                                         </div>
                               </c:if>           
@@ -85,9 +87,11 @@
                                 <div class="col-12">
                                     <div class="input-block">
                                         <label>Gênero</label>
-                                        <select ng-model="pessoa.genero" class="form-control input-sm">
+                                        <select ng-model="pessoa.genero" class="form-control input-sm" required>
 						   					<option value="M">Masculino</option>
 						   					<option value="F">Feminino</option>
+						   					<option value="NB">Não-binário</option>
+						   					<option value="PNR">Prefiro não responder</option>
 										</select>
                                     </div>
                                 </div>
@@ -108,12 +112,6 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="input-block">
-                                        <label>Telefone</label>
-                                        <input type="text" data-mask="(00) 00000-0000" ng-model="pessoa.telefone" id="telefone" onblur="validarDDD(this.value , 'telefone')"/>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="input-block">
                                         <label>Celular</label>
                                         <input type="text" data-mask="(00) 00000-0000" ng-model="pessoa.celular" id="celular" onblur="validarDDD(this.value , 'celular')" required/>
                                     </div>
@@ -130,6 +128,25 @@
                                         <input type="text" data-mask="00.000-000" ng-model="pessoa.cep" id="cep" required onblur="validarCep(this.value)"/>
                                     </div>
                                 </div>
+                                <div class="col-12">
+                                        <div class="termos">
+                                            <input type="checkbox" required oninvalid="this.setCustomValidity('Marque esta caixa para continuar')" onchange="try{setCustomValidity('')}catch(e){}" style="position: relative;top: -11px;"/>
+                                            <span class="new-cadastro" style="font-size: 13px;">
+                                                Declaro que aceito e me submeto às condições das Políticas de Privacidade,
+                                                <div class="button-blue line">
+                                                    <%--<ilion:artigoConsulta categoria="termos-de-uso" artigo="termos-de-uso-vitazure" order="posicao" varRetorno="art"/>--%>
+                                                    <ilion:arquivoCategoriaLista categoria="documentos" order="posicao" layout="lateral" varRetorno="art"/>
+                                                        <c:forEach var="arq" items="${art}">
+                                                            <c:if test="${arq.title == \"Política de privacidade\"}">
+                                                                <c:set var="arqTermos" value="${arq.url}"/>
+                                                            </c:if>
+                                                        </c:forEach>
+                                                    <a href="${arqTermos}" target="_blank" >Políticas de Privacidade,</a>
+                                                </div>
+                                                bem como a todos os documentos anexos a estas.
+                                            </span>
+                                        </div>
+                                    </div>
                                 <div class="col-12">
                                     <button type="submit" class="button-secundary" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Completar cadastro</button>
                                 </div>
@@ -170,11 +187,13 @@
  $(function(){
 	 $('#avatar').change(function(){
 	 	const file = $(this)[0].files[0]
-	 	const fileReader = new FileReader()
-	 	fileReader.onloadend = function(){
-			$('#img').attr('src',fileReader.result)
-		}
-	 	fileReader.readAsDataURL(file)
+	 	if(file.size <= '500000'){	 		
+		 	const fileReader = new FileReader()
+		 	fileReader.onloadend = function(){
+				$('#img').attr('src',fileReader.result)
+			}
+		 	fileReader.readAsDataURL(file)
+	 	}
 	 })
  })
 

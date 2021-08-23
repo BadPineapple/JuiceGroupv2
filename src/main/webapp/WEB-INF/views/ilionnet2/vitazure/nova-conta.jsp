@@ -93,11 +93,12 @@
                                     <div class="col-12">
                                         <div class="input-block">
                                             <label>Senha</label>
-                                            <input type="text" ng-model="pessoa.senha" required onblur="validarSenha(this.value)" maxlength="8">
-                                              <i class="far fa-info-circle" data-toggle="tooltip" data-html="true" style="font-size: 28px;position: absolute;top: 34px;left: 89%;" title="Senha com 8 caracteres, pelo menos uma letra maiúscula e um número"></i>
+                                            <input type="password" ng-model="pessoa.senha" id="password" required onblur="validarSenha(this.value)" maxlength="8">
+                                               <span class="pass far fa-eye-slash" style="font-size: 17px;position: absolute;top: 41px;left: 91%;"></span>
+<!--                                               <i class="far fa-info-circle" data-toggle="tooltip" data-html="true" style="font-size: 28px;position: absolute;top: 34px;left: 89%;" title="Senha com 8 caracteres, pelo menos uma letra maiúscula e um número"></i> -->
                                             </input>
-                                            
-                                            <div id="divNivelSenha" style="border: 1px solid;width: 100%;height: 30px;border-radius: 8px;display: none;">
+                                            <p style="font-size: 12px;">* Senha com 8 caracteres, pelo menos uma letra maiúscula e um número.</p>
+                                            <div id="divNivelSenha" style="border: 1px solid #e0dedd;width: 100%;height: 30px;border-radius: 8px;display: none;">
                                                <div id="nivelSenhaFraca" style="background: red;width: 35%;height: 28px;text-align: center;position: absolute;border-radius: 8px;display: none;"><p style="position: relative;top: -10px;color: white;">Fraca</p></div>
                                                <div id="nivelSenhaMedia" style="background: #e3e025;width: 70%;height: 28px;text-align: center;position: absolute;border-radius: 8px;display: none;"><p style="position: relative;top: -10px;color: white;">Média</p></div>
                                                <div id="nivelSenhaForte" style="background: green;width: 94%;height: 28px;text-align: center;position: absolute;border-radius: 8px;display: none;"><p style="position: relative;top: -10px;color: white;">Forte</p></div>
@@ -176,6 +177,24 @@
 </c:if>
 
 <script>
+
+
+let btn = document.querySelector('.pass');
+
+btn.addEventListener('click', function() {
+
+    let input = document.querySelector('#password');
+
+    if(input.getAttribute('type') == 'password') {
+        input.setAttribute('type', 'text');
+        btn.setAttribute('class', 'pass far fa-eye'); 
+    } else {
+        input.setAttribute('type', 'password');
+        btn.setAttribute('class', 'pass far fa-eye-slash');        
+    }
+
+});
+
 function validarDDD(telefone) {
 	if(telefone.length < 15){
     	document.getElementById('txtCelular').value="";       

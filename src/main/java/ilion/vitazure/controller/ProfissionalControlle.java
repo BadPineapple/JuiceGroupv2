@@ -107,6 +107,7 @@ public class ProfissionalControlle {
 	    	  }else if(profissionalVH.getProfissional().getPessoa().getFoto() == null || profissionalVH.getProfissional().getPessoa().getFoto().getId().equals("")) {
 	    		  profissionalVH.getProfissional().getPessoa().setFoto(null);
 	    	  }
+	    	  profissionalNegocio.validarDados(profissionalVH);
 	    	  profissionalVH.getProfissional().setPessoa(pessoaNegocio.incluirAtualizar(profissionalVH.getProfissional().getPessoa()));
 	    	  profissionalVH.setProfissional(profissionalNegocio.incluirAtualizar(profissionalVH.getProfissional()));
 	    	  especialidadeNegocio.validarItens(profissionalVH.getEspecialidade(), profissionalVH.getProfissional());

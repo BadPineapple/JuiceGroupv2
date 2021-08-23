@@ -18,7 +18,11 @@ import ilion.util.Uteis;
 import ilion.util.VLHForm;
 import ilion.util.ValueListInfo;
 import ilion.util.busca.PalavrasChaveCondicoes;
+import ilion.util.exceptions.ValidacaoException;
 import ilion.util.persistencia.HibernateUtil;
+import ilion.vitazure.enumeradores.DuracaoAtendimentoEnum;
+import ilion.vitazure.enumeradores.TipoContaEnum;
+import ilion.vitazure.enumeradores.TipoProfissionalEnum;
 import ilion.vitazure.model.Pessoa;
 import ilion.vitazure.model.Profissional;
 import net.mlw.vlh.ValueList;
@@ -105,13 +109,55 @@ public class ProfissionalNegocio {
 		.add(Restrictions.le("dataFimAvisoFerias", Uteis.formatarDataHora(new Date(), "dd/MM/YYY")));
 		subquery.setProjection(Projections.property("id"));
 		List list =  hibernateUtil.list(subquery);
-		System.out.println("____________________________________________________________________________");
 		DetachedCriteria dc = DetachedCriteria.forClass(Profissional.class);
 		dc.add(Restrictions.eq("ativo", Boolean.TRUE));
         if (!list.isEmpty()) {
         	dc.add(Restrictions.not(Restrictions.in("id", list)));
 		}
 		return (List<Profissional>) hibernateUtil.list(dc);
+	}
+	
+	public void validarDados(ProfissionalVH profissionalVH)  throws Exception{
+		if(profissionalVH.getMenuValidar().equals("dadosProfissional")) {
+			validarDadosProfissionais(profissionalVH);
+		}else if(profissionalVH.getMenuValidar().equals("formacao")) {
+			validarFormacao(profissionalVH);
+		}else if(profissionalVH.getMenuValidar().equals("tempoDuracao")) {
+			validarTempoDuracao(profissionalVH);
+		}
+	}
+	
+	private void validarDadosProfissionais(ProfissionalVH profissionalVH)  throws Exception{
+		if(Uteis.ehNuloOuVazio(profissionalVH.getProfissional().getDocumentoCrpCrm())) {
+			throw new ValidacaoException("Documento do (CRP/CRM) não informado.");
+		}
+		if(Uteis.ehNuloOuVazio(profissionalVH.getProfissional().getCadastroEpsi())) {
+			throw new ValidacaoException("Cadastro do e-Psi não informado.");
+		}
+		if(profissionalVH.getProfissional().getTipoProfissional().equals(TipoProfissionalEnum.NAO_INFORMADO)) {
+			throw new ValidacaoException("Tipo profissional não informado.");
+		}
+		if(profissionalVH.getEspecialidade().isEmpty()) {
+			throw new ValidacaoException("Especialidade não informado.");
+		}
+		if(profissionalVH.getTemasTrabalho().isEmpty()) {
+			throw new ValidacaoException("Temas não informado.");
+		}
+		if(!profissionalVH.getProfissional().getAdolescentes() && profissionalVH.getProfissional().getAdultos() && profissionalVH.getProfissional().getCasais() && profissionalVH.getProfissional().getIdosos()) {
+			throw new ValidacaoException("Faixa de atendimento – obrigatório marcar pelo menos uma das opções.");
+		}
+		
+	}
+	
+	private void validarFormacao(ProfissionalVH profissionalVH)  throws Exception{
+		if(profissionalVH.getFormacaoAcademica().isEmpty()) {
+			throw new ValidacaoException("Formação não informado.");
+		}
+	}
+	private void validarTempoDuracao(ProfissionalVH profissionalVH)  throws Exception{
+		if(profissionalVH.getProfissional().getDuracaoAtendimento().equals(DuracaoAtendimentoEnum.NAO_INFORMADO)) {
+			throw new ValidacaoException("Duração de atendimento não informado.");
+		}
 	}
 	
 }

@@ -69,6 +69,9 @@ public class HorarioAtendimentoNegocio {
 	@Transactional
 	public HorarioAtendimento incluirAtualizar(HorarioAtendimento horarioAtendimento) {
 		if (horarioAtendimento.getId() == null || horarioAtendimento.getId() == 0) {
+			if(horarioAtendimento.getEnderecoAtendimento() == null || horarioAtendimento.getEnderecoAtendimento().getId() == null) {
+				horarioAtendimento.setEnderecoAtendimento(null);
+			}
 			horarioAtendimento = (HorarioAtendimento) hibernateUtil.save(horarioAtendimento);
 		} else {
 			hibernateUtil.update(horarioAtendimento);

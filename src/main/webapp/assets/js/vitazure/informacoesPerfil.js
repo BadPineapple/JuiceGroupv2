@@ -68,8 +68,8 @@ function informacoesPerfilController($scope, $http, $window) {
    
     $scope.contatos = new Array();
 
-    $scope.perfilProfissional = function () {
-        perfilProfissional($scope, $http, $window);
+    $scope.perfilProfissional = function (menuValidar) {
+        perfilProfissional(menuValidar,$scope, $http, $window);
     };
 	$scope.adicionarFormacao = function () {
         adicionar($scope, $http, $window);
@@ -126,10 +126,16 @@ function informacoesPerfilController($scope, $http, $window) {
 	$scope.excluirEndereco = function () {
     	ExcluirEndereco($scope, $http, $window);
 	}
+	$scope.salvarListEndereco = function () {
+    	salvarListEndereco($scope, $http, $window);
+	}
+	$scope.salvarListEnderecoAtendimento = function () {
+    	salvarListEnderecoAtendimento($scope, $http, $window);
+	}
 	
 }
 
-function perfilProfissional($scope, $http, $window) {
+function perfilProfissional(menu,$scope, $http, $window) {
 
 	$scope.ProfissionalVH.profissional.avisoFerias = document.getElementById("avisoFerias").checked;
 	$scope.ProfissionalVH.profissional.habilitarDesconto40 = document.getElementById("habilitarDesconto40").checked;
@@ -156,7 +162,7 @@ function perfilProfissional($scope, $http, $window) {
 	if(arquivos.length != 0){
 		$scope.ProfissionalVH.profissional.pessoa.foto = arquivos;
     }
-    
+    $scope.ProfissionalVH.menuValidar= menu;
 $http.post("/vitazure/perfilProfissional", $scope.ProfissionalVH)
         .then(function (response) {
             alert_success(response.data.message, () => {
@@ -201,7 +207,7 @@ function uploadData($scope , formdata) {
         }, error: function (response) {
             console.log("Erro!!" + response.responseText);
             if(response.responseText.includes('exceeds the configured maximum') || response.responseText.includes('413')){
-			  alert_error("Erro ao incluir a imagem verifique o tamanho da imagem esta dentro do limite permitido");
+			  alert_error("Verifique o tamanho da imagem esta dentro do limite permitido");
 			}else{
               alert_error(response.responseText);
 			}
@@ -258,6 +264,12 @@ function validarCamposEnderecoAtendimento(){
   }else if(document.getElementById("bairro").value == 'undefined' || document.getElementById("bairro").value == null || document.getElementById("bairro").value == ''){
 	alert_error("Informar Bairro");
 	return false;
+  }else if(document.getElementById("numero").value == 'undefined' || document.getElementById("numero").value == null || document.getElementById("numero").value == ''){
+	alert_error("Informar numero");
+	return false;
+  }else if(document.getElementById("complemento").value == 'undefined' || document.getElementById("complemento").value == null || document.getElementById("complemento").value == ''){
+	alert_error("Informar complemento");
+	return false;
   }
    return true;
 }
@@ -276,6 +288,7 @@ function adicionarEndereco($scope, $http, $window) {
 		document.getElementById("cidade").value = "";
 		document.getElementById("bairro").value = "";
 		document.getElementById("numero").value = "";
+		return true;
     }	
 }
 
@@ -443,6 +456,7 @@ function adicionarHorarioAtendimento($scope, $http, $window) {
         $scope.atendimentoOnline = false; 
         $scope.enderecoSemanaHorario = '';
         $scope.atendimentoPresencial = false;
+		return true;
     }
 	
 }
@@ -457,7 +471,7 @@ function validarCampos(diaSemana,horaInicio,horaFim, atendimentoOnline , enderec
 	}else if(horaFim == 'undefined' || horaFim == null || horaFim == ''){
 		alert_error("Informar Hora Fim");
 		return false;
-	}else if(enderecoSemanaHorario == 'undefined' || enderecoSemanaHorario == null || enderecoSemanaHorario == ''){
+	}else if((enderecoSemanaHorario == 'undefined' && atendimentoPresencial == true ) || (enderecoSemanaHorario == null && atendimentoPresencial == true ) || (enderecoSemanaHorario == '' && atendimentoPresencial == true )){
 		alert_error("Informar Endereço Atendimento");
 		return false;
 	}else if((atendimentoOnline == 'undefined' && atendimentoPresencial == 'undefined') || (atendimentoOnline == null && atendimentoPresencial == null) || (atendimentoOnline == false && atendimentoPresencial  == false)){
@@ -482,7 +496,7 @@ function AdicionarTabelaHorarioAtendimento(item, indice){
 			"<td align='center'>"+(item.horaFim)+"</td>"+
 			"<td align='center'>"+(item.atendimentoOnline ? 'sim' : 'Não')+"</td>"+
 			"<td align='center'>"+(item.atendimentoPresencial  ? 'sim' : 'Não')+"</td>"+
-			"<td align='center'>"+(item.enderecoAtendimento.logradouro)+"</td>"+
+			"<td align='center'>"+(typeof item.enderecoAtendimento ===  "undefined" ? '-' : item.enderecoAtendimento.logradouro)+"</td>"+
 			"<td align='center'><a  id='btn-excluir' onclick='ExcluirHorarioAtendimento("+indice+")' style='color: red;'><i class='fas fa-trash'></i></a></td>"+
 			"</tr>");
 		
@@ -595,6 +609,9 @@ function validarHora(valor , campoInformado){
 	}else if(valor.substring(3,5) > 59){
 		alert_error("Verificar Valor Informado.");
 		document.getElementById(campoInformado).value = "";
+	}else if(document.getElementById("horaFim").value !=  '' && (document.getElementById("horaInicio").value > document.getElementById("horaFim").value)){
+		alert_error("Hora Início não pode ser maior que hora fim.");
+		document.getElementById(campoInformado).value = "";
 	}
 	
 }
@@ -635,7 +652,7 @@ function validarCampo(campo , $scope, $http, $window){
 	if(campo == 'undefined' || campo == null || campo == ''){
 		alert_error("Informar sobre mim.");
 	}else{
-		perfilProfissional($scope, $http, $window);
+		perfilProfissional('',$scope, $http, $window);
 	}
 }
 function validarCampoFerias($scope, $http, $window){
@@ -646,8 +663,48 @@ function validarCampoFerias($scope, $http, $window){
 		alert_error("Informar data fim férias.");
 	}
 	else{
-		perfilProfissional($scope, $http, $window);
+		perfilProfissional('',$scope, $http, $window);
+	}
+}
+function salvarListEndereco($scope, $http, $window){
+	if(validarItemPreenchido($scope, $http, $window)){
+	   perfilProfissional('',$scope, $http, $window);
 	}
 }
 
+function validarItemPreenchido($scope, $http, $window){
+	if(document.getElementById("cep").value != ''){
+	return adicionarEndereco($scope, $http, $window);
+  }else  if(document.getElementById("logradouro").value != ''){
+	return adicionarEndereco($scope, $http, $window);
+  }else  if(document.getElementById("cidade").value != ''){
+	return adicionarEndereco($scope, $http, $window);
+  }else if(document.getElementById("bairro").value != ''){
+	return adicionarEndereco($scope, $http, $window);
+  }else if(document.getElementById("numero").value != ''){
+	return adicionarEndereco($scope, $http, $window);
+  }else if(document.getElementById("complemento").value != ''){
+	return adicionarEndereco($scope, $http, $window);
+  }
+   return true;
+}
 
+
+function salvarListEnderecoAtendimento($scope, $http, $window){
+	if(validarItemPreenchidoEndereco($scope, $http, $window)){
+	   perfilProfissional('',$scope, $http, $window);
+	}
+}
+function validarItemPreenchidoEndereco($scope, $http, $window){
+	if($scope.diaSemana != ''){
+		return adicionarHorarioAtendimento($scope, $http, $window);
+	}else if($scope.horaInicio != ''){
+		return adicionarHorarioAtendimento($scope, $http, $window);
+	}else if($scope.horaFim != ''){
+		return adicionarHorarioAtendimento($scope, $http, $window);
+	}else if($scope.enderecoSemanaHorario != ''){
+		return adicionarHorarioAtendimento($scope, $http, $window);
+	}
+	
+	return true;
+}

@@ -22,7 +22,7 @@
                         <li><a href="https://www.vitazure.com.br/para-sua-empresa" class="line">Aqui &eacute; para sua empresa</a></li>
 
 
-                        <li><a href="#" class="line">Entre em contato</a></li>
+                        <li><a href="<ilion:url/>entreContato" class="line">Entre em contato</a></li>
                     </ul>
                 </div>
 
