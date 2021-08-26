@@ -77,7 +77,7 @@
                                 </div>
 
                                 <div class="col-12 d-none d-md-block col-md-6 col-xl-6">
-                                    <button class="button-secundary">Buscar</button>
+                                    <button class="button-secundary" ng-click="consultarProfissional()">Buscar</button>
                                 </div>
 
                                 <div class="col-12 col-md-6 col-xl-6">
@@ -106,7 +106,7 @@
                                 </div>
 
                                 <div class="col-12 d-block d-md-none">
-                                    <button class="button-secundary">Buscar</button>
+                                    <button class="button-secundary" ng-click="consultarProfissional()">Buscar2</button>
                                 </div>
                             </div>
                         </form>

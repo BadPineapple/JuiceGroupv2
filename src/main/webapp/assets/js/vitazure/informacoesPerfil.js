@@ -163,6 +163,12 @@ function perfilProfissional(menu,$scope, $http, $window) {
 	if(arquivos.length != 0){
 		$scope.ProfissionalVH.profissional.pessoa.foto = arquivos;
     }
+	
+	var valorconsultaOnline = document.getElementById("valorconsultaOnline").value;
+	$scope.ProfissionalVH.profissional.valorConsultaOnline = valorconsultaOnline.replace('.','').replace(',','.')
+	var valorConsultaPresencial = document.getElementById("valorConsultaPresencial").value;
+	$scope.ProfissionalVH.profissional.valorConsultaPresencial = valorConsultaPresencial.replace('.','').replace(',','.')
+	
     $scope.ProfissionalVH.menuValidar= menu;
 $http.post("/vitazure/perfilProfissional", $scope.ProfissionalVH)
         .then(function (response) {
@@ -544,7 +550,7 @@ function salvarConta($scope, $http, $window) {
 
         $scope.profissional.banco = document.getElementById("banco").checked;
 
-        $scope.profissional.agencia = document.getElementById("agencia").checked;
+        $scope.profissional.agencia = document.getElementById("agencia").checked;R
 
         $scope.profissional.conta = document.getElementById("conta").checked;
 
@@ -553,7 +559,11 @@ function salvarConta($scope, $http, $window) {
         $scope.profissional.nomeFavorecido = document.getElementById("nomeFavorecido").checked;
 	
     };
-
+	
+	var valorconsultaOnline = document.getElementById("valorconsultaOnline").value;
+	$scope.ProfissionalVH.profissional.valorConsultaOnline = valorconsultaOnline.replace('.','').replace(',','.')
+	var valorConsultaPresencial = document.getElementById("valorConsultaPresencial").value;
+	$scope.ProfissionalVH.profissional.valorConsultaPresencial = valorConsultaPresencial.replace('.','').replace(',','.')
 	document.getElementById("spinner").style.display = "inline-block";
 	
     $http.post("/api/v1/registrar-cartao", $scope.ProfissionalVH.profissional)

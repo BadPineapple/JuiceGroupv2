@@ -6,6 +6,11 @@
 <jsp:include page="includes/include-head.jsp" flush="true" />
 <script	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 <script src="../assets/js/vitazure/agendamento.js"></script>
+<style type="text/css">
+ .slick-track {    
+    display: flex;
+}
+</style>
 </head>
 <body id="index" class="home">
 	<div id="app">

@@ -20,6 +20,8 @@ import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import ilion.util.Uteis;
+import ilion.util.exceptions.ValidacaoException;
 import ilion.vitazure.enumeradores.*;
 
 @Entity
@@ -142,6 +144,8 @@ public class Profissional implements Serializable{
 	  private String dataInicioAvisoFerias;
 
 	  private String dataFimAvisoFerias;
+	  
+	  private Boolean dadosCompleto;
 	  
 
 	public Long getId() {
@@ -620,7 +624,53 @@ public class Profissional implements Serializable{
 		this.dataFimAvisoFerias = dataFimAvisoFerias;
 	}
 	
+	public Boolean getDadosCompleto() {
+		if(dadosCompleto == null) {
+			dadosCompleto = Boolean.FALSE;
+		}
+		return dadosCompleto;
+	}
+
+	public void setDadosCompleto(Boolean dadosCompleto) {
+		this.dadosCompleto = dadosCompleto;
+	}
+
 	public String getPlanoApresentar() {
 	  return getPlano().equals("plano_mensal") ? "Mensal" : getPlano().equals("plano_semestral") ? "Semestral" :  "Anual";
+	}
+	
+	public Boolean getDadosProficionalCompleto() {		
+		if(Uteis.ehNuloOuVazio(getDocumentoCrpCrm()) || Uteis.ehNuloOuVazio(getCadastroEpsi()) || getTipoProfissional().equals(TipoProfissionalEnum.NAO_INFORMADO) || (!getAdolescentes() &&  !getAdultos() &&  !getCasais() &&  !getIdosos())) {
+			return Boolean.FALSE;
+		}
+		return Boolean.TRUE;
+	}
+	
+	public Boolean getDadosSobreMimCompleto() {		
+		if(Uteis.ehNuloOuVazio(getBiografia())) {
+			return Boolean.FALSE;
+		}
+		return Boolean.TRUE;
+	}
+	
+	public Boolean getTempoDuracaoCompleto() {		
+		if(getDuracaoAtendimento().equals(DuracaoAtendimentoEnum.NAO_INFORMADO)) {
+			return Boolean.FALSE;
+		}
+		return Boolean.TRUE;
+	}
+	
+	public Boolean getDadosValoresConsultaCompleto() {		
+		if( getValorConsultaOnline().equals(BigDecimal.ZERO) || getValorConsultaPresencial().equals(BigDecimal.ZERO) || getTempoAntecendencia().equals(tempoAntecendencia.NAO_INFORMADO)) {
+			return Boolean.FALSE;
+		}
+		return Boolean.TRUE;
+	}
+	
+	public String getValorOnlineFormatado() {
+		return Uteis.formatarValorMoedaPTBR(getValorConsultaOnline());
+	}
+	public String getValorPresencialFormatado() {
+		return Uteis.formatarValorMoedaPTBR(getValorConsultaPresencial());
 	}
 }

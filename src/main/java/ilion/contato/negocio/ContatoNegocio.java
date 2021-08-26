@@ -776,27 +776,27 @@ public class ContatoNegocio {
 	public void validarContato(Contato contato) throws EmailInvalidoException, EhNuloOuVazioException {
 
 		if (Uteis.ehNuloOuVazio(contato.getNome())) {
-			throw new EhNuloOuVazioException("O nome n�o pode ser vazio");
+			throw new EhNuloOuVazioException("O nome não pode ser vazio");
 		}
 
 		if (Uteis.ehNuloOuVazio(contato.getEmail())) {
-			throw new EhNuloOuVazioException("O email n�o pode ser vazio");
+			throw new EhNuloOuVazioException("O email não pode ser vazio");
 		}
 
 		if (!Uteis.ehEmailValido(contato.getEmail())) {
-			throw new EmailInvalidoException("O email inserido n�o � v�lido");
+			throw new EmailInvalidoException("O email inserido não é válido");
 		}
 
 		if (Uteis.ehNuloOuVazio(contato.getTelefone())) {
-			throw new EhNuloOuVazioException("O telefone n�o pode ser vazio");
+			throw new EhNuloOuVazioException("O telefone não pode ser vazio");
 		}
 
 		if (Uteis.ehNuloOuVazio(contato.getCidade())) {
-			throw new EhNuloOuVazioException("A cidade n�o pode ser vazia");
+			throw new EhNuloOuVazioException("A cidade não pode ser vazia");
 		}
 
 		if (Uteis.ehNuloOuVazio(contato.getMensagem())) {
-			throw new EhNuloOuVazioException("A mensagem n�o pode ser vazia");
+			throw new EhNuloOuVazioException("A mensagem não pode ser vazia");
 		}
 
 	}

@@ -6,6 +6,14 @@
 <jsp:include page="includes/include-head.jsp" flush="true" />
 <script	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 <script src="../assets/js/vitazure/agendamento.js"></script>
+
+<style type="text/css">
+ .slick-track {    
+    display: flex;
+}
+</style>
+
+
 </head>
 <body id="index" class="home">
 	<div id="app">
@@ -31,17 +39,16 @@
 													alt="">
 											</figure>
 											
-											<div class="valor-consulta" id="${profissional.id}.valorOnline" style="display:none;">
+											<div class="valor-consulta" id="${profissional.id}.valorOnline">
 												<p>Valor sessão:<br/></p>
-
 												<p>
-													R$<span>${profissional.valorConsultaOnline}</span>
+													R$<span>${profissional.valorOnlineFormatado}</span>
 												</p>
 											</div>
-											<div class="valor-consulta" id="${profissional.id}.valorPresencial">
+											<div class="valor-consulta" id="${profissional.id}.valorPresencial" style="display:none;">
 												<p>Valor sessão:<br/></p>
 												<p>
-													R$<span>${profissional.valorConsultaPresencial}</span>
+													R$<span>${profissional.valorPresencialFormatado}</span>
 												</p>
 											</div>
 											<div class="tempo-consulta">
@@ -54,8 +61,9 @@
 									<div class="col-12 col-md-4 col-xl-4">
 										<div class="psicologo-name">
 											<h3>${profissional.pessoa.nome}</h3>
-											<p>${profissional.documentoCrpCrm}-
-												${profissional.cadastroEpsi}</p>
+											<p>${profissional.tipoProfissional == 'PSICOLOGO' ? profissional.conselhoProfissional.CRP : profissional.conselhoProfissional.CRM}-${profissional.cadastroEpsi}</p>
+											<p>e-Psi: ${profissional.cadastroEpsi}</p>
+											<p>${profissional.pessoa.cidade}</p>
 										</div>
 
 										<div class="psicologo-description">

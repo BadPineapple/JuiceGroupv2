@@ -13,7 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 import ilion.vitazure.enumeradores.EspecialidadesEnum;
 import ilion.vitazure.enumeradores.TipoProfissionalEnum;
 import ilion.vitazure.model.*;
+import ilion.vitazure.negocio.AgendaNegocio;
+import ilion.vitazure.negocio.EnderecoNegocio;
 import ilion.vitazure.negocio.EspecialidadeNegocio;
+import ilion.vitazure.negocio.FormacaoAcademicaNegocio;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,6 +37,7 @@ import ilion.util.contexto.autorizacao.AcessoLivre;
 import ilion.vitazure.negocio.HorarioAtendimentoNegocio;
 import ilion.vitazure.negocio.PessoaNegocio;
 import ilion.vitazure.negocio.ProfissionalNegocio;
+import ilion.vitazure.negocio.TemaAtendimentoNegocio;
 
 @Controller
 @AcessoLivre
@@ -60,6 +65,20 @@ public class SiteController extends CustomErrorController {
 
 	@Autowired
 	private EspecialidadeNegocio especialidadeNegocio;
+	
+	@Autowired
+	private AgendaNegocio agendaNegocio;
+	
+	@Autowired
+	private FormacaoAcademicaNegocio formacaoAcademicaNegocio;
+	
+	@Autowired
+	private TemaAtendimentoNegocio temaNegocio;
+	
+	@Autowired
+	private EnderecoNegocio enderecoNegocio;
+	
+	
 	
 	@GetMapping(value = { "/",})
 	public String aguarde(HttpServletRequest request) {
@@ -299,7 +318,7 @@ public class SiteController extends CustomErrorController {
 		return "/ilionnet2/vitazure/sou-profissional";
 	}
 	
-	@RequestMapping("/resultado-de-busca/{tipoProfissional}/{especialista}")
+	@RequestMapping("/resultado-de-busca2/{tipoProfissional}/{especialista}")
 	public String buscaProfissional(HttpServletRequest request,@PathVariable String tipoProfissional,@PathVariable String especialista) {
 		List<Profissional> listProfissionais = profissionalNegocio.consultarProfissionaisAtivos();
 		consultarDataDisponivelProfissionais(listProfissionais , false , false);
@@ -324,6 +343,8 @@ public class SiteController extends CustomErrorController {
 	}
 	@GetMapping("/entreContato")
 	public String entreContato(HttpServletRequest request) {
+		Pessoa PessoaSessao = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
+		request.setAttribute("pessoa", PessoaSessao);
 		return "/ilionnet2/vitazure/entreContato";
 	}
 	
@@ -359,6 +380,50 @@ public class SiteController extends CustomErrorController {
   	  return lisProfissional;
   	  
     }
-
+	
+	 @GetMapping("/vitazure/perfil-do-profissional/{id}")
+	  	public String perfilProfissional(HttpServletRequest request ,@PathVariable Long id) {
+	  		Pessoa PessoaSessao = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
+	  		Profissional profissional = profissionalNegocio.consultarPorId(id);
+//	  		List<Agenda> listAgendaDia = agendaNegocio.consultarAgendaDia(PessoaSessao);
+//	  		request.setAttribute("agendaDia", listAgendaDia);
+	  		request.setAttribute("pessoa", PessoaSessao);
+	  		request.setAttribute("areaRestrita", true);
+	  		consultarDataDisponivelProfissional(profissional , false , false);
+	  		List<TemaTrabalho> temasTrabalho = temaNegocio.consultarTemasPorProfissional(id);
+	  		List<FormacaoAcademica> formacoes = formacaoAcademicaNegocio.consultarFormacoesPorPessoa(id);
+	  		List<Especialidade> especialidades = especialidadeNegocio.consultarEspecialidadesProfissional(id);
+	  		request.getSession().setAttribute("profissional", profissional);
+	  		request.getSession().setAttribute("temasTrabalho", temasTrabalho);
+	  		request.getSession().setAttribute("formacoes", formacoes);
+	  		request.getSession().setAttribute("especialidades", especialidades);
+	  		List<EnderecoAtendimento> enderecoAtendimento = new ArrayList<EnderecoAtendimento>();
+	  		enderecoAtendimento.addAll(enderecoNegocio.consultarEnderecoPorPessoa(profissional.getId()));
+	  		request.setAttribute("enderecoAtendimento", enderecoAtendimento);
+	  		request.setAttribute("cidadeProfissional", enderecoAtendimento.get(0).getCidade());
+			return "/ilionnet2/vitazure/perfil-do-profissional";
+	  	}
+	 
+	 private Profissional consultarDataDisponivelProfissional(Profissional profissional , Boolean atendimentoOnline , Boolean atendimentoPresencial) {
+   	  
+   	  List<Date> lista = new ArrayList<Date>();
+   	  
+   	  int diasIncrementado = 0;
+   	  while (diasIncrementado  < 60){
+   		  lista.add(Uteis.acrescentar(new Date(), Calendar.DATE, diasIncrementado));
+   		  diasIncrementado++;
+   	  }
+   		  List<HorarioAtendimento> listaHorarioatendimento = horarioNegocio.consultarHorariosAtendimentoPorProfissional(profissional.getId() , atendimentoOnline , atendimentoPresencial);
+   		  List<Date> datasPossivelAgendamento = lista.stream()
+   				  .filter( o1 -> {
+   					  return listaHorarioatendimento.stream()
+   							  .map(HorarioAtendimento::getDiaSemana)
+   							  .anyMatch(i2 -> i2.getValue() == o1.getDay());
+   				  }).collect(Collectors.toList());
+   		  profissional.getDatasPossivelAgendamento().addAll(datasPossivelAgendamento);
+   	  
+   		  return profissional;
+   	  
+     }
 	
 }

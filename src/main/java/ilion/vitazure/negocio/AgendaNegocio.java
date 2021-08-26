@@ -67,7 +67,7 @@ public class AgendaNegocio {
 			Transaction tx = new Transaction().find(jsonRetornoToken.get("token").toString());
 			Profissional profissional = profissionalNegocio.consultarPorId(Long.parseLong(jsonRetornoToken.get("idProfissional").toString()));
 			Date dataAgenda = Uteis.converterDataHoraString(jsonRetornoToken.get("dataAtendimento").toString(), jsonRetornoToken.get("horarioPossivelAtendimento").toString());
-			Agenda agenda = new Agenda(paciente, profissional, dataAgenda, jsonRetornoToken.get("tipoAtendimento").toString().equals("online") ? Boolean.TRUE : Boolean.FALSE, jsonRetornoToken.get("tipoAtendimento").toString().equals("presencial")  ? Boolean.TRUE : Boolean.FALSE, "", StatusEnum.PENDENTE, null , "");
+			Agenda agenda = new Agenda(paciente, profissional, dataAgenda, jsonRetornoToken.get("tipoAtendimento").toString().equals("online") || jsonRetornoToken.get("tipoAtendimento").toString().equals("") ? Boolean.TRUE : Boolean.FALSE, jsonRetornoToken.get("tipoAtendimento").toString().equals("presencial")  ? Boolean.TRUE : Boolean.FALSE, "", StatusEnum.PENDENTE, null , "");
 			agenda.setTokenTransacaoPagamentoConsulta(jsonRetornoToken.get("token").toString());
 			agenda.setIdTransacao(tx.getId());
 			if (agenda.getOnline()) {

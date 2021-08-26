@@ -105,12 +105,12 @@ public class ProfissionalNegocio {
 	public List<Profissional> consultarProfissionaisAtivos() {
 		
 		DetachedCriteria subquery = DetachedCriteria.forClass(Profissional.class);
-		subquery.add( Restrictions.eq("avisoFerias", Boolean.TRUE)).add(Restrictions.ge("dataInicioAvisoFerias", Uteis.formatarDataHora(new Date(), "dd/MM/YYY")))
-		.add(Restrictions.le("dataFimAvisoFerias", Uteis.formatarDataHora(new Date(), "dd/MM/YYY")));
+		subquery.add( Restrictions.eq("avisoFerias", Boolean.TRUE)).add(Restrictions.ge("dataInicioAvisoFerias", Uteis.formatarDataHora(new Date(), "dd/MM/YYY"))).add(Restrictions.le("dataFimAvisoFerias", Uteis.formatarDataHora(new Date(), "dd/MM/YYY")));
 		subquery.setProjection(Projections.property("id"));
 		List list =  hibernateUtil.list(subquery);
 		DetachedCriteria dc = DetachedCriteria.forClass(Profissional.class);
 		dc.add(Restrictions.eq("ativo", Boolean.TRUE));
+		dc.add(Restrictions.eq("dadosCompleto", Boolean.TRUE));
         if (!list.isEmpty()) {
         	dc.add(Restrictions.not(Restrictions.in("id", list)));
 		}
@@ -143,7 +143,7 @@ public class ProfissionalNegocio {
 		if(profissionalVH.getTemasTrabalho().isEmpty()) {
 			throw new ValidacaoException("Temas não informado.");
 		}
-		if(!profissionalVH.getProfissional().getAdolescentes() && profissionalVH.getProfissional().getAdultos() && profissionalVH.getProfissional().getCasais() && profissionalVH.getProfissional().getIdosos()) {
+		if(!profissionalVH.getProfissional().getAdolescentes() && !profissionalVH.getProfissional().getAdultos() && !profissionalVH.getProfissional().getCasais() && !profissionalVH.getProfissional().getIdosos()) {
 			throw new ValidacaoException("Faixa de atendimento – obrigatório marcar pelo menos uma das opções.");
 		}
 		
@@ -158,6 +158,50 @@ public class ProfissionalNegocio {
 		if(profissionalVH.getProfissional().getDuracaoAtendimento().equals(DuracaoAtendimentoEnum.NAO_INFORMADO)) {
 			throw new ValidacaoException("Duração de atendimento não informado.");
 		}
+	}
+	
+	public Boolean dadosProfissionaisCompleto(ProfissionalVH profissionalVH) throws Exception {
+		Boolean dadosCompleto = Boolean.TRUE;		
+		if(!profissionalVH.getProfissional().getDadosProficionalCompleto() || profissionalVH.getEspecialidade().isEmpty() || profissionalVH.getTemasTrabalho().isEmpty()) {
+			profissionalVH.getItensIncompletos().add("Dados Profissional");
+			dadosCompleto = Boolean.FALSE;
+		}
+		if(!profissionalVH.getProfissional().getTempoDuracaoCompleto()) {
+			profissionalVH.getItensIncompletos().add("Tempo de duração do atendimento");
+			dadosCompleto = Boolean.FALSE;
+		}
+		if(!profissionalVH.getProfissional().getDadosSobreMimCompleto()) {
+			profissionalVH.getItensIncompletos().add("Sobre Mim");
+			dadosCompleto = Boolean.FALSE;
+		}
+		if(profissionalVH.getFormacaoAcademica().isEmpty()) {
+			profissionalVH.getItensIncompletos().add("Formação");
+			dadosCompleto = Boolean.FALSE;
+		}
+		if(profissionalVH.getHorarioAtendimento().isEmpty()) {
+			profissionalVH.getItensIncompletos().add("Horário atendimento");
+			dadosCompleto = Boolean.FALSE;
+		}
+		if(!profissionalVH.getProfissional().getDadosValoresConsultaCompleto()) {
+			profissionalVH.getItensIncompletos().add("Valores de consulta");
+			dadosCompleto = Boolean.FALSE;
+		}
+		if(profissionalVH.getProfissional().getIdConta() == null || profissionalVH.getProfissional().getIdConta() == 0 ) {
+			profissionalVH.getItensIncompletos().add("Dados bancario para recebimento de consultas");
+			dadosCompleto = Boolean.FALSE;
+		}
+		profissionalVH.getProfissional().setDadosCompleto(dadosCompleto);
+		Profissional obj = new Profissional();
+		obj = profissionalVH.getProfissional();
+		atualizarSituacaoDadosCompletoProfissional(obj);
+        return dadosCompleto;
+	}
+	
+	public void atualizarSituacaoDadosCompletoProfissional(Profissional profissional) {
+		StringBuilder sql = new StringBuilder();
+		sql.append(" update profissional set dadoscompleto = ").append(profissional.getDadosCompleto());
+		sql.append(" where id = ").append(profissional.getId());
+		hibernateUtil.updateSQL(sql.toString());
 	}
 	
 }

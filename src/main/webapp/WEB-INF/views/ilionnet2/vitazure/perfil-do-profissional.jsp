@@ -13,6 +13,7 @@
         <jsp:include page="includes/include-menu-painel.jsp" flush="true" />
         <div class="area-white">
             <div class="container">
+              <angular-initializer ng-init="online='true';idTemp = ''; agenda = '';" />
                 <div class="row">
                     <div class="col-12">
                         <div class="perfil-psicologo perfil-profissional">
@@ -22,14 +23,16 @@
                                         <figure>
                                             <img src="${profissional.pessoa.foto.imagemApresentar == null ? '../assets/images/perfil.png' : profissional.pessoa.foto.link}" alt="">
                                         </figure>
-                                        <div class="valor-consulta" id="${profissional.id}.valorOnline" style="display:none;">
+                                        <div class="valor-consulta" id="${profissional.id}.valorOnline">
+												<p>Valor sessão:<br/></p>
 												<p>
-													R$<span>${profissional.valorConsultaOnline}</span>
+													R$<span>${profissional.valorOnlineFormatado}</span>
 												</p>
 											</div>
-											<div class="valor-consulta" id="${profissional.id}.valorPresencial">
+											<div class="valor-consulta" id="${profissional.id}.valorPresencial" style="display:none;">
+												<p>Valor sessão:<br/></p>
 												<p>
-													R$<span>${profissional.valorConsultaPresencial}</span>
+													R$<span>${profissional.valorPresencialFormatado}</span>
 												</p>
 											</div>
 											<div class="tempo-consulta">
@@ -46,7 +49,9 @@
                                 <div class="col-12 col-md-4 col-xl-5">
                                     <div class="psicologo-name">
                                         <h3>${profissional.pessoa.nome}</h3>
-                                        <p>${profissional.documentoCrpCrm}-${profissional.cadastroEpsi}</p>
+                                        <p>${profissional.tipoProfissional == 'PSICOLOGO' ? profissional.conselhoProfissional.CRP : profissional.conselhoProfissional.CRM}-${profissional.cadastroEpsi}</p>
+										<p>e-Psi: ${profissional.cadastroEpsi}</p>
+										<p>${cidadeProfissional}</p>
                                     </div>
                                     <div class="psicologo-description">
                                         <strong>Sobre min:</strong>
@@ -60,16 +65,24 @@
 	                                        </span>
 										</c:forEach>
                                     </div>
+                                    <div class="temas">
+                                        <p>Especialidade</p>
+                                        <c:forEach var="especialidade" items="${especialidades}">
+	                                        <span class="tipos-temas">
+	                                           ${especialidade.especialidade}
+	                                        </span>
+										</c:forEach>
+                                    </div>
 
                                     <div class="match-toggle">
                                         <div class="toggle-header formacao-academica">
                                             <strong>Formação Acadêmica</strong>
                                         </div>
                                         <div class="toggle-body formacao">
-                                            
                                             <ul>
                                                 <c:forEach var="formacao" items="${formacoes}">
                                                   <li>${formacao.tipoFormacao}</li>
+                                                  <li>${formacao.descricaoFormacao}</li>
                                                 </c:forEach>  
                                             </ul>
                                         
@@ -84,7 +97,7 @@
 													Agenda <span>Selecione uma data</span>
 												</h3>
  												 <div class="button-agenda">
-                                                 <span id="${profissional.id}.online"  onclick='marcardesmarcar(${profissional.id},"online");'>Online</span>
+                                                 <span id="${profissional.id}.online"  onclick='marcardesmarcar(${profissional.id},"online");' class="active marcar">Online</span>
                                                  <span id="${profissional.id}.presencial" onclick='marcardesmarcar(${profissional.id},"presencial");'>Presencial</span>
                                             </div>
 											</div>

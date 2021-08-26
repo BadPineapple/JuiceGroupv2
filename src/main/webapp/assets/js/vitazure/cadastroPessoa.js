@@ -8,6 +8,10 @@ function cadastroPessoaController($scope, $http, $window) {
     $scope.submit = function () {
         post($scope, $http, $window);
     };
+
+	$scope.completarCadastro = function () {
+        completarCadastro($scope, $http, $window);
+    };
 }
 
 function post($scope, $http, $window) {
@@ -31,6 +35,22 @@ function post($scope, $http, $window) {
         alert_error(response.data.message);
     })
 }
+
+function completarCadastro($scope, $http, $window) {
+    
+	if(arquivos.length != 0){
+		$scope.pessoa.foto = arquivos;
+    }
+    $http.post("/vitazure/completarCadastro", $scope.pessoa)
+        .then(function (response) {
+            alert_success(response.data.message, () => {
+                $window.location.href = "/vitazure/informacoes-perfil";
+            });
+        }).catch(function (response) {
+        alert_error(response.data.message);
+    })
+}
+
 
 $(function ($scope) {
     var wrapper = $(".wrapper-upload-area");

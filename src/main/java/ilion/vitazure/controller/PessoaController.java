@@ -145,5 +145,23 @@ public class PessoaController {
 			}
 	    	
 	    }
+	  
+	  @PostMapping(value = "/vitazure/completarCadastro", produces = "application/json")
+	  @ResponseBody
+	  public ResponseEntity<JsonString> completarCadastro(HttpServletRequest request,@RequestBody Pessoa pessoa) {
+	      try {
+	    	  if (pessoa.getFoto() != null && !pessoa.getFoto().getArquivo1().equals("")) {
+	    		  pessoa.setFoto(arquivoNegocio.inserir(pessoa.getFoto()));
+	    	  }else if(pessoa.getFoto() == null || pessoa.getFoto().getId().equals("")) {
+						pessoa.setFoto(null);
+	    	  }	 
+	    	  pessoa = pessoaNegocio.incluirAtualizar(pessoa);
+	    	  request.getSession().setAttribute(PessoaNegocio.ATRIBUTO_SESSAO, pessoa);
+			return new ResponseEntity<>(new JsonString("Dados Salvo com Sucesso."), HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(new JsonString(e.getMessage()), HttpStatus.BAD_REQUEST);
+	    } 
+	  }
 	
 }

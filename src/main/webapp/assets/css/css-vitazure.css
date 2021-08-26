@@ -1269,10 +1269,11 @@ h1.title-gray {
 }
 
 .valor-consulta p {
-    font-size: 2.4rem;
+    font-size: 2.0rem;
     line-height: 3rem;
     font-weight: 800;
     color: #806C47;
+    text-align: center;
 }
 
 .valor-consulta span {
@@ -1283,11 +1284,12 @@ h1.title-gray {
 
 .tempo-consulta {text-align: center;}
 .tempo-consulta p {
-    font-size: 2.4rem;
+    font-size: 2.0rem;
     font-weight: 800;
     line-height: 3rem;
     color: #18191F;
     margin-bottom: 2rem;
+    text-align: center;
 }
 
 .psicologo-name h3 {

@@ -45,7 +45,7 @@
                         <h3>Complete seu cadastro</h3>
                     </div>
                     <div class="col-12 col-md-6 offset-md-3 col-xl-6 offset-xl-3">
-                        <form ng-submit="submit()" class="form-default" style="padding: 3rem 0; font-weight: 800;">
+                        <form ng-submit="completarCadastro()" class="form-default" style="padding: 3rem 0; font-weight: 800;">
                           <angular-initializer ng-init="pessoa.id='${pessoa.id}';
 						                     pessoa.nome='${pessoa.nome}';
 						                     pessoa.email='${pessoa.email}';

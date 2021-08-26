@@ -38,7 +38,7 @@ function chamada (valor, item, id) {
             checkout.open({
                 paymentButtonText: 'Finalizar',
 				amount: valorTotal,
-				maxInstallments: 3,
+				maxInstallments: 1,
 				defaultInstallment: 1,
 				customerData: 'true',
 				createToken: 'true',

@@ -12,7 +12,7 @@ function consultarProfissional($scope, $http, $window) {
  
     $http.get("/resultado-de-busca/"+$scope.tipoProfissional+"/"+$scope.especialista)
         .then(function (response) {
-           $window.location.href = "/listaProfissionais";
+           $window.location.href = "/vitazure/listaProfissionais";
         }).catch(function (response) {
         alert_error(response.data.message);
     })

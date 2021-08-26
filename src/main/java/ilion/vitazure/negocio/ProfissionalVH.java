@@ -30,6 +30,8 @@ public class ProfissionalVH {
 	
 	private String menuValidar;
 	
+	private List<String> itensIncompletos;
+	
 	public Profissional getProfissional() {
 		return profissional;
 	}
@@ -115,6 +117,17 @@ public class ProfissionalVH {
 
 	public void setMenuValidar(String menuValidar) {
 		this.menuValidar = menuValidar;
+	}
+
+	public List<String> getItensIncompletos() {
+		if (itensIncompletos == null) {
+			itensIncompletos = new ArrayList<String>();
+		}
+		return itensIncompletos;
+	}
+
+	public void setItensIncompletos(List<String> itensIncompletos) {
+		this.itensIncompletos = itensIncompletos;
 	}
 
 	

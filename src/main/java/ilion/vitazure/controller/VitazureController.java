@@ -281,4 +281,32 @@ public class VitazureController {
 		  
 	  }
 	  
+	  @GetMapping("/vitazure/areaRestrita")
+		public String arearestrita(ModelMap modelMap, HttpServletRequest request) {
+			Pessoa pessoa = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
+			List<Agenda> listAgendaDia = agendaNegocio.consultarAgendaDia(pessoa);
+			pessoa = pessoaNegocio.consultarPorId(pessoa.getId());
+			Profissional profissional = new Profissional();
+			profissional = profissionalNegocio.consultarPorPessoa(pessoa.getId());
+			if (profissional == null || profissional.getId() == 0) {
+				profissional.setPessoa(pessoa);
+			}
+			modelMap.addAttribute("pessoa", pessoa);
+			modelMap.addAttribute("agendaDia", listAgendaDia);
+			if (pessoa.getCpf().equals("")) {
+				request.setAttribute("estados", EstadoEnum.values());
+				return "/ilionnet2/vitazure/completar-cadastro";
+			}else if(pessoa.getCliente()) {
+				request.setAttribute("tiposProfissional", TipoProfissionalEnum.values());
+				request.setAttribute("especialidades", EspecialidadesEnum.values());
+				return listaConsulta(modelMap, request);
+			}else if (pessoa.getPsicologo() && (profissional.getAtivo() == null || !profissional.getAtivo())) {
+					return "/ilionnet2/vitazure/assinatura";
+			}else {
+				 request.getSession().setAttribute(PessoaNegocio.PROFISSIONAL_COMPLETO, profissional.getDadosCompleto());
+				return listaConsulta(modelMap, request);
+			}
+		}
+	  
+	  
 }

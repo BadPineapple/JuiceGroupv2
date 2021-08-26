@@ -57,7 +57,9 @@
 .close {
   font-size: 2.5rem;
 }
-	
+.swal2-title{
+     display: contents !important;
+}	
 	</style>
 		<div id="testdiv1" style="position:absolute;visibility:hidden;background-color:white;layer-background-color:white;z-index:10000;"></div>
 </head>
@@ -96,8 +98,8 @@
 						                    bairro='';
 						                    numero='';						                    
 						                    ProfissionalVH.profissional.duracaoAtendimentoValor='${profissional.duracaoAtendimentoValor}';
-						                    ProfissionalVH.profissional.valorConsultaOnline='${profissional.valorConsultaOnline}';
-						                    ProfissionalVH.profissional.valorConsultaPresencial='${profissional.valorConsultaPresencial}';
+						                    ProfissionalVH.profissional.valorConsultaOnline='${profissional.valorOnlineFormatado}';
+						                    ProfissionalVH.profissional.valorConsultaPresencial='${profissional.valorPresencialFormatado}';
 						                    ProfissionalVH.profissional.tempoAntecendencia='${profissional.tempoAntecendencia}';
 						                    ProfissionalVH.profissional.adolescentes='${profissional.adolescentes}';
 						                    ProfissionalVH.profissional.adultos='${profissional.adultos}';
@@ -124,6 +126,7 @@
 										    ProfissionalVH.profissional.dataInicioAvisoFerias='${profissional.dataInicioAvisoFerias}';
 										    ProfissionalVH.profissional.dataFimAvisoFerias='${profissional.dataFimAvisoFerias}';
 										    ProfissionalVH.profissional.ativo='${profissional.ativo}';
+										    ProfissionalVH.profissional.dadosCompleto='${profissional.dadosCompleto}';
 										    ProfissionalVH.profissional.plano='${profissional.plano}';
 										    ProfissionalVH.profissional.dataInicioPlano='${profissional.dataInicioPlano}';
 										    ProfissionalVH.profissional.dataFimPlano='${profissional.dataFimPlano}';
@@ -621,7 +624,7 @@
                                         <div class="col-12">
                                             <div class="input-block">
                                                 <label>Valor da consulta presencial:</label>
-                                                <input type="text" ng-model="ProfissionalVH.profissional.valorConsultaPresencial" class="valorMonetario"   />
+                                                <input type="text" ng-model="ProfissionalVH.profissional.valorConsultaPresencial" id="valorConsultaPresencial" class="valorMonetario"   />
                                             </div>
                                         </div>
                                         <div class="col-12">

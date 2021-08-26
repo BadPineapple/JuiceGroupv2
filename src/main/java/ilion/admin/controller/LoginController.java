@@ -177,15 +177,16 @@ public class LoginController extends CustomErrorController {
     }
     
     @RequestMapping("/ilionnet/confirmacao")
-    public String confirmacao(String token, ModelMap modelMap) {
+    public String confirmacao(String token, ModelMap modelMap , HttpServletRequest request) {
     	try {
 	    	Pessoa pessoa = (Pessoa) pessoaNegocio.consultarPorEmail(StringUtil.decodePassword(token));
+	    	request.getSession().setAttribute(PessoaNegocio.ATRIBUTO_SESSAO, pessoa);
 	    	pessoa.setConfirmado(Boolean.TRUE);
 			pessoa = pessoaNegocio.incluirAtualizar(pessoa);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-    	return "/ilionnet2/vitazure/confirmacaoEmail";
+    	return "redirect:/vitazure/informacoes-perfil";
     }
     
     

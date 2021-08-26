@@ -89,6 +89,14 @@ public class EnderecoNegocio {
 		return (List<EnderecoAtendimento>) hibernateUtil.list(dc);
 	}
 	
+	public String consultarCidadeEnderecoPorProfissional(Long idProfissional) {
+		DetachedCriteria dc = DetachedCriteria.forClass(EnderecoAtendimento.class);
+		dc.createAlias("profissional", "p");
+		dc.add(Restrictions.eq("p.id", idProfissional));
+		EnderecoAtendimento endereco =  (EnderecoAtendimento) hibernateUtil.findFirstResult(dc);
+		return endereco.getCidade();
+	}
+	
 	@Transactional
 	public void excluir(EnderecoAtendimento enderecoAtendimento) {
 		hibernateUtil.delete(enderecoAtendimento);

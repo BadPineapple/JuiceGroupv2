@@ -42,6 +42,8 @@ public class PessoaNegocio {
 	
 	public final static String AGENDA_SESSAO = "agendaPessoa";
 	
+	public final static String PROFISSIONAL_COMPLETO = "profissonalSessaoCompleto";
+	
 	public Pessoa consultarPorId(Long id) {
 		return (Pessoa) hibernateUtil.findById(Pessoa.class, id);
 	}
@@ -247,6 +249,6 @@ public void emailAtivacao(Pessoa pessoaVO) throws Exception {
 		EmailSenderFactory emailSenderFactory = 
 				SpringApplicationContext.getBean(EmailSenderFactory.class);
 		emailSenderFactory.getInstance().send(e);
-	}
-	
+	}	
+
 }
