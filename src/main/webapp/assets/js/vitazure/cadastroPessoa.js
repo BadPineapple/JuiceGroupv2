@@ -96,8 +96,8 @@ function uploadData($scope , formdata) {
 
 function validarCep(e) {
 	let valorCep = e;
-	if( ! valorCep || valorCep.trim() == '' || valorCep.length < 10 ) {
-		alert('Problema no Cep Informado.');
+	if( ! valorCep || valorCep.trim() == '' || valorCep.length < 9 ) {
+		alert_error('CEP não informado ou invalido.');
 		return;
 	}
 
@@ -109,7 +109,7 @@ function validarCep(e) {
 
 function _processaRetornoCep(retorno) {
 	if(retorno.erro){
-		alert('Problema no Cep Informado.');
+		alert_error('Problema no Cep Informado.');
 		document.getElementById('cep').value=""; 
 	}	
 }
@@ -117,10 +117,10 @@ function _processaRetornoCep(retorno) {
 function validarDDD(telefone , id) {
 	if(telefone.length < 13){
     	document.getElementById(id).value="";       
-    	alert("Telefone Inválido");
+    	alert_error("Telefone Inválido");
 	}else if(telefone.substring(1,3) < 11){
 		document.getElementById(id).value="";       
-    	alert("Telefone Inválido");
+    	alert_error("Telefone Inválido");
 	}	
 	
 }

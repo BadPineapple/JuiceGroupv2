@@ -62,7 +62,7 @@ public class WherebyApi {
 			
 			if (responseJson.getStatusLine().getStatusCode() == 201) {
 				JSONObject json = new JSONObject(responseString);
-				String configuracaoSalaAtendimento = "?embed&logo=on";
+				String configuracaoSalaAtendimento = "?embed&logo=on&?chat=on&?people=off&?leaveButton=on";
 				String roomUrl = json.get("roomUrl").toString();
 				String roomHostUrl = json.get("hostRoomUrl").toString();
 				agenda.setUrlAtendimentoOnline(roomUrl.concat(configuracaoSalaAtendimento));

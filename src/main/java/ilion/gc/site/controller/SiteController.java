@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.ValidationException;
 
 import ilion.vitazure.enumeradores.EspecialidadesEnum;
 import ilion.vitazure.enumeradores.TipoProfissionalEnum;
@@ -20,14 +21,22 @@ import ilion.vitazure.negocio.FormacaoAcademicaNegocio;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import ilion.CustomErrorController;
 import ilion.admin.negocio.PropEnum;
 import ilion.admin.negocio.PropNegocio;
+import ilion.arquivo.negocio.Arquivo;
 import ilion.arquivo.negocio.ArquivoNegocio;
 import ilion.gc.negocio.Artigo;
 import ilion.gc.negocio.ArtigoSiteNegocio;
@@ -37,6 +46,7 @@ import ilion.util.contexto.autorizacao.AcessoLivre;
 import ilion.vitazure.negocio.HorarioAtendimentoNegocio;
 import ilion.vitazure.negocio.PessoaNegocio;
 import ilion.vitazure.negocio.ProfissionalNegocio;
+import ilion.vitazure.negocio.ProfissionalVH;
 import ilion.vitazure.negocio.TemaAtendimentoNegocio;
 
 @Controller
@@ -425,5 +435,17 @@ public class SiteController extends CustomErrorController {
    		  return profissional;
    	  
      }
+	 
+	 @GetMapping("/consulta/{id}")
+		public String teste(HttpServletRequest request , @PathVariable Long id) {
+		 Pessoa PessoaSessao = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);   
+		 Agenda agenda = new Agenda();
+		 agenda = agendaNegocio.consultarAgendaId(id);
+		 Profissional profissional = profissionalNegocio.consultarPorId(agenda.getProfissional().getId());
+		 request.setAttribute("agenda", agenda);
+		 String horaFimAtendimento = Uteis.calculodeHoraSemIntervalo(agenda.getHoraInicioAgenda(), 1, (Integer.parseInt(profissional.getDuracaoAtendimento().getNome())));
+		 request.setAttribute("horaFimAtendimento", horaFimAtendimento);		 
+		 return "/ilionnet2/vitazure/whereby";
+		}
 	
 }

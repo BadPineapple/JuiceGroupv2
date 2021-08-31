@@ -157,6 +157,7 @@
                         <p>Faça sua consulta pelo celular, tablet ou computador, a qualquer hora com privacidade e segurança garantidas.</p>
 
                         <form ng-submit="consultarProfissional()"  class="form-highlight">
+                          <input id="cidade" style="display: contents;">
                             <select ng-model="tipoProfissional">
                                 <option value="">Tipo de profissional</option>
                                 <c:forEach var="tipoProfissional" items="${tiposProfissional}">

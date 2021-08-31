@@ -227,5 +227,7 @@ public class Agenda {
 			return "Agenda[{" + id + "," + getDataHoraLiberarLink() + ","+getDataHoraBloquearLink() + ","+getDataHoraAlterAtendimento() + ","+ urlAtendimentoOnline + "}]";
 		}
 		
-	   
+		public String getHoraInicioAgenda() {
+			return Uteis.formatDataLocateBrasil(getDataHoraAgendamento(), "HH:mm");
+		}
 }

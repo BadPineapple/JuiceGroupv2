@@ -35,8 +35,7 @@
                     <a href="" target="_blank" id="linkAcesso" class="not-active button-secundary">Entrar na consulta</a>
                 </div>
             </div>
-            <div style="width: 100%; padding-bottom: 5px;
-">
+            <div style="width: 100%; padding-bottom: 5px;">
                 <span class="notice-text">
                             Todos os agendamentos seguem o horário de Brasília -
                              <div id="hora" style="padding-left: 4px;"></div>
@@ -90,7 +89,7 @@ class Agenda{
             for (var i = 0; i < agendas.length; i++) {
             	if (displayDate.substr(0, 5) >= agendas[i].horaLiberar &&  displayDate.substr(0, 5) < agendas[i].horaBloquear) {
             		document.getElementById("linkAcesso").className = "button-secundary";
-            		document.getElementById("linkAcesso").href = agendas[i].url;
+            		document.getElementById("linkAcesso").href = "https://vitazure.com.br/consulta/"+agendas[i].id;
 				}
             }
     };

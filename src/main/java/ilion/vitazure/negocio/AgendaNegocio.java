@@ -172,8 +172,7 @@ public class AgendaNegocio {
 	}
 	
 	public List<Agenda> consultarAgendaDia(Pessoa pessoaAgenda){
-		
-		
+				
 		List<Agenda> listAgendas = new ArrayList<Agenda>();
 		
 		DetachedCriteria dc = DetachedCriteria.forClass(Agenda.class);
@@ -184,13 +183,17 @@ public class AgendaNegocio {
 			dc.createAlias("profissional.pessoa", "p");
 			dc.add(Restrictions.eq("p.id", pessoaAgenda.getId()));	
 		}
-		dc.add(Restrictions.eq("p.id", pessoaAgenda.getId()));
 		dc.add(Restrictions.eq("status", StatusEnum.CONFIRMADO));
 		dc.add(Restrictions.eq("online", Boolean.TRUE));
-		dc.add( Restrictions.between("dataHoraAgendamento", new Date() , Uteis.highDateTime(new Date())));
+		dc.add( Restrictions.between("dataHoraAgendamento", Uteis.inicioDia(new Date()) , Uteis.highDateTime(new Date())));
 		dc.addOrder(Order.asc("dataHoraAgendamento"));
 		listAgendas = (List<Agenda>) hibernateUtil.list(dc);
 		return listAgendas;
 	}
 	
+	public Agenda consultarAgendaId(Long idAgenda){		
+		DetachedCriteria dc = DetachedCriteria.forClass(Agenda.class);
+		dc.add(Restrictions.eq("id", idAgenda));
+		return (Agenda) hibernateUtil.consultarUniqueResult(dc);
+	}
 }

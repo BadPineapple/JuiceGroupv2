@@ -11,6 +11,7 @@ import org.hibernate.criterion.Subqueries;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import ilion.admin.negocio.Usuario;
 import ilion.util.StatusEnum;
@@ -20,9 +21,14 @@ import ilion.util.ValueListInfo;
 import ilion.util.busca.PalavrasChaveCondicoes;
 import ilion.util.exceptions.ValidacaoException;
 import ilion.util.persistencia.HibernateUtil;
+import ilion.vitazure.enumeradores.ConselhoProfissionalEnum;
 import ilion.vitazure.enumeradores.DuracaoAtendimentoEnum;
+import ilion.vitazure.enumeradores.EspecialidadesEnum;
+import ilion.vitazure.enumeradores.EstadoEnum;
 import ilion.vitazure.enumeradores.TipoContaEnum;
 import ilion.vitazure.enumeradores.TipoProfissionalEnum;
+import ilion.vitazure.model.EnderecoAtendimento;
+import ilion.vitazure.model.Especialidade;
 import ilion.vitazure.model.Pessoa;
 import ilion.vitazure.model.Profissional;
 import net.mlw.vlh.ValueList;
@@ -146,6 +152,9 @@ public class ProfissionalNegocio {
 		if(!profissionalVH.getProfissional().getAdolescentes() && !profissionalVH.getProfissional().getAdultos() && !profissionalVH.getProfissional().getCasais() && !profissionalVH.getProfissional().getIdosos()) {
 			throw new ValidacaoException("Faixa de atendimento – obrigatório marcar pelo menos uma das opções.");
 		}
+		if(profissionalVH.getProfissional().getConselhoProfissional().equals(ConselhoProfissionalEnum.NAO_INFORMADO)) {
+			throw new ValidacaoException("Conselho profissional não informado.");
+		}
 		
 	}
 	
@@ -202,6 +211,51 @@ public class ProfissionalNegocio {
 		sql.append(" update profissional set dadoscompleto = ").append(profissional.getDadosCompleto());
 		sql.append(" where id = ").append(profissional.getId());
 		hibernateUtil.updateSQL(sql.toString());
+	}
+	
+	public List<Profissional> consultarProfissionaisFiltro(String palavraChave , String especialista ,  String estado, String cidade) {
+		DetachedCriteria dc = DetachedCriteria.forClass(Profissional.class);
+		dc.add(Restrictions.eq("ativo", Boolean.TRUE));
+		dc.add(Restrictions.eq("dadosCompleto", Boolean.TRUE));
+		DetachedCriteria subquery = DetachedCriteria.forClass(Profissional.class);
+		subquery.add( Restrictions.eq("avisoFerias", Boolean.TRUE)).add(Restrictions.ge("dataInicioAvisoFerias", Uteis.formatarDataHora(new Date(), "dd/MM/YYY"))).add(Restrictions.le("dataFimAvisoFerias", Uteis.formatarDataHora(new Date(), "dd/MM/YYY")));
+		subquery.setProjection(Projections.property("id"));
+		List list =  hibernateUtil.list(subquery);
+		if(!palavraChave.equals("undefined")) {
+			dc.createAlias("pessoa", "pessoa");
+			dc.add(Restrictions.eq("pessoa.nome", palavraChave));
+		}
+		if(!especialista.equals("undefined")) {
+			DetachedCriteria subqueryEspecialidade = DetachedCriteria.forClass(Especialidade.class);
+			subqueryEspecialidade.createAlias("profissional", "profissional");
+			subqueryEspecialidade.add( Restrictions.eq("especialidade", especialista));
+			subqueryEspecialidade.setProjection(Projections.property("profissional.id"));
+			List listEspecialidade =  hibernateUtil.list(subqueryEspecialidade);
+			if(!listEspecialidade.isEmpty()) {
+				dc.add(Restrictions.in("id", listEspecialidade));
+			}else {
+				dc.add(Restrictions.eq("id", 0L));
+			}
+		}
+		if(!estado.equals("undefined")) {
+			DetachedCriteria subqueryEstadoCidade = DetachedCriteria.forClass(EnderecoAtendimento.class);
+			subqueryEstadoCidade.createAlias("profissional", "profissional");
+			subqueryEstadoCidade.add( Restrictions.eq("estado", EstadoEnum.valueOf(estado)));
+			if(!cidade.equals("null")) {
+				subqueryEstadoCidade.add( Restrictions.ilike("cidade", cidade));
+			}
+			subqueryEstadoCidade.setProjection(Projections.property("profissional.id"));
+			List listEstadoCidade =  hibernateUtil.list(subqueryEstadoCidade);
+			if(!listEstadoCidade.isEmpty()) {
+				dc.add(Restrictions.in("id", listEstadoCidade));
+			}else {
+				dc.add(Restrictions.eq("id", 0L));
+			}
+		}
+        if (!list.isEmpty()) {
+        	dc.add(Restrictions.not(Restrictions.in("id", list)));
+		}
+		return (List<Profissional>) hibernateUtil.list(dc);
 	}
 	
 }

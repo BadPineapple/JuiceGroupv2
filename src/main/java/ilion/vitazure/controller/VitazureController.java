@@ -6,8 +6,12 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.ValidationException;
 
 import ilion.vitazure.enumeradores.*;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -107,6 +112,7 @@ public class VitazureController {
 		}else if(pessoa.getCliente()) {
 			request.setAttribute("tiposProfissional", TipoProfissionalEnum.values());
 			request.setAttribute("especialidades", EspecialidadesEnum.values());
+			request.setAttribute("estados", EstadoEnum.values());
 			return "/ilionnet2/vitazure/painel-do-cliente";
 		}else if (pessoa.getPsicologo() && (profissional.getAtivo() == null || !profissional.getAtivo())) {
 				return "/ilionnet2/vitazure/assinatura";
@@ -308,5 +314,39 @@ public class VitazureController {
 			}
 		}
 	  
+	  @PostMapping(value = "/vitazure/finalizarAtendimento", produces = "application/json")
+	  @ResponseBody
+	  public String finalizarAtendimento(ModelMap modelMap,HttpServletRequest request,	@RequestBody Long  id) throws NumberFormatException, JSONException {
+			 Pessoa PessoaSessao = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
+			 try {
+				   Agenda agendaConcluida = agendaNegocio.alterarAgenda(id, StatusEnum.CONCLUIDO.toString());
+				 
+					if (PessoaSessao.getCliente()) {
+				        request.getSession().setAttribute("agendaConcluida", agendaConcluida);
+				        return avaliacaoAtendimento(modelMap, request);
+					}
+					return listaConsulta(modelMap, request);
+				} catch (ValidationException e) {
+					e.printStackTrace();
+					return listaConsulta(modelMap, request);
+				}
+			}
 	  
+	    @RequestMapping("/vitazure/avaliacaoAtendimento")
+		public String avaliacaoAtendimento(ModelMap modelMap, HttpServletRequest request) {
+			Pessoa pessoa = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
+			List<Agenda> listAgendaDia = agendaNegocio.consultarAgendaDia(pessoa);
+			pessoa = pessoaNegocio.consultarPorId(pessoa.getId());
+			Agenda agenda = (Agenda) request.getSession().getAttribute("agendaConcluida");
+			Profissional profissional = new Profissional();
+			profissional = profissionalNegocio.consultarPorPessoa(pessoa.getId());
+			if (profissional == null || profissional.getId() == 0) {
+				profissional.setPessoa(pessoa);
+			}
+			modelMap.addAttribute("pessoa", pessoa);
+			modelMap.addAttribute("agendaDia", listAgendaDia);
+			modelMap.addAttribute("agendaConcluida", agenda);
+			return "/ilionnet2/vitazure/avaliacaoAtendimento";
+			
+		}
 }

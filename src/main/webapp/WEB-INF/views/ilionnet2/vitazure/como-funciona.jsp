@@ -138,7 +138,7 @@
 
                                     <p>Se você está buscando atendimento psicológico, basta clicar no botão abaixo “Quero me cadastrar” e efetuar o seu cadastro. Isso leva menos de 3 minutos. Agora, se você é Psicólogo, basta entrar em “Sou profissional”, no menu superior, efetuar seu cadastro e aguardar o contato de nosso departamento comercial em até 12 horas, simples assim.</p>
 
-                                    <a href="http://vitazure.com.br/cadastre-se" class="button-secundary">Quero em cadastrar</a>
+                                    <a href="http://vitazure.com.br/cadastre-se" class="button-secundary">Quero me cadastrar</a>
 
                                 </div>
                             </div>
@@ -257,7 +257,7 @@
 
                                     <p>Se você está buscando atendimento psicológico, basta clicar no botão abaixo “Quero me cadastrar” e efetuar o seu cadastro. Isso leva menos de 3 minutos. Agora, se você é Psicólogo, basta entrar em “Sou profissional”, no menu superior, efetuar seu cadastro e aguardar o contato de nosso departamento comercial em até 12 horas, simples assim.</p>
 
-                                    <a href="http://vitazure.com.br/cadastre-se" class="button-secundary">Quero em cadastrar</a>
+                                    <a href="http://vitazure.com.br/cadastre-se" class="button-secundary">Quero me cadastrar</a>
 
                                 </div>
                             </div>
@@ -268,7 +268,7 @@
                                 </div>
                                 <div class="toggle-body vitazure">
 
-                                    <p>Mantemos o mais alto padrão de segurança. Os dados que você nos informa são tratados de maneira confidencial. Nossos profissionais são selecionados e capacitados, garantimos a máxima qualidade ao indicá-los para você. Nossa plataforma oferece um ambiente extremamente seguro e regular.</p>
+                                    <p>É muito segura. Os dados informados por você são tratados de forma confidencial, são criptografados, ou seja, não podem ser lidos por outros recursos tecnológicos. Usamos certificado de segurança SSL, isso dá a segurança para a plataforma, você pode verificar na barra de endereços o conjunto de caracteres ”https”, indicando o uso do recurso.</p>
 
                                 </div>
                             </div>

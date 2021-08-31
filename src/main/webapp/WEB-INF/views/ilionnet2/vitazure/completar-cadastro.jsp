@@ -45,7 +45,7 @@
                         <h3>Complete seu cadastro</h3>
                     </div>
                     <div class="col-12 col-md-6 offset-md-3 col-xl-6 offset-xl-3">
-                        <form ng-submit="completarCadastro()" class="form-default" style="padding: 3rem 0; font-weight: 800;">
+                        <form ng-submit="completarCadastro()" class="form-default" style="padding: 3rem 0; font-weight: 800;" autocomplete="off">
                           <angular-initializer ng-init="pessoa.id='${pessoa.id}';
 						                     pessoa.nome='${pessoa.nome}';
 						                     pessoa.email='${pessoa.email}';
@@ -60,7 +60,7 @@
                          					 pessoa.psicologo ='${pessoa.psicologo}';
                          					 pessoa.foto.id='${pessoa.foto.id}';
 						                     pessoa.foto.link='${pessoa.foto.link}';
-						                     ProfissionalVH.profissional.pessoa.confirmado='${profissional.pessoa.confirmado}';
+						                     pessoa.confirmado='${pessoa.confirmado}';
                           					 "/>
                           
                             <div class="row">
@@ -119,13 +119,13 @@
                                 <div class="col-12">
                                     <div class="input-block">
                                         <label>Email</label>
-                                        <input type="text" ng-model="pessoa.email" class="not-active" required/>
+                                        <input type="text" ng-model="pessoa.email" class="not-active" required readonly onfocus="this.removeAttribute('readonly');"/>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="input-block">
                                         <label>CEP</label>
-                                        <input type="text" data-mask="00.000-000" ng-model="pessoa.cep" id="cep" required onblur="validarCep(this.value)"/>
+                                        <input type="text" data-mask="00000-000" ng-model="pessoa.cep" id="cep" required onblur="validarCep(this.value)"/>
                                     </div>
                                 </div>
                                 <div class="col-12">

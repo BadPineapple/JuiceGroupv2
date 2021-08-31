@@ -10,6 +10,10 @@ var dataSelecionada = '';
 
 var idTempSelecionado = '';
 
+var idRemoveHist = '';
+
+var idProfissionalHorario = '';
+
 
  var horariosDisponiveisAtendimento = new Array();
 
@@ -35,6 +39,13 @@ function agendamentoController($scope, $http, $window) {
      $scope.consultarAgenda = function () {
         consultarAgenda($scope, $http, $window);
     };
+	
+    $scope.consultarProfissional = function () {
+        consultarProfissional($scope, $http, $window);
+    };
+	$scope.buscaCidades = function () {
+        buscaCidades($scope, $http, $window);
+    };
 }
 
 function consultarDatasProfissional($scope, $http, $window , id , profissional) {
@@ -45,6 +56,12 @@ function consultarDatasProfissional($scope, $http, $window , id , profissional) 
 	} 
 	 idTemp = profissional+'.'+id;
      dataSelecionada = id;
+	 definirTipo(profissional);
+	 if(idRemoveHist != '' && idRemoveHist != profissional){
+		removerHorariosHist(profissional);
+	 }else{
+		idRemoveHist = profissional;
+	}
 	
 	$http.get("/vitazure/consultarDatasProfissional/"+id+"/"+profissional)
         .then(function (response) {
@@ -61,7 +78,7 @@ function consultarDatasProfissional($scope, $http, $window , id , profissional) 
     			}
            		horariosDisponiveisAtendimento.forEach(AdicionarHorariosDisponiveis);
         }).catch(function (response) {
-          alert('Teste');
+          alert(response.data);
     })
 }
 
@@ -77,7 +94,8 @@ function AdicionarHorariosDisponiveis(item, indice){
 };
 
 function selecionarHora(id , codigoProfissional){
-	 var idHora = id+"/"+codigoProfissional;
+	var idHora = id+"/"+codigoProfissional;
+    idProfissionalHorario = codigoProfissional;
 	document.getElementById(idHora).style = "border: 3px solid #83B2CD;background: #B8DFED;border-radius: 10px;text-align: center; margin: 10px 10px;transition: all .3s ease-in-out;padding: 5px; width: 74px;font-size: 1.6rem;line-height: 2rem;font-weight: 700;";
 	if(idTempSelecionado != ''){
 	  document.getElementById(idTempSelecionado).style = "background: #B8DFED;border-radius: 10px;text-align: center; margin: 10px 10px;transition: all .3s ease-in-out;padding: 5px; width: 74px;font-size: 1.6rem;line-height: 2rem;font-weight: 700;";
@@ -88,21 +106,23 @@ function selecionarHora(id , codigoProfissional){
       var enderecoLinkLocaliazacaoProfissional = "#enderecoLinkLocaliazacaoProfissional"+codigoProfissional +" a";
       $(enderecoProfissional).remove();
       $(enderecoLinkLocaliazacaoProfissional).remove();
-	for (var i = 0; i < horariosDisponiveisAtendimento.length; i++) {
-        if(id == i){
-	       var enderecoProfissional = "#enderecoProfissional"+codigoProfissional;
-	       $(enderecoProfissional).append(
-	          "<strong style='font-size: 15px;'>"+horariosDisponiveisAtendimento[i].enderecoatendimento+"</strong>"
-			);
-		   var enderecoLinkLocaliazacaoProfissional = "#enderecoLinkLocaliazacaoProfissional"+codigoProfissional;		
-	       $(enderecoLinkLocaliazacaoProfissional).append(
-	          "<a href='"+horariosDisponiveisAtendimento[i].linkGoogleMaps+"' target='_blank' class='localizacao line'>"+
-	             "<img src='../../assets/images/localizacao.png'>"+
-	             "Confira localização no Mapa "+
-	           "</a>"
-			);	
-        }
-    }
+	 if(definirTipo(codigoProfissional) == 'presencial'){
+		for (var i = 0; i < horariosDisponiveisAtendimento.length; i++) {
+	        if(id == i){
+		       var enderecoProfissional = "#enderecoProfissional"+codigoProfissional;
+		       $(enderecoProfissional).append(
+		          "<strong style='font-size: 15px;'>"+horariosDisponiveisAtendimento[i].enderecoatendimento+"</strong>"
+				);
+			   var enderecoLinkLocaliazacaoProfissional = "#enderecoLinkLocaliazacaoProfissional"+codigoProfissional;		
+		       $(enderecoLinkLocaliazacaoProfissional).append(
+		          "<a href='"+horariosDisponiveisAtendimento[i].linkGoogleMaps+"' target='_blank' class='localizacao line'>"+
+		             "<img src='../../assets/images/localizacao.png'>"+
+		             "Confira localização no Mapa "+
+		           "</a>"
+				);	
+	        }
+	    }
+	}
 };
 
 function marcardesmarcar(idProfissional,id) {
@@ -124,7 +144,7 @@ function marcardesmarcar(idProfissional,id) {
 function agendar(respostaPagamento ,$scope, $http, $window , id) {
 	var idProfissional = id;
 	var horarioPossivelAtendimento  = horariosDisponiveisAtendimento[idHoraTemp].horaPossivelAtendiemnto;
-	var tipoAtendimento  = tipoAgendamento;
+	var tipoAtendimento  = definirTipo(idProfissional);
 	var data  = dataSelecionada;
 	var retornoToken = JSON.stringify({
     "idProfissional":idProfissional,
@@ -149,59 +169,64 @@ $http.post("/vitazure/agendar/" , retornoToken)
 
 function efetuarPagamento($scope, $http, $window , id ,valorOnline ,valorPresencial) {
     var confirma = 0;
-    var tipoAtendimento  = tipoAgendamento;
+    var tipoAtendimento  = definirTipo(id);
     document.getElementById("spinner").style.display = "inline-block";
-    $.ajax({
-        url: '/api/v1/getencryption',
-        type: 'GET',
-        contentType: 'text/plain',
-        error: function (data, textStatus, xhr) {
-            alert(data.responseText + " error");
-            confirma = 0;
-        }
-    }).done(function (data, textStatus, jqXHR) {
-        confirma = 1;
-    }).then(function (data, textStatus, jqXHR) {
-        var ccae6d912a41bfefd569a77b5cd86603cde92e53cdd45813cba9e5bf080b3734 =  jqXHR.responseText;
-        var valorTotal = (tipoAgendamento == 'online' ? valorOnline : valorPresencial) * 100;
-        var button = document.querySelector('button');
-        function handleSuccess(data) {
-	        document.getElementById("spinner").style.display = "inline-block";
-            agendar(data ,$scope, $http, $window , id);
-        }
-        function handleError(data) {
-            console.log(data);
-        }
-        if (confirma === 1) {
-            var checkout = new PagarMeCheckout.Checkout({
-                encryption_key: ccae6d912a41bfefd569a77b5cd86603cde92e53cdd45813cba9e5bf080b3734,
-                success: handleSuccess,
-                error: handleError
-            });
-            document.getElementById("spinner").style.display = "none";
-            checkout.open({
-                paymentButtonText: 'Finalizar',
-				amount: valorTotal,
-				maxInstallments: 1,
-				defaultInstallment: 1,
-				customerData: 'true',
-				createToken: 'true',
-				postbackUrl: 'https://www.vitazure.com.br/api/v1/retornoPagarMe',
-				paymentMethods: 'credit_card',
-				uiColor: '#0097D6',
-				boletoDiscountPercentage: 0,
-				boletoExpirationDate: '12/12/2021',
-				pixExpirationDate: '2021-12-31',
-                items: [{
-                    id: id,
-                    title: "Pagamento Agendamento Consulta",
-                    unit_price: 10000,
-                    quantity: 1,
-                    tangible: 'false'
-                }]
-            });
-        }
-    });
+    if(idProfissionalHorario != id){
+      alert_error("Hora Agendamento Não Informado");
+	  document.getElementById("spinner").style.display = "none";
+    }else{
+	    $.ajax({
+	        url: '/api/v1/getencryption',
+	        type: 'GET',
+	        contentType: 'text/plain',
+	        error: function (data, textStatus, xhr) {
+	            alert(data.responseText + " error");
+	            confirma = 0;
+	        }
+	    }).done(function (data, textStatus, jqXHR) {
+	        confirma = 1;
+	    }).then(function (data, textStatus, jqXHR) {
+	        var ccae6d912a41bfefd569a77b5cd86603cde92e53cdd45813cba9e5bf080b3734 =  jqXHR.responseText;
+	        var valorTotal = (definirTipo(id) == 'online' ? valorOnline : valorPresencial) * 100;
+	        var button = document.querySelector('button');
+	        function handleSuccess(data) {
+		        document.getElementById("spinner").style.display = "inline-block";
+	            agendar(data ,$scope, $http, $window , id);
+	        }
+	        function handleError(data) {
+	            console.log(data);
+	        }
+	        if (confirma === 1) {
+	            var checkout = new PagarMeCheckout.Checkout({
+	                encryption_key: ccae6d912a41bfefd569a77b5cd86603cde92e53cdd45813cba9e5bf080b3734,
+	                success: handleSuccess,
+	                error: handleError
+	            });
+	            document.getElementById("spinner").style.display = "none";
+	            checkout.open({
+	                paymentButtonText: 'Finalizar',
+					amount: valorTotal,
+					maxInstallments: 1,
+					defaultInstallment: 1,
+					customerData: 'true',
+					createToken: 'true',
+					postbackUrl: 'https://www.vitazure.com.br/api/v1/retornoPagarMe',
+					paymentMethods: 'credit_card',
+					uiColor: '#0097D6',
+					boletoDiscountPercentage: 0,
+					boletoExpirationDate: '12/12/2021',
+					pixExpirationDate: '2021-12-31',
+	                items: [{
+	                    id: id,
+	                    title: "Pagamento Agendamento Consulta",
+	                    unit_price: 10000,
+	                    quantity: 1,
+	                    tangible: 'false'
+	                }]
+	            });
+	        }
+	    });
+    }
 }
 
 function definirAgendamento($scope, $http, $window , idAgenda , situacaoAlterar) {
@@ -228,3 +253,45 @@ function consultarAgenda($scope, $http, $window) {
     })
 }
 
+function definirTipo(idProfissional){
+  var online =  document.getElementById(idProfissional+'.online').className;
+  var presencial = document.getElementById(idProfissional+'.presencial').className;
+  if(presencial.includes('active')){
+	return 'presencial';
+  }else{
+	return 'online';
+ }  
+}
+function removerHorariosHist(profissional){
+   var idExcluir = "#panelFiltrosSelecionados"+idRemoveHist+" a";
+   $(idExcluir).remove();
+  idRemoveHist = profissional;
+}
+
+function consultarProfissional($scope, $http, $window) {
+	var cidade = document.getElementById("cidade").value === '' ? null : document.getElementById("cidade").value;
+    $http.get("/resultado-de-busca/"+$scope.palavraChave+"/"+$scope.especialista+"/"+$scope.estado+"/"+cidade)
+        .then(function (response) {
+           $window.location.href = "/vitazure/profissionais";
+        }).catch(function (response) {
+        alert_error(response.data.message);
+    })
+}
+
+function buscaCidades($scope, $http, $window) {
+ if($scope.estado != "" && typeof $scope.estado != 'undefined'){
+    $http.get("/api/cidades/"+$scope.estado)
+        .then(function (response) {
+           var $cidade = $("#cidade");
+			$cidade.empty();
+			$.each(response.data, function() {
+				$cidade.append($("<option />").val(this.nome).text(this.nome));
+			});
+			if( callback ) {
+				callback();
+			}
+        }).catch(function (response) {
+        alert_error(response.data.message);
+    })
+  }
+}

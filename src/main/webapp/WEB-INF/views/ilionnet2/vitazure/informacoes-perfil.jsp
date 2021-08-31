@@ -203,21 +203,7 @@
                                             </select>
                                           </div>
                                         </div>
-
-                                        <div class="col-12 col-md-6 col-xl-6">
-                                            <div class="input-block">
-                                                <label>Documento do (CRP/CRM)</label>
-                                                <input type="text" ng-model="ProfissionalVH.profissional.documentoCrpCrm"/>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12 col-md-6 col-xl-6">
-                                            <div class="input-block">
-                                                <label>Cadastro do e-Psi</label>
-                                                <input type="text" ng-model="ProfissionalVH.profissional.cadastroEpsi"  />
-                                            </div>
-                                        </div>
-
+                                        
                                         <div class="col-12 col-md-6 col-xl-6">
                                           <div class="input-block">
                                             <label>Conselho profissional</label>
@@ -229,6 +215,22 @@
                                             </select>
                                           </div>
                                         </div>
+                                        
+                                        <div class="col-12 col-md-6 col-xl-6">
+                                            <div class="input-block">
+                                                <label>Documento do (CRP/CRM)</label>
+                                                <input type="text" ng-model="ProfissionalVH.profissional.documentoCrpCrm"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 col-md-12 col-xl-12">
+                                            <div class="input-block">
+                                                <label>Cadastro do e-Psi</label>
+                                                <input type="text" ng-model="ProfissionalVH.profissional.cadastroEpsi"  />
+                                            </div>
+                                        </div>
+
+                                        
 
 
                                         <div class="col-12 col-md-12 col-xl-12">

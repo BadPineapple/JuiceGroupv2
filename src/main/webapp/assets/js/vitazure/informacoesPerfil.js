@@ -165,9 +165,9 @@ function perfilProfissional(menu,$scope, $http, $window) {
     }
 	
 	var valorconsultaOnline = document.getElementById("valorconsultaOnline").value;
-	$scope.ProfissionalVH.profissional.valorConsultaOnline = valorconsultaOnline.replace('.','').replace(',','.')
+	$scope.ProfissionalVH.profissional.valorConsultaOnline = valorconsultaOnline.replace('.','').replace('.','').replace(',','.')
 	var valorConsultaPresencial = document.getElementById("valorConsultaPresencial").value;
-	$scope.ProfissionalVH.profissional.valorConsultaPresencial = valorConsultaPresencial.replace('.','').replace(',','.')
+	$scope.ProfissionalVH.profissional.valorConsultaPresencial = valorConsultaPresencial.replace('.','').replace('.','').replace(',','.')
 	
     $scope.ProfissionalVH.menuValidar= menu;
 $http.post("/vitazure/perfilProfissional", $scope.ProfissionalVH)

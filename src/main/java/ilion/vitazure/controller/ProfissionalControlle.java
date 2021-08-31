@@ -38,6 +38,9 @@ import ilion.arquivo.negocio.ArquivoUteis;
 import ilion.util.Uteis;
 import ilion.util.contexto.autorizacao.PessoaLogada;
 import ilion.util.json.JsonString;
+import ilion.vitazure.enumeradores.EspecialidadesEnum;
+import ilion.vitazure.enumeradores.EstadoEnum;
+import ilion.vitazure.enumeradores.TipoProfissionalEnum;
 import ilion.vitazure.model.Agenda;
 import ilion.vitazure.model.FormacaoAcademica;
 import ilion.vitazure.model.HorarioAtendimento;
@@ -169,16 +172,17 @@ public class ProfissionalControlle {
 		request.setAttribute("agendaDia", listAgendaDia);
 		request.setAttribute("pessoa", PessoaSessao);
 		request.setAttribute("areaRestrita", true);
+		request.setAttribute("especialidades", EspecialidadesEnum.values());
+		request.setAttribute("tiposProfissional", TipoProfissionalEnum.values());
 		consultarDataDisponivelProfissionais(lisProfissional, false, false);
 		request.getSession().setAttribute("listProfissionais", lisProfissional);
+		request.setAttribute("estados", EstadoEnum.values());
 		return "/ilionnet2/vitazure/resultado-de-busca";
 	}
-
-	@GetMapping("/resultado-de-busca/{tipoProfissional}/{especialista}")
-	public String buscaProfissional(HttpServletRequest request, @PathVariable String tipoProfissional,
-		@PathVariable String especialista) {
+	@GetMapping("/resultado-de-busca/{palavraChave}/{especialista}/{estado}/{cidade}")
+	public String buscaProfissional(HttpServletRequest request, @PathVariable String palavraChave,@PathVariable String especialista , @PathVariable String estado,@PathVariable String cidade) {
 		Pessoa PessoaSessao = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
-		List<Profissional> lisProfissional = profissionalNegocio.consultarProfissionaisAtivos();
+		List<Profissional> lisProfissional = profissionalNegocio.consultarProfissionaisFiltro(palavraChave,especialista,estado,cidade);
 		lisProfissional.stream().forEach(profissional-> {
 			profissional.getPessoa().setCidade(enderecoNegocio.consultarCidadeEnderecoPorProfissional(profissional.getId()));
 		});
@@ -188,6 +192,9 @@ public class ProfissionalControlle {
 		request.setAttribute("areaRestrita", true);
 		consultarDataDisponivelProfissionais(lisProfissional, false, false);
 		request.getSession().setAttribute("listProfissionais", lisProfissional);
+		request.setAttribute("tiposProfissional", TipoProfissionalEnum.values());
+		request.setAttribute("especialidades", EspecialidadesEnum.values());
+		request.setAttribute("estados", EstadoEnum.values());
 		return "/ilionnet2/vitazure/resultado-de-busca";
 	}
 
@@ -324,5 +331,24 @@ public class ProfissionalControlle {
 			return new ResponseEntity<>(new JsonString(e.getMessage()), HttpStatus.BAD_REQUEST);
 		}
 	}
-
+	
+	@GetMapping("/vitazure/profissionais")
+	public String profissionais(HttpServletRequest request) {
+		Pessoa PessoaSessao = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
+		List<Profissional> lisProfissional = (List<Profissional>) request.getSession().getAttribute("listProfissionais");
+		lisProfissional.stream().forEach(profissional-> {
+			profissional.getPessoa().setCidade(enderecoNegocio.consultarCidadeEnderecoPorProfissional(profissional.getId()));
+		});
+		List<Agenda> listAgendaDia = agendaNegocio.consultarAgendaDia(PessoaSessao);
+		request.setAttribute("agendaDia", listAgendaDia);
+		request.setAttribute("pessoa", PessoaSessao);
+		request.setAttribute("areaRestrita", true);
+		request.setAttribute("especialidades", EspecialidadesEnum.values());
+		request.setAttribute("tiposProfissional", TipoProfissionalEnum.values());
+		consultarDataDisponivelProfissionais(lisProfissional, false, false);
+		request.getSession().setAttribute("listProfissionais", lisProfissional);
+		request.setAttribute("estados", EstadoEnum.values());
+		return "/ilionnet2/vitazure/resultado-de-busca";
+	}
+	
 }
