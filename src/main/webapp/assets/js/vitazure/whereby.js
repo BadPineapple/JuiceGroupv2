@@ -15,6 +15,11 @@ function atualizarCronometro($scope, $http, $window){
 		definirTempoCronometro($scope, $http, $window);		
 }
 
+
+function finalizacaoConsulta(urlAcessar,$scope, $http, $window){
+	$window.location.href = urlAcessar;
+}
+
 function relogio($scope, $http, $window){
 		
 		if((min == 0) && (seg == 0)){				
@@ -26,9 +31,11 @@ function relogio($scope, $http, $window){
 		        data: identificador,		        
 		        contentType: 'application/json',
 		        success: function (response) {
-		           alert_success('Atendimento Concluido!');
+		           alert_success('O tempo da sua consulta expirou,seu atendimento foi encerrado!');
+				   finalizacaoConsulta(response,$scope, $http, $window)
 		        }, error: function (response) {		           
-		              alert_error(response.responseText);
+		              alert_success('O tempo da sua consulta expirou,seu atendimento foi encerrado!');
+				   finalizacaoConsulta(response,$scope, $http, $window)
 		        }
 		    });			
 		}			

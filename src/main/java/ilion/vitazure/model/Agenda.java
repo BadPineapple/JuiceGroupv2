@@ -56,6 +56,10 @@ public class Agenda {
 	  private String tokenTransacaoPagamentoConsulta;
 	  
 	  private Integer idTransacao;
+	  
+	  private Integer avaliacaoAtendimentoNota;
+	  
+	  private String avaliacaoAtendimentoObservacao;
 
 	  public Long getId() {
 			if (id == null) {
@@ -230,4 +234,23 @@ public class Agenda {
 		public String getHoraInicioAgenda() {
 			return Uteis.formatDataLocateBrasil(getDataHoraAgendamento(), "HH:mm");
 		}
+
+		public Integer getAvaliacaoAtendimentoNota() {
+			return avaliacaoAtendimentoNota;
+		}
+
+		public void setAvaliacaoAtendimentoNota(Integer avaliacaoAtendimentoNota) {
+			this.avaliacaoAtendimentoNota = avaliacaoAtendimentoNota;
+		}
+
+		public String getAvaliacaoAtendimentoObservacao() {
+			return avaliacaoAtendimentoObservacao;
+		}
+
+		public void setAvaliacaoAtendimentoObservacao(String avaliacaoAtendimentoObservacao) {
+			this.avaliacaoAtendimentoObservacao = avaliacaoAtendimentoObservacao;
+		}
+		
+		
+		
 }

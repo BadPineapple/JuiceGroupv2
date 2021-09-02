@@ -9,6 +9,9 @@ function buscaProfissionalController($scope, $http, $window) {
 	$scope.buscaCidades = function () {
         buscaCidades($scope, $http, $window);
     };
+	$scope.consultarProfissionalExterna = function () {
+        consultarProfissionalExterna($scope, $http, $window);
+    };
 }
 
 function consultarProfissional($scope, $http, $window) {
@@ -37,4 +40,13 @@ function buscaCidades($scope, $http, $window) {
         alert_error(response.data.message);
     })
   }
+}
+
+function consultarProfissionalExterna($scope, $http, $window) {
+    $http.get("/resultado-de-busca-externa/"+$scope.especialista)
+        .then(function (response) {
+           $window.location.href = "/vitazure/profissionais-externa";
+        }).catch(function (response) {
+        alert_error(response.data.message);
+    })
 }

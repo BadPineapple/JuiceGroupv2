@@ -32,7 +32,7 @@
             <div class="col-12 col-md-4 col-xl-4">
                 <div class="entrar-consulta">
 				            <input type="text" value="${agendaDia}" id="agendaDia" style="display: contents;"/>
-                    <a href="" target="_blank" id="linkAcesso" class="not-active button-secundary">Entrar na consulta</a>
+                    <a href=""  id="linkAcesso" class="not-active button-secundary">Entrar na consulta</a>
                 </div>
             </div>
             <div style="width: 100%; padding-bottom: 5px;">
@@ -90,6 +90,8 @@ class Agenda{
             	if (displayDate.substr(0, 5) >= agendas[i].horaLiberar &&  displayDate.substr(0, 5) < agendas[i].horaBloquear) {
             		document.getElementById("linkAcesso").className = "button-secundary";
             		document.getElementById("linkAcesso").href = "https://vitazure.com.br/consulta/"+agendas[i].id;
+//             		var idAgenda = agendas[i].id;
+//             		document.getElementById("linkAcesso").onclick = function() {consultaAgenda(idAgenda)};
 				}
             }
     };

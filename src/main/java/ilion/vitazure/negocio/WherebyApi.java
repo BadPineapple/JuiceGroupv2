@@ -48,7 +48,7 @@ public class WherebyApi {
 		try {
 			HttpPost requestJson = new HttpPost(URL_API);
 			
-			StringEntity params = new StringEntity("{\"roomNamePattern\": \"human-short\", \"startDate\": \"" + startDate + "T" + startHour + ".000Z" + "\", \"endDate\": " +
+			StringEntity params = new StringEntity("{\"isLocked\": true,\"roomNamePattern\": \"human-short\", \"startDate\": \"" + startDate + "T" + startHour + ".000Z" + "\", \"endDate\": " +
 					" \"" + endDate + "T" + endHour + ".000Z" + "\"," +
 					" \"fields\": [\"hostRoomUrl\"]}");
 			
@@ -62,7 +62,7 @@ public class WherebyApi {
 			
 			if (responseJson.getStatusLine().getStatusCode() == 201) {
 				JSONObject json = new JSONObject(responseString);
-				String configuracaoSalaAtendimento = "?embed&logo=on&?chat=on&?people=off&?leaveButton=on";
+				String configuracaoSalaAtendimento = "?embed&logo=on&?chat=on&?people=off&?leaveButton=on&?lang=pt&?floatSelf";
 				String roomUrl = json.get("roomUrl").toString();
 				String roomHostUrl = json.get("hostRoomUrl").toString();
 				agenda.setUrlAtendimentoOnline(roomUrl.concat(configuracaoSalaAtendimento));

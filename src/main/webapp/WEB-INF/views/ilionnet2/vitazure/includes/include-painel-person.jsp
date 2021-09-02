@@ -20,7 +20,7 @@
             <div class="col-12 col-md-6 col-xl-6">
                 <div class="entrar-consulta">
                     <input type="text" value="${agendaDia}" id="agendaDia" style="display: contents;"/>
-                    <a href="" target="_blank" id="linkAcesso" class="not-active button-secundary">Entrar na consulta</a>
+                    <a href=""  id="linkAcesso" class="not-active button-secundary">Entrar na consulta</a>
 <!--                     <a href="http://localhost:8080/consulta/38"  id="linkAcesso" class="button-secundary">Entrar na consulta</a> -->
                 </div>
             </div>

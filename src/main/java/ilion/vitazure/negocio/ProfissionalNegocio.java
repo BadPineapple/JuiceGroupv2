@@ -221,11 +221,11 @@ public class ProfissionalNegocio {
 		subquery.add( Restrictions.eq("avisoFerias", Boolean.TRUE)).add(Restrictions.ge("dataInicioAvisoFerias", Uteis.formatarDataHora(new Date(), "dd/MM/YYY"))).add(Restrictions.le("dataFimAvisoFerias", Uteis.formatarDataHora(new Date(), "dd/MM/YYY")));
 		subquery.setProjection(Projections.property("id"));
 		List list =  hibernateUtil.list(subquery);
-		if(!palavraChave.equals("undefined")) {
+		if(palavraChave != null && !palavraChave.equals("undefined")) {
 			dc.createAlias("pessoa", "pessoa");
-			dc.add(Restrictions.eq("pessoa.nome", palavraChave));
+			dc.add(Restrictions.or(Restrictions.ilike("pessoa.nome", "%"+palavraChave+"%") , Restrictions.ilike("biografia", "%"+palavraChave+"%")));
 		}
-		if(!especialista.equals("undefined")) {
+		if(especialista != null && !especialista.equals("undefined")) {
 			DetachedCriteria subqueryEspecialidade = DetachedCriteria.forClass(Especialidade.class);
 			subqueryEspecialidade.createAlias("profissional", "profissional");
 			subqueryEspecialidade.add( Restrictions.eq("especialidade", especialista));
@@ -237,7 +237,7 @@ public class ProfissionalNegocio {
 				dc.add(Restrictions.eq("id", 0L));
 			}
 		}
-		if(!estado.equals("undefined")) {
+		if(estado != null && !estado.equals("undefined")) {
 			DetachedCriteria subqueryEstadoCidade = DetachedCriteria.forClass(EnderecoAtendimento.class);
 			subqueryEstadoCidade.createAlias("profissional", "profissional");
 			subqueryEstadoCidade.add( Restrictions.eq("estado", EstadoEnum.valueOf(estado)));

@@ -13,34 +13,65 @@
 
 <body id="index" class="home">
 <style>
-    .show-policy {
-        margin-bottom: 0px;
+
+	.show-policy {
+        margin-bottom: 0px !important;
     }
 
     .hidde-policy {
-        margin-bottom: -1000px;
+        margin-bottom: -1000px !important;
     }
 
+    .privacy-policy{
+       display: flex;
+	    align-items: center;
+	    justify-content: space-between;
+	    width: 100%;
+	    min-height: inherit;
+    }
     .privacy-policy-modal {
-        align-items: center;
-        background: #ffffff;
-        bottom: 0;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, .2);
-        display: flex;
-        justify-content: space-between;
-        padding: .5rem 20rem;
         position: fixed;
-        transition: .5s;
-        width: 100vw;
-        z-index: 2147483647;
+	    z-index: 2147483647;
+	    bottom: 16px;
+	    left: 16px;
+	    right: 16px;
+	    margin: auto;
+	    max-width: 1334px;
+	    min-height: 70px;
+	    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 40%);
+	    border: solid 1px #eeeeee;
+	    background-color: #fff;
     }
     .privacy-policy-text {
-        grid-area: text;
-        width: 70%;
+       vertical-align: middle;
+       padding: 16px;
     }
-
-    .privacy-policy-text h4 {
-        margin: 1rem 0;
+    
+    .privacy-policy-button {
+        padding: 8px 16px;
+	    border-radius: 3px;
+	    font-family: opensans, helvetica, arial, sans-serif;
+	    font-size: 14px;
+	    font-weight: bold;
+	    font-stretch: normal;
+	    font-style: normal;
+	    line-height: 1;
+	    letter-spacing: normal;
+	    text-align: center;
+	    color: #fff;
+	    border: 0;
+	    cursor: pointer;
+    
+    }
+    .privacy-policy-text-span {
+       font-family: opensans, helvetica, arial, sans-serif;
+	    font-size: 12px;
+	    font-weight: normal;
+	    font-stretch: normal;
+	    font-style: normal;
+	    line-height: normal;
+	    letter-spacing: -0.45px;
+	    color: #333;
     }
 
     .button-accept,
@@ -60,61 +91,57 @@
         width: 150px;
     }
 
-    @media (max-width: 768px) {
-        .privacy-policy-modal {
-            display: grid!important;
-            grid-template-areas:
-                "text"
-                "button"
-        ;
-            grid-template-rows: 1fr 1fr;
-            height: 200px;
-            padding: 0rem 2rem;
-        }
+/*     @media (max-width: 768px) { */
+/*         .privacy-policy-modal { */
+/*             display: grid!important; */
+/*             grid-template-areas: */
+/*                 "text" */
+/*                 "button" */
+/*         ; */
+/*             grid-template-rows: 1fr 1fr; */
+/*             height: 200px; */
+/*             padding: 0rem 2rem; */
+/*         } */
 
-        .privacy-policy-text {
-            padding: 0 .5rem;
-            width: 100%!important;
-        }
+/*         .privacy-policy-text { */
+/*             padding: 0 .5rem; */
+/*             width: 100%!important; */
+/*         } */
 
-        .button-accept,
-        .button-accept:hover {
-            width: 100%!important;
-        }
+/*         .button-accept, */
+/*         .button-accept:hover { */
+/*             width: 100%!important; */
+/*         } */
 
-        @media (max-width: 501px) {
-            .privacy-policy-modal {
-                height: 270px;
-            }
-        }
+/*         @media (max-width: 501px) { */
+/*             .privacy-policy-modal { */
+/*                 height: 270px; */
+/*             } */
+/*         } */
 
-        @media (max-width: 608px) and (min-width: 500px) {
-            .privacy-policy-modal {
-                height: 220px;
-            }
-        }
+/*         @media (max-width: 608px) and (min-width: 500px) { */
+/*             .privacy-policy-modal { */
+/*                 height: 220px; */
+/*             } */
+/*         } */
     }
 </style>
 
 <div class="privacy-policy-modal show-policy">
+   <div class="privacy-policy"> 
     <div class="privacy-policy-text">
-
         <ilion:arquivoCategoriaLista categoria="documentos" order="posicao" layout="lateral" varRetorno="art"/>
-
         <c:forEach items="${art}" var="arq">
-
             <c:if test="${arq.title == \"Política de privacidade\"}">
                 <c:set var="arqPolitica" value="${arq.url}"/>
             </c:if>
-
         </c:forEach>
-
-        <h4>Aviso de Cookies</h4>
-        <p>
-            Nós usamos cookies e outras tecnologias semelhantes para melhorar a sua experiência em nossos serviços, personalizar publicidade e recomendar conteúdo de seu interesse. Ao utilizar nossos serviços, você concorda com tal monitoramento descrito em nossa <a href="${arqPolitica}" target="_blank">Política de Privacidade</a>
-        </p>
+         <span class="privacy-policy-text-span">Nós usamos cookies e outras tecnologias semelhantes para melhorar a sua experiência em nossos serviços, personalizar publicidade e recomendar conteúdo de seu interesse. Ao utilizar nossos serviços, você concorda com tal monitoramento descrito em nossa <a href="${arqPolitica}" target="_blank">Política de Privacidade</a></span>
     </div>
-    <button class="btn btn-lg btn-primary" onclick="closePolicy()">Entendi</button>
+    <div style="padding: 16px 16px 16px 0;">
+      <button class="btn privacy-policy-button btn-primary" onclick="closePolicy()">Prossegir</button>
+    </div>
+    </div>
 </div>
 
 <script>
@@ -156,7 +183,7 @@
 
                         <p>Faça sua consulta pelo celular, tablet ou computador, a qualquer hora com privacidade e segurança garantidas.</p>
 
-                        <form ng-submit="consultarProfissional()"  class="form-highlight">
+                        <form ng-submit="consultarProfissionalExterna()"  class="form-highlight">
                           <input id="cidade" style="display: contents;">
                             <select ng-model="tipoProfissional">
                                 <option value="">Tipo de profissional</option>

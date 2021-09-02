@@ -15,7 +15,7 @@
                 <div class="row">
                     <div class="col-12 col-md-7 col-xl-7 text-center">
                         <div class="checkout">
-                            <h3>Agendamento Concluido com Sucesso</h3>
+                            <h3>Seu agendamento foi concluído com sucesso!</h3>
                             <p>Por favor, aguarde a confirmação do agendamendo pelo profissional selecionado.</p>
                         </div>
                     </div>

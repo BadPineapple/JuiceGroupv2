@@ -185,7 +185,7 @@ public class AgendaNegocio {
 		}
 		dc.add(Restrictions.eq("status", StatusEnum.CONFIRMADO));
 		dc.add(Restrictions.eq("online", Boolean.TRUE));
-		dc.add( Restrictions.between("dataHoraAgendamento", Uteis.inicioDia(new Date()) , Uteis.highDateTime(new Date())));
+		dc.add( Restrictions.between("dataHoraAgendamento", Uteis.inicioDia(new Date()) , Uteis.fimDia(new Date())));
 		dc.addOrder(Order.asc("dataHoraAgendamento"));
 		listAgendas = (List<Agenda>) hibernateUtil.list(dc);
 		return listAgendas;
@@ -196,4 +196,15 @@ public class AgendaNegocio {
 		dc.add(Restrictions.eq("id", idAgenda));
 		return (Agenda) hibernateUtil.consultarUniqueResult(dc);
 	}
+	
+	@Transactional
+	public Agenda avaliarAtendimento(Agenda agenda){
+		StringBuilder sql = new StringBuilder();
+		sql.append(" update agenda set avaliacaoAtendimentoObservacao = '").append(agenda.getAvaliacaoAtendimentoObservacao()).append("',avaliacaoAtendimentoNota =").append(agenda.getAvaliacaoAtendimentoNota());
+		sql.append(" where id = ").append(agenda.getId());
+		Integer codigoAgenda = hibernateUtil.updateSQL(sql.toString());
+		agenda = consultarAgendaId(Long.parseLong(codigoAgenda.toString()));
+		return agenda;
+	}
+	
 }

@@ -45,8 +45,8 @@ function submit($scope, $http, $window , $timeout) {
 		
 		$http.post("/rest/contato-registrar", $scope.contato)
         .then(function (response) {
-            alert_success(response.data.message, () => {
-	            'Obrigado pelo seu contato.'
+            alert_success('Sua mensagem foi encaminhada,em breve retornaremos.', () => {
+				$window.location.href = "/entreContato";
 			});
         }).catch(function (response) {
         alert_error(response.data.message);

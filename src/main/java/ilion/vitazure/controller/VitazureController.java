@@ -33,6 +33,7 @@ import ilion.admin.negocio.Usuario;
 import ilion.me.pagar.exception.PagarMeException;
 import ilion.me.pagar.model.PagarMe;
 import ilion.me.pagar.model.Transaction;
+import ilion.util.Uteis;
 import ilion.util.VLHForm;
 import ilion.util.ValueListInfo;
 import ilion.util.contexto.autorizacao.PessoaLogada;
@@ -316,21 +317,21 @@ public class VitazureController {
 	  
 	  @PostMapping(value = "/vitazure/finalizarAtendimento", produces = "application/json")
 	  @ResponseBody
-	  public String finalizarAtendimento(ModelMap modelMap,HttpServletRequest request,	@RequestBody Long  id) throws NumberFormatException, JSONException {
+	  public ResponseEntity<String> finalizarAtendimento(ModelMap modelMap,HttpServletRequest request,	@RequestBody Long  id) throws NumberFormatException, JSONException {
 			 Pessoa PessoaSessao = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
 			 try {
 				   Agenda agendaConcluida = agendaNegocio.alterarAgenda(id, StatusEnum.CONCLUIDO.toString());
 				 
 					if (PessoaSessao.getCliente()) {
 				        request.getSession().setAttribute("agendaConcluida", agendaConcluida);
-				        return avaliacaoAtendimento(modelMap, request);
+				        return new ResponseEntity<>(gson.toJson("/vitazure/avaliacaoAtendimento"), HttpStatus.OK);
 					}
-					return listaConsulta(modelMap, request);
+					return new ResponseEntity<>(gson.toJson("/vitazure/lista-de-consultas"), HttpStatus.OK);
 				} catch (ValidationException e) {
 					e.printStackTrace();
-					return listaConsulta(modelMap, request);
+					return new ResponseEntity<>(gson.toJson("/vitazure/lista-de-consultas"), HttpStatus.BAD_REQUEST);
 				}
-			}
+		}
 	  
 	    @RequestMapping("/vitazure/avaliacaoAtendimento")
 		public String avaliacaoAtendimento(ModelMap modelMap, HttpServletRequest request) {
@@ -349,4 +350,37 @@ public class VitazureController {
 			return "/ilionnet2/vitazure/avaliacaoAtendimento";
 			
 		}
+	    
+	    @GetMapping("/consulta/{id}")
+		public String teste(HttpServletRequest request , @PathVariable Long id) {
+		 Agenda agenda = new Agenda();
+		 agenda = agendaNegocio.consultarAgendaId(id);
+		 request.getSession().setAttribute("agenda", agenda);
+		 return "redirect:/vitazure/consulta";
+		}
+	
+		 @RequestMapping("/vitazure/consulta")
+		 public String testeOpa(ModelMap modelMap,HttpServletRequest request) {
+			 Pessoa PessoaSessao = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
+			 Agenda agenda = (Agenda) request.getSession().getAttribute("agenda");
+			 Profissional profissional = profissionalNegocio.consultarPorId(agenda.getProfissional().getId());
+			 String horaFimAtendimento = Uteis.calculodeHoraSemIntervalo(agenda.getHoraInicioAgenda(), 1, (Integer.parseInt(profissional.getDuracaoAtendimento().getNome())));
+			 request.setAttribute("horaFimAtendimento", horaFimAtendimento);
+			 modelMap.addAttribute("pessoa", PessoaSessao);
+			 request.setAttribute("agenda", agenda);
+			 return "/ilionnet2/vitazure/whereby";
+		 }
+	    
+		 @PostMapping(value = "/vitazure/finalizarAvaliacaoAtendimento", produces = "application/json")
+		 @ResponseBody
+		 public ResponseEntity<String> avaliacaoAtendimento(ModelMap modelMap,HttpServletRequest request, @RequestBody Agenda  agenda) throws NumberFormatException, JSONException {
+				 Pessoa PessoaSessao = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
+				 try {
+					   Agenda agendaAvaliada = agendaNegocio.avaliarAtendimento(agenda);
+					   return new ResponseEntity<>(gson.toJson("Agradecemos a sua Avaliação."), HttpStatus.OK);
+					} catch (ValidationException e) {
+						e.printStackTrace();
+						return new ResponseEntity<>(gson.toJson("Aconteceu um erro ao avaliar seu atendimento."), HttpStatus.BAD_REQUEST);
+					}
+			}
 }

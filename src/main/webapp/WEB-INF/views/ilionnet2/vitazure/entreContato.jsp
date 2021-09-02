@@ -53,8 +53,8 @@
 
                                 <div class="col-12">
                                     <div class="input-block">
-                                        <label>Telefone</label>
-                                        <input type="text" ng-model="contato.telefone" data-mask="(00)0000-0000" placeholder="(00) 0000-0000" required />
+                                        <label>Celular</label>
+                                        <input type="text" ng-model="contato.telefone" data-mask="(00)00000-0000" placeholder="(00) 0000-0000" required />
                                     </div>
                                 </div>
 

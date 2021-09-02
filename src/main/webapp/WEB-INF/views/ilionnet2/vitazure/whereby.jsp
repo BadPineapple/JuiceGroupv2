@@ -10,18 +10,16 @@
     .entrar-consulta {
       display: none;
     }
-
     .dados-atualizados {
       display: none;
     }
-
   </style>
   <script src="../assets/js/vitazure/moment.js"></script>
 </head>
 <body id="index" class="home"  ng-init="atualizarCronometro();agenda.id='${agenda.id}'">
 <div id="app">
   <jsp:include page="includes/include-header-internas.jsp" flush="true" />
-  <jsp:include page="includes/include-menu-painel.jsp" flush="true" />
+        <jsp:include page="includes/include-menu-painel.jsp" flush="true" />
   <div class="area-white">
     <div class="container">
         <div class="col-12 col-md-12 col-xl-12" style="display: flex;">
@@ -29,12 +27,12 @@
    		  <input type="text" value="${agenda.horaInicioAgenda}" id="horaInicio" style="display: contents;"/>
    		  <input type="text" value="${agenda.id}" id="id" style="display: contents;"/>
    		  <i class="fas fa-stopwatch" style="font-size: 24px;padding-right: 6px;"></i>
-   		  <p style="padding-right: 6px;">Tempo restante para esta reunião:</p>
+   		  <p style="padding-right: 6px;">Tempo restante para esta consulta:</p>
    		  <p id="spanRelogio"></p>
         </div>
       <div class="row">
         <div class="col-12">
-          <iframe src="${agenda.urlAtendimentoOnline}" allow="" style="width: 100%; height: 600px; margin: 0 auto; left: 20px"></iframe> 
+          <iframe src="${agenda.urlAtendimentoOnline}" allow="camera; microphone;" style="width: 100%; height: 600px; margin: 0 auto; left: 20px"></iframe> 
         </div>
       </div>
     </div>

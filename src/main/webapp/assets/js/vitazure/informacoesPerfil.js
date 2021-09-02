@@ -481,7 +481,7 @@ function validarCampos(diaSemana,horaInicio,horaFim, atendimentoOnline , enderec
 	}else if((enderecoSemanaHorario == 'undefined' && atendimentoPresencial == true ) || (enderecoSemanaHorario == null && atendimentoPresencial == true ) || (enderecoSemanaHorario == '' && atendimentoPresencial == true )){
 		alert_error("Informar Endereço Atendimento");
 		return false;
-	}else if((atendimentoOnline == 'undefined' && atendimentoPresencial == 'undefined') || (atendimentoOnline == null && atendimentoPresencial == null) || (atendimentoOnline == false && atendimentoPresencial  == false)){
+	}else if((atendimentoOnline == 'undefined' && atendimentoPresencial == 'undefined') || (atendimentoOnline == null && atendimentoPresencial == null) || (atendimentoOnline == 'false' && atendimentoPresencial  == 'false')){
 		alert_error("Informar Tipo Atendimento Online ou Presencial");
 		return false;
 	}

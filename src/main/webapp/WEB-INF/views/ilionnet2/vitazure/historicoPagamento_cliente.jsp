@@ -18,7 +18,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12 text-center">
-                        <h3 style="padding-bottom: 52px;">Historico Pagamento</h3>
+                        <h3 style="padding-bottom: 52px;">Histórico Pagamento</h3>
                     </div>
 <!--                     <div class="col-12 col-xl-4"> -->
 <!--                         <div class="search"> -->
