@@ -71,6 +71,8 @@
                                         <td style="text-align: center;">
                                           <c:if test="${agenda.status == 'PENDENTE'}">
 	                                           <button  class="btn btn-success" ng-click="definirAgendamento('${agenda.id}' , 'CONFIRMADO')">Confirmar</button>
+	                                      </c:if>
+	                                      <c:if test="${agenda.status == 'PENDENTE' || agenda.status == 'CONFIRMADO'}">
 	                                           <button  class="btn btn-danger" ng-click="definirAgendamento('${agenda.id}' , 'REMARCADO')">Remarcar</button>
 	                                      </c:if>     
 <%--                                            <c:if test="${agenda.online && agenda.status == 'CONFIRMADO'}"> --%>

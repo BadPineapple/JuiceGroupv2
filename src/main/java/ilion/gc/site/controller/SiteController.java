@@ -1,16 +1,19 @@
 package ilion.gc.site.controller;
 
 import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.ValidationException;
 
+import ilion.vitazure.controller.ProfissionalControlle;
 import ilion.vitazure.enumeradores.EspecialidadesEnum;
 import ilion.vitazure.enumeradores.EstadoEnum;
 import ilion.vitazure.enumeradores.TipoProfissionalEnum;
@@ -33,6 +36,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import com.google.gson.Gson;
 
 import ilion.CustomErrorController;
 import ilion.admin.negocio.PropEnum;
@@ -72,6 +77,9 @@ public class SiteController extends CustomErrorController {
 	private ProfissionalNegocio profissionalNegocio;
 	
 	@Autowired
+	private ProfissionalControlle profissionalControlle;
+
+	@Autowired
 	private HorarioAtendimentoNegocio horarioNegocio;
 
 	@Autowired
@@ -89,6 +97,7 @@ public class SiteController extends CustomErrorController {
 	@Autowired
 	private EnderecoNegocio enderecoNegocio;
 	
+	private Gson gson = new Gson();
 	
 	
 	@GetMapping(value = { "/",})
@@ -468,4 +477,26 @@ public class SiteController extends CustomErrorController {
 			return "/ilionnet2/vitazure/resultado-busca_aberta";
 		}
 	 
+		@RequestMapping("/vitazure/consultarDatasProfissional/{data}/{profissional}")
+		public ResponseEntity<String> consultaHorarioAtendimento(@PathVariable String data,@PathVariable Long profissional) {
+			try {
+				SimpleDateFormat sdf = new SimpleDateFormat("EE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
+				Date date = sdf.parse(data);
+				Profissional prof = profissionalNegocio.consultarPorId(profissional);
+				List<HorarioPossivelAtendimento> listHorarioPossivelAtendimento = profissionalControlle.maisTeste(prof, false, false, date);
+				return new ResponseEntity<>(gson.toJson(listHorarioPossivelAtendimento), HttpStatus.OK);
+			} catch (Exception e) {
+				return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			}
+
+		}
+
+	 
+	 
+	 @GetMapping("/teste")
+	 public String testeHtml(HttpServletRequest request) {
+		 Agenda agenda = agendaNegocio.consultarAgendaId(39L);
+		 request.setAttribute("agenda", agenda);
+		 return "/ilionnet2/vitazure/htmlTeste"; 
+	 }
 }

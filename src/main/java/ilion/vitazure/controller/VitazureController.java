@@ -317,7 +317,7 @@ public class VitazureController {
 	  
 	  @PostMapping(value = "/vitazure/finalizarAtendimento", produces = "application/json")
 	  @ResponseBody
-	  public ResponseEntity<String> finalizarAtendimento(ModelMap modelMap,HttpServletRequest request,	@RequestBody Long  id) throws NumberFormatException, JSONException {
+	  public ResponseEntity<String> finalizarAtendimento(ModelMap modelMap,HttpServletRequest request,	@RequestBody Long  id){
 			 Pessoa PessoaSessao = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
 			 try {
 				   Agenda agendaConcluida = agendaNegocio.alterarAgenda(id, StatusEnum.CONCLUIDO.toString());
@@ -329,6 +329,8 @@ public class VitazureController {
 					return new ResponseEntity<>(gson.toJson("/vitazure/lista-de-consultas"), HttpStatus.OK);
 				} catch (ValidationException e) {
 					e.printStackTrace();
+					return new ResponseEntity<>(gson.toJson("/vitazure/lista-de-consultas"), HttpStatus.BAD_REQUEST);
+				} catch (Exception e) {
 					return new ResponseEntity<>(gson.toJson("/vitazure/lista-de-consultas"), HttpStatus.BAD_REQUEST);
 				}
 		}
@@ -352,15 +354,17 @@ public class VitazureController {
 		}
 	    
 	    @GetMapping("/consulta/{id}")
-		public String teste(HttpServletRequest request , @PathVariable Long id) {
-		 Agenda agenda = new Agenda();
+		public String consultaAgendaId(ModelMap modelMap,HttpServletRequest request , @PathVariable Long id) {
+	     Pessoa PessoaSessao = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
+	     Agenda agenda = new Agenda();
 		 agenda = agendaNegocio.consultarAgendaId(id);
 		 request.getSession().setAttribute("agenda", agenda);
+		 modelMap.addAttribute("pessoa", PessoaSessao);
 		 return "redirect:/vitazure/consulta";
 		}
 	
 		 @RequestMapping("/vitazure/consulta")
-		 public String testeOpa(ModelMap modelMap,HttpServletRequest request) {
+		 public String apresentarDadosConsulta(ModelMap modelMap,HttpServletRequest request) {
 			 Pessoa PessoaSessao = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
 			 Agenda agenda = (Agenda) request.getSession().getAttribute("agenda");
 			 Profissional profissional = profissionalNegocio.consultarPorId(agenda.getProfissional().getId());

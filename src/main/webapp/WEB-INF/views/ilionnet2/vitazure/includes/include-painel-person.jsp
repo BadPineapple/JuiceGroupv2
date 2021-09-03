@@ -78,7 +78,7 @@ class Agenda{
             for (var i = 0; i < agendas.length; i++) {
             	if (displayDate.substr(0, 5) >= agendas[i].horaLiberar &&  displayDate.substr(0, 5) < agendas[i].horaBloquear) {
             		document.getElementById("linkAcesso").className = "button-secundary";
-            		document.getElementById("linkAcesso").href = "https://vitazure.com.br/consulta/"+agendas[i].id;
+            		document.getElementById("linkAcesso").href = "<ilion:url/>consulta/"+agendas[i].id;
 				}
             }
     };

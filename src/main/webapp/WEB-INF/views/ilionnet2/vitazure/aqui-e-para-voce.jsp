@@ -17,20 +17,16 @@
                     <div class="col-12 col-xl-9">
                         <h1 class="title-gray">Fale com seu<br/> Psicólogo de<br/> forma segura e de<br/> qualquer lugar.</h1>
                         <p>Busque por profissional ou especialidade.</p>
-                        <form ng-submit="consultarProfissional()"  class="form-highlight">
+                        <form ng-submit="consultarProfissionalExterna()"  class="form-highlight">
                             <select ng-model="tipoProfissional">
                                 <option value="">Tipo de profissional</option>
                                 <c:forEach var="tipoProfissional" items="${tiposProfissional}">
                                     <option ng-if="${tipoProfissional == 'PSICOLOGO'}" value="${tipoProfissional}">${tipoProfissional.valor}</option>
                                 </c:forEach>
-                                <%--<option value="medico">Médico</option>--%>
-                                <%--<option value="psiquiatra">Psiquiatra</option>--%>
                             </select>
 
                             <select ng-model="especialista">
                                 <option value="">Especialidade</option>
-                                <%--<option value="psicologico">Psicológico</option>--%>
-                                <%--<option value="psicanalise">Psicanálise</option>--%>
                                 <c:forEach items="${especialidades}" var="especialidade">
                                     <option ng-if="tipoProfissional == 'PSICOLOGO' && ${especialidade.tipoProfissional == 'PSICOLOGO'}" value="${especialidade.valor}">${especialidade.valor}</option>
                                 </c:forEach>

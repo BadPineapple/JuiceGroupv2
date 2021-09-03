@@ -221,7 +221,7 @@ public class ProfissionalControlle {
 
 	}
 
-	private List<HorarioPossivelAtendimento> maisTeste(Profissional profissional, Boolean atendimentoOnline,
+	public List<HorarioPossivelAtendimento> maisTeste(Profissional profissional, Boolean atendimentoOnline,
 			Boolean atendimentoPresencial, Date dataConsulta) {
 		List<HorarioAtendimento> listaHorarioatendimento = new ArrayList<HorarioAtendimento>();
 		listaHorarioatendimento.addAll(horarioNegocio.consultarHorariosAtendimentoPorProfissional(profissional.getId(),
@@ -324,8 +324,7 @@ public class ProfissionalControlle {
 			Long idAgenda = Long.parseLong(jsonRetornoToken.get("idAgenda").toString());
 			String situacaoAlterar = jsonRetornoToken.get("situacaoAlterar").toString();
 			agendaNegocio.alterarAgenda(idAgenda, situacaoAlterar);
-			return new ResponseEntity<>(new JsonString("Agenda " + situacaoAlterar.toLowerCase() + " com Sucesso!"),
-					HttpStatus.OK);
+			return new ResponseEntity<>(new JsonString("Agenda " + situacaoAlterar.toLowerCase() + " com Sucesso!"),HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<>(new JsonString(e.getMessage()), HttpStatus.BAD_REQUEST);

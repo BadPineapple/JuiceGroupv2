@@ -114,12 +114,13 @@ public class AgendaNegocio {
 	}
 	
 	@Transactional
-	public Agenda alterarAgenda(Long idAgenda , String situacao){
+	public Agenda alterarAgenda(Long idAgenda , String situacao) throws Exception{
 		DetachedCriteria dc = DetachedCriteria.forClass(Agenda.class);
 		dc.add(Restrictions.eq("id", idAgenda));
 		Agenda agenda = (Agenda) hibernateUtil.consultarUniqueResult(dc);
 		agenda.setStatus(StatusEnum.valueOf(situacao));
 		hibernateUtil.update(agenda);
+		envioEmailConsulta.enviarEmailAlteracaoSituacaoAgenda(agenda);
 		return agenda;
 	}
 	

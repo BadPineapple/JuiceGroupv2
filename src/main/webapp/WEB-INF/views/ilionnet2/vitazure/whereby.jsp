@@ -32,7 +32,7 @@
         </div>
       <div class="row">
         <div class="col-12">
-          <iframe src="${agenda.urlAtendimentoOnline}" allow="camera; microphone;" style="width: 100%; height: 600px; margin: 0 auto; left: 20px"></iframe> 
+          <iframe src="${pessoa.cliente ? agenda.urlAtendimentoOnline : agenda.hostUrlAtendimentoOnline}" allow="camera; microphone;" style="width: 100%; height: 600px; margin: 0 auto; left: 20px"></iframe> 
         </div>
       </div>
     </div>
