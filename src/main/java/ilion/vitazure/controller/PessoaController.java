@@ -1,6 +1,7 @@
 package ilion.vitazure.controller;
 
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -58,6 +59,8 @@ public class PessoaController {
 	    	  }else if(pessoa.getFoto() == null || pessoa.getFoto().getId().equals("")) {
 						pessoa.setFoto(null);
 					}
+
+			  pessoa.setEmail(pessoa.getEmail().toLowerCase(Locale.ROOT));
 
 	    	  if (!Uteis.ehEmailValido(pessoa.getEmail())) {
 	    	  	return new ResponseEntity<>(new JsonString("E-mail informado inválido."), HttpStatus.BAD_REQUEST);

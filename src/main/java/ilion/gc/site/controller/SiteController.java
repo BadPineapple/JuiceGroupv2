@@ -1,16 +1,14 @@
 package ilion.gc.site.controller;
 
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.ValidationException;
 
+import ilion.vitazure.controller.ProfissionalControlle;
 import ilion.vitazure.enumeradores.EspecialidadesEnum;
 import ilion.vitazure.enumeradores.EstadoEnum;
 import ilion.vitazure.enumeradores.TipoProfissionalEnum;
@@ -50,6 +48,8 @@ import ilion.vitazure.negocio.ProfissionalNegocio;
 import ilion.vitazure.negocio.ProfissionalVH;
 import ilion.vitazure.negocio.TemaAtendimentoNegocio;
 
+import com.google.gson.Gson;
+
 @Controller
 @AcessoLivre
 public class SiteController extends CustomErrorController {
@@ -70,7 +70,10 @@ public class SiteController extends CustomErrorController {
 	
 	@Autowired
 	private ProfissionalNegocio profissionalNegocio;
-	
+
+	@Autowired
+	private ProfissionalControlle profissionalControlle;
+
 	@Autowired
 	private HorarioAtendimentoNegocio horarioNegocio;
 
@@ -88,6 +91,8 @@ public class SiteController extends CustomErrorController {
 	
 	@Autowired
 	private EnderecoNegocio enderecoNegocio;
+
+	private Gson gson = new Gson();
 	
 	
 	
@@ -436,7 +441,7 @@ public class SiteController extends CustomErrorController {
    		  return profissional;
    	  
      }
-	 
+
 	 @GetMapping("/resultado-de-busca-externa/{especialista}")
 		public String buscaProfissional(HttpServletRequest request, @PathVariable String especialista) {
 			Pessoa PessoaSessao = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
@@ -467,5 +472,24 @@ public class SiteController extends CustomErrorController {
 			request.setAttribute("estados", EstadoEnum.values());
 			return "/ilionnet2/vitazure/resultado-busca_aberta";
 		}
+
+	@RequestMapping("/vitazure/consultarDatasProfissional/{data}/{profissional}")
+	public ResponseEntity<String> consultaHorarioAtendimento(@PathVariable String data,
+															 @PathVariable Long profissional) {
+		try {
+
+			SimpleDateFormat sdf = new SimpleDateFormat("EE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
+
+			Date date = sdf.parse(data);
+
+			Profissional prof = profissionalNegocio.consultarPorId(profissional);
+
+			List<HorarioPossivelAtendimento> listHorarioPossivelAtendimento = profissionalControlle.maisTeste(prof, false, false, date);
+
+			return new ResponseEntity<>(gson.toJson(listHorarioPossivelAtendimento), HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+	}
 	 
 }

@@ -221,7 +221,7 @@ public class ProfissionalControlle {
 
 	}
 
-	private List<HorarioPossivelAtendimento> maisTeste(Profissional profissional, Boolean atendimentoOnline,
+	public List<HorarioPossivelAtendimento> maisTeste(Profissional profissional, Boolean atendimentoOnline,
 			Boolean atendimentoPresencial, Date dataConsulta) {
 		List<HorarioAtendimento> listaHorarioatendimento = new ArrayList<HorarioAtendimento>();
 		listaHorarioatendimento.addAll(horarioNegocio.consultarHorariosAtendimentoPorProfissional(profissional.getId(),
@@ -279,25 +279,6 @@ public class ProfissionalControlle {
 				});
 
 		return listHorarioPossivelAtendimento;
-	}
-
-	@RequestMapping("/vitazure/consultarDatasProfissional/{data}/{profissional}")
-	public ResponseEntity<String> consultaHorarioAtendimento(@PathVariable String data,
-			@PathVariable Long profissional) {
-		try {
-
-			SimpleDateFormat sdf = new SimpleDateFormat("EE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
-
-			Date date = sdf.parse(data);
-
-			Profissional prof = profissionalNegocio.consultarPorId(profissional);
-
-			List<HorarioPossivelAtendimento> listHorarioPossivelAtendimento = maisTeste(prof, false, false, date);
-
-			return new ResponseEntity<>(gson.toJson(listHorarioPossivelAtendimento), HttpStatus.OK);
-		} catch (Exception e) {
-			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-		}
 	}
 
 	@PostMapping(value = "/vitazure/agendar", produces = "application/json")

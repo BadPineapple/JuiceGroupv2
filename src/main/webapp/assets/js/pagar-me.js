@@ -38,6 +38,7 @@ function chamada (valor, item, id) {
             checkout.open({
                 paymentButtonText: 'Finalizar',
 				amount: valorTotal,
+                headerText: 'Total a pagar <span style="font-size: 1.6rem !important; color: #0097D6; font-weight: bold">{price_info}</span>',
 				maxInstallments: 1,
 				defaultInstallment: 1,
 				customerData: 'true',
