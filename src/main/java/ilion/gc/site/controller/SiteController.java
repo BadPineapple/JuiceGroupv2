@@ -11,17 +11,6 @@ import java.util.Locale;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.ValidationException;
-
-import ilion.vitazure.controller.ProfissionalControlle;
-import ilion.vitazure.enumeradores.EspecialidadesEnum;
-import ilion.vitazure.enumeradores.EstadoEnum;
-import ilion.vitazure.enumeradores.TipoProfissionalEnum;
-import ilion.vitazure.model.*;
-import ilion.vitazure.negocio.AgendaNegocio;
-import ilion.vitazure.negocio.EnderecoNegocio;
-import ilion.vitazure.negocio.EspecialidadeNegocio;
-import ilion.vitazure.negocio.FormacaoAcademicaNegocio;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,29 +19,40 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.google.gson.Gson;
 
 import ilion.CustomErrorController;
 import ilion.admin.negocio.PropEnum;
 import ilion.admin.negocio.PropNegocio;
-import ilion.arquivo.negocio.Arquivo;
 import ilion.arquivo.negocio.ArquivoNegocio;
 import ilion.gc.negocio.Artigo;
 import ilion.gc.negocio.ArtigoSiteNegocio;
 import ilion.gc.taglibs.ArtigoParamsVO;
 import ilion.util.Uteis;
 import ilion.util.contexto.autorizacao.AcessoLivre;
+import ilion.vitazure.controller.ProfissionalControlle;
+import ilion.vitazure.enumeradores.EspecialidadesEnum;
+import ilion.vitazure.enumeradores.EstadoEnum;
+import ilion.vitazure.enumeradores.TipoProfissionalEnum;
+import ilion.vitazure.model.Agenda;
+import ilion.vitazure.model.EnderecoAtendimento;
+import ilion.vitazure.model.Especialidade;
+import ilion.vitazure.model.FormacaoAcademica;
+import ilion.vitazure.model.HorarioAtendimento;
+import ilion.vitazure.model.HorarioPossivelAtendimento;
+import ilion.vitazure.model.Pessoa;
+import ilion.vitazure.model.PostBlog;
+import ilion.vitazure.model.Profissional;
+import ilion.vitazure.model.TemaTrabalho;
+import ilion.vitazure.negocio.AgendaNegocio;
+import ilion.vitazure.negocio.EnderecoNegocio;
+import ilion.vitazure.negocio.EspecialidadeNegocio;
+import ilion.vitazure.negocio.FormacaoAcademicaNegocio;
 import ilion.vitazure.negocio.HorarioAtendimentoNegocio;
 import ilion.vitazure.negocio.PessoaNegocio;
 import ilion.vitazure.negocio.ProfissionalNegocio;
-import ilion.vitazure.negocio.ProfissionalVH;
 import ilion.vitazure.negocio.TemaAtendimentoNegocio;
 
 @Controller
@@ -75,7 +75,7 @@ public class SiteController extends CustomErrorController {
 	
 	@Autowired
 	private ProfissionalNegocio profissionalNegocio;
-	
+
 	@Autowired
 	private ProfissionalControlle profissionalControlle;
 
@@ -96,7 +96,7 @@ public class SiteController extends CustomErrorController {
 	
 	@Autowired
 	private EnderecoNegocio enderecoNegocio;
-	
+
 	private Gson gson = new Gson();
 	
 	
@@ -445,7 +445,7 @@ public class SiteController extends CustomErrorController {
    		  return profissional;
    	  
      }
-	 
+
 	 @GetMapping("/resultado-de-busca-externa/{especialista}")
 		public String buscaProfissional(HttpServletRequest request, @PathVariable String especialista) {
 			Pessoa PessoaSessao = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
@@ -490,8 +490,6 @@ public class SiteController extends CustomErrorController {
 			}
 
 		}
-
-	 
 	 
 	 @GetMapping("/teste")
 	 public String testeHtml(HttpServletRequest request) {

@@ -234,7 +234,16 @@ public class Agenda {
 		public String getHoraInicioAgenda() {
 			return Uteis.formatDataLocateBrasil(getDataHoraAgendamento(), "HH:mm");
 		}
-
+		
+		public String getHoraAgendaEmail() {
+			String campoFormatado = Uteis.formatDataLocateBrasil(getDataHoraAgendamento(), "HH- mm");
+			campoFormatado = campoFormatado.replaceAll("-", "h");
+			return campoFormatado;
+		}
+		public String getDataAgendaEmail() {
+			return Uteis.formatDataLocateBrasil(getDataHoraAgendamento(), "dd/MM/YYYY");
+		}
+		
 		public Integer getAvaliacaoAtendimentoNota() {
 			return avaliacaoAtendimentoNota;
 		}

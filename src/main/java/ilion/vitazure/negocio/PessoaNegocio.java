@@ -1,6 +1,8 @@
 package ilion.vitazure.negocio;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.Locale;
 
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Disjunction;
@@ -83,7 +85,7 @@ public class PessoaNegocio {
 			throw new ValidacaoException("Senha deve ser preenchida.");
 		}
 
-		Pessoa pessoaVO = consultarPorEmail(pessoa.getEmail());
+		Pessoa pessoaVO = consultarPorEmail(pessoa.getEmail().toLowerCase(Locale.ROOT));
 		
 		if (pessoaVO == null) {
 			throw new ValidacaoException("Usuario não Encontrado.");
@@ -240,6 +242,9 @@ public void emailAtivacao(Pessoa pessoaVO) throws Exception {
 		String url = urlProp+"/ilionnet/templateConfirmacao?id="+pessoaVO.getId();
 		String assunto = "Ativação - "+nomeEmpresaProp;
 		String html = Uteis.getHtml(url);
+
+		html = new String(html.getBytes(StandardCharsets.ISO_8859_1));
+
 		Email e = new Email();
 		e.setToEmail(pessoaVO.getEmail());
 		e.setToName(pessoaVO.getNome());

@@ -38,7 +38,7 @@
                                     <tr>
                                         <td style="text-align: center;">id</td>
                                         <td style="text-align: center;">Agenda</td>
-                                        <td style="text-align: center;">Data Transação</td>
+                                        <td style="text-align: center;">Data Consulta</td>
                                         <td style="text-align: center;">Profissional</td>
                                         <td style="text-align: center;">Valor Pago</td>
                                         <td style="text-align: center;">Status</td>
@@ -50,7 +50,7 @@
                                     <tr>
                                         <td style="text-align: center;">${pagamento.id}</td>
                                         <td style="text-align: center;">${pagamento.agenda}</td>
-                                        <td style="text-align: center;">${pagamento.dataFormatada}</td>
+                                        <td style="text-align: center;">${pagamento.dataAgenda}</td>
                                         <td style="text-align: center;">${pagamento.profissional}</td>
                                         <td style="text-align: center;">${pagamento.valorPago}</td>
                                         <td style="text-align: center;">${pagamento.status}</div>

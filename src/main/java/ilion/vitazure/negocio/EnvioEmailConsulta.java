@@ -36,12 +36,10 @@ public class EnvioEmailConsulta {
 		StringBuffer htmlEmail = new StringBuffer();
 		if(agenda.getStatus().equals(StatusEnum.CONFIRMADO)) {
 			htmlEmail.append(emailPadrao(corpoHtmlEmailConfirmacao()));
-			enviarEmailAlteracaoSituacaoAgendaProfissional(agenda, htmlEmail.toString().replaceAll("#nome#", agenda.getPaciente().getNome()), "Confirmação atendimento");
+			enviarEmailAlteracaoSituacaoAgendaProfissional(agenda, htmlEmail.toString().replaceAll("#nome#", agenda.getPaciente().getNome()).replaceAll("#dataAgendaEmail#", agenda.getDataAgendaEmail()).replaceAll("#profissionalAtendimento#", agenda.getProfissional().getPessoa().getNome()).replaceAll("#horaAgendaEmail#", agenda.getHoraAgendaEmail()), "Confirmação atendimento");
 		}else if(agenda.getStatus().equals(StatusEnum.REMARCADO)) {
 			
 		}else if(agenda.getStatus().equals(StatusEnum.CANCELADO)) {
-			
-		}else if(agenda.getStatus().equals(StatusEnum.CONCLUIDO)) {
 			
 		}
 		
@@ -83,7 +81,40 @@ public class EnvioEmailConsulta {
 	
 	private  String corpoHtmlEmailConfirmacao() {
 		StringBuffer corpoHtmlEmail = new StringBuffer();
-		
+		corpoHtmlEmail.append("	<div class=\"col-12\" style=\"padding-top: 45px;\">");
+		corpoHtmlEmail.append("	<p>Seu agendamento foi confirmado com sucesso!</p>");
+		corpoHtmlEmail.append("<table width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\">");
+		corpoHtmlEmail.append("			  <tr>");
+		corpoHtmlEmail.append("			    <td valign=\"top\" bgcolor=\"#F3F3F3\">");
+		corpoHtmlEmail.append("				  <table width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"3\" cellspacing=\"5\" bgcolor=\"#F3F3F3\">");
+		corpoHtmlEmail.append("				        <tr> ");
+		corpoHtmlEmail.append("				          <td><table width=\"100%\" border=\"0\" cellpadding=\"3\" cellspacing=\"0\" bgcolor=\"#FFFFFF\">");
+		corpoHtmlEmail.append("				              <tr> ");
+		corpoHtmlEmail.append("				                <td colspan=\"2\" align=\"right\">&nbsp;</td>");
+		corpoHtmlEmail.append("				              </tr>");
+		corpoHtmlEmail.append("				              <tr> ");
+		corpoHtmlEmail.append("				                <td width=\"90\"><strong><font size=\"2\" face=\"Arial, Helvetica, sans-serif\" style=\"color: #1895d4;\">Data:</font></strong></td>");
+		corpoHtmlEmail.append("				                <td><font size=\"2\" face=\"Arial, Helvetica, sans-serif\">#dataAgendaEmail#</font></td>");
+		corpoHtmlEmail.append("				              </tr>");
+		corpoHtmlEmail.append("				              <tr> ");
+		corpoHtmlEmail.append("				                <td width=\"90\"><strong><font size=\"2\" face=\"Arial, Helvetica, sans-serif\" style=\"color: #1895d4;\">Horário:</font></strong></td>");
+		corpoHtmlEmail.append("				                <td><font size=\"2\" face=\"Arial, Helvetica, sans-serif\">#horaAgendaEmail#</font></td>");
+		corpoHtmlEmail.append("				              </tr>");
+		corpoHtmlEmail.append("				              <tr> ");
+		corpoHtmlEmail.append("				                <td width=\"90\"><strong style=\"margin-right: 3px;\"><font size=\"2\" face=\"Arial, Helvetica, sans-serif\" style=\"color: #1895d4;\">Profissional:</font></strong></td>");
+		corpoHtmlEmail.append("				                <td><font size=\"2\" face=\"Arial, Helvetica, sans-serif\">#profissionalAtendimento#</font></td>");
+		corpoHtmlEmail.append("				              </tr>");
+		corpoHtmlEmail.append("				              <tr> ");
+		corpoHtmlEmail.append("				                <td colspan=\"2\" align=\"right\">&nbsp;</td>");
+		corpoHtmlEmail.append("				              </tr>");
+		corpoHtmlEmail.append("						</table>");
+		corpoHtmlEmail.append("						</td>");
+		corpoHtmlEmail.append("						</tr>");
+		corpoHtmlEmail.append("					</table>");
+		corpoHtmlEmail.append("			    </td>");
+		corpoHtmlEmail.append("		   </tr>");
+		corpoHtmlEmail.append("		</table>");
+		corpoHtmlEmail.append("</div>");
 		return corpoHtmlEmail.toString();
 	}
 	

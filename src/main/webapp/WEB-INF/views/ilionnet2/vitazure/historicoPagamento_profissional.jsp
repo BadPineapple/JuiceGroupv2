@@ -37,8 +37,8 @@
                                 <thead>
                                     <tr>
                                         <td style="text-align: center;">id</td>
-                                        <td style="text-align: center;">Agenda</td>
-                                        <td style="text-align: center;">Data Transação</td>
+                                        <td style="text-align: center;">Nome Paciente</td>
+                                        <td style="text-align: center;">Data Consulta</td>
                                         <td style="text-align: center;">Valor Recebido</td>
                                         <td style="text-align: center;">Status</td>
                                     </tr>
@@ -48,8 +48,8 @@
                                 <c:forEach var="pagamento" items="${listPagamentos}">
                                     <tr>
                                         <td style="text-align: center;">${pagamento.id}</td>
-                                        <td style="text-align: center;">${pagamento.agenda > 0 ? pagamento.agenda : '-'}</td>
-                                        <td style="text-align: center;">${pagamento.dataFormatada}</td>
+                                        <td style="text-align: center;">${pagamento.agenda > 0 ? pagamento.nomePaciente : '-'}</td>
+                                        <td style="text-align: center;">${pagamento.dataAgenda}</td>
                                         <td style="text-align: center;">${pagamento.agenda > 0 ? pagamento.valorPago : '-'}</td>
                                         <td style="text-align: center;">${pagamento.status}</div>
                                         </td>

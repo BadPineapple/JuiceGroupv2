@@ -35,6 +35,8 @@ public class PagamentoPagarMe {
 	private BigDecimal valorPago;
 	private Boolean planoVitazure;
 	private String  planoVitazureSelecionado;
+	private String dataAgenda;
+	private String nomePaciente;
 	
 	public Long getId() {
 		return id;
@@ -104,6 +106,18 @@ public class PagamentoPagarMe {
 	public void setIdPaciente(Long idPaciente) {
 		this.idPaciente = idPaciente;
 	}
+	public String getDataAgenda() {
+		return dataAgenda;
+	}
+	public void setDataAgenda(String dataAgenda) {
+		this.dataAgenda = dataAgenda;
+	}
+	public String getNomePaciente() {
+		return nomePaciente;
+	}
+	public void setNomePaciente(String nomePaciente) {
+		this.nomePaciente = nomePaciente;
+	}
 	public PagamentoPagarMe pagamento(Transaction transacao, Agenda agenda , Profissional profissional){
 		
 		PagamentoPagarMe pagamento =  new PagamentoPagarMe();
@@ -113,6 +127,8 @@ public class PagamentoPagarMe {
 			pagamento.setProfissional(agenda.getProfissional().getPessoa().getNome());
 			pagamento.setIdProfissional(agenda.getProfissional().getId());
 			pagamento.setIdPaciente(agenda.getPaciente().getId());
+			pagamento.setNomePaciente(agenda.getPaciente().getNome());
+			pagamento.setDataAgenda(agenda.getDataHoraApresentar());
 		}
 		if (profissional != null) {
 			pagamento.setProfissional(profissional.getPessoa().getNome());
