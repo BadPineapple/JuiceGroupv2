@@ -46,6 +46,11 @@ function agendamentoController($scope, $http, $window) {
 	$scope.buscaCidades = function () {
         buscaCidades($scope, $http, $window);
     };
+	
+	 $scope.concluirReagendamento = function (idProfissional , idAgendaReagendada) {
+        concluirReagendamento($scope, $http, $window , idProfissional , idAgendaReagendada);
+    };
+
 }
 
 function consultarDatasProfissional($scope, $http, $window , id , profissional) {
@@ -294,4 +299,31 @@ function buscaCidades($scope, $http, $window) {
         alert_error(response.data.message);
     })
   }
+}
+
+function concluirReagendamento($scope, $http, $window , idProfissional , idAgendaReagendada) {
+	 document.getElementById("spinner").style.display = "inline-block";
+	var idProfissional = idProfissional;
+	var idAgendaReagendada = idAgendaReagendada;
+	var horarioPossivelAtendimento  = horariosDisponiveisAtendimento[idHoraTemp].horaPossivelAtendiemnto;
+	var tipoAtendimento  = definirTipo(idProfissional);
+	var data  = dataSelecionada;
+	var jsonReagendamento = JSON.stringify({
+    "idProfissional":idProfissional,
+    "horarioPossivelAtendimento":horarioPossivelAtendimento,
+    "dataAtendimento":data,
+    "tipoAtendimento":tipoAtendimento,
+    "idAgendaReagendada":idAgendaReagendada,    
+  });
+
+$http.post("/vitazure/concluirReagendamento/" , jsonReagendamento)
+        .then(function (response) {
+            alert_success(response.data.message, () => {
+	            document.getElementById("spinner").style.display = "none";
+				$window.location.href = "/vitazure/telaAgradecimento";
+			});
+        }).catch(function (response) {
+        alert_error(response.data.message);
+		document.getElementById("spinner").style.display = "none";
+    })
 }

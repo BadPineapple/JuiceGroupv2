@@ -69,9 +69,9 @@
                                             </div>
                                         </td>
                                         <td style="text-align: center;">
-                                          <c:if test="${agenda.status == 'PENDENTE' || agenda.status == 'CONFIRMADO'}">
+                                          <c:if test="${agenda.status == 'PENDENTE' || agenda.status == 'CONFIRMADO' || (agenda.status == 'REMARCADO' && !agenda.reagendamentoConcluido)}">
 	                                           <button  class="btn btn-danger" ng-click="definirAgendamento('${agenda.id}' , 'CANCELADO')">Cancelar</button>
-	                                           <button  class="btn btn-warning" ng-click="definirAgendamento('${agenda.id}' , 'REMARCADO')">Remarcar</button>
+	                                           <a href="<ilion:url/>vitazure/reagendar/${agenda.id}"  class="btn btn-warning">Remarcar</a>
 	                                      </c:if>     
 <%--                                            <c:if test="${agenda.online && agenda.status == 'CONFIRMADO'}"> --%>
 <%-- 	                                           <a href="${agenda.urlAtendimentoOnline}" target="_blank"> --%>

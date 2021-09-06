@@ -14,6 +14,7 @@ import ilion.email.negocio.EmailNegocio;
 import ilion.util.Uteis;
 import ilion.vitazure.enumeradores.StatusEnum;
 import ilion.vitazure.model.Agenda;
+import ilion.vitazure.model.Pessoa;
 
 
 @Service
@@ -32,13 +33,20 @@ public class EnvioEmailConsulta {
 		enviarProfissional(agenda);
 	}
 	
-	public void enviarEmailAlteracaoSituacaoAgenda(Agenda agenda) {
+	public void enviarEmailAlteracaoSituacaoAgenda(Agenda agenda ,Pessoa pessoaSessao) {
 		StringBuffer htmlEmail = new StringBuffer();
 		if(agenda.getStatus().equals(StatusEnum.CONFIRMADO)) {
 			htmlEmail.append(emailPadrao(corpoHtmlEmailConfirmacao()));
-			enviarEmailAlteracaoSituacaoAgendaProfissional(agenda, htmlEmail.toString().replaceAll("#nome#", agenda.getPaciente().getNome()).replaceAll("#dataAgendaEmail#", agenda.getDataAgendaEmail()).replaceAll("#profissionalAtendimento#", agenda.getProfissional().getPessoa().getNome()).replaceAll("#horaAgendaEmail#", agenda.getHoraAgendaEmail()), "Confirmação atendimento");
-		}else if(agenda.getStatus().equals(StatusEnum.REMARCADO)) {
-			
+			enviarEmailAlteracaoSituacaoAgendaCliente(agenda, htmlEmail.toString().replaceAll("#nome#", agenda.getPaciente().getNome()).replaceAll("#dataAgendaEmail#", agenda.getDataAgendaEmail()).replaceAll("#profissionalAtendimento#", agenda.getProfissional().getPessoa().getNome()).replaceAll("#horaAgendaEmail#", agenda.getHoraAgendaEmail()), "Confirmação atendimento");
+		}else if(agenda.getStatus().equals(StatusEnum.REMARCADO) && pessoaSessao.getCliente()) {
+			String urlEntrar = propNegocio.findValueById(PropEnum.URL).concat("/entrar");
+			htmlEmail.append(emailPadrao(corpoHtmlEmailReagendamentoCliente()));
+			enviarEmailAlteracaoSituacaoAgendaProfissional(agenda, htmlEmail.toString().replaceAll("#nome#", agenda.getProfissional().getPessoa().getNome()), "Reagendamento atendimento solicitação cliente");
+		
+		}else if(agenda.getStatus().equals(StatusEnum.REMARCADO) && pessoaSessao.getPsicologo()) {
+			String urlEntrar = propNegocio.findValueById(PropEnum.URL).concat("/entrar");
+			htmlEmail.append(emailPadrao(corpoHtmlEmailReagendamentoProfissional()));
+			enviarEmailAlteracaoSituacaoAgendaCliente(agenda, htmlEmail.toString().replaceAll("#nome#", agenda.getPaciente().getNome()).replaceAll("#dataAgendaEmail#", agenda.getDataAgendaEmail()).replaceAll("#profissionalAtendimento#", agenda.getProfissional().getPessoa().getNome()).replaceAll("#horaAgendaEmail#", agenda.getHoraAgendaEmail()).replaceAll("#urlEntrar#", urlEntrar), "Reagendamento atendimento solicitação profissional");
 		}else if(agenda.getStatus().equals(StatusEnum.CANCELADO)) {
 			
 		}
@@ -49,39 +57,32 @@ public class EnvioEmailConsulta {
 	private void enviarEmailAlteracaoSituacaoAgendaCliente(Agenda agenda , String htmlEmail , String assuntoEmail) {
 		
 		 String nomeEmpresa = propNegocio.findValueById(PropEnum.NOME_EMPRESA);
-			
 			Email e = new Email();
 			e.setToName(propNegocio.findValueById(PropEnum.NOME_EMPRESA));
 			e.setToEmail(agenda.getPaciente().getEmail());
 			e.setReplyToName(agenda.getPaciente().getNome());
 			e.setSubject(assuntoEmail);
 			e.setMessage(htmlEmail.toString());
-
 			emailNegocio.adicionarEmail(e);
-			
 		
 	}
 	
 	private void enviarEmailAlteracaoSituacaoAgendaProfissional(Agenda agenda , String htmlEmail , String assuntoEmail) {
 		
 		String nomeEmpresa = propNegocio.findValueById(PropEnum.NOME_EMPRESA);
-			
 			Email e = new Email();
 			e.setToName(propNegocio.findValueById(PropEnum.NOME_EMPRESA));
 			e.setToEmail(agenda.getProfissional().getPessoa().getEmail());
 			e.setReplyToName(agenda.getProfissional().getPessoa().getNome());
 			e.setSubject(assuntoEmail);
 			e.setMessage(htmlEmail.toString());
-
 			emailNegocio.adicionarEmail(e);
-			
-		
 	}
 	
 	
 	private  String corpoHtmlEmailConfirmacao() {
 		StringBuffer corpoHtmlEmail = new StringBuffer();
-		corpoHtmlEmail.append("	<div class=\"col-12\" style=\"padding-top: 45px;\">");
+		corpoHtmlEmail.append("	<div class=\"col-12\" style=\"padding-top: 20px;\">");
 		corpoHtmlEmail.append("	<p>Seu agendamento foi confirmado com sucesso!</p>");
 		corpoHtmlEmail.append("<table width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\">");
 		corpoHtmlEmail.append("			  <tr>");
@@ -117,6 +118,67 @@ public class EnvioEmailConsulta {
 		corpoHtmlEmail.append("</div>");
 		return corpoHtmlEmail.toString();
 	}
+	
+	private  String corpoHtmlEmailReagendamentoProfissional() {
+		StringBuffer corpoHtmlEmail = new StringBuffer();
+		corpoHtmlEmail.append("	<div class=\"col-12\" style=\"padding-top: 20px;\">");
+		corpoHtmlEmail.append("	<p>Olá!</p>");
+		corpoHtmlEmail.append("	<p>Infelizmente não poderemos realizar sua consulta na data agendada.</p>");
+		corpoHtmlEmail.append("	<p>Por gentileza, solicitamos que, acesse nossa agenda para remarcar sua consulta.</p>");
+		corpoHtmlEmail.append(" <table width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\">");
+		corpoHtmlEmail.append("	<tr> ");
+		corpoHtmlEmail.append("	   <td align=\"center\" bgcolor=\"#D6E4E9\"><font size=\"2\" face=\"Arial, Helvetica, sans-serif\" color=\"#ff1744\"><strong>Consulta Cancelada</strong></font></td>");
+		corpoHtmlEmail.append("	</tr>");
+		corpoHtmlEmail.append("			  <tr>");
+		corpoHtmlEmail.append("			    <td valign=\"top\" bgcolor=\"#F3F3F3\">");
+		corpoHtmlEmail.append("				  <table width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"3\" cellspacing=\"5\" bgcolor=\"#F3F3F3\">");
+		corpoHtmlEmail.append("				        <tr> ");
+		corpoHtmlEmail.append("				          <td><table width=\"100%\" border=\"0\" cellpadding=\"3\" cellspacing=\"0\" bgcolor=\"#FFFFFF\">");
+		corpoHtmlEmail.append("				              <tr> ");
+		corpoHtmlEmail.append("				                <td colspan=\"2\" align=\"right\">&nbsp;</td>");
+		corpoHtmlEmail.append("				              </tr>");
+		corpoHtmlEmail.append("				              <tr> ");
+		corpoHtmlEmail.append("				                <td width=\"90\"><strong><font size=\"2\" face=\"Arial, Helvetica, sans-serif\" style=\"color: #ff1744;\">Data:</font></strong></td>");
+		corpoHtmlEmail.append("				                <td><font size=\"2\" face=\"Arial, Helvetica, sans-serif\" color=\"#ff1744\">#dataAgendaEmail#</font></td>");
+		corpoHtmlEmail.append("				              </tr>");
+		corpoHtmlEmail.append("				              <tr> ");
+		corpoHtmlEmail.append("				                <td width=\"90\"><strong><font size=\"2\" face=\"Arial, Helvetica, sans-serif\" style=\"color: #ff1744;\">Horário:</font></strong></td>");
+		corpoHtmlEmail.append("				                <td><font size=\"2\" face=\"Arial, Helvetica, sans-serif\" color=\"#ff1744\">#horaAgendaEmail#</font></td>");
+		corpoHtmlEmail.append("				              </tr>");
+		corpoHtmlEmail.append("				              <tr> ");
+		corpoHtmlEmail.append("				                <td width=\"90\"><strong style=\"margin-right: 3px;\"><font size=\"2\" face=\"Arial, Helvetica, sans-serif\" style=\"color: #ff1744;\">Profissional:</font></strong></td>");
+		corpoHtmlEmail.append("				                <td><font size=\"2\" face=\"Arial, Helvetica, sans-serif\" color=\"#ff1744\">#profissionalAtendimento#</font></td>");
+		corpoHtmlEmail.append("				              </tr>");
+		corpoHtmlEmail.append("				              <tr> ");
+		corpoHtmlEmail.append("				                <td colspan=\"2\" align=\"right\">&nbsp;</td>");
+		corpoHtmlEmail.append("				              </tr>");
+		corpoHtmlEmail.append("						</table>");
+		corpoHtmlEmail.append("						</td>");
+		corpoHtmlEmail.append("						</tr>");
+		corpoHtmlEmail.append("					</table>");
+		corpoHtmlEmail.append("			    </td>");
+		corpoHtmlEmail.append("		   </tr>");
+		corpoHtmlEmail.append("		</table>");
+		corpoHtmlEmail.append(" <div class=\"col-12\" style=\"padding-top: 20px;text-align: center;\">");
+		corpoHtmlEmail.append("	   <a href=\"#urlEntrar#\" class=\"botaoReagendar\">Reagendar consulta</a></font></td>");
+		corpoHtmlEmail.append("	</div>");
+		corpoHtmlEmail.append("</div>");
+		return corpoHtmlEmail.toString();
+	}
+	
+	private  String corpoHtmlEmailReagendamentoCliente() {
+		StringBuffer corpoHtmlEmail = new StringBuffer();
+		corpoHtmlEmail.append("	<div class=\"col-12\" style=\"padding-top: 20px;\">");
+		corpoHtmlEmail.append("	<p>Olá!</p>");
+		corpoHtmlEmail.append("	<p>Sua agenda de atendimento foi alterada acesse o link e confira as novas datas.</p>");		
+		corpoHtmlEmail.append(" <div class=\"col-12\" style=\"padding-top: 20px;text-align: center;\">");
+		corpoHtmlEmail.append("	   <a href=\"#urlEntrar#\" class=\"botaoReagendar\">Visualizar agenda</a></font></td>");
+		corpoHtmlEmail.append("	</div>");
+		corpoHtmlEmail.append("</div>");
+		return corpoHtmlEmail.toString();
+	}
+	
+	
 	
 	public void enviarPaciente(Agenda agenda) throws Exception {
 		
@@ -186,8 +248,6 @@ public void enviarProfissional(Agenda agenda) throws Exception {
 	
 public String emailPadrao(String corpoEmail) {
 	StringBuffer sb = new StringBuffer();
-	sb.append("<%@ include file=\"/ilionnet/taglibs.jsp\"%>");
-	sb.append("");
 	sb.append("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">");
 	sb.append("");
 	sb.append("<head>");
@@ -206,6 +266,19 @@ public String emailPadrao(String corpoEmail) {
 	sb.append("		  margin-top: 6px;");
 	sb.append("		  padding-top: 45px;");
 	sb.append("}");
+	sb.append(".botaoReagendar {");
+	sb.append("            height: 4rem;");
+	sb.append("		    line-height: 4rem;");
+	sb.append("		    padding: 8px 2.5rem;");
+	sb.append("		    font-size: 18px;");
+	sb.append("		    color: #ffffff;");
+	sb.append("		    background: #218838;");
+	sb.append("		    border-radius: 7px;");
+	sb.append("		    text-decoration: none;");
+	sb.append("		    margin: 0 1rem;");
+	sb.append("		    transition: all .3s ease-in-out;");
+	sb.append("		    border: 1px solid transparent;");
+	sb.append(" }");
 	sb.append("	</style>");
 	sb.append("</head>");
 	sb.append("<body>");

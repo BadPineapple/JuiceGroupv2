@@ -57,7 +57,7 @@ class HorarioAtenimento{
 	 this.horaAlmocoFim= horaAlmocoFim;
 	 this.atendimentoOnline= atendimentoOnline;
 	 this.atendimentoPresencial= atendimentoPresencial;
-	 const enderecoAtendimentoVO = enderecoSemanaHorario.split(',');	 
+	 const enderecoAtendimentoVO = enderecoSemanaHorario.split('.,');	 
      this.enderecoAtendimento= new EnderecoAtendimento(enderecoAtendimentoVO[0],enderecoAtendimentoVO[1],enderecoAtendimentoVO[2],enderecoAtendimentoVO[3],enderecoAtendimentoVO[4],enderecoAtendimentoVO[5],enderecoAtendimentoVO[6],enderecoAtendimentoVO[7],enderecoAtendimentoVO[8]);
   }
 }

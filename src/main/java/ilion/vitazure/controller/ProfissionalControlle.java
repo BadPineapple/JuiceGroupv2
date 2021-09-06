@@ -221,66 +221,6 @@ public class ProfissionalControlle {
 
 	}
 
-	public List<HorarioPossivelAtendimento> maisTeste(Profissional profissional, Boolean atendimentoOnline,
-			Boolean atendimentoPresencial, Date dataConsulta) {
-		List<HorarioAtendimento> listaHorarioatendimento = new ArrayList<HorarioAtendimento>();
-		listaHorarioatendimento.addAll(horarioNegocio.consultarHorariosAtendimentoPorProfissional(profissional.getId(),
-				atendimentoOnline, atendimentoPresencial));
-		List<HorarioPossivelAtendimento> listHorarioPossivelAtendimento = new ArrayList<HorarioPossivelAtendimento>();
-		listaHorarioatendimento.stream().filter(a -> a.getDiaSemana().getValue() == dataConsulta.getDay())
-				.forEach(horarioAtendimento -> {
-					Integer quantidadeMinutosAtendimento = Uteis.diferencaEmMinutos(
-							Uteis.converterHoraEmDate(horarioAtendimento.getHoraFim(), "HH:mm"),
-							Uteis.converterHoraEmDate(horarioAtendimento.getHoraInicio(), "HH:mm"));
-					Integer quantidadePossiveisAtendimento = quantidadeMinutosAtendimento
-							/ (Integer.parseInt(profissional.getDuracaoAtendimento().getNome()) + 10);
-					int x = 1;
-					String horaInicio = horarioAtendimento.getHoraInicio();
-					String horaFinal = "";
-					if (!horarioAtendimento.getHoraInicio().equals("")) {
-						HorarioPossivelAtendimento horarioPossivelAtendimentoInicial = new HorarioPossivelAtendimento();
-						horarioPossivelAtendimentoInicial.setHoraPossivelAtendiemnto(horaInicio);
-						horarioPossivelAtendimentoInicial.setDiaSemanaEnum(horarioAtendimento.getDiaSemana());
-						horarioPossivelAtendimentoInicial.setCodigoProfissional(profissional.getId());
-						if (horarioAtendimento.getEnderecoAtendimento() != null
-								&& horarioAtendimento.getEnderecoAtendimento().getId() != null) {
-							horarioPossivelAtendimentoInicial.setEnderecoatendimento(horarioAtendimento
-									.getEnderecoAtendimento().getLogradouro().concat(" - ")
-									.concat(horarioAtendimento.getEnderecoAtendimento().getComplemento()).concat(" - ")
-									.concat(horarioAtendimento.getEnderecoAtendimento().getBairro().concat(" - ")
-											.concat(horarioAtendimento.getEnderecoAtendimento().getCidade())
-											.concat(" - ").concat(horarioAtendimento.getEnderecoAtendimento()
-													.getEstado().getNome())));
-							horarioPossivelAtendimentoInicial
-									.setLinkGoogleMaps(horarioAtendimento.getEnderecoAtendimento().getLinkGoogleMaps());
-						}
-						listHorarioPossivelAtendimento.add(horarioPossivelAtendimentoInicial);
-						while (x <= quantidadePossiveisAtendimento) {
-							HorarioPossivelAtendimento horarioPossivelAtendimento = new HorarioPossivelAtendimento();
-							horarioPossivelAtendimento
-									.setHoraPossivelAtendiemnto(Uteis.calculodeHoraSemIntervalo(horaInicio, 1,
-											(Integer.parseInt(profissional.getDuracaoAtendimento().getNome()) + 10)));
-							horarioPossivelAtendimento.setDiaSemanaEnum(horarioAtendimento.getDiaSemana());
-							horarioPossivelAtendimento.setCodigoProfissional(profissional.getId());
-							if (horarioAtendimento.getEnderecoAtendimento() != null
-									&& horarioAtendimento.getEnderecoAtendimento().getId() != null) {
-								horarioPossivelAtendimento.setEnderecoatendimento(horarioAtendimento
-										.getEnderecoAtendimento().getLogradouro().concat(" - ")
-										.concat(horarioAtendimento.getEnderecoAtendimento().getComplemento())
-										.concat(" - ").concat(horarioAtendimento.getEnderecoAtendimento().getBairro()));
-								horarioPossivelAtendimento.setLinkGoogleMaps(
-										horarioAtendimento.getEnderecoAtendimento().getLinkGoogleMaps());
-							}
-							listHorarioPossivelAtendimento.add(horarioPossivelAtendimento);
-							horaInicio = horarioPossivelAtendimento.getHoraPossivelAtendiemnto();
-							x++;
-						}
-					}
-				});
-
-		return listHorarioPossivelAtendimento;
-	}
-
 	@PostMapping(value = "/vitazure/agendar", produces = "application/json")
 	@ResponseBody
 	public ResponseEntity<JsonString> agendar(HttpServletRequest request, @RequestBody String retornoToken) {
@@ -302,9 +242,10 @@ public class ProfissionalControlle {
 	public ResponseEntity<JsonString> definirAgendamento(HttpServletRequest request, @RequestBody String jsonAlterar) {
 		try {
 			JSONObject jsonRetornoToken = new JSONObject(jsonAlterar);
+			Pessoa pessoaSessao = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
 			Long idAgenda = Long.parseLong(jsonRetornoToken.get("idAgenda").toString());
 			String situacaoAlterar = jsonRetornoToken.get("situacaoAlterar").toString();
-			agendaNegocio.alterarAgenda(idAgenda, situacaoAlterar);
+			agendaNegocio.alterarAgenda(idAgenda, situacaoAlterar , pessoaSessao);
 			return new ResponseEntity<>(new JsonString("Agenda " + situacaoAlterar.toLowerCase() + " com Sucesso!"),HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();

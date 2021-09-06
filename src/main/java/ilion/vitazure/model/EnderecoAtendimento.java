@@ -127,7 +127,7 @@ public class EnderecoAtendimento {
 		
 		@Override
 		public String toString() {
-			return linkGoogleMaps +","+ estado +","+logradouro +","+complemento +","+cep+","+cidade+","+bairro +","+ numero +","+ id;
+			return linkGoogleMaps +".,"+ estado +".,"+logradouro +".,"+complemento +".,"+cep+".,"+cidade+".,"+bairro +".,"+ numero +".,"+ id;
 		}
 		
 		

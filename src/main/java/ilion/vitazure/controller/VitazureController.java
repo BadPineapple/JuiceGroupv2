@@ -37,6 +37,7 @@ import ilion.util.Uteis;
 import ilion.util.VLHForm;
 import ilion.util.ValueListInfo;
 import ilion.util.contexto.autorizacao.PessoaLogada;
+import ilion.util.json.JsonString;
 import ilion.vitazure.model.Agenda;
 import ilion.vitazure.model.EnderecoAtendimento;
 import ilion.vitazure.model.Especialidade;
@@ -318,11 +319,11 @@ public class VitazureController {
 	  @PostMapping(value = "/vitazure/finalizarAtendimento", produces = "application/json")
 	  @ResponseBody
 	  public ResponseEntity<String> finalizarAtendimento(ModelMap modelMap,HttpServletRequest request,	@RequestBody Long  id){
-			 Pessoa PessoaSessao = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
+			 Pessoa pessoaSessao = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
 			 try {
-				   Agenda agendaConcluida = agendaNegocio.alterarAgenda(id, StatusEnum.CONCLUIDO.toString());
+				   Agenda agendaConcluida = agendaNegocio.alterarAgenda(id, StatusEnum.CONCLUIDO.toString() , pessoaSessao);
 				 
-					if (PessoaSessao.getCliente()) {
+					if (pessoaSessao.getCliente()) {
 				        request.getSession().setAttribute("agendaConcluida", agendaConcluida);
 				        return new ResponseEntity<>(gson.toJson("/vitazure/avaliacaoAtendimento"), HttpStatus.OK);
 					}
@@ -387,4 +388,53 @@ public class VitazureController {
 						return new ResponseEntity<>(gson.toJson("Aconteceu um erro ao avaliar seu atendimento."), HttpStatus.BAD_REQUEST);
 					}
 			}
+		 
+		 @GetMapping("/vitazure/reagendar/{id}")
+			public String reagendarConsultaAgendareagendamento(ModelMap modelMap,HttpServletRequest request , @PathVariable Long id) {
+		     Pessoa PessoaSessao = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
+		     Agenda agenda = new Agenda();
+			 agenda = agendaNegocio.consultarAgendaId(id);
+			 request.getSession().setAttribute("agenda", agenda);
+			 modelMap.addAttribute("pessoa", PessoaSessao);
+			 return "redirect:/vitazure/reagendar";
+			}
+		
+			 @RequestMapping("/vitazure/reagendar")
+			 public String apresentarDadosProfissionalReagendamento(ModelMap modelMap,HttpServletRequest request) {
+				 Pessoa PessoaSessao = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
+				 Agenda agenda = (Agenda) request.getSession().getAttribute("agenda");
+				 Profissional profissional = profissionalNegocio.consultarPorId(agenda.getProfissional().getId());
+				 profissionalNegocio.consultarDataDisponivelProfissional(profissional , false , false);
+				 List<TemaTrabalho> temasTrabalho = temaNegocio.consultarTemasPorProfissional(profissional.getId());
+			  	 List<FormacaoAcademica> formacoes = formacaoAcademicaNegocio.consultarFormacoesPorPessoa(profissional.getId());
+			  	 List<Especialidade> especialidades = especialidadeNegocio.consultarEspecialidadesProfissional(profissional.getId());
+			  	 request.getSession().setAttribute("profissional", profissional);
+			  	 request.getSession().setAttribute("temasTrabalho", temasTrabalho);
+			  	 request.getSession().setAttribute("formacoes", formacoes);
+			  	 request.getSession().setAttribute("especialidades", especialidades);
+			  	 request.getSession().setAttribute("agenda", agenda);
+			  	 modelMap.addAttribute("pessoa", PessoaSessao);
+			  	 List<EnderecoAtendimento> enderecoAtendimento = new ArrayList<EnderecoAtendimento>();
+			  	 enderecoAtendimento.addAll(enderecoNegocio.consultarEnderecoPorPessoa(profissional.getId()));
+			  	 request.setAttribute("enderecoAtendimento", enderecoAtendimento);
+			  	 request.setAttribute("cidadeProfissional", enderecoAtendimento.get(0).getCidade());
+				 return "/ilionnet2/vitazure/perfil-do-profissional-reagendamento";
+			 }
+			 
+			    @PostMapping(value = "/vitazure/concluirReagendamento", produces = "application/json")
+				@ResponseBody
+				public ResponseEntity<JsonString> agendar(HttpServletRequest request, @RequestBody String jsonReagendamento) {
+					try {
+						Pessoa PessoaSessao = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
+						List<Agenda> listAgendaDia = agendaNegocio.consultarAgendaDia(PessoaSessao);
+						request.setAttribute("agendaDia", listAgendaDia);
+						JSONObject jsonRetornoToken = new JSONObject(jsonReagendamento);
+						agendaNegocio.incluirReagendamentoPaciente(jsonRetornoToken, PessoaSessao);
+						return new ResponseEntity<>(new JsonString("Reagendamento concluído com sucesso."), HttpStatus.OK);
+					} catch (Exception e) {
+						e.printStackTrace();
+						return new ResponseEntity<>(new JsonString(e.getMessage()), HttpStatus.BAD_REQUEST);
+					}
+				}
+		 
 }

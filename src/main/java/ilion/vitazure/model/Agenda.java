@@ -60,6 +60,10 @@ public class Agenda {
 	  private Integer avaliacaoAtendimentoNota;
 	  
 	  private String avaliacaoAtendimentoObservacao;
+	  
+	  private Long idAgendaReagendamento;
+	  
+	  private Boolean reagendamentoConcluido;
 
 	  public Long getId() {
 			if (id == null) {
@@ -258,6 +262,25 @@ public class Agenda {
 
 		public void setAvaliacaoAtendimentoObservacao(String avaliacaoAtendimentoObservacao) {
 			this.avaliacaoAtendimentoObservacao = avaliacaoAtendimentoObservacao;
+		}
+
+		public Long getIdAgendaReagendamento() {
+			return idAgendaReagendamento;
+		}
+
+		public void setIdAgendaReagendamento(Long idAgendaReagendamento) {
+			this.idAgendaReagendamento = idAgendaReagendamento;
+		}
+
+		public Boolean getReagendamentoConcluido() {
+			if(reagendamentoConcluido == null) {
+				reagendamentoConcluido = Boolean.FALSE;
+			}
+			return reagendamentoConcluido;
+		}
+
+		public void setReagendamentoConcluido(Boolean reagendamentoConcluido) {
+			this.reagendamentoConcluido = reagendamentoConcluido;
 		}
 		
 		

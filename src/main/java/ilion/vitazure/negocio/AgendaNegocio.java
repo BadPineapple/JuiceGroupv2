@@ -58,6 +58,9 @@ public class AgendaNegocio {
 	@Autowired
 	private EnvioEmailConsulta envioEmailConsulta;
 	
+	@Autowired
+	private AgendaNegocio agendaNegocio;
+	
 	
 	@Transactional
 	public Agenda incluirAgendaPaciente(JSONObject jsonRetornoToken , Pessoa paciente) throws Exception {
@@ -114,13 +117,13 @@ public class AgendaNegocio {
 	}
 	
 	@Transactional
-	public Agenda alterarAgenda(Long idAgenda , String situacao) throws Exception{
+	public Agenda alterarAgenda(Long idAgenda , String situacao , Pessoa pessoaSessao) throws Exception{
 		DetachedCriteria dc = DetachedCriteria.forClass(Agenda.class);
 		dc.add(Restrictions.eq("id", idAgenda));
 		Agenda agenda = (Agenda) hibernateUtil.consultarUniqueResult(dc);
 		agenda.setStatus(StatusEnum.valueOf(situacao));
 		hibernateUtil.update(agenda);
-		envioEmailConsulta.enviarEmailAlteracaoSituacaoAgenda(agenda);
+		envioEmailConsulta.enviarEmailAlteracaoSituacaoAgenda(agenda , pessoaSessao);
 		return agenda;
 	}
 	
@@ -143,7 +146,6 @@ public class AgendaNegocio {
 			Date data;
 			try {
 				data = formato.parse(vlhForm.getPalavraChave());
-				Date teste = Uteis.highDateTime(data);
 				disjunction.add( Restrictions.between("dataHoraAgendamento", data , Uteis.highDateTime(data)));
 			} catch (ParseException e) {
 			}
@@ -206,6 +208,43 @@ public class AgendaNegocio {
 		Integer codigoAgenda = hibernateUtil.updateSQL(sql.toString());
 		agenda = consultarAgendaId(Long.parseLong(codigoAgenda.toString()));
 		return agenda;
+	}
+	
+	public List<Agenda> consultarAgendaDiaProfissional(Profissional profissional , Date dataConsulta){
+		List<Agenda> listAgendas = new ArrayList<Agenda>();
+		DetachedCriteria dc = DetachedCriteria.forClass(Agenda.class);
+		dc.createAlias("profissional", "p");
+		dc.add(Restrictions.eq("p.id", profissional.getId()));
+		Disjunction disjunction = Restrictions.disjunction();
+		disjunction.add( Restrictions.between("dataHoraAgendamento", Uteis.inicioDia(dataConsulta) , Uteis.fimDia(dataConsulta)));
+		dc.add(disjunction);
+		dc.addOrder(Order.asc("dataHoraAgendamento"));
+		listAgendas = (List<Agenda>) hibernateUtil.list(dc);
+		return listAgendas;
+	}
+	
+	@Transactional
+	public Agenda incluirReagendamentoPaciente(JSONObject jsonRetornoToken , Pessoa paciente) throws Exception {
+		
+		try {
+			Profissional profissional = profissionalNegocio.consultarPorId(Long.parseLong(jsonRetornoToken.get("idProfissional").toString()));
+			Date dataAgenda = Uteis.converterDataHoraString(jsonRetornoToken.get("dataAtendimento").toString(), jsonRetornoToken.get("horarioPossivelAtendimento").toString());
+			Agenda agenda = new Agenda(paciente, profissional, dataAgenda, jsonRetornoToken.get("tipoAtendimento").toString().equals("online") || jsonRetornoToken.get("tipoAtendimento").toString().equals("") ? Boolean.TRUE : Boolean.FALSE, jsonRetornoToken.get("tipoAtendimento").toString().equals("presencial")  ? Boolean.TRUE : Boolean.FALSE, "", StatusEnum.PENDENTE, null , "");
+			if (agenda.getOnline()) {
+				wherebyApi.gerarLinkAtendimentoOnline(profissional, agenda);
+			}
+			agenda = (Agenda) hibernateUtil.save(agenda);
+			Agenda agendaReagendada = agendaNegocio.consultarAgendaId(Long.parseLong(jsonRetornoToken.get("idAgendaReagendada").toString()));
+			agendaReagendada.setIdAgendaReagendamento(agenda.getId());
+			agendaReagendada.setReagendamentoConcluido(Boolean.TRUE);
+			hibernateUtil.update(agendaReagendada);
+			agendaNegocio.alterarAgenda(agendaReagendada.getId(), StatusEnum.REMARCADO.toString(), paciente);
+			envioEmailConsulta.enviar(agenda);
+			return agenda;
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return new Agenda();
 	}
 	
 }

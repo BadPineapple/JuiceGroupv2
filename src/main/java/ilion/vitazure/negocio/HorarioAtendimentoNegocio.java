@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -89,6 +90,7 @@ public class HorarioAtendimentoNegocio {
 		if (atendimentoPresencial) {
 			dc.add(Restrictions.eq("atendimentopresencial", atendimentoPresencial));
 		}
+		dc.addOrder(Order.asc("horaInicio"));	
 		return (List<HorarioAtendimento>) hibernateUtil.list(dc);
 	}
 	

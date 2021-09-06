@@ -409,7 +409,7 @@ public class SiteController extends CustomErrorController {
 //	  		request.setAttribute("agendaDia", listAgendaDia);
 	  		request.setAttribute("pessoa", PessoaSessao);
 	  		request.setAttribute("areaRestrita", true);
-	  		consultarDataDisponivelProfissional(profissional , false , false);
+	  		profissionalNegocio.consultarDataDisponivelProfissional(profissional , false , false);
 	  		List<TemaTrabalho> temasTrabalho = temaNegocio.consultarTemasPorProfissional(id);
 	  		List<FormacaoAcademica> formacoes = formacaoAcademicaNegocio.consultarFormacoesPorPessoa(id);
 	  		List<Especialidade> especialidades = especialidadeNegocio.consultarEspecialidadesProfissional(id);
@@ -423,28 +423,7 @@ public class SiteController extends CustomErrorController {
 	  		request.setAttribute("cidadeProfissional", enderecoAtendimento.get(0).getCidade());
 			return "/ilionnet2/vitazure/perfil-do-profissional";
 	  	}
-	 
-	 private Profissional consultarDataDisponivelProfissional(Profissional profissional , Boolean atendimentoOnline , Boolean atendimentoPresencial) {
-   	  
-   	  List<Date> lista = new ArrayList<Date>();
-   	  
-   	  int diasIncrementado = 0;
-   	  while (diasIncrementado  < 60){
-   		  lista.add(Uteis.acrescentar(new Date(), Calendar.DATE, diasIncrementado));
-   		  diasIncrementado++;
-   	  }
-   		  List<HorarioAtendimento> listaHorarioatendimento = horarioNegocio.consultarHorariosAtendimentoPorProfissional(profissional.getId() , atendimentoOnline , atendimentoPresencial);
-   		  List<Date> datasPossivelAgendamento = lista.stream()
-   				  .filter( o1 -> {
-   					  return listaHorarioatendimento.stream()
-   							  .map(HorarioAtendimento::getDiaSemana)
-   							  .anyMatch(i2 -> i2.getValue() == o1.getDay());
-   				  }).collect(Collectors.toList());
-   		  profissional.getDatasPossivelAgendamento().addAll(datasPossivelAgendamento);
-   	  
-   		  return profissional;
-   	  
-     }
+	
 
 	 @GetMapping("/resultado-de-busca-externa/{especialista}")
 		public String buscaProfissional(HttpServletRequest request, @PathVariable String especialista) {
@@ -483,7 +462,7 @@ public class SiteController extends CustomErrorController {
 				SimpleDateFormat sdf = new SimpleDateFormat("EE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
 				Date date = sdf.parse(data);
 				Profissional prof = profissionalNegocio.consultarPorId(profissional);
-				List<HorarioPossivelAtendimento> listHorarioPossivelAtendimento = profissionalControlle.maisTeste(prof, false, false, date);
+				List<HorarioPossivelAtendimento> listHorarioPossivelAtendimento = profissionalNegocio.consultaHorarioPossivelAtendimento(prof, false, false, date);
 				return new ResponseEntity<>(gson.toJson(listHorarioPossivelAtendimento), HttpStatus.OK);
 			} catch (Exception e) {
 				return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);

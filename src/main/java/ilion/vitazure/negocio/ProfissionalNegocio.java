@@ -1,7 +1,11 @@
 package ilion.vitazure.negocio;
 
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Disjunction;
@@ -27,8 +31,11 @@ import ilion.vitazure.enumeradores.EspecialidadesEnum;
 import ilion.vitazure.enumeradores.EstadoEnum;
 import ilion.vitazure.enumeradores.TipoContaEnum;
 import ilion.vitazure.enumeradores.TipoProfissionalEnum;
+import ilion.vitazure.model.Agenda;
 import ilion.vitazure.model.EnderecoAtendimento;
 import ilion.vitazure.model.Especialidade;
+import ilion.vitazure.model.HorarioAtendimento;
+import ilion.vitazure.model.HorarioPossivelAtendimento;
 import ilion.vitazure.model.Pessoa;
 import ilion.vitazure.model.Profissional;
 import net.mlw.vlh.ValueList;
@@ -39,6 +46,12 @@ public class ProfissionalNegocio {
 
 	@Autowired
 	private HibernateUtil hibernateUtil;
+	
+	@Autowired
+	private HorarioAtendimentoNegocio horarioNegocio;
+	
+	@Autowired
+	private AgendaNegocio agendaciaNegocio;
 	
 	public Profissional consultarPorPessoa(Long idPessoa) {
 		DetachedCriteria dc = DetachedCriteria.forClass(Profissional.class);
@@ -257,5 +270,101 @@ public class ProfissionalNegocio {
 		}
 		return (List<Profissional>) hibernateUtil.list(dc);
 	}
+	
+private void validarHorarioDisponivelProfissional(List<HorarioPossivelAtendimento> listaHorarioatendimento, Profissional profissional , Date datavalidar) {
+		
+	List<Agenda> listHorarioOcupadoProfissional = agendaciaNegocio.consultarAgendaDiaProfissional(profissional, datavalidar);
+	List<HorarioPossivelAtendimento> horariosOcupados = listaHorarioatendimento.stream()
+	        .filter( o1 -> {
+	            return listHorarioOcupadoProfissional.stream()
+	                    .map(Agenda::getHoraInicioAgenda)
+	                    .anyMatch(i2 -> i2.equals(o1.getHoraPossivelAtendiemnto()));
+	        }).collect(Collectors.toList());
+				
+	listaHorarioatendimento.removeAll(horariosOcupados);
+	
+}
+	
+	
+	public List<HorarioPossivelAtendimento> consultaHorarioPossivelAtendimento(Profissional profissional, Boolean atendimentoOnline,	Boolean atendimentoPresencial, Date dataConsulta){
+		List<HorarioAtendimento> listaHorarioatendimento = new ArrayList<HorarioAtendimento>();
+		listaHorarioatendimento.addAll(horarioNegocio.consultarHorariosAtendimentoPorProfissional(profissional.getId(),	atendimentoOnline, atendimentoPresencial));
+		List<HorarioPossivelAtendimento> listHorarioPossivelAtendimento = new ArrayList<HorarioPossivelAtendimento>();
+		Date horaMaximaAgendamento = Uteis.acrescentar(new Date(), Calendar.MINUTE, (Integer.parseInt(profissional.getTempoAntecendencia().getNome())* 60));
+		listaHorarioatendimento.stream().filter(a -> a.getDiaSemana().getValue() == dataConsulta.getDay())
+				.forEach(horarioAtendimento -> {
+					Integer quantidadeMinutosAtendimento = Uteis.diferencaEmMinutos(
+							Uteis.converterHoraEmDate(horarioAtendimento.getHoraFim(), "HH:mm"),
+							Uteis.converterHoraEmDate(horarioAtendimento.getHoraInicio(), "HH:mm"));
+					Integer quantidadePossiveisAtendimento = quantidadeMinutosAtendimento / (Integer.parseInt(profissional.getDuracaoAtendimento().getNome()) + 10);
+					int x = 1;
+					String horaInicio = horarioAtendimento.getHoraInicio();
+					String horaFinal = "";
+					if (!horarioAtendimento.getHoraInicio().equals("")) {
+						HorarioPossivelAtendimento horarioPossivelAtendimentoInicial = new HorarioPossivelAtendimento();
+						horarioPossivelAtendimentoInicial.setHoraPossivelAtendiemnto(horaInicio);
+						horarioPossivelAtendimentoInicial.setDiaSemanaEnum(horarioAtendimento.getDiaSemana());
+						horarioPossivelAtendimentoInicial.setCodigoProfissional(profissional.getId());
+						if (horarioAtendimento.getEnderecoAtendimento() != null	&& horarioAtendimento.getEnderecoAtendimento().getId() != null) {
+							horarioPossivelAtendimentoInicial.setEnderecoatendimento(horarioAtendimento
+									.getEnderecoAtendimento().getLogradouro().concat(" - ")
+									.concat(horarioAtendimento.getEnderecoAtendimento().getComplemento()).concat(" - ")
+									.concat(horarioAtendimento.getEnderecoAtendimento().getBairro().concat(" - ")
+											.concat(horarioAtendimento.getEnderecoAtendimento().getCidade())
+											.concat(" - ").concat(horarioAtendimento.getEnderecoAtendimento()
+													.getEstado().getNome())));
+							horarioPossivelAtendimentoInicial.setLinkGoogleMaps(horarioAtendimento.getEnderecoAtendimento().getLinkGoogleMaps());
+						}
+						if(Uteis.validarDataInicialMaiorFinalComHora(horaInicio,dataConsulta, horaMaximaAgendamento) || !Uteis.isHojeIndependenteDaHora(dataConsulta)) {
+							listHorarioPossivelAtendimento.add(horarioPossivelAtendimentoInicial);
+						}
+						while (x <= quantidadePossiveisAtendimento) {
+							HorarioPossivelAtendimento horarioPossivelAtendimento = new HorarioPossivelAtendimento();
+							horarioPossivelAtendimento.setHoraPossivelAtendiemnto(Uteis.calculodeHoraSemIntervalo(horaInicio, 1,
+											(Integer.parseInt(profissional.getDuracaoAtendimento().getNome()) + 10)));
+							horarioPossivelAtendimento.setDiaSemanaEnum(horarioAtendimento.getDiaSemana());
+							horarioPossivelAtendimento.setCodigoProfissional(profissional.getId());
+							if (horarioAtendimento.getEnderecoAtendimento() != null
+									&& horarioAtendimento.getEnderecoAtendimento().getId() != null) {
+								horarioPossivelAtendimento.setEnderecoatendimento(horarioAtendimento
+										.getEnderecoAtendimento().getLogradouro().concat(" - ")
+										.concat(horarioAtendimento.getEnderecoAtendimento().getComplemento())
+										.concat(" - ").concat(horarioAtendimento.getEnderecoAtendimento().getBairro()));
+								horarioPossivelAtendimento.setLinkGoogleMaps(
+										horarioAtendimento.getEnderecoAtendimento().getLinkGoogleMaps());
+							}
+							if(Uteis.validarDataInicialMaiorFinalComHora(horaInicio,dataConsulta, horaMaximaAgendamento) || !Uteis.isHojeIndependenteDaHora(dataConsulta)) {
+							 listHorarioPossivelAtendimento.add(horarioPossivelAtendimento);
+							}
+							horaInicio = horarioPossivelAtendimento.getHoraPossivelAtendiemnto();
+							x++;
+						}
+					}
+				});
+		validarHorarioDisponivelProfissional(listHorarioPossivelAtendimento,profissional , dataConsulta);
+		return listHorarioPossivelAtendimento;
+	}
+	
+	 public Profissional consultarDataDisponivelProfissional(Profissional profissional , Boolean atendimentoOnline , Boolean atendimentoPresencial) {
+	   	  
+	   	  List<Date> lista = new ArrayList<Date>();
+	   	  
+	   	  int diasIncrementado = 0;
+	   	  while (diasIncrementado  < 60){
+	   		  lista.add(Uteis.acrescentar(new Date(), Calendar.DATE, diasIncrementado));
+	   		  diasIncrementado++;
+	   	  }
+	   		  List<HorarioAtendimento> listaHorarioatendimento = horarioNegocio.consultarHorariosAtendimentoPorProfissional(profissional.getId() , atendimentoOnline , atendimentoPresencial);
+	   		  List<Date> datasPossivelAgendamento = lista.stream()
+	   				  .filter( o1 -> {
+	   					  return listaHorarioatendimento.stream()
+	   							  .map(HorarioAtendimento::getDiaSemana)
+	   							  .anyMatch(i2 -> i2.getValue() == o1.getDay());
+	   				  }).collect(Collectors.toList());
+	   		  profissional.getDatasPossivelAgendamento().addAll(datasPossivelAgendamento);
+	   	  
+	   		  return profissional;
+	   	  
+	     }
 	
 }

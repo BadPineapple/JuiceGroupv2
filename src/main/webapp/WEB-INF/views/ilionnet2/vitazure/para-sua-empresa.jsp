@@ -84,7 +84,7 @@
                     </div>
 
                     <div class="col-12  col-md-6 col-xl-6">
-                        <form class="form-default"  ng-submit="submit()"  id="contatoApp">
+                        <form class="form-default"  ng-submit="enviarContatoEmpresa()"  id="contatoApp">
                             <div class="row">
                                 <div class="col-12">
                                     <div class="input-block">

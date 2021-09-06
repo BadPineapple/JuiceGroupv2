@@ -1608,6 +1608,69 @@ public class Uteis {
 		}
 		return "";
 	}
-
+	
+	public static Date getData(String data, String pattern) throws ParseException {
+		try {
+			if (data != null) {
+				SimpleDateFormat formatador = new SimpleDateFormat(pattern);
+				return formatador.parse(data);
+			}
+		} catch (Exception e) {
+		}
+		return null;
+	}
+	
+	public static String getData(Date data, String pattern) {
+		if (data != null) {
+			SimpleDateFormat formatador = new SimpleDateFormat(pattern, new Locale("pt", "BR"));
+			return formatador.format(data);
+		}
+		return "";
+	}
+	
+	public static String getHoraAtual() {
+		return getData(new Date(), "HH:mm");
+	}
+	
+	public static Boolean realizarValidacaoHora1MaiorHora2(String hora1, String hora2) {
+		Integer h1 = Integer.valueOf(hora1.substring(0, 2));
+		Integer h2 = Integer.valueOf(hora2.substring(0, 2));
+		Integer m1 = Integer.valueOf(hora1.substring(3, 5));
+		Integer m2 = Integer.valueOf(hora2.substring(3, 5));
+		if (h1 >= h2 && m1 > m2) {
+			return true;
+		} else if (h1.equals(h2)) {
+			h1 = Integer.valueOf(hora1.substring(3, 5));
+			h2 = Integer.valueOf(hora2.substring(3, 5));
+			if (h1 > h2) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public static Boolean isHojeIndependenteDaHora(Date data) {
+        Date hoje = new Date();
+        Boolean dataAtual = ((inicioDia(hoje).before(data) || inicioDia(hoje).equals(data)) && (fimDia(hoje).after(data) || fimDia(hoje).equals(data)));
+        return dataAtual;
+    }
+	
+	public static Boolean validarDataInicialMaiorFinalComHora(String horaValidar , Date data1, Date data2){
+		try {
+	    	SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+	    	String dataAtual = getData(data1,"dd/MM/yyyy ").concat(horaValidar);
+	    	String b = format.format(data2);
+			Date data1Formt = format.parse(dataAtual);
+			Date data2Formt = format.parse(b);
+    	if (data1Formt.compareTo(data2Formt) >= 0) {
+    		return Boolean.TRUE;
+    	}
+    	return Boolean.FALSE;
+		} catch (ParseException e) {
+			e.printStackTrace();
+			return Boolean.FALSE;
+		}
+    	
+    }
 	
 }

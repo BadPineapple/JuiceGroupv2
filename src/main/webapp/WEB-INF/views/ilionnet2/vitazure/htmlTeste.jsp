@@ -17,7 +17,21 @@
 		  margin-left: 46%;
 		  margin-top: 6px;
 		  padding-top: 45px;
-}
+      }
+      .botaoReagendar {
+            height: 4rem;
+		    line-height: 4rem;
+		    padding: 8px 2.5rem;
+		    font-size: 18px;
+		    color: #ffffff;
+		    background: #218838;
+		    border-radius: 7px;
+		    text-decoration: none;
+		    margin: 0 1rem;
+		    transition: all .3s ease-in-out;
+		    border: 1px solid transparent;
+      }
+     a[href*="#"] {display: none;}
 	</style>
 </head>
 <body>
@@ -30,38 +44,11 @@
 		 <h3>Prezado(a) ${agenda.paciente.nome}, </h3>
 		</div>
 		<div class="col-12">
-			<p>Seu agendamento foi confirmado com sucesso!</p>
-		  <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
-			  <tr>
-			    <td valign="top" bgcolor="#F3F3F3">
-				  <table width="100%" border="0" align="center" cellpadding="3" cellspacing="5" bgcolor="#F3F3F3">
-				        <tr> 
-				          <td><table width="100%" border="0" cellpadding="3" cellspacing="0" bgcolor="#FFFFFF">
-				              <tr> 
-				                <td colspan="2" align="right">&nbsp;</td>
-				              </tr>
-				              <tr> 
-				                <td width="90"><strong><font size="2" face="Arial, Helvetica, sans-serif" style="color: #1895d4;">Data:</font></strong></td>
-				                <td><font size="2" face="Arial, Helvetica, sans-serif"><c:out value="${agenda.dataAgendaEmail}" escapeXml="{true}"/></font></td>
-				              </tr>
-				              <tr> 
-				                <td width="90"><strong><font size="2" face="Arial, Helvetica, sans-serif" style="color: #1895d4;">Horário:</font></strong></td>
-				                <td><font size="2" face="Arial, Helvetica, sans-serif"><c:out value="${agenda.horaAgendaEmail}" escapeXml="{true}"/></font></td>
-				              </tr>
-				              <tr> 
-				                <td width="90"><strong style="margin-right: 3px;"><font size="2" face="Arial, Helvetica, sans-serif" style="color: #1895d4;">Profissional:</font></strong></td>
-				                <td><font size="2" face="Arial, Helvetica, sans-serif"><c:out value="${agenda.profissional.pessoa.nome}" escapeXml="{true}"/></font></td>
-				              </tr>
-				              <tr> 
-				                <td colspan="2" align="right">&nbsp;</td>
-				              </tr>
-						</table>
-						</td>
-						</tr>
-					</table>
-			    </td>
-		   </tr>
-		</table>			              
+			<p>Olá!</p>
+			<p>Sua agenda de atendimento foi alterada acesse o link e confira a nova data.</p>		  
+		<div class="col-12" style="padding-top: 20px;text-align: center;">
+			   <a href="<ilion:url/>/entrar" class="botaoReagendar">Visualizar agenda</a></font></td>
+		</div>			              
 		</div>
 		<div id="triangulo-para-cima"></div>
 		<div class="col-12" style="border-bottom: solid 2px;border-bottom-color: currentcolor;border-bottom-color: currentcolor;border-bottom-color: currentcolor;width: 95% !important;padding-bottom: 6px;border-color: #1795d4;margin-bottom: 20px;">
