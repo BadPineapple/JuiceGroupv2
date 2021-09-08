@@ -246,6 +246,9 @@ public class ProfissionalControlle {
 			Long idAgenda = Long.parseLong(jsonRetornoToken.get("idAgenda").toString());
 			String situacaoAlterar = jsonRetornoToken.get("situacaoAlterar").toString();
 			agendaNegocio.alterarAgenda(idAgenda, situacaoAlterar , pessoaSessao);
+			if(situacaoAlterar.equals("AGUARDANDO_REMARCACAO")) {
+				return new ResponseEntity<>(new JsonString("Solicitação de remarcação enviada ao cliente."),HttpStatus.OK);
+			}
 			return new ResponseEntity<>(new JsonString("Agenda " + situacaoAlterar.toLowerCase() + " com Sucesso!"),HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();

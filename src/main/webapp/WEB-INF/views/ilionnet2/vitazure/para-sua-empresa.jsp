@@ -11,7 +11,10 @@
 </head>
 
 <body id="index" class="home">
-	
+<div class="divSpinner" id="spinner">   
+   <img alt="" src="../../assets/images/logo-square.png" style="width: 126px;position: relative;top: 167px;left: 49%;">
+   <div class="spinner"></div>
+</div>
     <div id="app">
         <jsp:include page="includes/include-header.jsp" flush="true" />
 
@@ -89,28 +92,28 @@
                                 <div class="col-12">
                                     <div class="input-block">
                                         <label>Nome</label>
-                                        <input type="text" ng-model="contato.nome" placeholder="Nome" required />
+                                        <input type="text" id="nome" ng-model="contato.nome" placeholder="Nome" required />
                                     </div>
                                 </div>
 
                                 <div class="col-12">
                                     <div class="input-block">
                                         <label>E-mail</label>
-                                        <input type="text" ng-model="contato.email" placeholder="E-mail" required />
+                                        <input type="text" id="email" ng-model="contato.email" placeholder="E-mail" required />
                                     </div>
                                 </div>
 
                                 <div class="col-12">
                                     <div class="input-block">
                                         <label>Telefone</label>
-                                        <input type="text" ng-model="contato.telefone" data-mask="(00)0000-0000" placeholder="(00) 0000-0000" required />
+                                        <input type="text" id="telefone" ng-model="contato.telefone" data-mask="(00)0000-00000" placeholder="(00) 0000-00000" required />
                                     </div>
                                 </div>
 
                                 <div class="col-12">
                                     <div class="input-block">
                                         <label>Mensagem</label>
-                                        <textarea cols="20" rows="5" ng-model="contato.mensagem" placeholder="Informe seu texto aqui."></textarea>
+                                        <textarea cols="20" rows="5" id="mensagem" ng-model="contato.mensagem" placeholder="Informe seu texto aqui."></textarea>
                                     </div>
                                 </div>
 

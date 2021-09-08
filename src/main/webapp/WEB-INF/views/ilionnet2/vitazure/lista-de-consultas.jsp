@@ -64,8 +64,8 @@
                                         <td style="text-align: center;">${agenda.dataHoraApresentar}</td>
                                         <td style="text-align: center;">${agenda.profissional.duracaoAtendimento.nomeApresentar}</td>
                                         <td style="text-align: center;">
-                                            <div class="status ${agenda.status == 'CONFIRMADO' || agenda.status == 'CONCLUIDO' ?  'realizada' : agenda.status == 'REMARCADO' || agenda.status == 'CANCELADO' ? 'cancelada' : 'pendente'}" style="width: 100%;">
-                                                ${agenda.status}
+                                            <div class="status ${agenda.status == 'CONFIRMADO' || agenda.status == 'REALIZADO' ?  'realizada' : agenda.status == 'REMARCADO' || agenda.status == 'CANCELADO' ? 'cancelada' : 'pendente'}" style="width: 100%;">
+                                                ${agenda.status.nome}
                                             </div>
                                         </td>
                                         <td style="text-align: center;">
@@ -73,7 +73,7 @@
 	                                           <button  class="btn btn-success" ng-click="definirAgendamento('${agenda.id}' , 'CONFIRMADO')">Confirmar</button>
 	                                      </c:if>
 	                                      <c:if test="${agenda.status == 'PENDENTE' || agenda.status == 'CONFIRMADO'}">
-	                                           <button  class="btn btn-danger" ng-click="definirAgendamento('${agenda.id}' , 'REMARCADO')">Remarcar</button>
+	                                           <button  class="btn btn-danger" ng-click="definirAgendamento('${agenda.id}' , 'AGUARDANDO_REMARCACAO')">Remarcar</button>
 	                                      </c:if>     
 <%--                                            <c:if test="${agenda.online && agenda.status == 'CONFIRMADO'}"> --%>
 <%-- 	                                           <a href="${agenda.hostUrlAtendimentoOnline}" target="_blank"> --%>

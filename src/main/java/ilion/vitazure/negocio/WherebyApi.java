@@ -40,16 +40,16 @@ public class WherebyApi {
 
 		//Formatação padrão da data yyyy-MM-ddThh-mm-ss.000Z
 		String startDate = sdfData.format(new Date(agenda.getDataHoraAgendamento().getTime()));
-		String startHour = sdfHora.format(new Date(agenda.getDataHoraAgendamento().getTime()));
+		String startHour = sdfHora.format(new Date(agenda.getDataHoraAgendamento().getTime() + (180 * 60 * 1000)));
 
 		String endDate = sdfData.format(new Date(agenda.getDataHoraAgendamento().getTime()));
-		String endHour = sdfHora.format(new Date(agenda.getDataHoraAgendamento().getTime() + (Integer.parseInt(profissional.getDuracaoAtendimento().getNome()) * 60 * 1000)));
+		String endHour = sdfHora.format(new Date(agenda.getDataHoraAgendamento().getTime() + ((Integer.parseInt(profissional.getDuracaoAtendimento().getNome()) + 180) * 60 * 1000)));
 
 		try {
 			HttpPost requestJson = new HttpPost(URL_API);
 			
-			StringEntity params = new StringEntity("{\"isLocked\": true,\"roomNamePattern\": \"human-short\", \"startDate\": \"" + startDate + "T" + startHour + ".000Z" + "\", \"endDate\": " +
-					" \"" + endDate + "T" + endHour + ".000Z" + "\"," +
+			StringEntity params = new StringEntity("{\"isLocked\": true,\"roomNamePattern\": \"human-short\", \"startDate\": \"" + startDate + "T" + startHour + ".00Z" + "\", \"endDate\": " +
+					" \"" + endDate + "T" + endHour + ".00Z" + "\"," +
 					" \"fields\": [\"hostRoomUrl\"]}");
 			
 			requestJson.addHeader("authorization", "Bearer " + API_KEY);
@@ -62,7 +62,7 @@ public class WherebyApi {
 			
 			if (responseJson.getStatusLine().getStatusCode() == 201) {
 				JSONObject json = new JSONObject(responseString);
-				String configuracaoSalaAtendimento = "?embed&logo=on&?chat=on&?people=off&?leaveButton=on&?lang=pt&?floatSelf";
+				String configuracaoSalaAtendimento = "?embed&logo=on&?chat=on&?people=off&?lang=pt&?floatSelf";
 				String roomUrl = json.get("roomUrl").toString();
 				String roomHostUrl = json.get("hostRoomUrl").toString();
 				agenda.setUrlAtendimentoOnline(roomUrl.concat(configuracaoSalaAtendimento));

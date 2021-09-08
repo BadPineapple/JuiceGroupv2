@@ -1,17 +1,12 @@
 package ilion.vitazure.negocio;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 
 import ilion.admin.negocio.PropEnum;
 import ilion.admin.negocio.PropNegocio;
 import ilion.email.negocio.Email;
 import ilion.email.negocio.EmailNegocio;
-import ilion.util.Uteis;
 import ilion.vitazure.enumeradores.StatusEnum;
 import ilion.vitazure.model.Agenda;
 import ilion.vitazure.model.Pessoa;
@@ -29,24 +24,27 @@ public class EnvioEmailConsulta {
 	private PropNegocio propNegocio;
 	
 	public void enviar(Agenda agenda) throws Exception {
-		enviarPaciente(agenda);
-		enviarProfissional(agenda);
+		StringBuffer htmlEmail = new StringBuffer();
+		htmlEmail.append(emailPadrao(corpoHtmlEmailSolicitacaoAgendamento()));
+		enviarEmailAlteracaoSituacaoAgendaCliente(agenda, htmlEmail.toString().replaceAll("#nome#", agenda.getPaciente().getNome()).replaceAll("#nomePaciente#", agenda.getPaciente().getNome()).replaceAll("#emailPaciente#", agenda.getPaciente().getEmail()).replaceAll("#celularPaciente#", agenda.getPaciente().getCelular()).replaceAll("#dataAgendaEmail#", agenda.getDataAgendaEmail()).replaceAll("#profissionalAtendimento#", agenda.getProfissional().getPessoa().getNome()).replaceAll("#horaAgendaEmail#", agenda.getHoraAgendaEmail()), "Solicitação agendamento");
+		enviarEmailAlteracaoSituacaoAgendaProfissional(agenda, htmlEmail.toString().replaceAll("#nome#", agenda.getProfissional().getPessoa().getNome()).replaceAll("#nomePaciente#", agenda.getPaciente().getNome()).replaceAll("#emailPaciente#", agenda.getPaciente().getEmail()).replaceAll("#celularPaciente#", agenda.getPaciente().getCelular()).replaceAll("#dataAgendaEmail#", agenda.getDataAgendaEmail()).replaceAll("#profissionalAtendimento#", agenda.getProfissional().getPessoa().getNome()).replaceAll("#horaAgendaEmail#", agenda.getHoraAgendaEmail()), "Solicitação agendamento");
+		
 	}
 	
 	public void enviarEmailAlteracaoSituacaoAgenda(Agenda agenda ,Pessoa pessoaSessao) {
 		StringBuffer htmlEmail = new StringBuffer();
 		if(agenda.getStatus().equals(StatusEnum.CONFIRMADO)) {
 			htmlEmail.append(emailPadrao(corpoHtmlEmailConfirmacao()));
-			enviarEmailAlteracaoSituacaoAgendaCliente(agenda, htmlEmail.toString().replaceAll("#nome#", agenda.getPaciente().getNome()).replaceAll("#dataAgendaEmail#", agenda.getDataAgendaEmail()).replaceAll("#profissionalAtendimento#", agenda.getProfissional().getPessoa().getNome()).replaceAll("#horaAgendaEmail#", agenda.getHoraAgendaEmail()), "Confirmação atendimento");
+			enviarEmailAlteracaoSituacaoAgendaCliente(agenda, htmlEmail.toString().replaceAll("#nome#", agenda.getPaciente().getNome()).replaceAll("#dataAgendaEmail#", agenda.getDataAgendaEmail()).replaceAll("#profissionalAtendimento#", agenda.getProfissional().getPessoa().getNome()).replaceAll("#horaAgendaEmail#", agenda.getHoraAgendaEmail()), "Confirmação agendamento");
 		}else if(agenda.getStatus().equals(StatusEnum.REMARCADO) && pessoaSessao.getCliente()) {
 			String urlEntrar = propNegocio.findValueById(PropEnum.URL).concat("/entrar");
 			htmlEmail.append(emailPadrao(corpoHtmlEmailReagendamentoCliente()));
-			enviarEmailAlteracaoSituacaoAgendaProfissional(agenda, htmlEmail.toString().replaceAll("#nome#", agenda.getProfissional().getPessoa().getNome()), "Reagendamento atendimento solicitação cliente");
+			enviarEmailAlteracaoSituacaoAgendaProfissional(agenda, htmlEmail.toString().replaceAll("#nome#", agenda.getProfissional().getPessoa().getNome()).replaceAll("#urlEntrar#", urlEntrar), "Agendamento remarcado pelo cliente.");
 		
-		}else if(agenda.getStatus().equals(StatusEnum.REMARCADO) && pessoaSessao.getPsicologo()) {
+		}else if(agenda.getStatus().equals(StatusEnum.AGUARDANDO_REMARCACAO) && pessoaSessao.getPsicologo()) {
 			String urlEntrar = propNegocio.findValueById(PropEnum.URL).concat("/entrar");
 			htmlEmail.append(emailPadrao(corpoHtmlEmailReagendamentoProfissional()));
-			enviarEmailAlteracaoSituacaoAgendaCliente(agenda, htmlEmail.toString().replaceAll("#nome#", agenda.getPaciente().getNome()).replaceAll("#dataAgendaEmail#", agenda.getDataAgendaEmail()).replaceAll("#profissionalAtendimento#", agenda.getProfissional().getPessoa().getNome()).replaceAll("#horaAgendaEmail#", agenda.getHoraAgendaEmail()).replaceAll("#urlEntrar#", urlEntrar), "Reagendamento atendimento solicitação profissional");
+			enviarEmailAlteracaoSituacaoAgendaCliente(agenda, htmlEmail.toString().replaceAll("#nome#", agenda.getPaciente().getNome()).replaceAll("#dataAgendaEmail#", agenda.getDataAgendaEmail()).replaceAll("#profissionalAtendimento#", agenda.getProfissional().getPessoa().getNome()).replaceAll("#horaAgendaEmail#", agenda.getHoraAgendaEmail()).replaceAll("#urlEntrar#", urlEntrar), "Solicitação de reagentamento pelo profissional no portal vitazure");
 		}else if(agenda.getStatus().equals(StatusEnum.CANCELADO)) {
 			
 		}
@@ -122,12 +120,11 @@ public class EnvioEmailConsulta {
 	private  String corpoHtmlEmailReagendamentoProfissional() {
 		StringBuffer corpoHtmlEmail = new StringBuffer();
 		corpoHtmlEmail.append("	<div class=\"col-12\" style=\"padding-top: 20px;\">");
-		corpoHtmlEmail.append("	<p>Olá!</p>");
-		corpoHtmlEmail.append("	<p>Infelizmente não poderemos realizar sua consulta na data agendada.</p>");
-		corpoHtmlEmail.append("	<p>Por gentileza, solicitamos que, acesse nossa agenda para remarcar sua consulta.</p>");
+		corpoHtmlEmail.append("	<p>Caro cliente, o profissional de saúde do portal Vitazure solicitou um reagendamento da sua consulta.</p>");
+		corpoHtmlEmail.append("	<p>Por favor, acesse o site para fazer esta remarcação.</p>");
 		corpoHtmlEmail.append(" <table width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\">");
 		corpoHtmlEmail.append("	<tr> ");
-		corpoHtmlEmail.append("	   <td align=\"center\" bgcolor=\"#D6E4E9\"><font size=\"2\" face=\"Arial, Helvetica, sans-serif\" color=\"#ff1744\"><strong>Consulta Cancelada</strong></font></td>");
+		corpoHtmlEmail.append("	   <td align=\"center\" bgcolor=\"#D6E4E9\"><font size=\"2\" face=\"Arial, Helvetica, sans-serif\" color=\"#ff1744\"><strong>Consulta aguardando remarcação</strong></font></td>");
 		corpoHtmlEmail.append("	</tr>");
 		corpoHtmlEmail.append("			  <tr>");
 		corpoHtmlEmail.append("			    <td valign=\"top\" bgcolor=\"#F3F3F3\">");
@@ -180,71 +177,60 @@ public class EnvioEmailConsulta {
 	
 	
 	
-	public void enviarPaciente(Agenda agenda) throws Exception {
-		
-		StringBuffer sb = new StringBuffer();
-		
-		sb.append("<b> Agendamento Consulta</b><br/><br/>");
-		sb.append("<b>Nome: </b>").append(agenda.getPaciente().getNome()).append("<br/><br/>");
-		sb.append("<b>E-mail: </b>").append(agenda.getPaciente().getEmail()).append("<br/><br/>");
-		sb.append("<b>Celular: </b>").append(agenda.getPaciente().getCelular()).append("<br/><br/>");
-		sb.append("<b>Profissional: </b>").append(agenda.getProfissional().getPessoa().getNome()).append("<br/><br/>");
-		sb.append("<b>Horario: </b>").append(agenda.getDataHoraApresentar()).append("<br/><br/>");
-		
-		String nomeEmpresa = propNegocio.findValueById(PropEnum.NOME_EMPRESA);
-		
-		
-		String emailsContato = propNegocio.findValueById(PropEnum.EMAILS_CONTATO);
-		
-		List<String> emails = Uteis.formarListaComString(emailsContato, ";");
-		
-		for (String email : emails) {
-			
-			Email e = new Email();
-			e.setToName(propNegocio.findValueById(PropEnum.NOME_EMPRESA));
-			e.setToEmail(agenda.getPaciente().getEmail());
-			e.setReplyToEmail(agenda.getProfissional().getPessoa().getEmail());
-			e.setReplyToName(agenda.getPaciente().getNome());
-			e.setSubject("Agendamento Consulta");
-			e.setMessage(sb.toString());
-
-			emailNegocio.adicionarEmail(e);
-			
-		}
-		
+	private  String corpoHtmlEmailSolicitacaoAgendamento() {
+		StringBuffer corpoHtmlEmail = new StringBuffer();
+		corpoHtmlEmail.append("	<div class=\"col-12\" style=\"padding-top: 20px;\">");
+		corpoHtmlEmail.append(" <table width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\">");
+		corpoHtmlEmail.append("	<tr> ");
+		corpoHtmlEmail.append("	   <td align=\"center\" bgcolor=\"#D6E4E9\"><font size=\"2\" face=\"Arial, Helvetica, sans-serif\"><strong>Agendamento Consulta</strong></font></td>");
+		corpoHtmlEmail.append("	</tr>");
+		corpoHtmlEmail.append("			  <tr>");
+		corpoHtmlEmail.append("			    <td valign=\"top\" bgcolor=\"#F3F3F3\">");
+		corpoHtmlEmail.append("				  <table width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"3\" cellspacing=\"5\" bgcolor=\"#F3F3F3\">");
+		corpoHtmlEmail.append("				        <tr> ");
+		corpoHtmlEmail.append("				          <td><table width=\"100%\" border=\"0\" cellpadding=\"3\" cellspacing=\"0\" bgcolor=\"#FFFFFF\">");
+		corpoHtmlEmail.append("				              <tr> ");
+		corpoHtmlEmail.append("				                <td colspan=\"2\" align=\"right\">&nbsp;</td>");
+		corpoHtmlEmail.append("				              </tr>");
+		corpoHtmlEmail.append("				              <tr> ");
+		corpoHtmlEmail.append("				                <td width=\"90\"><strong><font size=\"2\" face=\"Arial, Helvetica, sans-serif\" style=\"color: #1895d4;\">Nome:</font></strong></td>");
+		corpoHtmlEmail.append("				                <td><font size=\"2\" face=\"Arial, Helvetica, sans-serif\">#nomePaciente#</font></td>");
+		corpoHtmlEmail.append("				              </tr>");
+		corpoHtmlEmail.append("				              <tr> ");
+		corpoHtmlEmail.append("				                <td width=\"90\"><strong><font size=\"2\" face=\"Arial, Helvetica, sans-serif\" style=\"color: #1895d4;\">E-mail:</font></strong></td>");
+		corpoHtmlEmail.append("				                <td><font size=\"2\" face=\"Arial, Helvetica, sans-serif\">#emailPaciente#</font></td>");
+		corpoHtmlEmail.append("				              </tr>");
+		corpoHtmlEmail.append("				              <tr> ");
+		corpoHtmlEmail.append("				                <td width=\"90\"><strong><font size=\"2\" face=\"Arial, Helvetica, sans-serif\" style=\"color: #1895d4;\">Celular:</font></strong></td>");
+		corpoHtmlEmail.append("				                <td><font size=\"2\" face=\"Arial, Helvetica, sans-serif\">#celularPaciente#</font></td>");
+		corpoHtmlEmail.append("				              </tr>");
+		corpoHtmlEmail.append("				              <tr> ");
+		corpoHtmlEmail.append("				                <td width=\"90\"><strong><font size=\"2\" face=\"Arial, Helvetica, sans-serif\" style=\"color: #1895d4;\">Data:</font></strong></td>");
+		corpoHtmlEmail.append("				                <td><font size=\"2\" face=\"Arial, Helvetica, sans-serif\">#dataAgendaEmail#</font></td>");
+		corpoHtmlEmail.append("				              </tr>");
+		corpoHtmlEmail.append("				              <tr> ");
+		corpoHtmlEmail.append("				                <td width=\"90\"><strong><font size=\"2\" face=\"Arial, Helvetica, sans-serif\" style=\"color: #1895d4;\">Horário:</font></strong></td>");
+		corpoHtmlEmail.append("				                <td><font size=\"2\" face=\"Arial, Helvetica, sans-serif\">#horaAgendaEmail#</font></td>");
+		corpoHtmlEmail.append("				              </tr>");
+		corpoHtmlEmail.append("				              <tr> ");
+		corpoHtmlEmail.append("				                <td width=\"90\"><strong style=\"margin-right: 3px;\"><font size=\"2\" face=\"Arial, Helvetica, sans-serif\" style=\"color: #1895d4;\">Profissional:</font></strong></td>");
+		corpoHtmlEmail.append("				                <td><font size=\"2\" face=\"Arial, Helvetica, sans-serif\">#profissionalAtendimento#</font></td>");
+		corpoHtmlEmail.append("				              </tr>");
+		corpoHtmlEmail.append("				              <tr> ");
+		corpoHtmlEmail.append("				                <td colspan=\"2\" align=\"right\">&nbsp;</td>");
+		corpoHtmlEmail.append("				              </tr>");
+		corpoHtmlEmail.append("						</table>");
+		corpoHtmlEmail.append("						</td>");
+		corpoHtmlEmail.append("						</tr>");
+		corpoHtmlEmail.append("					</table>");
+		corpoHtmlEmail.append("			    </td>");
+		corpoHtmlEmail.append("		   </tr>");
+		corpoHtmlEmail.append("		</table>");
+		corpoHtmlEmail.append("</div>");
+		return corpoHtmlEmail.toString();
 	}
 	
-public void enviarProfissional(Agenda agenda) throws Exception {
-		StringBuffer sb = new StringBuffer();
 		
-		sb.append("<b> Agendamento Consulta</b><br/><br/>");
-		sb.append("<b>Nome: </b>").append(agenda.getPaciente().getNome()).append("<br/><br/>");
-		sb.append("<b>E-mail: </b>").append(agenda.getPaciente().getEmail()).append("<br/><br/>");
-		sb.append("<b>Celular: </b>").append(agenda.getPaciente().getCelular()).append("<br/><br/>");
-		sb.append("<b>Horario: </b>").append(agenda.getDataHoraApresentar()).append("<br/><br/>");
-		
-		String nomeEmpresa = propNegocio.findValueById(PropEnum.NOME_EMPRESA);
-		
-		
-		String emailsContato = propNegocio.findValueById(PropEnum.EMAILS_CONTATO);
-		
-		List<String> emails = Uteis.formarListaComString(emailsContato, ";");
-		
-		for (String email : emails) {
-			
-			Email e = new Email();
-			e.setToName(propNegocio.findValueById(PropEnum.NOME_EMPRESA));
-			e.setToEmail(agenda.getProfissional().getPessoa().getEmail());
-			e.setReplyToEmail(agenda.getProfissional().getPessoa().getEmail());
-			e.setReplyToName(agenda.getPaciente().getNome());
-			e.setSubject("Agendamento Consulta");
-			e.setMessage(sb.toString());
-
-			emailNegocio.adicionarEmail(e);
-			
-		}
-		
-	}
 	
 public String emailPadrao(String corpoEmail) {
 	StringBuffer sb = new StringBuffer();
@@ -267,12 +253,12 @@ public String emailPadrao(String corpoEmail) {
 	sb.append("		  padding-top: 45px;");
 	sb.append("}");
 	sb.append(".botaoReagendar {");
-	sb.append("            height: 4rem;");
+	sb.append("         height: 4rem;");
 	sb.append("		    line-height: 4rem;");
 	sb.append("		    padding: 8px 2.5rem;");
 	sb.append("		    font-size: 18px;");
-	sb.append("		    color: #ffffff;");
-	sb.append("		    background: #218838;");
+	sb.append("		    color: #ffffff !important;");
+	sb.append("		    background: #82d0f5;");
 	sb.append("		    border-radius: 7px;");
 	sb.append("		    text-decoration: none;");
 	sb.append("		    margin: 0 1rem;");

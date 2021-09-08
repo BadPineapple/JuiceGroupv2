@@ -18,7 +18,7 @@
         <jsp:include page="includes/include-menu-painel.jsp" flush="true" />
         <div class="area-white">
             <div class="container">
-              <angular-initializer ng-init="online='true';idTemp = ''; agenda = '';" />
+              <angular-initializer ng-init="idTemp = ''; agenda = '';opcaoReagendamento(${profissional.id},${agenda.online});" />
                 <div class="row">
                     <div class="col-12">
                         <div class="perfil-psicologo perfil-profissional">
@@ -102,8 +102,9 @@
 													Agenda <span>Selecione uma nova data</span>
 												</h3>
  												 <div class="button-agenda">
-                                                 <span id="${profissional.id}.online"  onclick='marcardesmarcar(${profissional.id},"online");' class="active marcar">Online</span>
-                                                 <span id="${profissional.id}.presencial" onclick='marcardesmarcar(${profissional.id},"presencial");'>Presencial</span>
+ 												 
+                                                 <span id="${profissional.id}.online">Online</span>
+                                                 <span id="${profissional.id}.presencial">Presencial</span>
                                             </div>
 											</div>
 										</div>

@@ -55,9 +55,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 	    return new EmbeddedServletContainerCustomizer() {
 	        @Override
 	        public void customize(ConfigurableEmbeddedServletContainer container) {
-	        	
 	            ErrorPage error404Page = new ErrorPage(HttpStatus.NOT_FOUND, "/404");
-	            
 	            container.addErrorPages(error404Page);
 	        }
 	    };

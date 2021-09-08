@@ -20,7 +20,7 @@
 <div id="app">
   <jsp:include page="includes/include-header-internas.jsp" flush="true" />
   <div class="area-white">
-    <div class="container">
+    <div class="container" style="padding-top: 6%;">
         <div class="col-12 col-md-12 col-xl-12" style="display: flex;">
    		  <input type="text" value="${horaFimAtendimento}" id="horaFim" style="display: contents;"/>
    		  <input type="text" value="${agenda.horaInicioAgenda}" id="horaInicio" style="display: contents;"/>
@@ -28,13 +28,16 @@
    		  <i class="fas fa-stopwatch" style="font-size: 24px;padding-right: 6px;"></i>
    		  <p style="padding-right: 6px;">Tempo restante para esta consulta:</p>
    		  <p id="spanRelogio"></p>
+   		  <div>
+   		    <button id="finalizarAtendimento" style="width: 183px;position: absolute;left: 83%;font-size: 15px;"  class="btn btn-danger" ng-click="finalizacaoAtendimento()"><i class="fas fa-door-open" style="padding-right: 8px;"></i>Sair</button>
+          </div>
         </div>
       <div class="row">
         <div class="col-12">
           <iframe src="${pessoa.cliente ? agenda.urlAtendimentoOnline : agenda.hostUrlAtendimentoOnline}&?displayName=${pessoa.nome}" allow="camera; microphone;" style="width: 100%; height: 600px; margin: 0 auto; left: 20px"></iframe> 
         </div>
       </div>
-      <p style="padding-right: 6px;">Sua conexão é protegida com a criptógracia de ponta a ponta</p>
+      <p style="padding-right: 6px;">Sua conexão é protegida com a criptógracia de ponta a ponta.</p>
     </div>
   </div>
 

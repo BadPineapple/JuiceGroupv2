@@ -28,7 +28,6 @@ function consultarProfissional($scope, $http, $window , $timeout) {
 
 
 function submit($scope, $http, $window , $timeout) {
-
 		if( ! $scope.contato.nome ){
 			alert("Digite seu nome");
 			return;
@@ -45,7 +44,6 @@ function submit($scope, $http, $window , $timeout) {
 			alert("Digite a mensagem");
 			return;
 		}
-		
 		$http.post("/rest/contato-registrar", $scope.contato)
         .then(function (response) {
             alert_success('Sua mensagem foi encaminhada,em breve retornaremos.', () => {
@@ -74,14 +72,19 @@ function enviarContatoEmpresa($scope, $http, $window , $timeout) {
 			alert("Digite a mensagem");
 			return;
 		}
-		
+		document.getElementById("spinner").style.display = "inline-block";
 		$http.post("/rest/contato-registrar", $scope.contato)
         .then(function (response) {
             alert_success('Sua mensagem foi encaminhada,em breve retornaremos.', () => {
-				$window.location.href = "/para-sua-empresa";
+			document.getElementById("nome").value = "";
+			document.getElementById("email").value = "";
+			document.getElementById("telefone").value = "";
+			document.getElementById("mensagem").value = "";
+			document.getElementById("spinner").style.display = "none";
 			});
         }).catch(function (response) {
         alert_error(response.data.message);
+		document.getElementById("spinner").style.display = "none";
     })
 }
 

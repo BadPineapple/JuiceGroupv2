@@ -50,6 +50,15 @@ function agendamentoController($scope, $http, $window) {
 	 $scope.concluirReagendamento = function (idProfissional , idAgendaReagendada) {
         concluirReagendamento($scope, $http, $window , idProfissional , idAgendaReagendada);
     };
+	 $scope.opcaoReagendamento = function (idProfissional , tipo) {
+        var tipoAgendamento = "";
+       if(tipo){
+			tipoAgendamento = "online";
+	   }else{
+		tipoAgendamento = "presencial";
+	}
+		opcaoReagendamento(idProfissional , tipoAgendamento);
+    };
 
 }
 
@@ -143,6 +152,20 @@ function marcardesmarcar(idProfissional,id) {
 		 document.getElementById(idProfissional+'.valorPresencial').style.display = "inline-block";
 	}
 	
+	tipoAgendamento = id;
+}
+function opcaoReagendamento(idProfissional,id) {
+	if(id == 'online'){
+  		 document.getElementById(idProfissional+'.online').className = "active marcar"
+         document.getElementById(idProfissional+'.presencial').className = ""
+         document.getElementById(idProfissional+'.valorOnline').style.display = "inline-block";
+		document.getElementById(idProfissional+'.valorPresencial').style.display = "none";
+	}else{
+		 document.getElementById(idProfissional+'.online').className = ""
+         document.getElementById(idProfissional+'.presencial').className = "active marcar"
+		 document.getElementById(idProfissional+'.valorOnline').style.display = "none";
+		 document.getElementById(idProfissional+'.valorPresencial').style.display = "inline-block";
+	}
 	tipoAgendamento = id;
 }
 

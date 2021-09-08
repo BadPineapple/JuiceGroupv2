@@ -7,7 +7,11 @@ function consultaWherebyController($scope, $http, $window) {
 	
 	$scope.atualizarCronometro = function () {
         atualizarCronometro($scope, $http, $window);
-    };	
+    };
+
+$scope.finalizacaoAtendimento = function () {
+	finalizacaoAtendimento($scope, $http, $window);
+}	
 	
 }
 
@@ -20,11 +24,27 @@ function finalizacaoConsulta(urlAcessar,$scope, $http, $window){
 	$window.location.href = urlAcessar;
 }
 
+function finalizacaoAtendimento($scope, $http, $window){
+	var identificador = document.getElementById("id").value;
+	$.ajax({
+		        url: '/vitazure/finalizarAtendimento',
+		        type: 'post',
+		        data: identificador,		        
+		        contentType: 'application/json',
+		        success: function (response) {
+		           alert_success('Atendimento finalizado com sucesso!');
+				   finalizacaoConsulta(response,$scope, $http, $window)
+		        }, error: function (response) {		           
+		           alert_success('Atendimento finalizado com sucesso!');
+				   finalizacaoConsulta(response,$scope, $http, $window)
+		        }
+		    });	
+}
+
 function relogio($scope, $http, $window){
 		
 		if((min == 0) && (seg == 0)){				
 			var identificador = document.getElementById("id").value;
-		
 			$.ajax({
 		        url: '/vitazure/finalizarAtendimento',
 		        type: 'post',
@@ -32,10 +52,10 @@ function relogio($scope, $http, $window){
 		        contentType: 'application/json',
 		        success: function (response) {
 		           alert_success('O tempo da sua consulta expirou,seu atendimento foi encerrado!');
-				   finalizacaoConsulta(response,$scope, $http, $window)
+				    document.getElementById("finalizarAtendimento").click();
 		        }, error: function (response) {		           
 		              alert_success('O tempo da sua consulta expirou,seu atendimento foi encerrado!');
-				   finalizacaoConsulta(response,$scope, $http, $window)
+				    document.getElementById("finalizarAtendimento").click();
 		        }
 		    });			
 		}			

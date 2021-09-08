@@ -64,12 +64,12 @@
                                         <td style="text-align: center;">${agenda.dataHoraApresentar}</td>
                                         <td style="text-align: center;">${agenda.profissional.duracaoAtendimento.nomeApresentar}</td>
                                         <td style="text-align: center;">
-                                            <div class="status ${agenda.status == 'CONFIRMADO' || agenda.status == 'CONCLUIDO' ?  'realizada' : agenda.status == 'REMARCADO' || agenda.status == 'CANCELADO' ? 'cancelada' : 'pendente'}" style="width: 100%;">
-                                                ${agenda.status}
+                                            <div class="status ${agenda.status == 'CONFIRMADO' || agenda.status == 'REALIZADO' ?  'realizada' : agenda.status == 'REMARCADO' || agenda.status == 'CANCELADO' ? 'cancelada' : 'pendente'}" style="width: 100%;">
+                                                ${agenda.status.nome}
                                             </div>
                                         </td>
                                         <td style="text-align: center;">
-                                          <c:if test="${agenda.status == 'PENDENTE' || agenda.status == 'CONFIRMADO' || (agenda.status == 'REMARCADO' && !agenda.reagendamentoConcluido)}">
+                                          <c:if test="${agenda.status == 'PENDENTE' || agenda.status == 'CONFIRMADO' || agenda.status == 'AGUARDANDO_REMARCACAO'}">
 	                                           <button  class="btn btn-danger" ng-click="definirAgendamento('${agenda.id}' , 'CANCELADO')">Cancelar</button>
 	                                           <a href="<ilion:url/>vitazure/reagendar/${agenda.id}"  class="btn btn-warning">Remarcar</a>
 	                                      </c:if>     

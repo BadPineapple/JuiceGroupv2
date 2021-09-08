@@ -6,9 +6,10 @@ public enum StatusEnum {
 	PROCESSAMENTO("Processamento"),
 	CONFIRMADO("Confirmado"),
 	CANCELADO("Cancelado"),
-	CONCLUIDO("Concluido"),
+	REALIZADO("Realizado"),
 	NAO_ENCONTRATO("NO"),
-	REMARCADO("Remarcado");
+	REMARCADO("Remarcado"),
+	AGUARDANDO_REMARCACAO("Aguandando Remarcação");
 	
 	private String nome;
 	

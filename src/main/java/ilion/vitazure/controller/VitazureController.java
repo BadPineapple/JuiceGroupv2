@@ -321,7 +321,7 @@ public class VitazureController {
 	  public ResponseEntity<String> finalizarAtendimento(ModelMap modelMap,HttpServletRequest request,	@RequestBody Long  id){
 			 Pessoa pessoaSessao = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
 			 try {
-				   Agenda agendaConcluida = agendaNegocio.alterarAgenda(id, StatusEnum.CONCLUIDO.toString() , pessoaSessao);
+				   Agenda agendaConcluida = agendaNegocio.alterarAgenda(id, StatusEnum.REALIZADO.toString() , pessoaSessao);
 				 
 					if (pessoaSessao.getCliente()) {
 				        request.getSession().setAttribute("agendaConcluida", agendaConcluida);
