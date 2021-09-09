@@ -140,6 +140,8 @@ public class VitazureController {
 	@RequestMapping("/deslogar")
 	public String deslogar(HttpServletRequest request) {
 		request.getSession().removeAttribute("pessoaSessao");
+		request.getSession().removeAttribute("idProfissional");
+		request.getSession().removeAttribute("agendaPessoa");
 		return "redirect:/home";
 	}
 	
@@ -292,6 +294,7 @@ public class VitazureController {
 	  @GetMapping("/vitazure/areaRestrita")
 		public String arearestrita(ModelMap modelMap, HttpServletRequest request) {
 			Pessoa pessoa = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
+			String idProfissional = (String) request.getSession().getAttribute("idProfissional");
 			List<Agenda> listAgendaDia = agendaNegocio.consultarAgendaDia(pessoa);
 			pessoa = pessoaNegocio.consultarPorId(pessoa.getId());
 			Profissional profissional = new Profissional();
@@ -301,6 +304,9 @@ public class VitazureController {
 			}
 			modelMap.addAttribute("pessoa", pessoa);
 			modelMap.addAttribute("agendaDia", listAgendaDia);
+			if(idProfissional != null) {
+			  return "redirect:/vitazure/perfil-do-profissional/"+idProfissional;	
+			}
 			if (pessoa.getCpf().equals("")) {
 				request.setAttribute("estados", EstadoEnum.values());
 				return "/ilionnet2/vitazure/completar-cadastro";

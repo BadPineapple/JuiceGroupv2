@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -426,7 +427,7 @@ public class SiteController extends CustomErrorController {
 	
 
 	 @GetMapping("/resultado-de-busca-externa/{especialista}")
-		public String buscaProfissional(HttpServletRequest request, @PathVariable String especialista) {
+		public String buscaProfissional(ModelMap modelMap,HttpServletRequest request, @PathVariable String especialista) {
 			Pessoa PessoaSessao = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
 			List<Profissional> lisProfissional = profissionalNegocio.consultarProfissionaisFiltro(null,especialista,null,null);
 			lisProfissional.stream().forEach(profissional-> {
@@ -438,12 +439,14 @@ public class SiteController extends CustomErrorController {
 			request.setAttribute("tiposProfissional", TipoProfissionalEnum.values());
 			request.setAttribute("especialidades", EspecialidadesEnum.values());
 			request.setAttribute("estados", EstadoEnum.values());
+			modelMap.addAttribute("pessoa", PessoaSessao);
 			return "/ilionnet2/vitazure/resultado-de-busca";
 		}
 	 
 	 @GetMapping("/vitazure/profissionais-externa")
-		public String profissionais(HttpServletRequest request) {
+		public String profissionais(ModelMap modelMap,HttpServletRequest request) {
 			List<Profissional> lisProfissional = (List<Profissional>) request.getSession().getAttribute("listProfissionais");
+			Pessoa PessoaSessao = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
 			lisProfissional.stream().forEach(profissional-> {
 				profissional.getPessoa().setCidade(enderecoNegocio.consultarCidadeEnderecoPorProfissional(profissional.getId()));
 			});
@@ -453,6 +456,7 @@ public class SiteController extends CustomErrorController {
 			consultarDataDisponivelProfissionais(lisProfissional, false, false);
 			request.getSession().setAttribute("listProfissionais", lisProfissional);
 			request.setAttribute("estados", EstadoEnum.values());
+			modelMap.addAttribute("pessoa", PessoaSessao);
 			return "/ilionnet2/vitazure/resultado-busca_aberta";
 		}
 	 

@@ -31,8 +31,9 @@
 	            </div>
             <div class="col-12 col-md-4 col-xl-4">
                 <div class="entrar-consulta">
-				            <input type="text" value="${agendaDia}" id="agendaDia" style="display: contents;"/>
+				    <input type="text" value="${agendaDia}" id="agendaDia" style="display: contents;"/>
                     <a href=""  id="linkAcesso" class="not-active button-secundary">Entrar na consulta</a>
+                    <span id="proximaConsulta" style="position: absolute;top: 75%;color: #ff2626;"></span>
                 </div>
             </div>
             <div style="width: 100%; padding-bottom: 5px;">
@@ -86,12 +87,23 @@ class Agenda{
             const agendaVO = opa.split('Agenda[');
             var maisTeste = agendaVO[0];
             agendaVO.forEach(eu);
+            if(agendas.length == 0){
+            	document.getElementById("proximaConsulta").innerHTML = 'Sem consulta para ser liberada';
+            }
             for (var i = 0; i < agendas.length; i++) {
             	if (displayDate.substr(0, 5) >= agendas[i].horaLiberar &&  displayDate.substr(0, 5) < agendas[i].horaBloquear) {
             		document.getElementById("linkAcesso").className = "button-secundary";
             		document.getElementById("linkAcesso").href = "<ilion:url/>consulta/"+agendas[i].id;
 //             		var idAgenda = agendas[i].id;
 //             		document.getElementById("linkAcesso").onclick = function() {consultaAgenda(idAgenda)};
+				}
+            }
+            for (var i = 0; i < agendas.length; i++) {
+            	if (displayDate.substr(0, 5) < agendas[i].horaLiberar &&  displayDate.substr(0, 5) < agendas[i].horaBloquear) {
+            		document.getElementById("proximaConsulta").innerHTML = 'Proxima consulta a ser liberada '+agendas[i].horaLiberar;
+            		break;
+				}else{
+					document.getElementById("proximaConsulta").innerHTML = 'Sem consulta para ser liberada';
 				}
             }
     };

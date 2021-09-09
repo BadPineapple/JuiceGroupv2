@@ -103,7 +103,9 @@ public class PessoaController {
 		  try {
 			  pessoa = pessoaNegocio.login(pessoa);
 			  List<Agenda> listAgendaDia = agendaNegocio.consultarAgendaDia(pessoa);
+			  String idProfissional = (String) request.getSession().getAttribute("idProfissional");
 			  request.getSession().setAttribute(PessoaNegocio.ATRIBUTO_SESSAO, pessoa);
+			  request.getSession().setAttribute("idProfissional", idProfissional);
 			  request.getSession().setAttribute(PessoaNegocio.AGENDA_SESSAO, listAgendaDia);
 			  return new ResponseEntity<>(new JsonString("Logadando"), HttpStatus.OK);
 		  } catch (Exception e) {

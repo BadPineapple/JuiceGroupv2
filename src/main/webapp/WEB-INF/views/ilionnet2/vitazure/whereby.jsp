@@ -13,6 +13,9 @@
     .dados-atualizados {
       display: none;
     }
+    header {
+     position: absolute;
+    }
   </style>
   <script src="../assets/js/vitazure/moment.js"></script>
 </head>
@@ -20,7 +23,7 @@
 <div id="app">
   <jsp:include page="includes/include-header-internas.jsp" flush="true" />
   <div class="area-white">
-    <div class="container" style="padding-top: 6%;">
+    <div class="container" style="padding-top: 7%;">
         <div class="col-12 col-md-12 col-xl-12" style="display: flex;">
    		  <input type="text" value="${horaFimAtendimento}" id="horaFim" style="display: contents;"/>
    		  <input type="text" value="${agenda.horaInicioAgenda}" id="horaInicio" style="display: contents;"/>
@@ -34,7 +37,7 @@
         </div>
       <div class="row">
         <div class="col-12">
-          <iframe src="${pessoa.cliente ? agenda.urlAtendimentoOnline : agenda.hostUrlAtendimentoOnline}&?displayName=${pessoa.nome}" allow="camera; microphone;" style="width: 100%; height: 600px; margin: 0 auto; left: 20px"></iframe> 
+          <iframe id="frameWhereby" src="${pessoa.cliente ? agenda.urlAtendimentoOnline : agenda.hostUrlAtendimentoOnline}&?displayName=${pessoa.nome}" allow="camera; microphone;" style="width: 100%; margin: 0 auto; left: 20px; height:600px;"></iframe> 
         </div>
       </div>
       <p style="padding-right: 6px;">Sua conexão é protegida com a criptógracia de ponta a ponta.</p>
@@ -94,7 +97,22 @@
         alert(timeCounter.stop());
     }
 </script>
+<!-- <script> -->
 
+<!--  		$( window ).resize(function() { -->
+<!--  			var windowWidth = window.innerWidth; -->
+<!--  			var windowHeight = window.innerHeight; -->
+<!--  			var heightFrameWhereby = windowHeight - 300; -->
+<!--          	document.getElementById("frameWhereby").style.height = heightFrameWhereby+"px"; -->
+<!--  		}); -->
+
+<!--          $(document).ready(function () { -->
+<!--          	var windowWidth = window.innerWidth; -->
+<!--          	var windowHeight = window.innerHeight; -->
+<!--          	var heightFrameWhereby = windowHeight - 300; -->
+<!--          	document.getElementById("frameWhereby").style.height = heightFrameWhereby+"px"; -->
+<!--          }) -->
+<!--     </script> -->
 
 </html>
 

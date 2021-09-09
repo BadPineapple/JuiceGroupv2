@@ -247,4 +247,27 @@ public class AgendaNegocio {
 		return new Agenda();
 	}
 	
+	public List<Agenda> consultarAgendaDia(Date dataConsulta){
+		List<Agenda> listAgendas = new ArrayList<Agenda>();
+		DetachedCriteria dc = DetachedCriteria.forClass(Agenda.class);
+		dc.add(Restrictions.eq("status", StatusEnum.CONFIRMADO));
+		dc.add(Restrictions.isNull("enviadoAlerta"));
+		Disjunction disjunction = Restrictions.disjunction();
+		disjunction.add( Restrictions.between("dataHoraAgendamento", dataConsulta , Uteis.fimDia(dataConsulta)));
+		dc.add(disjunction);
+		dc.addOrder(Order.asc("dataHoraAgendamento"));
+		listAgendas = (List<Agenda>) hibernateUtil.list(dc);
+		return listAgendas;
+	}
+	
+	@Transactional
+	public Agenda envioAlertaAgenda(Agenda agenda){
+		StringBuilder sql = new StringBuilder();
+		sql.append(" update agenda set dataHoraEnviadoAlerta = '").append(new Date()).append("',enviadoAlerta = true");
+		sql.append(" where id = ").append(agenda.getId());
+		Integer codigoAgenda = hibernateUtil.updateSQL(sql.toString());
+		agenda = consultarAgendaId(Long.parseLong(codigoAgenda.toString()));
+		return agenda;
+	}
+	
 }

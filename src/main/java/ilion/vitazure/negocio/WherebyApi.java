@@ -48,7 +48,7 @@ public class WherebyApi {
 		try {
 			HttpPost requestJson = new HttpPost(URL_API);
 			
-			StringEntity params = new StringEntity("{\"isLocked\": true,\"roomNamePattern\": \"human-short\", \"startDate\": \"" + startDate + "T" + startHour + ".00Z" + "\", \"endDate\": " +
+			StringEntity params = new StringEntity("{\"roomNamePattern\": \"human-short\", \"startDate\": \"" + startDate + "T" + startHour + ".00Z" + "\", \"endDate\": " +
 					" \"" + endDate + "T" + endHour + ".00Z" + "\"," +
 					" \"fields\": [\"hostRoomUrl\"]}");
 			

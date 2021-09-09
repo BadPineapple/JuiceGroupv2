@@ -64,7 +64,11 @@ public class Agenda {
 	  private Long idAgendaReagendamento;
 	  
 	  private Boolean reagendamentoConcluido;
-
+	  
+	  private Boolean enviadoAlerta;
+	  
+	  private Date dataHoraEnviadoAlerta;
+	  
 	  public Long getId() {
 			if (id == null) {
 				id = 0l;
@@ -229,6 +233,9 @@ public class Agenda {
 		public String getDataHoraAlterAtendimento() {
 			return Uteis.formatarDataHora(Uteis.subtrair(getDataHoraAgendamento(), Calendar.MINUTE, 5), "HH:mm");
 		}
+		public String getDataHoraAvisoAtendimento() {
+			return Uteis.formatarDataHora(Uteis.subtrair(getDataHoraAgendamento(), Calendar.MINUTE, 35), "HH:mm");
+		}
 		
 		@Override
 		public String toString() {
@@ -281,6 +288,25 @@ public class Agenda {
 
 		public void setReagendamentoConcluido(Boolean reagendamentoConcluido) {
 			this.reagendamentoConcluido = reagendamentoConcluido;
+		}
+
+		public Boolean getEnviadoAlerta() {
+			if(enviadoAlerta == null) {
+			   enviadoAlerta = Boolean.FALSE;
+			}
+			return enviadoAlerta;
+		}
+
+		public void setEnviadoAlerta(Boolean enviadoAlerta) {
+			this.enviadoAlerta = enviadoAlerta;
+		}
+
+		public Date getDataHoraEnviadoAlerta() {
+			return dataHoraEnviadoAlerta;
+		}
+
+		public void setDataHoraEnviadoAlerta(Date dataHoraEnviadoAlerta) {
+			this.dataHoraEnviadoAlerta = dataHoraEnviadoAlerta;
 		}
 		
 		

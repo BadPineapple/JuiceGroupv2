@@ -12,6 +12,7 @@ import ilion.admin.negocio.PropEnum;
 import ilion.admin.negocio.PropNegocio;
 import ilion.email.negocio.EnvioDeEmailTimer;
 import ilion.util.Uteis;
+import ilion.vitazure.negocio.JobAlertaAgenda;
 
 @Component
 public class ApplicationStartup implements ApplicationListener<ApplicationReadyEvent> {
@@ -27,6 +28,9 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 	@Autowired
 	private EnvioDeEmailTimer envioDeEmailTimer;
 	
+	@Autowired
+	private JobAlertaAgenda jobAlertaAgenda;
+	
 	@Override
 	public void onApplicationEvent(ApplicationReadyEvent applicationReadyEvent) {
 		
@@ -41,6 +45,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 		logger.info("RealPath: "+Uteis.caminhoFisico);
 		
 		envioDeEmailTimer.init();
+		jobAlertaAgenda.init();
 		
 	}
 	

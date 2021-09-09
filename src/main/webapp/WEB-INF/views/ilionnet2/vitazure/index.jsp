@@ -267,9 +267,9 @@
                                     <img src="assets/images/sebrae.png" alt="Sebrae">
                                 </figure>
 
-                                <figure>
-                                    <img src="assets/images/linea.png" alt="Linea">
-                                </figure>
+<!--                                 <figure> -->
+<!--                                     <img src="assets/images/linea.png" alt="Linea"> -->
+<!--                                 </figure> -->
 
                             </div>
                         </div>

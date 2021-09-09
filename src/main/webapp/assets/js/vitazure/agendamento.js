@@ -206,10 +206,15 @@ function efetuarPagamento($scope, $http, $window , id ,valorOnline ,valorPresenc
 	    $.ajax({
 	        url: '/api/v1/getencryption',
 	        type: 'GET',
+			data: "idProfissional="+id,
 	        contentType: 'text/plain',
 	        error: function (data, textStatus, xhr) {
-	            alert(data.responseText + " error");
-	            confirma = 0;
+	            if(data.responseText === 'true'){
+					$window.location.href = "/entrar";
+				}else{
+				   alert(data.responseText + " error");
+				}
+				document.getElementById("spinner").style.display = "none";
 	        }
 	    }).done(function (data, textStatus, jqXHR) {
 	        confirma = 1;
