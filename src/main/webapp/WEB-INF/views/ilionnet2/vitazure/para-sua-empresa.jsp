@@ -35,7 +35,7 @@
         <div id="saiba-mais" class="area-white">
             <div class="container">
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-lg-12">
                         <div class="title-internas">
                             <h3>Para sua Empresa</h3>
                 
@@ -55,33 +55,44 @@
                         </div>
                     </div>
 
-                    <div class="col-12" style="margin: 50px 0 20px 15px">
+                    <div class="col-lg-12" style="margin: 50px 0 20px 0">
                         <div class="row">
-                            <h2>Cuidamos do seu time, oferecendo com valores especiais de convenio:</h2>
+							<div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+								<img src="../assets/images/time-de-sucesso.jpg" class="img-fluid" style="border-radius:7px" />
+							</div>
+							
+							<div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
+								<span class="d-md-none d-lg-none"><br/></span>
+								<h2>Cuidamos do seu time, oferecendo com valores especiais de convenio:</h2>
+							</div>
                         </div>
 
                         <div class="row">
-                            <ul style="list-style: none; ">
-                                <li style="margin: 20px 0 0 30px; font-size: 2rem">
-                                   <span><img src="../assets/images/blue-dot.png"> Atendimento psicológico online em todas as abordagens</span>
-                                </li>
+							<div class="col-12">
+								<ul style="list-style: none; ">
+									<li style="margin: 20px 0 0 0; font-size: 2rem">
+									   <span><img src="../assets/images/blue-dot.png"> Atendimento psicológico online em todas as abordagens</span>
+									</li>
 
-                                <li style="margin: 20px 0 0 30px; font-size: 2rem">
-                                    <span><img src="../assets/images/blue-dot.png"> Check-up emocional com avaliação e prevenção em síndrome de Burnout e Gerenciamento do Estresse</span>
-                                </li>
+									<li style="margin: 20px 0 0 0; font-size: 2rem">
+										<span><img src="../assets/images/blue-dot.png"> Check-up emocional com avaliação e prevenção em síndrome de Burnout e Gerenciamento do Estresse</span>
+									</li>
 
-                                <li style="margin: 20px 0 0 30px; font-size: 2rem">
-                                    <span><img src="../assets/images/blue-dot.png"> Atendimento Breve e Focal</span>
-                                </li>
+									<li style="margin: 20px 0 0 0; font-size: 2rem">
+										<span><img src="../assets/images/blue-dot.png"> Atendimento Breve e Focal</span>
+									</li>
 
-                                <li style="margin: 20px 0 20px 30px; font-size: 2rem">
-                                    <span><img src="../assets/images/blue-dot.png"> Oficina das emoções para líderes</span>
-                                </li>
-                            </ul>
+									<li style="margin: 20px 0 20px 0; font-size: 2rem">
+										<span><img src="../assets/images/blue-dot.png"> Oficina das emoções para líderes</span>
+									</li>
+								</ul>
+							</div>
                         </div>
 
                         <div class="row" style="margin-top: 10px">
-                            <p style="font-size: 2.3rem"> Saúde Mental é o melhor investimento para que seu time saiba que você os valoriza como pessoas e assim, mantê-los mais felizes e produtivos. Seja uma empresa reconhecida pelos seus colaboradores pelo ambiente de trabalho emocionalmente seguro! Seja  <span style="color: #0097d6;">Vitazure!</span></p>
+							<div class="col-12">
+	                            <p style="font-size: 2.3rem"> Saúde Mental é o melhor investimento para que seu time saiba que você os valoriza como pessoas e assim, mantê-los mais felizes e produtivos. Seja uma empresa reconhecida pelos seus colaboradores pelo ambiente de trabalho emocionalmente seguro! Seja  <span style="color: #0097d6;">Vitazure!</span></p>
+							</div>
                         </div>
 
                     </div>

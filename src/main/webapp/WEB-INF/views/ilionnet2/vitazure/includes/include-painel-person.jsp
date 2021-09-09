@@ -6,7 +6,7 @@
                 <div class="dados-person">
                     <div class="img-person">
                         <figure>
-                            <img src="${pessoa.foto.imagemApresentar == null ? '../assets/images/perfil.png' : pessoa.foto.link}" alt="" style="height: 150px;width: 150px;">
+                            <img src="${pessoa.foto.imagemApresentar == null ? '../assets/images/perfil.png' : pessoa.foto.link}" alt="">
                         </figure>
                     </div>
                     <div class="info-person">
@@ -24,11 +24,11 @@
 <!--                     <a href="http://localhost:8080/consulta/38"  id="linkAcesso" class="button-secundary">Entrar na consulta</a> -->
                 </div>
             </div>
-            <div style="width: 100%; padding-bottom: 5px;">
-                <span class="notice-text">
-                            Todos os agendamentos seguem o horário de Brasília -
-                             <div id="hora" style="padding-left: 4px;"></div>
-                        </span>
+			
+            <div class="col-12">
+				<span class="notice-text">
+					Todos os agendamentos seguem o horário de Brasília - <div id="hora" style="display: contents;"></div>.
+				</span>
             </div>
         </div>
     </div>
