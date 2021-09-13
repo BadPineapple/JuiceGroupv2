@@ -111,7 +111,7 @@
 										</div>
 
 										<div class="horarios-disponiveis">
-											<div class="menu d-none d-md-block" layout="block" id="panelFiltrosSelecionados${profissional.id}">
+											<div class="menu d-none d-md-block" style="display: block !important;" layout="block" id="panelFiltrosSelecionados${profissional.id}">
 											</div>
 											<div id="enderecoProfissional${profissional.id}" class="col-12" style="padding-top: 15px;">
 											</div>

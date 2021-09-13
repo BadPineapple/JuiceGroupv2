@@ -2683,7 +2683,7 @@ h1.title-gray {
     .toggle-header .formacao-academica {padding: 1.5rem 0 0;}
 
     .plano-semestral {
-        margin: 2rem 0;
+        margin: 8rem 0 1rem 0;
     }
 
     .planos-description .button-secundary {
@@ -2695,6 +2695,7 @@ h1.title-gray {
 
     .planos {
         padding-top: 2rem;
+        padding-bottom: 5rem;
     }
 
     .semestral {text-align: left !important;}

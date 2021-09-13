@@ -57,7 +57,7 @@
 
                     <div class="col-12" style="margin: 50px 0 20px 15px">
                         <div class="row">
-                            <h2>Cuidamos do seu time, oferecendo com valores especiais de convenio:</h2>
+                            <h2>Cuidamos do seu time, oferecendo valores especiais de convenio:</h2>
                         </div>
 
                         <div class="row">

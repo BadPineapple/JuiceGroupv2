@@ -268,7 +268,7 @@
 	                                            </div>
 	                                         </div> 
 											 <div class="col-12" style="padding-bottom: 15px;">  
-                                        				<div class="menu d-none d-md-block" layout="block">
+                                        				<div class="menu d-none d-md-block" style="display: block !important;" layout="block">
                        											 <span id="panelFiltrosSelecionados">
  																  </span>
 																</div>
@@ -308,14 +308,15 @@
                                  <div class="row">
                                          <div class="col-12" style="margin-bottom: 3rem">
                                            <div class="input-title">
-                                                <div col-md-11 col-lg-11 col-sm-12>
+                                                <div class="col-md-11 col-lg-11 col-sm-12">
                                                   <p>Formação</p>
                                                 </div>  
-                                                <div class="col-md-1 col-lg-1 col-sm-12" style="margin-top: 28px;">
-														<a class="btn pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-default btn-sm"  ng-click =adicionarFormacao()>
-															<i class="fas fa-plus" style="font-size: 23px;"></i>
-														</a>
-												</div>  
+                                                <div class="col-md-1 col-lg-1 col-sm-12" style="display: flex;">
+															<a class="btn pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-default btn-sm"  ng-click =adicionarFormacao()>
+																<i class="fas fa-plus" style="font-size: 23px;"></i>
+															</a>
+															<p style="display: contents;color: red;">*</p>
+												</div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-12">
@@ -351,6 +352,7 @@
                                                     <button class="button-secundary checkbox-button" ng-click="perfilProfissional('formacao')" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Salvar</button>
                                                 </div>
                                             </div>
+                                        <p style="color: red;font-size: 15px;">* O "<i class="fas fa-plus" style="font-size: 14px;"></i>" é utilizado para adicionar uma Formação à sua lista.Após informar os dados, selecione o "<i class="fas fa-plus" style="font-size: 14px;"></i>" e o item será adicionado a sua lista.</p>
                                         </div>
                                     </div>
     						<div class="match-toggle">
@@ -386,10 +388,11 @@
                                                 <div col-md-11 col-lg-11 col-sm-12>
                                                   <p>Endereço</p>
                                                 </div>  
-                                                <div class="col-md-1 col-lg-1 col-sm-12" style="margin-top: 28px;">
+                                                <div class="col-md-1 col-lg-1 col-sm-12" style="display: flex">
 														<a class="btn pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-default btn-sm"  ng-click =adicionarEndereco()>
 															<i class="fas fa-plus" style="font-size: 23px;"></i>
 														</a>
+													<p style="display: contents;color: red;">*</p>	
 												</div>  
                                             </div>
                                             <div class="row">
@@ -494,6 +497,7 @@
                                                     <button class="button-secundary checkbox-button" ng-click="salvarListEndereco()" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Salvar</button>
                                                 </div>
                                             </div>
+                                          <p style="color: red;font-size: 15px;">* O "<i class="fas fa-plus" style="font-size: 14px;"></i>" é utilizado para adicionar um endereço de atendimento à sua lista.Após informar os dados, selecione o "<i class="fas fa-plus" style="font-size: 14px;"></i>" e o item será adicionado a sua lista.</p>  
                                         </div>
                                     </div>
                                 </div>
@@ -530,10 +534,11 @@
                                                 <div class="col-md-11 col-lg-11 col-sm-12">
                                                   <p>Horário Atendimento</p>
                                                 </div>  
-                                                <div class="col-md-1 col-lg-1 col-sm-12" style="margin-top: 28px;">
+                                                <div class="col-md-1 col-lg-1 col-sm-12" style="display: flex;">
 														<a class="btn pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-default btn-sm"  ng-click =adicionarHorarioAtendimento()>
 															<i class="fas fa-plus" style="font-size: 23px;"></i>
 														</a>
+													<p style="display: contents;color: red;">*</p>	
 												</div>  
                                         </div>
                                     <div class="row">
@@ -607,6 +612,7 @@
                                             <button class="button-secundary checkbox-button" ng-click="salvarListEnderecoAtendimento()" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Salvar</button>
                                         </div>
                                     </div>
+                                       <p style="color: red;font-size: 15px;">* O "<i class="fas fa-plus" style="font-size: 14px;"></i>" é utilizado para adicionar um horário de atendimento à sua lista.Após informar os dados, selecione o "<i class="fas fa-plus" style="font-size: 14px;"></i>" e o item será adicionado a sua lista.</p>  
                                   </div>  
                                 </div>
                             </div>

@@ -36,7 +36,7 @@
                                         </div>
 
                                         <div class="planos-description">
-                                            <ul style="padding-bottom: 20px;">
+                                            <ul>
                                                 <li>Agendamento online e presencial ilimitado</li>
 
                                                 <li>Anúncio de perfil no portal</li>
