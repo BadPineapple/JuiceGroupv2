@@ -21,20 +21,27 @@
 }
 
 .dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #fff;
-  min-width: 160px;
-  overflow: auto;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
+    display: none;
+    position: absolute;
+    top: 35px;
+    left: 15px;
+    background-color: #fff;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgb(0 0 0 / 20%);
+    z-index: 1;
+    text-align: left;
+    padding: 7px;
+    border-radius: 5px;
 }
 
 .dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
+    color: black;
+    padding: 6px 10px;
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+    border-radius: 4px;
 }
 
 .dropdown-content a:hover {background-color: #6DCFF6;}
