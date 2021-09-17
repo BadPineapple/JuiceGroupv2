@@ -18,7 +18,7 @@
 <body id="index" class="home">
 	<div id="app">
 		<jsp:include page="includes/include-header-internas.jsp" flush="true" />
-		<div class="area-white" style="padding-top: 191px;">
+		<div class="area-white" style="padding-top: 100px;">
 			<div class="container">
 				<angular-initializer ng-init="online='true';idTemp = ''; agenda = '';" />
 				<div class="row">

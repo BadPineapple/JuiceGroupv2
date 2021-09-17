@@ -238,7 +238,7 @@ footer ul li a.line:after {
 .pages-internas svg { margin-top: -8px;}
 
 .form-default {
-    padding: 6.4rem 0;
+    padding: 2.4rem 0;
 }
 
 .form-default .input-block {
@@ -323,7 +323,7 @@ footer ul li a.line:after {
 
 .input-block p:last-child { margin-bottom: 2rem;}
 
-.form-default .button-secundary { width: 100%; margin-left: 0;}
+.form-default .button-secundary { width: 100%; margin-left: 0; font-weight: 600}
 
 .checkbox {
     display: flex;
@@ -401,9 +401,9 @@ footer ul li a.line:after {
     display: inline-block;
     margin: 0 2.5rem;
     font-size: 1.4rem;
-    font-weight: 400;
+	line-height: 1.8rem;
+    font-weight: 600;
     color: #52545E;
-    line-height: 2.4rem;
     padding-bottom: 5px;
 }
 
@@ -530,7 +530,7 @@ header.active {
 }
 
 .area-white {
-    padding: 6.4rem 0;
+    padding: 2.4rem 0;
 }
 
 .up-photos {
@@ -1293,8 +1293,10 @@ h1.title-gray {
 }
 
 .psicologo-name h3 {
-    color: #00A1FF;
-    line-height: 3.2rem;
+    font-weight: 800!important;
+    color: #0097d6;
+    font-size: 28px;
+    line-height: 34px;
     margin-bottom: 1.3rem;
 }
 
@@ -2147,8 +2149,10 @@ h1.title-gray {
 }
 
 .search {
-    padding: 3.9rem 0 2rem;
+    padding: 2rem 0 2rem;
 }
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {font-weight: 600!important}
 
 .search form {
     display: flex;
@@ -2293,9 +2297,23 @@ h1.title-gray {
     margin: 2.5rem 0;
 }
 
-@media screen and (max-width: 400px) {
-	.fc-calendar-container {		height: 300px;	}
-	.fc-calendar .fc-row > div > span.fc-date {		font-size: 15px;	}
+@media (max-width: 400px) {
+	.fc-calendar-container {height: 300px;}
+	.fc-calendar .fc-row > div > span.fc-date {font-size: 15px;}
+	
+	.img-person figure img {
+		width: 100px!important;
+		height: 100px!important;
+	}
+	.psicologo figure, 
+	.psicologo figure img {
+		width: 150px;
+		height: 150px;
+	}
+	.perfil-psicologo .row {
+		
+		margin: 0;
+	}
 }
 
 .agenda-online {
@@ -2390,7 +2408,7 @@ h1.title-gray {
     .button-purple { font-size: 1.8rem;line-height: 2.5rem; margin-top: 1.5rem }
 
     .area-white {
-        padding: 3rem 0;
+        padding: 1.5rem 0;
     }
 
     .banner-home { background-position-x: -370px !important;}
@@ -2600,6 +2618,7 @@ h1.title-gray {
         width: 100%;
         text-align: center;
         margin-top: 2rem !important;
+        margin-bottom: 3rem !important;
     }
 
     .area-blue { padding: 10rem 0 0;}
@@ -2725,10 +2744,11 @@ h1.title-gray {
 
     .tabela-consultas thead tr td { width: 100% !important;}
 
-    .tabela-consultas tbody tr td {
-        height: 2.5rem;
-        line-height: 2.5rem;
-    }
+	.tabela-consultas tbody tr td {
+		height: auto;
+		padding: 15px;
+		line-height: 20px;
+	}
 
     .search form input { width: 100%;}
 
@@ -2742,12 +2762,13 @@ h1.title-gray {
 
 .notice-text {
     font-size: 1.6rem;
-    line-height: 1.9rem;
-    color: #ff2626;
+    line-height: 2.5rem;
+    color: red;
     display: flex;
     flex-direction: row;
     justify-content: center;
     font-weight: 600;
+    text-align: center;
 }
 
 .funciona-text {

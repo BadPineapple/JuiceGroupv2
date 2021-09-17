@@ -61,7 +61,7 @@
                 </div>
             </div>
 
-            <div class="col-2 text-right d-block d-md-none">
+            <div class="col-4 text-right d-block d-md-none">
                 <a href="#menu" class="menu-mobile">
                     <svg width="26px" height="16px" viewBox="0 0 26 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">

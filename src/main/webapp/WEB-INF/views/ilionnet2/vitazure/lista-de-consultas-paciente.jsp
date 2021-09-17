@@ -30,7 +30,7 @@
 							      <input name="pagingPage" type="hidden" value="1"/>
 								      <div class="col-md-10 col-lg-10 col-sm-12">
 								          <div class="form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed" style="width: 100% !important;">
-								           	<label for="name" class="control-label">Palavra-Chave</label>
+								           	<label for="name" class="control-label" style="justify-content: left;">Palavra-Chave</label>
 											<input type="Large" name="palavraChave" id="palavraChave" class="form-control input-group-lg" style="width: 100% !important;"/>
 										</div> 
 									</div>
