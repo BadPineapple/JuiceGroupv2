@@ -12,6 +12,7 @@
 <script type="text/javascript" src="<c:url value='../ilionnet/design/script/funcoesTinyMCE.js'/>"></script>
 <script type="text/javascript" src="../ilionnet/design/script/CalendarPopup.js"></script>
 <script type="text/javascript" src="../ilionnet/design/script/common.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.4.0/moment.min.js"></script>
 	<script type="text/javascript">
 	document.write(getCalendarStyles());
 	var cal1x = new CalendarPopup("testdiv1");
@@ -248,7 +249,7 @@
                                             </div>
                                         </div>
                                         <div class="col-12" style="padding-bottom: 15px;">  
-                                        				<div class="menu d-none d-md-block" layout="block">
+                                        				<div class="menu d-none d-md-block" style="display: block !important;" layout="block">
                        											 <span id="panelFiltrosEspecialidades">
  																  </span>
 																</div>
@@ -510,7 +511,7 @@
 		    						<div class="col-12">
 		                                            <div class="input-block">
 		                                                <label>Tempo de duração do atendimento</label>
-		                                                <select ng-model="ProfissionalVH.profissional.duracaoAtendimento" class="form-control input-sm">
+		                                                <select ng-model="ProfissionalVH.profissional.duracaoAtendimento" id="duracaoAtendimento" class="form-control input-sm">
 															<c:forEach var="duracaoAtendimento" items="${duracoes}">
 						   							          <option value="${duracaoAtendimento}">${duracaoAtendimento.valor}</option>
 												            </c:forEach>
@@ -555,7 +556,7 @@
                                         <div class="col-12 col-md-4 col-xl-4">
                                                     <div class="input-block">
                                                         <label>Hora Início</label>
-                                                        <input type="text" ng-model="horaInicio" id="horaInicio" data-mask="00:00"  onchange="validarHora(this.value,'horaInicio')"/>
+                                                        <input type="text" ng-model="horaInicio" id="horaInicio" data-mask="00:00" onchange="validarHora(this.value,'horaInicio')"/>
                                                     </div>
                                          </div>
                                         <div class="col-12 col-md-4 col-xl-4">

@@ -503,7 +503,7 @@ function AdicionarTabelaHorarioAtendimento(item, indice){
 			"<td align='center'>"+(item.horaFim)+"</td>"+
 			"<td align='center'>"+(item.atendimentoOnline ? 'sim' : 'Não')+"</td>"+
 			"<td align='center'>"+(item.atendimentoPresencial  ? 'sim' : 'Não')+"</td>"+
-			"<td align='center'>"+(typeof item.enderecoAtendimento ===  "undefined" ? '-' : item.enderecoAtendimento.logradouro)+"</td>"+
+			"<td align='center'>"+(typeof item.enderecoAtendimento ===  "undefined" || typeof item.enderecoAtendimento.id ===  "undefined" || item.enderecoAtendimento.id ===  "undefined" ? '-' : item.enderecoAtendimento.logradouro)+"</td>"+
 			"<td align='center'><a  id='btn-excluir' onclick='ExcluirHorarioAtendimento("+indice+")' style='color: red;'><i class='fas fa-trash'></i></a></td>"+
 			"</tr>");
 		
@@ -623,8 +623,23 @@ function validarHora(valor , campoInformado){
 	}else if(document.getElementById("horaFim").value !=  '' && (document.getElementById("horaInicio").value > document.getElementById("horaFim").value)){
 		alert_error("Hora Início não pode ser maior que hora fim.");
 		document.getElementById(campoInformado).value = "";
+	}else if(document.getElementById("horaFim").value !=  '' && document.getElementById("horaInicio").value != ''){
+		 var dtChegada  = document.getElementById("horaFim").value;
+	  	 var dtPartida = document.getElementById("horaInicio").value;
+		 validarTempoMinimo(dtPartida,dtChegada , campoInformado);
 	}
-	
+}
+
+function validarTempoMinimo(horaInicio , horaFim , campoInformado){
+	  var tempoMinimoConsulta = document.getElementById("duracaoAtendimento").value == 'NAO_INFORMADO' || document.getElementById("duracaoAtendimento").value == 'QUARENTA_MINUTOS' ? 40 : document.getElementById("duracaoAtendimento").value == 'CINQUENTA_MINUTOS' ? 50 : 60;
+	  var ms = moment(horaFim,"HH:mm").diff(moment(horaInicio,"HH:mm"));
+	  var d = moment.duration(ms);
+	  var hora = Math.floor(d.asHours());
+	  var minuto = Math.floor(moment.utc(ms).format(" mm"));
+	  if(hora == 0 && minuto < tempoMinimoConsulta){
+		alert_error("O intervalo entre horarios não pode ser menor que o tempo de duração atendimento.");
+		document.getElementById(campoInformado).value = "";
+	  }
 }
 
 
