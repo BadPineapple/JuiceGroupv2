@@ -36,17 +36,19 @@
 				<div class="pmd-card-body">	
 					<form ng-submit="submitProfissional()">
 						          <angular-initializer
-						            ng-init="profissional.id='${profissional.id}';
+						            ng-init=" profissional.id='${profissional.id}';
 						                     profissional.documentoCrpCrm='${profissional.documentoCrpCrm}';
+						                     profissional.conselhoProfissional='${profissional.conselhoProfissional}';
 						                     profissional.cadastroEpsi='${profissional.cadastroEpsi}';
+						                     profissional.tituloProfissional='${profissional.tituloProfissional}';
 						                     profissional.tipoProfissional='${profissional.tipoProfissional}';
 						                     profissional.especialidade='${profissional.especialidade}';
 						                     profissional.temasTrabalho='${profissional.temasTrabalho}';
 						                     profissional.duracaoAtendimento='${profissional.duracaoAtendimento}';
 						                     profissional.biografia='${profissional.biografia}';
 						                     profissional.duracaoAtendimentoValor='${profissional.duracaoAtendimentoValor}';
-						                     profissional.valorConsultaOnline='${profissional.valorConsultaOnline}';
-						                     profissional.valorConsultaPresencial='${profissional.valorConsultaPresencial}';
+						                     profissional.valorConsultaOnline='${profissional.valorOnlineFormatado}';
+						                     profissional.valorConsultaPresencial='${profissional.valorPresencialFormatado}';
 						                     profissional.tempoAntecendencia='${profissional.tempoAntecendencia}';
 						                     profissional.adolescentes='${profissional.adolescentes}';
 						                     profissional.adultos='${profissional.adultos}';
@@ -73,11 +75,13 @@
 										     profissional.dataInicioAvisoFerias='${profissional.dataInicioAvisoFerias}';
 										     profissional.dataFimAvisoFerias='${profissional.dataFimAvisoFerias}';
 										     profissional.ativo='${profissional.ativo}';
+										     profissional.dadosCompleto='${profissional.dadosCompleto}';
 										     profissional.plano='${profissional.plano}';
 										     profissional.dataInicioPlano='${profissional.dataInicioPlano}';
 										     profissional.dataFimPlano='${profissional.dataFimPlano}';
 										     profissional.tokenTransacaoPlano='${profissional.tokenTransacaoPlano}';
 										     profissional.idRecebedor='${profissional.idRecebedor}';
+										     profissional.situacaoAprovacaoProfissional='${profissional.situacaoAprovacaoProfissional}';
 										     profissional.idConta='${profissional.idConta}';
 						                     profissional.pessoa.id='${profissional.pessoa.id}';
 						                     profissional.pessoa.nome='${profissional.pessoa.nome}';
@@ -98,6 +102,7 @@
 						                     profissional.pessoa.genero='${profissional.pessoa.genero}';
                           					 profissional.pessoa.cliente ='${profissional.pessoa.cliente}';
                          					 profissional.pessoa.psicologo ='${profissional.pessoa.psicologo}';
+                         					 profissional.pessoa.confirmado='${profissional.pessoa.confirmado}';
                          					 formacaoAcademica ='${formacaoAcademica}';
                          					 enderecoAtendimento ='';
                          					descricaoFormacao ='${descricaoFormacao}';
@@ -133,6 +138,45 @@
 									           </select>
                                             </div>
                                         </div>
+					       		 </div>
+					       		 
+					       		 <div class="col-md-12 col-lg-12 col-sm-12">
+						             <div class="col-md-3 col-lg-3 col-sm-12">
+                                            <div class="form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed">
+                                                <label class="control-label">Situação Autorização</label>
+                                                <select ng-model="profissional.situacaoAprovacaoProfissional" class="form-control input-group-lg">
+                                                   <c:forEach var="situacao" items="${situacaoAtendimento}">
+				   							          <option value="${situacao}">${situacao.nome}</option>
+										            </c:forEach>
+									           </select>
+                                            </div>
+                                      </div>
+						             <div class="col-md-3 col-lg-3 col-sm-12">
+                                            <div class="form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed">
+                                                <label class="control-label">Plano</label>
+                                                <select ng-model="profissional.plano" class="form-control input-group-lg">
+				   							          <option value=""> </option>
+				   							          <option value="plano_mensal">Plano Mensal</option>
+				   							          <option value="plano_mensal_gratuito">Plano Mensal Gratuito</option>
+				   							          <option value="plano_semestral">Plano Semestral</option>
+				   							          <option value="plano_semestral_gratuito">Plano Semestral Gratuito</option>
+				   							          <option value="plano_anual">Plano Anual</option>
+				   							          <option value="plano_anual_gratuito">Plano Anual Gratuito</option>
+									           </select>
+                                            </div>
+                                      </div>
+						             <div class="col-md-3 col-lg-3 col-sm-12">
+						               <div class=" form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed">
+						                <label>Data Inicio Plano</label>
+						                <input type="text" class="form-control" data-mask="00/00/0000"  id="dataInicioPlano"  ng-model="profissional.dataInicioPlano" ng-blur="">
+						              </div>
+						         	</div>
+						             <div class="col-md-3 col-lg-3 col-sm-12">
+						               <div class=" form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed">
+						                <label>Data Fim Plano</label>
+						                <input type="text" class="form-control" data-mask="00/00/0000"  id="dataFimPlano"  ng-model="profissional.dataFimPlano" ng-blur="">
+						              </div>
+						         	</div>
 					       		 </div>
 					       		 
 					       		 <div class="col-md-12 col-lg-12 col-sm-12">
@@ -197,40 +241,6 @@
                                             </div>
                                         </div>
 							</div>
-							
-							<div class="col-md-12 col-lg-12 col-sm-12">
-							  <div class="col-md-4 col-lg-4 col-sm-12">
-                                 <div class="form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed">
-                                    <label class="control-label">Especialidade</label>
-                                       <select ng-model="profissional.especialidade" class="form-control input-group-lg">
-								 		<c:forEach var="especialidade" items="${especialidades}">
-				   				          <option value="${especialidade}">${especialidade.valor}</option>
-								        </c:forEach>
-								      </select>
-                                   </div>
-                                 </div>
-								<div class="col-md-4 col-lg-4 col-sm-12">
-                                            <div class="form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed">
-                                               <label class="control-label">Temas de Trabalho</label>
-                                               <select ng-model="profissional.temasTrabalho" class="form-control input-group-lg">
-													<c:forEach var="temas" items="${temasTrabalho}">
-				   							          <option value="${temas}">${temas.valor}</option>
-										            </c:forEach>
-									           </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-4 col-lg-4 col-sm-12">
-                                            <div class="form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed">
-                                                <label class="control-label">Tempo de duração do atendimento</label>
-                                                <select ng-model="profissional.duracaoAtendimento" class="form-control input-group-lg">
-													<c:forEach var="duracaoAtendimento" items="${duracoes}">
-				   							          <option value="${duracaoAtendimento}">${duracaoAtendimento.valor}</option>
-										            </c:forEach>
-									           </select>
-                                            </div>
-                                        </div>
-							    </div>
 							    <div class="col-md-12 col-lg-12 col-sm-12">
                                     <div class="form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed">
                                        <label class="control-label">Bibliografia</label>
@@ -241,8 +251,8 @@
                                  <div class="col-md-12 col-lg-12 col-sm-12">
                                         <div class="col-md-3 col-lg-3 col-sm-12">
                                             <div class="form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed">
-                                                <label class="control-label">Tempo de consulta:</label>
-                                                <select ng-model="profissional.duracaoAtendimentoValor" class="form-control input-group-lg">
+                                                <label class="control-label">Tempo de duração do atendimento</label>
+                                                <select ng-model="profissional.duracaoAtendimento" class="form-control input-group-lg">
 													<c:forEach var="duracaoAtendimento" items="${duracoes}">
 				   							          <option value="${duracaoAtendimento}">${duracaoAtendimento.valor}</option>
 										            </c:forEach>
@@ -258,7 +268,7 @@
                                         <div class="col-md-3 col-lg-3 col-sm-12">
                                             <div class="form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed">
                                                 <label class="control-label">Valor da consulta presencial:</label>
-                                                <input type="text" ng-model="profissional.valorConsultaPresencial" class="valorMonetario form-control input-group-lg"   />
+                                                <input type="text" ng-model="profissional.valorConsultaPresencial" id="valorConsultaPresencial" class="valorMonetario form-control input-group-lg"   />
                                             </div>
                                         </div>
                                         <div class="col-md-3 col-lg-3 col-sm-12">
@@ -481,7 +491,7 @@
 <script src="/assets/js/bundle.libs.angular.js"></script>
 <script src="/assets/js/vitazure/cliente.js"></script>
 <script>
-$('.valorMonetario').mask('#.##0.00', {reverse: true});
+$('.valorMonetario').mask('#.##0,00', {reverse: true});
 </script>
 <c:if test="${param.m == 'ok'}">
 	<button 

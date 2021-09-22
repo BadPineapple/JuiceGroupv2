@@ -67,7 +67,7 @@
 				</div>
 				<div class="row">
 					<div class="col-12">
-					  <iframe id="frameWhereby" src="${pessoa.cliente ? agenda.urlAtendimentoOnline : agenda.hostUrlAtendimentoOnline}&?displayName=${pessoa.nome}" allow="camera; microphone;" style="width: 100%; margin: 0 auto; left: 20px; height:600px; border: none; border-radius: 12px;"></iframe> 
+					  <iframe id="frameWhereby" src="${agenda.urlAtendimentoOnline}&?displayName=${pessoa.nome}" allow="camera; microphone;" style="width: 100%; margin: 0 auto; left: 20px; height:600px; border: none; border-radius: 12px;"></iframe> 
 					</div>
 				</div>
 				<p style="padding-top: 10px; text-align: center; font-size: 14px; line-height: 20px; font-style: italic; color: #3F8608"><i class="fas fa-lock" style="padding-right: 5px"></i> Sua conexão é protegida com a criptógracia de ponta a ponta.</p>

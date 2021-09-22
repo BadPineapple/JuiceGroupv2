@@ -147,6 +147,8 @@ public class Profissional implements Serializable{
 	  
 	  private Boolean dadosCompleto;
 	  
+	  @Enumerated(EnumType.STRING)
+	  private SituacaoAprovacaoProfissionalEnum situacaoAprovacaoProfissional;
 
 	public Long getId() {
 		if (id == null) {
@@ -636,7 +638,7 @@ public class Profissional implements Serializable{
 	}
 
 	public String getPlanoApresentar() {
-	  return getPlano().equals("plano_mensal") ? "Mensal" : getPlano().equals("plano_semestral") ? "Semestral" :  "Anual";
+	  return getPlano().equals("plano_mensal") || getPlano().equals("plano_mensal_gratuito") ? "Mensal" : getPlano().equals("plano_semestral") || getPlano().equals("plano_semestral_gratuito") ? "Semestral" :  "Anual";
 	}
 	
 	public Boolean getDadosProficionalCompleto() {		
@@ -673,4 +675,19 @@ public class Profissional implements Serializable{
 	public String getValorPresencialFormatado() {
 		return Uteis.formatarValorMoedaPTBR(getValorConsultaPresencial());
 	}
+
+	public SituacaoAprovacaoProfissionalEnum getSituacaoAprovacaoProfissional() {
+		if (situacaoAprovacaoProfissional == null) {
+			situacaoAprovacaoProfissional = SituacaoAprovacaoProfissionalEnum.PENDENTE;
+		}
+		return situacaoAprovacaoProfissional;
+	}
+
+	public void setSituacaoAprovacaoProfissional(SituacaoAprovacaoProfissionalEnum situacaoAprovacaoProfissional) {
+		this.situacaoAprovacaoProfissional = situacaoAprovacaoProfissional;
+	}
+
+	
+	
+	
 }

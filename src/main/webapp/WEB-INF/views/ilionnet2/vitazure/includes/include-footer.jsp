@@ -60,6 +60,8 @@
                         <li><a href="${arqTermos}" class="line" target="_blank">Termos e condições de uso</a></li>
 
                         <li><a href="${arqPolitica}" class="line" target="_blank">Política de privacidade</a></li>
+                        
+                        <li><a href="<ilion:url/>ouvidoria" class="line">Ouvidoria</a></li>
 
                     </ul>
                 </div>

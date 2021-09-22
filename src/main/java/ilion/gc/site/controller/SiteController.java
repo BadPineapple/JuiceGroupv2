@@ -440,7 +440,7 @@ public class SiteController extends CustomErrorController {
 			request.setAttribute("especialidades", EspecialidadesEnum.values());
 			request.setAttribute("estados", EstadoEnum.values());
 			modelMap.addAttribute("pessoa", PessoaSessao);
-			return "/ilionnet2/vitazure/resultado-de-busca";
+			return "/ilionnet2/vitazure/resultado-busca_aberta";
 		}
 	 
 	 @GetMapping("/vitazure/profissionais-externa")
@@ -459,6 +459,24 @@ public class SiteController extends CustomErrorController {
 			modelMap.addAttribute("pessoa", PessoaSessao);
 			return "/ilionnet2/vitazure/resultado-busca_aberta";
 		}
+	 	
+	    @GetMapping("/resultado-de-busca-externa/{palavraChave}/{especialista}/{estado}/{cidade}")
+		public String buscaProfissional(HttpServletRequest request, @PathVariable String palavraChave,@PathVariable String especialista , @PathVariable String estado,@PathVariable String cidade) {
+			Pessoa PessoaSessao = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
+			List<Profissional> lisProfissional = profissionalNegocio.consultarProfissionaisFiltro(palavraChave,especialista,estado,cidade);
+			lisProfissional.stream().forEach(profissional-> {
+				profissional.getPessoa().setCidade(enderecoNegocio.consultarCidadeEnderecoPorProfissional(profissional.getId()));
+			});
+			request.setAttribute("pessoa", PessoaSessao);
+			request.setAttribute("areaRestrita", true);
+			consultarDataDisponivelProfissionais(lisProfissional, false, false);
+			request.getSession().setAttribute("listProfissionais", lisProfissional);
+			request.setAttribute("tiposProfissional", TipoProfissionalEnum.values());
+			request.setAttribute("especialidades", EspecialidadesEnum.values());
+			request.setAttribute("estados", EstadoEnum.values());
+			return "/ilionnet2/vitazure/resultado-busca_aberta";
+		}
+	 
 	 
 		@RequestMapping("/vitazure/consultarDatasProfissional/{data}/{profissional}")
 		public ResponseEntity<String> consultaHorarioAtendimento(@PathVariable String data,@PathVariable Long profissional) {
@@ -480,4 +498,11 @@ public class SiteController extends CustomErrorController {
 		 request.setAttribute("agenda", agenda);
 		 return "/ilionnet2/vitazure/htmlTeste"; 
 	 }
+	 
+	 @GetMapping("/ouvidoria")
+	 public String ouvidoria(HttpServletRequest request) {
+	  Pessoa PessoaSessao = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
+	  request.setAttribute("pessoa", PessoaSessao);
+	  return "/ilionnet2/vitazure/ouvidoria";
+	}
 }

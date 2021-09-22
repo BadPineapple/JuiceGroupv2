@@ -28,7 +28,7 @@ public class EnvioEmailConfirmacao extends Thread{
 	@Override
 	public void run() {
     	try {
-	    	Thread.sleep(5*1000);
+	    	Thread.sleep(20*1000);
 			pessoaNegocio.emailAtivacao(pessoa);
     	}	
 		 catch (Exception e) {

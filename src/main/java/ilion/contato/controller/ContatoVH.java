@@ -38,6 +38,8 @@ public class ContatoVH {
 	//uso interno no Ilionnet
 	private Boolean enviarEmail;
 	
+	private Boolean ouvidoria;
+	
 	public ContatoVH() {
 		super();
 		grupo = "Visitante do site";
@@ -198,5 +200,16 @@ public class ContatoVH {
 		this.dataRetorno = dataRetorno;
 	}
 
+	public Boolean getOuvidoria() {
+		if (ouvidoria == null) {
+			ouvidoria = false;
+		}
+		return ouvidoria;
+	}
 
+	public void setOuvidoria(Boolean ouvidoria) {
+		this.ouvidoria = ouvidoria;
+	}
+
+	
 }

@@ -38,6 +38,8 @@ public class Pessoa implements Serializable{
 	  private Boolean cliente;
 	  private Boolean psicologo;
 	  private Boolean confirmado;
+	  private Boolean pessoaImportada;
+	  private String nomeResponsavelImportacao;
 	  
 	  @ManyToOne
 	  @JoinColumn(nullable = true)
@@ -213,6 +215,24 @@ public class Pessoa implements Serializable{
 	  
 	public String getToken() {
 		return StringUtil.encodePassword(getEmail());
+	}
+	public Boolean getPessoaImportada() {
+		if(pessoaImportada == null) {
+			pessoaImportada = Boolean.FALSE;
+		}
+		return pessoaImportada;
+	}
+	public void setPessoaImportada(Boolean pessoaImportada) {
+		this.pessoaImportada = pessoaImportada;
+	}
+	public String getNomeResponsavelImportacao() {
+		if(nomeResponsavelImportacao == null) {
+			nomeResponsavelImportacao = "";
+		}
+		return nomeResponsavelImportacao;
+	}
+	public void setNomeResponsavelImportacao(String nomeResponsavelImportacao) {
+		this.nomeResponsavelImportacao = nomeResponsavelImportacao;
 	}
 	  
 	  

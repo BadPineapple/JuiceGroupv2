@@ -134,6 +134,7 @@
 										    ProfissionalVH.profissional.tokenTransacaoPlano='${profissional.tokenTransacaoPlano}';
 										    ProfissionalVH.profissional.idRecebedor='${profissional.idRecebedor}';
 										    ProfissionalVH.profissional.idConta='${profissional.idConta}';
+										    ProfissionalVH.profissional.situacaoAprovacaoProfissional='${profissional.situacaoAprovacaoProfissional}';
 						                    ProfissionalVH.profissional.pessoa.id='${profissional.pessoa.id}';
 						                    ProfissionalVH.profissional.pessoa.nome='${profissional.pessoa.nome}';
 						                    ProfissionalVH.profissional.pessoa.email='${profissional.pessoa.email}';

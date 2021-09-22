@@ -17,6 +17,7 @@ import ilion.admin.negocio.PropEnum;
 import ilion.admin.negocio.PropNegocio;
 import ilion.admin.negocio.Usuario;
 import ilion.email.negocio.Email;
+import ilion.email.negocio.EmailNegocio;
 import ilion.email.negocio.EmailSenderFactory;
 import ilion.util.StatusEnum;
 import ilion.util.StringUtil;
@@ -45,6 +46,9 @@ public class PessoaNegocio {
 	public final static String AGENDA_SESSAO = "agendaPessoa";
 	
 	public final static String PROFISSIONAL_COMPLETO = "profissonalSessaoCompleto";
+	
+	@Autowired
+	private EmailNegocio emailNegocio;
 	
 	public Pessoa consultarPorId(Long id) {
 		return (Pessoa) hibernateUtil.findById(Pessoa.class, id);
@@ -242,18 +246,13 @@ public void emailAtivacao(Pessoa pessoaVO) throws Exception {
 		String url = urlProp+"/ilionnet/templateConfirmacao?id="+pessoaVO.getId();
 		String assunto = "Ativação - "+nomeEmpresaProp;
 		String html = Uteis.getHtml(url);
-
 		html = new String(html.getBytes(StandardCharsets.ISO_8859_1));
-
 		Email e = new Email();
 		e.setToEmail(pessoaVO.getEmail());
 		e.setToName(pessoaVO.getNome());
 		e.setSubject(assunto);
 		e.setMessage(html);
-		
-		EmailSenderFactory emailSenderFactory = 
-				SpringApplicationContext.getBean(EmailSenderFactory.class);
-		emailSenderFactory.getInstance().send(e);
+		emailNegocio.adicionarEmail(e);
 	}	
 
 }

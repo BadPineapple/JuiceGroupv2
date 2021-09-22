@@ -58,7 +58,7 @@ public class PessoaController {
 	    		  pessoa.setFoto(arquivoNegocio.inserir(pessoa.getFoto()));
 	    	  }else if(pessoa.getFoto() == null || pessoa.getFoto().getId().equals("")) {
 						pessoa.setFoto(null);
-					}
+			  }
 
 			  pessoa.setEmail(pessoa.getEmail().toLowerCase(Locale.ROOT));
 
@@ -118,6 +118,9 @@ public class PessoaController {
 	  @ResponseBody
 	  public ResponseEntity<JsonString> atualizarPerfilProfissional(HttpServletRequest request,@RequestBody Profissional profissional) {
 	      try {
+	    	  if(profissional.getPessoa().getFoto() == null || profissional.getPessoa().getFoto().getId().equals("")) {
+	    		  profissional.getPessoa().setFoto(null);
+	    	  }
 	    	  profissional.setPessoa(pessoaNegocio.incluirAtualizar(profissional.getPessoa()));
 	    	  profissional = profissionalNegocio.incluirAtualizar(profissional);
 	    	  

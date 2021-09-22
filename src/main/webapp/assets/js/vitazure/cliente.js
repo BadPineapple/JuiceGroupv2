@@ -37,9 +37,14 @@ function postProfissional($scope, $http, $window) {
 	$scope.profissional.convenio40 = document.getElementById("convenio40").checked;
 	$scope.profissional.convenio50 = document.getElementById("convenio50").checked;
 	$scope.profissional.convenio60 = document.getElementById("convenio60").checked;
+	var valorconsultaOnline = document.getElementById("valorconsultaOnline").value;
+	$scope.profissional.valorConsultaOnline = valorconsultaOnline.replace('.','').replace('.','').replace(',','.')
+	var valorConsultaPresencial = document.getElementById("valorConsultaPresencial").value;
+	$scope.profissional.valorConsultaPresencial = valorConsultaPresencial.replace('.','').replace('.','').replace(',','.')
     $http.post("/vitazure/ilionnet/perfilProfissional", $scope.profissional)
         .then(function (response) {
             alert_success(response.data.message, () => {
+	           document.location.reload(true);
             });
         }).catch(function (response) {
         alert_error(response.data.message);

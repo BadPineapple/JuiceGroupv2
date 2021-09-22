@@ -29,6 +29,7 @@ import ilion.vitazure.enumeradores.ConselhoProfissionalEnum;
 import ilion.vitazure.enumeradores.DuracaoAtendimentoEnum;
 import ilion.vitazure.enumeradores.EspecialidadesEnum;
 import ilion.vitazure.enumeradores.EstadoEnum;
+import ilion.vitazure.enumeradores.SituacaoAprovacaoProfissionalEnum;
 import ilion.vitazure.enumeradores.TipoContaEnum;
 import ilion.vitazure.enumeradores.TipoProfissionalEnum;
 import ilion.vitazure.model.Agenda;
@@ -129,6 +130,7 @@ public class ProfissionalNegocio {
 		List list =  hibernateUtil.list(subquery);
 		DetachedCriteria dc = DetachedCriteria.forClass(Profissional.class);
 		dc.add(Restrictions.eq("ativo", Boolean.TRUE));
+		dc.add(Restrictions.eq("situacaoAprovacaoProfissional", SituacaoAprovacaoProfissionalEnum.AUTORIZADO));
 		dc.add(Restrictions.eq("dadosCompleto", Boolean.TRUE));
         if (!list.isEmpty()) {
         	dc.add(Restrictions.not(Restrictions.in("id", list)));
@@ -229,6 +231,7 @@ public class ProfissionalNegocio {
 	public List<Profissional> consultarProfissionaisFiltro(String palavraChave , String especialista ,  String estado, String cidade) {
 		DetachedCriteria dc = DetachedCriteria.forClass(Profissional.class);
 		dc.add(Restrictions.eq("ativo", Boolean.TRUE));
+		dc.add(Restrictions.eq("situacaoAprovacaoProfissional", SituacaoAprovacaoProfissionalEnum.AUTORIZADO));
 		dc.add(Restrictions.eq("dadosCompleto", Boolean.TRUE));
 		DetachedCriteria subquery = DetachedCriteria.forClass(Profissional.class);
 		subquery.add( Restrictions.eq("avisoFerias", Boolean.TRUE)).add(Restrictions.ge("dataInicioAvisoFerias", Uteis.formatarDataHora(new Date(), "dd/MM/YYY"))).add(Restrictions.le("dataFimAvisoFerias", Uteis.formatarDataHora(new Date(), "dd/MM/YYY")));

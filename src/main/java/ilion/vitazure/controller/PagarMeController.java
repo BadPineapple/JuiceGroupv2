@@ -25,10 +25,12 @@ import ilion.util.Uteis;
 import ilion.util.contexto.autorizacao.AcessoLivre;
 import ilion.util.contexto.autorizacao.PessoaLogada;
 import ilion.util.json.JsonString;
+import ilion.vitazure.enumeradores.SituacaoAprovacaoProfissionalEnum;
 import ilion.vitazure.model.PagamentoPagarMe;
 import ilion.vitazure.model.Pessoa;
 import ilion.vitazure.model.Profissional;
 import ilion.vitazure.negocio.AgendaNegocio;
+import ilion.vitazure.negocio.EnvioEmailConsulta;
 import ilion.vitazure.negocio.PagarMeNegocio;
 import ilion.vitazure.negocio.ProfissionalNegocio;
 
@@ -47,6 +49,9 @@ public class PagarMeController {
   
   @Autowired
   private AgendaNegocio agendaNegocio;
+  
+  @Autowired
+  private EnvioEmailConsulta envioEmailConsulta;
   
 
   private String jsonString;
@@ -132,6 +137,10 @@ public class PagarMeController {
 			profissional.setDataFimPlano(Uteis.formatarDataHora(Uteis.acrescentar(new Date(), Calendar.DATE, profissional.getQuantidadesDiasVencimentoPlano()) , "dd-MM-YYYY"));
 			profissional.setTokenTransacaoPlano(token);
 			profissional.setIdTransacao(tx.getId());
+			if(!profissional.getSituacaoAprovacaoProfissional().equals(SituacaoAprovacaoProfissionalEnum.PENDENTE)) {
+				profissional.setSituacaoAprovacaoProfissional(SituacaoAprovacaoProfissionalEnum.PENDENTE);
+				envioEmailConsulta.enviarMensagemAutorizarProfissional(profissional);
+			}
 			profissionalNegocio.incluirAtualizar(profissional);
 			Transaction capturarTransacao = new Transaction().find(tx.getId());
 			capturarTransacao.capture(tx.getAmount());

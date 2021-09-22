@@ -1,5 +1,6 @@
 package ilion.vitazure.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,11 +10,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ilion.CustomErrorController;
 import ilion.admin.negocio.Usuario;
+import ilion.contato.negocio.ArquivoTextoContatoImportacao;
+import ilion.contato.negocio.ContatoGrupo;
+import ilion.contato.negocio.ContatoImportacao;
+import ilion.util.Uteis;
 import ilion.util.VLHForm;
 import ilion.util.ValueListInfo;
 import ilion.util.contexto.autorizacao.UsuarioLogado;
@@ -22,6 +30,7 @@ import ilion.vitazure.enumeradores.DuracaoAtendimentoEnum;
 import ilion.vitazure.enumeradores.EspecialidadesEnum;
 import ilion.vitazure.enumeradores.EstadoEnum;
 import ilion.vitazure.enumeradores.FormacaoEnum;
+import ilion.vitazure.enumeradores.SituacaoAprovacaoProfissionalEnum;
 import ilion.vitazure.enumeradores.TemasTrabalhoEnum;
 import ilion.vitazure.enumeradores.TempoAntecendenciaEnum;
 import ilion.vitazure.enumeradores.TipoContaEnum;
@@ -31,6 +40,7 @@ import ilion.vitazure.model.FormacaoAcademica;
 import ilion.vitazure.model.Pessoa;
 import ilion.vitazure.model.Profissional;
 import ilion.vitazure.negocio.AgendaNegocio;
+import ilion.vitazure.negocio.ArquivoTextoImportarFuncionario;
 import ilion.vitazure.negocio.EnderecoNegocio;
 import ilion.vitazure.negocio.FormacaoAcademicaNegocio;
 import ilion.vitazure.negocio.PagarMeNegocio;
@@ -125,6 +135,7 @@ public class menuVitazureController  extends CustomErrorController{
 			}
 			request.setAttribute("profissional", profissional);
 			request.setAttribute("estados", EstadoEnum.values());
+			request.setAttribute("situacaoAtendimento", SituacaoAprovacaoProfissionalEnum.values());
 			request.setAttribute("tiposProfissional", TipoProfissionalEnum.values());
 			request.setAttribute("especialidades", EspecialidadesEnum.values());
 			request.setAttribute("temasTrabalho", TemasTrabalhoEnum.values());
@@ -198,4 +209,46 @@ public class menuVitazureController  extends CustomErrorController{
 		
 		return "/ilionnet/modulos/vitazure/movimentacoesCons";
 	}
+		
+	@RequestMapping("/importarFuncionario")
+	@UsuarioLogado()
+	public String contatoImportar() throws Exception {
+		return "/ilionnet/modulos/vitazure/importarFuncionario";
+	}
+	
+	@PostMapping("/funcionario-importar-executar")
+	@UsuarioLogado()
+	public String contatoImportarExecutar(HttpServletRequest request){
+
+		try {
+			MultipartFile arquivo = null;
+	
+			if( request instanceof MultipartHttpServletRequest ) {
+				MultipartHttpServletRequest mRequest = (MultipartHttpServletRequest) request;
+	
+				arquivo = mRequest.getFile("arquivo");
+			}
+	
+			if( arquivo == null || arquivo.isEmpty() ) {
+				return "redirect:importarFuncionario.sp?m=nenhum-arquivo";
+			}
+	
+			Usuario usuarioSessao = (Usuario) request.getSession().getAttribute("usuarioSessao");
+	
+			ContatoImportacao contatoImportacao =  new ArquivoTextoImportarFuncionario (arquivo.getInputStream(), usuarioSessao);
+
+		    contatoImportacao.importar();
+
+		String mensagem = contatoImportacao.getLog();
+
+		request.setAttribute("mensagem", mensagem);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "/ilionnet/modulos/vitazure/importarFuncionario";
+		
+	}
+	
 }

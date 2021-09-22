@@ -36,6 +36,7 @@ import ilion.util.exceptions.EhNuloOuVazioException;
 import ilion.util.exceptions.EmailInvalidoException;
 import ilion.util.exceptions.NomeNuloException;
 import ilion.util.persistencia.HibernateUtil;
+import ilion.vitazure.negocio.EnvioEmailConsulta;
 import net.mlw.vlh.ValueList;
 
 @Service
@@ -55,6 +56,9 @@ public class ContatoNegocio {
 
 	@Autowired
 	private ArquivoUteis arquivoUteis;
+	
+	@Autowired
+	private EnvioEmailConsulta envioEmailConsulta;
 
 	public Object consultar(Class clazz, Long id) {
 		return hibernateUtil.findById(clazz, id);
@@ -478,7 +482,8 @@ public class ContatoNegocio {
 		contato.setCadastradoPor("Web Site");
 
 		contato.setPermissaoEmail(contatoVH.getPermissaoEmail());
-
+		contato.setOuvidoria(contatoVH.getOuvidoria());
+		
 		if (contato.getId() == null) {
 			contato.setDataCriacao(new Date());
 			contato = (Contato) hibernateUtil.save(contato);
@@ -490,7 +495,7 @@ public class ContatoNegocio {
 
 		adicionarContatoComentario(contato, contatoVH);
 
-		enviarFormularioContatoEmail(contato, contatoVH);
+		envioEmailConsulta.enviarMensagemForm(contato, contatoVH);
 
 		return contato;
 	}

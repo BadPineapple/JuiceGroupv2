@@ -77,6 +77,8 @@ public class Contato implements Serializable {
   @Transient
   private List<Long> idsGrupos;
 
+  private Boolean ouvidoria;
+  
   public Contato() {
     super();
   }
@@ -291,4 +293,11 @@ public class Contato implements Serializable {
     this.dataNascimentoString = dataNascimentoString;
   }
 
+  public Boolean getOuvidoria() {
+	return ouvidoria;
+  }
+	
+  public void setOuvidoria(Boolean ouvidoria) {
+	this.ouvidoria = ouvidoria;
+  }
 }

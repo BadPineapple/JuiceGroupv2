@@ -98,6 +98,7 @@ public class VitazureController {
 	
 	@GetMapping("/vitazure/informacoes-perfil")
 	public String carregar(ModelMap modelMap, HttpServletRequest request) {
+		try {
 		Pessoa pessoa = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
 		List<Agenda> listAgendaDia = agendaNegocio.consultarAgendaDia(pessoa);
 		pessoa = pessoaNegocio.consultarPorId(pessoa.getId());
@@ -110,6 +111,7 @@ public class VitazureController {
 		modelMap.addAttribute("agendaDia", listAgendaDia);
 		if (pessoa.getCpf().equals("")) {
 			request.setAttribute("estados", EstadoEnum.values());
+			profissional = profissionalNegocio.incluirAtualizar(profissional);
 			return "/ilionnet2/vitazure/completar-cadastro";
 		}else if(pessoa.getCliente()) {
 			request.setAttribute("tiposProfissional", TipoProfissionalEnum.values());
@@ -136,6 +138,10 @@ public class VitazureController {
 			request.setAttribute("enderecoAtendimento", enderecoNegocio.consultarEnderecoPorPessoa(profissional.getId()));
 			return "/ilionnet2/vitazure/informacoes-perfil";
 		}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "/ilionnet2/vitazure/completar-cadastro";
 	}
 	@RequestMapping("/deslogar")
 	public String deslogar(HttpServletRequest request) {
@@ -374,6 +380,10 @@ public class VitazureController {
 		 public String apresentarDadosConsulta(ModelMap modelMap,HttpServletRequest request) {
 			 Pessoa PessoaSessao = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
 			 Agenda agenda = (Agenda) request.getSession().getAttribute("agenda");
+			 agenda = agendaNegocio.consultarAgendaId(agenda.getId());
+			 if(agenda.getStatus().equals(StatusEnum.REALIZADO)) {
+				 return "redirect:/vitazure/lista-de-consultas"; 
+			 }
 			 Profissional profissional = profissionalNegocio.consultarPorId(agenda.getProfissional().getId());
 			 String horaFimAtendimento = Uteis.calculodeHoraSemIntervalo(agenda.getHoraInicioAgenda(), 1, (Integer.parseInt(profissional.getDuracaoAtendimento().getNome())));
 			 request.setAttribute("horaFimAtendimento", horaFimAtendimento);

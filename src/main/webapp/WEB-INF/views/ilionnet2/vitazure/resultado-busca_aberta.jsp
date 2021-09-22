@@ -168,7 +168,7 @@
 <!--                                     </select> -->
 <!--                                 </div> -->
 	                                <div class="col-12 d-md-block col-md-12 col-xl-12">
-	                                    <button class="button-secundary" ng-click="consultarProfissional()" style="width: 100%">Buscar</button>
+	                                    <button class="button-secundary" ng-click="consultarProfissionalAberta()" style="width: 100%">Buscar</button>
 	                                </div>
                             </div>
                         </form>

@@ -61,29 +61,19 @@
 
   </li>
   
-<!--   <li> -->
+ <li>
 
-<%--    <a class="pmd-ripple-effect" href="<ilion:url/>ilionnet/logout"> --%>
-<!--     <i class="media-left media-middle"> -->
-<!--      <svg version="1.1" -->
-<!--           id="Layer_1" -->
-<!--           x="0px" -->
-<!--           y="0px" -->
-<!--           width="18px" -->
-<!--           height="18px" -->
-<!--           viewBox="288.64 337.535 18 18" -->
-<!--           enable-background="new 288.64 337.535 18 18" -->
-<!--           xml:space="preserve"> -->
-<!--                 <path fill="#020202" d="M295.39,337.535v2.25h9v13.5h-9v2.25h11.25v-18H295.39z M297.64,342.035v3.375h-9v2.25h9v3.375l3.375-3.375 -->
-<!--                     l1.125-1.125l-1.125-1.125L297.64,342.035z"/> -->
-<!--                 </svg> -->
-<!--     </i> -->
+   <a class="pmd-ripple-effect" href="<ilion:url/>importarFuncionario">
 
-<!--     <span class="media-body">Empresa</span> -->
+    <i class="media-left media-middle">
+      <i class="fas fa-file-upload" style="font-size: 25px;"></i>
+    </i>
+    <span class="media-body">Importar Funcionário</span>
 
-<!--    </a> -->
+   </a>
 
-<!--   </li> -->
+  </li> 
+
 
 <ilion:permissao tipo="usuario.sp">
   <li>

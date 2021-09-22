@@ -43,6 +43,9 @@ function agendamentoController($scope, $http, $window) {
     $scope.consultarProfissional = function () {
         consultarProfissional($scope, $http, $window);
     };
+    $scope.consultarProfissionalAberta = function () {
+        consultarProfissionalAberta($scope, $http, $window);
+    };
 	$scope.buscaCidades = function () {
         buscaCidades($scope, $http, $window);
     };
@@ -306,6 +309,15 @@ function consultarProfissional($scope, $http, $window) {
     $http.get("/resultado-de-busca/"+$scope.palavraChave+"/"+$scope.especialista+"/"+$scope.estado+"/"+cidade)
         .then(function (response) {
            $window.location.href = "/vitazure/profissionais";
+        }).catch(function (response) {
+        alert_error(response.data.message);
+    })
+}
+function consultarProfissionalAberta($scope, $http, $window) {
+	var cidade = document.getElementById("cidade").value === '' ? null : document.getElementById("cidade").value;
+    $http.get("/resultado-de-busca-externa/"+$scope.palavraChave+"/"+$scope.especialista+"/"+$scope.estado+"/"+cidade)
+        .then(function (response) {
+            $window.location.href = "/vitazure/profissionais-externa";
         }).catch(function (response) {
         alert_error(response.data.message);
     })
