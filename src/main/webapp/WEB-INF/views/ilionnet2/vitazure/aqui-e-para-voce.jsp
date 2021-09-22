@@ -6,6 +6,14 @@
 	<jsp:include page="includes/include-head.jsp" flush="true" />
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>	
 	<script src="../assets/js/vitazure/buscaProfissional.js"></script>
+
+    <style type="text/css">
+        .banner-content{
+            height: 125vh;
+        }
+
+    </style>
+    
 </head>
 <body id="index" class="home">
     <div id="app">
@@ -15,8 +23,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12 col-xl-9">
-                        <h1 class="title-gray">Fale com seu<br/> Psicólogo de<br/> forma segura e de<br/> qualquer lugar.</h1>
-                        <p>Busque por profissional ou especialidade.</p>
+                        <h1 class="title-gray" style="font-size: 5.0rem;">A Terapia faz bem, permita que haja transformações significativas em sua existência. Fale com seu psicólogo.</h1>
+                        <p>Com a ajuda do psicólogo, é possível, busque por <br> profissional ou especialidade.</p>
                         <form ng-submit="consultarProfissionalExterna()"  class="form-highlight">
                             <select ng-model="tipoProfissional">
                                 <option value="">Tipo de profissional</option>

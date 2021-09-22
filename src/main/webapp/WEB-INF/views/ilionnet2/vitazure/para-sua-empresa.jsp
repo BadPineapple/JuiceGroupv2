@@ -63,7 +63,7 @@
 							
 							<div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
 								<span class="d-md-none d-lg-none"><br/></span>
-								<h2>Cuidamos do seu time, oferecendo com valores especiais de convenio:</h2>
+								<h2>Cuidamos do seu time, oferecendo valores especiais de convenio:</h2>
 							</div>
                         </div>
 

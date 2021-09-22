@@ -90,6 +90,15 @@
         transform: scale(1.1);
         width: 150px;
     }
+    .banner-content{
+        height: 115vh;
+    }
+    @media (min-width: 700px){
+        .title-banner{
+            font-weight: 800 !important;
+            font-size: 45px;
+        }
+    }
 
 /*     @media (max-width: 768px) { */
 /*         .privacy-policy-modal { */
@@ -179,7 +188,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12 col-md-7 col-xl-7">
-                        <h1>Alcance uma vida saudável com a terapia online <span style="color: #0097d6;">Vitazure</span></h1>
+                        <h1 class="title-banner">Seus sentimentos merecem toda nossa atenção, aqui na <span style="color: #0097d6;">Vitazure</span> você vai encontrar quem te entende.</h1>
 
                         <p>Faça sua consulta pelo celular, tablet ou computador, a qualquer hora com privacidade e segurança garantidas.</p>
 

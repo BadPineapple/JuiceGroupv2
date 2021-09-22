@@ -75,7 +75,7 @@
                 <div class="row">
                     <div class="col-12 text-center">
                         <h3>Meu perfil</h3>
-                        <p>Preencha todos os tópicos para seu Perfil  Profissional</p>
+                        <p>Atenção profissional: As informações do Perfil Profissional serão usadas para a divulgação dos seus serviços nas páginas e perfis nas redes sociais da plataforma. É importante que você preencha com carinho, não deixando  informações sem preenchimento, afinal, estamos cuidando do seu cartão de visitas. </p>
                     </div>
 
                     <div class="col-12 col-md-8 offset-md-2 col-xl-8 offset-xl-2">

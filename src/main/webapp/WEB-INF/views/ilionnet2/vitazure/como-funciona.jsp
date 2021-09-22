@@ -100,6 +100,10 @@
                             </div>
                         </div>
 
+                        <div style="padding-top: 25px;">
+                            <p>Ainda sentiu falta de algum esclarecimento?<br>Navegue pelas perguntas mais frequentes para saber mais.</p>
+                        </div>
+
                         <div class="buttons-internas">
                             <a onclick="profissionalAtivo()" class="button-secundary" id="button-profissional">Sou profissional</a>
 

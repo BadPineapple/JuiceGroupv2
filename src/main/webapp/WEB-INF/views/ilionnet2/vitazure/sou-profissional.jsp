@@ -16,6 +16,12 @@
 	<title>Vitazure</title>
 	
 	<jsp:include page="includes/include-head.jsp" flush="true" />
+
+    <style type="text/css">
+        .banner-content{
+            height: 125vh;
+        }
+    </style>
 	
 </head>
 
@@ -29,9 +35,9 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12 col-md-9 offset-md-3 col-xl-9 offset-xl-3">
-                        <h1 class="title-gray">Sua carreira está prestes a decolar, venha fazer parte da <span style="color: #0097d6; font-style: normal">Vitazure</span> e nós cuidaremos do resto.</h1>
+                        <h1 class="title-gray">Sua carreira está prestes a decolar, venha fazer parte da <span style="color: #0097d6; font-style: normal">Vitazure</span> <span style="color: red">e nós cuidaremos do resto.</span></h1>
     
-                        <p>Estamos muito felizes que você esteja próximo de se juntar a nós, atualmente temos clientes prontos para trabalhar com você. Em breve, você terá acesso à nossa maravilhosa comunidade de profissionais.</p>
+                        <p>Estamos muito felizes que você esteja próximo de se juntar a nós, aqui você aumentará o alcance dos pacientes, definirá com mais segurança os temas de trabalho e terá total controle financeiro sobre as suas consultas. </p>
     
                         <div class="sou-profissional-button">
                             <a href="#vantagens" class="button-secundary button-consulta">Quero saber mais.</a>
