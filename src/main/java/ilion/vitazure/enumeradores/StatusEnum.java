@@ -8,6 +8,7 @@ public enum StatusEnum {
 	CANCELADO("Cancelado"),
 	REALIZADO("Realizado"),
 	NAO_ENCONTRATO("NO"),
+	NAO_COMPARECEU("Não compareceu"),
 	REMARCADO("Remarcado"),
 	AGUARDANDO_REMARCACAO("Aguandando Remarcação");
 	

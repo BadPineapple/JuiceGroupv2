@@ -40,6 +40,7 @@ public class Pessoa implements Serializable{
 	  private Boolean confirmado;
 	  private Boolean pessoaImportada;
 	  private String nomeResponsavelImportacao;
+	  private String empresaImportacao;
 	  
 	  @ManyToOne
 	  @JoinColumn(nullable = true)
@@ -233,6 +234,15 @@ public class Pessoa implements Serializable{
 	}
 	public void setNomeResponsavelImportacao(String nomeResponsavelImportacao) {
 		this.nomeResponsavelImportacao = nomeResponsavelImportacao;
+	}
+	public String getEmpresaImportacao() {
+		if(empresaImportacao == null) {
+			empresaImportacao = "";
+		}
+		return empresaImportacao;
+	}
+	public void setEmpresaImportacao(String empresaImportacao) {
+		this.empresaImportacao = empresaImportacao;
 	}
 	  
 	  

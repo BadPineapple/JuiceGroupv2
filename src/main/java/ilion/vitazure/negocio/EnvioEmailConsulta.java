@@ -59,7 +59,7 @@ public class EnvioEmailConsulta {
 		}else if(agenda.getStatus().equals(StatusEnum.AGUARDANDO_REMARCACAO) && pessoaSessao.getPsicologo()) {
 			String urlEntrar = propNegocio.findValueById(PropEnum.URL).concat("/entrar");
 			htmlEmail.append(emailPadrao(corpoHtmlEmailReagendamentoProfissional()));
-			enviarEmailAlteracaoSituacaoAgendaCliente(agenda, htmlEmail.toString().replaceAll("#nome#", agenda.getPaciente().getNome()).replaceAll("#dataAgendaEmail#", agenda.getDataAgendaEmail()).replaceAll("#profissionalAtendimento#", agenda.getProfissional().getPessoa().getNome()).replaceAll("#horaAgendaEmail#", agenda.getHoraAgendaEmail()).replaceAll("#urlEntrar#", urlEntrar), "Solicitação de reagentamento pelo profissional no portal vitazure");
+			enviarEmailAlteracaoSituacaoAgendaCliente(agenda, htmlEmail.toString().replaceAll("#nome#", agenda.getPaciente().getNome()).replaceAll("#dataAgendaEmail#", agenda.getDataAgendaEmail()).replaceAll("#profissionalAtendimento#", agenda.getProfissional().getPessoa().getNome()).replaceAll("#horaAgendaEmail#", agenda.getHoraAgendaEmail()).replaceAll("#urlEntrar#", urlEntrar), "Solicitação de reagendamento pelo profissional no portal vitazure");
 		}else if(agenda.getStatus().equals(StatusEnum.CANCELADO)) {
 			
 		}

@@ -54,7 +54,7 @@
             </table>
 </ilion:permissao>
 
-<ilion:permissao tipo="terrafos">
+<ilion:permissao tipo="vitazure">
 			<table border="0" align="left" cellpadding="0" cellspacing="0">
               <tr> 
                     <td class="top_combo_esquerdo"></td>

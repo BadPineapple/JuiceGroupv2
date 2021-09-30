@@ -159,6 +159,10 @@ public class PessoaNegocio {
 			dc.add(Restrictions.eq("status", statusEnum));
 		}
 		
+		if (!usuarioSessao.getAdmin()) {
+			dc.add(Restrictions.eq("empresaImportacao", usuarioSessao.getEmpresa()));
+		}
+		
 		ValueList notificacaos = hibernateUtil.consultarValueList(dc, org.hibernate.criterion.Order.desc("id"), valueListInfo);
 
 		return notificacaos;

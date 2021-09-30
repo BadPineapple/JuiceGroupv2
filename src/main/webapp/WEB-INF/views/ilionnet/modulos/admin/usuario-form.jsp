@@ -78,15 +78,9 @@
     <td align="right" class="linkCinzaEscuro">Senha:</td>
     <td class="linkCinza"><form:input path="senhaAux" cssClass="forms2" cssStyle="width:50%;"/></td>
   </tr>
-  <tr> 
-    <td align="right" valign="middle" class="linkCinzaEscuro">Fazendas Vinculadas:</td>
-    <td class="linkCinza">
-    	
-    	<form:checkboxes items="${fazendasTodas}" path="fazendas" itemLabel="nome" itemValue="id" delimiter="<br/>"/>
-    	
-    </td>
-    <td align="right" class="linkCinzaEscuro"></td>
-    <td class="linkCinza"></td>
+   <tr> 
+    <td align="right" valign="middle" class="linkCinzaEscuro">Admin:</td>
+    <td class="linkCinza"><form:checkbox path="admin" value="admin"/></td>
   </tr>
 </table>
 

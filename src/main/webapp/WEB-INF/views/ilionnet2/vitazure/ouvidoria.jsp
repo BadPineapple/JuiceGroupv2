@@ -32,6 +32,11 @@
         <div class="area-white">
             <div class="container">
                 <div class="row">
+                <div class="row" style="margin-top: 10px">
+							<div class="col-12 funciona-text">
+	                            <p>A Ouvidoria é um espaço aberto para receber elogios, sugestões, reclamações ou denúncias que você acredita não terem sido atendidos adequadamente pelos setores e pessoas responsáveis. Sua atuação fundamenta-se na ética, respeito, autonomia, imparcialidade e transparência nas decisões.</p>
+							</div>
+                        </div>
                     <div class="col-12">
                         <div class="col-12 text-center">
                             <h3>Ouvidoria</h3>

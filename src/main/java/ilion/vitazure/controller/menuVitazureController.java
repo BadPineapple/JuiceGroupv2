@@ -1,11 +1,15 @@
 package ilion.vitazure.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +21,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ilion.CustomErrorController;
+import ilion.admin.negocio.PropEnum;
+import ilion.admin.negocio.PropNegocio;
 import ilion.admin.negocio.Usuario;
 import ilion.contato.negocio.ArquivoTextoContatoImportacao;
 import ilion.contato.negocio.ContatoGrupo;
@@ -69,6 +75,9 @@ public class menuVitazureController  extends CustomErrorController{
 	
 	@Autowired
 	private PagarMeNegocio pagarMeNegocio;
+	
+	@Autowired
+	private PropNegocio propNegocio;
 	
 	@RequestMapping("/cliente")
 	@UsuarioLogado()
@@ -222,7 +231,7 @@ public class menuVitazureController  extends CustomErrorController{
 
 		try {
 			MultipartFile arquivo = null;
-	
+			String path = propNegocio.findValueById(PropEnum.STATIC_PATH_ABSOLUTO);
 			if( request instanceof MultipartHttpServletRequest ) {
 				MultipartHttpServletRequest mRequest = (MultipartHttpServletRequest) request;
 	
@@ -230,22 +239,24 @@ public class menuVitazureController  extends CustomErrorController{
 			}
 	
 			if( arquivo == null || arquivo.isEmpty() ) {
-				return "redirect:importarFuncionario.sp?m=nenhum-arquivo";
+				return "redirect:importarFuncionario.sp?m=nenhum arquivo selecionado";
 			}
-	
 			Usuario usuarioSessao = (Usuario) request.getSession().getAttribute("usuarioSessao");
 	
 			ContatoImportacao contatoImportacao =  new ArquivoTextoImportarFuncionario (arquivo.getInputStream(), usuarioSessao);
 
-		    contatoImportacao.importar();
+		    contatoImportacao.importarExcelFuncionario(arquivo, path, "excelImportarFuncionario");
+		    
 
 		String mensagem = contatoImportacao.getLog();
 
 		request.setAttribute("mensagem", mensagem);
 		} catch (IOException e) {
 			e.printStackTrace();
+			return "redirect:importarFuncionario.sp?m="+e.getMessage();
 		} catch (Exception e) {
 			e.printStackTrace();
+			return "redirect:importarFuncionario.sp?m="+e.getMessage();
 		}
 		return "/ilionnet/modulos/vitazure/importarFuncionario";
 		

@@ -122,56 +122,38 @@
     <td width="15%" align="right" valign="middle" class="linkCinzaEscuro">Artigo:</td>
     <td width="*" class="linkCinza"><form:checkbox path="permissoes" value="gc.sp"/> Visualiza <form:checkbox path="permissoes" value="artigo-form.sp"/> Incluir/Alterar <form:checkbox path="permissoes" value="artigo-excluir.sp"/> Excluir <form:checkbox path="permissoes" value="artigo-publicar.sp"/> Publicar (<form:checkbox path="permissoes" value="comentarios.sp"/> Coment&aacute;rios <form:checkbox path="permissoes" value="comentario-status.sp"/> Publicar Coment&aacute;rios <form:checkbox path="permissoes" value="comentario-excluir.sp"/> Excluir Coment&aacute;rios)</td>
   </tr>
-  <%-- <tr>
-    <td align="right" valign="middle" class="linkCinzaEscuro">T&oacute;pico:</td>
-    <td class="linkCinza"><form:checkbox path="permissoes" value="topico"/> Visualiza/Incluir/Alterar/Excluir</td>
-  </tr> --%>
-  <%-- <tr>
-    <td align="right" valign="middle" class="linkCinzaEscuro">Sub-categoria:</td>
-    <td class="linkCinza"><form:checkbox path="permissoes" value="subcategoria-lista.sp"/> Visualiza <form:checkbox path="permissoes" value="subcategoria-form.sp"/> Incluir/Alterar <form:checkbox path="permissoes" value="subcategoria-excluir.sp"/> Excluir</td>
-  </tr> --%>
 </table>
 
 <table width="100%" border="0" cellspacing="1" cellpadding="0">
   <tr>
-    <td class="tituloDestaque"><strong><font color="#003366">M&oacute;dulo Terraf&oacute;s </font></strong></td>
+    <td class="tituloDestaque"><strong><font color="#003366">M&oacute;dulo Vitazure </font></strong></td>
   </tr>
 </table>
 
 <table width="100%" border="0" cellspacing="1" cellpadding="0">
   <tr>
-    <td width="15%" align="right" valign="middle" class="linkCinzaEscuro">Terraf&oacute;s:</td>
-    <td width="*" class="linkCinza"><form:checkbox path="permissoes" value="terrafos"/> Visualizar/Incluir/Alterar/Excluir </td>
+    <td width="15%" align="right" valign="middle" class="linkCinzaEscuro">Agendamentos:</td>
+    <td width="*" class="linkCinza"><form:checkbox path="permissoes" value="vitazure_agendamentos"/> Visualizar</td>
   </tr>
   <tr>
-    <td align="right" valign="middle" class="linkCinzaEscuro">Fazendas:</td>
-    <td class="linkCinza"><form:checkbox path="permissoes" value="terrafos_fazendas"/> Visualizar/Incluir/Alterar/Excluir </td>
+    <td width="15%" align="right" valign="middle" class="linkCinzaEscuro">Cliente/Funcionario:</td>
+    <td width="*" class="linkCinza"><form:checkbox path="permissoes" value="vitazure_cliente"/> Visualizar</td>
   </tr>
   <tr>
-    <td align="right" valign="middle" class="linkCinzaEscuro">Cadastros:</td>
-    <td class="linkCinza"><form:checkbox path="permissoes" value="terrafos_cadastros"/> Visualizar/Incluir/Alterar/Excluir </td>
+    <td width="15%" align="right" valign="middle" class="linkCinzaEscuro">Movimentações:</td>
+    <td width="*" class="linkCinza"><form:checkbox path="permissoes" value="vitazure_movimentacoes"/> Visualizar</td>
   </tr>
   <tr>
-    <td align="right" valign="middle" class="linkCinzaEscuro">Cadastros Padr&otilde;es:</td>
-    <td class="linkCinza"><form:checkbox path="permissoes" value="terrafos_cadastros_padroes"/> Visualizar/Incluir/Alterar/Excluir </td>
+    <td width="15%" align="right" valign="middle" class="linkCinzaEscuro">Profissional:</td>
+    <td width="*" class="linkCinza"><form:checkbox path="permissoes" value="vitazure_profissional"/> Visualizar</td>
   </tr>
   <tr>
-    <td align="right" valign="middle" class="linkCinzaEscuro">Avalia&ccedil;&atilde;o T&eacute;cnica:</td>
-    <td class="linkCinza"><form:checkbox path="permissoes" value="terrafos_avaliacao_tecnica"/> Visualizar/Alterar </td>
+    <td width="15%" align="right" valign="middle" class="linkCinzaEscuro">Importar Funcionario:</td>
+    <td width="*" class="linkCinza"><form:checkbox path="permissoes" value="vitazure_importar_funcionario"/> Incluir</td>
   </tr>
   <tr>
-    <td align="right" valign="middle" class="linkCinzaEscuro">Relat&oacute;rios:</td>
-    <td class="linkCinza"><form:checkbox path="permissoes" value="terrafos_relatorios"/> Visualizar </td>
-  </tr>
-  <tr>
-    <td align="right" valign="middle" class="linkCinzaEscuro">Monitoramento:</td>
-    <td class="linkCinza"><form:checkbox path="permissoes" value="terrafos_monitoramento"/> Visualizar </td>
-  </tr>
-</table>
-
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-  <tr> 
-    <td class="divisaoAzul"></td>
+    <td width="15%" align="right" valign="middle" class="linkCinzaEscuro">Vitazure:</td>
+    <td width="*" class="linkCinza"><form:checkbox path="permissoes" value="vitazure"/> Visualizar</td>
   </tr>
 </table>
 

@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 import org.apache.log4j.Logger;
+import org.springframework.web.multipart.MultipartFile;
 
 import ilion.SpringApplicationContext;
 import ilion.admin.negocio.Usuario;
@@ -193,5 +194,11 @@ public class ArquivoTextoContatoImportacao implements ContatoImportacao {
 		}
 		
 		return retorno;
+	}
+
+	@Override
+	public void importarExcelFuncionario(MultipartFile arquivo, String caminho, String pacote) throws Exception {
+		// TODO Auto-generated method stub
+		
 	}
 }

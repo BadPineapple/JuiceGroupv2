@@ -60,6 +60,8 @@ public class Usuario implements Serializable {
 	@Transient
 	private String senhaAux;
 	
+	private Boolean admin;
+	
 	public Usuario() {
 		super();
 	}
@@ -171,6 +173,17 @@ public class Usuario implements Serializable {
 
 	public void setSenhaAux(String senhaAux) {
 		this.senhaAux = senhaAux;
+	}
+	
+	public Boolean getAdmin() {
+		if (admin == null) {
+			admin = false;
+		}
+		return admin;
+	}
+
+	public void setAdmin(Boolean admin) {
+		this.admin = admin;
 	}
 
 	@Override

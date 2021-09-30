@@ -12,7 +12,9 @@ import org.springframework.stereotype.Component;
 
 import ilion.SpringApplicationContext;
 import ilion.util.Uteis;
+import ilion.vitazure.enumeradores.StatusEnum;
 import ilion.vitazure.model.Agenda;
+import ilion.vitazure.model.Pessoa;
 
 @Component
 public class JobAlertaAgenda {
@@ -59,7 +61,9 @@ public class JobAlertaAgenda {
 			
 			try {
 				List<Agenda> agendaAlerta = agendaNegocio.consultarAgendaDia(Uteis.subtrair(new Date(), Calendar.MINUTE, 32));
+				List<Agenda> agendaNaoCompareceu = agendaNegocio.consultarAgendaDiaNaoAtendida(new Date());
 				agendaAlerta.stream().forEach(agenda -> envioEmailConsulta.enviarAlertaAgenda(agenda));
+				agendaNaoCompareceu.stream().forEach(naoCompareceu -> agendaNaoCompareceu2(naoCompareceu));
 			} catch (Exception e) {
 				logger.error("erro envio Alerta Mensagem", e);
 			}
@@ -70,6 +74,16 @@ public class JobAlertaAgenda {
 		}
 	}
 	
-	
+	public void agendaNaoCompareceu2(Agenda agenda) {
+		if(Uteis.validarDataInicialMaiorFinalComHora(Uteis.formatarDataHora(new Date(), "HH:mm"), new Date(), Uteis.acrescentar(agenda.getDataHoraAgendamento(), Calendar.MINUTE, 62))) {
+			try {
+				agendaNegocio.alterarAgenda(agenda.getId(), StatusEnum.NAO_COMPARECEU.toString() , new Pessoa());
+				logger.error("Alterado a situação para não compareceu agenda id "+agenda.getId());
+			} catch (Exception e) {
+				logger.error("Erro para alterar a situação para não compareceu agenda id "+agenda.getId(), e);
+				e.printStackTrace();
+			}
+		}
+	}
 	
 }

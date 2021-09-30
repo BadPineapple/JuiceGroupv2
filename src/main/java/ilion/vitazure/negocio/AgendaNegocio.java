@@ -270,4 +270,17 @@ public class AgendaNegocio {
 		return agenda;
 	}
 	
+	public List<Agenda> consultarAgendaDiaNaoAtendida(Date dataConsulta){
+		List<Agenda> listAgendas = new ArrayList<Agenda>();
+		DetachedCriteria dc = DetachedCriteria.forClass(Agenda.class);
+		dc.add(Restrictions.eq("status", StatusEnum.CONFIRMADO));
+		dc.add(Restrictions.eq("online", Boolean.TRUE));
+		Disjunction disjunction = Restrictions.disjunction();
+		disjunction.add( Restrictions.between("dataHoraAgendamento", Uteis.inicioDia(dataConsulta) , Uteis.fimDia(dataConsulta)));
+		dc.add(disjunction);
+		dc.addOrder(Order.asc("dataHoraAgendamento"));
+		listAgendas = (List<Agenda>) hibernateUtil.list(dc);
+		return listAgendas;
+	}
+	
 }

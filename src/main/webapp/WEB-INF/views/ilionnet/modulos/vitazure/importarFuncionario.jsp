@@ -49,18 +49,12 @@
 					</fieldset>
 					</c:if>
 	                     <div class="form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed" style="border: solid 1px;padding: 15px;margin: 18px;">
-	                        <label class="control-label">Instruções para importar uma lista de contatos:</label>
+	                        <label class="control-label">Instruções para importar uma lista de funcionários:</label>
 							<br/>
-							1 - A lista deve ser formatada em arquivo txt. Ex.: contatos.txt;<br/>
-							2 - A cada linha deve conter os dados de um contato com seu Nome, e-mail e telefone.<br/>
-							3 - Os dados devem ser separador por ; (ponto e vírgula).<br/>
-							4 - Após importar será enviado um email de confirmação para o funcionário informado no arquivo.<br/>
-							5 - A senha inicial de acesso dos funcionários importados: "Vitazure1".<br/>
-							<br/>
-							Ex:<br/>
-							Nome;e-mail;telefone;<br/>
-							Nome;e-mail;telefone;<br/>
-							Nome;e-mail;telefone;<br/>
+							1 - A lista deve ser formatada em arquivo Excel. Ex.: funcionarios.xls ou funcionarios.xlsx;<br/>
+							2 - Cada linha deve conter os dados de um funcionário com nome, e-mail e telefone.<br/>
+							3 - Os dados devem ser separador por coluna.<br/>
+							4 - A senha inicial de acesso dos funcionários importados será: "Vitazure1".<br/>
 							<br/>
 	                   </div>
 			    </div>
@@ -72,13 +66,13 @@
 <jsp:include page="../../../ilionnet2/inc/include-footer.jsp" flush="true"/>
 <jsp:include page="../../../ilionnet2/inc/include-js-footer.jsp" flush="true"/>
 
-<c:if test="${param.m == 'ok'}">
+<c:if test="${not empty mensagem}">
 	<button 
 		type="button" 
 		data-positionX="right" 
 		data-positionY="top" 
 		data-effect="fadeInUp" 
-		data-message="Dados Excluido com sucesso."
+		data-message="Dados Importado com sucesso."
 		data-type="success" 
 		class="btn pmd-ripple-effect btn-success pmd-z-depth pmd-alert-toggle"
 		id="alertSucess"
@@ -89,6 +83,28 @@
 		(function() {
 			setTimeout(function() {
 				$('#alertSucess').click();
+			}, 300);
+		})();
+	</script>
+</c:if>
+
+<c:if test="${param.m != 'ok' && param.m != null}">
+	<button 
+		type="button" 
+		data-positionX="right" 
+		data-positionY="top" 
+		data-effect="fadeInUp" 
+		data-message="${param.m}"
+		data-type="error" 
+		class="btn pmd-ripple-effect btn-error pmd-z-depth pmd-alert-toggle"
+		id="alertMsgError"
+		style="display:none;">
+		Erro
+	</button>
+	<script type="text/javascript">
+		(function() {
+			setTimeout(function() {
+				$('#alertMsgError').click();
 			}, 300);
 		})();
 	</script>
