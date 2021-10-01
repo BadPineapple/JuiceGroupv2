@@ -11,6 +11,12 @@
         .banner-content{
             height: 125vh;
         }
+        @media (min-width: 700px){
+            .title-banner {
+                font-weight: 800 !important;
+                font-size: 45px;
+            }
+        }
 
     </style>
     
@@ -23,7 +29,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12 col-xl-9">
-                        <h1 class="title-gray" style="font-size: 5.0rem;">A Terapia faz bem, permita que haja transformações significativas em sua existência. Fale com seu psicólogo.</h1>
+                        <h1 class="title-banner" style="font-size: 5.0rem;">A Terapia faz bem, permita <br>que haja transformações significativas em sua<br> existência. Fale com seu psicólogo.</h1>
                         <p>Com a ajuda do psicólogo, é possível, busque por <br> profissional ou especialidade.</p>
                         <form ng-submit="consultarProfissionalExterna()"  class="form-highlight">
                             <select ng-model="tipoProfissional">
