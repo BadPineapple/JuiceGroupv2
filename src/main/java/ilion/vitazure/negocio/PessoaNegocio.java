@@ -144,6 +144,7 @@ public class PessoaNegocio {
 			for (String condicao : condicoes) {
 				disjunction.add( Restrictions.ilike("nome", condicao));
 				disjunction.add( Restrictions.ilike("email", condicao));
+				disjunction.add( Restrictions.ilike("empresaImportacao", condicao));
 			}
 			Long id = Uteis.converterLong(vlhForm.getPalavraChave());
 

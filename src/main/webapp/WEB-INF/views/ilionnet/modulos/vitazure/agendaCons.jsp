@@ -57,6 +57,7 @@
 							    <th class="text-center">Data consulta</th>
 							    <th class="text-center">Tempo Consulta</th>
 							    <th class="text-center">Situação</th>
+							    <th class="text-center">Avaliação</th>
 							</tr>
 							<c:forEach var="agenda" items="${agendas}">
 							<tr>
@@ -66,6 +67,7 @@
 								<td align="center">${agenda.dataHoraApresentar}</td>
 								<td align="center">${agenda.profissional.duracaoAtendimento.nomeApresentar}</td>
 								<td align="center">${agenda.status}</td>
+								<td align="center">${agenda.avaliacaoAtendimentoNota}</td>
 							</tr>
 							</c:forEach>
 						</table>

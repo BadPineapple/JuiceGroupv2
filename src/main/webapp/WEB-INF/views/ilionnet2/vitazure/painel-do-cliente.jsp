@@ -83,7 +83,7 @@
 <!--                                         <option value="">05/07</option> -->
 <!--                                     </select> -->
 <!--                                 </div> -->
-	                                <div class="col-12 d-none d-md-block col-md-12 col-xl-12">
+	                                <div class="col-12 d-md-block col-md-12 col-xl-12">
 	                                    <button class="button-secundary" ng-click="consultarProfissional()" style="width: 100%">Buscar</button>
 	                                </div>
                             </div>

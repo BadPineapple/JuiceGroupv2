@@ -130,6 +130,8 @@ public class Profissional implements Serializable{
 	  private Boolean casais;
 	  
 	  private Boolean idosos;
+
+	  private Boolean crianca;
 	  
 	  private String tokenTransacaoPlano;
 	  
@@ -581,7 +583,18 @@ public class Profissional implements Serializable{
 	public void setIdosos(Boolean idosos) {
 		this.idosos = idosos;
 	}
-	  
+	
+	public Boolean getCrianca() {
+		if (crianca == null) {
+			crianca = Boolean.FALSE;
+		}
+		return crianca;
+	}
+
+	public void setCrianca(Boolean crianca) {
+		this.crianca = crianca;
+	}
+
 	public int getQuantidadesDiasVencimentoPlano() {
 		return getPlano().equals("plano_mensal") ? 30 : getPlano().equals("plano_semestral") ? 180 :  365 ;
 	}

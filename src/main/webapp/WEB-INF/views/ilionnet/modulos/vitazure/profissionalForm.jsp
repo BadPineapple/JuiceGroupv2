@@ -103,6 +103,9 @@
                           					 profissional.pessoa.cliente ='${profissional.pessoa.cliente}';
                          					 profissional.pessoa.psicologo ='${profissional.pessoa.psicologo}';
                          					 profissional.pessoa.confirmado='${profissional.pessoa.confirmado}';
+                         					 profissional.pessoa.relacaoContato='${profissional.pessoa.relacaoContato}';
+						                     profissional.pessoa.nomeContato='${profissional.pessoa.nomeContato}';
+						                     profissional.pessoa.celularContato='${profissional.pessoa.celularContato}';
                          					 formacaoAcademica ='${formacaoAcademica}';
                          					 enderecoAtendimento ='';
                          					descricaoFormacao ='${descricaoFormacao}';

@@ -61,6 +61,9 @@
                          					 pessoa.foto.id='${pessoa.foto.id}';
 						                     pessoa.foto.link='${pessoa.foto.link}';
 						                     pessoa.confirmado='${pessoa.confirmado}';
+						                     pessoa.relacaoContato='${pessoa.relacaoContato}';
+						                     pessoa.nomeContato='${pessoa.nomeContato}';
+						                     pessoa.celularContato='${pessoa.celularContato}';
                           					 "/>
                           
                             <div class="row">
@@ -126,6 +129,28 @@
                                     <div class="input-block">
                                         <label>CEP</label>
                                         <input type="text" data-mask="00000-000" ng-model="pessoa.cep" id="cep" required onblur="validarCep(this.value)"/>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="input-block">
+                                        <label>Relação Contato</label>
+                                        <select ng-model="pessoa.relacaoContato" class="form-control input-sm">
+						   					<option value=""></option>
+						   					<option value="amigo">Amigo</option>
+						   					<option value="familiar">Familiar</option>
+										</select>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="input-block">
+                                        <label>Nome Contato</label>
+                                        <input type="text" ng-model="pessoa.nomeContato"/>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="input-block">
+                                        <label>Celular Contato</label>
+                                        <input type="text" data-mask="(00) 00000-0000" ng-model="pessoa.celularContato" id="celular" onblur="validarDDD(this.value , 'celular')"/>
                                     </div>
                                 </div>
                                 <div class="col-12">

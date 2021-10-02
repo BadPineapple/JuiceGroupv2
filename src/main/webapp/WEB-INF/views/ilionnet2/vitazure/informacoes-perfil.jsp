@@ -106,6 +106,7 @@
 						                    ProfissionalVH.profissional.adultos='${profissional.adultos}';
 						                    ProfissionalVH.profissional.casais='${profissional.casais}';
 						                    ProfissionalVH.profissional.idosos='${profissional.idosos}';
+						                    ProfissionalVH.profissional.crianca='${profissional.crianca}';
 						                    ProfissionalVH.profissional.tipoConta='${profissional.tipoConta}';
 						                    ProfissionalVH.profissional.banco='${profissional.banco}';
 						                    ProfissionalVH.profissional.agencia='${profissional.agencia}';
@@ -155,6 +156,9 @@
                           					ProfissionalVH.profissional.pessoa.cliente ='${profissional.pessoa.cliente}';
                          					ProfissionalVH.profissional.pessoa.psicologo ='${profissional.pessoa.psicologo}';
                          					ProfissionalVH.profissional.pessoa.confirmado='${profissional.pessoa.confirmado}';
+                         					ProfissionalVH.profissional.pessoa.relacaoContato='${profissional.pessoa.relacaoContato}';
+						                    ProfissionalVH.profissional.pessoa.nomeContato='${profissional.pessoa.nomeContato}';
+						                    ProfissionalVH.profissional.pessoa.celularContato='${profissional.pessoa.celularContato}';
                          					ProfissionalVH.formacaoAcademica ='${formacaoAcademica}';
                          					ProfissionalVH.enderecoAtendimento ='';
                          					ProfissionalVH.menuValidar= '';
@@ -220,14 +224,14 @@
                                         
                                         <div class="col-12 col-md-6 col-xl-6">
                                             <div class="input-block">
-                                                <label>Documento do (CRP/CRM)</label>
+                                                <label>Registro profissional (CRP/CRM)</label>
                                                 <input type="text" ng-model="ProfissionalVH.profissional.documentoCrpCrm"/>
                                             </div>
                                         </div>
 
                                         <div class="col-12 col-md-12 col-xl-12">
                                             <div class="input-block">
-                                                <label>Cadastro do e-Psi</label>
+                                                <label>Informe o número ou protocolo de cadastro e-Psi</label>
                                                 <input type="text" ng-model="ProfissionalVH.profissional.cadastroEpsi"  />
                                             </div>
                                         </div>
@@ -282,17 +286,21 @@
 	                                                <input type="checkbox" ng-model="ProfissionalVH.profissional.adolescentes" id="adolescentes" ng-checked="${profissional.adolescentes}"/>
 	                                                <label>adolescentes</label>
 	                                            </div>
-	                                            <div class="checkbox col-md-3 col-lg-3 col-sm-12">
+	                                            <div class="checkbox col-md-2 col-lg-2 col-sm-12">
 	                                                <input type="checkbox" ng-model="ProfissionalVH.profissional.adultos" id="adultos" ng-checked="${profissional.adultos}"/>
 	                                                <label>adultos</label>
 	                                            </div>
-	                                            <div class="checkbox col-md-3 col-lg-3 col-sm-12">
+	                                            <div class="checkbox col-md-2 col-lg-2 col-sm-12">
 	                                                <input type="checkbox" ng-model="ProfissionalVH.profissional.casais" id="casais" ng-checked="${profissional.casais}"/>
 	                                                <label>casais</label>
 	                                            </div>
-	                                            <div class="checkbox col-md-3 col-lg-3 col-sm-12">
+	                                            <div class="checkbox col-md-2 col-lg-2 col-sm-12">
 	                                                <input type="checkbox" ng-model="ProfissionalVH.profissional.idosos" id="idosos" ng-checked="${profissional.idosos}"/>
 	                                                <label>idosos</label>
+	                                            </div>
+	                                            <div class="checkbox col-md-3 col-lg-3 col-sm-12">
+	                                                <input type="checkbox" ng-model="ProfissionalVH.profissional.crianca" id="crianca" ng-checked="${profissional.crianca}"/>
+	                                                <label>crianca</label>
 	                                            </div>
  										<div class="col-12">
                                                     <button class="button-secundary checkbox-button" ng-click="perfilProfissional('dadosProfissional')" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Salvar</button>
@@ -333,6 +341,15 @@
                                                               <textarea cols="20" rows="5" ng-model="descricaoFormacao"  style="color: #A6A6A6"></textarea>
                                                     </div>
                                                 </div>
+                                            </div>
+                                                <div class="input-title" style="border: none;">
+                                                <div class="col-md-12 col-lg-12 col-sm-12" style="display: flex;">
+															<a class="btn pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-default btn-sm" style="width: 100%;
+																text-align: end;font-size: 16px;"  ng-click =adicionarFormacao()>
+                                                  			Adicionar Formação
+																<i class="fas fa-plus" style="font-size: 23px;"></i>
+															</a>
+												</div>
                                             </div>
                                         </div>
                                      <div class="col-12">  
@@ -457,6 +474,17 @@
                                                         <input type="text" ng-model="linkGoogleMaps" id="linkGoogleMaps"  />
                                                     </div>
                                                 </div>
+                                                <div class="col-12 col-md-12 col-xl-12">
+                                                <div class="input-title" style="border: none;">
+                                                <div class="col-md-12 col-lg-12 col-sm-12" style="display: flex;">
+															<a class="btn pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-default btn-sm" style="width: 100%;
+																text-align: end;font-size: 16px;"  ng-click =adicionarEndereco()>
+                                                  			Adicionar Endereço
+																<i class="fas fa-plus" style="font-size: 23px;"></i>
+															</a>
+												</div>
+												</div>
+                                            </div>
                                      <div class="col-12">  
                                         <div class="table-responsive">
 							                <table id="tblCadastroEndereco" class="table table-bordered">         
@@ -588,7 +616,17 @@
                                                 <label>Atendimento Presencial</label>
                                             </div>
                                         </div>
-                                        
+                                        <div class="col-12 col-md-12 col-xl-12" style="padding-top: 26px;">
+                                                <div class="input-title" style="border: none;">
+                                                <div class="col-md-12 col-lg-12 col-sm-12" style="display: flex;">
+															<a class="btn pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-default btn-sm" style="width: 100%;
+																text-align: end;font-size: 16px;"  ng-click =adicionarHorarioAtendimento()>
+                                                  			Adicionar Horário Atendimento
+																<i class="fas fa-plus" style="font-size: 23px;"></i>
+															</a>
+												</div>
+												</div>
+                                            </div>
                                         <div class="col-12" style="padding-top: 18px;">  
                                         <div class="table-responsive">
 							                <table id="tblCadastroHorarioAtendimento" class="table table-bordered">         

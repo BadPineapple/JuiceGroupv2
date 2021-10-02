@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Disjunction;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -376,6 +377,7 @@ public class PagarMeNegocio {
 		}else {
 			dc.add(Restrictions.eq("idPaciente", codigoPessoa));	
 		}
+		 dc.addOrder(Order.desc("id"));
 		listPagamentoPagarMe = (List<PagamentoPagarMe>) hibernateUtil.list(dc);
 		return listPagamentoPagarMe;
 	}

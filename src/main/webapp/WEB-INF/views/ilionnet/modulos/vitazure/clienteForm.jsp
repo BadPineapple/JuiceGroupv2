@@ -48,6 +48,9 @@
 						                     pessoa.cidade='${pessoa.cidade}';
 						                     pessoa.endereco='${pessoa.endereco}';
 						                     pessoa.setor='${pessoa.setor}';
+						                      pessoa.relacaoContato='${pessoa.relacaoContato}';
+						                     pessoa.nomeContato='${pessoa.nomeContato}';
+						                     pessoa.celularContato='${pessoa.celularContato}';
 						                     pessoa.cliente='true'
 						                     "/>
 							<div class="row">
@@ -123,7 +126,31 @@
 						                <input type="Large" id="cidade" ng-model="pessoa.cidade" class="form-control input-group-lg"/>
 						              </div>
 						            </div>
-							</div>	
+							</div>
+							<div class="col-md-12 col-lg-12 col-sm-12">	
+							<div class="col-md-4 col-lg-4 col-sm-12">
+						              <div class="  form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed">
+                                        <label>Relação Contato</label>
+                                        <select ng-model="pessoa.relacaoContato" class="form-control input-group-lg">
+						   					<option value=""></option>
+						   					<option value="amigo">Amigo</option>
+						   					<option value="familiar">Familiar</option>
+										</select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-lg-4 col-sm-12">
+						              <div class="  form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed">
+                                        <label>Nome Contato</label>
+                                        <input type="text" ng-model="pessoa.nomeContato" class="form-control input-group-lg"/>
+                                    </div>
+                                </div>
+                               <div class="col-md-4 col-lg-4 col-sm-12">
+						              <div class="  form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed">
+                                        <label>Celular Contato</label>
+                                        <input type="text" data-mask="(00) 00000-0000" ng-model="pessoa.celularContato" id="celular"  class="form-control input-group-lg"/>
+                                    </div>
+                                </div>
+                           </div> 	
 							<div class="col-md-12 col-lg-12 col-sm-12" style="text-align: center;padding-top: 30px;padding-bottom: 50px;">
 							    <div class="  form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed">
 										<button type="submit" class="btn btn-success pmd-checkbox-ripple-effect">Salvar</button>
