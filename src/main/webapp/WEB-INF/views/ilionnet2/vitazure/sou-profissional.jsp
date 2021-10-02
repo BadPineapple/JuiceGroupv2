@@ -21,6 +21,12 @@
         .banner-content{
             height: 125vh;
         }
+        @media (min-width: 700px){
+            .title-banner {
+                font-weight: 800 !important;
+                font-size: 45px;
+            }
+        }
     </style>
 	
 </head>
@@ -35,8 +41,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12 col-md-9 offset-md-3 col-xl-9 offset-xl-3">
-                        <h1 class="title-gray">Sua carreira está prestes a decolar, venha fazer parte da <span style="color: #0097d6; font-style: normal">Vitazure</span>.</h1>
-    
+                        <h1 class="title-banner">Sua carreira está prestes a decolar, venha fazer parte da <span style="color: #0097d6; font-style: normal">Vitazure</span></h1>
                         <p>Estamos muito felizes que você esteja próximo de se juntar a nós, aqui você terá seus serviços divulgados para além das fronteiras regionais, aumentando o alcance dos pacientes, definirá com mais segurança seus temas de trabalho e terá total controle financeiro sobre suas consultas.</p>
     
                         <div class="sou-profissional-button">
