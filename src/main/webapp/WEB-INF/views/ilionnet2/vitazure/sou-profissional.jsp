@@ -41,9 +41,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12 col-md-9 offset-md-3 col-xl-9 offset-xl-3">
-                        <h1 class="title-banner">Sua carreira está prestes a decolar, venha fazer parte da <span style="color: #0097d6; font-style: normal">Vitazure</span></h1>
+                        <h1 class="title-banner" style="text-align: right;">Sua carreira está prestes a decolar, venha fazer parte da <span style="color: #0097d6; font-style: normal">Vitazure</span></h1>
                         <p>Estamos muito felizes que você esteja próximo de se juntar a nós, aqui você terá seus serviços divulgados para além das fronteiras regionais, aumentando o alcance dos pacientes, definirá com mais segurança seus temas de trabalho e terá total controle financeiro sobre suas consultas.</p>
-    
                         <div class="sou-profissional-button">
                             <a href="#vantagens" class="button-secundary button-consulta">Quero saber mais.</a>
                         </div>
@@ -161,7 +160,8 @@
                                         <div class="lista-cadastro">
                                             <span>2.</span>
 
-                                            <p>Cadastro aprovado ou já ter solicitado junto ao Conselho Regional de Psicologia o cadastro relativo ao<br/> e-PSI;</p>
+                                            <p>Cadastro aprovado ou já ter solicitado junto ao Conselho Regional de Psicologia o cadastro relativo ao e-PSI.
+											<br>Mais informações poderão ser obtidas nos Conselhos Regionais de Psicologia e no Diálogo Digital "Resolução 11/2018" que foi realizado no dia 06/11/2018, e está disponível <a href="https://e-psi.cfp.org.br/" target="_blank">clicando aqui</a>;</p>
                                         </div>
 
                                         <div class="lista-cadastro">
@@ -173,13 +173,13 @@
                                         <div class="lista-cadastro">
                                             <span>4.</span>
 
-                                            <p>Assinatura trimestral, semestral<br> ou anual na plataforma;</p>
+                                            <p>Assinatura mensal, semestral ou anual na plataforma;</p>
                                         </div>
 
                                         <div class="lista-cadastro">
                                             <span>5.</span>
 
-                                            <p style="transform: translateY(0px);">Conexão de internet confiável.</p>
+                                            <p style="transform: translateY(0px);">Conexão de internet confiável, se informe aqui.</p>
                                         </div>
                                     </div>
                                 </div>

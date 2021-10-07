@@ -54,6 +54,7 @@
 							    <th class="text-center">ID</th>
 							    <th class="text-center">Profissional</th>
 							    <th class="text-center">Paciente</th>
+							    <td class="text-center">Convênio</td>
 							    <th class="text-center">Data consulta</th>
 							    <th class="text-center">Tempo Consulta</th>
 							    <th class="text-center">Situação</th>
@@ -64,6 +65,7 @@
 								<td class="text-center">${agenda.id}</td>
 								<td align="center">${agenda.profissional.pessoa.nome}</td>
 								<td align="center">${agenda.paciente.nome}</td>
+								<td align="center">${agenda.paciente.empresaImportacao != "" ? "Empresa" : "Particular"}</td>
 								<td align="center">${agenda.dataHoraApresentar}</td>
 								<td align="center">${agenda.profissional.duracaoAtendimento.nomeApresentar}</td>
 								<td align="center">${agenda.status}</td>

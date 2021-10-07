@@ -463,6 +463,7 @@ function adicionarHorarioAtendimento($scope, $http, $window) {
         $scope.atendimentoOnline = false; 
         $scope.enderecoSemanaHorario = '';
         $scope.atendimentoPresencial = false;
+		document.getElementById("divEndereco").style.display = "none"; 
 		return true;
     }
 	
@@ -481,7 +482,7 @@ function validarCampos(diaSemana,horaInicio,horaFim, atendimentoOnline , enderec
 	}else if((enderecoSemanaHorario == 'undefined' && atendimentoPresencial == true ) || (enderecoSemanaHorario == null && atendimentoPresencial == true ) || (enderecoSemanaHorario == '' && atendimentoPresencial == true )){
 		alert_error("Informar Endereço Atendimento");
 		return false;
-	}else if((atendimentoOnline == 'undefined' && atendimentoPresencial == 'undefined') || (atendimentoOnline == null && atendimentoPresencial == null) || (atendimentoOnline == 'false' && atendimentoPresencial  == 'false')){
+	}else if((atendimentoOnline == 'undefined' && atendimentoPresencial == 'undefined') || (atendimentoOnline == null && atendimentoPresencial == null) || (atendimentoOnline == 'false' && atendimentoPresencial  == 'false') || (atendimentoOnline == false && atendimentoPresencial  == false)){
 		alert_error("Informar Tipo Atendimento Online ou Presencial");
 		return false;
 	}
@@ -734,3 +735,11 @@ function validarItemPreenchidoEndereco($scope, $http, $window){
 	
 	return true;
 }
+
+function validarValor(campo , campoInformado){
+	  let valor = campo.replace('.','').replace(',','.');
+	  if(valor > 10000.00){
+		 alert_error('O valor limite para este cadastro é de R$ 10.000,00');
+		 document.getElementById(campoInformado).value = "";
+	  }
+  }

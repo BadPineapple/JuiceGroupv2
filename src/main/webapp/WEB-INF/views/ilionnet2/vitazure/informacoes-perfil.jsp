@@ -77,7 +77,6 @@
                         <h3>Meu perfil</h3>
                         <p>Atenção profissional: As informações do Perfil Profissional serão usadas para a divulgação dos seus serviços nas páginas e perfis nas redes sociais da plataforma. É importante que você preencha com carinho, não deixando  informações sem preenchimento, afinal, estamos cuidando do seu cartão de visitas. </p>
                     </div>
-
                     <div class="col-12 col-md-8 offset-md-2 col-xl-8 offset-xl-2">
                         <form class="form-default">
                           <angular-initializer ng-init="ProfissionalVH.profissional.id='${profissional.id}';
@@ -249,7 +248,7 @@
 										            </c:forEach>
 									           </select>
 									           <a class="btn pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-default btn-sm" style="position: absolute;left: 94%;top: 32px;"  ng-click =adicionarEspecialidades()>
-													<i class="fas fa-plus" style="font-size: 23px;"></i>
+													<i class="fas fa-plus" style="font-size: 23px;color: #0097d6;"></i>
 												</a>
                                             </div>
                                         </div>
@@ -269,7 +268,7 @@
 											            </c:forEach>
 										           </select>
 	                                            <a class="btn pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-default btn-sm" style="position: absolute;left: 94%;top: 32px;"  ng-click =adicionarTemas()>
-													<i class="fas fa-plus" style="font-size: 23px;"></i>
+													<i class="fas fa-plus" style="font-size: 23px;color: #0097d6;"></i>
 												</a>
 	                                            </div>
 	                                         </div> 
@@ -300,7 +299,7 @@
 	                                            </div>
 	                                            <div class="checkbox col-md-3 col-lg-3 col-sm-12">
 	                                                <input type="checkbox" ng-model="ProfissionalVH.profissional.crianca" id="crianca" ng-checked="${profissional.crianca}"/>
-	                                                <label>crianca</label>
+	                                                <label>criança</label>
 	                                            </div>
  										<div class="col-12">
                                                     <button class="button-secundary checkbox-button" ng-click="perfilProfissional('dadosProfissional')" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Salvar</button>
@@ -323,7 +322,7 @@
                                                 </div>  
                                                 <div class="col-md-1 col-lg-1 col-sm-12" style="display: flex;">
 															<a class="btn pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-default btn-sm"  ng-click =adicionarFormacao()>
-																<i class="fas fa-plus" style="font-size: 23px;"></i>
+																<i class="fas fa-plus" style="font-size: 23px;color: #0097d6;"></i>
 															</a>
 															<p style="display: contents;color: red;">*</p>
 												</div>
@@ -347,7 +346,7 @@
 															<a class="btn pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-default btn-sm" style="width: 100%;
 																text-align: end;font-size: 16px;"  ng-click =adicionarFormacao()>
                                                   			Adicionar Formação
-																<i class="fas fa-plus" style="font-size: 23px;"></i>
+																<i class="fas fa-plus" style="font-size: 23px;color: #0097d6;"></i>
 															</a>
 												</div>
                                             </div>
@@ -409,7 +408,7 @@
                                                 </div>  
                                                 <div class="col-md-1 col-lg-1 col-sm-12" style="display: flex">
 														<a class="btn pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-default btn-sm"  ng-click =adicionarEndereco()>
-															<i class="fas fa-plus" style="font-size: 23px;"></i>
+															<i class="fas fa-plus" style="font-size: 23px;color: #0097d6;"></i>
 														</a>
 													<p style="display: contents;color: red;">*</p>	
 												</div>  
@@ -480,7 +479,7 @@
 															<a class="btn pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-default btn-sm" style="width: 100%;
 																text-align: end;font-size: 16px;"  ng-click =adicionarEndereco()>
                                                   			Adicionar Endereço
-																<i class="fas fa-plus" style="font-size: 23px;"></i>
+																<i class="fas fa-plus" style="font-size: 23px;color: #0097d6;"></i>
 															</a>
 												</div>
 												</div>
@@ -566,7 +565,7 @@
                                                 </div>  
                                                 <div class="col-md-1 col-lg-1 col-sm-12" style="display: flex;">
 														<a class="btn pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-default btn-sm"  ng-click =adicionarHorarioAtendimento()>
-															<i class="fas fa-plus" style="font-size: 23px;"></i>
+															<i class="fas fa-plus" style="font-size: 23px;color: #0097d6;"></i>
 														</a>
 													<p style="display: contents;color: red;">*</p>	
 												</div>  
@@ -594,7 +593,19 @@
                                                         <input type="text" ng-model="horaFim" id="horaFim" data-mask="00:00"  onchange="validarHora(this.value ,'horaFim')"/>
                                                     </div>
                                          </div>
-                                        <div class="col-12 col-md-12 col-xl-12">
+                                        <div class="col-12 col-md-6 col-xl-6">
+                                            <div class="checkbox">
+                                                <input type="checkbox" ng-model="atendimentoOnline" ng-checked="${atendimentoOnline}"/>
+                                                <label>Atendimento Online</label>
+                                            </div>
+                                        </div>
+										<div class="col-12 col-md-6 col-xl-6">
+                                            <div class="checkbox">
+                                                <input type="checkbox" ng-model="atendimentoPresencial" ng-checked="${atendimentoPresencial}" onclick="apresentarCampoEndereco(this.checked)"/>
+                                                <label>Atendimento Presencial</label>
+                                            </div>
+                                        </div> 
+                                        <div class="col-12 col-md-12 col-xl-12" style="padding-top: 21px;display:none;" id="divEndereco">
                                                     <div class="input-block">
                                                         <label>Endereço Atendimento</label>
                                                         <select ng-model="enderecoSemanaHorario" class="form-control input-sm">
@@ -604,25 +615,13 @@
 											           </select>
                                                     </div>
                                          </div>
-										<div class="col-12 col-md-6 col-xl-6">
-                                            <div class="checkbox">
-                                                <input type="checkbox" ng-model="atendimentoOnline" ng-checked="${atendimentoOnline}"/>
-                                                <label>Atendimento Online</label>
-                                            </div>
-                                        </div>
-										<div class="col-12 col-md-6 col-xl-6">
-                                            <div class="checkbox">
-                                                <input type="checkbox" ng-model="atendimentoPresencial" ng-checked="${atendimentoPresencial}"/>
-                                                <label>Atendimento Presencial</label>
-                                            </div>
-                                        </div>
                                         <div class="col-12 col-md-12 col-xl-12" style="padding-top: 26px;">
                                                 <div class="input-title" style="border: none;">
                                                 <div class="col-md-12 col-lg-12 col-sm-12" style="display: flex;">
 															<a class="btn pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-default btn-sm" style="width: 100%;
 																text-align: end;font-size: 16px;"  ng-click =adicionarHorarioAtendimento()>
                                                   			Adicionar Horário Atendimento
-																<i class="fas fa-plus" style="font-size: 23px;"></i>
+																<i class="fas fa-plus" style="font-size: 23px;color: #0097d6;"></i>
 															</a>
 												</div>
 												</div>
@@ -662,17 +661,18 @@
                                     <strong>Valores de consulta</strong>
                                 </div>
                                 <div class="toggle-body vitazure">
+                                  <p>Sugerimos que o valor da consulta online seja menor que o valor da consulta presencial. Haja vista que o custo online é menor.</p>
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="input-block">
                                                 <label>Valor da consulta online:</label>
-                                                <input type="text" ng-model="ProfissionalVH.profissional.valorConsultaOnline" id="valorconsultaOnline" class="valorMonetario"  />
+                                                <input type="text" ng-model="ProfissionalVH.profissional.valorConsultaOnline" id="valorconsultaOnline" class="valorMonetario"  onblur="validarValor(this.value , 'valorconsultaOnline')"/>
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <div class="input-block">
                                                 <label>Valor da consulta presencial:</label>
-                                                <input type="text" ng-model="ProfissionalVH.profissional.valorConsultaPresencial" id="valorConsultaPresencial" class="valorMonetario"   />
+                                                <input type="text" ng-model="ProfissionalVH.profissional.valorConsultaPresencial" id="valorConsultaPresencial" class="valorMonetario" onblur="validarValor(this.value , 'valorConsultaPresencial')"/>
                                             </div>
                                         </div>
                                         <div class="col-12">
@@ -1055,7 +1055,6 @@ $(function(){
 	  }
   }
 </script>
-
 <script>
 function validarQuantidadeCortesiaMes(valor){
 	if (valor == 0 || valor == null) {
@@ -1072,7 +1071,15 @@ function validarQuantidadeConsultaDesconto40Mes(valor){
 	
 }
 </script>
-
+<script>
+  function apresentarCampoEndereco(campo){
+	  if(campo == true || campo == 'true'){
+		document.getElementById("divEndereco").style.display = "inline-block";
+	  }else{
+		document.getElementById("divEndereco").style.display = "none"; 
+	  }
+  }
+</script>
     </div>
 </body>
 </html>

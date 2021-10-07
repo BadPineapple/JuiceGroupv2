@@ -1,5 +1,8 @@
 package ilion.vitazure.negocio;
 
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -10,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ilion.util.Uteis;
 import ilion.util.persistencia.HibernateUtil;
 import ilion.vitazure.model.HorarioAtendimento;
 import ilion.vitazure.model.Profissional;
@@ -97,6 +101,20 @@ public class HorarioAtendimentoNegocio {
 	@Transactional
 	public void excluir(HorarioAtendimento horarioAtendimento) {
 		hibernateUtil.delete(horarioAtendimento);
+	}
+	
+	public void validarDiasFerias(Profissional profissional) {
+		List<Date> listRemover = new ArrayList<Date>();
+		profissional.getDatasPossivelAgendamento().stream().forEach(datasPossivelAgendamento -> {
+			try {
+				if(Uteis.isDataDentroDoPeriodo(Uteis.convert(profissional.getDataInicioAvisoFerias()) , Uteis.convert(profissional.getDataFimAvisoFerias()) , datasPossivelAgendamento)) {
+					listRemover.add(datasPossivelAgendamento);
+				}
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		});
+		profissional.getDatasPossivelAgendamento().removeAll(listRemover);
 	}
 	
 }

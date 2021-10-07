@@ -48,6 +48,7 @@
                                 <thead>
                                     <tr>
                                         <td style="text-align: center;">Paciente</td>
+                                        <td style="text-align: center;">Convênio</td>
                                         <td style="text-align: center;">Localização</td>
                                         <td style="text-align: center;">Data</td>
                                         <td style="text-align: center;">Duração</td>
@@ -60,6 +61,7 @@
                                 <c:forEach var="agenda" items="${listAgendas}">
                                     <tr>
                                         <td style="text-align: center;">${agenda.paciente.nome}</td>
+                                        <td style="text-align: center;">${agenda.paciente.empresaImportacao != "" ? "Empresa" : "Particular"}</td>
                                         <td style="text-align: center;">${agenda.online ? 'Online' : 'Endereco'}</td>
                                         <td style="text-align: center;">${agenda.dataHoraApresentar}</td>
                                         <td style="text-align: center;">${agenda.profissional.duracaoAtendimento.nomeApresentar}</td>

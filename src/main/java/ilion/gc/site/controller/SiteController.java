@@ -397,6 +397,9 @@ public class SiteController extends CustomErrorController {
   							  .anyMatch(i2 -> i2.getValue() == o1.getDay());
   				  }).collect(Collectors.toList());
   		  profissional.getDatasPossivelAgendamento().addAll(datasPossivelAgendamento);
+  		if(profissional.getAvisoFerias()) {
+			  horarioNegocio.validarDiasFerias(profissional);
+			}
   	  });
   	  return lisProfissional;
   	  

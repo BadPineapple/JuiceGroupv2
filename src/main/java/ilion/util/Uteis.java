@@ -1673,4 +1673,27 @@ public class Uteis {
     	
     }
 	
+	 public static Boolean isDataDentroDoPeriodo(Date periodoInicial, Date periodoFinal, Date data) throws ParseException {
+	    	SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+	    	periodoInicial = format.parse(format.format(periodoInicial));
+	    	periodoFinal = format.parse(format.format(periodoFinal));
+	    	data = format.parse(format.format(data));
+	    	if(data.before(periodoInicial) || data.after(periodoFinal)) {
+	    		return Boolean.FALSE;
+	    	}
+	    	return Boolean.TRUE;
+	    }
+	 
+	  public static Date convert(String data) throws ParseException {
+	        try {
+	            if (data != null) {
+	              SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); 
+	              Date data2 = formato.parse(data);
+	              return data2;
+	            }
+	        } catch (Exception e) {
+	        }
+	        return null;
+	    }
+	
 }
