@@ -6,6 +6,7 @@ import java.util.Locale;
 
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Disjunction;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ import ilion.admin.negocio.Usuario;
 import ilion.email.negocio.Email;
 import ilion.email.negocio.EmailNegocio;
 import ilion.email.negocio.EmailSenderFactory;
+import ilion.me.pagar.model.Limit;
 import ilion.util.StatusEnum;
 import ilion.util.StringUtil;
 import ilion.util.Uteis;
@@ -59,7 +61,7 @@ public class PessoaNegocio {
 		dc.add(Restrictions.eq("email", email));
 		return (Pessoa) hibernateUtil.consultarUniqueResult(dc);
 	}
-
+	
 	@Transactional
 	public Pessoa incluirAtualizar(Pessoa pessoa) throws Exception{
 		validarUsuario(pessoa);
@@ -244,20 +246,31 @@ public void enviarSenhaEmail(String email) throws Exception {
 	    	EnvioEmailConfirmacao.novo(pessoa);
 	}
 	
-public void emailAtivacao(Pessoa pessoaVO) throws Exception {
-		
-		String urlProp = propNegocio.findValueById(PropEnum.URL);
-		String nomeEmpresaProp = propNegocio.findValueById(PropEnum.NOME_EMPRESA);
-		String url = urlProp+"/ilionnet/templateConfirmacao?id="+pessoaVO.getId();
-		String assunto = "Ativação - "+nomeEmpresaProp;
-		String html = Uteis.getHtml(url);
-		html = new String(html.getBytes(StandardCharsets.ISO_8859_1));
-		Email e = new Email();
-		e.setToEmail(pessoaVO.getEmail());
-		e.setToName(pessoaVO.getNome());
-		e.setSubject(assunto);
-		e.setMessage(html);
-		emailNegocio.adicionarEmail(e);
-	}	
+	public void emailAtivacao(Pessoa pessoaVO) throws Exception {
+			
+			String urlProp = propNegocio.findValueById(PropEnum.URL);
+			String nomeEmpresaProp = propNegocio.findValueById(PropEnum.NOME_EMPRESA);
+			String url = urlProp+"/ilionnet/templateConfirmacao?id="+pessoaVO.getId();
+			String assunto = "Ativação - "+nomeEmpresaProp;
+			String html = Uteis.getHtml(url);
+			html = new String(html.getBytes(StandardCharsets.ISO_8859_1));
+			Email e = new Email();
+			e.setToEmail(pessoaVO.getEmail());
+			e.setToName(pessoaVO.getNome());
+			e.setSubject(assunto);
+			e.setMessage(html);
+			emailNegocio.adicionarEmail(e);
+		}
+
+	public Pessoa consultarPorCpf(String cpf) {
+		DetachedCriteria dc = DetachedCriteria.forClass(Pessoa.class);
+		dc.add(Restrictions.eq("cpf", cpf));
+		List<Pessoa> listPessoa = (List<Pessoa>) hibernateUtil.list(dc);
+		if(listPessoa.isEmpty()) {
+			return null;
+		}else {
+			return listPessoa.get(0);
+		}
+	}
 
 }

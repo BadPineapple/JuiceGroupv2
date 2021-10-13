@@ -131,28 +131,30 @@
                                         <input type="text" data-mask="00000-000" ng-model="pessoa.cep" id="cep" required onblur="validarCep(this.value)"/>
                                     </div>
                                 </div>
-                                <div class="col-12">
-                                    <div class="input-block">
-                                        <label>Relação Contato</label>
-                                        <select ng-model="pessoa.relacaoContato" class="form-control input-sm">
-						   					<option value=""></option>
-						   					<option value="amigo">Amigo</option>
-						   					<option value="familiar">Familiar</option>
-										</select>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="input-block">
-                                        <label>Nome Contato</label>
-                                        <input type="text" ng-model="pessoa.nomeContato"/>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="input-block">
-                                        <label>Celular Contato</label>
-                                        <input type="text" data-mask="(00) 00000-0000" ng-model="pessoa.celularContato" id="celular" onblur="validarDDD(this.value , 'celular')"/>
-                                    </div>
-                                </div>
+                               <c:if test="${pessoa.cliente}"> 
+	                                <div class="col-12">
+	                                    <div class="input-block">
+	                                        <label>Contato de um familiar ou pessoa próxima</label>
+	                                        <select ng-model="pessoa.relacaoContato" class="form-control input-sm">
+							   					<option value=""></option>
+							   					<option value="amigo">Amigo</option>
+							   					<option value="familiar">Familiar</option>
+											</select>
+	                                    </div>
+	                                </div>
+	                                <div class="col-12">
+	                                    <div class="input-block">
+	                                        <label>Nome Contato</label>
+	                                        <input type="text" ng-model="pessoa.nomeContato"/>
+	                                    </div>
+	                                </div>
+	                                <div class="col-12">
+	                                    <div class="input-block">
+	                                        <label>Celular Contato</label>
+	                                        <input type="text" data-mask="(00) 00000-0000" ng-model="pessoa.celularContato" id="celular" onblur="validarDDD(this.value , 'celular')"/>
+	                                    </div>
+	                                </div>
+                                </c:if>
                                 <div class="col-12">
                                         <div class="termos">
                                             <input type="checkbox" required oninvalid="this.setCustomValidity('Marque esta caixa para continuar')" onchange="try{setCustomValidity('')}catch(e){}" style="position: relative;top: -11px;"/>

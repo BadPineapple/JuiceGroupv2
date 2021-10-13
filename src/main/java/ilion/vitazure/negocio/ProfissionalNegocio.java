@@ -145,6 +145,8 @@ public class ProfissionalNegocio {
 			validarFormacao(profissionalVH);
 		}else if(profissionalVH.getMenuValidar().equals("tempoDuracao")) {
 			validarTempoDuracao(profissionalVH);
+		}else if(profissionalVH.getProfissional().getAvisoFerias()) {
+		    validarDataAvisoFerias(profissionalVH);
 		}
 	}
 	
@@ -154,6 +156,9 @@ public class ProfissionalNegocio {
 		}
 		if(Uteis.ehNuloOuVazio(profissionalVH.getProfissional().getCadastroEpsi())) {
 			throw new ValidacaoException("Cadastro do e-Psi não informado.");
+		}
+		if(Uteis.ehNuloOuVazio(profissionalVH.getProfissional().getDataValidadeEpsi())) {
+			throw new ValidacaoException("Data validação do e-Psi não informado.");
 		}
 		if(profissionalVH.getProfissional().getTipoProfissional().equals(TipoProfissionalEnum.NAO_INFORMADO)) {
 			throw new ValidacaoException("Tipo profissional não informado.");
@@ -181,6 +186,12 @@ public class ProfissionalNegocio {
 	private void validarTempoDuracao(ProfissionalVH profissionalVH)  throws Exception{
 		if(profissionalVH.getProfissional().getDuracaoAtendimento().equals(DuracaoAtendimentoEnum.NAO_INFORMADO)) {
 			throw new ValidacaoException("Duração de atendimento não informado.");
+		}
+	}
+	
+	private void validarDataAvisoFerias(ProfissionalVH profissionalVH)  throws Exception{
+		if(Uteis.validarDataInicialMaiorFinal(profissionalVH.getProfissional().getDataInicioAvisoFerias() , profissionalVH.getProfissional().getDataFimAvisoFerias())) {
+			throw new ValidacaoException("Data inicial não pode ser maior que data final.");
 		}
 	}
 	

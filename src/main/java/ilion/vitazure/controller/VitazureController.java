@@ -118,9 +118,11 @@ public class VitazureController {
 			request.setAttribute("especialidades", EspecialidadesEnum.values());
 			request.setAttribute("estados", EstadoEnum.values());
 			return "/ilionnet2/vitazure/painel-do-cliente";
-		}else if (pessoa.getPsicologo() && (profissional.getAtivo() == null || !profissional.getAtivo())) {
-				return "/ilionnet2/vitazure/assinatura";
-		}else {
+		}
+//		else if (pessoa.getPsicologo() && (profissional.getAtivo() == null || !profissional.getAtivo())) {
+//				return "/ilionnet2/vitazure/assinatura";
+//		}
+		else {
 			request.setAttribute("conselhoProfissional", ConselhoProfissionalEnum.values());
 			request.setAttribute("estados", EstadoEnum.values());
 			request.setAttribute("tiposProfissional", TipoProfissionalEnum.values());
@@ -320,9 +322,11 @@ public class VitazureController {
 				request.setAttribute("tiposProfissional", TipoProfissionalEnum.values());
 				request.setAttribute("especialidades", EspecialidadesEnum.values());
 				return listaConsulta(modelMap, request);
-			}else if (pessoa.getPsicologo() && (profissional.getAtivo() == null || !profissional.getAtivo())) {
-					return "/ilionnet2/vitazure/assinatura";
-			}else {
+			}
+//			else if (pessoa.getPsicologo() && (profissional.getAtivo() == null || !profissional.getAtivo())) {
+//					return "/ilionnet2/vitazure/assinatura";
+//			}
+			else {
 				 request.getSession().setAttribute(PessoaNegocio.PROFISSIONAL_COMPLETO, profissional.getDadosCompleto());
 				return listaConsulta(modelMap, request);
 			}
@@ -453,4 +457,24 @@ public class VitazureController {
 					}
 				}
 		 
+			      @GetMapping("/vitazure/validarFinalizarAtendimento/{identificador}")
+			      public ResponseEntity<String> validarFinalizarAtendimento(ModelMap modelMap,HttpServletRequest request, @PathVariable Long  identificador){
+						 Pessoa pessoaSessao = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
+						 try {
+							    Agenda agenda = agendaNegocio.consultarAgendaId(identificador);
+								if (agenda.getStatus().equals(StatusEnum.REALIZADO) && pessoaSessao.getCliente()) {
+							        request.getSession().setAttribute("agendaConcluida", agenda);
+							        return new ResponseEntity<>(gson.toJson("/vitazure/avaliacaoAtendimento"), HttpStatus.OK);
+								}else if(agenda.getStatus().equals(StatusEnum.REALIZADO) && pessoaSessao.getPsicologo()) {
+									return new ResponseEntity<>(gson.toJson("/vitazure/lista-de-consultas"), HttpStatus.OK);
+								}
+								return new ResponseEntity<>(gson.toJson(""), HttpStatus.OK);
+							} catch (ValidationException e) {
+								e.printStackTrace();
+								return new ResponseEntity<>(gson.toJson(""), HttpStatus.BAD_REQUEST);
+							} catch (Exception e) {
+								return new ResponseEntity<>(gson.toJson(""), HttpStatus.BAD_REQUEST);
+							}
+					}
+			    
 }

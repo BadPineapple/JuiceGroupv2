@@ -170,14 +170,14 @@
                                             <p>Cadastro na plataforma<br> Vitazure;</p>
                                         </div>
 
+<!--                                         <div class="lista-cadastro"> -->
+<!--                                             <span>4.</span> -->
+
+<!--                                             <p>Assinatura mensal, semestral ou anual na plataforma;</p> -->
+<!--                                         </div> -->
+
                                         <div class="lista-cadastro">
                                             <span>4.</span>
-
-                                            <p>Assinatura mensal, semestral ou anual na plataforma;</p>
-                                        </div>
-
-                                        <div class="lista-cadastro">
-                                            <span>5.</span>
 
                                             <p style="transform: translateY(0px);">Conexão de internet confiável, se informe aqui.</p>
                                         </div>

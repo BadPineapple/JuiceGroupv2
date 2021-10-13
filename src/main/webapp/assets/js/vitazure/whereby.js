@@ -82,6 +82,25 @@ function relogio($scope, $http, $window){
 			
 		}		
 };
+
+
+function validarAgendaConcluida($scope, $http, $window){
+		var identificador = document.getElementById("id").value;
+			
+			$.ajax({
+		        url: '/vitazure/validarFinalizarAtendimento',
+		        type: 'GET',
+		        data: 'identificador ='+identificador,
+		        contentType: 'application/json',
+		        success: function (response) {
+		           alert_success('O tempo da sua consulta expirou,seu atendimento foi encerrado!');
+		        }, error: function (response) {		           
+		              alert_success('O tempo da sua consulta expirou,seu atendimento foi encerrado!');
+		        }
+		    });			
+			setTimeout('validarAgendaConcluida()', 10000);				
+};
+
 	
 function definirTempoCronometro($scope, $http, $window) {
 	       var d = new Date(), displayDate;
@@ -106,6 +125,7 @@ function definirTempoCronometro($scope, $http, $window) {
 	            seg = tempo[1];
 	          }	         
 	          relogio($scope, $http, $window);
+	          validarAgendaConcluida($scope, $http, $window);
 	       }else{
 	    	   setTimeout('definirTempoCronometro()', 1000); 
 	       }  	          

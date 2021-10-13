@@ -737,9 +737,23 @@ function validarItemPreenchidoEndereco($scope, $http, $window){
 }
 
 function validarValor(campo , campoInformado){
-	  let valor = campo.replace('.','').replace(',','.');
+	  let valor = campo.replace('.','').replace('.','').replace('.','').replace('.','').replace(',','.');
 	  if(valor > 10000.00){
 		 alert_error('O valor limite para este cadastro é de R$ 10.000,00');
 		 document.getElementById(campoInformado).value = "";
 	  }
   }
+function validarDataMaiorAtual(data , id){
+	  let partes = data.split('/') 
+	  let dataAtual = new Date()
+	  data2 = new Date(partes[2], partes[1] - 1, partes[0])
+      var quantidadeMes = (data2.getFullYear()*12 + data2.getMonth()) - (dataAtual.getFullYear()*12 + dataAtual.getMonth());
+	 var RegExPattern = /^((((0?[1-9]|[12]\d|3[01])[\.\-\/](0?[13578]|1[02])      [\.\-\/]((1[6-9]|[2-9]\d)?\d{2}))|((0?[1-9]|[12]\d|31)[\.\-\/](0?[13456789]|1[012])[\.\-\/]((1[6-9]|[2-9]\d)?\d{2}))|((0?[1-9]|1\d|2[0-8])[\.\-\/]0?2[\.\-\/]((1[6-9]|[2-9]\d)?\d{2}))|(29[\.\-\/]0?2[\.\-\/]((1[6-9]|[2-9]\d)?(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00)|00)))|(((0[1-9]|[12]\d|3[01])(0[13578]|1[02])((1[6-9]|[2-9]\d)?\d{2}))|((0[1-9]|[12]\d|30)(0[13456789]|1[012])((1[6-9]|[2-9]\d)?\d{2}))|((0[1-9]|1\d|2[0-8])02((1[6-9]|[2-9]\d)?\d{2}))|(2902((1[6-9]|[2-9]\d)?(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00)|00))))$/;
+     if (((!((data.match(RegExPattern)))) && ( data != "" )) || data2 <= dataAtual) {
+          alert_error('Data informada esta inválida.');
+          document.getElementById(id).value = '';
+     }else if(quantidadeMes > 12){
+		  alert_error('Data informada não pode ser maior que 12 meses.');
+          document.getElementById(id).value = '';
+	}
+}

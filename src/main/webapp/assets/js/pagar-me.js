@@ -5,7 +5,7 @@ function chamada (valor, item, id) {
         type: 'GET',
         contentType: 'text/plain',
         error: function (data, textStatus, xhr) {
-            alert(data.responseText + " error");
+            alert_error(data.responseText);
             confirma = 0;
         }
     }).done(function (data, textStatus, jqXHR) {

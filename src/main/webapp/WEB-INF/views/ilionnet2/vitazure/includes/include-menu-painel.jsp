@@ -37,12 +37,12 @@
 	                    <i class="far fa-user" style="font-size: 20px;padding-right: 6px;font-weight: 300;"></i>
 	                    Meus Dados          
 	                </a>
-	                <c:if test="${pessoa.psicologo}">
-	                <a href="<ilion:url/>vitazure/minhaAssinatura" class="line">
-	                    <i class="fas fa-file-contract" style="font-size: 20px;padding-right: 6px;font-weight: 300;"></i>
-	                    Minha Assinatura          
-	                </a>
-	                </c:if>
+<%-- 	                <c:if test="${pessoa.psicologo}"> --%>
+<%-- 	                <a href="<ilion:url/>vitazure/minhaAssinatura" class="line"> --%>
+<!-- 	                    <i class="fas fa-file-contract" style="font-size: 20px;padding-right: 6px;font-weight: 300;"></i> -->
+<!-- 	                    Minha Assinatura           -->
+<!-- 	                </a> -->
+<%-- 	                </c:if> --%>
 	             </c:if>   
             </div>
         </div>

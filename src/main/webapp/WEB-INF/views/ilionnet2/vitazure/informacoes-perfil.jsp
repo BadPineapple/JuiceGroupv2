@@ -126,6 +126,7 @@
 										    ProfissionalVH.profissional.avisoFerias='${profissional.avisoFerias}';
 										    ProfissionalVH.profissional.dataInicioAvisoFerias='${profissional.dataInicioAvisoFerias}';
 										    ProfissionalVH.profissional.dataFimAvisoFerias='${profissional.dataFimAvisoFerias}';
+										    ProfissionalVH.profissional.dataValidadeEpsi='${profissional.dataValidadeEpsi}';
 										    ProfissionalVH.profissional.ativo='${profissional.ativo}';
 										    ProfissionalVH.profissional.dadosCompleto='${profissional.dadosCompleto}';
 										    ProfissionalVH.profissional.plano='${profissional.plano}';
@@ -228,10 +229,20 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-12 col-md-12 col-xl-12">
+                                        <div class="col-8 col-md-8 col-xl-8">
                                             <div class="input-block">
                                                 <label>Informe o número ou protocolo de cadastro e-Psi</label>
                                                 <input type="text" ng-model="ProfissionalVH.profissional.cadastroEpsi"  />
+                                            </div>
+                                        </div>
+                                        <div class="col-4 col-md-4 col-xl-4">
+                                            <div class="input-block">
+                                                <label>Data de validade do e-Psi</label>
+                                                <input type="text" data-mask="00/00/0000" ng-model="ProfissionalVH.profissional.dataValidadeEpsi" id="dataValidadeEpsi" onchange="validarDataMaiorAtual(this.value , 'dataValidadeEpsi')">
+			                                      <a href="javascript:;" style="position: absolute;left: 83%;top: 45%;" onClick="cal1x.select(document.getElementById('dataValidadeEpsi'),'linkDataValidadeEpsi','dd/MM/yyyy'); return false;" onchange="validarDataMaiorAtual(this.value)" id="linkDataValidadeEpsi" name="linkDataValidadeEpsi">
+			                                        <i class="fas fa-calendar-week" style="font-size: 20px;"></i>
+			                                      </a>
+			                                    </input>  
                                             </div>
                                         </div>
 
@@ -918,35 +929,35 @@
                                 </div>
                             </div>
     
-                            <div class="match-toggle">
-                                <div class="toggle-header">
-                                    <strong>Consulta com desconto</strong>
-                                </div>
+<!--                             <div class="match-toggle"> -->
+<!--                                 <div class="toggle-header"> -->
+<!--                                     <strong>Consulta com desconto</strong> -->
+<!--                                 </div> -->
     
-                                <div class="toggle-body vitazure">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div class="toogle-title">
-                                                <p>Habilitando essa opção será concedido um desconto de R$40,00 aleatório distribuído pelo sistema. Exemplo: se você atende por R$90,00, com o desconto aplicado pelo cliente você irá receber R$50,00.</p>
-                                            </div>
-                                        </div>
+<!--                                 <div class="toggle-body vitazure"> -->
+<!--                                     <div class="row"> -->
+<!--                                         <div class="col-12"> -->
+<!--                                             <div class="toogle-title"> -->
+<!--                                                 <p>Habilitando essa opção será concedido um desconto de R$40,00 aleatório distribuído pelo sistema. Exemplo: se você atende por R$90,00, com o desconto aplicado pelo cliente você irá receber R$50,00.</p> -->
+<!--                                             </div> -->
+<!--                                         </div> -->
 
-                                        <div class="col-12">
-                                            <div class="checkbox">
-                                                <input type="checkbox" ng-model="ProfissionalVH.profissional.habilitarDesconto40" id="habilitarDesconto40" ng-checked="${profissional.habilitarDesconto40}" onclick="apresentarCampoConsulta40Mes(this.checked)" />
-                                                <label>Habilitar desconto de R$40,00</label>
-                                            </div>
-    										<div class="col-12" style="display:none;" id="divQuantidadeConsulta40Mes">
-                                               <p>Quantidade de consultas cortesias no mês: <input type="text" id="quantidadeConsultaDesconto40Mes" onchange="validarQuantidadeConsultaDesconto40Mes(this.value)" style="width: 32px;text-align: center;" ng-model="ProfissionalVH.profissional.quantidadeConsultaDesconto40Mes" data-mask="00"/></p>
-                                            </div>   
-                                        </div>
+<!--                                         <div class="col-12"> -->
+<!--                                             <div class="checkbox"> -->
+<%--                                                 <input type="checkbox" ng-model="ProfissionalVH.profissional.habilitarDesconto40" id="habilitarDesconto40" ng-checked="${profissional.habilitarDesconto40}" onclick="apresentarCampoConsulta40Mes(this.checked)" /> --%>
+<!--                                                 <label>Habilitar desconto de R$40,00</label> -->
+<!--                                             </div> -->
+<!--     										<div class="col-12" style="display:none;" id="divQuantidadeConsulta40Mes"> -->
+<!--                                                <p>Quantidade de consultas cortesias no mês: <input type="text" id="quantidadeConsultaDesconto40Mes" onchange="validarQuantidadeConsultaDesconto40Mes(this.value)" style="width: 32px;text-align: center;" ng-model="ProfissionalVH.profissional.quantidadeConsultaDesconto40Mes" data-mask="00"/></p> -->
+<!--                                             </div>    -->
+<!--                                         </div> -->
 
-                                        <div class="col-12">
-                                            <button class="button-secundary checkbox-button" ng-click="perfilProfissional('')" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Salvar</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+<!--                                         <div class="col-12"> -->
+<!--                                             <button class="button-secundary checkbox-button" ng-click="perfilProfissional('')" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Salvar</button> -->
+<!--                                         </div> -->
+<!--                                     </div> -->
+<!--                                 </div> -->
+<!--                             </div> -->
     
                             <div class="match-toggle">
                                 <div class="toggle-header">

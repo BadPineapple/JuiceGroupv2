@@ -485,35 +485,35 @@
             </div>
         </div>
 
-        <div class="area-cell">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 col-md-6 col-xl-6">
-                        <h2>Acompanhe suas consultas também pelo app.</h2>
+<!--         <div class="area-cell"> -->
+<!--             <div class="container"> -->
+<!--                 <div class="row"> -->
+<!--                     <div class="col-12 col-md-6 col-xl-6"> -->
+<!--                         <h2>Acompanhe suas consultas também pelo app.</h2> -->
 
-                        <p>Com mais essa facilidade você poderá acompanhar suas consultas pelo celular, tablet ou computador.</p>
+<!--                         <p>Com mais essa facilidade você poderá acompanhar suas consultas pelo celular, tablet ou computador.</p> -->
 
-                        <div class="lojas-aplicativos">
-                            <p>Disponível para Android e iOS.</p>
+<!--                         <div class="lojas-aplicativos"> -->
+<!--                             <p>Disponível para Android e iOS.</p> -->
 
-                            <div class="aplicativos">
-                                <a href="#">
-                                    <figure>
-                                        <img src="assets/images/google-play.png" alt="">
-                                    </figure>
-                                </a>
+<!--                             <div class="aplicativos"> -->
+<!--                                 <a href="#"> -->
+<!--                                     <figure> -->
+<!--                                         <img src="assets/images/google-play.png" alt=""> -->
+<!--                                     </figure> -->
+<!--                                 </a> -->
 
-                                <a href="#">
-                                    <figure>
-                                        <img src="assets/images/apple-store.png" alt="">
-                                    </figure>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<!--                                 <a href="#"> -->
+<!--                                     <figure> -->
+<!--                                         <img src="assets/images/apple-store.png" alt=""> -->
+<!--                                     </figure> -->
+<!--                                 </a> -->
+<!--                             </div> -->
+<!--                         </div> -->
+<!--                     </div> -->
+<!--                 </div> -->
+<!--             </div> -->
+<!--         </div> -->
 
         <div class="blog">
             <div class="container">

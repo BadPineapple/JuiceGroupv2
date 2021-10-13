@@ -1696,4 +1696,22 @@ public class Uteis {
 	        return null;
 	    }
 	
+	  public static Boolean validarDataInicialMaiorFinal(String dataInicial , String dataFinal){
+			try {
+		    	SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+		    	String dataAtual = dataInicial;
+		    	String b = dataFinal;
+				Date data1Formt = format.parse(dataAtual);
+				Date data2Formt = format.parse(b);
+	    	if (data1Formt.compareTo(data2Formt) >= 0) {
+	    		return Boolean.TRUE;
+	    	}
+	    	return Boolean.FALSE;
+			} catch (ParseException e) {
+				e.printStackTrace();
+				return Boolean.FALSE;
+			}
+	    	
+	    }
+	  
 }

@@ -245,7 +245,35 @@
 
                                 </div>
                             </div>
+                            
+                            <div class="match-toggle">
+                                <div class="toggle-header">
+                                    <strong>Quais recursos serão necessários para meu atendimento online?</strong>
+                                </div>
+                                <div class="toggle-body vitazure">
 
+                                    <p>Se for usar um computador desktop ou notebook, sugerimos observar os seguintes equipamentos:</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;1- Webcam - recomendamos uma câmara (1280 x 720 pixels) com sistema HD de 720p no mínimo;
+    									</br>&nbsp;&nbsp;&nbsp;&nbsp;2- Microfone de Lapela;
+    									</br>&nbsp;&nbsp;&nbsp;&nbsp;3-  Fone de ouvido.	</p>
+    								<p>Os notebooks mais recentes (2021) já possuem os componentes acima, exceção do fone de ouvido, recomendação do seu uso também nos notebooks.
+									</br>Se você pensa em usar o aparelho celular, observe os seguintes equipamentos:</p>
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;1-  Fone de ouvido;
+    								</br>&nbsp;&nbsp;&nbsp;&nbsp;2- Anel de led (Ring Light) – em ambientes com pouca luz, recomendamos o uso das luzes de led.</p>		
+                                	<p>Link de comunicação (internet):
+									</br>Recomendamos que o link seja de no mínimo 15MB;
+									</br>Não é recomendado uso de links de dados móveis, seu uso deve ser somente em caso de impossibilidade extrema de contar com recursos aqui recomendados.</p>
+                                </div>
+                            </div>
+							
+							 <div class="match-toggle">
+                                <div class="toggle-header">
+                                    <strong>Que cuidados preciso ter para o atendimento online?</strong>
+                                </div>
+                                <div class="toggle-body vitazure">
+                                    <p>Diferentemente do atendimento presencial, no atendimento online a(o) Psicóloga(o) precisa considerar, além do seu ambiente físico e virtual, o ambiente físico e virtual da(o) cliente em conexão. Nessa modalidade de atendimento a garantia de sigilo profissional também envolve a(o) cliente, que deve ser orientada(o) quanto aos cuidados a serem adotados como: estar em um ambiente da casa que não tenha interferências externas (excesso de ruído, animais de estimação, circulação de outras pessoas, etc.), ter um bom antivírus e internet de qualidade e fazer utilização de fones de ouvido.</p>
+                                </div>
+                            </div>
 
                             <!-- End como funciona profissional -->
                         </div>

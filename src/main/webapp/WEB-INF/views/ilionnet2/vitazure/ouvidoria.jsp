@@ -22,7 +22,6 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="title-internas">
-                            
                         </div>
                     </div>
                 </div>
@@ -32,18 +31,29 @@
         <div class="area-white">
             <div class="container">
                 <div class="row">
+                  <h2 class="title-gray">A Vitazure valoriza a transparência e sua segurança.</h2>
                 <div class="row" style="margin-top: 10px">
-							<div class="col-12 funciona-text">
-	                            <p>A Ouvidoria é um espaço aberto para receber elogios, sugestões, reclamações ou denúncias que você acredita não terem sido atendidos adequadamente pelos setores e pessoas responsáveis. Sua atuação fundamenta-se na ética, respeito, autonomia, imparcialidade e transparência nas decisões.</p>
-							</div>
+                     		<div class="col-12">
+                                <div class="toggle-header" style="background: none !important; padding: 0 !important">
+                                    <strong style="padding-left: 0 !important; cursor: default">Fale com a gente:</strong>
+                                </div>
+                                <p style=" margin-bottom: 3rem;">Atendimento de segunda à sexta-feira, das 8h às 18h através do nosso chat disponível na plataforma.</p>
+                            </div>
+                     		<div class="col-12">
+                                <div class="toggle-header" style="background: none !important; padding: 0 !important">
+                                    <strong style="padding-left: 0 !important; cursor: default">COMO ACESSAR A OUVIDORIA?</strong>
+                                </div>
+                                <p style=" margin-bottom: 3rem;">A Ouvidoria Vitazure é o espaço no qual clientes que normalmente não conseguiram solucionar demandas por meio dos canais de atendimento habituais, possam buscar auxílio.
+								   </br>Este espaço é designado para reclamações, sugestões de melhoria e até mesmo elogios.</p>
+                            </div>
                         </div>
-                    <div class="col-12">
-                        <div class="col-12 text-center">
-                            <h3>Ouvidoria</h3>
-                        </div>
-                    </div>
+<!--                     <div class="col-12"> -->
+<!--                         <div class="col-12 text-center"> -->
+<!--                             <h3>Ouvidoria</h3> -->
+<!--                         </div> -->
+<!--                     </div> -->
 
-                    <div class="col-12  col-md-6 offset-md-3 col-xl-6 offset-xl-3">
+                    <div class="col-12  col-md-6 col-xl-6">
                         <form class="form-default"  ng-submit="enviarOuvidoria()"  id="ouvidoriaApp">
                             <div class="row">
                                 <div class="col-12">
@@ -79,6 +89,11 @@
                                 </div>
                             </div>
                         </form>
+                    </div>
+                    <div class="col-12 col-md-5 offset-md-1 col-xl-5 offset-xl-1">
+                        <div class="right-input">
+                            <img src="../assets/images/ouvidoria.png" class="img-fluid" />
+                        </div>
                     </div>                   
                 </div>
             </div>

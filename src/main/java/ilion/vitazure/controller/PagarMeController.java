@@ -67,6 +67,8 @@ public class PagarMeController {
     	  String idProfissional = request.getParameter("idProfissional");
     	  request.getSession().setAttribute("idProfissional", idProfissional);
     	  return new ResponseEntity<>("true", HttpStatus.BAD_REQUEST); 
+      }else if(pessoa.getPsicologo()) {
+    	  return new ResponseEntity<>("Não é possível fazer agendamento com uma conta do Tipo Profissional.", HttpStatus.BAD_REQUEST);  
       }
       return new ResponseEntity<>(API, HttpStatus.OK);
     } catch (Exception e) {

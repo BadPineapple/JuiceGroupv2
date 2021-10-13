@@ -215,7 +215,7 @@ function efetuarPagamento($scope, $http, $window , id ,valorOnline ,valorPresenc
 	            if(data.responseText === 'true'){
 					$window.location.href = "/entrar";
 				}else{
-				   alert(data.responseText + " error");
+				   alert_error(data.responseText);
 				}
 				document.getElementById("spinner").style.display = "none";
 	        }

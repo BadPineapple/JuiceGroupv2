@@ -82,7 +82,7 @@ public class AgendaNegocio {
 			Collection<SplitRule> rules = new ArrayList<>();
 				SplitRule splitRules = new SplitRule();
 				splitRules.setRecipientId(profissional.getIdRecebedor());
-				splitRules.setPercentage(100);
+				splitRules.setPercentage(89);
 	            rules.add(splitRules);
 	        capturarTransacao.setSplitRules(rules);
 			capturarTransacao.capture(tx.getAmount());

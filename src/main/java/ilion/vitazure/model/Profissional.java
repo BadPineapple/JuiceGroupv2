@@ -151,6 +151,8 @@ public class Profissional implements Serializable{
 	  
 	  @Enumerated(EnumType.STRING)
 	  private SituacaoAprovacaoProfissionalEnum situacaoAprovacaoProfissional;
+	  
+	  private String dataValidadeEpsi;
 
 	public Long getId() {
 		if (id == null) {
@@ -698,6 +700,14 @@ public class Profissional implements Serializable{
 
 	public void setSituacaoAprovacaoProfissional(SituacaoAprovacaoProfissionalEnum situacaoAprovacaoProfissional) {
 		this.situacaoAprovacaoProfissional = situacaoAprovacaoProfissional;
+	}
+
+	public String getDataValidadeEpsi() {
+		return dataValidadeEpsi;
+	}
+
+	public void setDataValidadeEpsi(String dataValidadeEpsi) {
+		this.dataValidadeEpsi = dataValidadeEpsi;
 	}
 
 	

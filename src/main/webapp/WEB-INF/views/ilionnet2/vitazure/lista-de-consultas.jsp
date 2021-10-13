@@ -47,7 +47,7 @@
                             <table class="tabela-consultas">
                                 <thead>
                                     <tr>
-                                        <td style="text-align: center;">Paciente</td>
+                                        <td style="text-align: left;">Paciente</td>
                                         <td style="text-align: center;">Convênio</td>
                                         <td style="text-align: center;">Localização</td>
                                         <td style="text-align: center;">Data</td>
@@ -60,7 +60,7 @@
                                 <tbody>
                                 <c:forEach var="agenda" items="${listAgendas}">
                                     <tr>
-                                        <td style="text-align: center;">${agenda.paciente.nome}</td>
+                                        <td style="text-align: left;">${agenda.paciente.nome}</td>
                                         <td style="text-align: center;">${agenda.paciente.empresaImportacao != "" ? "Empresa" : "Particular"}</td>
                                         <td style="text-align: center;">${agenda.online ? 'Online' : 'Endereco'}</td>
                                         <td style="text-align: center;">${agenda.dataHoraApresentar}</td>
