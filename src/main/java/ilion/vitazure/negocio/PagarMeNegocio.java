@@ -111,6 +111,8 @@ public class PagarMeNegocio {
 	      throw new Exception("Banco não informada.");
       }else if (profissional.getTipoConta() == TipoContaEnum.NAO_INFORMADO) {
 	      throw new Exception("Tipo Conta não informada.");
+      }else if (profissional.getNomeFavorecido().length() > 30) {
+    	  throw new Exception("Verifique o nome do favorecido, máximo de 30 caracteres.");
       }
 	  
   }
@@ -123,6 +125,8 @@ public class PagarMeNegocio {
 		return "Problema com os dados da conta";
 	}else if(ErroTransacao.toString().contains("agencia")) {
 		return "Problema com os dados da agência";
+	}else if(ErroTransacao.toString().contains("name")) {
+		  return "Problema com o nome do favorecido";
 	}
 	return ErroTransacao.toString();
 	

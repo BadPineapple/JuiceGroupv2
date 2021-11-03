@@ -79,15 +79,15 @@ public class PagarMeController {
 
   @PostMapping(value = "/api/v1/registrar-cartao", produces = "application/json")
   @ResponseBody
-  public ResponseEntity<JsonString> salvarCartao(HttpServletRequest request, @RequestBody Profissional profissional) {
+  public ResponseEntity<JsonString> salvarCartao(HttpServletRequest request, @RequestBody Profissional profissional) throws Exception{
     try {
     	
     String resposta = pagarMeNegocio.cadastraRecebedor(profissional);
 
-    if(resposta.contains("Erro")) {
-      return new ResponseEntity<>(new JsonString(resposta), HttpStatus.BAD_REQUEST);
-    }
+    if(resposta.contains("sucesso")) {
       return new ResponseEntity<>(new JsonString("Conta cadastrada com sucesso"), HttpStatus.OK);
+    }
+    return new ResponseEntity<>(new JsonString(resposta), HttpStatus.BAD_REQUEST);
     }catch (Exception e) {
       return new ResponseEntity<>(new JsonString(e.getMessage()), HttpStatus.BAD_REQUEST);
     }

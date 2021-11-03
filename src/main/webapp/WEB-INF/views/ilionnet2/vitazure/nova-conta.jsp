@@ -63,9 +63,10 @@
                                     <div class="col-12">
                                         <div class="input-block">
                                             <label>Tipo Conta</label>
-		                                    <select ng-model="tipoConta">
+		                                    <select ng-model="tipoConta" onchange="apresentarCampoCpf(this.value);">
 		                                        <option value="CL">Cliente</option>
 		                                        <option value="PS">Profissional</option>
+		                                        <option value="CO">Cliente Convênio</option>
 		                                    </select>
                                         </div>
                                     </div>
@@ -75,7 +76,12 @@
                                             <input type="text"  ng-model="pessoa.nome" required />
                                         </div>
                                     </div>
-
+	                                <div class="col-12" id="divCpf" style="display: none;">
+	                                        <div class="input-block">
+	                                            <label>Cpf</label>
+	                                            <input type="text" data-mask="000.000.000-00"  ng-model="pessoa.cpf"/>
+	                                        </div>
+	                                </div>
                                     <div class="col-12">
                                         <div class="input-block">
                                             <label>Celular</label>
@@ -239,7 +245,15 @@ function validarSenha(senha){
 	
 }
 </script>
-
+<script>
+  function apresentarCampoCpf(campo){
+	  if(campo == 'CO'){
+		document.getElementById("divCpf").style.display = "inline-block";
+	  }else{
+		document.getElementById("divCpf").style.display = "none"; 
+	  }
+  }
+</script>
     </div>
 </body>
 </html>

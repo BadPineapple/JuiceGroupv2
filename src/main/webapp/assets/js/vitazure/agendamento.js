@@ -194,6 +194,7 @@ $http.post("/vitazure/agendar/" , retornoToken)
 			});
         }).catch(function (response) {
         alert_error(response.data.message);
+		document.getElementById("spinner").style.display = "none";
     })
 }
 
@@ -305,8 +306,12 @@ function removerHorariosHist(profissional){
 }
 
 function consultarProfissional($scope, $http, $window) {
+	var especialista = $scope.especialista;
+	if(typeof especialista != 'undefined'){
+		especialista = $scope.especialista.replace('/','&');
+	}
 	var cidade = document.getElementById("cidade").value === '' ? null : document.getElementById("cidade").value;
-    $http.get("/resultado-de-busca/"+$scope.palavraChave+"/"+$scope.especialista+"/"+$scope.estado+"/"+cidade)
+    $http.get("/resultado-de-busca/"+$scope.palavraChave+"/"+especialista+"/"+$scope.estado+"/"+cidade)
         .then(function (response) {
            $window.location.href = "/vitazure/profissionais";
         }).catch(function (response) {
@@ -314,8 +319,12 @@ function consultarProfissional($scope, $http, $window) {
     })
 }
 function consultarProfissionalAberta($scope, $http, $window) {
+	var especialista = $scope.especialista;
+	if(typeof especialista != 'undefined'){
+		especialista = $scope.especialista.replace('/','&');
+	}
 	var cidade = document.getElementById("cidade").value === '' ? null : document.getElementById("cidade").value;
-    $http.get("/resultado-de-busca-externa/"+$scope.palavraChave+"/"+$scope.especialista+"/"+$scope.estado+"/"+cidade)
+    $http.get("/resultado-de-busca-externa/"+$scope.palavraChave+"/"+especialista+"/"+$scope.estado+"/"+cidade)
         .then(function (response) {
             $window.location.href = "/vitazure/profissionais-externa";
         }).catch(function (response) {
@@ -324,7 +333,7 @@ function consultarProfissionalAberta($scope, $http, $window) {
 }
 
 function buscaCidades($scope, $http, $window) {
- if($scope.estado != "" && typeof $scope.estado != 'undefined'){
+ if($scope.estado != "" && typeof $scope.estado != 'undefined' && $scope.estado != 'NAO_INFORMADO'){
     $http.get("/api/cidades/"+$scope.estado)
         .then(function (response) {
            var $cidade = $("#cidade");

@@ -153,6 +153,14 @@ public class Profissional implements Serializable{
 	  private SituacaoAprovacaoProfissionalEnum situacaoAprovacaoProfissional;
 	  
 	  private String dataValidadeEpsi;
+	  
+	  private Boolean aceiteContrato;
+	  
+	  private String dataAceiteContrato;
+	  
+	  private String ipAceiteContrato;
+	  
+	  private String ipExternoAceiteContrato;
 
 	public Long getId() {
 		if (id == null) {
@@ -708,6 +716,41 @@ public class Profissional implements Serializable{
 
 	public void setDataValidadeEpsi(String dataValidadeEpsi) {
 		this.dataValidadeEpsi = dataValidadeEpsi;
+	}
+
+	public Boolean getAceiteContrato() {
+		if(aceiteContrato == null) {
+			aceiteContrato = Boolean.FALSE;
+		}
+		return aceiteContrato;
+	}
+
+	public void setAceiteContrato(Boolean aceiteContrato) {
+		this.aceiteContrato = aceiteContrato;
+	}
+
+	public String getDataAceiteContrato() {
+		return dataAceiteContrato;
+	}
+
+	public void setDataAceiteContrato(String dataAceiteContrato) {
+		this.dataAceiteContrato = dataAceiteContrato;
+	}
+
+	public String getIpAceiteContrato() {
+		return ipAceiteContrato;
+	}
+
+	public void setIpAceiteContrato(String ipAceiteContrato) {
+		this.ipAceiteContrato = ipAceiteContrato;
+	}
+
+	public String getIpExternoAceiteContrato() {
+		return ipExternoAceiteContrato;
+	}
+
+	public void setIpExternoAceiteContrato(String ipExternoAceiteContrato) {
+		this.ipExternoAceiteContrato = ipExternoAceiteContrato;
 	}
 
 	

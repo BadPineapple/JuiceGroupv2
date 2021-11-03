@@ -15,7 +15,7 @@ function cadastroPessoaController($scope, $http, $window) {
 }
 
 function post($scope, $http, $window) {
-    if($scope.tipoConta != '' && $scope.tipoConta == 'CL'){
+    if($scope.tipoConta != '' && ($scope.tipoConta == 'CL' || $scope.tipoConta == 'CO')){
 	  $scope.pessoa.cliente='true';
 	  $scope.pessoa.psicologo='false';
 	}

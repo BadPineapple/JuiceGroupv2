@@ -185,6 +185,11 @@
 		<script src="../assets/js/bundle.libs.ilionnet.js"></script>
 		<script src="../assets/js/bundle.scripts.ilionnet.js"></script>
 		<script src="../assets/js/bundle.libs.angular.js"></script>
+		<script>
+		  if(${empty listProfissionais}){
+		   alert_error(" Profissional com as condições selecionadas não disponível, tente outros parâmetros");		
+		  }
+		</script>
 		 <script>
 		    var myVar = setInterval(myTimer ,1000);
 		    function myTimer() {

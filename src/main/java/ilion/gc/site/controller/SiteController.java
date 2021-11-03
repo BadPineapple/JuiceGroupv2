@@ -103,7 +103,7 @@ public class SiteController extends CustomErrorController {
 	
 	@GetMapping(value = { "/",})
 	public String aguarde(HttpServletRequest request) {
-		return "/aguarde";
+		return "redirect:/home";
 	}
 	@GetMapping(value = { "/home" })
 	public String index(HttpServletRequest request) {
@@ -432,6 +432,9 @@ public class SiteController extends CustomErrorController {
 	 @GetMapping("/resultado-de-busca-externa/{especialista}")
 		public String buscaProfissional(ModelMap modelMap,HttpServletRequest request, @PathVariable String especialista) {
 			Pessoa PessoaSessao = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
+			if(especialista.contains("&")) {
+				especialista = especialista.replace("&", "/");
+			}
 			List<Profissional> lisProfissional = profissionalNegocio.consultarProfissionaisFiltro(null,especialista,null,null);
 			lisProfissional.stream().forEach(profissional-> {
 				profissional.getPessoa().setCidade(enderecoNegocio.consultarCidadeEnderecoPorProfissional(profissional.getId()));
@@ -466,6 +469,9 @@ public class SiteController extends CustomErrorController {
 	    @GetMapping("/resultado-de-busca-externa/{palavraChave}/{especialista}/{estado}/{cidade}")
 		public String buscaProfissional(HttpServletRequest request, @PathVariable String palavraChave,@PathVariable String especialista , @PathVariable String estado,@PathVariable String cidade) {
 			Pessoa PessoaSessao = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
+			if(especialista.contains("&")) {
+				especialista = especialista.replace("&", "/");
+			}
 			List<Profissional> lisProfissional = profissionalNegocio.consultarProfissionaisFiltro(palavraChave,especialista,estado,cidade);
 			lisProfissional.stream().forEach(profissional-> {
 				profissional.getPessoa().setCidade(enderecoNegocio.consultarCidadeEnderecoPorProfissional(profissional.getId()));

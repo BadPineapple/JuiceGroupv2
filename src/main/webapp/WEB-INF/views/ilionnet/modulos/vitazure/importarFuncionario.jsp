@@ -52,9 +52,8 @@
 	                        <label class="control-label">Instruções para importar uma lista de funcionários:</label>
 							<br/>
 							1 - A lista deve ser formatada em arquivo Excel. Ex.: funcionarios.xls ou funcionarios.xlsx;<br/>
-							2 - Cada linha deve conter os dados de um funcionário com nome, e-mail e telefone.<br/>
+							2 - Cada linha deve conter os dados de um funcionário com nome e cpf.<br/>
 							3 - Os dados devem ser separador por coluna.<br/>
-							4 - A senha inicial de acesso dos funcionários importados será: "Vitazure1".<br/>
 							<br/>
 	                   </div>
 			    </div>

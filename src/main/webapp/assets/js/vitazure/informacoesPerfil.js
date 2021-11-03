@@ -57,9 +57,11 @@ class HorarioAtenimento{
 	 this.horaAlmocoFim= horaAlmocoFim;
 	 this.atendimentoOnline= atendimentoOnline;
 	 this.atendimentoPresencial= atendimentoPresencial;
-	 const enderecoAtendimentoVO = enderecoSemanaHorario.split('.,');	 
-     this.enderecoAtendimento= new EnderecoAtendimento(enderecoAtendimentoVO[0],enderecoAtendimentoVO[1],enderecoAtendimentoVO[2],enderecoAtendimentoVO[3],enderecoAtendimentoVO[4],enderecoAtendimentoVO[5],enderecoAtendimentoVO[6],enderecoAtendimentoVO[7],enderecoAtendimentoVO[8]);
-  }
+ 	 if(typeof enderecoSemanaHorario != 'undefined'){
+	  const enderecoAtendimentoVO = enderecoSemanaHorario.split('.,');	 
+      this.enderecoAtendimento= new EnderecoAtendimento(enderecoAtendimentoVO[0],enderecoAtendimentoVO[1],enderecoAtendimentoVO[2],enderecoAtendimentoVO[3],enderecoAtendimentoVO[4],enderecoAtendimentoVO[5],enderecoAtendimentoVO[6],enderecoAtendimentoVO[7],enderecoAtendimentoVO[8]);
+	 }  
+}
 }
 
 
@@ -111,9 +113,9 @@ function informacoesPerfilController($scope, $http, $window) {
 	$scope.apresentarCampoData = function (apresentarCampo) {
     	apresentarCampoData(apresentarCampo);
 	}
-	$scope.apresentarCampoConsulta40Mes = function (apresentarCampo) {
+	/*$scope.apresentarCampoConsulta40Mes = function (apresentarCampo) {
     	apresentarCampoConsulta40Mes(apresentarCampo);
-	}
+	}*/
 	$scope.apresentarPrimeiraConsultaCortesia = function (apresentarCampo) {
     	apresentarPrimeiraConsultaCortesia(apresentarCampo);
 	}
@@ -139,7 +141,6 @@ function perfilProfissional(menu,$scope, $http, $window) {
 
 	// $scope.ProfissionalVH.profissional.conselhoProfissional = document.getElementById("conselhoProfissional").checked;
 	$scope.ProfissionalVH.profissional.avisoFerias = document.getElementById("avisoFerias").checked;
-	$scope.ProfissionalVH.profissional.habilitarDesconto40 = document.getElementById("habilitarDesconto40").checked;
 	$scope.ProfissionalVH.profissional.atendimentoPorLibras = document.getElementById("atendimentoPorLibras").checked;
 	$scope.ProfissionalVH.profissional.primeiraConsultaCortesia = document.getElementById("primeiraConsultaCortesia").checked;
 	$scope.ProfissionalVH.profissional.pacote2com5Desconto = document.getElementById("pacote2com5Desconto").checked;
@@ -168,7 +169,7 @@ function perfilProfissional(menu,$scope, $http, $window) {
 	$scope.ProfissionalVH.profissional.valorConsultaOnline = valorconsultaOnline.replace('.','').replace('.','').replace(',','.')
 	var valorConsultaPresencial = document.getElementById("valorConsultaPresencial").value;
 	$scope.ProfissionalVH.profissional.valorConsultaPresencial = valorConsultaPresencial.replace('.','').replace('.','').replace(',','.')
-	
+	$scope.ProfissionalVH.profissional.dataValidadeEpsi = document.getElementById("dataValidadeEpsi").value;
     $scope.ProfissionalVH.menuValidar= menu;
 $http.post("/vitazure/perfilProfissional", $scope.ProfissionalVH)
         .then(function (response) {
@@ -486,12 +487,12 @@ function validarCampos(diaSemana,horaInicio,horaFim, atendimentoOnline , enderec
 		alert_error("Informar Tipo Atendimento Online ou Presencial");
 		return false;
 	}
-//	for(var i = 0; i < horarioAtendimentos.length; i++){
-//		if(diaSemana == horarioAtendimentos[i].diaSemana && (horaInicio > horarioAtendimentos[i].horaInicio && horaInicio < horarioAtendimentos[i].horaFim && horaFim > horarioAtendimentos[i].horaInicio && horaFim < horarioAtendimentos[i].horaFim)){
-//			alert("Ja Existe")
-//			return false;
-//		}
-//	}
+	for(var i = 0; i < horarioAtendimentos.length; i++){
+		if(diaSemana == horarioAtendimentos[i].diaSemana && (horaInicio >= horarioAtendimentos[i].horaInicio && horaInicio < horarioAtendimentos[i].horaFim)){
+			alert_error("Horário informado já incluído no mesmo dia da semana.")
+			return false;
+		}
+	}
 	
 	return true;
 }
@@ -551,7 +552,7 @@ function salvarConta($scope, $http, $window) {
 
         $scope.profissional.banco = document.getElementById("banco").checked;
 
-        $scope.profissional.agencia = document.getElementById("agencia").checked;R
+        $scope.profissional.agencia = document.getElementById("agencia").checked;
 
         $scope.profissional.conta = document.getElementById("conta").checked;
 
@@ -595,13 +596,13 @@ function apresentarCampoData(campo){
 		document.getElementById("divCampoFinalDataAviso").style.display = "none"; 
 	  }
   }
-function apresentarCampoConsulta40Mes(campo){
+/*function apresentarCampoConsulta40Mes(campo){
 	  if(campo === 'true' || document.getElementById("habilitarDesconto40").checked){
 		document.getElementById("divQuantidadeConsulta40Mes").style.display = "inline-block";
 	  }else{
 		document.getElementById("divQuantidadeConsulta40Mes").style.display = "none"; 
 	  }
-}
+}*/
 
 function apresentarPrimeiraConsultaCortesia(campo){
 	  if(campo === 'true' || document.getElementById("primeiraConsultaCortesia").checked){

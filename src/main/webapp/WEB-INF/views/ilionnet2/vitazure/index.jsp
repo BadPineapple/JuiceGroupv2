@@ -276,9 +276,13 @@
                                     <img src="assets/images/sebrae.png" alt="Sebrae">
                                 </figure>
 
-<!--                                 <figure> -->
-<!--                                     <img src="assets/images/linea.png" alt="Linea"> -->
-<!--                                 </figure> -->
+                                <figure>
+                                    <img src="assets/images/caderno_virtual.png" style="width: 160px;" alt="Caderno virtual">
+                                </figure>
+                                
+                                <figure>
+                                    <img src="assets/images/believe.jpeg" style="width: 160px;" alt="Believe">
+                                </figure>
 
                             </div>
                         </div>

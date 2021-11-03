@@ -128,8 +128,7 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
                 XSSFRow linha = (XSSFRow) linhas.next();
                 Iterator celulas = linha.cellIterator();
                 String nome = null;
-        		String email = null;
-        		String telefone = null;
+        		String cpf = null;
         		
                 while (celulas.hasNext()) {
                     XSSFCell celula = (XSSFCell) celulas.next();
@@ -140,20 +139,17 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
                         	nome = celula.toString();
                         	break;
                         case 1:
-                        	email = celula.toString();
-                        	break;
-                        case 2:
-                        	telefone = celula.toString();
+                        	cpf = celula.toString();
                         	break;
                     }
 
                 }
-                if( ! Uteis.ehNuloOuVazio(nome) && ! Uteis.ehNuloOuVazio(email) && ! Uteis.ehNuloOuVazio(telefone)) {
-        			importarFuncionario(nome, email,telefone, usuario);
+                if( ! Uteis.ehNuloOuVazio(nome) && ! Uteis.ehNuloOuVazio(cpf)) {
+        			importarFuncionario(nome, cpf, usuario);
         		} else {
         			linhasErro.add(numeroLinha);
         			qtdErro++;
-        			this.listPessoaErro.add(!Uteis.ehNuloOuVazio(nome) ? nome : ! Uteis.ehNuloOuVazio(email) ? email : telefone);
+        			this.listPessoaErro.add(!Uteis.ehNuloOuVazio(nome) ? nome : cpf);
         		}
             }
 	      } catch (IOException e) {
@@ -191,8 +187,7 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
 	
 	private void importarLinha(String linha) throws Exception {
 		String nome = null;
-		String email = null;
-		String telefone = null;
+		String cpf = null;
 		
 		StringTokenizer st = new StringTokenizer(linha, ";");
 		
@@ -202,32 +197,28 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
 			if(i == 0){
 				nome = element;
 			} else if(i == 1){
-				email = element;
-			}  else if(i == 3){
-				telefone = element;
-			}
+				cpf = element;
+			} 
 			i++;
 		}
-		if( ! Uteis.ehNuloOuVazio(email) ) {
-			importarFuncionario(nome, email,telefone, usuario);
+		if( ! Uteis.ehNuloOuVazio(cpf) ) {
+			importarFuncionario(nome, cpf, usuario);
 			qtdSucesso++;
 		} else {
 			linhasErro.add(numeroLinha);
 		}
 	}
 
-	private void importarFuncionario(String nome, String email, String telefone, Usuario usuario) throws Exception {
-		email = email.trim();
+	private void importarFuncionario(String nome, String cpf , Usuario usuario) throws Exception {
 		
-		Pessoa pessoa = pessoaNegocio.consultarPorEmail(email);
+		Pessoa pessoa = pessoaNegocio.consultarPorCpf(cpf);
 		
 		if(pessoa == null) {
 			pessoa = new Pessoa();
 			pessoa.setNomeResponsavelImportacao(usuario.getNome());
 			pessoa.setDataCadastro(new Date());
 			pessoa.setNome(nome);
-			pessoa.setEmail(email);
-			pessoa.setCelular(telefone);
+			pessoa.setCpf(cpf);
 			pessoa.setCliente(Boolean.TRUE);
 			pessoa.setPessoaImportada(Boolean.TRUE);
 			pessoa.setSenha("Vitazure1");

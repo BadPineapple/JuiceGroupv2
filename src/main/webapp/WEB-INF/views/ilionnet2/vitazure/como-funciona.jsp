@@ -366,7 +366,7 @@
                                 </div>
                                 <div class="toggle-body vitazure">
 
-                                    <p>A Vitazure não oferece tratamento ou aconselhamento imediato para pessoas em crise suicida, em caso de crise ligue para 141 (CVV) ou acesse ww.cvv.org.br, em caso de emergência procure atendimento em um hospital mais próximo.</p>
+                                    <p>A Vitazure não oferece tratamento ou aconselhamento imediato para pessoas em crise suicida, em caso de crise ligue para 188 (CVV) ou acesse ww.cvv.org.br, em caso de emergência procure atendimento em um hospital mais próximo.</p>
 
                                 </div>
                             </div>
@@ -387,9 +387,7 @@
                                     <strong>Como funcionam as consultas/sessões online?</strong>
                                 </div>
                                 <div class="toggle-body vitazure">
-
-                                    <p>As consultas/sessões acontecem por meio do consultório virtual da plataforma Vitazure, são realizadas de forma online. Atendemos os padrões de segurança recomendados, diferentemente de plataformas populares como WhatsApp, Skype e outras, que não possuem proteção sigilo de pacientes. O uso do consultório virtual não exige nenhuma instalação de aplicativo, você consegue entrar diretamente por um link enviado no seu e-mail 15 minutos antes da consulta/sessão ou também diretamente pela plataforma, fazendo seu login.</p>
-
+                                    <p>As consultas/sessões acontecem por meio do consultório virtual da plataforma Vitazure, são realizadas de forma online. Atendemos os padrões de segurança recomendados, diferentemente de plataformas populares como WhatsApp, Skype e outras, que não possuem proteção sigilo de pacientes. O uso do consultório virtual não exige nenhuma instalação de aplicativo, você consegue entrar diretamente pela plataforma, fazendo seu login.</p>
                                 </div>
                             </div>
 

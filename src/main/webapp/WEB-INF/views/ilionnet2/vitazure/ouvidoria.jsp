@@ -22,6 +22,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="title-internas">
+                  <h2 class="title-gray">A <span style="color: #0097d6;">Vitazure</span> valoriza a transparência e sua segurança.</h2>
                         </div>
                     </div>
                 </div>
@@ -31,7 +32,6 @@
         <div class="area-white">
             <div class="container">
                 <div class="row">
-                  <h2 class="title-gray">A Vitazure valoriza a transparência e sua segurança.</h2>
                 <div class="row" style="margin-top: 10px">
                      		<div class="col-12">
                                 <div class="toggle-header" style="background: none !important; padding: 0 !important">

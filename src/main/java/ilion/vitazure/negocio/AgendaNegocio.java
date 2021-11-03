@@ -67,6 +67,7 @@ public class AgendaNegocio {
 		
 		try {
 			PagarMe.init(propNegocio.findValueById(PropEnum.PAGAR_ME_API_KEY));
+			String situacaoPagarme = propNegocio.findValueById(PropEnum.SITUACAO_PAGARME);
 			Transaction tx = new Transaction().find(jsonRetornoToken.get("token").toString());
 			Profissional profissional = profissionalNegocio.consultarPorId(Long.parseLong(jsonRetornoToken.get("idProfissional").toString()));
 			Date dataAgenda = Uteis.converterDataHoraString(jsonRetornoToken.get("dataAtendimento").toString(), jsonRetornoToken.get("horarioPossivelAtendimento").toString());
@@ -80,10 +81,18 @@ public class AgendaNegocio {
 			
 			Transaction capturarTransacao = new Transaction().find(tx.getId());
 			Collection<SplitRule> rules = new ArrayList<>();
-				SplitRule splitRules = new SplitRule();
-				splitRules.setRecipientId(profissional.getIdRecebedor());
-				splitRules.setPercentage(89);
-	            rules.add(splitRules);
+			SplitRule splitRulesProfissional = new SplitRule();
+			splitRulesProfissional.setRecipientId(profissional.getIdRecebedor());
+			splitRulesProfissional.setPercentage(89);
+			rules.add(splitRulesProfissional);
+			SplitRule splitRulesEmpresa = new SplitRule();
+			if (situacaoPagarme.equals("PRODUCAO")) {
+				splitRulesEmpresa.setRecipientId("re_ckp8jpaz5069y0h9ttty8srcu");
+			}else {
+				splitRulesEmpresa.setRecipientId("re_ckraudxgi00zm0p9tsbnszhmo");
+			}
+			splitRulesEmpresa.setPercentage(11);
+	        rules.add(splitRulesEmpresa);
 	        capturarTransacao.setSplitRules(rules);
 			capturarTransacao.capture(tx.getAmount());
 			PagamentoPagarMe pagamentoPagarMe = new PagamentoPagarMe();

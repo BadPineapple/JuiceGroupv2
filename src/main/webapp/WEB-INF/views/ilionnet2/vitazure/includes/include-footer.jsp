@@ -71,7 +71,13 @@
                 <div class="copyright">
 
                     <p>&copy; 2021. Todos os direitos reservados.</p>
-
+					<div class="redes-sociais">
+                        <a href="https://transparencyreport.google.com/safe-browsing/search?url=vitazure.com.br%2Fhome&hl=pt_BR" target="_blank">
+                            <figure>
+                                <img src="../assets/images/site_seguro.png" style="width: 115px;" alt="">
+                            </figure>
+                        </a>
+                    </div>    
                     <div class="redes-sociais">
                         <a href="http://instagram.com/vitazure" target="_blank">
                             <figure>

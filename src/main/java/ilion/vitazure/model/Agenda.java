@@ -225,10 +225,10 @@ public class Agenda {
 		}
 		
 		public String getDataHoraLiberarLink() {
-			return Uteis.formatarDataHora(Uteis.subtrair(getDataHoraAgendamento(), Calendar.MINUTE, 10), "HH:mm");
+			return Uteis.formatarDataHora(Uteis.subtrair(getDataHoraAgendamento(), Calendar.MINUTE, 5), "HH:mm");
 		}
 		public String getDataHoraBloquearLink() {
-			return Uteis.formatarDataHora(Uteis.acrescentar(getDataHoraAgendamento(), Calendar.MINUTE, 30), "HH:mm");
+			return Uteis.formatarDataHora(Uteis.acrescentar(getDataHoraAgendamento(), Calendar.MINUTE, (Integer.parseInt(getProfissional().getDuracaoAtendimento().getNome()) + 5)), "HH:mm");
 		}
 		public String getDataHoraAlterAtendimento() {
 			return Uteis.formatarDataHora(Uteis.subtrair(getDataHoraAgendamento(), Calendar.MINUTE, 5), "HH:mm");

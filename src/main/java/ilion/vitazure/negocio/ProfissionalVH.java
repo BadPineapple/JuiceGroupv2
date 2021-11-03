@@ -32,6 +32,10 @@ public class ProfissionalVH {
 	
 	private List<String> itensIncompletos;
 	
+	private String ipMaquinaAceite;
+	
+	private String nomeMaquinaAceite;
+	
 	public Profissional getProfissional() {
 		return profissional;
 	}
@@ -130,5 +134,22 @@ public class ProfissionalVH {
 		this.itensIncompletos = itensIncompletos;
 	}
 
+	public String getIpMaquinaAceite() {
+		return ipMaquinaAceite;
+	}
+
+	public void setIpMaquinaAceite(String ipMaquinaAceite) {
+		this.ipMaquinaAceite = ipMaquinaAceite;
+	}
+
+	public String getNomeMaquinaAceite() {
+		return nomeMaquinaAceite;
+	}
+
+	public void setNomeMaquinaAceite(String nomeMaquinaAceite) {
+		this.nomeMaquinaAceite = nomeMaquinaAceite;
+	}
+
+	
 	
 }

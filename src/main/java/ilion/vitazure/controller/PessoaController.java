@@ -64,7 +64,7 @@ public class PessoaController {
 
 	    	  if (!Uteis.ehEmailValido(pessoa.getEmail())) {
 	    	  	return new ResponseEntity<>(new JsonString("E-mail informado inválido."), HttpStatus.BAD_REQUEST);
-					}
+			  }
 
 	    	  if (!(pessoa.getCelular().matches("^\\((?:[14689][1-9]|2[12478]|3[1234578]|5[1345]|7[134579])\\) (?:[2-8]|9[1-9])[0-9]{3}-[0-9]{4}$"))) {
 	    	  	return new ResponseEntity<>(new JsonString("Número de telefone inválido. Verifique se o DDD está correto"), HttpStatus.BAD_REQUEST);
@@ -87,7 +87,14 @@ public class PessoaController {
 	    	  if (pessoa.getSenha().length() < 8 || !containNumber || !containUpperCase) {
 	    	  	return new ResponseEntity<>(new JsonString("A senha deve conter no mínimo 8 caracteres, uma letra maiúscula e um número."), HttpStatus.BAD_REQUEST);
 					}
-
+	  		  Pessoa pessoaImportada =  pessoaNegocio.consultarPorCpf(pessoa.getCpf());
+	  		  if(pessoaImportada != null && pessoa.getId() == 0 && pessoaImportada.getPessoaImportada()) {
+	  			pessoa.setId(pessoaImportada.getId());
+	  			pessoa.setEmpresaImportacao(pessoaImportada.getEmpresaImportacao());
+	  			pessoa.setConfirmado(Boolean.FALSE);
+	  			pessoa.setNomeResponsavelImportacao(pessoaImportada.getNomeResponsavelImportacao());
+	  			pessoa.setPessoaImportada(pessoaImportada.getPessoaImportada());
+	  		  }
 	    	  pessoa = pessoaNegocio.incluirAtualizar(pessoa);
 	    	  pessoaNegocio.enviarEmailAtivacao(pessoa);
 	    	  request.getSession().setAttribute(PessoaNegocio.ATRIBUTO_SESSAO, pessoa);

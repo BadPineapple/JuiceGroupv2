@@ -13,6 +13,7 @@
 <script type="text/javascript" src="../ilionnet/design/script/CalendarPopup.js"></script>
 <script type="text/javascript" src="../ilionnet/design/script/common.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.4.0/moment.min.js"></script>
+
 	<script type="text/javascript">
 	document.write(getCalendarStyles());
 	var cal1x = new CalendarPopup("testdiv1");
@@ -136,6 +137,11 @@
 										    ProfissionalVH.profissional.idRecebedor='${profissional.idRecebedor}';
 										    ProfissionalVH.profissional.idConta='${profissional.idConta}';
 										    ProfissionalVH.profissional.situacaoAprovacaoProfissional='${profissional.situacaoAprovacaoProfissional}';
+										    ProfissionalVH.profissional.aceiteContrato='${profissional.aceiteContrato}';
+										    ProfissionalVH.profissional.dataAceiteContrato='${profissional.dataAceiteContrato}';
+										    ProfissionalVH.profissional.ipAceiteContrato='${profissional.ipAceiteContrato}';
+										    ProfissionalVH.profissional.ipExternoAceiteContrato='${profissional.ipExternoAceiteContrato}';
+										    ProfissionalVH.ipMaquinaAceite='<%= request.getRemoteAddr() %>';
 						                    ProfissionalVH.profissional.pessoa.id='${profissional.pessoa.id}';
 						                    ProfissionalVH.profissional.pessoa.nome='${profissional.pessoa.nome}';
 						                    ProfissionalVH.profissional.pessoa.email='${profissional.pessoa.email}';
@@ -809,21 +815,21 @@
                                         <div class="col-12">
                                             <div class="checkbox">
                                                 <input type="checkbox" ng-model="ProfissionalVH.profissional.convenio40" id="convenio40" ng-checked="${profissional.convenio40}"/>
-                                                <label>Habilitar opção para realizar atendimento para os convênios no valor de R$40,00</label>
+                                                <label>Habilitar opção para realizar atendimento para os convênios no valor de R$45,00</label>
                                             </div>
                                         </div>
     
                                         <div class="col-12">
                                             <div class="checkbox">
                                                 <input type="checkbox" ng-model="ProfissionalVH.profissional.convenio50" id="convenio50" ng-checked="${profissional.convenio50}"/>
-                                                <label>Habilitar opção para realizar atendimento para os convênios no valor de R$50,00</label>
+                                                <label>Habilitar opção para realizar atendimento para os convênios no valor de R$56,00</label>
                                             </div>
                                         </div>
     
                                         <div class="col-12">
                                             <div class="checkbox">
                                                 <input type="checkbox" ng-model="ProfissionalVH.profissional.convenio60" id="convenio60" ng-checked="${profissional.convenio60}"/>
-                                                <label>Habilitar opção para realizar atendimento para os convênios no valor de R$60,00</label>
+                                                <label>Habilitar opção para realizar atendimento para os convênios no valor de R$67,00</label>
                                             </div>
                                         </div>
 
@@ -886,7 +892,7 @@
 
                                         <div class="col-12">
                                             <div class="toogle-title">
-                                                <p>Quando um paciente novo se cadastrar e não realizar consultas em um determinado tempo, será disponibilizado para ele um voucher com uma consulta cortesia, sem custo, a ser direcionado para os psicólogos que marcarem essa opção. Este serviço é um atendimento psicológico pontual, focado em um problema específico. O paciente receberá do psicólogo um aconselhamento ou orientação, com o objetivo de direcionar e ajudar a lidar com aquele problema.</p>
+                                                <p>Quando um paciente novo se cadastrar e não realizar consultas em um determinado tempo, será disponibilizado para ele um voucher com uma consulta cortesia, sem custo, a ser direcionado para os psicólogos que marcarem essa opção.O paciente receberá do psicólogo um aconselhamento ou orientação, com o objetivo de direcionar e ajudar a lidar com aquele problema e incentiva-lo a iniciar o seu processo terapêutico.Habilitar opção para uma consulta cortesia.</p>
                                             </div>
                                         </div>
 
@@ -999,6 +1005,49 @@
 			                                </div>
                                         <div class="col-12">
                                             <button class="button-secundary checkbox-button" ng-click="validarCampoFerias()" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Salvar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="match-toggle">
+                                <div class="toggle-header">
+                                    <strong>Assinatura de contrato</strong>
+                                </div>
+                                <div class="toggle-body vitazure">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="toogle-title">
+                                                <p>Parabéns! chegamos ao final do nosso cadastro, agora só mais um detalhe também importante: As questões abaixo já foram informadas no início do seu cadastro, elas estão aqui para eventuais duvidas que permaneceram.</p>
+                                            </div>
+                                        </div>
+										<div class="col-12" style="padding-left:40px;">
+			                                <p style=" margin-bottom: 3rem;">1.&nbsp;&nbsp;Não há cobrança de assinatura, apenas cobraremos uma taxa de manutenção da plataforma de 9,75% (nove, setenta e cinco por cento), sobre o valor da consulta. Dessa forma, se o valor de sua consulta for R$ 100,00 por exemplo, R$ 90,25 será o seu crédito e R$ 9,75 será a taxa da Vitazure. Lembrando que a partir de agora você poderá fazer a gestão da sua agenda de forma virtual, seus atendimentos com segurança e cuidaremos que todos seus atendimentos sejam pagos e repassados a você com tranquilidade.</p>
+										</div>
+										<div class="col-12" style="padding-left:40px;">
+			                                <p style=" margin-bottom: 3rem;">2.&nbsp;&nbsp;Você pode dedicar seu tempo aos seus atendimentos pois a gestão financeira será mensal e cada valor da consulta, subtraído da taxa de manutenção, será acrescido ao seu saldo, e assim que liquidado, transferido à cada 30 dias, para sua conta corrente cadastrada na plataforma.</p>
+										</div>
+										<div class="col-12" style="padding-left:40px;">
+			                                <p style=" margin-bottom: 3rem;">3.&nbsp;&nbsp;Se você for correntista do Banco Bradesco estará isento da taxa de DOC, caso contrário a plataforma de gerenciamento de pagamentos (PAGAR.ME) cobrará de você uma taxa relativa à DOC, no valor de R$ 3,67 para fazer a transferência do seu saldo mensal para sua conta corrente. Este é um procedimento financeiro seguro e que trará maior comodidade para seus recebimentos.</p>
+										</div>
+										<div class="col-12" style="padding-left:40px;">
+			                                <p style=" margin-bottom: 3rem;">4.&nbsp;&nbsp;A partir de agora o controle das suas consultas é fácil, online e em tempo real. Você poderá acompanhar seu saldo quando quiser. Cada consulta creditada aparecerá no seu relatório financeiro com o nome do paciente, data de pagamento, data do processamento e data de recebimento na sua conta.</p>
+										</div>
+										<div class="col-12" style="padding-left:40px;">
+                                                    <ilion:arquivoCategoriaLista categoria="documentos" order="posicao" layout="lateral" varRetorno="art"/>
+                                                        <c:forEach var="arq" items="${art}">
+                                                            <c:if test="${arq.title == \"Adesao Prestacao servico\"}">
+                                                                <c:set var="arqTermos" value="${arq.url}"/>
+                                                            </c:if>
+                                                        </c:forEach>
+                                            <p><input type="checkbox" ng-model="ProfissionalVH.profissional.aceiteContrato" id="aceiteContrato" ng-checked="${profissional.aceiteContrato}"/>
+                                            &nbsp;&nbsp;Declaro que li e concordo com o <a href="${arqTermos}" target="_blank" >&nbsp;Termo de Adesão de prestação de serviços</a>&nbsp;&nbsp;da Vitazure.</p>
+                                    </div>
+										<div class="col-12" style="padding-left:40px;">
+			                                <p style="margin-bottom: 3rem;">Dúvidas? Acesse: vitazure.com.br, na seção "Fale conosco, nós estamos online".</p>
+										</div>
+                                        <div class="col-12">
+                                            <button class="button-secundary checkbox-button" ng-click="perfilProfissional('')" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Salvar</button>
                                         </div>
                                     </div>
                                 </div>

@@ -38,75 +38,81 @@
 						          <angular-initializer
 						            ng-init=" profissional.id='${profissional.id}';
 						                     profissional.documentoCrpCrm='${profissional.documentoCrpCrm}';
-						                     profissional.conselhoProfissional='${profissional.conselhoProfissional}';
-						                     profissional.cadastroEpsi='${profissional.cadastroEpsi}';
-						                     profissional.tituloProfissional='${profissional.tituloProfissional}';
-						                     profissional.tipoProfissional='${profissional.tipoProfissional}';
-						                     profissional.especialidade='${profissional.especialidade}';
-						                     profissional.temasTrabalho='${profissional.temasTrabalho}';
-						                     profissional.duracaoAtendimento='${profissional.duracaoAtendimento}';
-						                     profissional.biografia='${profissional.biografia}';
-						                     profissional.duracaoAtendimentoValor='${profissional.duracaoAtendimentoValor}';
-						                     profissional.valorConsultaOnline='${profissional.valorOnlineFormatado}';
-						                     profissional.valorConsultaPresencial='${profissional.valorPresencialFormatado}';
-						                     profissional.tempoAntecendencia='${profissional.tempoAntecendencia}';
-						                     profissional.adolescentes='${profissional.adolescentes}';
-						                     profissional.adultos='${profissional.adultos}';
-						                     profissional.casais='${profissional.casais}';
-						                     profissional.idosos='${profissional.idosos}';
-						                     profissional.tipoConta='${profissional.tipoConta}';
-						                     profissional.banco='${profissional.banco}';
-						                     profissional.agencia='${profissional.agencia}';
-						                     profissional.conta='${profissional.conta}';
-     					                     profissional.digitoVerificador='${profissional.digitoVerificador}';
-						                     profissional.nomeFavorecido='${profissional.nomeFavorecido}';
-										     profissional.convenio40='${profissional.convenio40}';
-										     profissional.convenio50='${profissional.convenio50}';
-										     profissional.convenio60='${profissional.convenio60}';
-										     profissional.pacote2com5Desconto='${profissional.pacote2com5Desconto}';
-										     profissional.pacote3com10Desconto='${profissional.pacote3com10Desconto}';
-										     profissional.pacote4com15Desconto='${profissional.pacote4com15Desconto}';
-										     profissional.primeiraConsultaCortesia='${profissional.primeiraConsultaCortesia}';
-										     profissional.quantidadeConsultaCortesiaMes='${profissional.quantidadeConsultaCortesiaMes}';
-										     profissional.atendimentoPorLibras='${profissional.atendimentoPorLibras}';
-										     profissional.habilitarDesconto40='${profissional.habilitarDesconto40}';
-										     profissional.quantidadeConsultaDesconto40Mes='${profissional.quantidadeConsultaDesconto40Mes}';
-										     profissional.avisoFerias='${profissional.avisoFerias}';
-										     profissional.dataInicioAvisoFerias='${profissional.dataInicioAvisoFerias}';
-										     profissional.dataFimAvisoFerias='${profissional.dataFimAvisoFerias}';
-										     profissional.ativo='${profissional.ativo}';
-										     profissional.dadosCompleto='${profissional.dadosCompleto}';
-										     profissional.plano='${profissional.plano}';
-										     profissional.dataInicioPlano='${profissional.dataInicioPlano}';
-										     profissional.dataFimPlano='${profissional.dataFimPlano}';
-										     profissional.tokenTransacaoPlano='${profissional.tokenTransacaoPlano}';
-										     profissional.idRecebedor='${profissional.idRecebedor}';
-										     profissional.situacaoAprovacaoProfissional='${profissional.situacaoAprovacaoProfissional}';
-										     profissional.idConta='${profissional.idConta}';
-						                     profissional.pessoa.id='${profissional.pessoa.id}';
-						                     profissional.pessoa.nome='${profissional.pessoa.nome}';
-						                     profissional.pessoa.email='${profissional.pessoa.email}';
-						                     profissional.pessoa.telefone='${profissional.pessoa.telefone}';
-						                     profissional.pessoa.celular='${profissional.pessoa.celular}';
-						                     profissional.pessoa.senha='${profissional.pessoa.senha}';
-						                     profissional.pessoa.dataNascimento='${profissional.pessoa.dataNascimento}';
-						                     profissional.pessoa.cpf='${profissional.pessoa.cpf}';
-						                     profissional.pessoa.cep='${profissional.pessoa.cep}';
-						                     profissional.pessoa.cidade='${profissional.pessoa.cidade}';
-						                     profissional.pessoa.estado='${profissional.pessoa.estado}';
-						                     profissional.pessoa.endereco='${profissional.pessoa.endereco}';
-						                     profissional.pessoa.setor='${profissional.pessoa.setor}';
-						                     profissional.pessoa.foto.id='${profissional.pessoa.foto.id}';
-						                     profissional.pessoa.foto.link='${profissional.pessoa.foto.link}';
-						                     profissional.pessoa.foto.layout='${profissional.pessoa.foto.layout}';
-						                     profissional.pessoa.genero='${profissional.pessoa.genero}';
-                          					 profissional.pessoa.cliente ='${profissional.pessoa.cliente}';
-                         					 profissional.pessoa.psicologo ='${profissional.pessoa.psicologo}';
-                         					 profissional.pessoa.confirmado='${profissional.pessoa.confirmado}';
-                         					 profissional.pessoa.relacaoContato='${profissional.pessoa.relacaoContato}';
-						                     profissional.pessoa.nomeContato='${profissional.pessoa.nomeContato}';
-						                     profissional.pessoa.celularContato='${profissional.pessoa.celularContato}';
-                         					 formacaoAcademica ='${formacaoAcademica}';
+						                    profissional.conselhoProfissional='${profissional.conselhoProfissional}';
+						                    profissional.cadastroEpsi='${profissional.cadastroEpsi}';
+						                    profissional.tituloProfissional='${profissional.tituloProfissional}';
+						                    profissional.tipoProfissional='${profissional.tipoProfissional}';
+						                    profissional.especialidade='${profissional.especialidade}';
+						                    profissional.temasTrabalho='${profissional.temasTrabalho}';
+						                    profissional.duracaoAtendimento='${profissional.duracaoAtendimento}';
+						                    profissional.biografia='${profissional.biografia}';						                    						                    
+						                    profissional.duracaoAtendimentoValor='${profissional.duracaoAtendimentoValor}';
+						                    profissional.valorConsultaOnline='${profissional.valorOnlineFormatado}';
+						                    profissional.valorConsultaPresencial='${profissional.valorPresencialFormatado}';
+						                    profissional.tempoAntecendencia='${profissional.tempoAntecendencia}';
+						                    profissional.adolescentes='${profissional.adolescentes}';
+						                    profissional.adultos='${profissional.adultos}';
+						                    profissional.casais='${profissional.casais}';
+						                    profissional.idosos='${profissional.idosos}';
+						                    profissional.crianca='${profissional.crianca}';
+						                    profissional.tipoConta='${profissional.tipoConta}';
+						                    profissional.banco='${profissional.banco}';
+						                    profissional.agencia='${profissional.agencia}';
+						                    profissional.conta='${profissional.conta}';
+     					                    profissional.digitoVerificador='${profissional.digitoVerificador}';
+						                    profissional.nomeFavorecido='${profissional.nomeFavorecido}';
+										    profissional.convenio40='${profissional.convenio40}';
+										    profissional.convenio50='${profissional.convenio50}';
+										    profissional.convenio60='${profissional.convenio60}';
+										    profissional.pacote2com5Desconto='${profissional.pacote2com5Desconto}';
+										    profissional.pacote3com10Desconto='${profissional.pacote3com10Desconto}';
+										    profissional.pacote4com15Desconto='${profissional.pacote4com15Desconto}';
+										    profissional.primeiraConsultaCortesia='${profissional.primeiraConsultaCortesia}';
+										    profissional.quantidadeConsultaCortesiaMes='${profissional.quantidadeConsultaCortesiaMes}';
+										    profissional.atendimentoPorLibras='${profissional.atendimentoPorLibras}';
+										    profissional.habilitarDesconto40='${profissional.habilitarDesconto40}';
+										    profissional.quantidadeConsultaDesconto40Mes='${profissional.quantidadeConsultaDesconto40Mes}';
+										    profissional.avisoFerias='${profissional.avisoFerias}';
+										    profissional.dataInicioAvisoFerias='${profissional.dataInicioAvisoFerias}';
+										    profissional.dataFimAvisoFerias='${profissional.dataFimAvisoFerias}';
+										    profissional.dataValidadeEpsi='${profissional.dataValidadeEpsi}';
+										    profissional.ativo='${profissional.ativo}';
+										    profissional.dadosCompleto='${profissional.dadosCompleto}';
+										    profissional.plano='${profissional.plano}';
+										    profissional.dataInicioPlano='${profissional.dataInicioPlano}';
+										    profissional.dataFimPlano='${profissional.dataFimPlano}';
+										    profissional.tokenTransacaoPlano='${profissional.tokenTransacaoPlano}';
+										    profissional.idRecebedor='${profissional.idRecebedor}';
+										    profissional.idConta='${profissional.idConta}';
+										    profissional.situacaoAprovacaoProfissional='${profissional.situacaoAprovacaoProfissional}';
+										    profissional.aceiteContrato='${profissional.aceiteContrato}';
+										    profissional.dataAceiteContrato='${profissional.dataAceiteContrato}';
+										    profissional.ipAceiteContrato='${profissional.ipAceiteContrato}';
+										    profissional.ipExternoAceiteContrato='${profissional.ipExternoAceiteContrato}';
+						                    profissional.pessoa.id='${profissional.pessoa.id}';
+						                    profissional.pessoa.nome='${profissional.pessoa.nome}';
+						                    profissional.pessoa.email='${profissional.pessoa.email}';
+						                    profissional.pessoa.telefone='${profissional.pessoa.telefone}';
+						                    profissional.pessoa.celular='${profissional.pessoa.celular}';
+						                    profissional.pessoa.senha='${profissional.pessoa.senha}';
+						                    profissional.pessoa.dataNascimento='${profissional.pessoa.dataNascimento}';
+						                    profissional.pessoa.cpf='${profissional.pessoa.cpf}';
+						                    profissional.pessoa.cep='${profissional.pessoa.cep}';
+						                    profissional.pessoa.cidade='${profissional.pessoa.cidade}';
+						                    profissional.pessoa.estado='${profissional.pessoa.estado}';
+						                    profissional.pessoa.endereco='${profissional.pessoa.endereco}';
+						                    profissional.pessoa.setor='${profissional.pessoa.setor}';
+						                    profissional.pessoa.foto.id='${profissional.pessoa.foto.id}';
+						                    profissional.pessoa.foto.link='${profissional.pessoa.foto.link}';
+						                    profissional.pessoa.foto.layout='${profissional.pessoa.foto.layout}';
+						                    profissional.pessoa.genero='${profissional.pessoa.genero}';
+                          					profissional.pessoa.cliente ='${profissional.pessoa.cliente}';
+                         					profissional.pessoa.psicologo ='${profissional.pessoa.psicologo}';
+                         					profissional.pessoa.confirmado='${profissional.pessoa.confirmado}';
+                         					profissional.pessoa.relacaoContato='${profissional.pessoa.relacaoContato}';
+						                    profissional.pessoa.nomeContato='${profissional.pessoa.nomeContato}';
+						                    profissional.pessoa.celularContato='${profissional.pessoa.celularContato}';
+                         					formacaoAcademica ='${formacaoAcademica}';
                          					 enderecoAtendimento ='';
                          					descricaoFormacao ='${descricaoFormacao}';
                          					formacaoAcademica ='${formacaoAcademica}';
@@ -213,6 +219,24 @@
 						              <div class="  form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed">
 						                <label for="cep" class="control-label">CEP</label>
 						                <input type="Large" id="cep" ng-model="profissional.pessoa.cep" data-mask="00.000-000" class="form-control input-group-lg" required/>
+						              </div>
+						            </div>
+								   <div class="col-md-3 col-lg-3 col-sm-12">
+						              <div class="  form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed">
+						                <label for="cep" class="control-label">Data Aceite Contrato</label>
+						                <input type="Large" id="dataAceiteContrato" disabled="true" ng-model="profissional.dataAceiteContrato" class="form-control input-group-lg" required/>
+						              </div>
+						            </div>
+								   <div class="col-md-3 col-lg-3 col-sm-12">
+						              <div class="  form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed">
+						                <label for="cep" class="control-label">Ip Aceite Contrato</label>
+						                <input type="Large" id="ipAceiteContrato" disabled="true" ng-model="profissional.ipAceiteContrato" class="form-control input-group-lg" required/>
+						              </div>
+						            </div>
+								   <div class="col-md-3 col-lg-3 col-sm-12">
+						              <div class="  form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed">
+						                <label for="cep" class="control-label">Ip Externo Aceite Contrato</label>
+						                <input type="Large" id="ipExternoAceiteContrato" disabled="true" ng-model="profissional.ipExternoAceiteContrato" class="form-control input-group-lg" required/>
 						              </div>
 						            </div>
 							</div>
@@ -424,6 +448,7 @@
                                                 <label>Incluir data início e data fim do afastamento</label>
                                             </div>
                                     </div>
+                                    
                                    <div class="col-md-12 col-lg-12 col-sm-12">  
 	                                    <div class="pmd-card pmd-z-depth pmd-card-custom-view">
 								            <div class="table-responsive">

@@ -109,7 +109,11 @@ public class VitazureController {
 		}
 		modelMap.addAttribute("pessoa", pessoa);
 		modelMap.addAttribute("agendaDia", listAgendaDia);
-		if (pessoa.getCpf().equals("")) {
+		if (pessoa.getCpf().equals("") && pessoa.getPsicologo()) {
+			request.setAttribute("estados", EstadoEnum.values());
+			profissional = profissionalNegocio.incluirAtualizar(profissional);
+			return "/ilionnet2/vitazure/orientacao";
+		}else if (pessoa.getCpf().equals("")) {
 			request.setAttribute("estados", EstadoEnum.values());
 			profissional = profissionalNegocio.incluirAtualizar(profissional);
 			return "/ilionnet2/vitazure/completar-cadastro";
@@ -301,7 +305,8 @@ public class VitazureController {
 	  
 	  @GetMapping("/vitazure/areaRestrita")
 		public String arearestrita(ModelMap modelMap, HttpServletRequest request) {
-			Pessoa pessoa = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
+		  try {
+		  	Pessoa pessoa = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
 			String idProfissional = (String) request.getSession().getAttribute("idProfissional");
 			List<Agenda> listAgendaDia = agendaNegocio.consultarAgendaDia(pessoa);
 			pessoa = pessoaNegocio.consultarPorId(pessoa.getId());
@@ -314,8 +319,11 @@ public class VitazureController {
 			modelMap.addAttribute("agendaDia", listAgendaDia);
 			if(idProfissional != null) {
 			  return "redirect:/vitazure/perfil-do-profissional/"+idProfissional;	
-			}
-			if (pessoa.getCpf().equals("")) {
+			}if (pessoa.getCpf().equals("") && pessoa.getPsicologo()) {
+				request.setAttribute("estados", EstadoEnum.values());
+				profissional = profissionalNegocio.incluirAtualizar(profissional);
+				return "/ilionnet2/vitazure/orientacao";
+			}else if (pessoa.getCpf().equals("")) {
 				request.setAttribute("estados", EstadoEnum.values());
 				return "/ilionnet2/vitazure/completar-cadastro";
 			}else if(pessoa.getCliente()) {
@@ -330,6 +338,10 @@ public class VitazureController {
 				 request.getSession().setAttribute(PessoaNegocio.PROFISSIONAL_COMPLETO, profissional.getDadosCompleto());
 				return listaConsulta(modelMap, request);
 			}
+		  } catch (Exception e) {
+				e.printStackTrace();
+			}
+		  return listaConsulta(modelMap, request);
 		}
 	  
 	  @PostMapping(value = "/vitazure/finalizarAtendimento", produces = "application/json")
@@ -476,5 +488,26 @@ public class VitazureController {
 								return new ResponseEntity<>(gson.toJson(""), HttpStatus.BAD_REQUEST);
 							}
 					}
+			      
+			      
+			    @GetMapping("/vitazure/informacoes-perfil-completarCadastro")
+			  	public String completarCadastro(ModelMap modelMap, HttpServletRequest request) {
+			  		try {
+				  		Pessoa pessoa = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
+				  		List<Agenda> listAgendaDia = agendaNegocio.consultarAgendaDia(pessoa);
+				  		pessoa = pessoaNegocio.consultarPorId(pessoa.getId());
+				  		Profissional profissional = new Profissional();
+				  		profissional = profissionalNegocio.consultarPorPessoa(pessoa.getId());
+				  		modelMap.addAttribute("pessoa", pessoa);
+				  		modelMap.addAttribute("agendaDia", listAgendaDia);
+				  		request.setAttribute("estados", EstadoEnum.values());
+				  		profissional = profissionalNegocio.incluirAtualizar(profissional);
+				  		return "/ilionnet2/vitazure/completar-cadastro";
+			  		} catch (Exception e) {
+			  			e.printStackTrace();
+			  		}
+			  		return "/ilionnet2/vitazure/completar-cadastro";
+			  	}
+			      
 			    
 }

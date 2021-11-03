@@ -1,5 +1,12 @@
 package ilion.util;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.InetAddress;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
@@ -64,6 +71,12 @@ public final class UtilIpRequest {
 		return request.getRemoteHost();
 	}
 	
+	public static String getNomeHost() throws UnknownHostException {
+		InetAddress  ip = InetAddress.getLocalHost();
+		String  hostname = ip.getHostName();
+	    return hostname;
+	}
+	
 /*	public static void logar(HttpServletRequest request) {
 		logger.info("---------------------Headers - inicio");
 		Enumeration headersName = request.getHeaderNames();
@@ -74,5 +87,22 @@ public final class UtilIpRequest {
 		}
 		logger.info("---------------------Headers - fim");
 	}*/
+	
+	public static String IPExterno() {
+        URL ipAdress;
+        try {
+            ipAdress = new URL("http://myexternalip.com/raw");
+            BufferedReader in = new BufferedReader(new InputStreamReader(ipAdress.openStream()));
+            String ip = in.readLine();
+            return ip;
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+		return "";
+    }
+	
+	
 }
 

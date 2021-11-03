@@ -159,7 +159,7 @@
                         <div class="psicologia-online">
                             <h2>Psicologia Online</h2>
 
-                            <p style="padding: 1rem 3rem;">O atendimento psicológico online é uma abordagem equivalente a psicoterapia presencial e desde novembro de 2018 tal prática é permitida pelo Conselho Federal de Psicologia, conforme Resolução CFP 11/2018. As sessões duram até 50 minutos, são conduzidas através de teleatendimento, em ambiente seguro e de privacidade, mediante agendamento e pagamento prévios.  Esse serviço não é indicado para casos de saúde graves. Crianças e menores de 18 anos precisam de autorização por escrito do seu responsável.</p>
+                            <p style="padding: 1rem 3rem;">O atendimento psicológico online é uma abordagem equivalente a psicoterapia presencial e desde novembro de 2018 tal prática é permitida pelo Conselho Federal de Psicologia, conforme Resolução CFP 11/2018. As sessões duram até 60 minutos, são conduzidas através de teleatendimento, em ambiente seguro e de privacidade, mediante agendamento e pagamento prévios. Esse serviço não é indicado para casos de saúde graves. Crianças e menores de 18 anos precisam de autorização por escrito do seu responsável..</p>
                         </div>
                     </div>
                 </div>

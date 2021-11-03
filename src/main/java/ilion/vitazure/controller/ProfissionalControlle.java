@@ -1,5 +1,6 @@
 package ilion.vitazure.controller;
 
+import java.net.InetAddress;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -36,6 +37,7 @@ import ilion.arquivo.negocio.Arquivo;
 import ilion.arquivo.negocio.ArquivoNegocio;
 import ilion.arquivo.negocio.ArquivoUteis;
 import ilion.util.Uteis;
+import ilion.util.UtilIpRequest;
 import ilion.util.contexto.autorizacao.PessoaLogada;
 import ilion.util.json.JsonString;
 import ilion.vitazure.enumeradores.EspecialidadesEnum;
@@ -102,36 +104,34 @@ public class ProfissionalControlle {
 
 	@PostMapping(value = "/vitazure/perfilProfissional", produces = "application/json")
 	@ResponseBody
-	public ResponseEntity<JsonString> atualizarPerfilProfissional(HttpServletRequest request,
-			@RequestBody ProfissionalVH profissionalVH) {
+	public ResponseEntity<JsonString> atualizarPerfilProfissional(HttpServletRequest request,@RequestBody ProfissionalVH profissionalVH) {
 		try {
-			if (profissionalVH.getProfissional().getPessoa().getFoto() != null
-					&& !profissionalVH.getProfissional().getPessoa().getFoto().getArquivo1().equals("")) {
-				profissionalVH.getProfissional().getPessoa()
-						.setFoto(arquivoNegocio.inserir(profissionalVH.getProfissional().getPessoa().getFoto()));
-			} else if (profissionalVH.getProfissional().getPessoa().getFoto() == null
-					|| profissionalVH.getProfissional().getPessoa().getFoto().getId().equals("")) {
+			
+			if (profissionalVH.getProfissional().getPessoa().getFoto() != null && !profissionalVH.getProfissional().getPessoa().getFoto().getArquivo1().equals("")) {
+				profissionalVH.getProfissional().getPessoa().setFoto(arquivoNegocio.inserir(profissionalVH.getProfissional().getPessoa().getFoto()));
+			} else if (profissionalVH.getProfissional().getPessoa().getFoto() == null || profissionalVH.getProfissional().getPessoa().getFoto().getId().equals("")) {
 				profissionalVH.getProfissional().getPessoa().setFoto(null);
 			}
+			if(profissionalVH.getProfissional().getAceiteContrato() && (profissionalVH.getProfissional().getDataAceiteContrato() == null || profissionalVH.getProfissional().getDataAceiteContrato().equals(""))) {
+				profissionalVH.getProfissional().setDataAceiteContrato(Uteis.formatarDataHora(new Date(), "dd/MM/YYYY HH:mm:ss"));
+				profissionalVH.getProfissional().setIpExternoAceiteContrato(UtilIpRequest.IPExterno());
+				profissionalVH.getProfissional().setIpAceiteContrato(profissionalVH.getIpMaquinaAceite());
+			}
+			UtilIpRequest.IPExterno();
 			profissionalNegocio.validarDados(profissionalVH);
-			profissionalVH.getProfissional()
-					.setPessoa(pessoaNegocio.incluirAtualizar(profissionalVH.getProfissional().getPessoa()));
+			profissionalVH.getProfissional().setPessoa(pessoaNegocio.incluirAtualizar(profissionalVH.getProfissional().getPessoa()));
 			profissionalVH.setProfissional(profissionalNegocio.incluirAtualizar(profissionalVH.getProfissional()));
 			especialidadeNegocio.validarItens(profissionalVH.getEspecialidade(), profissionalVH.getProfissional());
 			temaNegocio.validarItens(profissionalVH.getTemasTrabalho(), profissionalVH.getProfissional());
-			formacaoAcademicaNegocio.validarItens(profissionalVH.getFormacaoAcademica(),
-					profissionalVH.getProfissional());
+			formacaoAcademicaNegocio.validarItens(profissionalVH.getFormacaoAcademica(),profissionalVH.getProfissional());
 			enderecoNegocio.validarItens(profissionalVH.getEnderecoAtendimento(), profissionalVH.getProfissional());
 			horarioNegocio.validarItens(profissionalVH.getHorarioAtendimento(), profissionalVH.getProfissional());
 			profissionalNegocio.dadosProfissionaisCompleto(profissionalVH);
-			request.getSession().setAttribute(PessoaNegocio.PROFISSIONAL_COMPLETO,
-					profissionalVH.getProfissional().getDadosCompleto());
+			request.getSession().setAttribute(PessoaNegocio.PROFISSIONAL_COMPLETO,profissionalVH.getProfissional().getDadosCompleto());
 			StringBuilder listItensAtualizar = new StringBuilder();
 			if (profissionalVH.getItensIncompletos() != null && !profissionalVH.getItensIncompletos().isEmpty()) {
-				listItensAtualizar.append(
-						"<div class=\"col-12 col-md-12 col-xl-12\"><i class=\"fas fa-exclamation-triangle\" style=\"color: #dc3545;padding: 13px;\"></i>Itens aguardando preenchimentos :</div>");
-				profissionalVH.getItensIncompletos().stream().forEach(valor -> listItensAtualizar.append(
-						"<div class=\"col-12 col-md-12 col-xl-12\" style=\"line-height: 3.4rem;color: #dc3545;\"><i class=\"fas fa-check\" style=\"color: #dc3545;padding: 6px;\"></i>"
+				listItensAtualizar.append("<div class=\"col-12 col-md-12 col-xl-12\"><i class=\"fas fa-exclamation-triangle\" style=\"color: #dc3545;padding: 13px;\"></i>Itens aguardando preenchimentos :</div>");
+				profissionalVH.getItensIncompletos().stream().forEach(valor -> listItensAtualizar.append("<div class=\"col-12 col-md-12 col-xl-12\" style=\"line-height: 3.4rem;color: #dc3545;\"><i class=\"fas fa-check\" style=\"color: #dc3545;padding: 6px;\"></i>"
 								+ valor + "</div>"));
 			}
 			return new ResponseEntity<>(new JsonString("Perfil Profissional Atualizado!" + listItensAtualizar),
@@ -252,7 +252,7 @@ public class ProfissionalControlle {
 			if(situacaoAlterar.equals("AGUARDANDO_REMARCACAO")) {
 				return new ResponseEntity<>(new JsonString("Solicitação de remarcação enviada ao cliente."),HttpStatus.OK);
 			}
-			return new ResponseEntity<>(new JsonString("Agenda " + situacaoAlterar.toLowerCase() + " com Sucesso!"),HttpStatus.OK);
+			return new ResponseEntity<>(new JsonString("Agendamento " + situacaoAlterar.toLowerCase() + " com Sucesso!"),HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<>(new JsonString(e.getMessage()), HttpStatus.BAD_REQUEST);

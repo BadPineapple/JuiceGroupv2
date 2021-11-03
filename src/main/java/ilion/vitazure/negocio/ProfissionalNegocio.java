@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import ilion.admin.negocio.Usuario;
 import ilion.util.StatusEnum;
 import ilion.util.Uteis;
+import ilion.util.UtilIpRequest;
 import ilion.util.VLHForm;
 import ilion.util.ValueListInfo;
 import ilion.util.busca.PalavrasChaveCondicoes;
@@ -125,7 +126,7 @@ public class ProfissionalNegocio {
 	public List<Profissional> consultarProfissionaisAtivos() {
 		
 		DetachedCriteria subquery = DetachedCriteria.forClass(Profissional.class);
-		subquery.add( Restrictions.eq("avisoFerias", Boolean.TRUE)).add(Restrictions.ge("dataInicioAvisoFerias", Uteis.formatarDataHora(new Date(), "dd/MM/YYY"))).add(Restrictions.le("dataFimAvisoFerias", Uteis.formatarDataHora(new Date(), "dd/MM/YYY")));
+		subquery.add( Restrictions.eq("avisoFerias", Boolean.TRUE)).add(Restrictions.ge("dataInicioAvisoFerias", Uteis.formatarDataHora(new Date(), "dd/MM/YYYY"))).add(Restrictions.le("dataFimAvisoFerias", Uteis.formatarDataHora(new Date(), "dd/MM/YYYY")));
 		subquery.setProjection(Projections.property("id"));
 		List list =  hibernateUtil.list(subquery);
 		DetachedCriteria dc = DetachedCriteria.forClass(Profissional.class);
@@ -223,6 +224,9 @@ public class ProfissionalNegocio {
 		}
 		if(profissionalVH.getProfissional().getIdConta() == null || profissionalVH.getProfissional().getIdConta() == 0 ) {
 			profissionalVH.getItensIncompletos().add("Dados bancario para recebimento de consultas");
+			dadosCompleto = Boolean.FALSE;
+		}if(!profissionalVH.getProfissional().getAceiteContrato()) {
+			profissionalVH.getItensIncompletos().add("Termo de Adesão de prestação de serviços da Vitazure");
 			dadosCompleto = Boolean.FALSE;
 		}
 		profissionalVH.getProfissional().setDadosCompleto(dadosCompleto);

@@ -77,7 +77,7 @@
                     <div class="col-12 col-md-6 col-xl-6">
                         <div class="cellphone">
                             <figure>
-                                <img src="../assets/images/cellphone.jpg" alt="">
+                                <img src="../assets/images/cellphone_vitazure.jpg" alt="">
                             </figure>
                         </div>
                     </div>
@@ -160,8 +160,7 @@
                                         <div class="lista-cadastro">
                                             <span>2.</span>
 
-                                            <p>Cadastro aprovado ou já ter solicitado junto ao Conselho Regional de Psicologia o cadastro relativo ao e-PSI.
-											<br>Mais informações poderão ser obtidas nos Conselhos Regionais de Psicologia e no Diálogo Digital "Resolução 11/2018" que foi realizado no dia 06/11/2018, e está disponível <a href="https://e-psi.cfp.org.br/" target="_blank">clicando aqui</a>;</p>
+                                            <p>Cadastro aprovado ou já ter solicitado junto ao Conselho Regional de Psicologia o cadastro relativo ao e-PSI.Mais informações poderão ser obtidas nos Conselhos Regionais de Psicologia e no Diálogo Digital "Resolução 11/2018" que foi realizado no dia 06/11/2018, e está disponível <a href="https://e-psi.cfp.org.br/" target="_blank">clicando aqui</a>;</p>
                                         </div>
 
                                         <div class="lista-cadastro">
