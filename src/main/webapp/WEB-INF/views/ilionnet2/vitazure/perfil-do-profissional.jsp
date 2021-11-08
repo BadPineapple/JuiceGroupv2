@@ -54,7 +54,7 @@
 										<p>${cidadeProfissional}</p>
                                     </div>
                                     <div class="psicologo-description">
-                                        <strong>Sobre min:</strong>
+                                        <strong>Sobre mim:</strong>
                                         <p>${profissional.biografia}</p>
                                     </div>
                                     <div class="temas">

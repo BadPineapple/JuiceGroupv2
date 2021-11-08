@@ -1,5 +1,6 @@
 package ilion.vitazure.negocio;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -18,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import ilion.admin.negocio.Usuario;
+import ilion.admin.negocio.UsuarioNegocio;
 import ilion.util.StatusEnum;
 import ilion.util.Uteis;
 import ilion.util.UtilIpRequest;
@@ -54,6 +56,9 @@ public class ProfissionalNegocio {
 	
 	@Autowired
 	private AgendaNegocio agendaciaNegocio;
+	
+	@Autowired
+	private UsuarioNegocio usuarioNegocio;
 	
 	public Profissional consultarPorPessoa(Long idPessoa) {
 		DetachedCriteria dc = DetachedCriteria.forClass(Profissional.class);
@@ -123,7 +128,7 @@ public class ProfissionalNegocio {
 
 	}
 	
-	public List<Profissional> consultarProfissionaisAtivos() {
+	public List<Profissional> consultarProfissionaisAtivos(Pessoa pessoaSessao) {
 		
 		DetachedCriteria subquery = DetachedCriteria.forClass(Profissional.class);
 		subquery.add( Restrictions.eq("avisoFerias", Boolean.TRUE)).add(Restrictions.ge("dataInicioAvisoFerias", Uteis.formatarDataHora(new Date(), "dd/MM/YYYY"))).add(Restrictions.le("dataFimAvisoFerias", Uteis.formatarDataHora(new Date(), "dd/MM/YYYY")));
@@ -135,6 +140,19 @@ public class ProfissionalNegocio {
 		dc.add(Restrictions.eq("dadosCompleto", Boolean.TRUE));
         if (!list.isEmpty()) {
         	dc.add(Restrictions.not(Restrictions.in("id", list)));
+		}
+        if (pessoaSessao != null && pessoaSessao.getPessoaImportada()) {
+          List<Usuario> listUsuarioEmpresa = usuarioNegocio.consultarPorEmpresa(pessoaSessao.getEmpresaImportacao());
+          String convenioConsulta = listUsuarioEmpresa.get(0).getConvenio().equals("45") ? "convenio40" : listUsuarioEmpresa.get(0).getConvenio().equals("56") ? "convenio50" :  listUsuarioEmpresa.get(0).getConvenio().equals("67") ? "convenio60" : "ativo";
+          dc.add(Restrictions.eq(convenioConsulta, Boolean.TRUE));
+          List<Profissional> listProfissionais = (List<Profissional>) hibernateUtil.list(dc);
+          listProfissionais.stream().forEach(profissional -> {
+        	  if(!listUsuarioEmpresa.get(0).getConvenio().equals("")) {
+        		  profissional.setValorConsultaOnline(new BigDecimal(listUsuarioEmpresa.get(0).getConvenio())); 
+        		  profissional.setValorConsultaPresencial(new BigDecimal(listUsuarioEmpresa.get(0).getConvenio()));
+        	  }
+          });
+          return listProfissionais;
 		}
 		return (List<Profissional>) hibernateUtil.list(dc);
 	}
@@ -243,7 +261,7 @@ public class ProfissionalNegocio {
 		hibernateUtil.updateSQL(sql.toString());
 	}
 	
-	public List<Profissional> consultarProfissionaisFiltro(String palavraChave , String especialista ,  String estado, String cidade) {
+	public List<Profissional> consultarProfissionaisFiltro(String palavraChave , String especialista ,  String estado, String cidade , Pessoa pessoaSessao) {
 		DetachedCriteria dc = DetachedCriteria.forClass(Profissional.class);
 		dc.add(Restrictions.eq("ativo", Boolean.TRUE));
 		dc.add(Restrictions.eq("situacaoAprovacaoProfissional", SituacaoAprovacaoProfissionalEnum.AUTORIZADO));
@@ -286,6 +304,19 @@ public class ProfissionalNegocio {
         if (!list.isEmpty()) {
         	dc.add(Restrictions.not(Restrictions.in("id", list)));
 		}
+        if (pessoaSessao != null && pessoaSessao.getPessoaImportada()) {
+            List<Usuario> listUsuarioEmpresa = usuarioNegocio.consultarPorEmpresa(pessoaSessao.getEmpresaImportacao());
+            String convenioConsulta = listUsuarioEmpresa.get(0).getConvenio().equals("45") ? "convenio40" : listUsuarioEmpresa.get(0).getConvenio().equals("56") ? "convenio50" :  listUsuarioEmpresa.get(0).getConvenio().equals("67") ? "convenio60" : "ativo";
+            dc.add(Restrictions.eq(convenioConsulta, Boolean.TRUE));
+            List<Profissional> listProfissionais = (List<Profissional>) hibernateUtil.list(dc);
+            listProfissionais.stream().forEach(profissional -> {
+          	  if(!listUsuarioEmpresa.get(0).getConvenio().equals("")) {
+          		  profissional.setValorConsultaOnline(new BigDecimal(listUsuarioEmpresa.get(0).getConvenio())); 
+          		  profissional.setValorConsultaPresencial(new BigDecimal(listUsuarioEmpresa.get(0).getConvenio()));
+          	  }
+            });
+            return listProfissionais;
+  		}
 		return (List<Profissional>) hibernateUtil.list(dc);
 	}
 	
@@ -384,5 +415,23 @@ private void validarHorarioDisponivelProfissional(List<HorarioPossivelAtendiment
 	   		  return profissional;
 	   	  
 	     }
+	 
+	 public Profissional consultaPerfilCompletoPorId(Long idProfissional , Pessoa pessoaSessao) {
+			DetachedCriteria dc = DetachedCriteria.forClass(Profissional.class);
+			dc.add(Restrictions.eq("id", idProfissional));
+			Profissional profissional = (Profissional) hibernateUtil.consultarUniqueResult(dc);
+			if (profissional == null) {
+				return new Profissional();
+			}
+			if (pessoaSessao != null && pessoaSessao.getPessoaImportada()) {
+	            List<Usuario> listUsuarioEmpresa = usuarioNegocio.consultarPorEmpresa(pessoaSessao.getEmpresaImportacao());
+	          	  if(!listUsuarioEmpresa.get(0).getConvenio().equals("")) {
+	          		  profissional.setValorConsultaOnline(new BigDecimal(listUsuarioEmpresa.get(0).getConvenio())); 
+	          		  profissional.setValorConsultaPresencial(new BigDecimal(listUsuarioEmpresa.get(0).getConvenio()));
+	          	  }
+	  		}
+            
+			return profissional;
+		}
 	
 }

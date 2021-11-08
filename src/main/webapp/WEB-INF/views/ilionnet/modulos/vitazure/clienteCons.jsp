@@ -60,9 +60,9 @@
 							<c:forEach var="cliente" items="${clientes}">
 							<tr>
 								<td class="text-center">${cliente.id}</td>
-								<td align="center">${cliente.nome}</td>
-								<td align="center">${cliente.email}</td>
-								<td align="center">${cliente.empresaImportacao}</td>
+								<td >${cliente.nome}</td>
+								<td >${cliente.email}</td>
+								<td >${cliente.empresaImportacao}</td>
 								<td class="pmd-table-row-action" align="center">
 									<a href="<ilion:url/>vitazure/cliente/${cliente.id}" class="btn pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-default btn-sm">
 										<i class="material-icons md-dark pmd-sm">edit</i>

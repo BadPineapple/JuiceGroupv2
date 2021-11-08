@@ -341,7 +341,8 @@ public class SiteController extends CustomErrorController {
 	
 	@RequestMapping("/resultado-de-busca2/{tipoProfissional}/{especialista}")
 	public String buscaProfissional(HttpServletRequest request,@PathVariable String tipoProfissional,@PathVariable String especialista) {
-		List<Profissional> listProfissionais = profissionalNegocio.consultarProfissionaisAtivos();
+		Pessoa PessoaSessao = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
+		List<Profissional> listProfissionais = profissionalNegocio.consultarProfissionaisAtivos(PessoaSessao);
 		consultarDataDisponivelProfissionais(listProfissionais , false , false);
 		request.getSession().setAttribute("listProfissionais", listProfissionais);
 		return "/ilionnet2/vitazure/resultado-de-busca";
@@ -408,7 +409,7 @@ public class SiteController extends CustomErrorController {
 	 @GetMapping("/vitazure/perfil-do-profissional/{id}")
 	  	public String perfilProfissional(HttpServletRequest request ,@PathVariable Long id) {
 	  		Pessoa PessoaSessao = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
-	  		Profissional profissional = profissionalNegocio.consultarPorId(id);
+	  		Profissional profissional = profissionalNegocio.consultaPerfilCompletoPorId(id , PessoaSessao);
 //	  		List<Agenda> listAgendaDia = agendaNegocio.consultarAgendaDia(PessoaSessao);
 //	  		request.setAttribute("agendaDia", listAgendaDia);
 	  		request.setAttribute("pessoa", PessoaSessao);
@@ -435,7 +436,7 @@ public class SiteController extends CustomErrorController {
 			if(especialista.contains("&")) {
 				especialista = especialista.replace("&", "/");
 			}
-			List<Profissional> lisProfissional = profissionalNegocio.consultarProfissionaisFiltro(null,especialista,null,null);
+			List<Profissional> lisProfissional = profissionalNegocio.consultarProfissionaisFiltro(null,especialista,null,null , PessoaSessao);
 			lisProfissional.stream().forEach(profissional-> {
 				profissional.getPessoa().setCidade(enderecoNegocio.consultarCidadeEnderecoPorProfissional(profissional.getId()));
 			});
@@ -472,7 +473,7 @@ public class SiteController extends CustomErrorController {
 			if(especialista.contains("&")) {
 				especialista = especialista.replace("&", "/");
 			}
-			List<Profissional> lisProfissional = profissionalNegocio.consultarProfissionaisFiltro(palavraChave,especialista,estado,cidade);
+			List<Profissional> lisProfissional = profissionalNegocio.consultarProfissionaisFiltro(palavraChave,especialista,estado,cidade ,PessoaSessao);
 			lisProfissional.stream().forEach(profissional-> {
 				profissional.getPessoa().setCidade(enderecoNegocio.consultarCidadeEnderecoPorProfissional(profissional.getId()));
 			});

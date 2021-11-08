@@ -352,4 +352,11 @@ public class UsuarioNegocio {
 		
     	return usuario;
 	}
+	
+	public List<Usuario> consultarPorEmpresa(String empresa) {
+		DetachedCriteria dc = DetachedCriteria.forClass(Usuario.class);
+		dc.add(Restrictions.eq("empresa", empresa));
+		return  (List<Usuario>) hibernateUtil.list(dc);
+	}
+	
 }

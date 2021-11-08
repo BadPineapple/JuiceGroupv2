@@ -82,6 +82,12 @@
     <td align="right" valign="middle" class="linkCinzaEscuro">Admin:</td>
     <td class="linkCinza"><form:checkbox path="admin" value="admin"/></td>
   </tr>
+  <tr> 
+    <td align="right" valign="middle" class="linkCinzaEscuro">Convênio</td>
+    <td class="linkCinza">
+      <form:radiobutton path="convenio" value="45"/> R$45,00 <form:radiobutton path="convenio" value="56"/> R$56,00 <form:radiobutton path="convenio" value="67"/> R$67,00
+    </td>
+  </tr>
 </table>
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0">

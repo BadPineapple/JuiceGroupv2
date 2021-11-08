@@ -164,7 +164,7 @@ public class ProfissionalControlle {
 	@GetMapping("/vitazure/listaProfissionais")
 	public String souProfissional(HttpServletRequest request) {
 		Pessoa PessoaSessao = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
-		List<Profissional> lisProfissional = profissionalNegocio.consultarProfissionaisAtivos();
+		List<Profissional> lisProfissional = profissionalNegocio.consultarProfissionaisAtivos(PessoaSessao);
 		lisProfissional.stream().forEach(profissional-> {
 			profissional.getPessoa().setCidade(enderecoNegocio.consultarCidadeEnderecoPorProfissional(profissional.getId()));
 		});
@@ -182,7 +182,7 @@ public class ProfissionalControlle {
 	@GetMapping("/resultado-de-busca/{palavraChave}/{especialista}/{estado}/{cidade}")
 	public String buscaProfissional(HttpServletRequest request, @PathVariable String palavraChave,@PathVariable String especialista , @PathVariable String estado,@PathVariable String cidade) {
 		Pessoa PessoaSessao = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
-		List<Profissional> lisProfissional = profissionalNegocio.consultarProfissionaisFiltro(palavraChave,especialista,estado,cidade);
+		List<Profissional> lisProfissional = profissionalNegocio.consultarProfissionaisFiltro(palavraChave,especialista,estado,cidade , PessoaSessao);
 		lisProfissional.stream().forEach(profissional-> {
 			profissional.getPessoa().setCidade(enderecoNegocio.consultarCidadeEnderecoPorProfissional(profissional.getId()));
 		});

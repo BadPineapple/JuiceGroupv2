@@ -32,6 +32,7 @@ import ilion.util.VLHForm;
 import ilion.util.ValueListInfo;
 import ilion.util.contexto.autorizacao.UsuarioLogado;
 import ilion.vitazure.enumeradores.BancoEnum;
+import ilion.vitazure.enumeradores.ConselhoProfissionalEnum;
 import ilion.vitazure.enumeradores.DuracaoAtendimentoEnum;
 import ilion.vitazure.enumeradores.EspecialidadesEnum;
 import ilion.vitazure.enumeradores.EstadoEnum;
@@ -42,17 +43,23 @@ import ilion.vitazure.enumeradores.TempoAntecendenciaEnum;
 import ilion.vitazure.enumeradores.TipoContaEnum;
 import ilion.vitazure.enumeradores.TipoProfissionalEnum;
 import ilion.vitazure.model.EnderecoAtendimento;
+import ilion.vitazure.model.Especialidade;
 import ilion.vitazure.model.FormacaoAcademica;
+import ilion.vitazure.model.HorarioAtendimento;
 import ilion.vitazure.model.Pessoa;
 import ilion.vitazure.model.Profissional;
+import ilion.vitazure.model.TemaTrabalho;
 import ilion.vitazure.negocio.AgendaNegocio;
 import ilion.vitazure.negocio.ArquivoTextoImportarFuncionario;
 import ilion.vitazure.negocio.EnderecoNegocio;
+import ilion.vitazure.negocio.EspecialidadeNegocio;
 import ilion.vitazure.negocio.FormacaoAcademicaNegocio;
+import ilion.vitazure.negocio.HorarioAtendimentoNegocio;
 import ilion.vitazure.negocio.PagarMeNegocio;
 import ilion.vitazure.negocio.PessoaNegocio;
 import ilion.vitazure.negocio.ProfissionalNegocio;
 import ilion.vitazure.negocio.ProfissionalVH;
+import ilion.vitazure.negocio.TemaAtendimentoNegocio;
 import net.mlw.vlh.ValueList;
 
 @Controller
@@ -78,6 +85,16 @@ public class menuVitazureController  extends CustomErrorController{
 	
 	@Autowired
 	private PropNegocio propNegocio;
+	
+	@Autowired
+	private TemaAtendimentoNegocio temaNegocio;
+	
+	@Autowired
+	private EspecialidadeNegocio especialidadeNegocio;
+	
+	@Autowired
+	private HorarioAtendimentoNegocio horarioNegocio;
+	
 	
 	@RequestMapping("/cliente")
 	@UsuarioLogado()
@@ -137,26 +154,33 @@ public class menuVitazureController  extends CustomErrorController{
 			Profissional profissional = new Profissional();
 			List<FormacaoAcademica> formacao = new ArrayList<FormacaoAcademica>();
 			List<EnderecoAtendimento> enderecoAtendimento = new ArrayList<EnderecoAtendimento>();
+			List<TemaTrabalho> temaTrabalhoEnum = new ArrayList<TemaTrabalho>();
+			List<Especialidade> especialidade = new ArrayList<Especialidade>();
+			List<HorarioAtendimento> horarioAtendimento = new ArrayList<HorarioAtendimento>();
 			if (id != null && id != 0) {
 				profissional = profissionalNegocio.consultarPorPessoa(id);
 				formacao.addAll(formacaoAcademicaNegocio.consultarFormacoesPorPessoa(profissional.getId()));
 				enderecoAtendimento.addAll(enderecoNegocio.consultarEnderecoPorPessoa(profissional.getId()));
+				temaTrabalhoEnum.addAll(temaNegocio.consultarTemasPorProfissional(profissional.getId()));
+				especialidade.addAll(especialidadeNegocio.consultarEspecialidadesProfissional(profissional.getId()));
+				horarioAtendimento.addAll(horarioNegocio.consultarHorariosAtendimentoPorProfissional(profissional.getId() , false , false));
 			}
 			request.setAttribute("profissional", profissional);
 			request.setAttribute("estados", EstadoEnum.values());
 			request.setAttribute("situacaoAtendimento", SituacaoAprovacaoProfissionalEnum.values());
 			request.setAttribute("tiposProfissional", TipoProfissionalEnum.values());
-			request.setAttribute("especialidades", EspecialidadesEnum.values());
-			request.setAttribute("temasTrabalho", TemasTrabalhoEnum.values());
+			request.setAttribute("especialidades", especialidade);
 			request.setAttribute("duracoes", DuracaoAtendimentoEnum.values());
 			request.setAttribute("duracaoAtendimentoValor", DuracaoAtendimentoEnum.values());
 			request.setAttribute("tiposConta", TipoContaEnum.values());
 			request.setAttribute("bancos", BancoEnum.values());
-			request.setAttribute("temasTrabalho", TemasTrabalhoEnum.values());
+			request.setAttribute("temasTrabalho", temaTrabalhoEnum);
 			request.setAttribute("tempoAntecendencia", TempoAntecendenciaEnum.values());
 			request.setAttribute("formacoes", FormacaoEnum.values());
 			request.setAttribute("formacao", formacao);
 			request.setAttribute("enderecoAtendimento", enderecoAtendimento);
+			request.setAttribute("conselhoProfissional", ConselhoProfissionalEnum.values());
+			request.setAttribute("horarioAtendimento", horarioAtendimento);
 			return "/ilionnet/modulos/vitazure/profissionalForm";
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("msgError", e.getMessage());

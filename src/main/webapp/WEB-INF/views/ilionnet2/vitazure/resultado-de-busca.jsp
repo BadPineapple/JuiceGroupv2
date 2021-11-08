@@ -67,7 +67,7 @@
 										</div>
 
 										<div class="psicologo-description">
-											<strong>Sobre min:</strong>
+											<strong>Sobre mim:</strong>
 											<p >${profissional.biografiaApresentar}</p>
 											<a href="<ilion:url/>vitazure/perfil-do-profissional/${profissional.id}" class="button-perfil">Perfil Completo</a>
 										</div>

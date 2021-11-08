@@ -7,7 +7,7 @@
                 <div class="dados-person">
                     <div class="img-person">
                         <figure>
-                            <img src="${pessoa.foto.imagemApresentar == null ? '../assets/images/perfil.png' : pessoa.foto.link}" alt="">
+                            <img src="${pessoa.foto.imagemApresentar == null ? '../assets/images/perfil.png' : pessoa.foto.link}" alt="" style="height: 162px;width: 162px;">
                         </figure>
                     </div>
 

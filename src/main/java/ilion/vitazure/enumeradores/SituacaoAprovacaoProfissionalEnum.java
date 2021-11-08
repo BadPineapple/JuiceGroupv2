@@ -4,7 +4,8 @@ public enum SituacaoAprovacaoProfissionalEnum {
 
 	PENDENTE("Pendente"),
 	AUTORIZADO("Autorizado"),
-	NAO_AUTORIZADO("Não Autorizado");	
+	NAO_AUTORIZADO("Não Autorizado"),
+	INATIVO("Inativo");	
 	private String nome;
 	
 	

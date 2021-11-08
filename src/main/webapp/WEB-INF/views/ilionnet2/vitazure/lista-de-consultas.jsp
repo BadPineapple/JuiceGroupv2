@@ -60,7 +60,10 @@
                                 <tbody>
                                 <c:forEach var="agenda" items="${listAgendas}">
                                     <tr>
-                                        <td style="text-align: left;">${agenda.paciente.nome}</td>
+                                        <td style="text-align: left;"><i class="fas fa-info-circle" style="padding: 8px;font-size: 17px;" data-toggle="tooltip" data-placement="top" data-html="true" 
+                                         title="Email:${agenda.paciente.email}</br>Telefone:${agenda.paciente.telefone}</br>Celular:${agenda.paciente.celular}"></i>
+                                         ${agenda.paciente.nome}
+                                         </td>
                                         <td style="text-align: center;">${agenda.paciente.empresaImportacao != "" ? "Empresa" : "Particular"}</td>
                                         <td style="text-align: center;">${agenda.online ? 'Online' : 'Endereco'}</td>
                                         <td style="text-align: center;">${agenda.dataHoraApresentar}</td>
@@ -97,7 +100,11 @@
                 </div>
             </div>
         </div>
-
+		<script>
+		$(function () {
+			  $('[data-toggle="tooltip"]').tooltip()
+			})
+		</script>
         <jsp:include page="includes/include-footer.jsp" flush="true" />
         <script src="../assets/js/bundle.libs.ilionnet.js"></script>
 		<script src="../assets/js/bundle.scripts.ilionnet.js"></script>

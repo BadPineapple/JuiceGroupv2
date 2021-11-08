@@ -64,6 +64,9 @@
 						                     pessoa.relacaoContato='${pessoa.relacaoContato}';
 						                     pessoa.nomeContato='${pessoa.nomeContato}';
 						                     pessoa.celularContato='${pessoa.celularContato}';
+						                     pessoa.empresaImportacao='${pessoa.empresaImportacao}';
+						                     pessoa.pessoaImportada='${pessoa.pessoaImportada}';
+						                     pessoa.nomeResponsavelImportacao='${pessoa.nomeResponsavelImportacao}';
                           					 "/>
                           
                             <div class="row">

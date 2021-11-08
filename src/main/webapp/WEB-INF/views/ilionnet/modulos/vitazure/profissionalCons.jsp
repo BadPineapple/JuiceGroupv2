@@ -83,10 +83,7 @@
 		            </div>
 		        </div>
 	             <div class="row" >
-			        <div class="col-md-2" style="padding-top: 17px;">
-						  <a href="<ilion:url/>vitazure/profissional/0" class="btn btn-primary" role="button">Novo</a>
-		            </div>
-		            <div class="col-md-10" >
+		            <div class="col-md-12" >
 		             	<ilion:vlhPagination valueListInfo="${profissionais.valueListInfo}" navCssClass="pull-right"/>
 				    </div>
 			    </div>

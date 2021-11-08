@@ -272,16 +272,24 @@
                                     <img src="assets/images/inpro.png" alt="Instituto Projeção">
                                 </figure>
 
-                                <figure>
-                                    <img src="assets/images/sebrae.png" alt="Sebrae">
-                                </figure>
+<!--                                 <figure> -->
+<!--                                     <img src="assets/images/sebrae.png" alt="Sebrae"> -->
+<!--                                 </figure> -->
 
                                 <figure>
                                     <img src="assets/images/caderno_virtual.png" style="width: 160px;" alt="Caderno virtual">
                                 </figure>
                                 
                                 <figure>
-                                    <img src="assets/images/believe.jpeg" style="width: 160px;" alt="Believe">
+                                    <img src="assets/images/believe.jpg" style="width: 160px;" alt="Believe">
+                                </figure>
+
+                                <figure>
+                                    <img src="assets/images/cardioHortiz.png" style="width: 160px;" alt="Cardio">
+                                </figure>
+
+                                <figure style="position: relative;top: -32px;">
+                                    <img src="assets/images/logo-hospital-goiania-leste.png" style="width: 160px;" alt="Hospital Goiânia leste">
                                 </figure>
 
                             </div>

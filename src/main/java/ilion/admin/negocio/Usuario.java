@@ -62,6 +62,8 @@ public class Usuario implements Serializable {
 	
 	private Boolean admin;
 	
+	private String convenio;
+	
 	public Usuario() {
 		super();
 	}
@@ -216,6 +218,19 @@ public class Usuario implements Serializable {
 		return "Usuario [id=" + id + ", nome=" + nome + ", email=" + email + ", login=" + login + ", perfil=" + perfil
 				+ "]";
 	}
+
+	public String getConvenio() {
+		if(convenio == null) {
+			convenio = "";
+		}
+		return convenio;
+	}
+
+	public void setConvenio(String convenio) {
+		this.convenio = convenio;
+	}
+	
+	
 	
 	
 }
