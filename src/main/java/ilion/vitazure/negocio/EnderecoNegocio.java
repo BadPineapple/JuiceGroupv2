@@ -94,6 +94,9 @@ public class EnderecoNegocio {
 		dc.createAlias("profissional", "p");
 		dc.add(Restrictions.eq("p.id", idProfissional));
 		EnderecoAtendimento endereco =  (EnderecoAtendimento) hibernateUtil.findFirstResult(dc);
+		if(endereco == null) {
+			return "";
+		}
 		return endereco.getCidade();
 	}
 	

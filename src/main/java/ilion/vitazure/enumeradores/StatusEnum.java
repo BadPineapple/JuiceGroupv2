@@ -10,7 +10,7 @@ public enum StatusEnum {
 	NAO_ENCONTRATO("NO"),
 	NAO_COMPARECEU("Não compareceu"),
 	REMARCADO("Remarcado"),
-	AGUARDANDO_REMARCACAO("Aguandando Remarcação");
+	AGUARDANDO_REMARCACAO("Aguardando Remarcação");
 	
 	private String nome;
 	

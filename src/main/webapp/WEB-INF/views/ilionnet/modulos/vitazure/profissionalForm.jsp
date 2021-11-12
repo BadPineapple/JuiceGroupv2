@@ -41,8 +41,8 @@
 		<!--breadcrum start-->
 		<ol class="breadcrumb text-left">
 		  <li><a href="<ilion:url/>ilionnet/home2">Home</a></li>
-		  <li>Protons</li>
-		  <li><a href="<ilion:url/>ilionnet/protons/usuario">Profissional</a></li>
+		  <li>Vitazure</li>
+		  <li><a href="<ilion:url/>profissional">Profissional</a></li>
 		  <li class="active">Edi&ccedil;&atilde;o</li>
 		</ol><!--breadcrum end--> 
 		
@@ -126,6 +126,7 @@
                          					profissional.pessoa.relacaoContato='${profissional.pessoa.relacaoContato}';
 						                    profissional.pessoa.nomeContato='${profissional.pessoa.nomeContato}';
 						                    profissional.pessoa.celularContato='${profissional.pessoa.celularContato}';
+						                    profissional.pessoa.clienteAtivo='${profissional.pessoa.clienteAtivo}';
                          					formacaoAcademica ='${formacaoAcademica}';
                          					 enderecoAtendimento ='';
                          					descricaoFormacao ='${descricaoFormacao}';

@@ -67,6 +67,7 @@ public class PessoaNegocio {
 		validarUsuario(pessoa);
 		pessoa = criptografarSenha(pessoa);
 		if (pessoa.getId() == null || pessoa.getId() == 0) {
+			pessoa.setClienteAtivo(Boolean.TRUE);
 			pessoa = (Pessoa) hibernateUtil.save(pessoa);
 		} else {
 			hibernateUtil.update(pessoa);
@@ -103,6 +104,9 @@ public class PessoaNegocio {
 		
 		if (pessoaVO.getConfirmado() == null || !pessoaVO.getConfirmado()) {
 			throw new ValidacaoException("Usuário ainda não ativado. Por favor, confira o link de ativação enviado no e-mail cadastrado.");
+		}
+		if (pessoaVO.getCliente() && !pessoaVO.getClienteAtivo()) {
+			throw new ValidacaoException("Usuário Inativo.");
 		}
 		
 		return pessoaVO;

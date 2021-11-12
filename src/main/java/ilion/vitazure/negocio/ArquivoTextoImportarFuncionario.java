@@ -224,6 +224,7 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
 			pessoa.setSenha("Vitazure1");
 			pessoa.setEmpresaImportacao(usuario.getEmpresa());
 			pessoa.setConfirmado(Boolean.TRUE);
+			pessoa.setClienteAtivo(Boolean.TRUE);
 			pessoa = pessoaNegocio.incluirAtualizar(pessoa);
 			this.listPessoaImportada.add(pessoa);
 			qtdSucesso++;

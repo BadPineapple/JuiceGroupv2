@@ -44,6 +44,7 @@ public class Pessoa implements Serializable{
 	  private String relacaoContato;
 	  private String nomeContato;
 	  private String celularContato;
+	  private Boolean clienteAtivo;
 	  
 	  @ManyToOne
 	  @JoinColumn(nullable = true)
@@ -273,6 +274,15 @@ public class Pessoa implements Serializable{
 	}
 	public void setCelularContato(String celularContato) {
 		this.celularContato = celularContato;
+	}
+	public Boolean getClienteAtivo() {
+		if(clienteAtivo == null) {
+			clienteAtivo = Boolean.FALSE;
+		}
+		return clienteAtivo;
+	}
+	public void setClienteAtivo(Boolean clienteAtivo) {
+		this.clienteAtivo = clienteAtivo;
 	}
 	  
 	  

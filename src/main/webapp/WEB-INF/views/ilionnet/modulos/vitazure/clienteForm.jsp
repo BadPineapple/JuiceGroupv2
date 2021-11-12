@@ -37,21 +37,29 @@
 					<form ng-submit="submit()">
 						          <angular-initializer
 						            ng-init="pessoa.id='${pessoa.id}';
-						                     pessoa.nome='${pessoa.nome}';
-						                     pessoa.email='${pessoa.email}';
-						                     pessoa.telefone='${pessoa.telefone}';
-						                     pessoa.celular='${pessoa.celular}';
-						                     pessoa.senha='${pessoa.senha}';
-						                     pessoa.dataNascimento='${pessoa.dataNascimento}';
-						                     pessoa.cpf='${pessoa.cpf}';
-						                     pessoa.cep='${pessoa.cep}';
-						                     pessoa.cidade='${pessoa.cidade}';
-						                     pessoa.endereco='${pessoa.endereco}';
-						                     pessoa.setor='${pessoa.setor}';
-						                      pessoa.relacaoContato='${pessoa.relacaoContato}';
-						                     pessoa.nomeContato='${pessoa.nomeContato}';
-						                     pessoa.celularContato='${pessoa.celularContato}';
-						                     pessoa.cliente='true'
+						                    pessoa.nome='${pessoa.nome}';
+						                    pessoa.email='${pessoa.email}';
+						                    pessoa.telefone='${pessoa.telefone}';
+						                    pessoa.celular='${pessoa.celular}';
+						                    pessoa.senha='${pessoa.senha}';
+						                    pessoa.dataNascimento='${pessoa.dataNascimento}';
+						                    pessoa.cpf='${pessoa.cpf}';
+						                    pessoa.cep='${pessoa.cep}';
+						                    pessoa.cidade='${pessoa.cidade}';
+						                    pessoa.estado='${pessoa.estado}';
+						                    pessoa.endereco='${pessoa.endereco}';
+						                    pessoa.setor='${pessoa.setor}';
+						                    pessoa.foto.id='${pessoa.foto.id}';
+						                    pessoa.foto.link='${pessoa.foto.link}';
+						                    pessoa.foto.layout='${pessoa.foto.layout}';
+						                    pessoa.genero='${pessoa.genero}';
+                          					pessoa.cliente ='${pessoa.cliente}';
+                         					pessoa.psicologo ='${pessoa.psicologo}';
+                         					pessoa.confirmado='${pessoa.confirmado}';
+                         					pessoa.relacaoContato='${pessoa.relacaoContato}';
+						                    pessoa.nomeContato='${pessoa.nomeContato}';
+						                    pessoa.celularContato='${pessoa.celularContato}';
+						                    pessoa.clienteAtivo='${pessoa.clienteAtivo}';
 						                     "/>
 							<div class="row">
 						          <div class="col-md-12 col-lg-12 col-sm-12">
@@ -110,22 +118,28 @@
 						            </div>
 						             <div class="col-md-3 col-lg-3 col-sm-12">
 								        <div class="  form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed">
-								           <label for="endereco" class="control-label">Endereco</label>
-								           <input type="Large" id="endereco" ng-model="pessoa.endereco" class="form-control input-group-lg" required/>
+								           <label for="endereco" class="control-label">Genero</label>
+								           <input type="Large" id="genero" ng-model="pessoa.genero" class="form-control input-group-lg" required/>
 								        </div>
 								    </div>
 						            <div class="col-md-3 col-lg-3 col-sm-12">
 						              <div class="  form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed">
-						                <label for="setor" class="control-label">Bairro</label>
-						                <input type="Large" id="setor" ng-model="pessoa.setor" class="form-control input-group-lg"/>
-						              </div>
-						            </div>
-						            <div class="col-md-3 col-lg-3 col-sm-12">
+                                        <label>Ativo</label>
+                                        <select ng-model="pessoa.clienteAtivo" class="form-control input-group-lg">
+						   					<option value="true">Sim</option>
+						   					<option value="false">Não</option>
+										</select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-lg-3 col-sm-12">
 						              <div class="  form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed">
-						                <label for="cidade" class="control-label">Cidade</label>
-						                <input type="Large" id="cidade" ng-model="pessoa.cidade" class="form-control input-group-lg"/>
-						              </div>
-						            </div>
+                                        <label>Confirmado</label>
+                                        <select ng-model="pessoa.confirmado" class="form-control input-group-lg">
+						   					<option value="true">Sim</option>
+						   					<option value="false">Não</option>
+										</select>
+                                    </div>
+                                </div>
 							</div>
 							<div class="col-md-12 col-lg-12 col-sm-12">	
 							<div class="col-md-4 col-lg-4 col-sm-12">

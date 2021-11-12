@@ -75,6 +75,9 @@ public class EnderecoAtendimento {
 		}
 
 		public String getCidade() {
+			if(cidade == null) {
+				cidade = "";
+			}
 			return cidade;
 		}
 

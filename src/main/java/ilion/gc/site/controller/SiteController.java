@@ -425,7 +425,7 @@ public class SiteController extends CustomErrorController {
 	  		List<EnderecoAtendimento> enderecoAtendimento = new ArrayList<EnderecoAtendimento>();
 	  		enderecoAtendimento.addAll(enderecoNegocio.consultarEnderecoPorPessoa(profissional.getId()));
 	  		request.setAttribute("enderecoAtendimento", enderecoAtendimento);
-	  		request.setAttribute("cidadeProfissional", enderecoAtendimento.get(0).getCidade());
+	  		request.setAttribute("cidadeProfissional", enderecoAtendimento.isEmpty() ? "" : enderecoAtendimento.get(0).getCidade());
 			return "/ilionnet2/vitazure/perfil-do-profissional";
 	  	}
 	
