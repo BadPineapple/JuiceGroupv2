@@ -700,7 +700,7 @@
 				   							          <option value="${tempo}">${tempo.valor}</option>
 										            </c:forEach>
 									           </select>
-                                                <p>Tempo de antecêndia minimo para o paciênte marcar a consulta.</p>
+                                                <p>Tempo de antecêndia minimo para o paciente marcar a consulta.</p>
                                                 <p>O tempo padrão é de 1 hora.</p>
                                             </div>
                                         </div>

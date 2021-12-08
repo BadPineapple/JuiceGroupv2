@@ -3,6 +3,7 @@ package ilion.vitazure.negocio;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -79,11 +80,16 @@ public class AgendaNegocio {
 			}
 			agenda = (Agenda) hibernateUtil.save(agenda);
 			
+			if(!jsonRetornoToken.get("pacote").toString().equals("")) {
+				gerarAgendaPacote(dataAgenda , jsonRetornoToken , paciente, profissional , tx);
+			}
+			
 			Transaction capturarTransacao = new Transaction().find(tx.getId());
 			Collection<SplitRule> rules = new ArrayList<>();
 			SplitRule splitRulesProfissional = new SplitRule();
 			splitRulesProfissional.setRecipientId(profissional.getIdRecebedor());
-			splitRulesProfissional.setPercentage(89);
+			splitRulesProfissional.setPercentage(90);
+			splitRulesProfissional.setChargeProcessingFee(Boolean.FALSE);
 			rules.add(splitRulesProfissional);
 			SplitRule splitRulesEmpresa = new SplitRule();
 			if (situacaoPagarme.equals("PRODUCAO")) {
@@ -91,7 +97,7 @@ public class AgendaNegocio {
 			}else {
 				splitRulesEmpresa.setRecipientId("re_ckraudxgi00zm0p9tsbnszhmo");
 			}
-			splitRulesEmpresa.setPercentage(11);
+			splitRulesEmpresa.setPercentage(10);
 	        rules.add(splitRulesEmpresa);
 	        capturarTransacao.setSplitRules(rules);
 			capturarTransacao.capture(tx.getAmount());
@@ -106,6 +112,47 @@ public class AgendaNegocio {
 			e.printStackTrace();
 		}
 		return new Agenda();
+	}
+	
+	@Transactional
+	public void gerarAgendaPacote(Date dataAgendaInicial , JSONObject jsonRetornoToken ,Pessoa paciente,Profissional profissional , Transaction tx) {
+		try {
+			List<Date> listDatasPacote = new ArrayList<Date>();
+			if(jsonRetornoToken.get("pacote").toString().equals("pacote2")) {
+				listDatasPacote.addAll(listaDataPacote(dataAgendaInicial , 1));
+			}else if(jsonRetornoToken.get("pacote").toString().equals("pacote3")) {
+				listDatasPacote.addAll(listaDataPacote(dataAgendaInicial , 2));
+			}else if(jsonRetornoToken.get("pacote").toString().equals("pacote4")) {
+				listDatasPacote.addAll(listaDataPacote(dataAgendaInicial , 3));
+			}
+			listDatasPacote.stream().forEach(data -> gerarAgenda(data, jsonRetornoToken, paciente, profissional, tx));
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public List<Date> listaDataPacote(Date dataAgendaInicial , Integer quantidadeDataPacote){
+		List<Date> listDataPacote = new ArrayList<Date>();
+		Integer quantidadeDataGerada = 0;
+		while (quantidadeDataGerada < quantidadeDataPacote) {
+			listDataPacote.add(Uteis.acrescentar(dataAgendaInicial, Calendar.DATE, 7));
+			quantidadeDataGerada++;
+		}
+		return listDataPacote;
+	}
+	
+	public void gerarAgenda(Date dataAgenda , JSONObject jsonRetornoToken ,Pessoa paciente,Profissional profissional ,Transaction tx) {
+		try {
+			Agenda	agenda = new Agenda(paciente, profissional, dataAgenda, jsonRetornoToken.get("tipoAtendimento").toString().equals("online") || jsonRetornoToken.get("tipoAtendimento").toString().equals("") ? Boolean.TRUE : Boolean.FALSE, jsonRetornoToken.get("tipoAtendimento").toString().equals("presencial")  ? Boolean.TRUE : Boolean.FALSE, "", StatusEnum.PENDENTE, null , "");
+			agenda.setTokenTransacaoPagamentoConsulta(jsonRetornoToken.get("token").toString());
+			agenda.setIdTransacao(tx.getId());
+			if (agenda.getOnline()) {
+				wherebyApi.gerarLinkAtendimentoOnline(profissional, agenda);
+			}
+			agenda = (Agenda) hibernateUtil.save(agenda);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public List<Agenda> consultarAgenda(Pessoa pessoaAgenda){

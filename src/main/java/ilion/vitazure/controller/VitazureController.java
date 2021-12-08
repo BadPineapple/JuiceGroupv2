@@ -323,7 +323,7 @@ public class VitazureController {
 				request.setAttribute("estados", EstadoEnum.values());
 				profissional = profissionalNegocio.incluirAtualizar(profissional);
 				return "/ilionnet2/vitazure/orientacao";
-			}else if (pessoa.getCpf().equals("")) {
+			}else if (pessoa.getCpf().equals("") || (pessoa.getEmail().equals("") && pessoa.getPessoaImportada())) {
 				request.setAttribute("estados", EstadoEnum.values());
 				return "/ilionnet2/vitazure/completar-cadastro";
 			}else if(pessoa.getCliente()) {
@@ -421,7 +421,7 @@ public class VitazureController {
 					}
 			}
 		 
-		 @GetMapping("/vitazure/reagendar/{id}")
+		   @GetMapping("/vitazure/reagendar/{id}")
 			public String reagendarConsultaAgendareagendamento(ModelMap modelMap,HttpServletRequest request , @PathVariable Long id) {
 		     Pessoa PessoaSessao = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
 		     Agenda agenda = new Agenda();
@@ -430,6 +430,14 @@ public class VitazureController {
 			 modelMap.addAttribute("pessoa", PessoaSessao);
 			 return "redirect:/vitazure/reagendar";
 			}
+		   @GetMapping("/vitazure/reagendamentoProfissional/{id}")
+		   public String reagendamentoProfissional(ModelMap modelMap,HttpServletRequest request , @PathVariable Long id) {
+			   Agenda agenda = new Agenda();
+			   agenda = agendaNegocio.consultarAgendaId(id);
+			   request.getSession().setAttribute("agenda", agenda);
+			   modelMap.addAttribute("pessoa", agenda.getPaciente());
+			   return "redirect:/vitazure/reagendamentoProfissional";
+		   }
 		
 			 @RequestMapping("/vitazure/reagendar")
 			 public String apresentarDadosProfissionalReagendamento(ModelMap modelMap,HttpServletRequest request) {
@@ -445,11 +453,33 @@ public class VitazureController {
 			  	 request.getSession().setAttribute("formacoes", formacoes);
 			  	 request.getSession().setAttribute("especialidades", especialidades);
 			  	 request.getSession().setAttribute("agenda", agenda);
+			  	request.getSession().setAttribute("reagendamentoProfissional", Boolean.FALSE);
 			  	 modelMap.addAttribute("pessoa", PessoaSessao);
 			  	 List<EnderecoAtendimento> enderecoAtendimento = new ArrayList<EnderecoAtendimento>();
 			  	 enderecoAtendimento.addAll(enderecoNegocio.consultarEnderecoPorPessoa(profissional.getId()));
 			  	 request.setAttribute("enderecoAtendimento", enderecoAtendimento);
 			  	 request.setAttribute("cidadeProfissional", enderecoAtendimento.get(0).getCidade());
+				 return "/ilionnet2/vitazure/perfil-do-profissional-reagendamento";
+			 }
+			 @RequestMapping("/vitazure/reagendamentoProfissional")
+			 public String apresentarDadosProfissionalreagendamentoProfissional(ModelMap modelMap,HttpServletRequest request) {
+				 Agenda agenda = (Agenda) request.getSession().getAttribute("agenda");
+				 Profissional profissional = profissionalNegocio.consultarPorId(agenda.getProfissional().getId());
+				 profissionalNegocio.consultarDataDisponivelProfissional(profissional , false , false);
+				 List<TemaTrabalho> temasTrabalho = temaNegocio.consultarTemasPorProfissional(profissional.getId());
+				 List<FormacaoAcademica> formacoes = formacaoAcademicaNegocio.consultarFormacoesPorPessoa(profissional.getId());
+				 List<Especialidade> especialidades = especialidadeNegocio.consultarEspecialidadesProfissional(profissional.getId());
+				 request.getSession().setAttribute("profissional", profissional);
+				 request.getSession().setAttribute("temasTrabalho", temasTrabalho);
+				 request.getSession().setAttribute("formacoes", formacoes);
+				 request.getSession().setAttribute("especialidades", especialidades);
+				 request.getSession().setAttribute("agenda", agenda);
+				 request.getSession().setAttribute("reagendamentoProfissional", Boolean.TRUE);
+				 modelMap.addAttribute("pessoa", agenda.getPaciente());
+				 List<EnderecoAtendimento> enderecoAtendimento = new ArrayList<EnderecoAtendimento>();
+				 enderecoAtendimento.addAll(enderecoNegocio.consultarEnderecoPorPessoa(profissional.getId()));
+				 request.setAttribute("enderecoAtendimento", enderecoAtendimento);
+				 request.setAttribute("cidadeProfissional", enderecoAtendimento.get(0).getCidade());
 				 return "/ilionnet2/vitazure/perfil-do-profissional-reagendamento";
 			 }
 			 
@@ -468,6 +498,19 @@ public class VitazureController {
 						return new ResponseEntity<>(new JsonString(e.getMessage()), HttpStatus.BAD_REQUEST);
 					}
 				}
+			    @PostMapping(value = "/vitazure/concluirReagendamentoProfissional", produces = "application/json")
+			    @ResponseBody
+			    public ResponseEntity<JsonString> ReagendamentoProfissional(HttpServletRequest request, @RequestBody String jsonReagendamento) {
+			    	try {
+			    		JSONObject jsonRetornoToken = new JSONObject(jsonReagendamento);
+			    		Agenda agendaReagendada = agendaNegocio.consultarAgendaId(Long.parseLong(jsonRetornoToken.get("idAgendaReagendada").toString()));
+			    		agendaNegocio.incluirReagendamentoPaciente(jsonRetornoToken, agendaReagendada.getPaciente());
+			    		return new ResponseEntity<>(new JsonString("Reagendamento concluído com sucesso."), HttpStatus.OK);
+			    	} catch (Exception e) {
+			    		e.printStackTrace();
+			    		return new ResponseEntity<>(new JsonString(e.getMessage()), HttpStatus.BAD_REQUEST);
+			    	}
+			    }
 		 
 			      @GetMapping("/vitazure/validarFinalizarAtendimento/{identificador}")
 			      public ResponseEntity<String> validarFinalizarAtendimento(ModelMap modelMap,HttpServletRequest request, @PathVariable Long  identificador){

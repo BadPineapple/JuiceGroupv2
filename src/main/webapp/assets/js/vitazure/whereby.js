@@ -95,7 +95,6 @@ function validarAgendaConcluida($scope, $http, $window){
 		        success: function (response) {
 		           alert_success('O tempo da sua consulta expirou,seu atendimento foi encerrado!');
 		        }, error: function (response) {		           
-		              alert_success('O tempo da sua consulta expirou,seu atendimento foi encerrado!');
 		        }
 		    });			
 			setTimeout('validarAgendaConcluida()', 10000);				

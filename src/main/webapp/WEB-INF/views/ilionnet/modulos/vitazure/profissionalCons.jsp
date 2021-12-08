@@ -54,9 +54,6 @@
 							    <th class="text-center">ID</th>
 							    <th class="text-center">Nome</th>
 							    <th class="text-center">Email</th>
-							    <th class="text-center">Data Inicio Plano</th>
-							    <th class="text-center">Data Fim Plano</th>
-							    <th class="text-center">Plano</th>
 							    <th class="text-center">Ativo</th>
 							    <th class="text-center">Opcoes</th>
 							</tr>
@@ -65,10 +62,7 @@
 								<td class="text-center">${profissional.id}</td>
 								<td align="center">${profissional.pessoa.nome}</td>
 								<td align="center">${profissional.pessoa.email}</td>
-								<td align="center">${profissional.dataInicioPlano}</td>
-								<td align="center">${profissional.dataFimPlano}</td>
-								<td align="center">${profissional.plano}</td>
-								<td align="center">${profissional.ativo ? 'Ativo' : 'Inativo'}</td>
+								<td align="center">${profissional.situacaoAprovacaoProfissional}</td>
 								<td class="pmd-table-row-action" align="center">
 									<a href="<ilion:url/>vitazure/profissional/${profissional.pessoa.id}" class="btn pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-default btn-sm">
 										<i class="material-icons md-dark pmd-sm">edit</i>

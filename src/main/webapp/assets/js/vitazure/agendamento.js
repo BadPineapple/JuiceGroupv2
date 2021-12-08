@@ -14,6 +14,8 @@ var idRemoveHist = '';
 
 var idProfissionalHorario = '';
 
+var pacote = '';
+
 
  var horariosDisponiveisAtendimento = new Array();
 
@@ -30,8 +32,8 @@ function agendamentoController($scope, $http, $window) {
     $scope.consultarDatasProfissional = function (id, profissional) {
         consultarDatasProfissional($scope, $http, $window , id , profissional);
     };
-    $scope.efetuarPagamento = function (id ,valorOnline ,valorPresencial) {
-        efetuarPagamento($scope, $http, $window , id,valorOnline ,valorPresencial);
+    $scope.efetuarPagamento = function (id ,valorOnline ,valorPresencial,valorOnlinePacote2 ,valorOnlinePacote3,valorOnlinePacote4,valorPresencialPacote2,valorPresencialPacote3 ,valorPresencialPacote4) {
+        efetuarPagamento($scope, $http, $window , id,valorOnline ,valorPresencial,valorOnlinePacote2 ,valorOnlinePacote3,valorOnlinePacote4,valorPresencialPacote2,valorPresencialPacote3 ,valorPresencialPacote4);
     };
      $scope.definirAgendamento = function (idAgenda, situacaoAlterar) {
         definirAgendamento($scope, $http, $window , idAgenda, situacaoAlterar);
@@ -52,6 +54,9 @@ function agendamentoController($scope, $http, $window) {
 	
 	 $scope.concluirReagendamento = function (idProfissional , idAgendaReagendada) {
         concluirReagendamento($scope, $http, $window , idProfissional , idAgendaReagendada);
+    };
+	 $scope.concluirReagendamentoProfissional = function (idProfissional , idAgendaReagendada) {
+        concluirReagendamentoProfissional($scope, $http, $window , idProfissional , idAgendaReagendada);
     };
 	 $scope.opcaoReagendamento = function (idProfissional , tipo) {
         var tipoAgendamento = "";
@@ -148,13 +153,29 @@ function marcardesmarcar(idProfissional,id) {
          document.getElementById(idProfissional+'.presencial').className = ""
          document.getElementById(idProfissional+'.valorOnline').style.display = "inline-block";
 		document.getElementById(idProfissional+'.valorPresencial').style.display = "none";
+		document.getElementById(idProfissional+'.valorOnlinePacote2Formatado').style.display = "none";
+		 document.getElementById(idProfissional+'.valorOnlinePacote3Formatado').style.display = "none";
+		 document.getElementById(idProfissional+'.valorOnlinePacote4Formatado').style.display = "none";
+	    document.getElementById(idProfissional+'.valorPresencialPacote2Formatado').style.display = "none";
+		 document.getElementById(idProfissional+'.valorPresencialPacote3Formatado').style.display = "none";
+		 document.getElementById(idProfissional+'.valorPresencialPacote4Formatado').style.display = "none";
 	}else{
 		 document.getElementById(idProfissional+'.online').className = ""
          document.getElementById(idProfissional+'.presencial').className = "active marcar"
 		 document.getElementById(idProfissional+'.valorOnline').style.display = "none";
 		 document.getElementById(idProfissional+'.valorPresencial').style.display = "inline-block";
+	     document.getElementById(idProfissional+'.valorOnlinePacote2Formatado').style.display = "none";
+		 document.getElementById(idProfissional+'.valorOnlinePacote3Formatado').style.display = "none";
+		 document.getElementById(idProfissional+'.valorOnlinePacote4Formatado').style.display = "none";
+	     document.getElementById(idProfissional+'.valorPresencialPacote2Formatado').style.display = "none";
+		 document.getElementById(idProfissional+'.valorPresencialPacote3Formatado').style.display = "none";
+		 document.getElementById(idProfissional+'.valorPresencialPacote4Formatado').style.display = "none";
 	}
 	
+	     document.getElementById(idProfissional+'.pacote2') == null ? '' : document.getElementById(idProfissional+'.pacote2').className = ""
+         document.getElementById(idProfissional+'.pacote3') == null ? '' : document.getElementById(idProfissional+'.pacote3').className = "";
+         document.getElementById(idProfissional+'.pacote4') == null ? '' : document.getElementById(idProfissional+'.pacote4').className = "";
+		 pacote = '';
 	tipoAgendamento = id;
 }
 function opcaoReagendamento(idProfissional,id) {
@@ -184,6 +205,7 @@ function agendar(respostaPagamento ,$scope, $http, $window , id) {
     "tipoAtendimento":tipoAtendimento,
     "token": respostaPagamento.token,
     "payment_method": respostaPagamento.payment_method,
+    "pacote" : pacote,
   });
 
 $http.post("/vitazure/agendar/" , retornoToken)
@@ -199,7 +221,7 @@ $http.post("/vitazure/agendar/" , retornoToken)
 }
 
 
-function efetuarPagamento($scope, $http, $window , id ,valorOnline ,valorPresencial) {
+function efetuarPagamento($scope, $http, $window , id ,valorOnline ,valorPresencial,valorOnlinePacote2 ,valorOnlinePacote3,valorOnlinePacote4,valorPresencialPacote2,valorPresencialPacote3 ,valorPresencialPacote4) {
     var confirma = 0;
     var tipoAtendimento  = definirTipo(id);
     document.getElementById("spinner").style.display = "inline-block";
@@ -224,7 +246,13 @@ function efetuarPagamento($scope, $http, $window , id ,valorOnline ,valorPresenc
 	        confirma = 1;
 	    }).then(function (data, textStatus, jqXHR) {
 	        var ccae6d912a41bfefd569a77b5cd86603cde92e53cdd45813cba9e5bf080b3734 =  jqXHR.responseText;
-	        var valorTotal = (definirTipo(id) == 'online' ? valorOnline : valorPresencial) * 100;
+	        var valorTotal = (definirTipo(id) == 'online' && pacote == 'pacote2' ? valorOnlinePacote2 :
+                              definirTipo(id) == 'online' && pacote == 'pacote3' ? valorOnlinePacote3 :
+                              definirTipo(id) == 'online' && pacote == 'pacote4' ? valorOnlinePacote4 :
+                              definirTipo(id) == 'presencial' && pacote == 'pacote2' ? valorPresencialPacote2 :
+							  definirTipo(id) == 'presencial' && pacote == 'pacote3' ? valorPresencialPacote3 :
+					          definirTipo(id) == 'presencial' && pacote == 'pacote4' ? valorPresencialPacote4 : 
+                              definirTipo(id) == 'online' && pacote == '' ? valorOnline : valorPresencial) * 100;
 	        var button = document.querySelector('button');
 	        function handleSuccess(data) {
 		        document.getElementById("spinner").style.display = "inline-block";
@@ -375,4 +403,98 @@ $http.post("/vitazure/concluirReagendamento/" , jsonReagendamento)
         alert_error(response.data.message);
 		document.getElementById("spinner").style.display = "none";
     })
+}
+function concluirReagendamentoProfissional($scope, $http, $window , idProfissional , idAgendaReagendada) {
+	 document.getElementById("spinner").style.display = "inline-block";
+	var idProfissional = idProfissional;
+	var idAgendaReagendada = idAgendaReagendada;
+	var horarioPossivelAtendimento  = horariosDisponiveisAtendimento[idHoraTemp].horaPossivelAtendiemnto;
+	var tipoAtendimento  = definirTipo(idProfissional);
+	var data  = dataSelecionada;
+	var jsonReagendamento = JSON.stringify({
+    "idProfissional":idProfissional,
+    "horarioPossivelAtendimento":horarioPossivelAtendimento,
+    "dataAtendimento":data,
+    "tipoAtendimento":tipoAtendimento,
+    "idAgendaReagendada":idAgendaReagendada,    
+  });
+
+$http.post("/vitazure/concluirReagendamentoProfissional/" , jsonReagendamento)
+        .then(function (response) {
+            alert_success(response.data.message, () => {
+	            document.getElementById("spinner").style.display = "none";
+				$window.location.href = "/vitazure/telaAgradecimento";
+			});
+        }).catch(function (response) {
+        alert_error(response.data.message);
+		document.getElementById("spinner").style.display = "none";
+    })
+}
+
+function selecionarPacote(idProfissional,id) {
+	var tipoAtendimento  = definirTipo(idProfissional);
+	if(id == 'pacote2' && tipoAtendimento == 'online'){
+  		 document.getElementById(idProfissional+'.pacote2').className = "active marcar"
+         document.getElementById(idProfissional+'.pacote3') == null ? '' : document.getElementById(idProfissional+'.pacote3').className = "";
+         document.getElementById(idProfissional+'.pacote4') == null ? '' : document.getElementById(idProfissional+'.pacote4').className = "";
+         document.getElementById(idProfissional+'.valorOnlinePacote2Formatado').style.display = "inline-block";
+		 document.getElementById(idProfissional+'.valorOnlinePacote3Formatado').style.display = "none";
+		 document.getElementById(idProfissional+'.valorOnlinePacote4Formatado').style.display = "none";
+         document.getElementById(idProfissional+'.valorPresencialPacote2Formatado').style.display = "none";
+		 document.getElementById(idProfissional+'.valorPresencialPacote3Formatado').style.display = "none";
+		 document.getElementById(idProfissional+'.valorPresencialPacote4Formatado').style.display = "none";
+	}else if(id == 'pacote2' && tipoAtendimento == 'presencial'){
+  		 document.getElementById(idProfissional+'.pacote2').className = "active marcar"
+         document.getElementById(idProfissional+'.pacote3') == null ? '' : document.getElementById(idProfissional+'.pacote3').className = "";
+         document.getElementById(idProfissional+'.pacote4') == null ? '' : document.getElementById(idProfissional+'.pacote4').className = "";
+         document.getElementById(idProfissional+'.valorOnlinePacote2Formatado').style.display = "none";
+		 document.getElementById(idProfissional+'.valorOnlinePacote3Formatado').style.display = "none";
+		 document.getElementById(idProfissional+'.valorOnlinePacote4Formatado').style.display = "none";
+         document.getElementById(idProfissional+'.valorPresencialPacote2Formatado').style.display = "inline-block";
+		 document.getElementById(idProfissional+'.valorPresencialPacote3Formatado').style.display = "none";
+		 document.getElementById(idProfissional+'.valorPresencialPacote4Formatado').style.display = "none";
+	}else if(id == 'pacote3' && tipoAtendimento == 'online'){
+		 document.getElementById(idProfissional+'.pacote2') == null ? '' : document.getElementById(idProfissional+'.pacote2').className = "";
+         document.getElementById(idProfissional+'.pacote3').className = "active marcar";
+		 document.getElementById(idProfissional+'.pacote4') == null ? '' : document.getElementById(idProfissional+'.pacote4').className = "";
+		 document.getElementById(idProfissional+'.valorOnlinePacote2Formatado').style.display = "none";
+		 document.getElementById(idProfissional+'.valorOnlinePacote3Formatado').style.display = "inline-block";
+		 document.getElementById(idProfissional+'.valorOnlinePacote4Formatado').style.display = "none";
+	     document.getElementById(idProfissional+'.valorPresencialPacote2Formatado').style.display = "none";
+		 document.getElementById(idProfissional+'.valorPresencialPacote3Formatado').style.display = "none";
+		 document.getElementById(idProfissional+'.valorPresencialPacote4Formatado').style.display = "none";
+	}else if(id == 'pacote3' && tipoAtendimento == 'presencial'){
+		 document.getElementById(idProfissional+'.pacote2') == null ? '' : document.getElementById(idProfissional+'.pacote2').className = "";
+         document.getElementById(idProfissional+'.pacote3').className = "active marcar";
+		 document.getElementById(idProfissional+'.pacote4') == null ? '' : document.getElementById(idProfissional+'.pacote4').className = "";
+		 document.getElementById(idProfissional+'.valorOnlinePacote2Formatado').style.display = "none";
+		 document.getElementById(idProfissional+'.valorOnlinePacote3Formatado').style.display = "none";
+		 document.getElementById(idProfissional+'.valorOnlinePacote4Formatado').style.display = "none";
+	     document.getElementById(idProfissional+'.valorPresencialPacote2Formatado').style.display = "none";
+		 document.getElementById(idProfissional+'.valorPresencialPacote3Formatado').style.display = "inline-block";
+		 document.getElementById(idProfissional+'.valorPresencialPacote4Formatado').style.display = "none";
+	}else if(id == 'pacote4' && tipoAtendimento == 'online'){
+		 document.getElementById(idProfissional+'.pacote2') == null ? '' : document.getElementById(idProfissional+'.pacote2').className = "";
+		 document.getElementById(idProfissional+'.pacote3') == null ? '' : document.getElementById(idProfissional+'.pacote3').className = "";
+         document.getElementById(idProfissional+'.pacote4').className = "active marcar";
+		 document.getElementById(idProfissional+'.valorOnlinePacote2Formatado').style.display = "none";
+		 document.getElementById(idProfissional+'.valorOnlinePacote3Formatado').style.display = "none";
+		 document.getElementById(idProfissional+'.valorOnlinePacote4Formatado').style.display = "inline-block";
+	     document.getElementById(idProfissional+'.valorPresencialPacote2Formatado').style.display = "none";
+		 document.getElementById(idProfissional+'.valorPresencialPacote3Formatado').style.display = "none";
+		 document.getElementById(idProfissional+'.valorPresencialPacote4Formatado').style.display = "none";
+	}else{
+		 document.getElementById(idProfissional+'.pacote2') == null ? '' : document.getElementById(idProfissional+'.pacote2').className = "";
+		 document.getElementById(idProfissional+'.pacote3') == null ? '' : document.getElementById(idProfissional+'.pacote3').className = "";
+         document.getElementById(idProfissional+'.pacote4').className = "active marcar";
+		 document.getElementById(idProfissional+'.valorOnlinePacote2Formatado').style.display = "none";
+		 document.getElementById(idProfissional+'.valorOnlinePacote3Formatado').style.display = "none";
+		 document.getElementById(idProfissional+'.valorOnlinePacote4Formatado').style.display = "none";
+	      document.getElementById(idProfissional+'.valorPresencialPacote2Formatado').style.display = "none";
+		 document.getElementById(idProfissional+'.valorPresencialPacote3Formatado').style.display = "none";
+		 document.getElementById(idProfissional+'.valorPresencialPacote4Formatado').style.display = "inline-block";
+	}
+	     document.getElementById(idProfissional+'.valorOnline').style.display = "none";
+		 document.getElementById(idProfissional+'.valorPresencial').style.display = "none";
+	  pacote = id;
 }

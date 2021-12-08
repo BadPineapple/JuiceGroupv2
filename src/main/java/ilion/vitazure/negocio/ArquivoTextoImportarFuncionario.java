@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.StringTokenizer;
+import java.util.stream.Collectors;
 
 import javax.validation.ValidationException;
 
@@ -32,6 +33,7 @@ import ilion.admin.negocio.Usuario;
 import ilion.contato.negocio.ContatoImportacao;
 import ilion.util.Uteis;
 import ilion.vitazure.model.Pessoa;
+import ilion.vitazure.model.TemaTrabalho;
 
 
 
@@ -49,6 +51,7 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
 	private PessoaNegocio pessoaNegocio;
 	private List<Pessoa> listPessoaImportada;
 	private List<String> listPessoaErro;
+	private List<Pessoa> erroPessoasDuplicadas;
 	private static final String SLASH_WINDOWS = "\\";
 	private static final String SLASH_LINUX = "/";
 	
@@ -72,6 +75,7 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
 		this.linhasErro = new ArrayList<Integer>();
 		this.listPessoaImportada = new ArrayList<Pessoa>();
 		this.listPessoaErro = new ArrayList<String>();
+		this.erroPessoasDuplicadas = new ArrayList<Pessoa>();
 	}
 	
 	public void importar() throws Exception {
@@ -90,6 +94,8 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
 					}
 				}
 			}
+			validarCpfDuplicadoLista();
+//				pessoa = pessoaNegocio.incluirAtualizar(pessoa);
 			bufferedReader.close();
 		} catch (Exception e) {
 			logger.error("Erro ao importar funcionario", e);
@@ -97,6 +103,30 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
 		}
 	}
 	
+	public void validarCpfDuplicadoLista() {
+		
+		listPessoaImportada.stream().forEach(pessoa1 -> validar(pessoa1));
+		
+		if(erroPessoasDuplicadas.isEmpty()) {
+			listPessoaImportada.stream().forEach(pessoa -> {
+				try {
+					pessoaNegocio.incluirAtualizar(pessoa);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			});
+		}
+	}
+	
+	public void validar(Pessoa pessoa) {
+        
+		for(Pessoa p : listPessoaImportada) {
+			if(p.getCpf().equals(pessoa.getCpf()) && !p.getNome().equals(pessoa.getNome()) && !erroPessoasDuplicadas.contains(pessoa)) {
+				erroPessoasDuplicadas.add(pessoa);
+			}
+		}
+		
+	}
 	
 	public void importarExcelFuncionario(MultipartFile arquivo, String caminho, String pacote) throws Exception {
 
@@ -152,6 +182,7 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
         			this.listPessoaErro.add(!Uteis.ehNuloOuVazio(nome) ? nome : cpf);
         		}
             }
+	        validarCpfDuplicadoLista();
 	      } catch (IOException e) {
 	        throw new ValidationException("Houve um erro: " + e.getMessage());
 	      }
@@ -225,7 +256,7 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
 			pessoa.setEmpresaImportacao(usuario.getEmpresa());
 			pessoa.setConfirmado(Boolean.TRUE);
 			pessoa.setClienteAtivo(Boolean.TRUE);
-			pessoa = pessoaNegocio.incluirAtualizar(pessoa);
+//			pessoa = pessoaNegocio.incluirAtualizar(pessoa);
 			this.listPessoaImportada.add(pessoa);
 			qtdSucesso++;
 		}
@@ -234,17 +265,20 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
 	
 	public String getLog() {
 		StringBuilder retorno = new StringBuilder();
-		if(qtdSucesso > 0) {
+		if(qtdSucesso > 0 && erroPessoasDuplicadas.isEmpty()) {
 			retorno.append("<strong>Qtd. de linhas importadas:</strong> "+qtdSucesso+"<br/>");
 			retorno.append(" <div class=\"col-md-12 col-lg-12 col-sm-12\">");
 			this.listPessoaImportada.forEach(pessoa -> {
-				retorno.append(" <div class=\"col-md-4 col-lg-4 col-sm-12\">");
+				retorno.append(" <div class=\"col-md-6 col-lg-6 col-sm-12\">");
 				retorno.append("<strong>Nome: </strong>").append(pessoa.getNome());
+				retorno.append("</div>");
+				retorno.append(" <div class=\"col-md-6 col-lg-6 col-sm-12\">");
+				retorno.append("<strong>CPf: </strong>").append(pessoa.getCpf());
 				retorno.append("</div>");
 			});
 			retorno.append("</div>");
 		}
-		if( ! linhasErro.isEmpty() ) {
+		if( ! linhasErro.isEmpty() && erroPessoasDuplicadas.isEmpty()) {
 			retorno.append("<strong>Linhas Erro:</strong>"+qtdErro+"<br/>");
 			retorno.append(" <div class=\"col-md-12 col-lg-12 col-sm-12\">");
 			this.listPessoaErro.forEach(string -> {
@@ -256,6 +290,19 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
 		}
 		if( ! Uteis.ehNuloOuVazio(erro) ) {
 			retorno.append("<strong>ERRO:</strong> "+erro);
+		}
+		if(!erroPessoasDuplicadas.isEmpty()) {
+			retorno.append("<strong>Problemas ao importar arquivos, existe cpf duplicados:</strong><br/>");
+			retorno.append(" <div class=\"col-md-12 col-lg-12 col-sm-12\">");
+			this.erroPessoasDuplicadas.forEach(pessoa -> {
+				retorno.append(" <div class=\"col-md-6 col-lg-6 col-sm-12\">");
+				retorno.append("<strong>Nome: </strong>").append(pessoa.getNome());
+				retorno.append("</div>");
+				retorno.append(" <div class=\"col-md-6 col-lg-6 col-sm-12\">");
+				retorno.append("<strong>CPf: </strong>").append(pessoa.getCpf());
+				retorno.append("</div>");
+			});
+			retorno.append("</div>");
 		}
 		return retorno.toString();
 	}

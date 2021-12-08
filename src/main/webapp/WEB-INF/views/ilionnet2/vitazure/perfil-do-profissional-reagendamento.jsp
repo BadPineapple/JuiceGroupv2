@@ -123,7 +123,12 @@
 											</div>
 											<div id="enderecoLinkLocaliazacaoProfissional${profissional.id}" class="col-12" style="padding-top: 10px;">
 											</div>
-											<a href="#" ng-click="concluirReagendamento('${profissional.id}' , '${agenda.id}')" class="button-secundary">Reagendar consulta</a>
+											<c:if test="${!reagendamentoProfissional}">
+											   <a href="#" ng-click="concluirReagendamento('${profissional.id}' , '${agenda.id}')" class="button-secundary">Reagendar consulta</a>
+											</c:if>
+											<c:if test="${reagendamentoProfissional}">
+											   <a href="#" ng-click="concluirReagendamentoProfissional('${profissional.id}' , '${agenda.id}')" class="button-secundary">Reagendar consulta</a>
+											</c:if>
 										</div>
                                 </div>
                             </div>

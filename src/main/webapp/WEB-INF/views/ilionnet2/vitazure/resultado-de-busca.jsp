@@ -45,10 +45,46 @@
 													R$<span>${profissional.valorOnlineFormatado}</span>
 												</p>
 											</div>
+											<div class="valor-consulta" id="${profissional.id}.valorOnlinePacote2Formatado" style="display:none;">
+												<p>Valor sessão:<br/></p>
+												<p>
+													R$<span>${profissional.valorOnlinePacote2Formatado}</span>
+												</p>
+											</div>
+											<div class="valor-consulta" id="${profissional.id}.valorOnlinePacote3Formatado" style="display:none;">
+												<p>Valor sessão:<br/></p>
+												<p>
+													R$<span>${profissional.valorOnlinePacote3Formatado}</span>
+												</p>
+											</div>
+											<div class="valor-consulta" id="${profissional.id}.valorOnlinePacote4Formatado" style="display:none;">
+												<p>Valor sessão:<br/></p>
+												<p>
+													R$<span>${profissional.valorOnlinePacote4Formatado}</span>
+												</p>
+											</div>
 											<div class="valor-consulta" id="${profissional.id}.valorPresencial" style="display:none;">
 												<p>Valor sessão:<br/></p>
 												<p>
 													R$<span>${profissional.valorPresencialFormatado}</span>
+												</p>
+											</div>
+											<div class="valor-consulta" id="${profissional.id}.valorPresencialPacote2Formatado" style="display:none;">
+												<p>Valor sessão:<br/></p>
+												<p>
+													R$<span>${profissional.valorPresencialPacote2Formatado}</span>
+												</p>
+											</div>
+											<div class="valor-consulta" id="${profissional.id}.valorPresencialPacote3Formatado" style="display:none;">
+												<p>Valor sessão:<br/></p>
+												<p>
+													R$<span>${profissional.valorPresencialPacote3Formatado}</span>
+												</p>
+											</div>
+											<div class="valor-consulta" id="${profissional.id}.valorPresencialPacote4Formatado" style="display:none;">
+												<p>Valor sessão:<br/></p>
+												<p>
+													R$<span>${profissional.valorPresencialPacote4Formatado}</span>
 												</p>
 											</div>
 											<div class="tempo-consulta">
@@ -98,8 +134,15 @@
 											<div class="menu d-none d-md-block" style="display: block !important;" layout="block" id="panelFiltrosSelecionados${profissional.id}"></div>
 											<div id="enderecoProfissional${profissional.id}" class="col-12" style="padding-top: 15px;"></div>
 											<div id="enderecoLinkLocaliazacaoProfissional${profissional.id}" class="col-12" style="padding-top: 10px;"></div>
-											<a href="#" ng-click="efetuarPagamento('${profissional.id}' , '${profissional.valorConsultaOnline}' , '${profissional.valorConsultaPresencial}')" class="button-secundary">Agendar consulta</a>
+											<a href="#" ng-click="efetuarPagamento('${profissional.id}' , '${profissional.valorConsultaOnline}' , '${profissional.valorConsultaPresencial}' 
+											,'${profissional.valorOnlinePacote2}' ,'${profissional.valorOnlinePacote3}' ,'${profissional.valorOnlinePacote4}'
+											,'${profissional.valorPresencialPacote2}' ,'${profissional.valorPresencialPacote3}' ,'${profissional.valorPresencialPacote4}')" class="button-secundary">Agendar consulta</a>
 										</div>
+										<div class="button-agenda">
+                                                 <span id="${profissional.id}.pacote2" ng-if="${profissional.pacote2com5Desconto}"  onclick='selecionarPacote(${profissional.id},"pacote2");'>Pacote com 2 consultas por 5% de desconto</span>
+                                                 <span id="${profissional.id}.pacote3" ng-if="${profissional.pacote3com10Desconto}"  onclick='selecionarPacote(${profissional.id},"pacote3");'>Pacote com 3 consultas por 10% de desconto</span>
+                                                 <span id="${profissional.id}.pacote4" ng-if="${profissional.pacote4com15Desconto}"  onclick='selecionarPacote(${profissional.id},"pacote4");'>Pacote com 4 consultas por 15% de desconto</span>
+                                            </div>
 									</div>
 								</div>
 							</div>

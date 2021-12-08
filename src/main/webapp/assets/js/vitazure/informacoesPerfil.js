@@ -174,7 +174,6 @@ function perfilProfissional(menu,$scope, $http, $window) {
 $http.post("/vitazure/perfilProfissional", $scope.ProfissionalVH)
         .then(function (response) {
             alert_success(response.data.message, () => {
-				$window.location.href = "/vitazure/informacoes-perfil";
 			});
         }).catch(function (response) {
         alert_error(response.data.message);

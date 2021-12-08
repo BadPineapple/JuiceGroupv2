@@ -67,7 +67,7 @@ public class PessoaNegocio {
 		validarUsuario(pessoa);
 		pessoa = criptografarSenha(pessoa);
 		if (pessoa.getId() == null || pessoa.getId() == 0) {
-			pessoa.setClienteAtivo(Boolean.TRUE);
+			pessoa.setClienteAtivo(pessoa.getPessoaImportada() ? Boolean.FALSE : Boolean.TRUE);
 			pessoa = (Pessoa) hibernateUtil.save(pessoa);
 		} else {
 			hibernateUtil.update(pessoa);

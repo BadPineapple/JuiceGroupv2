@@ -1714,4 +1714,8 @@ public class Uteis {
 	    	
 	    }
 	  
+	  public static BigDecimal calcularValorComDesconto(BigDecimal valorTotal , Integer valorDesconto) {
+		  BigDecimal valorFinal = valorTotal.subtract((valorTotal.divide(new BigDecimal(100)).multiply(new BigDecimal(valorDesconto))));
+		  return valorFinal;
+	  }
 }

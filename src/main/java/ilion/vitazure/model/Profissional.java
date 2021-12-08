@@ -753,7 +753,54 @@ public class Profissional implements Serializable{
 		this.ipExternoAceiteContrato = ipExternoAceiteContrato;
 	}
 
-	
+	public String getValorOnlinePacote2Formatado() {
+		BigDecimal valorPacote2 = Uteis.calcularValorComDesconto(getValorConsultaOnline() , 5).multiply(new BigDecimal(2));		
+		return Uteis.formatarValorMoedaPTBR(valorPacote2);
+	}
+	public String getValorOnlinePacote3Formatado() {
+		BigDecimal valorPacote2 = Uteis.calcularValorComDesconto(getValorConsultaOnline() , 10).multiply(new BigDecimal(3));		
+		return Uteis.formatarValorMoedaPTBR(valorPacote2);
+	}
+	public String getValorOnlinePacote4Formatado() {
+		BigDecimal valorPacote2 = Uteis.calcularValorComDesconto(getValorConsultaOnline() , 15).multiply(new BigDecimal(4));		
+		return Uteis.formatarValorMoedaPTBR(valorPacote2);
+	}
+	public String getValorPresencialPacote2Formatado() {
+		BigDecimal valorPacote2 = Uteis.calcularValorComDesconto(getValorConsultaPresencial() , 5).multiply(new BigDecimal(2));		
+		return Uteis.formatarValorMoedaPTBR(valorPacote2);
+	}
+	public String getValorPresencialPacote3Formatado() {
+		BigDecimal valorPacote2 = Uteis.calcularValorComDesconto(getValorConsultaPresencial() , 10).multiply(new BigDecimal(3));		
+		return Uteis.formatarValorMoedaPTBR(valorPacote2);
+	}
+	public String getValorPresencialPacote4Formatado() {
+		BigDecimal valorPacote2 = Uteis.calcularValorComDesconto(getValorConsultaPresencial() , 15).multiply(new BigDecimal(4));		
+		return Uteis.formatarValorMoedaPTBR(valorPacote2);
+	}
+	public BigDecimal getValorOnlinePacote2() {
+		BigDecimal valorPacote2 = Uteis.calcularValorComDesconto(getValorConsultaOnline() , 5).multiply(new BigDecimal(2));		
+		return valorPacote2;
+	}
+	public BigDecimal getValorOnlinePacote3() {
+		BigDecimal valorPacote3 = Uteis.calcularValorComDesconto(getValorConsultaOnline() , 10).multiply(new BigDecimal(3));		
+		return valorPacote3;
+	}
+	public BigDecimal getValorOnlinePacote4() {
+		BigDecimal valorPacote4 = Uteis.calcularValorComDesconto(getValorConsultaOnline() , 15).multiply(new BigDecimal(4));		
+		return valorPacote4;
+	}
+	public BigDecimal getValorPresencialPacote2() {
+		BigDecimal valorPacote2 = Uteis.calcularValorComDesconto(getValorConsultaPresencial() , 5).multiply(new BigDecimal(2));		
+		return valorPacote2;
+	}
+	public BigDecimal getValorPresencialPacote3() {
+		BigDecimal valorPacote3 = Uteis.calcularValorComDesconto(getValorConsultaPresencial() , 10).multiply(new BigDecimal(3));		
+		return valorPacote3;
+	}
+	public BigDecimal getValorPresencialPacote4() {
+		BigDecimal valorPacote4 = Uteis.calcularValorComDesconto(getValorConsultaPresencial() , 15).multiply(new BigDecimal(4));		
+		return valorPacote4;
+	}
 	
 	
 }

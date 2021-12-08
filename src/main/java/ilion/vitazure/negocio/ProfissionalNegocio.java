@@ -135,7 +135,6 @@ public class ProfissionalNegocio {
 		subquery.setProjection(Projections.property("id"));
 		List list =  hibernateUtil.list(subquery);
 		DetachedCriteria dc = DetachedCriteria.forClass(Profissional.class);
-		dc.add(Restrictions.eq("ativo", Boolean.TRUE));
 		dc.add(Restrictions.eq("situacaoAprovacaoProfissional", SituacaoAprovacaoProfissionalEnum.AUTORIZADO));
 		dc.add(Restrictions.eq("dadosCompleto", Boolean.TRUE));
         if (!list.isEmpty()) {
@@ -263,7 +262,6 @@ public class ProfissionalNegocio {
 	
 	public List<Profissional> consultarProfissionaisFiltro(String palavraChave , String especialista ,  String estado, String cidade , Pessoa pessoaSessao) {
 		DetachedCriteria dc = DetachedCriteria.forClass(Profissional.class);
-		dc.add(Restrictions.eq("ativo", Boolean.TRUE));
 		dc.add(Restrictions.eq("situacaoAprovacaoProfissional", SituacaoAprovacaoProfissionalEnum.AUTORIZADO));
 		dc.add(Restrictions.eq("dadosCompleto", Boolean.TRUE));
 		DetachedCriteria subquery = DetachedCriteria.forClass(Profissional.class);

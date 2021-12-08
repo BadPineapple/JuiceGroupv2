@@ -28,7 +28,6 @@ function post($scope, $http, $window) {
 }
 function postProfissional($scope, $http, $window) {
 	$scope.profissional.avisoFerias = document.getElementById("avisoFerias").checked;
-	$scope.profissional.habilitarDesconto40 = document.getElementById("habilitarDesconto40").checked;
 	$scope.profissional.atendimentoPorLibras = document.getElementById("atendimentoPorLibras").checked;
 	$scope.profissional.primeiraConsultaCortesia = document.getElementById("primeiraConsultaCortesia").checked;
 	$scope.profissional.pacote2com5Desconto = document.getElementById("pacote2com5Desconto").checked;

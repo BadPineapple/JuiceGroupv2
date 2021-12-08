@@ -272,9 +272,9 @@
                                     <img src="assets/images/inpro.png" alt="Instituto Projeção">
                                 </figure>
 
-<!--                                 <figure> -->
-<!--                                     <img src="assets/images/sebrae.png" alt="Sebrae"> -->
-<!--                                 </figure> -->
+                                <figure>
+                                    <img src="assets/images/ilion_marca.png" style="width: 160px;" alt="Ilion">
+                                </figure>
 
                                 <figure>
                                     <img src="assets/images/caderno_virtual.png" style="width: 160px;" alt="Caderno virtual">
