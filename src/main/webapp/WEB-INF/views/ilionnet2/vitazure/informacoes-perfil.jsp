@@ -182,8 +182,8 @@
                          					horaInicio='';
                          					horaFim='';
                          					enderecoSemanaHorario='';
-                         					atendimentoOnline='false';
-                         					atendimentoPresencial='false';
+                         					atendimentoOnline= false;
+                         					atendimentoPresencial= false;
                           					 "/>
                             <div class="match-toggle">
                                 <div class="toggle-header">
@@ -1012,7 +1012,7 @@
                             
                             <div class="match-toggle">
                                 <div class="toggle-header">
-                                    <strong>Assinatura de contrato</strong>
+                                    <strong>Assinatura do termo de adesão</strong>
                                 </div>
                                 <div class="toggle-body vitazure">
                                     <div class="row">
@@ -1022,7 +1022,7 @@
                                             </div>
                                         </div>
 										<div class="col-12" style="padding-left:40px;">
-			                                <p style=" margin-bottom: 3rem;">1.&nbsp;&nbsp;Não há cobrança de assinatura, apenas cobraremos uma taxa de manutenção da plataforma de 9,75% (nove, setenta e cinco por cento), sobre o valor da consulta. Dessa forma, se o valor de sua consulta for R$ 100,00 por exemplo, R$ 90,25 será o seu crédito e R$ 9,75 será a taxa da Vitazure. Lembrando que a partir de agora você poderá fazer a gestão da sua agenda de forma virtual, seus atendimentos com segurança e cuidaremos que todos seus atendimentos sejam pagos e repassados a você com tranquilidade.</p>
+			                                <p style=" margin-bottom: 3rem;">1.&nbsp;&nbsp;Não há cobrança de assinatura, apenas cobraremos uma taxa de manutenção da plataforma de 10% (dez por cento), sobre o valor da consulta. Dessa forma, se o valor de sua consulta for R$ 100,00 por exemplo, R$ 90,00 será o seu crédito e R$ 10,00 será a taxa da Vitazure. Lembrando que a partir de agora você poderá fazer a gestão da sua agenda de forma virtual, seus atendimentos com segurança e cuidaremos que todos seus atendimentos sejam pagos e repassados a você com tranquilidade.</p>
 										</div>
 										<div class="col-12" style="padding-left:40px;">
 			                                <p style=" margin-bottom: 3rem;">2.&nbsp;&nbsp;Você pode dedicar seu tempo aos seus atendimentos pois a gestão financeira será mensal e cada valor da consulta, subtraído da taxa de manutenção, será acrescido ao seu saldo, e assim que liquidado, transferido à cada 30 dias, para sua conta corrente cadastrada na plataforma.</p>

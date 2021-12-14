@@ -130,16 +130,16 @@ public class ProfissionalNegocio {
 	
 	public List<Profissional> consultarProfissionaisAtivos(Pessoa pessoaSessao) {
 		
-		DetachedCriteria subquery = DetachedCriteria.forClass(Profissional.class);
-		subquery.add( Restrictions.eq("avisoFerias", Boolean.TRUE)).add(Restrictions.ge("dataInicioAvisoFerias", Uteis.formatarDataHora(new Date(), "dd/MM/YYYY"))).add(Restrictions.le("dataFimAvisoFerias", Uteis.formatarDataHora(new Date(), "dd/MM/YYYY")));
-		subquery.setProjection(Projections.property("id"));
-		List list =  hibernateUtil.list(subquery);
+//		DetachedCriteria subquery = DetachedCriteria.forClass(Profissional.class);
+//		subquery.add( Restrictions.eq("avisoFerias", Boolean.TRUE)).add(Restrictions.ge("dataInicioAvisoFerias", Uteis.formatarDataHora(new Date(), "dd/MM/YYYY"))).add(Restrictions.le("dataFimAvisoFerias", Uteis.formatarDataHora(new Date(), "dd/MM/YYYY")));
+//		subquery.setProjection(Projections.property("id"));
+//		List list =  hibernateUtil.list(subquery);
 		DetachedCriteria dc = DetachedCriteria.forClass(Profissional.class);
 		dc.add(Restrictions.eq("situacaoAprovacaoProfissional", SituacaoAprovacaoProfissionalEnum.AUTORIZADO));
 		dc.add(Restrictions.eq("dadosCompleto", Boolean.TRUE));
-        if (!list.isEmpty()) {
-        	dc.add(Restrictions.not(Restrictions.in("id", list)));
-		}
+//        if (!list.isEmpty()) {
+//        	dc.add(Restrictions.not(Restrictions.in("id", list)));
+//		}
         if (pessoaSessao != null && pessoaSessao.getPessoaImportada()) {
           List<Usuario> listUsuarioEmpresa = usuarioNegocio.consultarPorEmpresa(pessoaSessao.getEmpresaImportacao());
           String convenioConsulta = listUsuarioEmpresa.get(0).getConvenio().equals("45") ? "convenio40" : listUsuarioEmpresa.get(0).getConvenio().equals("56") ? "convenio50" :  listUsuarioEmpresa.get(0).getConvenio().equals("67") ? "convenio60" : "ativo";
@@ -264,10 +264,10 @@ public class ProfissionalNegocio {
 		DetachedCriteria dc = DetachedCriteria.forClass(Profissional.class);
 		dc.add(Restrictions.eq("situacaoAprovacaoProfissional", SituacaoAprovacaoProfissionalEnum.AUTORIZADO));
 		dc.add(Restrictions.eq("dadosCompleto", Boolean.TRUE));
-		DetachedCriteria subquery = DetachedCriteria.forClass(Profissional.class);
-		subquery.add( Restrictions.eq("avisoFerias", Boolean.TRUE)).add(Restrictions.ge("dataInicioAvisoFerias", Uteis.formatarDataHora(new Date(), "dd/MM/YYY"))).add(Restrictions.le("dataFimAvisoFerias", Uteis.formatarDataHora(new Date(), "dd/MM/YYY")));
-		subquery.setProjection(Projections.property("id"));
-		List list =  hibernateUtil.list(subquery);
+//		DetachedCriteria subquery = DetachedCriteria.forClass(Profissional.class);
+//		subquery.add( Restrictions.eq("avisoFerias", Boolean.TRUE)).add(Restrictions.ge("dataInicioAvisoFerias", Uteis.formatarDataHora(new Date(), "dd/MM/YYY"))).add(Restrictions.le("dataFimAvisoFerias", Uteis.formatarDataHora(new Date(), "dd/MM/YYY")));
+//		subquery.setProjection(Projections.property("id"));
+//		List list =  hibernateUtil.list(subquery);
 		if(palavraChave != null && !palavraChave.equals("undefined")) {
 			dc.createAlias("pessoa", "pessoa");
 			dc.add(Restrictions.or(Restrictions.ilike("pessoa.nome", "%"+palavraChave+"%") , Restrictions.ilike("biografia", "%"+palavraChave+"%")));
@@ -299,9 +299,9 @@ public class ProfissionalNegocio {
 				dc.add(Restrictions.eq("id", 0L));
 			}
 		}
-        if (!list.isEmpty()) {
-        	dc.add(Restrictions.not(Restrictions.in("id", list)));
-		}
+//        if (!list.isEmpty()) {
+//        	dc.add(Restrictions.not(Restrictions.in("id", list)));
+//		}
         if (pessoaSessao != null && pessoaSessao.getPessoaImportada()) {
             List<Usuario> listUsuarioEmpresa = usuarioNegocio.consultarPorEmpresa(pessoaSessao.getEmpresaImportacao());
             String convenioConsulta = listUsuarioEmpresa.get(0).getConvenio().equals("45") ? "convenio40" : listUsuarioEmpresa.get(0).getConvenio().equals("56") ? "convenio50" :  listUsuarioEmpresa.get(0).getConvenio().equals("67") ? "convenio60" : "ativo";

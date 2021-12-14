@@ -75,11 +75,11 @@
                                         </td>
                                         <td style="text-align: center;">
                                           <c:if test="${agenda.status == 'PENDENTE'}">
-	                                           <button  class="btn btn-success" ng-click="definirAgendamento('${agenda.id}' , 'CONFIRMADO')">Confirmar</button>
+	                                           <button style="font-size: 11px;" class="btn btn-success" ng-click="definirAgendamento('${agenda.id}' , 'CONFIRMADO')">Confirmar</button>
 	                                      </c:if>
 	                                      <c:if test="${agenda.status == 'PENDENTE' || agenda.status == 'CONFIRMADO' || agenda.status == 'NAO_COMPARECEU'}">
-	                                           <button  class="btn btn-danger" ng-click="definirAgendamento('${agenda.id}' , 'AGUARDANDO_REMARCACAO')">Remarcar</button>
-	                                           <a href="<ilion:url/>vitazure/reagendamentoProfissional/${agenda.id}"  class="btn btn-warning">Reagendar</a>
+	                                           <button style="font-size: 11px;"  class="btn btn-danger" ng-click="definirAgendamento('${agenda.id}' , 'AGUARDANDO_REMARCACAO')">Remarcar</button>
+	                                           <a style="font-size: 11px;" href="<ilion:url/>vitazure/reagendamentoProfissional/${agenda.id}"  class="btn btn-warning">Reagendar</a>
 	                                      </c:if>     
 <%--                                            <c:if test="${agenda.online && agenda.status == 'CONFIRMADO'}"> --%>
 <%-- 	                                           <a href="${agenda.hostUrlAtendimentoOnline}" target="_blank"> --%>

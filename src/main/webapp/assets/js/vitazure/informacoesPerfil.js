@@ -174,6 +174,8 @@ function perfilProfissional(menu,$scope, $http, $window) {
 $http.post("/vitazure/perfilProfissional", $scope.ProfissionalVH)
         .then(function (response) {
             alert_success(response.data.message, () => {
+	         document.getElementById("valorconsultaOnline").value = valorconsultaOnline;
+             document.getElementById("valorConsultaPresencial").value = valorConsultaPresencial;
 			});
         }).catch(function (response) {
         alert_error(response.data.message);
@@ -502,8 +504,8 @@ function AdicionarTabelaHorarioAtendimento(item, indice){
 			"<td align='center'>"+item.diaSemana+"</td>"+
 			"<td align='center'>"+(item.horaInicio)+"</td>"+
 			"<td align='center'>"+(item.horaFim)+"</td>"+
-			"<td align='center'>"+(item.atendimentoOnline ? 'sim' : 'Não')+"</td>"+
-			"<td align='center'>"+(item.atendimentoPresencial  ? 'sim' : 'Não')+"</td>"+
+			"<td align='center'>"+(item.atendimentoOnline || item.atendimentoOnline == 'true' ? 'sim' : 'Não')+"</td>"+
+			"<td align='center'>"+(item.atendimentoPresencial || item.atendimentoPresencial == 'true'  ? 'sim' : 'Não')+"</td>"+
 			"<td align='center'>"+(typeof item.enderecoAtendimento ===  "undefined" || typeof item.enderecoAtendimento.id ===  "undefined" || item.enderecoAtendimento.id ===  "undefined" ? '-' : item.enderecoAtendimento.logradouro)+"</td>"+
 			"<td align='center'><a  id='btn-excluir' onclick='ExcluirHorarioAtendimento("+indice+")' style='color: red;'><i class='fas fa-trash'></i></a></td>"+
 			"</tr>");

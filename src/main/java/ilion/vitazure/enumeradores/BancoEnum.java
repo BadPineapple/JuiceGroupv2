@@ -11,6 +11,7 @@ public enum BancoEnum {
 	 	NUBANK("NUBANK","NuBank", "260"),
 	 	BRADESCO("BRADESCO","Bradesco", "237"),
 	 	SANTANDER("SANTANDER","Santander", "033"),
+	 	PAN("PAN","Banco Pan", "623"),
 	 	INTER("INTER","Banco Inter", "077");	
 
 	

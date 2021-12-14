@@ -38,18 +38,12 @@
 											<div class="tempo-consulta">
 												<p>${profissional.duracaoAtendimento.nomeApresentar}</p>
 											</div>
-<!--                                         <div class="compartilhar-perfil"> -->
-<!--                                             <a href="#" class="line"> -->
-<!--                                                 <img src="../../assets/images/compartilhar.png" alt=""> -->
-<!--                                                 Compartilhar Perfil -->
-<!--                                             </a> -->
-<!--                                         </div> -->
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-4 col-xl-5">
                                     <div class="psicologo-name">
                                         <h3>${profissional.pessoa.nome}</h3>
-                                        <p>${profissional.tipoProfissional == 'PSICOLOGO' ? profissional.conselhoProfissional.CRP : profissional.conselhoProfissional.CRM}-${profissional.cadastroEpsi}</p>
+                                        <p>${profissional.tipoProfissional == 'PSICOLOGO' ? profissional.conselhoProfissional.CRP : profissional.conselhoProfissional.CRM}</p>
 										<p>e-Psi: ${profissional.cadastroEpsi}</p>
 										<p>${cidadeProfissional}</p>
                                     </div>

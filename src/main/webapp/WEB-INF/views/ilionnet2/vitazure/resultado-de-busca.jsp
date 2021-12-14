@@ -97,7 +97,7 @@
 									<div class="col-12 col-md-4 col-xl-4">
 										<div class="psicologo-name">
 											<h3>${profissional.pessoa.nome}</h3>
-											<p>${profissional.tipoProfissional == 'PSICOLOGO' ? profissional.conselhoProfissional.CRP : profissional.conselhoProfissional.CRM}-${profissional.cadastroEpsi}</p>
+											<p>${profissional.tipoProfissional == 'PSICOLOGO' ? profissional.conselhoProfissional.CRP : profissional.conselhoProfissional.CRM}</p>
 											<p>e-Psi: ${profissional.cadastroEpsi}</p>
 											<p>${profissional.pessoa.cidade}</p>
 										</div>
