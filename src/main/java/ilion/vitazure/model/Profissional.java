@@ -161,6 +161,12 @@ public class Profissional implements Serializable{
 	  private String ipAceiteContrato;
 	  
 	  private String ipExternoAceiteContrato;
+	  
+	  @Transient
+	  private Boolean atendimentoOnline;
+	  
+	  @Transient
+	  private Boolean atendimentoPresencial;
 
 	public Long getId() {
 		if (id == null) {
@@ -801,6 +807,29 @@ public class Profissional implements Serializable{
 		BigDecimal valorPacote4 = Uteis.calcularValorComDesconto(getValorConsultaPresencial() , 15).multiply(new BigDecimal(4));		
 		return valorPacote4;
 	}
+
+	public Boolean getAtendimentoOnline() {
+		if(atendimentoOnline == null) {
+			atendimentoOnline = Boolean.FALSE;
+		}
+		return atendimentoOnline;
+	}
+
+	public void setAtendimentoOnline(Boolean atendimentoOnline) {
+		this.atendimentoOnline = atendimentoOnline;
+	}
+
+	public Boolean getAtendimentoPresencial() {
+		if(atendimentoPresencial == null) {
+			atendimentoPresencial = Boolean.FALSE;
+		}
+		return atendimentoPresencial;
+	}
+
+	public void setAtendimentoPresencial(Boolean atendimentoPresencial) {
+		this.atendimentoPresencial = atendimentoPresencial;
+	}
+	
 	
 	
 }

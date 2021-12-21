@@ -78,14 +78,14 @@ function consultarDatasProfissional($scope, $http, $window , id , profissional) 
 	} 
 	 idTemp = profissional+'.'+id;
      dataSelecionada = id;
-	 definirTipo(profissional);
+	 var tipoAtendimento = definirTipo(profissional);
 	 if(idRemoveHist != '' && idRemoveHist != profissional){
 		removerHorariosHist(profissional);
 	 }else{
 		idRemoveHist = profissional;
 	}
 	
-	$http.get("/vitazure/consultarDatasProfissional/"+id+"/"+profissional)
+	$http.get("/vitazure/consultarDatasProfissional/"+id+"/"+profissional+"/"+definirTipo(profissional))
         .then(function (response) {
 	           var idExcluir = "#panelFiltrosSelecionados"+profissional+" a";
            		$(idExcluir).remove();
@@ -153,23 +153,23 @@ function marcardesmarcar(idProfissional,id) {
          document.getElementById(idProfissional+'.presencial').className = ""
          document.getElementById(idProfissional+'.valorOnline').style.display = "inline-block";
 		document.getElementById(idProfissional+'.valorPresencial').style.display = "none";
-		document.getElementById(idProfissional+'.valorOnlinePacote2Formatado').style.display = "none";
+	/*	document.getElementById(idProfissional+'.valorOnlinePacote2Formatado').style.display = "none";
 		 document.getElementById(idProfissional+'.valorOnlinePacote3Formatado').style.display = "none";
 		 document.getElementById(idProfissional+'.valorOnlinePacote4Formatado').style.display = "none";
 	    document.getElementById(idProfissional+'.valorPresencialPacote2Formatado').style.display = "none";
 		 document.getElementById(idProfissional+'.valorPresencialPacote3Formatado').style.display = "none";
-		 document.getElementById(idProfissional+'.valorPresencialPacote4Formatado').style.display = "none";
+		 document.getElementById(idProfissional+'.valorPresencialPacote4Formatado').style.display = "none"; */
 	}else{
 		 document.getElementById(idProfissional+'.online').className = ""
          document.getElementById(idProfissional+'.presencial').className = "active marcar"
 		 document.getElementById(idProfissional+'.valorOnline').style.display = "none";
 		 document.getElementById(idProfissional+'.valorPresencial').style.display = "inline-block";
-	     document.getElementById(idProfissional+'.valorOnlinePacote2Formatado').style.display = "none";
+	 /*    document.getElementById(idProfissional+'.valorOnlinePacote2Formatado').style.display = "none";
 		 document.getElementById(idProfissional+'.valorOnlinePacote3Formatado').style.display = "none";
 		 document.getElementById(idProfissional+'.valorOnlinePacote4Formatado').style.display = "none";
 	     document.getElementById(idProfissional+'.valorPresencialPacote2Formatado').style.display = "none";
 		 document.getElementById(idProfissional+'.valorPresencialPacote3Formatado').style.display = "none";
-		 document.getElementById(idProfissional+'.valorPresencialPacote4Formatado').style.display = "none";
+		 document.getElementById(idProfissional+'.valorPresencialPacote4Formatado').style.display = "none"; */
 	}
 	
 	     document.getElementById(idProfissional+'.pacote2') == null ? '' : document.getElementById(idProfissional+'.pacote2').className = ""
@@ -177,6 +177,7 @@ function marcardesmarcar(idProfissional,id) {
          document.getElementById(idProfissional+'.pacote4') == null ? '' : document.getElementById(idProfissional+'.pacote4').className = "";
 		 pacote = '';
 	tipoAgendamento = id;
+	removerHorariosHist(idProfissional);
 }
 function opcaoReagendamento(idProfissional,id) {
 	if(id == 'online'){
@@ -310,8 +311,8 @@ $http.post("/vitazure/alterarSituacaoAgenda" , jsonAlterar)
 }
 
 function consultarAgenda($scope, $http, $window) {
-	
-	$http.get("/vitazure/consultarDatasProfissional/"+id+"/"+profissional)
+	var tipoAtendimento = 'ambos';
+	$http.get("/vitazure/consultarDatasProfissional/"+id+"/"+profissional+"/"+tipoAtendimento)
         .then(function (response) {
         }).catch(function (response) {
           alert(response);

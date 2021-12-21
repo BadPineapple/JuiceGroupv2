@@ -400,7 +400,8 @@ public class SiteController extends CustomErrorController {
   		  profissional.getDatasPossivelAgendamento().addAll(datasPossivelAgendamento);
   		if(profissional.getAvisoFerias()) {
 			  horarioNegocio.validarDiasFerias(profissional);
-			}
+		}
+  		horarioNegocio.validarTipoAtendimento(profissional, listaHorarioatendimento);
   	  });
   	  return lisProfissional;
   	  
@@ -488,13 +489,13 @@ public class SiteController extends CustomErrorController {
 		}
 	 
 	 
-		@RequestMapping("/vitazure/consultarDatasProfissional/{data}/{profissional}")
-		public ResponseEntity<String> consultaHorarioAtendimento(@PathVariable String data,@PathVariable Long profissional) {
+		@RequestMapping("/vitazure/consultarDatasProfissional/{data}/{profissional}/{tipoAtendimento}")
+		public ResponseEntity<String> consultaHorarioAtendimento(@PathVariable String data,@PathVariable Long profissional , @PathVariable String tipoAtendimento) {
 			try {
 				SimpleDateFormat sdf = new SimpleDateFormat("EE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
 				Date date = sdf.parse(data);
 				Profissional prof = profissionalNegocio.consultarPorId(profissional);
-				List<HorarioPossivelAtendimento> listHorarioPossivelAtendimento = profissionalNegocio.consultaHorarioPossivelAtendimento(prof, false, false, date);
+				List<HorarioPossivelAtendimento> listHorarioPossivelAtendimento = profissionalNegocio.consultaHorarioPossivelAtendimento(prof, tipoAtendimento.equals("online") ? true : false, tipoAtendimento.equals("presencial") ? true : false, date);
 				return new ResponseEntity<>(gson.toJson(listHorarioPossivelAtendimento), HttpStatus.OK);
 			} catch (Exception e) {
 				return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);

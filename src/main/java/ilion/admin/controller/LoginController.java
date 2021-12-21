@@ -182,6 +182,7 @@ public class LoginController extends CustomErrorController {
 	    	Pessoa pessoa = (Pessoa) pessoaNegocio.consultarPorEmail(StringUtil.decodePassword(token));
 	    	request.getSession().setAttribute(PessoaNegocio.ATRIBUTO_SESSAO, pessoa);
 	    	pessoa.setConfirmado(Boolean.TRUE);
+	    	pessoa.setClienteAtivo(Boolean.TRUE);
 			pessoa = pessoaNegocio.incluirAtualizar(pessoa);
 		} catch (Exception e) {
 			e.printStackTrace();

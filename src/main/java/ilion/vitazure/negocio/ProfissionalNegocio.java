@@ -335,6 +335,7 @@ private void validarHorarioDisponivelProfissional(List<HorarioPossivelAtendiment
 	
 	public List<HorarioPossivelAtendimento> consultaHorarioPossivelAtendimento(Profissional profissional, Boolean atendimentoOnline,	Boolean atendimentoPresencial, Date dataConsulta){
 		List<HorarioAtendimento> listaHorarioatendimento = new ArrayList<HorarioAtendimento>();
+		horarioNegocio.consultarHorariosAtendimentoPorProfissional(profissional.getId(),	atendimentoOnline, atendimentoPresencial);
 		listaHorarioatendimento.addAll(horarioNegocio.consultarHorariosAtendimentoPorProfissional(profissional.getId(),	atendimentoOnline, atendimentoPresencial));
 		List<HorarioPossivelAtendimento> listHorarioPossivelAtendimento = new ArrayList<HorarioPossivelAtendimento>();
 		Date horaMaximaAgendamento = Uteis.acrescentar(new Date(), Calendar.MINUTE, (Integer.parseInt(profissional.getTempoAntecendencia().getNome())* 60));

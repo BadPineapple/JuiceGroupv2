@@ -54,7 +54,7 @@
                                 <div class="col-12 col-md-4 col-xl-5">
                                     <div class="psicologo-name">
                                         <h3>${profissional.pessoa.nome}</h3>
-                                        <p>${profissional.tipoProfissional == 'PSICOLOGO' ? profissional.conselhoProfissional.CRP : profissional.conselhoProfissional.CRM}</p>
+                                        <p>${profissional.tipoProfissional == 'PSICOLOGO' ? profissional.conselhoProfissional.CRP : profissional.conselhoProfissional.CRM} - ${profissional.documentoCrpCrm}</p>
 										<p>e-Psi: ${profissional.cadastroEpsi}</p>
 										<p>${cidadeProfissional}</p>
                                     </div>

@@ -89,10 +89,10 @@ public class HorarioAtendimentoNegocio {
 		dc.createAlias("profissional", "p");
 		dc.add(Restrictions.eq("p.id", idProfissional));
 		if (atendimentoOnline) {
-			dc.add(Restrictions.eq("atendimentoonline", atendimentoOnline));
+			dc.add(Restrictions.eq("atendimentoOnline", atendimentoOnline));
 		}
 		if (atendimentoPresencial) {
-			dc.add(Restrictions.eq("atendimentopresencial", atendimentoPresencial));
+			dc.add(Restrictions.eq("atendimentoPresencial", atendimentoPresencial));
 		}
 		dc.addOrder(Order.asc("horaInicio"));	
 		return (List<HorarioAtendimento>) hibernateUtil.list(dc);
@@ -115,6 +115,12 @@ public class HorarioAtendimentoNegocio {
 			}
 		});
 		profissional.getDatasPossivelAgendamento().removeAll(listRemover);
+	}
+	
+	public void validarTipoAtendimento(Profissional profissional , List<HorarioAtendimento> listaHorarioatendimento) {
+		profissional.setAtendimentoOnline(listaHorarioatendimento.stream().anyMatch(horarioAtendimento -> horarioAtendimento.getAtendimentoOnline()));
+		profissional.setAtendimentoPresencial(listaHorarioatendimento.stream().anyMatch(horarioAtendimento -> horarioAtendimento.getAtendimentoPresencial()));
+		
 	}
 	
 }
