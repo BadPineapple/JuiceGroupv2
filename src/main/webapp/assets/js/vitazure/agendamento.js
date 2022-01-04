@@ -153,23 +153,23 @@ function marcardesmarcar(idProfissional,id) {
          document.getElementById(idProfissional+'.presencial').className = ""
          document.getElementById(idProfissional+'.valorOnline').style.display = "inline-block";
 		document.getElementById(idProfissional+'.valorPresencial').style.display = "none";
-	/*	document.getElementById(idProfissional+'.valorOnlinePacote2Formatado').style.display = "none";
+		document.getElementById(idProfissional+'.valorOnlinePacote2Formatado').style.display = "none";
 		 document.getElementById(idProfissional+'.valorOnlinePacote3Formatado').style.display = "none";
 		 document.getElementById(idProfissional+'.valorOnlinePacote4Formatado').style.display = "none";
 	    document.getElementById(idProfissional+'.valorPresencialPacote2Formatado').style.display = "none";
 		 document.getElementById(idProfissional+'.valorPresencialPacote3Formatado').style.display = "none";
-		 document.getElementById(idProfissional+'.valorPresencialPacote4Formatado').style.display = "none"; */
+		 document.getElementById(idProfissional+'.valorPresencialPacote4Formatado').style.display = "none"; 
 	}else{
 		 document.getElementById(idProfissional+'.online').className = ""
          document.getElementById(idProfissional+'.presencial').className = "active marcar"
 		 document.getElementById(idProfissional+'.valorOnline').style.display = "none";
 		 document.getElementById(idProfissional+'.valorPresencial').style.display = "inline-block";
-	 /*    document.getElementById(idProfissional+'.valorOnlinePacote2Formatado').style.display = "none";
+	     document.getElementById(idProfissional+'.valorOnlinePacote2Formatado').style.display = "none";
 		 document.getElementById(idProfissional+'.valorOnlinePacote3Formatado').style.display = "none";
 		 document.getElementById(idProfissional+'.valorOnlinePacote4Formatado').style.display = "none";
 	     document.getElementById(idProfissional+'.valorPresencialPacote2Formatado').style.display = "none";
 		 document.getElementById(idProfissional+'.valorPresencialPacote3Formatado').style.display = "none";
-		 document.getElementById(idProfissional+'.valorPresencialPacote4Formatado').style.display = "none"; */
+		 document.getElementById(idProfissional+'.valorPresencialPacote4Formatado').style.display = "none";
 	}
 	
 	     document.getElementById(idProfissional+'.pacote2') == null ? '' : document.getElementById(idProfissional+'.pacote2').className = ""
