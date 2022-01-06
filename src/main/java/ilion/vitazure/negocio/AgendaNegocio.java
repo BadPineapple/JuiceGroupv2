@@ -62,11 +62,24 @@ public class AgendaNegocio {
 	@Autowired
 	private AgendaNegocio agendaNegocio;
 	
+	private List<Agenda> listAgendasEnviarEmail;
 	
+	public List<Agenda> getListAgendasEnviarEmail() {
+		if(listAgendasEnviarEmail == null) {
+			listAgendasEnviarEmail = new ArrayList<Agenda>();
+		}
+		return listAgendasEnviarEmail;
+	}
+
+	public void setListAgendasEnviarEmail(List<Agenda> listAgendasEnviarEmail) {
+		this.listAgendasEnviarEmail = listAgendasEnviarEmail;
+	}
+
 	@Transactional
 	public Agenda incluirAgendaPaciente(JSONObject jsonRetornoToken , Pessoa paciente) throws Exception {
 		
 		try {
+			getListAgendasEnviarEmail().clear();
 			PagarMe.init(propNegocio.findValueById(PropEnum.PAGAR_ME_API_KEY));
 			String situacaoPagarme = propNegocio.findValueById(PropEnum.SITUACAO_PAGARME);
 			Transaction tx = new Transaction().find(jsonRetornoToken.get("token").toString());
@@ -79,7 +92,7 @@ public class AgendaNegocio {
 				wherebyApi.gerarLinkAtendimentoOnline(profissional, agenda);
 			}
 			agenda = (Agenda) hibernateUtil.save(agenda);
-			
+			getListAgendasEnviarEmail().add(agenda);
 			if(!jsonRetornoToken.get("pacote").toString().equals("")) {
 				gerarAgendaPacote(dataAgenda , jsonRetornoToken , paciente, profissional , tx);
 			}
@@ -104,9 +117,11 @@ public class AgendaNegocio {
 			PagamentoPagarMe pagamentoPagarMe = new PagamentoPagarMe();
 			pagamentoPagarMe = pagamentoPagarMe.pagamento(capturarTransacao, agenda, null);
 			pagarMeNegocio.salvarPagamentoPagarMe(pagamentoPagarMe);
-			
-			envioEmailConsulta.enviar(agenda);
-			
+			getListAgendasEnviarEmail().stream().forEach(agendaEnviar -> {try {
+				envioEmailConsulta.enviar(agendaEnviar);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}});
 			return agenda;
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -150,6 +165,7 @@ public class AgendaNegocio {
 				wherebyApi.gerarLinkAtendimentoOnline(profissional, agenda);
 			}
 			agenda = (Agenda) hibernateUtil.save(agenda);
+			getListAgendasEnviarEmail().add(agenda);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -338,5 +354,8 @@ public class AgendaNegocio {
 		listAgendas = (List<Agenda>) hibernateUtil.list(dc);
 		return listAgendas;
 	}
+	
+	
+	
 	
 }

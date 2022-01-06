@@ -45,40 +45,10 @@
 													R$<span>${profissional.valorOnlineFormatado}</span>
 												</p>
 											</div>
-											<div class="valor-consulta" id="${profissional.id}.valorOnlinePacote2Formatado" style="display:none;">
-												<p>Valor sessão:<br/></p>
-												<p>
-													R$<span>${profissional.valorOnlinePacote2Formatado}</span>
-												</p>
-											</div>
-											<div class="valor-consulta" id="${profissional.id}.valorOnlinePacote3Formatado" style="display:none;">
-												<p>Valor sessão:<br/></p>
-												<p>
-													R$<span>${profissional.valorOnlinePacote3Formatado}</span>
-												</p>
-											</div>
-											<div class="valor-consulta" id="${profissional.id}.valorOnlinePacote4Formatado" style="display:none;">
-												<p>Valor sessão:<br/></p>
-												<p>
-													R$<span>${profissional.valorOnlinePacote4Formatado}</span>
-												</p>
-											</div>
 											<div class="valor-consulta" id="${profissional.id}.valorPresencial" style="display:none;">
 												<p>Valor sessão:<br/></p>
 												<p>
 													R$<span>${profissional.valorPresencialFormatado}</span>
-												</p>
-											</div>
-											<div class="valor-consulta" id="${profissional.id}.valorPresencialPacote2Formatado" style="display:none;">
-												<p>Valor sessão:<br/></p>
-												<p>
-													R$<span>${profissional.valorPresencialPacote2Formatado}</span>
-												</p>
-											</div>
-											<div class="valor-consulta" id="${profissional.id}.valorPresencialPacote3Formatado" style="display:none;">
-												<p>Valor sessão:<br/></p>
-												<p>
-													R$<span>${profissional.valorPresencialPacote3Formatado}</span>
 												</p>
 											</div>
 											<div class="valor-consulta" id="${profissional.id}.valorPresencialPacote4Formatado" style="display:none;">

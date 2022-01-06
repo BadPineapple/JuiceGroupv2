@@ -116,6 +116,7 @@
 										    ProfissionalVH.profissional.convenio40='${profissional.convenio40}';
 										    ProfissionalVH.profissional.convenio50='${profissional.convenio50}';
 										    ProfissionalVH.profissional.convenio60='${profissional.convenio60}';
+										    ProfissionalVH.profissional.convenio56='${profissional.convenio56}';
 										    ProfissionalVH.profissional.pacote2com5Desconto='${profissional.pacote2com5Desconto}';
 										    ProfissionalVH.profissional.pacote3com10Desconto='${profissional.pacote3com10Desconto}';
 										    ProfissionalVH.profissional.pacote4com15Desconto='${profissional.pacote4com15Desconto}';
@@ -812,26 +813,26 @@
                                             </div>
                                         </div>
     
-                                        <div class="col-12">
-                                            <div class="checkbox">
-                                                <input type="checkbox" ng-model="ProfissionalVH.profissional.convenio40" id="convenio40" ng-checked="${profissional.convenio40}"/>
-                                                <label>Habilitar opção para realizar atendimento para os convênios no valor de R$45,00</label>
-                                            </div>
-                                        </div>
+<!--                                         <div class="col-12"> -->
+<!--                                             <div class="checkbox"> -->
+<%--                                                 <input type="checkbox" ng-model="ProfissionalVH.profissional.convenio40" id="convenio40" ng-checked="${profissional.convenio40}"/> --%>
+<!--                                                 <label>Habilitar opção para realizar atendimento para os convênios no valor de R$45,00</label> -->
+<!--                                             </div> -->
+<!--                                         </div> -->
     
                                         <div class="col-12">
                                             <div class="checkbox">
-                                                <input type="checkbox" ng-model="ProfissionalVH.profissional.convenio50" id="convenio50" ng-checked="${profissional.convenio50}"/>
+                                                <input type="checkbox" ng-model="ProfissionalVH.profissional.convenio56" id="convenio56" ng-checked="${profissional.convenio56}"/>
                                                 <label>Habilitar opção para realizar atendimento para os convênios no valor de R$56,00</label>
                                             </div>
                                         </div>
     
-                                        <div class="col-12">
-                                            <div class="checkbox">
-                                                <input type="checkbox" ng-model="ProfissionalVH.profissional.convenio60" id="convenio60" ng-checked="${profissional.convenio60}"/>
-                                                <label>Habilitar opção para realizar atendimento para os convênios no valor de R$67,00</label>
-                                            </div>
-                                        </div>
+<!--                                         <div class="col-12"> -->
+<!--                                             <div class="checkbox"> -->
+<%--                                                 <input type="checkbox" ng-model="ProfissionalVH.profissional.convenio60" id="convenio60" ng-checked="${profissional.convenio60}"/> --%>
+<!--                                                 <label>Habilitar opção para realizar atendimento para os convênios no valor de R$67,00</label> -->
+<!--                                             </div> -->
+<!--                                         </div> -->
 
                                         <div class="col-12">
                                             <button class="button-secundary checkbox-button" ng-click="perfilProfissional('')" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Salvar</button>

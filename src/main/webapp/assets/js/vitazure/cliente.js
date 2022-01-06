@@ -33,9 +33,7 @@ function postProfissional($scope, $http, $window) {
 	$scope.profissional.pacote2com5Desconto = document.getElementById("pacote2com5Desconto").checked;
 	$scope.profissional.pacote3com10Desconto = document.getElementById("pacote3com10Desconto").checked;
 	$scope.profissional.pacote4com15Desconto = document.getElementById("pacote4com15Desconto").checked;
-	$scope.profissional.convenio40 = document.getElementById("convenio40").checked;
-	$scope.profissional.convenio50 = document.getElementById("convenio50").checked;
-	$scope.profissional.convenio60 = document.getElementById("convenio60").checked;
+	$scope.profissional.convenio56 = document.getElementById("convenio56").checked;
 	var valorconsultaOnline = document.getElementById("valorconsultaOnline").value;
 	$scope.profissional.valorConsultaOnline = valorconsultaOnline.replace('.','').replace('.','').replace(',','.')
 	var valorConsultaPresencial = document.getElementById("valorConsultaPresencial").value;

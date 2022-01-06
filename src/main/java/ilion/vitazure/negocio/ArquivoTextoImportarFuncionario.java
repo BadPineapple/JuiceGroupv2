@@ -52,6 +52,8 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
 	private List<Pessoa> listPessoaImportada;
 	private List<String> listPessoaErro;
 	private List<Pessoa> erroPessoasDuplicadas;
+	private List<Pessoa> pessoasjaCadastradaBanco;
+	private List<Pessoa> pessoasjaCadastradaProfissionalBanco;
 	private static final String SLASH_WINDOWS = "\\";
 	private static final String SLASH_LINUX = "/";
 	
@@ -76,6 +78,8 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
 		this.listPessoaImportada = new ArrayList<Pessoa>();
 		this.listPessoaErro = new ArrayList<String>();
 		this.erroPessoasDuplicadas = new ArrayList<Pessoa>();
+		this.pessoasjaCadastradaBanco = new ArrayList<Pessoa>();
+		this.pessoasjaCadastradaProfissionalBanco = new ArrayList<Pessoa>();
 	}
 	
 	public void importar() throws Exception {
@@ -259,6 +263,14 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
 //			pessoa = pessoaNegocio.incluirAtualizar(pessoa);
 			this.listPessoaImportada.add(pessoa);
 			qtdSucesso++;
+		}else if(pessoa.getCliente()) {
+			pessoa.setEmpresaImportacao(usuario.getEmpresa());
+			pessoa.setConfirmado(Boolean.TRUE);
+			pessoa.setClienteAtivo(Boolean.TRUE);
+			this.pessoasjaCadastradaBanco.add(pessoa);
+			this.listPessoaImportada.add(pessoa);
+		}else {
+			this.pessoasjaCadastradaProfissionalBanco.add(pessoa);
 		}
 		
 	}
@@ -295,6 +307,32 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
 			retorno.append("<strong>Problemas ao importar arquivos, existe cpf duplicados:</strong><br/>");
 			retorno.append(" <div class=\"col-md-12 col-lg-12 col-sm-12\">");
 			this.erroPessoasDuplicadas.forEach(pessoa -> {
+				retorno.append(" <div class=\"col-md-6 col-lg-6 col-sm-12\">");
+				retorno.append("<strong>Nome: </strong>").append(pessoa.getNome());
+				retorno.append("</div>");
+				retorno.append(" <div class=\"col-md-6 col-lg-6 col-sm-12\">");
+				retorno.append("<strong>CPf: </strong>").append(pessoa.getCpf());
+				retorno.append("</div>");
+			});
+			retorno.append("</div>");
+		}
+		if(!pessoasjaCadastradaBanco.isEmpty()) {
+			retorno.append("<strong>CPF já existente na base de dados:</strong><br/>");
+			retorno.append(" <div class=\"col-md-12 col-lg-12 col-sm-12\">");
+			this.pessoasjaCadastradaBanco.forEach(pessoa -> {
+				retorno.append(" <div class=\"col-md-6 col-lg-6 col-sm-12\">");
+				retorno.append("<strong>Nome: </strong>").append(pessoa.getNome());
+				retorno.append("</div>");
+				retorno.append(" <div class=\"col-md-6 col-lg-6 col-sm-12\">");
+				retorno.append("<strong>CPf: </strong>").append(pessoa.getCpf());
+				retorno.append("</div>");
+			});
+			retorno.append("</div>");
+		}
+		if(!pessoasjaCadastradaProfissionalBanco.isEmpty()) {
+			retorno.append("<strong>CPF já existente na base de dados com o tipo Profissional:</strong><br/>");
+			retorno.append(" <div class=\"col-md-12 col-lg-12 col-sm-12\">");
+			this.pessoasjaCadastradaProfissionalBanco.forEach(pessoa -> {
 				retorno.append(" <div class=\"col-md-6 col-lg-6 col-sm-12\">");
 				retorno.append("<strong>Nome: </strong>").append(pessoa.getNome());
 				retorno.append("</div>");

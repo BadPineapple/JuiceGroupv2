@@ -146,9 +146,7 @@ function perfilProfissional(menu,$scope, $http, $window) {
 	$scope.ProfissionalVH.profissional.pacote2com5Desconto = document.getElementById("pacote2com5Desconto").checked;
 	$scope.ProfissionalVH.profissional.pacote3com10Desconto = document.getElementById("pacote3com10Desconto").checked;
 	$scope.ProfissionalVH.profissional.pacote4com15Desconto = document.getElementById("pacote4com15Desconto").checked;
-	$scope.ProfissionalVH.profissional.convenio40 = document.getElementById("convenio40").checked;
-	$scope.ProfissionalVH.profissional.convenio50 = document.getElementById("convenio50").checked;
-	$scope.ProfissionalVH.profissional.convenio60 = document.getElementById("convenio60").checked;
+	$scope.ProfissionalVH.profissional.convenio56 = document.getElementById("convenio56").checked;
 	if($scope.ProfissionalVH.profissional.avisoFerias){
 	 $scope.ProfissionalVH.profissional.dataInicioAvisoFerias = document.getElementById("dataInicioAvisoFerias").value;
 	 $scope.ProfissionalVH.profissional.dataFimAvisoFerias = document.getElementById("dataFimAvisoFerias").value;		

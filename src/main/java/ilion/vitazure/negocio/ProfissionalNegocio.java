@@ -142,7 +142,7 @@ public class ProfissionalNegocio {
 //		}
         if (pessoaSessao != null && pessoaSessao.getPessoaImportada()) {
           List<Usuario> listUsuarioEmpresa = usuarioNegocio.consultarPorEmpresa(pessoaSessao.getEmpresaImportacao());
-          String convenioConsulta = listUsuarioEmpresa.get(0).getConvenio().equals("45") ? "convenio40" : listUsuarioEmpresa.get(0).getConvenio().equals("56") ? "convenio50" :  listUsuarioEmpresa.get(0).getConvenio().equals("67") ? "convenio60" : "ativo";
+          String convenioConsulta = listUsuarioEmpresa.get(0).getConvenio().equals("45") ? "convenio40" : listUsuarioEmpresa.get(0).getConvenio().equals("56") ? "convenio56" :  listUsuarioEmpresa.get(0).getConvenio().equals("67") ? "convenio60" : "ativo";
           dc.add(Restrictions.eq(convenioConsulta, Boolean.TRUE));
           List<Profissional> listProfissionais = (List<Profissional>) hibernateUtil.list(dc);
           listProfissionais.stream().forEach(profissional -> {
@@ -304,7 +304,7 @@ public class ProfissionalNegocio {
 //		}
         if (pessoaSessao != null && pessoaSessao.getPessoaImportada()) {
             List<Usuario> listUsuarioEmpresa = usuarioNegocio.consultarPorEmpresa(pessoaSessao.getEmpresaImportacao());
-            String convenioConsulta = listUsuarioEmpresa.get(0).getConvenio().equals("45") ? "convenio40" : listUsuarioEmpresa.get(0).getConvenio().equals("56") ? "convenio50" :  listUsuarioEmpresa.get(0).getConvenio().equals("67") ? "convenio60" : "ativo";
+            String convenioConsulta = listUsuarioEmpresa.get(0).getConvenio().equals("45") ? "convenio40" : listUsuarioEmpresa.get(0).getConvenio().equals("56") ? "convenio56" :  listUsuarioEmpresa.get(0).getConvenio().equals("67") ? "convenio60" : "ativo";
             dc.add(Restrictions.eq(convenioConsulta, Boolean.TRUE));
             List<Profissional> listProfissionais = (List<Profissional>) hibernateUtil.list(dc);
             listProfissionais.stream().forEach(profissional -> {

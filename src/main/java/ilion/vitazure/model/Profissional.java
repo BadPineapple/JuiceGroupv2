@@ -104,6 +104,8 @@ public class Profissional implements Serializable{
 	  private Boolean convenio50;
 	  
 	  private Boolean convenio60;
+
+	  private Boolean convenio56;
 	  
 	  private Boolean pacote2com5Desconto;
 	  
@@ -410,6 +412,14 @@ public class Profissional implements Serializable{
 
 	public void setConvenio60(Boolean convenio60) {
 		this.convenio60 = convenio60;
+	}
+	
+	public Boolean getConvenio56() {
+		return convenio56;
+	}
+
+	public void setConvenio56(Boolean convenio56) {
+		this.convenio56 = convenio56;
 	}
 
 	public Boolean getPacote2com5Desconto() {

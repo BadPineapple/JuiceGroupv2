@@ -78,6 +78,7 @@
 										    profissional.convenio40='${profissional.convenio40}';
 										    profissional.convenio50='${profissional.convenio50}';
 										    profissional.convenio60='${profissional.convenio60}';
+										    profissional.convenio56='${profissional.convenio56}';
 										    profissional.pacote2com5Desconto='${profissional.pacote2com5Desconto}';
 										    profissional.pacote3com10Desconto='${profissional.pacote3com10Desconto}';
 										    profissional.pacote4com15Desconto='${profissional.pacote4com15Desconto}';
@@ -447,24 +448,24 @@
 									  	</div> 
 									  </div>
                                  <div class="col-md-12 col-lg-12 col-sm-12" style="padding-left:30px;">       
-                                        <div class="col-md-4 col-lg-4 col-sm-12">
+<!--                                         <div class="col-md-4 col-lg-4 col-sm-12"> -->
+<!--                                             <div class="checkbox"> -->
+<%--                                                 <input type="checkbox" ng-model="profissional.convenio40" id="convenio40" ng-checked="${profissional.convenio40}"/> --%>
+<!--                                                 <label>atendimento para os convênios no valor de R$45,00</label> -->
+<!--                                             </div> -->
+<!--                                         </div> -->
+                                        <div class="col-md-12 col-lg-12 col-sm-12">
                                             <div class="checkbox">
-                                                <input type="checkbox" ng-model="profissional.convenio40" id="convenio40" ng-checked="${profissional.convenio40}"/>
-                                                <label>atendimento para os convênios no valor de R$45,00</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 col-lg-4 col-sm-12">
-                                            <div class="checkbox">
-                                                <input type="checkbox" ng-model="profissional.convenio50" id="convenio50" ng-checked="${profissional.convenio50}"/>
+                                                <input type="checkbox" ng-model="profissional.convenio56" id="convenio56" ng-checked="${profissional.convenio56}"/>
                                                 <label>atendimento para os convênios no valor de R$56,00</label>
                                             </div>
                                         </div>
-                                        <div class="col-md-4 col-lg-4 col-sm-12">
-                                            <div class="checkbox">
-                                                <input type="checkbox" ng-model="profissional.convenio60" id="convenio60" ng-checked="${profissional.convenio60}"/>
-                                                <label>atendimento para os convênios no valor de R$67,00</label>
-                                            </div>
-                                        </div>
+<!--                                         <div class="col-md-4 col-lg-4 col-sm-12"> -->
+<!--                                             <div class="checkbox"> -->
+<%--                                                 <input type="checkbox" ng-model="profissional.convenio60" id="convenio60" ng-checked="${profissional.convenio60}"/> --%>
+<!--                                                 <label>atendimento para os convênios no valor de R$67,00</label> -->
+<!--                                             </div> -->
+<!--                                         </div> -->
                                   </div>
                                   <div class="col-md-12 col-lg-12 col-sm-12">
 									    <div class="col-md-12 col-lg-12 col-sm-12 divTitulo">

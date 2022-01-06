@@ -85,7 +85,7 @@
   <tr> 
     <td align="right" valign="middle" class="linkCinzaEscuro">Convênio</td>
     <td class="linkCinza">
-      <form:radiobutton path="convenio" value="45"/> R$45,00 <form:radiobutton path="convenio" value="56"/> R$56,00 <form:radiobutton path="convenio" value="67"/> R$67,00
+      <form:radiobutton path="convenio" value="56"/> R$56,00
     </td>
   </tr>
 </table>
