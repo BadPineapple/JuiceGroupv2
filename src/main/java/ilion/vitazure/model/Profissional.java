@@ -163,6 +163,8 @@ public class Profissional implements Serializable{
 	  private String ipAceiteContrato;
 	  
 	  private String ipExternoAceiteContrato;
+
+	  private Boolean firstTime;
 	  
 	  @Transient
 	  private Boolean atendimentoOnline;
@@ -186,6 +188,17 @@ public class Profissional implements Serializable{
 			pessoa = new Pessoa();
 		}
 		return pessoa;
+	}
+
+	public Boolean getFirstTime() {
+		if(firstTime == null) {
+			firstTime = Boolean.TRUE;
+		}
+		return firstTime;
+	}
+
+	public void setFirstTime(Boolean firstTime) {
+		this.firstTime = firstTime;
 	}
 
 	public void setPessoa(Pessoa pessoa) {

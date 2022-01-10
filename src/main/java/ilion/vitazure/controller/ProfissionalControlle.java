@@ -134,6 +134,12 @@ public class ProfissionalControlle {
 				profissionalVH.getItensIncompletos().stream().forEach(valor -> listItensAtualizar.append("<div class=\"col-12 col-md-12 col-xl-12\" style=\"line-height: 3.4rem;color: #dc3545;\"><i class=\"fas fa-check\" style=\"color: #dc3545;padding: 6px;\"></i>"
 								+ valor + "</div>"));
 			}
+
+			if(profissionalVH.getProfissional().getAceiteContrato() && profissionalVH.getProfissional().getFirstTime() && profissionalVH.getItensIncompletos().isEmpty()) {
+				profissionalVH.getProfissional().setFirstTime(Boolean.FALSE);
+				pessoaNegocio.CuncluidoPerfil(profissionalVH.getProfissional().getPessoa());
+			}
+
 			return new ResponseEntity<>(new JsonString("Perfil Profissional Atualizado!" + listItensAtualizar),
 					HttpStatus.OK);
 		} catch (Exception e) {

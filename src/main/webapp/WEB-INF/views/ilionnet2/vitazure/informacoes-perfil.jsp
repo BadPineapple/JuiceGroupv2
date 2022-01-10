@@ -81,6 +81,7 @@
                     <div class="col-12 col-md-8 offset-md-2 col-xl-8 offset-xl-2">
                         <form class="form-default">
                           <angular-initializer ng-init="ProfissionalVH.profissional.id='${profissional.id}';
+                                            ProfissionalVH.profissional.firstTime='${profissional.firstTime}';
 						                    ProfissionalVH.profissional.documentoCrpCrm='${profissional.documentoCrpCrm}';
 						                    ProfissionalVH.profissional.conselhoProfissional='${profissional.conselhoProfissional}';
 						                    ProfissionalVH.profissional.cadastroEpsi='${profissional.cadastroEpsi}';
@@ -1041,7 +1042,7 @@
                                                                 <c:set var="arqTermos" value="${arq.url}"/>
                                                             </c:if>
                                                         </c:forEach>
-                                            <p><input type="checkbox" ng-model="ProfissionalVH.profissional.aceiteContrato" id="aceiteContrato" ng-checked="${profissional.aceiteContrato}"/>
+                                            <p><input type="checkbox" ng-model="ProfissionalVH.profissional.aceiteContrato" id="aceiteContrato" ng-checked="${profissional.aceiteContrato} " onclick="aceiteContrato(this.checked)"/>
                                             &nbsp;&nbsp;Declaro que li e concordo com o <a href="${arqTermos}" target="_blank" >&nbsp;Termo de Adesão de prestação de serviços</a>&nbsp;&nbsp;da Vitazure.</p>
                                     </div>
 										<div class="col-12" style="padding-left:40px;">

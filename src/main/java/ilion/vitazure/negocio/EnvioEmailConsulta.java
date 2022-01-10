@@ -79,6 +79,71 @@ public class EnvioEmailConsulta {
 			emailNegocio.adicionarEmail(e);
 		
 	}
+
+	private void enviarEmailPerfilProfissionalCompleto(Pessoa PessoaSessao , String htmlEmail , String assuntoEmail) {
+
+		String nomeEmpresa = propNegocio.findValueById(PropEnum.NOME_EMPRESA);
+		Email e = new Email();
+		e.setToName(propNegocio.findValueById(PropEnum.NOME_EMPRESA));
+
+		e.setToEmail(PessoaSessao.getEmail());
+		e.setReplyToName(PessoaSessao.getNome());
+
+		e.setSubject(assuntoEmail);
+		e.setMessage(htmlEmail.toString());
+		emailNegocio.adicionarEmail(e);
+
+	}
+
+	public void enviarAlertaPerfilCompleto(Pessoa PessoaSessao){
+		StringBuffer htmlEmail = new StringBuffer();
+		htmlEmail.append(emailPadrao(corpoHtmlEmailConf()));
+		enviarEmailPerfilProfissionalCompleto(PessoaSessao, htmlEmail.toString().replaceAll("#mensagem#", "Olá #nome#,\n" +
+				"\n" + "<br>" +
+				"Você deu um importante passo para sua carreira, em breve terá disponível uma plataforma simples e segura para realizar seus atendimentos.\n" +
+				"\n" + "<br>" +
+				"A Vitazure estará junto com você nesta jornada\n" +
+				"\n" + "<br>" +
+				"A próxima etapa do processo será realizada por nós.\n" +
+				"\n" + "<br>" +
+				"Seu cadastro está em análise e logo lhe daremos um retorno.\n" +
+				"\n" + "<br>" +
+				"Você pode a qualquer momento nos chamar caso ainda tenha alguma dúvida ou mesmo esteja precisando de mais algum esclarecimento.\n" +
+				"\n" + "<br>" +
+				"Aguarde, não iremos nos demorar.\n" +
+				"\n" + "<br>" +
+				"Equipe Vitazure").replaceAll("#nome#", PessoaSessao.getNome()).replaceAll("#tipoMensagem#", "Agora é só aguardar"), "Você deu um importante passo para sua carreira");
+	}
+
+	private  String corpoHtmlEmailConf() {
+		StringBuffer corpoHtmlEmail = new StringBuffer();
+		corpoHtmlEmail.append("	<div class=\"col-12\" style=\"padding-top: 20px;\">");
+		corpoHtmlEmail.append(" <table width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\">");
+		corpoHtmlEmail.append("	<tr> ");
+		corpoHtmlEmail.append("	   <td align=\"center\" bgcolor=\"#D6E4E9\"><font size=\"2\" face=\"Arial, Helvetica, sans-serif\"><strong>#tipoMensagem#</strong></font></td>");
+		corpoHtmlEmail.append("	</tr>");
+		corpoHtmlEmail.append("			  <tr>");
+		corpoHtmlEmail.append("			    <td valign=\"top\" bgcolor=\"#F3F3F3\">");
+		corpoHtmlEmail.append("				  <table width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"3\" cellspacing=\"5\" bgcolor=\"#F3F3F3\">");
+		corpoHtmlEmail.append("				        <tr> ");
+		corpoHtmlEmail.append("				          <td><table width=\"100%\" border=\"0\" cellpadding=\"3\" cellspacing=\"0\" bgcolor=\"#FFFFFF\">");
+		corpoHtmlEmail.append("				              <tr> ");
+		corpoHtmlEmail.append("				                <td><font size=\"2\" face=\"Arial, Helvetica, sans-serif\">#mensagem#</font></td>");
+		corpoHtmlEmail.append("				              </tr>");
+		corpoHtmlEmail.append("				              <tr> ");
+		corpoHtmlEmail.append("				                <td colspan=\"2\" align=\"right\">&nbsp;</td>");
+		corpoHtmlEmail.append("				              </tr>");
+		corpoHtmlEmail.append("						</table>");
+		corpoHtmlEmail.append("						</td>");
+		corpoHtmlEmail.append("						</tr>");
+		corpoHtmlEmail.append("					</table>");
+		corpoHtmlEmail.append("			    </td>");
+		corpoHtmlEmail.append("		   </tr>");
+		corpoHtmlEmail.append("		</table>");
+		corpoHtmlEmail.append("</div>");
+		return corpoHtmlEmail.toString();
+	}
+
 	
 	private void enviarEmailAlteracaoSituacaoAgendaProfissional(Agenda agenda , String htmlEmail , String assuntoEmail) {
 		
