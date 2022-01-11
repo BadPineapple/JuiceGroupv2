@@ -56,7 +56,7 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
 	private List<Pessoa> pessoasjaCadastradaProfissionalBanco;
 	private static final String SLASH_WINDOWS = "\\";
 	private static final String SLASH_LINUX = "/";
-	
+	private Boolean erroOperacao;
 	
 	public ArquivoTextoImportarFuncionario() {
 		super();
@@ -80,6 +80,7 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
 		this.erroPessoasDuplicadas = new ArrayList<Pessoa>();
 		this.pessoasjaCadastradaBanco = new ArrayList<Pessoa>();
 		this.pessoasjaCadastradaProfissionalBanco = new ArrayList<Pessoa>();
+		this.erroOperacao = Boolean.FALSE;
 	}
 	
 	public void importar() throws Exception {
@@ -111,7 +112,7 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
 		
 		listPessoaImportada.stream().forEach(pessoa1 -> validar(pessoa1));
 		
-		if(erroPessoasDuplicadas.isEmpty()) {
+		if(erroPessoasDuplicadas.isEmpty() && !this.erroOperacao) {
 			listPessoaImportada.stream().forEach(pessoa -> {
 				try {
 					pessoaNegocio.incluirAtualizar(pessoa);
@@ -123,12 +124,15 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
 	}
 	
 	public void validar(Pessoa pessoa) {
-        
-		for(Pessoa p : listPessoaImportada) {
-			if(p.getCpf().equals(pessoa.getCpf()) && !p.getNome().equals(pessoa.getNome()) && !erroPessoasDuplicadas.contains(pessoa)) {
-				erroPessoasDuplicadas.add(pessoa);
+		if(operacaoValida(pessoa.getOperacaoImportacao())) {
+			for(Pessoa p : listPessoaImportada) {
+				if(p.getCpf().equals(pessoa.getCpf()) && !p.getNome().equals(pessoa.getNome()) && !erroPessoasDuplicadas.contains(pessoa)) {
+					erroPessoasDuplicadas.add(pessoa);
+				}
 			}
-		}
+		}else {
+			this.erroOperacao = Boolean.TRUE;
+		}	
 		
 	}
 	
@@ -163,6 +167,7 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
                 Iterator celulas = linha.cellIterator();
                 String nome = null;
         		String cpf = null;
+        		String operacao = null;
         		
                 while (celulas.hasNext()) {
                     XSSFCell celula = (XSSFCell) celulas.next();
@@ -175,11 +180,14 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
                         case 1:
                         	cpf = celula.toString();
                         	break;
+                        case 2:
+                        	operacao = celula.toString();
+                        	break;
                     }
 
                 }
-                if( ! Uteis.ehNuloOuVazio(nome) && ! Uteis.ehNuloOuVazio(cpf)) {
-        			importarFuncionario(nome, cpf, usuario);
+                if( ! Uteis.ehNuloOuVazio(nome) && ! Uteis.ehNuloOuVazio(cpf) && ! Uteis.ehNuloOuVazio(operacao)) {
+        			importarFuncionario(nome, cpf,operacao, usuario);
         		} else {
         			linhasErro.add(numeroLinha);
         			qtdErro++;
@@ -190,10 +198,10 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
 	      } catch (IOException e) {
 	        throw new ValidationException("Houve um erro: " + e.getMessage());
 	      }
-	      
-	      
-	      
 	    }
+	private Boolean operacaoValida(String operacao) {
+		return operacao.equals("1.0") || operacao.equals("2.0") || operacao.equals("3.0");
+	}
 	
 	
 	/**
@@ -223,7 +231,8 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
 	private void importarLinha(String linha) throws Exception {
 		String nome = null;
 		String cpf = null;
-		
+		String operacao = null;
+		     
 		StringTokenizer st = new StringTokenizer(linha, ";");
 		
 		int i = 0;
@@ -237,18 +246,20 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
 			i++;
 		}
 		if( ! Uteis.ehNuloOuVazio(cpf) ) {
-			importarFuncionario(nome, cpf, usuario);
+			importarFuncionario(nome, cpf, operacao,usuario);
 			qtdSucesso++;
 		} else {
 			linhasErro.add(numeroLinha);
 		}
 	}
 
-	private void importarFuncionario(String nome, String cpf , Usuario usuario) throws Exception {
+	private void importarFuncionario(String nome, String cpf ,String operacao, Usuario usuario) throws Exception {
 		
 		Pessoa pessoa = pessoaNegocio.consultarPorCpf(cpf);
 		
-		if(pessoa == null) {
+		if(!operacaoValida(operacao)) {
+			this.erroOperacao = Boolean.TRUE;
+		}else if(pessoa == null && (operacao.equals("1.0") || operacao.equals("3.0"))) {
 			pessoa = new Pessoa();
 			pessoa.setNomeResponsavelImportacao(usuario.getNome());
 			pessoa.setDataCadastro(new Date());
@@ -260,16 +271,21 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
 			pessoa.setEmpresaImportacao(usuario.getEmpresa());
 			pessoa.setConfirmado(Boolean.TRUE);
 			pessoa.setClienteAtivo(Boolean.TRUE);
-//			pessoa = pessoaNegocio.incluirAtualizar(pessoa);
+			pessoa.setOperacaoImportacao(operacao);
 			this.listPessoaImportada.add(pessoa);
 			qtdSucesso++;
-		}else if(pessoa.getCliente()) {
+		}else if(pessoa != null && pessoa.getCliente() && (operacao.equals("1.0") || operacao.equals("3.0"))) {
 			pessoa.setEmpresaImportacao(usuario.getEmpresa());
 			pessoa.setConfirmado(Boolean.TRUE);
 			pessoa.setClienteAtivo(Boolean.TRUE);
+			pessoa.setOperacaoImportacao(operacao);
 			this.pessoasjaCadastradaBanco.add(pessoa);
 			this.listPessoaImportada.add(pessoa);
-		}else {
+		}else if(pessoa != null && operacao.equals("2.0")) {
+			pessoa.setConfirmado(Boolean.FALSE);
+			pessoa.setClienteAtivo(Boolean.FALSE);
+			pessoa.setOperacaoImportacao(operacao);
+		}else if(operacaoValida(operacao)) {
 			this.pessoasjaCadastradaProfissionalBanco.add(pessoa);
 		}
 		
@@ -277,7 +293,7 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
 	
 	public String getLog() {
 		StringBuilder retorno = new StringBuilder();
-		if(qtdSucesso > 0 && erroPessoasDuplicadas.isEmpty()) {
+		if(qtdSucesso > 0 && erroPessoasDuplicadas.isEmpty() && !this.erroOperacao) {
 			retorno.append("<strong>Qtd. de linhas importadas:</strong> "+qtdSucesso+"<br/>");
 			retorno.append(" <div class=\"col-md-12 col-lg-12 col-sm-12\">");
 			this.listPessoaImportada.forEach(pessoa -> {
@@ -290,7 +306,7 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
 			});
 			retorno.append("</div>");
 		}
-		if( ! linhasErro.isEmpty() && erroPessoasDuplicadas.isEmpty()) {
+		if( ! linhasErro.isEmpty() && erroPessoasDuplicadas.isEmpty() && !this.erroOperacao) {
 			retorno.append("<strong>Linhas Erro:</strong>"+qtdErro+"<br/>");
 			retorno.append(" <div class=\"col-md-12 col-lg-12 col-sm-12\">");
 			this.listPessoaErro.forEach(string -> {
@@ -303,7 +319,7 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
 		if( ! Uteis.ehNuloOuVazio(erro) ) {
 			retorno.append("<strong>ERRO:</strong> "+erro);
 		}
-		if(!erroPessoasDuplicadas.isEmpty()) {
+		if(!erroPessoasDuplicadas.isEmpty() && !this.erroOperacao) {
 			retorno.append("<strong>Problemas ao importar arquivos, existe cpf duplicados:</strong><br/>");
 			retorno.append(" <div class=\"col-md-12 col-lg-12 col-sm-12\">");
 			this.erroPessoasDuplicadas.forEach(pessoa -> {
@@ -316,7 +332,7 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
 			});
 			retorno.append("</div>");
 		}
-		if(!pessoasjaCadastradaBanco.isEmpty()) {
+		if(!pessoasjaCadastradaBanco.isEmpty() && !this.erroOperacao) {
 			retorno.append("<strong>CPF já existente na base de dados:</strong><br/>");
 			retorno.append(" <div class=\"col-md-12 col-lg-12 col-sm-12\">");
 			this.pessoasjaCadastradaBanco.forEach(pessoa -> {
@@ -329,7 +345,7 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
 			});
 			retorno.append("</div>");
 		}
-		if(!pessoasjaCadastradaProfissionalBanco.isEmpty()) {
+		if(!pessoasjaCadastradaProfissionalBanco.isEmpty() && !this.erroOperacao) {
 			retorno.append("<strong>CPF já existente na base de dados com o tipo Profissional:</strong><br/>");
 			retorno.append(" <div class=\"col-md-12 col-lg-12 col-sm-12\">");
 			this.pessoasjaCadastradaProfissionalBanco.forEach(pessoa -> {
@@ -341,7 +357,9 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
 				retorno.append("</div>");
 			});
 			retorno.append("</div>");
-		}
+		}if(this.erroOperacao) {
+			retorno.append("<strong>Operação invalida, verifique as instruções para importação de funcionários.</strong><br/>");
+		}	
 		return retorno.toString();
 	}
 	

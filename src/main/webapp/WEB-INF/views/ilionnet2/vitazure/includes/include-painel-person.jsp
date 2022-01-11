@@ -11,7 +11,7 @@
                     </div>
                     <div class="info-person">
                         <span>Olá ${pessoa.nome}</span>
-                        <a href="#" class="button-white"> Paciente</a>
+                        <a href="#" class="button-white"> Paciente ${pessoa.pessoaImportada ? 'conveniado' : ''}</a>
                         <span>${pessoa.email}</span>
                     </div>
                 </div>

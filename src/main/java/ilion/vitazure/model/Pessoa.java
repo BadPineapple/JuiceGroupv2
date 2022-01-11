@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import ilion.arquivo.negocio.Arquivo;
 import ilion.util.StringUtil;
@@ -52,6 +53,9 @@ public class Pessoa implements Serializable{
 	  
 	  private String dataNascimento;
 	  private Date dataCadastro;
+	  
+	  @Transient
+	  private String operacaoImportacao;
 	
 	public Long getId() {
 		if (id == null) {
@@ -284,8 +288,12 @@ public class Pessoa implements Serializable{
 	public void setClienteAtivo(Boolean clienteAtivo) {
 		this.clienteAtivo = clienteAtivo;
 	}
-	  
-	  
 	
+	public String getOperacaoImportacao() {
+		return operacaoImportacao;
+	}
+	public void setOperacaoImportacao(String operacaoImportacao) {
+		this.operacaoImportacao = operacaoImportacao;
+	}
 
 }

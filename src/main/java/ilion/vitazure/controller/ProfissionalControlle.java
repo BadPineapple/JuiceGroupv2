@@ -1,13 +1,9 @@
 package ilion.vitazure.controller;
 
-import java.net.InetAddress;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +19,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
@@ -44,12 +39,9 @@ import ilion.vitazure.enumeradores.EspecialidadesEnum;
 import ilion.vitazure.enumeradores.EstadoEnum;
 import ilion.vitazure.enumeradores.TipoProfissionalEnum;
 import ilion.vitazure.model.Agenda;
-import ilion.vitazure.model.FormacaoAcademica;
 import ilion.vitazure.model.HorarioAtendimento;
-import ilion.vitazure.model.HorarioPossivelAtendimento;
 import ilion.vitazure.model.Pessoa;
 import ilion.vitazure.model.Profissional;
-import ilion.vitazure.model.TemaTrabalho;
 import ilion.vitazure.negocio.AgendaNegocio;
 import ilion.vitazure.negocio.EnderecoNegocio;
 import ilion.vitazure.negocio.EspecialidadeNegocio;
@@ -137,7 +129,8 @@ public class ProfissionalControlle {
 
 			if(profissionalVH.getProfissional().getAceiteContrato() && profissionalVH.getProfissional().getFirstTime() && profissionalVH.getItensIncompletos().isEmpty()) {
 				profissionalVH.getProfissional().setFirstTime(Boolean.FALSE);
-				pessoaNegocio.CuncluidoPerfil(profissionalVH.getProfissional().getPessoa());
+				profissionalNegocio.atualizarSituacaoFirstTimeProfissional(profissionalVH.getProfissional());
+				profissionalNegocio.enviarAlertaPerfilCompleto(profissionalVH.getProfissional().getPessoa());
 			}
 
 			return new ResponseEntity<>(new JsonString("Perfil Profissional Atualizado!" + listItensAtualizar),

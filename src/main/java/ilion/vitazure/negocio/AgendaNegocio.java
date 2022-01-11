@@ -149,8 +149,10 @@ public class AgendaNegocio {
 	public List<Date> listaDataPacote(Date dataAgendaInicial , Integer quantidadeDataPacote){
 		List<Date> listDataPacote = new ArrayList<Date>();
 		Integer quantidadeDataGerada = 0;
+		Date dataTemp = dataAgendaInicial;
 		while (quantidadeDataGerada < quantidadeDataPacote) {
-			listDataPacote.add(Uteis.acrescentar(dataAgendaInicial, Calendar.DATE, 7));
+			dataTemp = Uteis.acrescentar(dataTemp, Calendar.DATE, 7);
+			listDataPacote.add(dataTemp);
 			quantidadeDataGerada++;
 		}
 		return listDataPacote;

@@ -39,9 +39,6 @@ public class PessoaNegocio {
 
 	@Autowired
 	private HibernateUtil hibernateUtil;
-
-	@Autowired
-	private EnvioEmailConsulta envioEmailConsulta;
 	
 	@Autowired
 	private PropNegocio propNegocio;
@@ -115,11 +112,6 @@ public class PessoaNegocio {
 		return pessoaVO;
 	}
 
-	@Transactional
-	public Pessoa CuncluidoPerfil(Pessoa pessoaSessao) throws Exception{
-		envioEmailConsulta.enviarAlertaPerfilCompleto(pessoaSessao);
-		return null;
-	}
 	
 	private Pessoa criptografarSenha(Pessoa pessoa) {
 		 

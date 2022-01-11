@@ -60,6 +60,9 @@ public class ProfissionalNegocio {
 	@Autowired
 	private UsuarioNegocio usuarioNegocio;
 	
+	@Autowired
+	private EnvioEmailConsulta envioEmailConsulta;
+	
 	public Profissional consultarPorPessoa(Long idPessoa) {
 		DetachedCriteria dc = DetachedCriteria.forClass(Profissional.class);
 		dc.createAlias("pessoa", "p");
@@ -432,5 +435,15 @@ private void validarHorarioDisponivelProfissional(List<HorarioPossivelAtendiment
             
 			return profissional;
 		}
-	
+	 
+		public void enviarAlertaPerfilCompleto(Pessoa pessoaSessao) throws Exception{
+			envioEmailConsulta.enviarAlertaPerfilCompleto(pessoaSessao);
+		}
+		
+		public void atualizarSituacaoFirstTimeProfissional(Profissional profissional) {
+			StringBuilder sql = new StringBuilder();
+			sql.append(" update profissional set FirstTime = ").append(profissional.getFirstTime());
+			sql.append(" where id = ").append(profissional.getId());
+			hibernateUtil.updateSQL(sql.toString());
+		}
 }
