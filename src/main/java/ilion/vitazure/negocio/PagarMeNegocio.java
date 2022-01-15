@@ -98,7 +98,7 @@ public class PagarMeNegocio {
 
   
   private void validarCampos(Profissional profissional) throws Exception {
-	  
+	  profissional.setNomeFavorecido(profissional.getPessoa().getNome());
 	  if (profissional.getAgencia().trim().equals("")) {
 		  throw new Exception("Agência não informada.");
 	  }else if (profissional.getConta().trim().equals("")) {
@@ -111,8 +111,8 @@ public class PagarMeNegocio {
 	      throw new Exception("Banco não informada.");
       }else if (profissional.getTipoConta() == TipoContaEnum.NAO_INFORMADO) {
 	      throw new Exception("Tipo Conta não informada.");
-      }else if (profissional.getNomeFavorecido().length() > 30) {
-    	  throw new Exception("Verifique o nome do favorecido, máximo de 30 caracteres.");
+      }else if (profissional.getPessoa().getNome().length() > 30) {
+    	  profissional.setNomeFavorecido(profissional.getPessoa().getNome().substring(0, 28));
       }
 	  
   }

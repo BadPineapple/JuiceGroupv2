@@ -328,7 +328,7 @@
 	                                            <div class="col-md-3 col-lg-3 col-sm-12">
 	                                              <div class="form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed">
 	                                                <input type="checkbox" ng-model="profissional.crianca" id="crianca" ng-checked="${profissional.crianca}"/>
-	                                                <label>criança</label>
+	                                                <label>crianças</label>
 	                                               </div> 
 	                                            </div>
 	                            </div>                 
@@ -339,7 +339,6 @@
 							  </div>
 							    <div class="col-md-12 col-lg-12 col-sm-12">
                                     <div class="form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed">
-                                       <label class="control-label">Bibliografia</label>
                                            <textarea class="form-control input-group-lg" cols="20" rows="5" ng-model="profissional.biografia" placeholder="Informe aqui sua vida profissional. Procure ser mais claro possível." style="color: #A6A6A6"></textarea>
                                      </div>
                                  </div>

@@ -46,6 +46,8 @@ public class Pessoa implements Serializable{
 	  private String nomeContato;
 	  private String celularContato;
 	  private Boolean clienteAtivo;
+	  @Transient
+	  private String tipoConta;
 	  
 	  @ManyToOne
 	  @JoinColumn(nullable = true)
@@ -295,5 +297,12 @@ public class Pessoa implements Serializable{
 	public void setOperacaoImportacao(String operacaoImportacao) {
 		this.operacaoImportacao = operacaoImportacao;
 	}
+	public String getTipoConta() {
+		return tipoConta;
+	}
+	public void setTipoConta(String tipoConta) {
+		this.tipoConta = tipoConta;
+	}
+	
 
 }
