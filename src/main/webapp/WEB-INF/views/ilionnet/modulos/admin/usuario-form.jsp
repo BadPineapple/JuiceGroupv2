@@ -76,7 +76,7 @@
     <td align="right" valign="middle" class="linkCinzaEscuro">Login:</td>
     <td class="linkCinza"><form:input path="login" cssClass="forms2" cssStyle="width:50%;"/></td>
     <td align="right" class="linkCinzaEscuro">Senha:</td>
-    <td class="linkCinza"><form:input path="senhaAux" cssClass="forms2" cssStyle="width:50%;"/></td>
+    <td class="linkCinza"><form:input path="senhaAux" type="password" cssClass="forms2" cssStyle="width:50%;"/></td>
   </tr>
    <tr> 
     <td align="right" valign="middle" class="linkCinzaEscuro">Admin:</td>

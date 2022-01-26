@@ -54,14 +54,18 @@
 							    <th class="text-center">ID</th>
 							    <th class="text-center">Nome</th>
 							    <th class="text-center">Email</th>
-							    <th class="text-center">Ativo</th>
+							    <th class="text-center">Telefone</th>
+							    <th class="text-center">Data Aceite Contrato</th>
+							    <th class="text-center">Situação</th>
 							    <th class="text-center">Opcoes</th>
 							</tr>
 							<c:forEach var="profissional" items="${profissionais}">
 							<tr>
 								<td class="text-center">${profissional.id}</td>
-								<td align="center">${profissional.pessoa.nome}</td>
-								<td align="center">${profissional.pessoa.email}</td>
+								<td align="left">${profissional.pessoa.nome}</td>
+								<td align="left">${profissional.pessoa.email}</td>
+								<td align="center">${profissional.pessoa.celular}</td>
+								<td align="center">${profissional.dataAceiteContrato}</td>
 								<td align="center">${profissional.situacaoAprovacaoProfissional}</td>
 								<td class="pmd-table-row-action" align="center">
 									<a href="<ilion:url/>vitazure/profissional/${profissional.pessoa.id}" class="btn pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-default btn-sm">

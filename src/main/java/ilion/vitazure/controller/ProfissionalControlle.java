@@ -132,7 +132,7 @@ public class ProfissionalControlle {
 				profissionalNegocio.atualizarSituacaoFirstTimeProfissional(profissionalVH.getProfissional());
 				profissionalNegocio.enviarAlertaPerfilCompleto(profissionalVH.getProfissional().getPessoa());
 			}
-			return new ResponseEntity<>(new JsonString(profissionalVH.getProfissional().getAceiteContrato() && profissionalVH.getProfissional().getFirstTime() && profissionalVH.getItensIncompletos().isEmpty() ? "Parabéns, você deu um importante passo para sua carreira, agora é só aguardar nosso retorno." : "Perfil Profissional Atualizado!" + listItensAtualizar),
+			return new ResponseEntity<>(new JsonString(profissionalVH.getProfissional().getAceiteContrato() && !profissionalVH.getProfissional().getFirstTime() && profissionalVH.getItensIncompletos().isEmpty() ? "Parabéns, você deu um importante passo para sua carreira, agora é só aguardar nosso retorno." : "Perfil Profissional Atualizado!" + listItensAtualizar),
 					HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -152,7 +152,7 @@ public class ContatoController {
 
 		ContatoImportacao contatoImportacao = new ArquivoTextoContatoImportacao(arquivo.getInputStream(), charset, contatoGrupo, usuarioSessao);
 
-		contatoImportacao.importar();
+//		contatoImportacao.importar();
 
 		String mensagem = contatoImportacao.getLog();
 

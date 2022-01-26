@@ -54,8 +54,8 @@
                                     <tr>
                                         <td style="text-align: center;">id</td>
                                         <td style="text-align: center;">Agenda</td>
-                                        <td style="text-align: center;">Plano</td>
                                         <td style="text-align: center;">Data Transação</td>
+                                        <td style="text-align: center;">Data Consulta</td>
                                         <td style="text-align: center;">Tipo Transação</td>
                                         <td style="text-align: center;">Profissional</td>
                                         <td style="text-align: center;">Valor Pago</td>
@@ -68,10 +68,10 @@
                                     <tr>
                                         <td style="text-align: center;">${pagamento.id}</td>
                                         <td style="text-align: center;">${pagamento.agenda > 0 ? pagamento.agenda : '-'}</td>
-                                        <td style="text-align: center;">${pagamento.agenda == null ? pagamento.planoApresentar : '-'}</td>
                                         <td style="text-align: center;">${pagamento.dataFormatada}</td>
+                                        <td style="text-align: center;">${pagamento.dataAgenda}</td>
                                         <td style="text-align: center;">${pagamento.agenda > 0 ? 'Consulta Agendada' : 'Plano'}</td>
-                                        <td style="text-align: center;">${pagamento.profissional}</td>
+                                        <td style="text-align: left;">${pagamento.profissional}</td>
                                         <td style="text-align: center;">${pagamento.valorPago}</td>
                                         <td style="text-align: center;">${pagamento.status}</div>
                                         </td>

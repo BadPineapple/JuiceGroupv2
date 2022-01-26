@@ -63,8 +63,8 @@
 							<c:forEach var="agenda" items="${agendas}">
 							<tr>
 								<td class="text-center">${agenda.id}</td>
-								<td align="center">${agenda.profissional.pessoa.nome}</td>
-								<td align="center">${agenda.paciente.nome}</td>
+								<td align="left">${agenda.profissional.pessoa.nome}</td>
+								<td align="left">${agenda.paciente.nome}</td>
 								<td align="center">${agenda.paciente.empresaImportacao != "" ? "Empresa" : "Particular"}</td>
 								<td align="center">${agenda.dataHoraApresentar}</td>
 								<td align="center">${agenda.profissional.duracaoAtendimento.nomeApresentar}</td>

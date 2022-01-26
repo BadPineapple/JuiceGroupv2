@@ -53,16 +53,20 @@
 					        <tr>
 							    <th class="text-center">ID</th>
 							    <th class="text-center">Nome</th>
+							    <th class="text-center">CPF</th>
 							    <th class="text-center">Email</th>
 							    <th class="text-center">Empresa</th>
+							    <th class="text-center">Situação</th>
 							    <th class="text-center">Opcoes</th>
 							</tr>
 							<c:forEach var="cliente" items="${clientes}">
 							<tr>
 								<td class="text-center">${cliente.id}</td>
 								<td >${cliente.nome}</td>
+								<td >${cliente.cpf}</td>
 								<td >${cliente.email}</td>
-								<td >${cliente.empresaImportacao}</td>
+								<td >${cliente.empresaImportacao eq '' ? 'Particular' : cliente.empresaImportacao}</td>
+								<td >${cliente.clienteAtivo eq 'true' ? 'Ativo' : 'Desativado'}</td>
 								<td class="pmd-table-row-action" align="center">
 									<a href="<ilion:url/>vitazure/cliente/${cliente.id}" class="btn pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-default btn-sm">
 										<i class="material-icons md-dark pmd-sm">edit</i>
