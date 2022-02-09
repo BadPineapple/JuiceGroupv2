@@ -56,6 +56,8 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
 	private List<Pessoa> pessoasOperacao2;
 	private List<Pessoa> pessoasOperacao3;
 	private List<Pessoa> pessoasOperacao3ProfissionalNaoCadastrado;
+	private List<Pessoa> pessoasOperacao2ProfissionalNaoCadastrado;
+	private List<Pessoa> pessoasOperacao2VinculadoOutraEmpresa;
 	private static final String SLASH_WINDOWS = "\\";
 	private static final String SLASH_LINUX = "/";
 	private Boolean operacoesValidadas;
@@ -254,6 +256,28 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
 	public void setPessoasOperacao3ProfissionalNaoCadastrado(List<Pessoa> pessoasOperacao3ProfissionalNaoCadastrado) {
 		this.pessoasOperacao3ProfissionalNaoCadastrado = pessoasOperacao3ProfissionalNaoCadastrado;
 	}
+	
+	public List<Pessoa> getPessoasOperacao2ProfissionalNaoCadastrado() {
+		if(pessoasOperacao2ProfissionalNaoCadastrado == null) {
+			pessoasOperacao2ProfissionalNaoCadastrado = new ArrayList<Pessoa>();
+		}
+		return pessoasOperacao2ProfissionalNaoCadastrado;
+	}
+
+	public void setPessoasOperacao2ProfissionalNaoCadastrado(List<Pessoa> pessoasOperacao2ProfissionalNaoCadastrado) {
+		this.pessoasOperacao2ProfissionalNaoCadastrado = pessoasOperacao2ProfissionalNaoCadastrado;
+	}
+	
+	public List<Pessoa> getPessoasOperacao2VinculadoOutraEmpresa() {
+		if(pessoasOperacao2VinculadoOutraEmpresa == null) {
+			pessoasOperacao2VinculadoOutraEmpresa = new ArrayList<Pessoa>();
+		}
+		return pessoasOperacao2VinculadoOutraEmpresa;
+	}
+
+	public void setPessoasOperacao2VinculadoOutraEmpresa(List<Pessoa> pessoasOperacao2VinculadoOutraEmpresa) {
+		this.pessoasOperacao2VinculadoOutraEmpresa = pessoasOperacao2VinculadoOutraEmpresa;
+	}
 
 	public ArquivoTextoImportarFuncionario() {
 		super();
@@ -371,12 +395,17 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
 				pessoaNegocio.incluirAtualizar(pessoa);
 			}else if(pessoa.getOperacaoImportacao().equals("1.0") && !Uteis.ehNuloOuVazio(pessoa.getEmpresaImportacao())) {
 				getPessoasOperacao1VinculadoOutraEmpresa().add(pessoa);
-			}else if(pessoa.getOperacaoImportacao().equals("2.0")) {
-				pessoa.setConfirmado(Boolean.FALSE);
-				pessoa.setClienteAtivo(Boolean.FALSE);
+			}else if(pessoa.getId() != null && pessoa.getId() != 0L && pessoa.getOperacaoImportacao().equals("2.0") && (!Uteis.ehNuloOuVazio(pessoa.getEmpresaImportacao()) && usuario.getEmpresa().equals(pessoa.getEmpresaImportacao()))) {
+				pessoa.setEmpresaImportacao(null);
+				pessoa.setPessoaImportada(Boolean.FALSE);
+				pessoa.setNomeResponsavelImportacao(null);
 				getPessoasOperacao2().add(pessoa);
 				pessoaNegocio.incluirAtualizar(pessoa);
-			}else if(pessoa.getId() != null && pessoa.getId() != 0L && pessoa.getOperacaoImportacao().equals("3.0")) {
+			}else if(pessoa.getId() != null && pessoa.getId() != 0L && pessoa.getOperacaoImportacao().equals("2.0") && (!Uteis.ehNuloOuVazio(pessoa.getEmpresaImportacao()) && !usuario.getEmpresa().equals(pessoa.getEmpresaImportacao()))) {
+                 getPessoasOperacao2VinculadoOutraEmpresa().add(pessoa);
+			}else if((pessoa.getId() == null || pessoa.getId() == 0L) && pessoa.getOperacaoImportacao().equals("2.0")) {
+		    	getPessoasOperacao2ProfissionalNaoCadastrado().add(pessoa);
+		    }else if(pessoa.getId() != null && pessoa.getId() != 0L && pessoa.getOperacaoImportacao().equals("3.0")) {
 				pessoa.setEmpresaImportacao(getUsuario().getEmpresa());
 				getPessoasOperacao3().add(pessoa);
 				pessoaNegocio.incluirAtualizar(pessoa);
@@ -441,6 +470,31 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
 				retorno.append("</div>");
 			});
 			retorno.append("</div>");
+		}if(!getPessoasOperacao2VinculadoOutraEmpresa().isEmpty()) {
+			retorno.append("<strong>Qtd. de linhas não importadas, com CPF não vinculado a essa empresa: ").append(getPessoasOperacao2().size()).append("</strong><br/>");
+			retorno.append(" <div class=\"col-md-12 col-lg-12 col-sm-12\">");
+			getPessoasOperacao2VinculadoOutraEmpresa().forEach(pessoa -> {
+				retorno.append(" <div class=\"col-md-6 col-lg-6 col-sm-12\">");
+				retorno.append("<strong>Nome: </strong>").append(pessoa.getNome());
+				retorno.append("</div>");
+				retorno.append(" <div class=\"col-md-6 col-lg-6 col-sm-12\">");
+				retorno.append("<strong>CPf: </strong>").append(pessoa.getCpf());
+				retorno.append("</div>");
+			});
+			retorno.append("</div>");
+		}
+		if(!getPessoasOperacao2ProfissionalNaoCadastrado().isEmpty()) {
+			retorno.append("<strong>Qtd. de linhas não importadas com desligamento, CPF não existente na base: ").append(getPessoasOperacao2ProfissionalNaoCadastrado().size()).append("</strong><br/>");
+			retorno.append(" <div class=\"col-md-12 col-lg-12 col-sm-12\">");
+			getPessoasOperacao2ProfissionalNaoCadastrado().forEach(pessoa -> {
+				retorno.append(" <div class=\"col-md-6 col-lg-6 col-sm-12\">");
+				retorno.append("<strong>Nome: </strong>").append(pessoa.getNome());
+				retorno.append("</div>");
+				retorno.append(" <div class=\"col-md-6 col-lg-6 col-sm-12\">");
+				retorno.append("<strong>CPf: </strong>").append(pessoa.getCpf());
+				retorno.append("</div>");
+			});
+			retorno.append("</div>");
 		}
 		if(!getPessoasOperacao3().isEmpty()) {
 			retorno.append("<strong>Qtd. de linhas importadas, com CPF já existente na base: ").append(getPessoasOperacao3().size()).append("</strong><br/>");
@@ -456,7 +510,7 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
 			retorno.append("</div>");
 		}
 		if(!getPessoasOperacao1VinculadoOutraEmpresa().isEmpty()) {
-			retorno.append("<strong>Qtd. de linhas não importadas, com CPF vinculado a outra empresa: ").append(getPessoasOperacao1VinculadoOutraEmpresa().size()).append("</strong><br/>");
+			retorno.append("<strong>Qtd. de linhas não importadas, com CPF vinculado a uma empresa: ").append(getPessoasOperacao1VinculadoOutraEmpresa().size()).append("</strong><br/>");
 			retorno.append(" <div class=\"col-md-12 col-lg-12 col-sm-12\">");
 			getPessoasOperacao1VinculadoOutraEmpresa().forEach(pessoa -> {
 				retorno.append(" <div class=\"col-md-6 col-lg-6 col-sm-12\">");

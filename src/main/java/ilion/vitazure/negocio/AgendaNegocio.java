@@ -30,6 +30,7 @@ import ilion.util.Uteis;
 import ilion.util.VLHForm;
 import ilion.util.ValueListInfo;
 import ilion.util.busca.PalavrasChaveCondicoes;
+import ilion.util.exceptions.ValidacaoException;
 import ilion.util.persistencia.HibernateUtil;
 import ilion.vitazure.enumeradores.StatusEnum;
 import ilion.vitazure.model.Agenda;
@@ -202,7 +203,6 @@ public class AgendaNegocio {
 	}
 	
 	public ValueList buscar(VLHForm vlhForm, ValueListInfo valueListInfo , Usuario usuarioSessao , Pessoa pessoaAgenda) {
-
 		DetachedCriteria dc = DetachedCriteria.forClass(Agenda.class);
 		dc.createAlias("paciente", "pac");
 		dc.createAlias("profissional", "prof");
@@ -357,7 +357,32 @@ public class AgendaNegocio {
 		return listAgendas;
 	}
 	
-	
+	public ValueList relResumoAtendimento(VLHForm vlhForm, ValueListInfo valueListInfo) throws Exception{
+		DetachedCriteria dc = DetachedCriteria.forClass(Agenda.class);
+		dc.createAlias("paciente", "pac");
+		dc.add( Restrictions.eq("pac.empresaImportacao", vlhForm.getPalavraChave()));
+		if(vlhForm.getStatusAgenda() != null) {
+          dc.add( Restrictions.eq("status", vlhForm.getStatusAgenda()));
+		}
+		Disjunction disjunction = Restrictions.disjunction();
+		disjunction.add( Restrictions.between("dataHoraAgendamento", Uteis.converterHoraEmDate(vlhForm.getDataInicio(), "yyyy-MM-dd") , Uteis.converterHoraEmDate(vlhForm.getDataFim(), "yyyy-MM-dd")));
+		dc.add(disjunction);
+		ValueList notificacaos = hibernateUtil.consultarValueList(dc, org.hibernate.criterion.Order.asc("id"), valueListInfo);
+
+		return notificacaos;
+
+	}
+
+	private void validarDadosConsulta(VLHForm vlhForm) throws Exception{
+		if(vlhForm.getPalavraChave() == null) {
+			throw new ValidacaoException("Necessário informar a empresa.");
+		}else if(vlhForm.getDataInicio() == null) {
+			throw new ValidacaoException("Necessário informar data inicio.");
+		}else if(vlhForm.getDataFim() == null) {
+			throw new ValidacaoException("Necessário informar data fim.");
+		}
+		
+	}
 	
 	
 }

@@ -409,7 +409,13 @@ public class PagarMeNegocio {
 			}
 			dc.add(disjunction);
 		}
-
+		
+		if(!Uteis.ehNuloOuVazio(vlhForm.getDataInicio()) && !Uteis.ehNuloOuVazio(vlhForm.getDataFim())) {
+			Disjunction disjunction = Restrictions.disjunction();
+			disjunction.add( Restrictions.between("dataTransacao", vlhForm.getDataInicio().concat("T00:00:00.000-00:00") , vlhForm.getDataFim().concat("T23:59:00.000-00:00")));
+			dc.add(disjunction);
+		}
+		
 		StatusEnum statusEnum = StatusEnum.fromString(vlhForm.getStatus());
 
 		if (statusEnum != null) {

@@ -33,12 +33,26 @@
 						<div class="row">
 					      <input name="sp" type="hidden" value="true"/>
 					      <input name="pagingPage" type="hidden" value="1"/>
-						      <div class="col-md-10 col-lg-10 col-sm-12">
+						      <div class="col-md-4 col-lg-4 col-sm-12">
 						          <div class="form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed" style="width: 100% !important;">
 						           	<label for="name" class="control-label">Palavra-Chave</label>
 									<input type="Large" name="palavraChave" id="palavraChave" class="form-control input-group-lg" style="width: 100% !important;"/>
 								</div> 
 							</div>
+							<div class="col-md-6 col-lg-6 col-sm-12">
+			                 	<label>Periodo Transação</label>
+			                   <div class="form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed" style="width: 100%;">
+			                       <div class="col-md-5 col-lg-5 col-sm-12">
+				                        <input type="date" name="dataInicio" id="dataInicio" class="form-control input-group-lg" style="width: 100%;font-size: 16px;"/>
+			                        </div>
+			                        <div class="col-md-1 col-lg-1 col-sm-12" style="top: 22px;"> 
+			                          <p>a</p>
+			                        </div>  
+			                        <div class="col-md-5 col-lg-5 col-sm-12">   
+				                        <input type="date" name="dataFim" id="dataFim" class="form-control input-group-lg" style="width: 100%;font-size: 16px;"/>
+			                        </div>   
+			                   </div>
+			                 </div>
 							<div class="col-md-2 col-lg-2 col-sm-12 text-center" style="padding-top: 35px;">	
 							  <button class="btn btn-primary">Buscar</button>
 							</div>  
@@ -47,40 +61,68 @@
 					</div>
 			    </div>
 		        <!-- Basic Bootstrap Table example -->
+		        <valuelist:root value="listPagamentos" url="?setarParametros=true&" includeParameters="palavraChave|dataInicio|dataFim">  
 		        <div class="pmd-card pmd-z-depth pmd-card-custom-view">
 		            <div class="table-responsive">
 		                <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <td style="text-align: center;">id</td>
-                                        <td style="text-align: center;">Agenda</td>
-                                        <td style="text-align: center;">Data Transação</td>
-                                        <td style="text-align: center;">Data Consulta</td>
-                                        <td style="text-align: center;">Tipo Transação</td>
-                                        <td style="text-align: center;">Profissional</td>
-                                        <td style="text-align: center;">Valor Pago</td>
-                                        <td style="text-align: center;">Status</td>
-                                    </tr>
-                                </thead>
+		                    <valuelist:row bean="pagamento">
+		                        <valuelist:column title="ID"> 
+							        <c:out value="${pagamento.id}"/>
+						        </valuelist:column> 
+								<valuelist:column title="Agenda" > 
+									<c:out value="${pagamento.agenda > 0 ? pagamento.agenda : '-'}"/>
+								</valuelist:column> 
+								<valuelist:column title="Data Transação"> 
+							        <c:out value="${pagamento.dataFormatada}"/>
+						        </valuelist:column> 
+								<valuelist:column title="Data Consulta"> 
+						        	<c:out value="${pagamento.dataAgenda}"/> 
+						        </valuelist:column> 
+								<valuelist:column title="Tipo Transação" > 
+							        <c:out value="${pagamento.agenda > 0 ? 'Consulta Agendada' : 'Plano'}"/>
+						        </valuelist:column> 
+								<valuelist:column title="Profissional" sortable="asc" property="profissional"> 
+							        <c:out value="${pagamento.profissional}"/>
+						        </valuelist:column> 
+								<valuelist:column title="Valor Pago"> 
+							        <c:out value="${pagamento.valorPago}"/>
+						        </valuelist:column> 
+								<valuelist:column title="Status" > 
+							        <c:out value="${pagamento.status}"/>
+						        </valuelist:column> 
+							</valuelist:row>
+<!--                                 <thead> -->
+<!--                                     <tr> -->
+<!--                                         <td style="text-align: center;">id</td> -->
+<!--                                         <td style="text-align: center;">Agenda</td> -->
+<!--                                         <td style="text-align: center;">Data Transação</td> -->
+<!--                                         <td style="text-align: center;">Data Consulta</td> -->
+<!--                                         <td style="text-align: center;">Tipo Transação</td> -->
+<!--                                         <td style="text-align: center;">Profissional</td> -->
+<!--                                         <td style="text-align: center;">Valor Pago</td> -->
+<!--                                         <td style="text-align: center;">Status</td> -->
+<!--                                     </tr> -->
+<!--                                 </thead> -->
     
-                                <tbody>
-                                <c:forEach var="pagamento" items="${listPagamentos}">
-                                    <tr>
-                                        <td style="text-align: center;">${pagamento.id}</td>
-                                        <td style="text-align: center;">${pagamento.agenda > 0 ? pagamento.agenda : '-'}</td>
-                                        <td style="text-align: center;">${pagamento.dataFormatada}</td>
-                                        <td style="text-align: center;">${pagamento.dataAgenda}</td>
-                                        <td style="text-align: center;">${pagamento.agenda > 0 ? 'Consulta Agendada' : 'Plano'}</td>
-                                        <td style="text-align: left;">${pagamento.profissional}</td>
-                                        <td style="text-align: center;">${pagamento.valorPago}</td>
-                                        <td style="text-align: center;">${pagamento.status}</div>
-                                        </td>
-                                    </tr>
-    							</c:forEach>
-                                </tbody>
+<!--                                 <tbody> -->
+<%--                                 <c:forEach var="pagamento" items="${listPagamentos}"> --%>
+<!--                                     <tr> -->
+<%--                                         <td style="text-align: center;">${pagamento.id}</td> --%>
+<%--                                         <td style="text-align: center;">${pagamento.agenda > 0 ? pagamento.agenda : '-'}</td> --%>
+<%--                                         <td style="text-align: center;">${pagamento.dataFormatada}</td> --%>
+<%--                                         <td style="text-align: center;">${pagamento.dataAgenda}</td> --%>
+<%--                                         <td style="text-align: center;">${pagamento.agenda > 0 ? 'Consulta Agendada' : 'Plano'}</td> --%>
+<%--                                         <td style="text-align: left;">${pagamento.profissional}</td> --%>
+<%--                                         <td style="text-align: center;">${pagamento.valorPago}</td> --%>
+<%--                                         <td style="text-align: center;">${pagamento.status}</div> --%>
+<!--                                         </td> -->
+<!--                                     </tr> -->
+<%--     							</c:forEach> --%>
+<!--                                 </tbody> -->
                             </table>
 		            </div>
 		        </div>
+		        </valuelist:root> 
 	             <div class="row" >
 		            <div class="col-md-10" >
 		             	<ilion:vlhPagination valueListInfo="${listPagamentos.valueListInfo}" navCssClass="pull-right"/>
@@ -120,6 +162,8 @@
 <script>
 	(function() {
 		$('#palavraChave').val('${param.palavraChave}');
+		$('#dataInicio').val('${param.dataInicio}');
+		$('#dataFim').val('${param.dataFim}');
 	})();
 </script>
 <script type="text/javascript">

@@ -37,6 +37,7 @@ import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -76,6 +77,11 @@ public class Uteis {
 		df2MaximumFractionDigits.setMaximumFractionDigits(2);
 	}
 
+	public static void setCaminhoFisico(ServletContext servletContext) {
+		caminhoRealPath = servletContext.getRealPath("/");
+	}
+	
+	
 	public static Long converterLong(String s) {
 		Long l = null;
 		try {

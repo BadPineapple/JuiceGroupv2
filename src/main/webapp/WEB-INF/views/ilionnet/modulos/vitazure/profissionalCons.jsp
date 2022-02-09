@@ -47,39 +47,71 @@
 					</div>
 			    </div>
 		        <!-- Basic Bootstrap Table example -->
+		       <valuelist:root value="profissionais" url="?setarParametros=true&" includeParameters="palavraChave">  
 		        <div class="pmd-card pmd-z-depth pmd-card-custom-view">
 		            <div class="table-responsive">
 		                <table class="table table-bordered">
-					        <tr>
-							    <th class="text-center">ID</th>
-							    <th class="text-center">Nome</th>
-							    <th class="text-center">Email</th>
-							    <th class="text-center">Telefone</th>
-							    <th class="text-center">Data Aceite Contrato</th>
-							    <th class="text-center">Situação</th>
-							    <th class="text-center">Opcoes</th>
-							</tr>
-							<c:forEach var="profissional" items="${profissionais}">
-							<tr>
-								<td class="text-center">${profissional.id}</td>
-								<td align="left">${profissional.pessoa.nome}</td>
-								<td align="left">${profissional.pessoa.email}</td>
-								<td align="center">${profissional.pessoa.celular}</td>
-								<td align="center">${profissional.dataAceiteContrato}</td>
-								<td align="center">${profissional.situacaoAprovacaoProfissional}</td>
-								<td class="pmd-table-row-action" align="center">
-									<a href="<ilion:url/>vitazure/profissional/${profissional.pessoa.id}" class="btn pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-default btn-sm">
+		                  <valuelist:row bean="profissional">
+		                        <valuelist:column title="ID"> 
+							        <c:out value="${profissional.id}"/>
+						        </valuelist:column> 
+								<valuelist:column title="Nome" sortable="asc" property="pessoa.nome"> 
+								<valuelist:attribute name="align" value="left"/>
+									<c:out value="${profissional.pessoa.nome}"/>
+								</valuelist:column> 
+								<valuelist:column title="Email" >
+								  <valuelist:attribute name="align" value="left"/> 
+							        <c:out value="${profissional.pessoa.email}"/>
+						        </valuelist:column> 
+								<valuelist:column title="Telefone"> 
+						        	<c:out value="${profissional.pessoa.celular}"/> 
+						        </valuelist:column> 
+								<valuelist:column title="Data Aceite Contrato" sortable="asc" property="dataAceiteContrato"> 
+							        <c:out value="${profissional.dataAceiteContrato}"/>
+						        </valuelist:column> 
+								<valuelist:column title="Situação"> 
+							        <c:out value="${profissional.situacaoAprovacaoProfissional}"/>
+						        </valuelist:column> 
+								<valuelist:column title="Opcoes"> 
+							        <a href="<ilion:url/>vitazure/profissional/${profissional.pessoa.id}" class="btn pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-default btn-sm">
 										<i class="material-icons md-dark pmd-sm">edit</i>
 									</a>
 									<a href="<ilion:url/>vitazure/profissional/excluir/${profissional.pessoa.id}" title="Excluir" class="btn pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-default btn-sm">
                        					 <i class="material-icons md-dark pmd-sm">delete</i>
                       				</a>
-								</td>
-							</tr>
-							</c:forEach>
+						        </valuelist:column> 
+							</valuelist:row>
+<!-- 					        <tr> -->
+<!-- 							    <th class="text-center">ID</th> -->
+<!-- 							    <th class="text-center">Nome</th> -->
+<!-- 							    <th class="text-center">Email</th> -->
+<!-- 							    <th class="text-center">Telefone</th> -->
+<!-- 							    <th class="text-center">Data Aceite Contrato</th> -->
+<!-- 							    <th class="text-center">Situação</th> -->
+<!-- 							    <th class="text-center">Opcoes</th> -->
+<!-- 							</tr> -->
+<%-- 							<c:forEach var="profissional" items="${profissionais}"> --%>
+<!-- 							<tr> -->
+<%-- 								<td class="text-center">${profissional.id}</td> --%>
+<%-- 								<td align="left">${profissional.pessoa.nome}</td> --%>
+<%-- 								<td align="left">${profissional.pessoa.email}</td> --%>
+<%-- 								<td align="center">${profissional.pessoa.celular}</td> --%>
+<%-- 								<td align="center">${profissional.dataAceiteContrato}</td> --%>
+<%-- 								<td align="center">${profissional.situacaoAprovacaoProfissional}</td> --%>
+<!-- 								<td class="pmd-table-row-action" align="center"> -->
+<%-- 									<a href="<ilion:url/>vitazure/profissional/${profissional.pessoa.id}" class="btn pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-default btn-sm"> --%>
+<!-- 										<i class="material-icons md-dark pmd-sm">edit</i> -->
+<!-- 									</a> -->
+<%-- 									<a href="<ilion:url/>vitazure/profissional/excluir/${profissional.pessoa.id}" title="Excluir" class="btn pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-default btn-sm"> --%>
+<!--                        					 <i class="material-icons md-dark pmd-sm">delete</i> -->
+<!--                       				</a> -->
+<!-- 								</td> -->
+<!-- 							</tr> -->
+<%-- 							</c:forEach> --%>
 						</table>
 		            </div>
 		        </div>
+		       </valuelist:root> 
 	             <div class="row" >
 		            <div class="col-md-12" >
 		             	<ilion:vlhPagination valueListInfo="${profissionais.valueListInfo}" navCssClass="pull-right"/>

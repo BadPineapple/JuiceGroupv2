@@ -17,13 +17,13 @@
 <div id="content" class="pmd-content">
     <div class="container-fluid">
         <h1 class="section-title">
-			<span>Cliente</span>
+			<span>Relatório Extrato Financeiro</span>
 		</h1><!-- End Title -->
 		<!--breadcrum start-->
 		<ol class="breadcrumb text-left">
 		  <li><a href="<ilion:url/>ilionnet/home2">Home</a></li>
 		  <li>Vitazure</li>
-		  <li class="active">Cliente </li>
+		  <li class="active">Relatório Extrato Financeiro</li>
 		</ol><!--breadcrum end--> 
 		<div class="col-md-12">
 		    <div class="component-box">
@@ -47,70 +47,39 @@
 					</div>
 			    </div>
 		        <!-- Basic Bootstrap Table example -->
-		      <valuelist:root value="clientes" url="?setarParametros=true&" includeParameters="palavraChave">   
 		        <div class="pmd-card pmd-z-depth pmd-card-custom-view">
 		            <div class="table-responsive">
 		                <table class="table table-bordered">
-		                   <valuelist:row bean="cliente">
-		                        <valuelist:column title="ID"> 
-							        <c:out value="${cliente.id}"/>
-						        </valuelist:column> 
-								<valuelist:column title="Nome" sortable="asc" property="nome"> 
-								<valuelist:attribute name="align" value="left"/>
-									<c:out value="${cliente.nome}"/>
-								</valuelist:column> 
-								<valuelist:column title="CPF" > 
-							        <c:out value="${cliente.cpf}"/>
-						        </valuelist:column> 
-								<valuelist:column title="Email"> 
-						        	<c:out value="${cliente.email}"/> 
-						        </valuelist:column> 
-								<valuelist:column title="Empresa" sortable="asc" property="empresaImportacao"> 
-							        <c:out value="${cliente.empresaImportacao eq '' ? 'Particular' : cliente.empresaImportacao}"/>
-						        </valuelist:column> 
-								<valuelist:column title="Situação"> 
-							        <c:out value="${cliente.clienteAtivo eq 'true' ? 'Ativo' : 'Desativado'}"/>
-						        </valuelist:column> 
-								<valuelist:column title="Opcoes"> 
-							        <a href="<ilion:url/>vitazure/cliente/${cliente.id}" class="btn pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-default btn-sm">
+					        <tr>
+							    <th class="text-center">ID</th>
+							    <th class="text-center">Nome</th>
+							    <th class="text-center">CPF</th>
+							    <th class="text-center">Email</th>
+							    <th class="text-center">Empresa</th>
+							    <th class="text-center">Situação</th>
+							    <th class="text-center">Opcoes</th>
+							</tr>
+							<c:forEach var="cliente" items="${clientes}">
+							<tr>
+								<td class="text-center">${cliente.id}</td>
+								<td >${cliente.nome}</td>
+								<td >${cliente.cpf}</td>
+								<td >${cliente.email}</td>
+								<td >${cliente.empresaImportacao eq '' ? 'Particular' : cliente.empresaImportacao}</td>
+								<td >${cliente.clienteAtivo eq 'true' ? 'Ativo' : 'Desativado'}</td>
+								<td class="pmd-table-row-action" align="center">
+									<a href="<ilion:url/>vitazure/cliente/${cliente.id}" class="btn pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-default btn-sm">
 										<i class="material-icons md-dark pmd-sm">edit</i>
 									</a>
-									<a  onClick="if(confirm('Deseja realmente excluir a cliente <c:out value='${cliente.nome}'/>?')){location='<ilion:url/>vitazure/cliente/excluir/<c:out value='${cliente.id}'/>'}" title="Excluir" class="btn pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-default btn-sm">
+									<a href="<ilion:url/>vitazure/cliente/excluir/${cliente.id}" title="Excluir" class="btn pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-default btn-sm">
                        					 <i class="material-icons md-dark pmd-sm">delete</i>
                       				</a>
-						        </valuelist:column> 
-							</valuelist:row>
-<!-- 					        <tr> -->
-<!-- 							    <th class="text-center">ID</th> -->
-<!-- 							    <th class="text-center">Nome</th> -->
-<!-- 							    <th class="text-center">CPF</th> -->
-<!-- 							    <th class="text-center">Email</th> -->
-<!-- 							    <th class="text-center">Empresa</th> -->
-<!-- 							    <th class="text-center">Situação</th> -->
-<!-- 							    <th class="text-center">Opcoes</th> -->
-<!-- 							</tr> -->
-<%-- 							<c:forEach var="cliente" items="${clientes}"> --%>
-<!-- 							<tr> -->
-<%-- 								<td class="text-center">${cliente.id}</td> --%>
-<%-- 								<td >${cliente.nome}</td> --%>
-<%-- 								<td >${cliente.cpf}</td> --%>
-<%-- 								<td >${cliente.email}</td> --%>
-<%-- 								<td >${cliente.empresaImportacao eq '' ? 'Particular' : cliente.empresaImportacao}</td> --%>
-<%-- 								<td >${cliente.clienteAtivo eq 'true' ? 'Ativo' : 'Desativado'}</td> --%>
-<!-- 								<td class="pmd-table-row-action" align="center"> -->
-<%-- 									<a href="<ilion:url/>vitazure/cliente/${cliente.id}" class="btn pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-default btn-sm"> --%>
-<!-- 										<i class="material-icons md-dark pmd-sm">edit</i> -->
-<!-- 									</a> -->
-<%-- 									<a href="<ilion:url/>vitazure/cliente/excluir/${cliente.id}" title="Excluir" class="btn pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-default btn-sm"> --%>
-<!--                        					 <i class="material-icons md-dark pmd-sm">delete</i> -->
-<!--                       				</a> -->
-<!-- 								</td> -->
-<!-- 							</tr> -->
-<%-- 							</c:forEach> --%>
+								</td>
+							</tr>
+							</c:forEach>
 						</table>
 		            </div>
 		        </div>
-		      </valuelist:root>  
 	             <div class="row" >
 			        <div class="col-md-2" style="padding-top: 17px;">
 						  <a href="<ilion:url/>vitazure/cliente/0" class="btn btn-primary" role="button">Novo</a>

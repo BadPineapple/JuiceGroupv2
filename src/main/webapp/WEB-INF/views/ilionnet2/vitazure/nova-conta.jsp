@@ -73,13 +73,13 @@
                                     <div class="col-12">
                                         <div class="input-block">
                                             <label>Nome completo</label>
-                                            <input type="text"  ng-model="pessoa.nome" required />
+                                            <input type="text" id="nome"  ng-model="pessoa.nome" required />
                                         </div>
                                     </div>
 	                                <div class="col-12" id="divCpf" style="display: none;">
 	                                        <div class="input-block">
 	                                            <label>Cpf</label>
-	                                            <input type="text" data-mask="000.000.000-00"  ng-model="pessoa.cpf"/>
+	                                            <input type="text" id="cpf" data-mask="000.000.000-00"  ng-model="pessoa.cpf"/>
 	                                        </div>
 	                                </div>
                                     <div class="col-12">
@@ -92,7 +92,7 @@
                                     <div class="col-12">
                                         <div class="input-block">
                                             <label>E-mail (Será seu Login)</label>
-                                            <input type="text" ng-model="pessoa.email" required />
+                                            <input type="text" ng-model="pessoa.email" id="email" required />
                                         </div>
                                     </div>
 
@@ -252,6 +252,12 @@ function validarSenha(senha){
 	  }else{
 		document.getElementById("divCpf").style.display = "none"; 
 	  }
+	  document.getElementById("nome").value = "";
+	  document.getElementById("cpf").value = "";
+	  document.getElementById("password").value = "";
+	  document.getElementById("txtCelular").value = "";
+	  document.getElementById("email").value = "";
+	  divNivelSenha.style.display = "none";
   }
 </script>
     </div>

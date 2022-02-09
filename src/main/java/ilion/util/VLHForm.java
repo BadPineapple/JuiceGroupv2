@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import ilion.util.busca.BuscaUtil;
+import ilion.vitazure.enumeradores.StatusEnum;
 
 public class VLHForm implements Serializable {
 	/**
@@ -48,6 +49,12 @@ public class VLHForm implements Serializable {
 	private String marcaSlug;
 	
 	private Map<String, Object> params = new HashMap<>();
+	
+	private String dataInicio;
+
+	private String dataFim;
+	
+	private StatusEnum statusAgenda;
 	
 	public VLHForm() {
 		super();
@@ -220,6 +227,30 @@ public class VLHForm implements Serializable {
 		this.marcaSlug = marcaSlug;
 	}
 	
+	public String getDataInicio() {
+		return dataInicio;
+	}
+
+	public void setDataInicio(String dataInicio) {
+		this.dataInicio = dataInicio;
+	}
+
+	public String getDataFim() {
+		return dataFim;
+	}
+
+	public void setDataFim(String dataFim) {
+		this.dataFim = dataFim;
+	}
+
+	public StatusEnum getStatusAgenda() {
+		return statusAgenda;
+	}
+
+	public void setStatusAgenda(StatusEnum statusAgenda) {
+		this.statusAgenda = statusAgenda;
+	}
+
 	public static VLHForm getVLHSessionSomente(String id, HttpServletRequest request) {
 		HttpSession s = request.getSession();
 
@@ -316,6 +347,12 @@ public class VLHForm implements Serializable {
 		this.setIdArtigo(Uteis.converterLong(request.getParameter("idArtigo")));
 			
 		this.marcaSlug = request.getParameter("marca");
+		
+		this.setDataInicio(request.getParameter("dataInicio"));
+
+		this.setDataFim(request.getParameter("dataFim"));
+		
+		this.setStatusAgenda(StatusEnum.fromString(request.getParameter("statusAgenda")));
 		
 		this.params.clear();
 		

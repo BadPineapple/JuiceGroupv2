@@ -67,7 +67,6 @@ public class AuthInterceptor implements HandlerInterceptor {
 		for (AutorizacaoTipoEnum autorizacaoTipoEnum : AutorizacaoTipoEnum.values()) {
 			
 			Object annotation = obterAnotacaoAutorizacao(handlerMethod, autorizacaoTipoEnum.getClazzAnnotation());
-			
 			if( annotation != null ) {
 				retorno = autorizacaoTipoEnum;
 				break;
@@ -76,7 +75,6 @@ public class AuthInterceptor implements HandlerInterceptor {
 		}
 		
 		if( retorno == null ) {
-//			logger.error("permissao-nao-definida: "+handlerMethod.toString());
 //			Uteis.escreverResposta("permissao-nao-definida", false, response);
 			throw new NaoAutenticadoException();
 		}
