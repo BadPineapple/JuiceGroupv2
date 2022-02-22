@@ -58,6 +58,8 @@ public class Pessoa implements Serializable{
 	  
 	  @Transient
 	  private String operacaoImportacao;
+
+	  private String classificacaoImportacao;
 	
 	public Long getId() {
 		if (id == null) {
@@ -303,6 +305,13 @@ public class Pessoa implements Serializable{
 	public void setTipoConta(String tipoConta) {
 		this.tipoConta = tipoConta;
 	}
+	public String getClassificacaoImportacao() {
+		return classificacaoImportacao;
+	}
+	public void setClassificacaoImportacao(String classificacaoImportacao) {
+		this.classificacaoImportacao = classificacaoImportacao;
+	}
+	
 	
 
 }

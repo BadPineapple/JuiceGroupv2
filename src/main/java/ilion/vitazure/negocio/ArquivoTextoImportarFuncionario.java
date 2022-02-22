@@ -58,9 +58,11 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
 	private List<Pessoa> pessoasOperacao3ProfissionalNaoCadastrado;
 	private List<Pessoa> pessoasOperacao2ProfissionalNaoCadastrado;
 	private List<Pessoa> pessoasOperacao2VinculadoOutraEmpresa;
+	private List<Pessoa> pessoasOperacao3VinculadoOutraEmpresa;
 	private static final String SLASH_WINDOWS = "\\";
 	private static final String SLASH_LINUX = "/";
 	private Boolean operacoesValidadas;
+	private Boolean classificacaoValidadas;
 	
 	public InputStream getInputStream() {
 		return inputStream;
@@ -278,6 +280,28 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
 	public void setPessoasOperacao2VinculadoOutraEmpresa(List<Pessoa> pessoasOperacao2VinculadoOutraEmpresa) {
 		this.pessoasOperacao2VinculadoOutraEmpresa = pessoasOperacao2VinculadoOutraEmpresa;
 	}
+	
+	public Boolean getClassificacaoValidadas() {
+		if(classificacaoValidadas == null) {
+			classificacaoValidadas = Boolean.TRUE;
+		}
+		return classificacaoValidadas;
+	}
+
+	public void setClassificacaoValidadas(Boolean classificacaoValidadas) {
+		this.classificacaoValidadas = classificacaoValidadas;
+	}
+	
+	public List<Pessoa> getPessoasOperacao3VinculadoOutraEmpresa() {
+		if(pessoasOperacao3VinculadoOutraEmpresa == null) {
+			pessoasOperacao3VinculadoOutraEmpresa = new ArrayList<Pessoa>();
+		}
+		return pessoasOperacao3VinculadoOutraEmpresa;
+	}
+
+	public void setPessoasOperacao3VinculadoOutraEmpresa(List<Pessoa> pessoasOperacao3VinculadoOutraEmpresa) {
+		this.pessoasOperacao3VinculadoOutraEmpresa = pessoasOperacao3VinculadoOutraEmpresa;
+	}
 
 	public ArquivoTextoImportarFuncionario() {
 		super();
@@ -323,6 +347,7 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
               String nome = null;
       		  String cpf = null;
       		  String operacao = null;
+      		  String classificacao = null;
       		
               while (celulas.hasNext()) {
                   XSSFCell celula = (XSSFCell) celulas.next();
@@ -338,10 +363,13 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
                       case 2:
                       	operacao = celula.toString();
                       	break;
+                      case 3:
+                    	  classificacao = celula.toString();
+                    	  break;
                   }
 
               }
-      			importarFuncionario(nome, cpf,operacao);
+      			importarFuncionario(nome, cpf,operacao , classificacao);
           }
 	        validarCpfDuplicadoLista();
 	      } catch (IOException e) {
@@ -349,7 +377,7 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
 	      }
 	    }
 	
-	private void importarFuncionario(String nome, String cpf ,String operacao) throws Exception {
+	private void importarFuncionario(String nome, String cpf ,String operacao, String classificacao) throws Exception {
 		
 		Pessoa pessoa = new Pessoa();
 		pessoa = pessoaNegocio.consultarPorCpf(cpf);
@@ -365,12 +393,12 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
 			pessoa.setSenha("Vitazure1");
 			pessoa.setConfirmado(Boolean.TRUE);
 			pessoa.setClienteAtivo(Boolean.TRUE);
-			pessoa.setOperacaoImportacao(operacao);
 		}else{
 			pessoa.setConfirmado(Boolean.TRUE);
 			pessoa.setClienteAtivo(Boolean.TRUE);
-			pessoa.setOperacaoImportacao(operacao);
 		}
+		pessoa.setOperacaoImportacao(operacao);
+		pessoa.setClassificacaoImportacao(classificacao);
 		getListPessoaImportada().add(pessoa);
 		
 	}
@@ -381,8 +409,9 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
 		getListPessoaImportada().removeAll(getListPessoaImportada().stream().filter(pessoaNulas -> Uteis.ehNuloOuVazio(pessoaNulas.getNome()) && Uteis.ehNuloOuVazio(pessoaNulas.getCpf()) && Uteis.ehNuloOuVazio(pessoaNulas.getOperacaoImportacao())).collect(Collectors.toList()));
 		
 		setOperacoesValidadas(getListPessoaImportada().stream().allMatch(pessoa -> (pessoa.getOperacaoImportacao() != null && pessoa.getOperacaoImportacao().equals("1.0")) || (pessoa.getOperacaoImportacao() != null && pessoa.getOperacaoImportacao().equals("2.0")) || (pessoa.getOperacaoImportacao() != null && pessoa.getOperacaoImportacao().equals("3.0"))));
+		setClassificacaoValidadas(getListPessoaImportada().stream().allMatch(pessoa -> (pessoa.getClassificacaoImportacao() != null && pessoa.getClassificacaoImportacao().equals("1.0")) || (pessoa.getClassificacaoImportacao() != null && pessoa.getClassificacaoImportacao().equals("2.0"))));
 		getListPessoaImportada().stream().forEach(pessoaImportada -> validar(pessoaImportada));
-		if(getErroPessoasDuplicadas().isEmpty() && getOperacoesValidadas()) {
+		if(getErroPessoasDuplicadas().isEmpty() && getOperacoesValidadas() && getClassificacaoValidadas()) {
 			getListPessoaImportada().stream().forEach(pessoa -> incluirAtualizarFuncionarioArquivo(pessoa));
 		}
 	}
@@ -405,10 +434,12 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
                  getPessoasOperacao2VinculadoOutraEmpresa().add(pessoa);
 			}else if((pessoa.getId() == null || pessoa.getId() == 0L) && pessoa.getOperacaoImportacao().equals("2.0")) {
 		    	getPessoasOperacao2ProfissionalNaoCadastrado().add(pessoa);
-		    }else if(pessoa.getId() != null && pessoa.getId() != 0L && pessoa.getOperacaoImportacao().equals("3.0")) {
+		    }else if(pessoa.getId() != null && pessoa.getId() != 0L && pessoa.getOperacaoImportacao().equals("3.0") && ((!Uteis.ehNuloOuVazio(pessoa.getEmpresaImportacao()) && usuario.getEmpresa().equals(pessoa.getEmpresaImportacao())) || Uteis.ehNuloOuVazio(pessoa.getEmpresaImportacao()))) {
 				pessoa.setEmpresaImportacao(getUsuario().getEmpresa());
 				getPessoasOperacao3().add(pessoa);
 				pessoaNegocio.incluirAtualizar(pessoa);
+		    }else if(pessoa.getId() != null && pessoa.getId() != 0L && pessoa.getOperacaoImportacao().equals("3.0") && (!Uteis.ehNuloOuVazio(pessoa.getEmpresaImportacao()) && !usuario.getEmpresa().equals(pessoa.getEmpresaImportacao()))) {
+		    	getPessoasOperacao3VinculadoOutraEmpresa().add(pessoa);
 		    }else if((pessoa.getId() == null || pessoa.getId() == 0L) && pessoa.getOperacaoImportacao().equals("3.0")) {
 		    	getPessoasOperacao3ProfissionalNaoCadastrado().add(pessoa);
 		    }
@@ -431,6 +462,9 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
 		StringBuilder retorno = new StringBuilder();
 		if(!getOperacoesValidadas()) {
 			retorno.append("<strong>Operação invalida, verifique as instruções para importação de funcionários.</strong><br/>");
+		}
+		if(!getClassificacaoValidadas()) {
+			retorno.append("<strong>A coluna 4 contém inconsistência, verifique nas orientações de preenchimento.</strong><br/>");
 		}
 		if(!getErroPessoasDuplicadas().isEmpty()) {
 			retorno.append("<strong>Problemas ao importar arquivos, existe cpf duplicados:</strong><br/>");
@@ -526,6 +560,18 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
 			retorno.append("<strong>Qtd. de linhas não importadas, CPF não existente na base: ").append(getPessoasOperacao3ProfissionalNaoCadastrado().size()).append("</strong><br/>");
 			retorno.append(" <div class=\"col-md-12 col-lg-12 col-sm-12\">");
 			getPessoasOperacao3ProfissionalNaoCadastrado().forEach(pessoa -> {
+				retorno.append(" <div class=\"col-md-6 col-lg-6 col-sm-12\">");
+				retorno.append("<strong>Nome: </strong>").append(pessoa.getNome());
+				retorno.append("</div>");
+				retorno.append(" <div class=\"col-md-6 col-lg-6 col-sm-12\">");
+				retorno.append("<strong>CPf: </strong>").append(pessoa.getCpf());
+				retorno.append("</div>");
+			});
+			retorno.append("</div>");
+		}if(!getPessoasOperacao3VinculadoOutraEmpresa().isEmpty()) {
+			retorno.append("<strong>Qtd. de linhas não importadas, com CPF vinculado a outra empresa:").append(getPessoasOperacao3VinculadoOutraEmpresa().size()).append("</strong><br/>");
+			retorno.append(" <div class=\"col-md-12 col-lg-12 col-sm-12\">");
+			getPessoasOperacao3VinculadoOutraEmpresa().forEach(pessoa -> {
 				retorno.append(" <div class=\"col-md-6 col-lg-6 col-sm-12\">");
 				retorno.append("<strong>Nome: </strong>").append(pessoa.getNome());
 				retorno.append("</div>");
