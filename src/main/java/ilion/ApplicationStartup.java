@@ -12,6 +12,7 @@ import ilion.admin.negocio.PropEnum;
 import ilion.admin.negocio.PropNegocio;
 import ilion.email.negocio.EnvioDeEmailTimer;
 import ilion.util.Uteis;
+import ilion.vitazure.negocio.AtualizaPagamentoBoletoTimer;
 import ilion.vitazure.negocio.JobAlertaAgenda;
 
 @Component
@@ -24,6 +25,8 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 	
 	@Autowired
 	private ServletContext servletContext;
+	@Autowired
+	private AtualizaPagamentoBoletoTimer atualizaPagamentoBoletoTimer;
 	
 	@Autowired
 	private EnvioDeEmailTimer envioDeEmailTimer;
@@ -46,6 +49,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 		
 		envioDeEmailTimer.init();
 		jobAlertaAgenda.init();
+		atualizaPagamentoBoletoTimer.init();
 		
 	}
 	

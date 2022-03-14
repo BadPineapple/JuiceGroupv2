@@ -76,6 +76,7 @@ public class HibernateUtil {
 		getCurrentSession().flush();
 		getCurrentSession().clear();
 		getCurrentSession().update(e);
+		getCurrentSession().flush();
 	}
 
 	public void delete(Object e) {

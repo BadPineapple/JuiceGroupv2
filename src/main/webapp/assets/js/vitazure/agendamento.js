@@ -193,8 +193,7 @@ function opcaoReagendamento(idProfissional,id) {
 	}
 	tipoAgendamento = id;
 }
-
-function agendar(respostaPagamento ,$scope, $http, $window , id) {
+function gerarBoleto(respostaPagamento ,$scope, $http, $window , id) {
 	var idProfissional = id;
 	var horarioPossivelAtendimento  = horariosDisponiveisAtendimento[idHoraTemp].horaPossivelAtendiemnto;
 	var tipoAtendimento  = definirTipo(idProfissional);
@@ -207,6 +206,7 @@ function agendar(respostaPagamento ,$scope, $http, $window , id) {
     "token": respostaPagamento.token,
     "payment_method": respostaPagamento.payment_method,
     "pacote" : pacote,
+    "respostaPagamento": respostaPagamento,
   });
 
 $http.post("/vitazure/agendar/" , retornoToken)
@@ -221,7 +221,47 @@ $http.post("/vitazure/agendar/" , retornoToken)
     })
 }
 
+function agendar(respostaPagamento ,$scope, $http, $window , id) {
+	console.log(respostaPagamento);
+	var idProfissional = id;
+	var horarioPossivelAtendimento  = horariosDisponiveisAtendimento[idHoraTemp].horaPossivelAtendiemnto;
+	var tipoAtendimento  = definirTipo(idProfissional);
+	var data  = dataSelecionada;
+	var retornoToken = JSON.stringify({
+    "idProfissional":idProfissional,
+    "horarioPossivelAtendimento":horarioPossivelAtendimento,
+    "dataAtendimento":data,
+    "tipoAtendimento":tipoAtendimento,
+    "token": respostaPagamento.token,
+    "payment_method": respostaPagamento.payment_method,
+    "pacote" : pacote,
+    "respostaPagamento": respostaPagamento,
+  });
 
+$http.post("/vitazure/agendar/" , retornoToken)
+        .then(function (response) {
+		console.log('retorno do java' + response.data);
+            alert_success(response.data.message, () => {
+	            document.getElementById("spinner").style.display = "none";
+	            console.log(response.data);
+	            if(response.data.attributeOne == "boleto") {
+		console.log('retorno do java' + response.data.attributeOne);
+	            	$window.open(response.data.attributeTwo,'_blank');
+	            }
+				$window.location.href = "/vitazure/telaAgradecimento";
+				
+			});
+        }).catch(function (response) {
+        alert_error(response.data.message);
+		document.getElementById("spinner").style.display = "none";
+    })
+}
+
+function addDays(date, days) {
+  var result = new Date(date);
+  result.setDate(result.getDate() + days);
+  return result;
+}
 function efetuarPagamento($scope, $http, $window , id ,valorOnline ,valorPresencial,valorOnlinePacote2 ,valorOnlinePacote3,valorOnlinePacote4,valorPresencialPacote2,valorPresencialPacote3 ,valorPresencialPacote4) {
     var confirma = 0;
     var tipoAtendimento  = definirTipo(id);
@@ -256,7 +296,10 @@ function efetuarPagamento($scope, $http, $window , id ,valorOnline ,valorPresenc
                               definirTipo(id) == 'online' && pacote == '' ? valorOnline : valorPresencial) * 100;
 	        var button = document.querySelector('button');
 	        function handleSuccess(data) {
+		 		console.log('AKIII');
+		 		    console.log(data);
 		        document.getElementById("spinner").style.display = "inline-block";
+		     
 	            agendar(data ,$scope, $http, $window , id);
 	        }
 	        function handleError(data) {
@@ -268,6 +311,75 @@ function efetuarPagamento($scope, $http, $window , id ,valorOnline ,valorPresenc
 	                success: handleSuccess,
 	                error: handleError
 	            });
+	            var mes = dataSelecionada.substring(4,7);
+	            console.log(mes);
+	            switch (mes) {
+						case 'Jan' :
+						mes = 01;
+						break;
+						case 'Feb' :
+						mes = 02;
+						break;
+						case 'Mar' :
+						mes = 03;
+						break;
+						case 'Apr' :
+						mes = 04;
+						break;
+						case 'May' :
+						mes = 05;
+						break;
+						case 'Jun' :
+						mes = 06;
+						break;
+						case 'Jul' :
+						mes = 07;
+						break;
+						case 'Ago' :
+						mes = 08;
+						break;
+						case 'Sep' :
+						mes = 09;
+						break;
+						case 'Oct' :
+						mes = 10;
+						break;
+						case 'Nov' :
+						mes = 11;
+						break;
+						case 'Dec' :
+						mes = 12;
+						break;
+						default:
+						mes = mes;
+				}
+	             console.log('mes ' + mes);
+	            var dia = dataSelecionada.substring(8,10);
+	              console.log('DIA ' + dia);
+	            var ano = dataSelecionada.substring(24,28);
+	              console.log('ano ' + ano);
+	            var dataSelecionadaFormatada = new Date(ano +"-"+ mes +"-"+ dia);
+	            console.log('dataSelecionadaFormatada ' + dataSelecionadaFormatada);
+	          	var diff = Math.abs(dataSelecionadaFormatada.getTime() - new Date().getTime());
+	          	var days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+	          	  console.log('diff ' + diff);
+	          	  
+	          	  console.log('days ' + days);
+	          	var vnow = new Date();
+	          	var dataExpiracaoBoleto = addDays(vnow,2);
+	          	var dataExpiracaoPix = addDays(vnow,0);
+	          	console.log('dias ' + days);
+	          	if (days < 3 ) {
+					var cont = confirm("Atenção, O agendamento para pagamento com boleto, deverá ser superior a 3 dias. Deseja Continuar?")
+					console.log('result ' + cont);
+					if(!cont) {
+						  document.getElementById("spinner").style.display = "none";
+						return;
+					}
+				}
+	            var listOptions = days < 3 ? 'credit_card,pix' : 'credit_card,pix,boleto';
+	            
+	            
 	            document.getElementById("spinner").style.display = "none";
 	            checkout.open({
 	                paymentButtonText: 'Finalizar',
@@ -277,11 +389,11 @@ function efetuarPagamento($scope, $http, $window , id ,valorOnline ,valorPresenc
 					customerData: 'true',
 					createToken: 'true',
 					postbackUrl: 'https://www.vitazure.com.br/api/v1/retornoPagarMe',
-					paymentMethods: 'credit_card',
+					paymentMethods: listOptions,
 					uiColor: '#0097D6',
 					boletoDiscountPercentage: 0,
-					boletoExpirationDate: '12/12/2021',
-					pixExpirationDate: '2021-12-31',
+					boletoExpirationDate: dataExpiracaoBoleto.toISOString().split('T')[0],
+					pixExpirationDate: dataExpiracaoPix.toISOString().split('T')[0],
 	                items: [{
 	                    id: id,
 	                    title: "Pagamento Agendamento Consulta",

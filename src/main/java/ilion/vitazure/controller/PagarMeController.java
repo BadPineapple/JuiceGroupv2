@@ -61,6 +61,7 @@ public class PagarMeController {
   public ResponseEntity<String> getAPI(HttpServletRequest request) {
 
     String API = propNegocio.findValueById(PropEnum.PAGAR_ME_ENCRYPTION_KEY);
+    
     try {
       Pessoa pessoa = (Pessoa) request.getSession().getAttribute("pessoaSessao");
       if(pessoa == null) {
@@ -98,7 +99,6 @@ public class PagarMeController {
   @ResponseBody
   public ResponseEntity<String> receberPostback(HttpServletRequest request, @RequestBody String postback) {
     try {
-
       PagarMe.init(propNegocio.findValueById(PropEnum.PAGAR_ME_API_KEY));
       Postback teste = new Postback();
       teste.setPayload(postback);

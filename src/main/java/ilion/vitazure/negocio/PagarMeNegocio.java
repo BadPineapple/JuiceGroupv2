@@ -1,5 +1,10 @@
 package ilion.vitazure.negocio;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -37,6 +42,7 @@ import ilion.util.persistencia.HibernateUtil;
 import ilion.vitazure.enumeradores.BancoEnum;
 import ilion.vitazure.enumeradores.StatusEnum;
 import ilion.vitazure.enumeradores.TipoContaEnum;
+import ilion.vitazure.model.Agenda;
 import ilion.vitazure.model.PagamentoPagarMe;
 import ilion.vitazure.model.Profissional;
 import net.mlw.vlh.ValueList;
@@ -54,6 +60,11 @@ public class PagarMeNegocio {
   @Autowired
   private HibernateUtil hibernateUtil;
 
+  @Autowired
+  private AgendaNegocio agendaNegocio;
+
+  @Autowired
+  private PessoaNegocio pessoaNegocio;
 
   public String cadastraRecebedor (Profissional profissional) throws Exception{
     
@@ -282,7 +293,18 @@ public class PagarMeNegocio {
       return null;
     }
   }
-
+  //TODO Finalizar e CHamar Atravez de um JOB
+  public String getStatusPayment(PagamentoPagarMe pagarMe) {
+		String statusPagamento = null;
+	  	try {
+			PagarMe.init(propNegocio.findValueById(PropEnum.PAGAR_ME_API_KEY));
+			Transaction tx = new Transaction().find(pagarMe.getIdTransacao());
+			statusPagamento = tx.getStatus().name();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return statusPagamento;
+	}
   public String alteraPlano(String planoId, Integer valor, Integer dias) {
     try {
       PagarMe.init(propNegocio.findValueById(PropEnum.PAGAR_ME_API_KEY));
@@ -370,6 +392,11 @@ public class PagarMeNegocio {
 	  hibernateUtil.save(pagamentoPagarMe);
   }
   
+  @Transactional
+  public void atualizarPagamentoPagarMe(PagamentoPagarMe pagamentoPagarMe) {
+	  hibernateUtil.update(pagamentoPagarMe);
+  }
+  
   public List<PagamentoPagarMe> consultarPagamentoPagarMe(Long codigoPessoa , Boolean profissional){
 		
 		List<PagamentoPagarMe> listPagamentoPagarMe = new ArrayList<PagamentoPagarMe>();
@@ -427,7 +454,40 @@ public class PagarMeNegocio {
 		return notificacaos;
 
 	}
+  public List<PagamentoPagarMe> getListaPagamentosPendentes() {
+	  DetachedCriteria dc = DetachedCriteria.forClass(PagamentoPagarMe.class);
+	  dc.add(Restrictions.eq("status","ESPERANDO PAGAMENTO"));
+	  List<PagamentoPagarMe> list = (List<PagamentoPagarMe>) hibernateUtil.list(dc);
+	  return list;
+	  
+  }
   
-  
+  public boolean atualizarPagamento()  throws Exception {
+	  List<PagamentoPagarMe> listaPendentes = getListaPagamentosPendentes();
+	  for( PagamentoPagarMe item : listaPendentes ) {
+		 String status =  getStatusPayment(item);
+		 
+		 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+		 LocalDate dateObject = LocalDate.parse(item.getDataFormatada(), formatter);
+		 Agenda agenda = agendaNegocio.consultarAgendaId(item.getAgenda());
+		  Period dias = Period.between(agenda.getDataHoraAgendamento().toInstant().atZone(ZoneId.systemDefault())
+			      .toLocalDate(), LocalDate.now());
+
+		 if (status.equals("PAID") &&  dias.getDays() <= 0) {
+			 //ATUALIZA PAGAMENTO, LIBERA AGENDAMENTO
+			 agendaNegocio.alterarAgenda(item.getAgenda(),StatusEnum.PENDENTE.name(),pessoaNegocio.consultarPorId(item.getIdPaciente()));
+			 item.setStatus(StatusEnum.valueOf("CONFIRMADO").getNome());
+			 atualizarPagamentoPagarMe(item);
+		 }
+		 if (!status.equals("PAID") &&  dias.getDays() >= 0 ) {
+			 System.out.println(item.getIdPaciente());
+			 agendaNegocio.alterarAgenda(item.getAgenda(),StatusEnum.CANCELADO.name(),pessoaNegocio.consultarPorId(item.getIdPaciente()));
+			 item.setStatus(StatusEnum.valueOf("CANCELADO").getNome());
+			 atualizarPagamentoPagarMe(item);
+		 }
+		 
+	  }
+	  return listaPendentes.size() > 0 ? true : false;
+  }
   
 }
