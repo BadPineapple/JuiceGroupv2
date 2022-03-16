@@ -20,8 +20,6 @@
                             <c:choose>
                             	<c:when test="${ paymentUrl != null && paymentUrl != ''}">
 									<h3>Seu agendamento será confirmado no seu e-mail em até 72 horas após o pagamento</h3>
-                            		</p>
-                            		<h3>${paymentUrl}</h3>
                             	</c:when>
                             	<c:otherwise>
                             		<h3>Seu agendamento foi concluído com sucesso!</h3>
