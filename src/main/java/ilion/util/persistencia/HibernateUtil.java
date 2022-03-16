@@ -76,6 +76,7 @@ public class HibernateUtil {
 		getCurrentSession().flush();
 		getCurrentSession().clear();
 		getCurrentSession().update(e);
+		getCurrentSession().flush();
 	}
 
 	public void delete(Object e) {
@@ -245,6 +246,18 @@ public class HibernateUtil {
 			criteria.setFirstResult(firstResult);
 		}
 
+		return criteria.list();
+	}
+	
+	public List listarColumn(DetachedCriteria detachedCriteria, CharSequence colunas)
+			throws HibernateException {
+		if (colunas != null && colunas.length() != 0) {
+			ProjectionList p = formarProjetionsList(colunas.toString());
+			detachedCriteria.setProjection(p);
+		}
+		
+		Session s = getCurrentSession();
+		Criteria criteria = detachedCriteria.getExecutableCriteria(s);
 		return criteria.list();
 	}
 

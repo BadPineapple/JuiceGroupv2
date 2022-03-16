@@ -566,7 +566,6 @@ function salvarConta($scope, $http, $window) {
 	var valorConsultaPresencial = document.getElementById("valorConsultaPresencial").value;
 	$scope.ProfissionalVH.profissional.valorConsultaPresencial = valorConsultaPresencial.replace('.','').replace(',','.')
 	document.getElementById("spinner").style.display = "inline-block";
-	
     $http.post("/api/v1/registrar-cartao", $scope.ProfissionalVH.profissional)
 
         .then(function (response) {

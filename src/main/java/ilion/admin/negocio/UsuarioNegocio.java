@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.FetchMode;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -357,6 +358,16 @@ public class UsuarioNegocio {
 		DetachedCriteria dc = DetachedCriteria.forClass(Usuario.class);
 		dc.add(Restrictions.eq("empresa", empresa));
 		return  (List<Usuario>) hibernateUtil.list(dc);
+	}
+	
+	public List<String> consultarEmpresasCadastradas(){
+		List<String> listEmpresas = new ArrayList<String>();
+		DetachedCriteria dc = DetachedCriteria.forClass(Usuario.class);
+		dc.setProjection(Projections.distinct(Projections.property("empresa")));
+		dc.add(Restrictions.ne("empresa", ""));
+		dc.addOrder(Order.asc("empresa"));
+		listEmpresas = hibernateUtil.listarColumn(dc, "empresa");
+		return listEmpresas;
 	}
 	
 }

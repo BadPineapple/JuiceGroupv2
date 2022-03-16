@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.ValidationException;
 
 import org.apache.log4j.Logger;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,6 +32,7 @@ import ilion.admin.negocio.PropNegocio;
 import ilion.arquivo.negocio.Arquivo;
 import ilion.arquivo.negocio.ArquivoNegocio;
 import ilion.arquivo.negocio.ArquivoUteis;
+import ilion.me.pagar.model.ResponsePaymentTransaction;
 import ilion.util.Uteis;
 import ilion.util.UtilIpRequest;
 import ilion.util.contexto.autorizacao.PessoaLogada;
@@ -47,6 +49,7 @@ import ilion.vitazure.negocio.EnderecoNegocio;
 import ilion.vitazure.negocio.EspecialidadeNegocio;
 import ilion.vitazure.negocio.FormacaoAcademicaNegocio;
 import ilion.vitazure.negocio.HorarioAtendimentoNegocio;
+import ilion.vitazure.negocio.PagarMeNegocio;
 import ilion.vitazure.negocio.PessoaNegocio;
 import ilion.vitazure.negocio.ProfissionalNegocio;
 import ilion.vitazure.negocio.ProfissionalVH;
@@ -65,6 +68,9 @@ public class ProfissionalControlle {
 	@Autowired
 	private PessoaNegocio pessoaNegocio;
 
+	@Autowired
+	private PagarMeNegocio pagarMeNegocio;
+	
 	@Autowired
 	private EnderecoNegocio enderecoNegocio;
 
@@ -132,8 +138,7 @@ public class ProfissionalControlle {
 				profissionalNegocio.atualizarSituacaoFirstTimeProfissional(profissionalVH.getProfissional());
 				profissionalNegocio.enviarAlertaPerfilCompleto(profissionalVH.getProfissional().getPessoa());
 			}
-
-			return new ResponseEntity<>(new JsonString("Perfil Profissional Atualizado!" + listItensAtualizar),
+			return new ResponseEntity<>(new JsonString(profissionalVH.getProfissional().getAceiteContrato() && !profissionalVH.getProfissional().getFirstTime() && profissionalVH.getItensIncompletos().isEmpty() ? "Parabéns, você deu um importante passo para sua carreira, agora é só aguardar nosso retorno." : "Perfil Profissional Atualizado!" + listItensAtualizar),
 					HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -222,7 +227,6 @@ public class ProfissionalControlle {
 		return lisProfissional;
 
 	}
-
 	@PostMapping(value = "/vitazure/agendar", produces = "application/json")
 	@ResponseBody
 	public ResponseEntity<JsonString> agendar(HttpServletRequest request, @RequestBody String retornoToken) {
@@ -231,7 +235,17 @@ public class ProfissionalControlle {
 			List<Agenda> listAgendaDia = agendaNegocio.consultarAgendaDia(PessoaSessao);
 			request.setAttribute("agendaDia", listAgendaDia);
 			JSONObject jsonRetornoToken = new JSONObject(retornoToken);
-			agendaNegocio.incluirAgendaPaciente(jsonRetornoToken, PessoaSessao);
+			ResponsePaymentTransaction responsePayment  = agendaNegocio.incluirAgendaPaciente(jsonRetornoToken, PessoaSessao);
+			if(responsePayment.getTransactionType().equals("boleto") ) {
+				request.getSession().setAttribute("paymentUrl", responsePayment.getResultPaymentUrl());
+				request.getSession().setAttribute("qrCode", "");
+				return new ResponseEntity<>(new JsonString("Agendamento realizado com sucesso, Aguardando Pagamento", responsePayment.getTransactionType(),responsePayment.getResultPaymentUrl()), HttpStatus.OK);
+			}
+			if(responsePayment.getTransactionType().equals("pix") ) {
+				request.getSession().setAttribute("paymentUrl", "");
+				request.getSession().setAttribute("qrCode", responsePayment.getPixQRCode());
+				return new ResponseEntity<>(new JsonString("Agendamento realizado com sucesso, Aguardando Pagamento", responsePayment.getTransactionType(),responsePayment.getResultPaymentUrl()), HttpStatus.OK);
+			}
 			return new ResponseEntity<>(new JsonString("Agendamento realizado com sucesso."), HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();

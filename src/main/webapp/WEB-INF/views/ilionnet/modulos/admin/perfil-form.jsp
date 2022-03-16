@@ -104,25 +104,25 @@
     <td class="linkCinza"><form:checkbox path="permissoes" value="contato-exportar.sp"/> Exportar contatos</td>
   </tr> 
 </table>
-<table width="100%" border="0" cellspacing="1" cellpadding="0">
-  <tr>
-    <td class="tituloDestaque"><strong><font color="#003366">M&oacute;dulo Ger&ecirc;ncia de Conte&uacute;do </font></strong></td>
-  </tr>
-</table>
-<table width="100%" border="0" cellspacing="1" cellpadding="0">
-  <tr>
-    <td align="right" valign="middle" class="linkCinzaEscuro">Categorias Vis&iacute;veis: </td>
-    <td class="linkCinza">
+<!-- <table width="100%" border="0" cellspacing="1" cellpadding="0"> -->
+<!--   <tr> -->
+<!--     <td class="tituloDestaque"><strong><font color="#003366">M&oacute;dulo Ger&ecirc;ncia de Conte&uacute;do </font></strong></td> -->
+<!--   </tr> -->
+<!-- </table> -->
+<!-- <table width="100%" border="0" cellspacing="1" cellpadding="0"> -->
+<!--   <tr> -->
+<!--     <td align="right" valign="middle" class="linkCinzaEscuro">Categorias Vis&iacute;veis: </td> -->
+<!--     <td class="linkCinza"> -->
     
-    <form:checkboxes items="${categoriasArtigoTodas}" path="categorias" itemLabel="nomeSite" itemValue="id" delimiter="<br/>"/>
+<%--     <form:checkboxes items="${categoriasArtigoTodas}" path="categorias" itemLabel="nomeSite" itemValue="id" delimiter="<br/>"/> --%>
     
-    </td>
-  </tr>
-  <tr> 
-    <td width="15%" align="right" valign="middle" class="linkCinzaEscuro">Artigo:</td>
-    <td width="*" class="linkCinza"><form:checkbox path="permissoes" value="gc.sp"/> Visualiza <form:checkbox path="permissoes" value="artigo-form.sp"/> Incluir/Alterar <form:checkbox path="permissoes" value="artigo-excluir.sp"/> Excluir <form:checkbox path="permissoes" value="artigo-publicar.sp"/> Publicar (<form:checkbox path="permissoes" value="comentarios.sp"/> Coment&aacute;rios <form:checkbox path="permissoes" value="comentario-status.sp"/> Publicar Coment&aacute;rios <form:checkbox path="permissoes" value="comentario-excluir.sp"/> Excluir Coment&aacute;rios)</td>
-  </tr>
-</table>
+<!--     </td> -->
+<!--   </tr> -->
+<!--   <tr>  -->
+<!--     <td width="15%" align="right" valign="middle" class="linkCinzaEscuro">Artigo:</td> -->
+<%--     <td width="*" class="linkCinza"><form:checkbox path="permissoes" value="gc.sp"/> Visualiza <form:checkbox path="permissoes" value="artigo-form.sp"/> Incluir/Alterar <form:checkbox path="permissoes" value="artigo-excluir.sp"/> Excluir <form:checkbox path="permissoes" value="artigo-publicar.sp"/> Publicar (<form:checkbox path="permissoes" value="comentarios.sp"/> Coment&aacute;rios <form:checkbox path="permissoes" value="comentario-status.sp"/> Publicar Coment&aacute;rios <form:checkbox path="permissoes" value="comentario-excluir.sp"/> Excluir Coment&aacute;rios)</td> --%>
+<!--   </tr> -->
+<!-- </table> -->
 
 <table width="100%" border="0" cellspacing="1" cellpadding="0">
   <tr>

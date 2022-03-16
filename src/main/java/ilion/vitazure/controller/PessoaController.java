@@ -95,6 +95,9 @@ public class PessoaController {
 	  			pessoa.setNomeResponsavelImportacao(pessoaImportada.getNomeResponsavelImportacao());
 	  			pessoa.setPessoaImportada(pessoaImportada.getPessoaImportada());
 	  		  }
+	  		  if(pessoaImportada == null && pessoa.getTipoConta().equals("CO")) {
+	  			return new ResponseEntity<>(new JsonString("CPF não existe na base de dados, entre em contato com sua empresa."), HttpStatus.BAD_REQUEST);
+	  		  }
 	    	  pessoa = pessoaNegocio.incluirAtualizar(pessoa);
 	    	  pessoaNegocio.enviarEmailAtivacao(pessoa);
 	    	  request.getSession().setAttribute(PessoaNegocio.ATRIBUTO_SESSAO, pessoa);

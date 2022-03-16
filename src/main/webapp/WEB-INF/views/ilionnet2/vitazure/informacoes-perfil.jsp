@@ -318,7 +318,7 @@
 	                                            </div>
 	                                            <div class="checkbox col-md-3 col-lg-3 col-sm-12">
 	                                                <input type="checkbox" ng-model="ProfissionalVH.profissional.crianca" id="crianca" ng-checked="${profissional.crianca}"/>
-	                                                <label>criança</label>
+	                                                <label>crianças</label>
 	                                            </div>
  										<div class="col-12">
                                                     <button class="button-secundary checkbox-button" ng-click="perfilProfissional('dadosProfissional')" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Salvar</button>
@@ -777,21 +777,9 @@
                                         <div class="col-12">
                                             <div class="input-block">
                                                 <label>Nome do favorecido</label>
-                                                <input type="text" ng-model="ProfissionalVH.profissional.nomeFavorecido"/>
+                                                <input type="text" ng-model="ProfissionalVH.profissional.pessoa.nome" disabled="true"/>
                                             </div>
                                         </div>
-
-<!--                                         <div class="col-12"> -->
-<!--                                             <div class="input-block"> -->
-<!--                                                 <div class="pix"> -->
-<!--                                                     <img src="images/pix.png" alt=""> -->
-<!--                                                     <p>Novidade! Informe sua chave pix</p> -->
-<!--                                                 </div> -->
-
-<!--                                                 <label>Pix</label> -->
-<!--                                                 <input type="text"   /> -->
-<!--                                             </div> -->
-<!--                                         </div> -->
 
                                         <div class="col-12">
                                             <button class="button-secundary checkbox-button" ng-click="salvarConta()" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Salvar</button>

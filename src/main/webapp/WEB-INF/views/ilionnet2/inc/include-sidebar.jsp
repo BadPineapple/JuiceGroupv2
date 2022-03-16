@@ -74,6 +74,26 @@
    </a>
   </li>
   </ilion:permissao>
+<ilion:permissao tipo="usuario.sp">
+  <li>
+   <a class="pmd-ripple-effect" href="<ilion:url/>relResumoAtendimento">
+    <i class="media-left media-middle">
+      <i class="fas fa-file-chart-line" style="font-size: 25px;"></i>
+    </i>
+    <span class="media-body">Rel.Atendimento Empresa</span>
+   </a>
+  </li>
+  </ilion:permissao>
+<%-- <ilion:permissao tipo="usuario.sp"> --%>
+<!--   <li> -->
+<%--    <a class="pmd-ripple-effect" href="<ilion:url/>relExtratoFinanceiro"> --%>
+<!--     <i class="media-left media-middle"> -->
+<!--       <i class="fas fa-file-chart-pie" style="font-size: 25px;"></i> -->
+<!--     </i> -->
+<!--     <span class="media-body">Rel.Extrato Financeiro</span> -->
+<!--    </a> -->
+<!--   </li> -->
+<%--   </ilion:permissao> --%>
   <li>
    <a class="pmd-ripple-effect" href="<ilion:url/>ilionnet/logout">
     <i class="media-left media-middle">

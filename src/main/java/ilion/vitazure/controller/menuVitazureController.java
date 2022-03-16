@@ -1,12 +1,20 @@
 package ilion.vitazure.controller;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -24,11 +32,13 @@ import ilion.CustomErrorController;
 import ilion.admin.negocio.PropEnum;
 import ilion.admin.negocio.PropNegocio;
 import ilion.admin.negocio.Usuario;
+import ilion.admin.negocio.UsuarioNegocio;
 import ilion.contato.negocio.ArquivoTextoContatoImportacao;
 import ilion.contato.negocio.ContatoGrupo;
 import ilion.contato.negocio.ContatoImportacao;
 import ilion.util.Uteis;
 import ilion.util.VLHForm;
+import ilion.util.ValueListImpl;
 import ilion.util.ValueListInfo;
 import ilion.util.contexto.autorizacao.UsuarioLogado;
 import ilion.vitazure.enumeradores.BancoEnum;
@@ -38,10 +48,12 @@ import ilion.vitazure.enumeradores.EspecialidadesEnum;
 import ilion.vitazure.enumeradores.EstadoEnum;
 import ilion.vitazure.enumeradores.FormacaoEnum;
 import ilion.vitazure.enumeradores.SituacaoAprovacaoProfissionalEnum;
+import ilion.vitazure.enumeradores.StatusEnum;
 import ilion.vitazure.enumeradores.TemasTrabalhoEnum;
 import ilion.vitazure.enumeradores.TempoAntecendenciaEnum;
 import ilion.vitazure.enumeradores.TipoContaEnum;
 import ilion.vitazure.enumeradores.TipoProfissionalEnum;
+import ilion.vitazure.model.Agenda;
 import ilion.vitazure.model.EnderecoAtendimento;
 import ilion.vitazure.model.Especialidade;
 import ilion.vitazure.model.FormacaoAcademica;
@@ -59,6 +71,7 @@ import ilion.vitazure.negocio.PagarMeNegocio;
 import ilion.vitazure.negocio.PessoaNegocio;
 import ilion.vitazure.negocio.ProfissionalNegocio;
 import ilion.vitazure.negocio.ProfissionalVH;
+import ilion.vitazure.negocio.RelatorioVitazure;
 import ilion.vitazure.negocio.TemaAtendimentoNegocio;
 import net.mlw.vlh.ValueList;
 
@@ -94,6 +107,12 @@ public class menuVitazureController  extends CustomErrorController{
 	
 	@Autowired
 	private HorarioAtendimentoNegocio horarioNegocio;
+	
+	@Autowired
+	private UsuarioNegocio usuarioNegocio;
+	
+	@Autowired
+	private RelatorioVitazure relatorioVitazure;
 	
 	
 	@RequestMapping("/cliente")
@@ -245,8 +264,96 @@ public class menuVitazureController  extends CustomErrorController{
 		
 	@RequestMapping("/importarFuncionario")
 	@UsuarioLogado()
-	public String contatoImportar() throws Exception {
+	public String contatoImportar() {
 		return "/ilionnet/modulos/vitazure/importarFuncionario";
+	}
+	
+	@RequestMapping("/relResumoAtendimento")
+	@UsuarioLogado()
+	public String RelResumoAtendimento(HttpServletRequest request) {
+		try {
+		VLHForm vlhForm = VLHForm.getVLHSession("resumoAtendimento", request);
+		if(vlhForm.getPalavraChave() != null) {
+			ValueList agendas = agendaNegocio.relResumoAtendimento(vlhForm,new ValueListInfo(vlhForm));
+			request.setAttribute("agendas", agendas);
+		}else {
+			ValueList agendas = new ValueListImpl(new ArrayList<>(), new ValueListInfo());
+			request.setAttribute("agendas", agendas);
+		}
+		request.setAttribute("empresas", usuarioNegocio.consultarEmpresasCadastradas());
+		request.setAttribute("status", StatusEnum.values());
+		
+			return "/ilionnet/modulos/vitazure/relResumoAtendimento";
+		} catch (Exception e) {
+			return "/ilionnet/modulos/vitazure/relResumoAtendimento";
+		}
+	}
+	
+	@RequestMapping("/download-pdf")
+	@UsuarioLogado()
+	public void enviarArquivo(HttpServletResponse response,HttpServletRequest request) throws Exception {
+	        ServletOutputStream stream = null;
+	        BufferedInputStream buf = null;
+
+	        try {
+	        	
+	        	VLHForm vlhForm = VLHForm.getVLHSession("resumoAtendimento", request);
+	        	ValueList agendas = agendaNegocio.relResumoAtendimento(vlhForm,new ValueListInfo(vlhForm));
+
+	        	stream = response.getOutputStream();
+	        	String urlDownload = relatorioVitazure.UrlDownloadArquivo(agendas, vlhForm ,"RelResumoAtendimento", "Relatório Resumo Atendimento");
+	            File pdf = new File(urlDownload);
+	            response.setContentType("application/pdf");
+	            response.addHeader("Content-Disposition","attachment; filename="+vlhForm.getPalavraChave());
+	            response.setContentLength((int) pdf.length());
+
+	            FileInputStream input = new FileInputStream(pdf);
+	            buf = new BufferedInputStream(input);
+
+	            int readBytes = 0;
+
+	            while ((readBytes = buf.read()) != -1)
+	                stream.write(readBytes);
+	        } catch (IOException ioe) {
+	            throw new ServletException(ioe.getMessage());
+	        }catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+	            if (stream != null) {
+	                stream.close();
+	            }
+
+	            if (buf != null) {
+	                buf.close();
+	            }
+	        }
+	    }
+	
+	@RequestMapping("/download-excel")
+	@UsuarioLogado()
+	public void enviarArquivoExcel(HttpServletResponse response,HttpServletRequest request) {
+		try {
+			VLHForm vlhForm = VLHForm.getVLHSession("resumoAtendimento", request);
+			ValueList agendas = agendaNegocio.relResumoAtendimento(vlhForm,new ValueListInfo(vlhForm));
+			HSSFWorkbook wb = relatorioVitazure.gerarExcel(response,agendas.getList(), vlhForm.getPalavraChave());
+			String nome = vlhForm.getPalavraChave()+Uteis.formatarDataHora(new Date(), "yyyy-MM-dd")+".xls";
+			response.setContentType("application/vnd.ms-excel");
+			response.setHeader("Content-Disposition","inline; filename="+nome);
+			OutputStream os = response.getOutputStream();
+			wb.write(os);
+			os.close();
+		} catch (Exception e) {
+		}
+	}
+	
+	
+	@RequestMapping("/relExtratoFinanceiro")
+	@UsuarioLogado()
+	public String RelRelExtratoFinanceiro(HttpServletRequest request) {
+		ValueList agendas = new ValueListImpl(new ArrayList<>(), new ValueListInfo());
+		request.setAttribute("agendas", agendas);
+//		request.setAttribute("profissionais", listPagamentos);
+		return "/ilionnet/modulos/vitazure/relExtratoFinanceiro";
 	}
 	
 	@PostMapping("/funcionario-importar-executar")
@@ -285,5 +392,7 @@ public class menuVitazureController  extends CustomErrorController{
 		return "/ilionnet/modulos/vitazure/importarFuncionario";
 		
 	}
+	
+	
 	
 }

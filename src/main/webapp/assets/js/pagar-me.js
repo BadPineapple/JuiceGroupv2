@@ -19,6 +19,7 @@ function chamada (valor, item, id) {
 
         function handleSuccess(data) {
 	        document.getElementById("spinner").style.display = "inline-block";
+            console.log(data);
             salvarTransacao(data , item);
         }
 
@@ -33,7 +34,7 @@ function chamada (valor, item, id) {
                 success: handleSuccess,
                 error: handleError
             });
-
+			var listOptions = ['credit_card','boleto','pix'];
 
             checkout.open({
                 paymentButtonText: 'Finalizar',
@@ -43,8 +44,8 @@ function chamada (valor, item, id) {
 				defaultInstallment: 1,
 				customerData: 'true',
 				createToken: 'true',
-				postbackUrl: 'https://www.vitazure.com.br/api/v1/retornoPagarMe',
-				paymentMethods: 'credit_card',
+				postbackUrl: 'https://5e4e-191-55-59-7.ngrok.io/api/v1/retornoPagarMe',
+				paymentMethods: listOptions,
 				uiColor: '#0097D6',
 				boletoDiscountPercentage: 0,
 				boletoExpirationDate: '12/12/2021',

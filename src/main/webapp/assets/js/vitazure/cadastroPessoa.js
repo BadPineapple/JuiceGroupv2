@@ -18,6 +18,7 @@ function post($scope, $http, $window) {
     if($scope.tipoConta != '' && ($scope.tipoConta == 'CL' || $scope.tipoConta == 'CO')){
 	  $scope.pessoa.cliente='true';
 	  $scope.pessoa.psicologo='false';
+	  $scope.pessoa.tipoConta= $scope.tipoConta;
 	}
 	if($scope.tipoConta != '' && $scope.tipoConta == 'PS'){
 		$scope.pessoa.psicologo='true';

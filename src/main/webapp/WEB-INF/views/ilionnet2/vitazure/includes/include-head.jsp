@@ -21,8 +21,8 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 	<script src="../../assets/js/vitazure/como-funciona.js"></script>
 	<link rel="stylesheet" href="../../assets/css/all.css">
-	<script src="//code-sa1.jivosite.com/widget/S7BYUXIMv6" async></script>
-	
+<!-- 	<script src="//code-sa1.jivosite.com/widget/S7BYUXIMv6" async></script> -->
+	<script src="https://wbot.chat/index.js" token="5378dbf3f02e9203ee922f41569a6d76" async></script>
 	<link rel="icon" type="image/png" sizes="32x32" href="../../assets/images/logo-square.png">
 	<title>Vitazure</title>
 

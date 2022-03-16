@@ -52,13 +52,16 @@
 	                        <label class="control-label">Instruções para importar uma lista de funcionários:</label>
 							<br/>
 							1 - A lista deve ser formatada em arquivo Excel. com o nome do arquivo funcionarios.xls ou funcionarios.xlsx;<br/>
-							2 - Cada linha deve conter somente o NOME, CPF e OPERAÇÃO;<br/>
+							2 - Cada linha deve conter somente o NOME, CPF, OPERAÇÃO e CLASSIFICAÇÃO;<br/>
 							3 - Os dados devem ser separados em colunas, NÃO coloque título nas colunas, SOMENTE os dados dos funcionários;<br/>
 							4 - O Campo OPERAÇÃO deve receber os seguintes valores:<br/>
 							&nbsp;&nbsp;1 (um) - Quando um novo funcionário será incluído;<br/>
 							&nbsp;&nbsp;2 (dois) - Quando um funcionário que já está incluído na base de dados deverá ser desligado do convênio;<br/>
 							&nbsp;&nbsp;3 (três) - Quando um Funcionário que já exista na base de dados deverá ser incluído no convênio.<br/>
-							4 - Os dados devem ser separados em colunas, NÃO coloque título nas colunas, SOMENTE os dados dos funcionários;<br/>
+							5 - O Campo CLASSIFICAÇÃO deve receber os seguintes valores:<br/>
+							&nbsp;&nbsp;1 (um) - Cliente titular;<br/>
+							&nbsp;&nbsp;2 (dois) - Cliente dependente;<br/>
+							6 - Os dados devem ser separados em colunas, NÃO coloque título nas colunas, SOMENTE os dados dos funcionários;<br/>
 							<br/>
 	                   </div>
 			    </div>

@@ -183,6 +183,11 @@ public class PessoaNegocio {
 				throw new ValidacaoException("Email já Cadastrado.");
 			}
 		}
+		if( ! Uteis.ehNuloOuVazio(pessoa.getCpf()) ) {
+			if( existeCpfJaCadastrado(pessoa) ) {
+				throw new ValidacaoException("CPF já Cadastrado.");
+			}
+		}
 		
 	}
 	
@@ -194,6 +199,16 @@ public class PessoaNegocio {
 			dc.add(Restrictions.not(Restrictions.eq("id", pessoa.getId())));
 		}
 
+		return hibernateUtil.possuiRegistros(dc);
+	}
+	public Boolean existeCpfJaCadastrado(Pessoa pessoa) {
+		DetachedCriteria dc = DetachedCriteria.forClass(Pessoa.class);
+		dc.add(Restrictions.eq("cpf", pessoa.getCpf()));
+		
+		if(pessoa.getId() != null) {
+			dc.add(Restrictions.not(Restrictions.eq("id", pessoa.getId())));
+		}
+		
 		return hibernateUtil.possuiRegistros(dc);
 	}
 	

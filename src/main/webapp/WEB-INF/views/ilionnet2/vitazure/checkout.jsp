@@ -34,7 +34,7 @@
                             	<c:when test="${ paymentUrl == null || paymentUrl == ''}">
                              	</c:when>
                              	<c:otherwise>
-                             		<p><a href="${paymentUrl}?format=pdf" class="button-secundary" target="_blank">Gerar boleto</a>
+                             		<p><a href="${paymentUrl}?format=pdf" class="button-secundary" target="_blank">gerar boleto</a>
                              	</c:otherwise>
                             </c:choose>
                             <c:choose>

@@ -237,14 +237,38 @@
 </script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-206194212-2"></script>
-	<script>
+<script>
 	window.dataLayer = window.dataLayer || [];
 	function gtag(){dataLayer.push(arguments);}
 	gtag('js', new Date());
-	
 	gtag('config', 'UA-206194212-2');
 </script>
 
+<!-- Global site tag (gtag.js) - Google Ads: 10782658131 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-10782658131"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+gtag('config', 'AW-10782658131');
+</script>
+<!-- Event snippet for Enviar formulário de lead conversion page
+In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
+<script>
+function gtag_report_conversion(url) {
+var callback = function () {
+if (typeof(url) != 'undefined') {
+window.location = url;
+}
+};
+gtag('event', 'conversion', {
+'send_to': 'AW-10782658131/nSj0CJnpyJADENOcyZUo',
+'event_callback': callback
+});
+return false;
+}
+</script>
 <!-- Facebook Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s)

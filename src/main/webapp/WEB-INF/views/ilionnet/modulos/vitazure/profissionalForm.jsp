@@ -141,6 +141,15 @@
 							  	</div> 
 							  </div>
 						          <div class="col-md-12 col-lg-12 col-sm-12">
+						           <div class="dados-person">
+                    					<div class="img-person">
+							            <figure>
+	                                        <img id="img" src="${profissional.pessoa.foto.link == null ? '../../assets/images/perfil.png' : profissional.pessoa.foto.link}" alt="" style="height: 162px;width: 162px;">
+	                                    </figure>
+	                                 </div>
+	                               </div>     
+						          </div>
+						          <div class="col-md-12 col-lg-12 col-sm-12">
 						            <div class="col-md-3 col-lg-3 col-sm-12">
 						              <div class="  form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed">
 						                <label for="nome" class="control-label">Nome</label>
@@ -209,7 +218,7 @@
 						             <div class="col-md-3 col-lg-3 col-sm-12">
 								        <div class="  form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed">
 								           <label for="senha" class="control-label">Senha</label>
-								           <input type="password" id="senha" ng-model="profissional.pessoa.senha" class="form-control input-group-lg" required/>
+								           <input type="password" id="senha" ng-model="profissional.pessoa.senha" class="form-control input-group-lg" required disabled="true"/>
 								        </div>
 								    </div>
 						            <div class="col-md-3 col-lg-3 col-sm-12">
@@ -328,7 +337,7 @@
 	                                            <div class="col-md-3 col-lg-3 col-sm-12">
 	                                              <div class="form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed">
 	                                                <input type="checkbox" ng-model="profissional.crianca" id="crianca" ng-checked="${profissional.crianca}"/>
-	                                                <label>criança</label>
+	                                                <label>crianças</label>
 	                                               </div> 
 	                                            </div>
 	                            </div>                 
@@ -339,7 +348,6 @@
 							  </div>
 							    <div class="col-md-12 col-lg-12 col-sm-12">
                                     <div class="form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed">
-                                       <label class="control-label">Bibliografia</label>
                                            <textarea class="form-control input-group-lg" cols="20" rows="5" ng-model="profissional.biografia" placeholder="Informe aqui sua vida profissional. Procure ser mais claro possível." style="color: #A6A6A6"></textarea>
                                      </div>
                                  </div>
@@ -554,7 +562,7 @@
 													<c:forEach var="especialidade" items="${especialidades}">
 													<tr>
 														<td class="text-center">${especialidade.id}</td>
-														<td align="center">${especialidade.especialidade}</td>
+														<td align="left">${especialidade.especialidade}</td>
 													</tr>
 													</c:forEach>
 												</table>
@@ -577,7 +585,7 @@
 													<c:forEach var="tema" items="${temasTrabalho}">
 													<tr>
 														<td class="text-center">${tema.id}</td>
-														<td align="center">${tema.tema}</td>
+														<td align="left">${tema.tema}</td>
 													</tr>
 													</c:forEach>
 												</table>
@@ -601,8 +609,8 @@
 													<c:forEach var="formacao" items="${formacao}">
 													<tr>
 														<td class="text-center">${formacao.id}</td>
-														<td align="center">${formacao.tipoFormacao}</td>
-														<td align="center">${formacao.descricaoFormacao}</td>
+														<td align="left">${formacao.tipoFormacao}</td>
+														<td align="left">${formacao.descricaoFormacao}</td>
 													</tr>
 													</c:forEach>
 												</table>

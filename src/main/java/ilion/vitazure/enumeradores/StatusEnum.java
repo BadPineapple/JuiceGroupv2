@@ -3,6 +3,7 @@ package ilion.vitazure.enumeradores;
 public enum StatusEnum {
 
 	PENDENTE("Pendente"),
+	AG_PAGAMENTO("Aguardando Pagamento"),
 	PROCESSAMENTO("Processamento"),
 	CONFIRMADO("Confirmado"),
 	CANCELADO("Cancelado"),
