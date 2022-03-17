@@ -11,18 +11,14 @@
 
                 <div class="footer-up-menu">
                     <ul>
-                        <li><a href="https://www.vitazure.com.br/home" class="line">Home</a></li>
+                        <li><a href="<ilion:url/>home" class="line">Home</a></li>
 
-                        <li><a href="https://www.vitazure.com.br/como-funciona" class="line">Como funciona</a></li>
+                        <li><a href="<ilion:url/>como-funciona" class="line">Como funciona</a></li>
 
-                        <li><a href="https://www.vitazure.com.br/aqui-e-para-voce" class="line">Aqui &eacute; pra voc&ecirc;</a></li>
+                        <li><a href="<ilion:url/>quero-atendimento" class="line">Quero atendimento</a></li>
 
-                        <li><a href="https://www.vitazure.com.br/sou-profissional" class="line">Sou profissional</a></li>
+                        <li><a href="<ilion:url/>sou-aluno" class="line">Sou Aluno</a></li>
 
-                        <li><a href="https://www.vitazure.com.br/para-sua-empresa" class="line">Aqui &eacute; para sua empresa</a></li>
-
-
-                        <li><a href="<ilion:url/>entreContato" class="line">Entre em contato</a></li>
                     </ul>
                 </div>
 
@@ -35,33 +31,32 @@
 
                         <c:forEach items="${art}" var="arq">
 
-                            <c:if test="${arq.title == \"Código de ética\"}">
+                            <c:if test="${arq.title == \"CÑƒdigo de Ð¹tica\"}">
                                 <c:set var="arqEtica" value="${arq.url}"/>
                             </c:if>
 
-                            <c:if test="${arq.title == \"Resolução\"}">
+                            <c:if test="${arq.title == \"ResoluÐ·Ð³o\"}">
                                 <c:set var="arqResolucao" value="${arq.url}"/>
                             </c:if>
 
-                            <c:if test="${arq.title == \"Termos e condições\"}">
-                                <c:set var="arqTermos" value="${arq.url}"/>
+                            <c:if test="${arq.title == \"Conselho Federal\"}">
+                                <c:set var="arqConselho" value="${arq.url}"/>
                             </c:if>
 
-                            <c:if test="${arq.title == \"Política de privacidade\"}">
-                                <c:set var="arqPolitica" value="${arq.url}"/>
+                            <c:if test="${arq.title == \"Termo de uso\"}">
+                                <c:set var="arqTermo" value="${arq.url}"/>
                             </c:if>
 
                         </c:forEach>
 
-                        <li><a href="${arqEtica}" class="line" target="_blank">Código de ética profissional do Psicólogo</a></li>
+                        <li><a href="${arqEtica}" class="line" target="_blank">CÑƒdigo de Ð¹tica</a></li>
 
-                        <li><a href="${arqResolucao}" class="line" target="_blank">Resolução CFP nº 11/2018</a></li>
+                        <li><a href="${arqResolucao}" class="line" target="_blank">ResoluÐ·Ð³o CFP nÑ” 11/2018</a></li>
 
-                        <li><a href="${arqTermos}" class="line" target="_blank">Termos e condições de uso</a></li>
+                        <li><a href="${arqConselho}" class="line" target="_blank">Conselho Federal</a></li>
 
-                        <li><a href="${arqPolitica}" class="line" target="_blank">Política de privacidade</a></li>
+                        <li><a href="${arqTermo}" class="line" target="_blank">Termos de uso</a></li>
                         
-                        <li><a href="<ilion:url/>ouvidoria" class="line">Ouvidoria</a></li>
 
                     </ul>
                 </div>
@@ -70,7 +65,7 @@
             <div class="col-12">
                 <div class="copyright">
 
-                    <p>&copy; 2021. Todos os direitos reservados.</p>
+                    <p>&copy; 2022. Todos os direitos reservados.</p>
 					<div class="redes-sociais">
                         <a href="https://transparencyreport.google.com/safe-browsing/search?url=vitazure.com.br%2Fhome&hl=pt_BR" target="_blank">
                             <figure>
@@ -107,12 +102,12 @@
     <ul>
         <li><a href="<ilion:url/>home">Home</a></li>
         <li><a href="<ilion:url/>como-funciona" class="line">Como funciona</a></li>
-        <li><a href="<ilion:url/>aqui-e-para-voce" class="line">Aqui &eacute; pra voc&ecirc;</a></li>
-        <li><a href="<ilion:url/>sou-profissional" class="line">Sou Profissional</a></li>
-        <li><a href="<ilion:url/>para-sua-empresa" class="line">Aqui &eacute; para sua empresa</a></li>
+        <li><a href="<ilion:url/>quero-atendimento" class="line">Quero atendimento</a></li>
+        <li><a href="<ilion:url/>sou-aluno" class="line">Sou Aluno</a></li>
+       
         <c:if test="${pessoa == null}">
          <li><a href="<ilion:url/>entrar">Entrar</a></li>
-         <li><a href="<ilion:url/>cadastre-se">Crie sua conta</a></li>
+        
 		</c:if>
 		<c:if test="${pessoa != null}">
 		  <a href="<ilion:url/>/vitazure/informacoes-perfil">Painel Principal</a>
@@ -253,7 +248,7 @@ gtag('js', new Date());
 
 gtag('config', 'AW-10782658131');
 </script>
-<!-- Event snippet for Enviar formulário de lead conversion page
+<!-- Event snippet for Enviar formulÐ±rio de lead conversion page
 In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
 <script>
 function gtag_report_conversion(url) {
