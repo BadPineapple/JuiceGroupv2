@@ -12,8 +12,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 	<meta name="author" content="Ilion" />
 	
-	<title>Vitazure</title>
-	
 	<jsp:include page="includes/include-head.jsp" flush="true" />
 	
 </head>
@@ -29,7 +27,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="title-internas">
-                            <h3>Como funciona a Vitazure</h3>
+                            <h3>Como funciona a Vitazure Clínica Escola</h3>
 
                             <div class="pages-internas">
                                 <a href="#">
@@ -54,86 +52,21 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="toggle-header" style="background: none !important; padding: 0 !important">
-                                    <strong style="padding-left: 0 !important; cursor: default">O que é a Vitazure?</strong>
-                                </div>
-                                <p style=" margin-bottom: 3rem;">A <span style="color: #0097d6;">Vitazure</span> é uma plataforma que conecta profissionais e pacientes, com o uso de recursos tecnológicos,<br> facilitando que pessoas encontrem o profissional certo para suas necessidades, com total segurança e<br> sigilo, tornando suas vidas mais felizes e saudáveis. </p>
-                            </div>
-
-                            <div class="col-12 col-md-4 col-xl-4">
-                                <div class="happy-faces" style="margin-bottom: 5rem;">
-                                    <div class="funciona up-photos">
-                                        <figure class="funciona first-photo">
-                                            <img src="../assets/images/img-1.jpg" alt="">
-                                        </figure>
-
-                                        <figure class="funciona second-photo">
-                                            <img src="../assets/images/img-2.jpg" alt="">
-                                        </figure>
-                                    </div>
-
-                                    <div class="funciona down-photos">
-                                        <figure class="funciona third-photo">
-                                            <img src="../assets/images/img-3.jpg" alt="">
-                                        </figure>
-
-                                        <figure class="funciona fourth-photo">
-                                            <img src="../assets/images/img-4.jpg" alt="">
-                                        </figure>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-12 col-md-8 col-md-8">
-                                <div class="funciona-text">
-                                    <div class="toggle-header" style="background: none !important; padding: 0 !important; cursor: default;">
-                                        <strong style="padding-left: 0 !important">Quem faz parte da Vitazure?</strong>
-                                    </div>
-                                    <p>A <span style="color: #0097d6; font-style: normal">Vitazure</span> é formada por pessoas que acreditam e trabalham para oferecer as melhores condições de bem-estar, equilíbrio emocional e físico para as pessoas, possibilitando acesso à saúde por meio de plataforma tecnológica simples, segura, acessível, totalmente online, que conecta pacientes a profissionais especializados em qualquer lugar e a qualquer hora.
-                                    </p>
-
-                                    <span style="color: #0097d6; font-style: normal">Acreditamos que pessoas integrais, fazem escolhas mais saudáveis e transformam o mundo em um lugar melhor para viver. E esse é o nosso propósito.</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div style="padding-top: 25px;">
-                            <p>Ainda sentiu falta de algum esclarecimento?<br>Navegue pelas perguntas mais frequentes para saber mais.</p>
-                        </div>
-
-                        <div class="buttons-internas">
-                            <a onclick="profissionalAtivo()" class="button-secundary" id="button-profissional">Sou profissional</a>
-
-                            <a onclick="pacienteAtivo()" class="button-white" id="button-paciente">Sou paciente</a>
-                        </div>
-
-                        <!-- Inicio como funciona profissional -->
-
                         <div id="funciona-profissional" class="painel-ativo">
-
-                            <%--<div class="match-toggle">--%>
-                                <%--<div class="toggle-header">--%>
-                                    <%--<strong>O que é a Vitazure?</strong>--%>
-                                <%--</div>--%>
-                                <%--<div class="toggle-body vitazure">--%>
-
-                                    <%--<p>A Vitazure é uma plataforma queconecta profissionais epacientes, com o uso derecursostecnológicos. Facilitando que pessoas encontrarem o profissional certo para suas necessidades, com total segurança e sigilo, tornando suas vidas mais felizes e saudáveis.</p>--%>
-                                <%--</div>--%>
-                            <%--</div>--%>
-
-                            <%--<div class="match-toggle">--%>
-                                <%--<div class="toggle-header">--%>
-                                    <%--<strong>Quem faz parte da equipe Vitazure?</strong>--%>
-                                <%--</div>--%>
-                                <%--<div class="toggle-body vitazure">--%>
-
-                                    <%--<p>A Vitazure é formada por pessoas que acreditam e trabalham para oferecer as melhores condições de bem-estar, equilíbrio emocional e físico para as pessoas, possibilitando acesso à saúde por meio de plataforma tecnológica simples, segura, acessível, totalmente online, que conecta pacientes a profissionais especializados em qualquer lugar e a qualquer hora.</p><p>Acreditamos que pessoas integrais, fazem escolhas mais saudáveis e transformam o mundo em um lugar melhor para viver. E esse é o nosso propósito.</p>--%>
-
-                                <%--</div>--%>
-                            <%--</div>--%>
+                            <div class="match-toggle">
+                                <div class="toggle-header">
+                                    <strong>O que é a Vitazure Clínica Escola?</strong>
+                                </div>
+                                <div class="toggle-body vitazure">
+                                    <p>A <b>Vitazure Cínica Escola</b> é uma ação social, que visa promover a democratização do atendimento psicoterápico online no país.
+                                     <br>A procura por serviçoes psicológicos online atingiu um nível nunca imaginável durante a pandemia do coronavírus, isso a partir de meados de
+                                     <br>2020, deixando claro que a atuação da área de saúde por meio de recursos de Tecnologia da Informação e Comunicação (TICs), veio para ficar.
+                                     <br>A <b>Vitazure Cínica Escola</b> consiste em um espaço onde professores e alunos desempenham atividades práticas relacionadas à saúde mental.
+                                     <br>Além de ser um ambiente acessível à população, é uma maneira de proporcionar aos estudantes uma experiência sobre como será o mercado
+									 <br>de trabalho nas suas respectivas áreas.
+                                    </p>
+                                </div>
+                            </div>
                             <div class="match-toggle">
                                 <div class="toggle-header">
                                     <strong>Como me cadastrar?</strong>
