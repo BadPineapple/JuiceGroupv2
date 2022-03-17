@@ -25,28 +25,16 @@
     <div id="app">
         <jsp:include page="includes/include-header.jsp" flush="true" />
         <div class="banner-content banner-internas">
-
             <div class="container">
                 <div class="row">
                     <div class="col-12 col-xl-9">
-                        <h1 class="title-banner" style="font-size: 5.0rem;">A Terapia faz bem, permita <br>que haja transformações significativas em sua<br> existência. Fale com seu psicólogo.</h1>
-                        <p>Com a ajuda do psicólogo, é possível, busque por <br> profissional ou especialidade.</p>
-                        <form ng-submit="consultarProfissionalExterna()"  class="form-highlight">
-                            <select ng-model="tipoProfissional">
-                                <option value="">Tipo de profissional</option>
-                                <c:forEach var="tipoProfissional" items="${tiposProfissional}">
-                                    <option ng-if="${tipoProfissional == 'PSICOLOGO'}" value="${tipoProfissional}">${tipoProfissional.valor}</option>
-                                </c:forEach>
-                            </select>
-
-                            <select ng-model="especialista">
-                                <option value="">Especialidade</option>
-                                <c:forEach items="${especialidades}" var="especialidade">
-                                    <option ng-if="tipoProfissional == 'PSICOLOGO' && ${especialidade.tipoProfissional == 'PSICOLOGO'}" value="${especialidade.valor}">${especialidade.valor}</option>
-                                </c:forEach>
-                            </select>
-                            <button type="submit" class="button-secundary">Buscar</button>
-                        </form>
+                        <h1 class="title-banner" style="font-size: 5.54rem;line-height: 9rem;font-weight: 800;margin-top: 16rem;margin-bottom: 3rem;">Está precisando <br>de atendimento?</h1>
+                        <p style="font-size: 2rem;">Este espaço permite o acesso social à saúde mental. As instituições
+                        <br>que fazem parte da Vitazure Clinica Escola, poderão aceitar ou rejeitar
+                        <br>sua inscrição conforme os requisitos adotados. As vagas são
+                        <br>limitadas.
+                        </p>
+                   		 <a href="<ilion:url/>registre-se-como-paciente" class="button-secundary button-consulta" style="margin: 0;">Inscreva-se agora!</a>   
                     </div>
                 </div>
             </div>
@@ -57,7 +45,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="title-internas">
-                            <h3>Aqui é para você</h3>
+                            <h3>Quero atendimento</h3>
 
                             <div class="pages-internas">
                                 <a href="#">
@@ -70,98 +58,85 @@
 
                                 <span>></span>
 
-                                <a href="#">Aqui é para você</a>
+                                <a href="#">Quero atendimento</a>
                             </div>
                         </div>
 
                         <div class="agendar-consulta"style="text-align: center; padding: 6rem 0 4.8rem;">
-                            <h2>Como agendar minha<br/> consulta online?</h2>
+                            <h2>Consulte abaixo as instituiçoes<br/>parceiras da Vitazure Clínica Escola:</h2>
 
-                            <p>As pessoas estão descobrindo e aproveitando diferentes formas de realizar suas atividades<br/> diárias. E a consulta online, que já é uma tendência. se tornou uma realidade.</p>
+                            <p>Encontre a instituição mais próxima e solicite um agendamento.</p>
                         </div>
                     </div>
-
-                    <div class="col-12 col-md-3 col-xl-3">
-                        <div class="consulta-online">
-                            <div class="consulta-img">
-                                <figure class="d-none d-md-block">
-                                    <img src="../assets/images/busque.png" alt="">
-                                </figure>
-
-                                <figure class="d-block d-md-none">
-                                    <img src="../assets/images/busque-mobile.png" alt="">
-                                </figure>
-                            </div>
-
-                            <div class="consulta-title">
-                                <strong>Busque</strong>
-                                <p>Busque o profissional de saúde que se identifique.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-md-3 col-xl-3">
-                        <div class="consulta-online">
-                            <div class="consulta-img">
-                                <figure class="d-none d-md-block">
-                                    <img src="../assets/images/agende.png" alt="">
-                                </figure>
-
-                                <figure class="d-block d-md-none">
-                                    <img src="../assets/images/agende-mobile.png" alt="">
-                                </figure>
-                            </div>
-
-                            <div class="consulta-title">
-                                <strong>Agende</strong>
-                                <p>Escolha o melhor dia e horário para sua consulta online.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-md-3 col-xl-3">
-                        <div class="consulta-online">
-                            <div class="consulta-img">
-                                <figure class="d-none d-md-block">
-                                    <img src="../assets/images/pague.png" alt="">
-                                </figure>
-
-                                <figure class="d-block d-md-none">
-                                    <img src="../assets/images/pague-mobile.png" alt="">
-                                </figure>
-                            </div>
-
-                            <div class="consulta-title">
-                                <strong>Pague</strong>
-                                <p>Efetue o pagamento da consulta e pronto.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-md-3 col-xl-3">
-                        <div class="consulta-online">
-                            <div class="consulta-img">
-                                <figure>
-                                    <img src="../assets/images/converse.png" alt="">
-                                </figure>
-                            </div>
-
-                            <div class="consulta-title">
-                                <strong>Converse</strong>
-                                <p>Fale por videoconsulta com seu psicólogo, com sigilo e segurança.</p>
-                            </div>
-                        </div>
-                    </div>
-
+					 <div class="col-12">
+					   <h3 style="font-size: 2.6rem;"><i class="fal fa-angle-right" style="padding-right: 20px;"></i>Instituto Projeção</h3>
+					   <p>Departamento de Psicologia</p>
+					   <p>Professor: Paulo Cesar Farias</p>
+					   <p>Telefone: 62 3949-2938</p>
+					   <p>E-mail: dp@ufg.org.br</p>
+					 </div>
+					 <div class="col-12">
+					   <h3 style="font-size: 2.6rem;"><i class="fal fa-angle-right" style="padding-right: 20px;"></i>Pontifica Universitária Católica de Goiás</h3>
+					   <p>Departamento de Psicologia</p>
+					   <p>Professor: Ricardo Augusto</p>
+					   <p>Telefone: 62 3949-2938</p>
+					   <p>E-mail: dp@ucg.org.br</p>
+					 </div>
+					 <div class="col-12">
+					   <h3 style="font-size: 2.6rem;"><i class="fal fa-angle-right" style="padding-right: 20px;"></i>UniEvangélica - Universidade Evangélica de Goiás</h3>
+					   <p>Departamento de Psicologia</p>
+					   <p>Professor: Pedro Antônio</p>
+					   <p>Telefone: 62 3949-2938</p>
+					   <p>E-mail: dp@unievangelica.com.br</p>
+					 </div>
                     <div class="col-12 text-center">
-                        <a href="<ilion:url/>cadastre-se" class="button-secundary button-consulta">Agendar minha consulta</a>
-
                         <div class="psicologia-online">
                             <h2>Psicologia Online</h2>
-
-                            <p style="padding: 1rem 3rem;">O atendimento psicológico online é uma abordagem equivalente a psicoterapia presencial e desde novembro de 2018 tal prática é permitida pelo Conselho Federal de Psicologia, conforme Resolução CFP 11/2018. As sessões duram até 60 minutos, são conduzidas através de teleatendimento, em ambiente seguro e de privacidade, mediante agendamento e pagamento prévios. Esse serviço não é indicado para casos de saúde graves. Crianças e menores de 18 anos precisam de autorização por escrito do seu responsável..</p>
+                            <p style="padding: 1rem 3rem;">O atendimento psicológico online é uma abordagem equivalente a psicoterapia presencial e desde novembro de 2018 tal prática é permitida pelo Conselho Federal de Psicologia, conforme Resolução CFP 11/2018. As sessões duram até 60 minutos, são conduzidas através de teleatendimento, em ambiente seguro e de privacidade, mediante agendamento prévio. Esse serviço não é indicado para casos de saúde graves. Crianças e menores de 18 anos precisam de autorização por escrito do seu responsável..</p>
                         </div>
                     </div>
+                    
+                    <div class="blog">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h3>Confira as últimas do Blog</h3>
+                    </div>
+
+                    <c:forEach items="${posts}" var="post">
+                        <div class="col-12 col-md-6 col-xl-3">
+                            <div class="post">
+                                <a href="${post.link}" target='_blank'>
+                                    <div class="post-img">
+                                        <figure style=" text-align-last: center">
+                                            <img src="${post.imagem}" alt="" style="max-height: 20.4rem; border-radius: 3px;">
+                                        </figure>
+                                    </div>
+
+                                    <div class="post-title" style="text-justify: auto">
+                                        <p>${post.titulo}</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </c:forEach>
+
+                    <div class="col-12">
+                        <div class="more-post line">
+                            <a href="https://blog.vitazure.com.br/" target='_blank'>
+                                Veja mais posts
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M15.2931 6.70711C14.9026 6.31658 14.9026 5.68342 15.2931 5.29289C15.6837 4.90237 16.3168 4.90237 16.7074 5.29289L22.7073 11.2929C23.0979 11.6834 23.0979 12.3166 22.7073 12.7071L16.7074 18.7071C16.3168 19.0976 15.6837 19.0976 15.2931 18.7071C14.9026 18.3166 14.9026 17.6834 15.2931 17.2929L19.586 13H2.01103C1.45265 13 1 12.5523 1 12C1 11.4477 1.45265 11 2.01103 11H19.586L15.2931 6.70711Z" fill="black"/>
+                                </svg>
+                                    
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                    
+                    
                 </div>
             </div>
         </div>
