@@ -1,24 +1,28 @@
 <%@ include file="/ilionnet/taglibs.jsp"%>
-<footer>
+<rodapé>
     <div class="container">
-        <div class="row">
+        <div class="linha">
             <div class="col-12 text-center">
                 <a href="#">
-                    <figure>
+                    <figura>
                         <img src="../../assets/images/logo-footer.png" alt="">
-                    </figure>
+                    </figura>
                 </a>
 
                 <div class="footer-up-menu">
                     <ul>
-                        <li><a href="<ilion:url/>home" class="line">Home</a></li>
+                        <li><a href="https://www.vitazure.com.br/home" class="line">Início</a></li>
 
-                        <li><a href="<ilion:url/>como-funciona" class="line">Como funciona</a></li>
+                        <li><a href="https://www.vitazure.com.br/como-funciona" class="line">Como funciona</a></li>
 
-                        <li><a href="<ilion:url/>quero-atendimento" class="line">Quero atendimento</a></li>
+                        <li><a href="https://www.vitazure.com.br/aqui-e-para-voce" class="line">Aqui é pra você</a></li>
 
-                        <li><a href="<ilion:url/>sou-aluno" class="line">Sou Aluno</a></li>
+                        <li><a href="https://www.vitazure.com.br/sou-profissional" class="line">Souprofissional</a></li>
 
+                        <li><a href="https://www.vitazure.com.br/para-sua-empresa" class="line">Aqui é para sua empresa</a></li>
+
+
+                        <li><a href="<ilion:url/>entreContato" class="line">Entre em contato</a></li>
                     </ul>
                 </div>
 
@@ -31,32 +35,33 @@
 
                         <c:forEach items="${art}" var="arq">
 
-                            <c:if test="${arq.title == \"Cуdigo de йtica\"}">
+                            <c:if test="${arq.title == \"Código deética\"}">
                                 <c:set var="arqEtica" value="${arq.url}"/>
                             </c:if>
 
-                            <c:if test="${arq.title == \"Resoluзгo\"}">
+                            <c:if test="${arq.title == \"Resoluçãoção\"}">
                                 <c:set var="arqResolucao" value="${arq.url}"/>
                             </c:if>
 
-                            <c:if test="${arq.title == \"Conselho Federal\"}">
-                                <c:set var="arqConselho" value="${arq.url}"/>
+                            <c:if test="${arq.title == \"Termos e condições\"}">
+                                <c:set var="arqTermos" value="${arq.url}"/>
                             </c:if>
 
-                            <c:if test="${arq.title == \"Termo de uso\"}">
-                                <c:set var="arqTermo" value="${arq.url}"/>
+                            <c:if test="${arq.title == \"Política de privacidade\"}">
+                                <c:set var="arqPolítica" value="${arq.url}"/>
                             </c:if>
 
                         </c:forEach>
 
-                        <li><a href="${arqEtica}" class="line" target="_blank">Cуdigo de йtica</a></li>
+                        <li><a href="${arqEtica}" class="line" target="_blank">Código deéticaProfissional do Psicólogo</a></li>
 
-                        <li><a href="${arqResolucao}" class="line" target="_blank">Resoluзгo CFP nє 11/2018</a></li>
+                        <li><a href="${arqResolucao}" class="line" target="_blank">Resoluçãoção PCP nº11/2018</a></li>
 
-                        <li><a href="${arqConselho}" class="line" target="_blank">Conselho Federal</a></li>
+                        <li><a href="${arqTermos}" class="line" target="_blank">Termos e condições de uso</a></li>
 
-                        <li><a href="${arqTermo}" class="line" target="_blank">Termos de uso</a></li>
+                        <li><a href="${arqPolítica}" class="line" target="_blank">Política de privacidade</a></li>
                         
+                        <li><a href="<ilion:url/>ouvidoria" class="line">Ouvidoria</a></li>
 
                     </ul>
                 </div>
@@ -65,31 +70,31 @@
             <div class="col-12">
                 <div class="copyright">
 
-                    <p>&copy; 2022. Todos os direitos reservados.</p>
+                    <p>© 2021. Todos os direitos reservados.</p>
 					<div class="redes-sociais">
                         <a href="https://transparencyreport.google.com/safe-browsing/search?url=vitazure.com.br%2Fhome&hl=pt_BR" target="_blank">
-                            <figure>
+                            <figura>
                                 <img src="../assets/images/site_seguro.png" style="width: 115px;" alt="">
-                            </figure>
+                            </figura>
                         </a>
                     </div>    
                     <div class="redes-sociais">
                         <a href="http://instagram.com/vitazure" target="_blank">
-                            <figure>
+                            <figura>
                                 <img src="../assets/images/instagram.png" alt="">
-                            </figure>
+                            </figura>
                         </a>
 
                         <a href="http://blog.vitazure.com.br/" target="_blank">
-                            <figure>
+                            <figura>
                                 <img src="../assets/images/icon-blog.png" alt="">
-                            </figure>
+                            </figura>
                         </a>
 
                         <a href="https://www.youtube.com/channel/vitazure" target="_blank">
-                            <figure>
+                            <figura>
                                 <img src="../assets/images/youtube.png" alt="" style="width: 30px">
-                            </figure>
+                            </figura>
                         </a>
                     </div>
                 </div>
@@ -100,14 +105,14 @@
 
 <nav id="menu">
     <ul>
-        <li><a href="<ilion:url/>home">Home</a></li>
+        <li><a href="<ilion:url/>home">Início</a></li>
         <li><a href="<ilion:url/>como-funciona" class="line">Como funciona</a></li>
-        <li><a href="<ilion:url/>quero-atendimento" class="line">Quero atendimento</a></li>
-        <li><a href="<ilion:url/>sou-aluno" class="line">Sou Aluno</a></li>
-       
+        <li><a href="<ilion:url/>umaqie-para-voce" class="line">Aqui é pra você</a></li>
+        <li><a href="<ilion:url/>sou-profissional" class="line">SouProfissional</a></li>
+       <li><a href="<ilion:url/>para-sua-empresa" class="line">Aqui é para sua empresa</a></li>
         <c:if test="${pessoa == null}">
          <li><a href="<ilion:url/>entrar">Entrar</a></li>
-        
+        <li><a href="<ilion:url/>cadastro-se">Crie sua conta</a></li>
 		</c:if>
 		<c:if test="${pessoa != null}">
 		  <a href="<ilion:url/>/vitazure/informacoes-perfil">Painel Principal</a>
@@ -116,21 +121,21 @@
     </ul>
 </nav>
 
-<style>
-   .mm-menu a, .mm-menu a:active, .mm-menu a:hover, .mm-menu a:link, .mm-menu a:visited {
-        text-decoration: none;
-        color: #fff;
-        background: #0097d6;
-        font-size: 1.3rem;
-        padding: 1.5rem;
+<estilo>
+   .mm-menu a, .mm-menu a:ativo, .mm-menu a:hover, .mm-menu a:link, .mm-menu a:visitado {
+        decoração de texto: nenhuma;
+        cor: #ff;
+        fundo: #0097d6;
+        tamanho da fonte: 1.3rem;
+        preenchimento: 1.5rem;
     }
 
-    .mm-listitem:after {
-        left: 0;
+    .mm-listitem:depois de {
+        esquerda: 0;
     }   
 
-    .mm-panels>.mm-panel {
-        background: #0097d6;
+    .mm-painéis>.mm-painel {
+        fundo: #0097d6;
     }
 </style>
 
@@ -150,40 +155,40 @@
     document.addEventListener(
         "DOMContentLoaded", () => {
             new Mmenu( "#menu", {
-                extensions: ["theme-dark", "pagedim-black", "position-right"]
+                extensões: ["theme-dark", "pagedim-black", "position-right"]
             });
         }
     );
 
     $('.slider-dias').slick({
-        dots: false,
-        infinite: true,
-        speed: 300,
+        pontos: falso,
+        infinito: verdadeiro,
+        velocidade: 300,
         slidesToShow: 5,
         slidesToScroll: 1,
-        arrows: true,
+        setas: verdade,
         prevArrow: '<img class="slick-prev" src="../../assets/images/left-arrow.png" alt="">',
         nextArrow: '<img class="slick-next" src="../../assets/images/right-arrow.png" alt="">',
-        responsive: [
+        responsivo: [
             {
-            breakpoint: 1024,
-            settings: {
+            ponto de interrupção: 1024,
+            definições: {
                 slidesToShow: 3,
                 slidesToScroll: 3,
-                infinite: true,
-                dots: true
+                infinito: verdadeiro,
+                pontos: verdade
             }
             },
             {
-            breakpoint: 600,
-            settings: {
+            ponto de interrupção: 600,
+            definições: {
                 slidesToShow: 2,
                 slidesToScroll: 2
             }
             },
             {
-            breakpoint: 480,
-            settings: {
+            ponto de interrupção: 480,
+            definições: {
                 slidesToShow: 1,
                 slidesToScroll: 1
             }
@@ -194,9 +199,9 @@
     $(window).scroll(function(){ scrollSite(); });
     scrollSite();
 
-    function scrollSite(){
+    função scrollSite(){
         if($(this).scrollTop() > 100){
-            $('header').addClass('active');
+            $('cabeçalho').addClass('ativo');
         };
         if($(this).scrollTop() < 100){
             $('header').removeClass('active');
@@ -207,7 +212,7 @@
         $(this).parent().toggleClass('active');
     });
 
-    const buttonOnline = document.querySelector('.online');
+    botãoconstOnline = document.querySelector('.online');
     const buttonPresencial = document.querySelector('.presencial');
     const agendaPresencial = document.querySelector('.agenda-presencial');
     const agendaOnline = document.querySelector('.agenda-online');
@@ -216,68 +221,68 @@
         buttonOnline.classList.add('active');
         buttonPresencial.classList.remove('active');
 
-        agendaPresencial.style.display = 'none';
-        agendaOnline.style.display = 'block';
+        agendaPresencial.style.display = 'nenhum';
+        agendaOnline.style.display = 'bloquear';
     })
 
     buttonPresencial.addEventListener('click', function() {
         buttonPresencial.classList.add('active');
         buttonOnline.classList.remove('active');
 
-        agendaOnline.style.display = 'none';
-        agendaPresencial.style.display = 'block';
+        agendaOnline.style.display = 'nenhum';
+        agendaPresencial.style.display = 'bloquear';
 
         $('.slider-dias').slick('slickNext');
     })
 </script>
-<!-- Global site tag (gtag.js) - Google Analytics -->
+<!-- Tag global do site (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-206194212-2"></script>
 <script>
 	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
+	function gtag(){dataLayer.push(argumentos);}
 	gtag('js', new Date());
 	gtag('config', 'UA-206194212-2');
 </script>
 
-<!-- Global site tag (gtag.js) - Google Ads: 10782658131 -->
+<!-- Tag global do site (gtag.js) - Google Ads: 10782658131 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-10782658131"></script>
 <script>
 window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
+function gtag(){dataLayer.push(argumentos);}
 gtag('js', new Date());
 
 gtag('config', 'AW-10782658131');
 </script>
-<!-- Event snippet for Enviar formulбrio de lead conversion page
-In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
+<!-- Fragmento de evento para o formulário de envioumapágina de conversão rio de leads
+Em sua página html, adicione o snippet e chame gtag_report_conversion quando alguém clicar no link ou botão escolhido. -->
 <script>
 function gtag_report_conversion(url) {
-var callback = function () {
+var retorno de chamada = function() {
 if (typeof(url) != 'undefined') {
-window.location = url;
+janela.local = url;
 }
 };
-gtag('event', 'conversion', {
+gtag('evento', 'conversão', {
 'send_to': 'AW-10782658131/nSj0CJnpyJADENOcyZUo',
-'event_callback': callback
+'event_callback': retorno de chamada
 });
-return false;
+retorna falso;
 }
 </script>
-<!-- Facebook Pixel Code -->
+<!-- Código de pixel do Facebook -->
 <script>
-!function(f,b,e,v,n,t,s)
+!função(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+n.callMethod.apply(n,argumentos):n.queue.push(argumentos)};
 if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
 n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
+s.parentNode.insertBefore(t,s)}(janela, documento,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '3091229947775490');
+fbq('iniciar', '3091229947775490');
 fbq('track', 'PageView');
 </script>
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=3091229947775490&ev=PageView&noscript=1"
 /></noscript>
-<!-- End Facebook Pixel Code -->
+<!-- Fim do código de pixel do Facebook -->
