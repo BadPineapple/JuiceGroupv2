@@ -11,7 +11,6 @@ import ilion.admin.negocio.PropEnum;
 import ilion.admin.negocio.PropNegocio;
 import ilion.contato.controller.ContatoVH;
 import ilion.contato.negocio.Contato;
-import ilion.contato.negocio.ContatoNegocio;
 import ilion.email.negocio.Email;
 import ilion.email.negocio.EmailNegocio;
 import ilion.email.negocio.EmailSenderFactory;
@@ -112,7 +111,45 @@ public class EnvioEmailConsulta {
 									urlEntrar),
 					"Solicitação de reagendamento pelo profissional no portal vitazure");
 		} else if (agenda.getStatus().equals(StatusEnum.CANCELADO)) {
-
+			String urlEntrar = propNegocio.findValueById(PropEnum.URL).concat("/entrar");
+			htmlEmail.append(emailPadrao(corpoHtmlEmailCancelamentoCliente()));
+			enviarEmailAlteracaoSituacaoAgendaCliente(agenda,
+					htmlEmail.toString().replaceAll("#nome#", agenda.getPaciente().getNome())
+							.replaceAll("#dataAgendaEmail#", agenda.getDataAgendaEmail())
+							.replaceAll("#profissionalAtendimento#", agenda.getProfissional().getPessoa().getNome())
+							.replaceAll("#horaAgendaEmail#", agenda.getHoraAgendaEmail()).replaceAll("#urlEntrar#",
+									urlEntrar),
+					"Cancelamento Agendamento");
+			htmlEmail = new StringBuffer();
+			htmlEmail.append(emailPadrao(corpoHtmlEmailCancelamentoProssionnal()));
+			enviarEmailAlteracaoSituacaoAgendaProfissional(			
+			agenda,
+					htmlEmail.toString().replaceAll("#nome#", agenda.getPaciente().getNome())
+							.replaceAll("#dataAgendaEmail#", agenda.getDataAgendaEmail())
+							.replaceAll("#profissionalAtendimento#", agenda.getProfissional().getPessoa().getNome())
+							.replaceAll("#horaAgendaEmail#", agenda.getHoraAgendaEmail()).replaceAll("#urlEntrar#",
+									urlEntrar),
+					"Cancelamento Agendamento");
+		} else if (agenda.getStatus().equals(StatusEnum.PENDENTE)) {
+			String urlEntrar = propNegocio.findValueById(PropEnum.URL).concat("/entrar");
+			htmlEmail.append(emailPadrao(corpoHtmlEmailPagtoAprovadoCliente("BOLETO")));
+			enviarEmailAlteracaoSituacaoAgendaCliente(agenda,
+					htmlEmail.toString().replaceAll("#nome#", agenda.getPaciente().getNome())
+							.replaceAll("#dataAgendaEmail#", agenda.getDataAgendaEmail())
+							.replaceAll("#profissionalAtendimento#", agenda.getProfissional().getPessoa().getNome())
+							.replaceAll("#horaAgendaEmail#", agenda.getHoraAgendaEmail()).replaceAll("#urlEntrar#",
+									urlEntrar),
+					"Confirmação Pagamento");
+			htmlEmail = new StringBuffer();
+			htmlEmail.append(emailPadrao(corpoHtmlEmailPagtoAprovadoProssionnal()));
+			enviarEmailAlteracaoSituacaoAgendaProfissional(			
+			agenda,
+					htmlEmail.toString().replaceAll("#nome#", agenda.getPaciente().getNome())
+							.replaceAll("#dataAgendaEmail#", agenda.getDataAgendaEmail())
+							.replaceAll("#profissionalAtendimento#", agenda.getProfissional().getPessoa().getNome())
+							.replaceAll("#horaAgendaEmail#", agenda.getHoraAgendaEmail()).replaceAll("#urlEntrar#",
+									urlEntrar),
+					"Confirmação Pagamento");
 		}
 
 	}
@@ -160,6 +197,209 @@ public class EnvioEmailConsulta {
 				"Você deu um importante passo para sua carreira");
 	}
 
+	private String corpoHtmlEmailPagtoAprovadoCliente(String TipoPagamento) {
+		StringBuffer corpoHtmlEmail = new StringBuffer();
+		corpoHtmlEmail.append("	<div class=\"col-12\" style=\"padding-top: 20px;\">");
+		if(TipoPagamento.equals("PIX")) {
+			corpoHtmlEmail.append("	<p> A transferência PIX foi confirmada, juntamente com seu agendamento!</p>");
+		} else {
+			corpoHtmlEmail.append("	<p>O pagamento do seu boleto foi confirmado, juntamente com seu agendamento!</p>");
+		}
+		corpoHtmlEmail
+		.append("Esteja atento para a data e horário.");
+		corpoHtmlEmail
+				.append("<table width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\">");
+		corpoHtmlEmail.append("			  <tr>");
+		corpoHtmlEmail.append("			    <td valign=\"top\" bgcolor=\"#F3F3F3\">");
+		corpoHtmlEmail.append(
+				"				  <table width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"3\" cellspacing=\"5\" bgcolor=\"#F3F3F3\">");
+		corpoHtmlEmail.append("				        <tr> ");
+		corpoHtmlEmail.append(
+				"				          <td><table width=\"100%\" border=\"0\" cellpadding=\"3\" cellspacing=\"0\" bgcolor=\"#FFFFFF\">");
+		corpoHtmlEmail.append("				              <tr> ");
+		corpoHtmlEmail.append("				                <td colspan=\"2\" align=\"right\">&nbsp;</td>");
+		corpoHtmlEmail.append("				              </tr>");
+		corpoHtmlEmail.append("				              <tr> ");
+		corpoHtmlEmail.append(
+				"				                <td width=\"90\"><strong><font size=\"2\" face=\"Arial, Helvetica, sans-serif\" style=\"color: #1895d4;\">Data:</font></strong></td>");
+		corpoHtmlEmail.append(
+				"				                <td><font size=\"2\" face=\"Arial, Helvetica, sans-serif\">#dataAgendaEmail#</font></td>");
+		corpoHtmlEmail.append("				              </tr>");
+		corpoHtmlEmail.append("				              <tr> ");
+		corpoHtmlEmail.append(
+				"				                <td width=\"90\"><strong><font size=\"2\" face=\"Arial, Helvetica, sans-serif\" style=\"color: #1895d4;\">Horário:</font></strong></td>");
+		corpoHtmlEmail.append(
+				"				                <td><font size=\"2\" face=\"Arial, Helvetica, sans-serif\">#horaAgendaEmail#</font></td>");
+		corpoHtmlEmail.append("				              </tr>");
+		corpoHtmlEmail.append("				              <tr> ");
+		corpoHtmlEmail.append(
+				"				                <td width=\"90\"><strong style=\"margin-right: 3px;\"><font size=\"2\" face=\"Arial, Helvetica, sans-serif\" style=\"color: #1895d4;\">Profissional:</font></strong></td>");
+		corpoHtmlEmail.append(
+				"				                <td><font size=\"2\" face=\"Arial, Helvetica, sans-serif\">#profissionalAtendimento#</font></td>");
+		corpoHtmlEmail.append("				              </tr>");
+		corpoHtmlEmail.append("				              <tr> ");
+		corpoHtmlEmail.append("				                <td colspan=\"2\" align=\"right\">&nbsp;</td>");
+		corpoHtmlEmail.append("				              </tr>");
+		corpoHtmlEmail.append("						</table>");
+		corpoHtmlEmail.append("						</td>");
+		corpoHtmlEmail.append("						</tr>");
+		corpoHtmlEmail.append("					</table>");
+		corpoHtmlEmail.append("			    </td>");
+		corpoHtmlEmail.append("		   </tr>");
+		corpoHtmlEmail.append("		</table>");
+		corpoHtmlEmail.append("</div>");
+		return corpoHtmlEmail.toString();
+	}
+	
+	private String corpoHtmlEmailCancelamentoCliente() {
+		StringBuffer corpoHtmlEmail = new StringBuffer();
+		corpoHtmlEmail.append("	<div class=\"col-12\" style=\"padding-top: 20px;\">");
+		corpoHtmlEmail.append("	<p>O Seu agendamento listado abaixo foi cancelado, pois não foi possivel identificar o Pagamento</p>");
+
+		corpoHtmlEmail
+				.append("<table width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\">");
+		corpoHtmlEmail.append("			  <tr>");
+		corpoHtmlEmail.append("			    <td valign=\"top\" bgcolor=\"#F3F3F3\">");
+		corpoHtmlEmail.append(
+				"				  <table width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"3\" cellspacing=\"5\" bgcolor=\"#F3F3F3\">");
+		corpoHtmlEmail.append("				        <tr> ");
+		corpoHtmlEmail.append(
+				"				          <td><table width=\"100%\" border=\"0\" cellpadding=\"3\" cellspacing=\"0\" bgcolor=\"#FFFFFF\">");
+		corpoHtmlEmail.append("				              <tr> ");
+		corpoHtmlEmail.append("				                <td colspan=\"2\" align=\"right\">&nbsp;</td>");
+		corpoHtmlEmail.append("				              </tr>");
+		corpoHtmlEmail.append("				              <tr> ");
+		corpoHtmlEmail.append(
+				"				                <td width=\"90\"><strong><font size=\"2\" face=\"Arial, Helvetica, sans-serif\" style=\"color: #1895d4;\">Data:</font></strong></td>");
+		corpoHtmlEmail.append(
+				"				                <td><font size=\"2\" face=\"Arial, Helvetica, sans-serif\">#dataAgendaEmail#</font></td>");
+		corpoHtmlEmail.append("				              </tr>");
+		corpoHtmlEmail.append("				              <tr> ");
+		corpoHtmlEmail.append(
+				"				                <td width=\"90\"><strong><font size=\"2\" face=\"Arial, Helvetica, sans-serif\" style=\"color: #1895d4;\">Horário:</font></strong></td>");
+		corpoHtmlEmail.append(
+				"				                <td><font size=\"2\" face=\"Arial, Helvetica, sans-serif\">#horaAgendaEmail#</font></td>");
+		corpoHtmlEmail.append("				              </tr>");
+		corpoHtmlEmail.append("				              <tr> ");
+		corpoHtmlEmail.append(
+				"				                <td width=\"90\"><strong style=\"margin-right: 3px;\"><font size=\"2\" face=\"Arial, Helvetica, sans-serif\" style=\"color: #1895d4;\">Profissional:</font></strong></td>");
+		corpoHtmlEmail.append(
+				"				                <td><font size=\"2\" face=\"Arial, Helvetica, sans-serif\">#profissionalAtendimento#</font></td>");
+		corpoHtmlEmail.append("				              </tr>");
+		corpoHtmlEmail.append("				              <tr> ");
+		corpoHtmlEmail.append("				                <td colspan=\"2\" align=\"right\">&nbsp;</td>");
+		corpoHtmlEmail.append("				              </tr>");
+		corpoHtmlEmail.append("						</table>");
+		corpoHtmlEmail.append("						</td>");
+		corpoHtmlEmail.append("						</tr>");
+		corpoHtmlEmail.append("					</table>");
+		corpoHtmlEmail.append("			    </td>");
+		corpoHtmlEmail.append("		   </tr>");
+		corpoHtmlEmail.append("		</table>");
+		corpoHtmlEmail.append("</div>");
+		return corpoHtmlEmail.toString();
+	}
+	
+
+	private String corpoHtmlEmailCancelamentoProssionnal() {
+		StringBuffer corpoHtmlEmail = new StringBuffer();
+		corpoHtmlEmail.append("	<div class=\"col-12\" style=\"padding-top: 20px;\">");
+		corpoHtmlEmail.append("	<p>O Agendamento abaixo Foi cancelado, pois não houve identificação do Pagamento:</p>");
+
+		corpoHtmlEmail
+				.append("<table width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\">");
+		corpoHtmlEmail.append("			  <tr>");
+		corpoHtmlEmail.append("			    <td valign=\"top\" bgcolor=\"#F3F3F3\">");
+		corpoHtmlEmail.append(
+				"				  <table width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"3\" cellspacing=\"5\" bgcolor=\"#F3F3F3\">");
+		corpoHtmlEmail.append("				        <tr> ");
+		corpoHtmlEmail.append(
+				"				          <td><table width=\"100%\" border=\"0\" cellpadding=\"3\" cellspacing=\"0\" bgcolor=\"#FFFFFF\">");
+		corpoHtmlEmail.append("				              <tr> ");
+		corpoHtmlEmail.append("				                <td colspan=\"2\" align=\"right\">&nbsp;</td>");
+		corpoHtmlEmail.append("				              </tr>");
+		corpoHtmlEmail.append("				              <tr> ");
+		corpoHtmlEmail.append(
+				"				                <td width=\"90\"><strong><font size=\"2\" face=\"Arial, Helvetica, sans-serif\" style=\"color: #1895d4;\">Data:</font></strong></td>");
+		corpoHtmlEmail.append(
+				"				                <td><font size=\"2\" face=\"Arial, Helvetica, sans-serif\">#dataAgendaEmail#</font></td>");
+		corpoHtmlEmail.append("				              </tr>");
+		corpoHtmlEmail.append("				              <tr> ");
+		corpoHtmlEmail.append(
+				"				                <td width=\"90\"><strong><font size=\"2\" face=\"Arial, Helvetica, sans-serif\" style=\"color: #1895d4;\">Horário:</font></strong></td>");
+		corpoHtmlEmail.append(
+				"				                <td><font size=\"2\" face=\"Arial, Helvetica, sans-serif\">#horaAgendaEmail#</font></td>");
+		corpoHtmlEmail.append("				              </tr>");
+		corpoHtmlEmail.append("				              <tr> ");
+		corpoHtmlEmail.append(
+				"				                <td width=\"90\"><strong style=\"margin-right: 3px;\"><font size=\"2\" face=\"Arial, Helvetica, sans-serif\" style=\"color: #1895d4;\">Profissional:</font></strong></td>");
+		corpoHtmlEmail.append(
+				"				                <td><font size=\"2\" face=\"Arial, Helvetica, sans-serif\">#profissionalAtendimento#</font></td>");
+		corpoHtmlEmail.append("				              </tr>");
+		corpoHtmlEmail.append("				              <tr> ");
+		corpoHtmlEmail.append("				                <td colspan=\"2\" align=\"right\">&nbsp;</td>");
+		corpoHtmlEmail.append("				              </tr>");
+		corpoHtmlEmail.append("						</table>");
+		corpoHtmlEmail.append("						</td>");
+		corpoHtmlEmail.append("						</tr>");
+		corpoHtmlEmail.append("					</table>");
+		corpoHtmlEmail.append("			    </td>");
+		corpoHtmlEmail.append("		   </tr>");
+		corpoHtmlEmail.append("		</table>");
+		corpoHtmlEmail.append("</div>");
+		return corpoHtmlEmail.toString();
+	}
+	
+	private String corpoHtmlEmailPagtoAprovadoProssionnal() {
+		StringBuffer corpoHtmlEmail = new StringBuffer();
+		corpoHtmlEmail.append("	<div class=\"col-12\" style=\"padding-top: 20px;\">");
+		corpoHtmlEmail.append("	<p>Foi confirmado o pagamento do agendamento:</p>");
+
+		corpoHtmlEmail
+				.append("<table width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\">");
+		corpoHtmlEmail.append("			  <tr>");
+		corpoHtmlEmail.append("			    <td valign=\"top\" bgcolor=\"#F3F3F3\">");
+		corpoHtmlEmail.append(
+				"				  <table width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"3\" cellspacing=\"5\" bgcolor=\"#F3F3F3\">");
+		corpoHtmlEmail.append("				        <tr> ");
+		corpoHtmlEmail.append(
+				"				          <td><table width=\"100%\" border=\"0\" cellpadding=\"3\" cellspacing=\"0\" bgcolor=\"#FFFFFF\">");
+		corpoHtmlEmail.append("				              <tr> ");
+		corpoHtmlEmail.append("				                <td colspan=\"2\" align=\"right\">&nbsp;</td>");
+		corpoHtmlEmail.append("				              </tr>");
+		corpoHtmlEmail.append("				              <tr> ");
+		corpoHtmlEmail.append(
+				"				                <td width=\"90\"><strong><font size=\"2\" face=\"Arial, Helvetica, sans-serif\" style=\"color: #1895d4;\">Data:</font></strong></td>");
+		corpoHtmlEmail.append(
+				"				                <td><font size=\"2\" face=\"Arial, Helvetica, sans-serif\">#dataAgendaEmail#</font></td>");
+		corpoHtmlEmail.append("				              </tr>");
+		corpoHtmlEmail.append("				              <tr> ");
+		corpoHtmlEmail.append(
+				"				                <td width=\"90\"><strong><font size=\"2\" face=\"Arial, Helvetica, sans-serif\" style=\"color: #1895d4;\">Horário:</font></strong></td>");
+		corpoHtmlEmail.append(
+				"				                <td><font size=\"2\" face=\"Arial, Helvetica, sans-serif\">#horaAgendaEmail#</font></td>");
+		corpoHtmlEmail.append("				              </tr>");
+		corpoHtmlEmail.append("				              <tr> ");
+		corpoHtmlEmail.append(
+				"				                <td width=\"90\"><strong style=\"margin-right: 3px;\"><font size=\"2\" face=\"Arial, Helvetica, sans-serif\" style=\"color: #1895d4;\">Profissional:</font></strong></td>");
+		corpoHtmlEmail.append(
+				"				                <td><font size=\"2\" face=\"Arial, Helvetica, sans-serif\">#profissionalAtendimento#</font></td>");
+		corpoHtmlEmail.append("				              </tr>");
+		corpoHtmlEmail.append("				              <tr> ");
+		corpoHtmlEmail.append("				                <td colspan=\"2\" align=\"right\">&nbsp;</td>");
+		corpoHtmlEmail.append("				              </tr>");
+		corpoHtmlEmail.append("						</table>");
+		corpoHtmlEmail.append("						</td>");
+		corpoHtmlEmail.append("						</tr>");
+		corpoHtmlEmail.append("					</table>");
+		corpoHtmlEmail.append("			    </td>");
+		corpoHtmlEmail.append("		   </tr>");
+		corpoHtmlEmail.append("		</table>");
+		corpoHtmlEmail.append("	<p>Confirme na página <b>Minhas consultas</b>, para que o paciente seja informado.</p>");
+		corpoHtmlEmail.append("</div>");
+		return corpoHtmlEmail.toString();
+	}
+	
 	private String corpoHtmlEmailConf() {
 		StringBuffer corpoHtmlEmail = new StringBuffer();
 		corpoHtmlEmail.append("	<div class=\"col-12\" style=\"padding-top: 20px;\">");

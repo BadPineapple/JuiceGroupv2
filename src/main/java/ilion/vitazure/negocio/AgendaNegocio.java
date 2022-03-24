@@ -270,13 +270,14 @@ public class AgendaNegocio {
 	public void gerarAgenda(Date dataAgenda, JSONObject jsonRetornoToken, Pessoa paciente, Profissional profissional,
 			Transaction tx) {
 		try {
+			String payment_method = jsonRetornoToken.get("payment_method").toString().toUpperCase();
 			Agenda agenda = new Agenda(paciente, profissional, dataAgenda,
 					jsonRetornoToken.get("tipoAtendimento").toString().equals("online")
 							|| jsonRetornoToken.get("tipoAtendimento").toString().equals("") ? Boolean.TRUE
 									: Boolean.FALSE,
 					jsonRetornoToken.get("tipoAtendimento").toString().equals("presencial") ? Boolean.TRUE
 							: Boolean.FALSE,
-					"", StatusEnum.PENDENTE, null, "");
+					"", payment_method.equals("BOLETO") || payment_method.equals("PIX") ? StatusEnum.AG_PAGAMENTO :  StatusEnum.PENDENTE, null, "");
 			agenda.setTokenTransacaoPagamentoConsulta(jsonRetornoToken.get("token").toString());
 			agenda.setIdTransacao(tx.getId());
 			if (agenda.getOnline()) {
@@ -389,7 +390,11 @@ public class AgendaNegocio {
 		dc.add(Restrictions.eq("id", idAgenda));
 		return (Agenda) hibernateUtil.consultarUniqueResult(dc);
 	}
-
+	public List<Agenda> consultarAgendaIdTransacao(Integer idTransacao) {
+		DetachedCriteria dc = DetachedCriteria.forClass(Agenda.class);
+		dc.add(Restrictions.eq("idTransacao", idTransacao));
+		return (List<Agenda>) hibernateUtil.buscar(dc,1,10);
+	}
 	@Transactional
 	public Agenda avaliarAtendimento(Agenda agenda) {
 		StringBuilder sql = new StringBuilder();
