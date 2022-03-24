@@ -469,23 +469,32 @@ public class PagarMeNegocio {
 		 
 		 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
 		 LocalDate dateObject = LocalDate.parse(item.getDataFormatada(), formatter);
-		 Agenda agenda = agendaNegocio.consultarAgendaId(item.getAgenda());
+		 List<Agenda> listAgendas = agendaNegocio.consultarAgendaIdTransacao(item.getIdTransacao());
+		 int contador = 1;
+		 for (Agenda agenda : listAgendas) {
+			 
 		  Period dias = Period.between(agenda.getDataHoraAgendamento().toInstant().atZone(ZoneId.systemDefault())
 			      .toLocalDate(), LocalDate.now());
-
+		  
 		 if (status.equals("PAID") &&  dias.getDays() <= 0) {
 			 //ATUALIZA PAGAMENTO, LIBERA AGENDAMENTO
-			 agendaNegocio.alterarAgenda(item.getAgenda(),StatusEnum.PENDENTE.name(),pessoaNegocio.consultarPorId(item.getIdPaciente()));
-			 item.setStatus(StatusEnum.valueOf("CONFIRMADO").getNome());
+			 agendaNegocio.alterarAgenda(agenda.getId(),StatusEnum.PENDENTE.name(),pessoaNegocio.consultarPorId(item.getIdPaciente()));
+			 if (listAgendas.size() == contador) {
+				 item.setStatus(StatusEnum.valueOf("CONFIRMADO").getNome());
+			 }
+			 contador++;
 			 atualizarPagamentoPagarMe(item);
 		 }
 		 if (!status.equals("PAID") &&  dias.getDays() >= 0 ) {
 			 System.out.println(item.getIdPaciente());
-			 agendaNegocio.alterarAgenda(item.getAgenda(),StatusEnum.CANCELADO.name(),pessoaNegocio.consultarPorId(item.getIdPaciente()));
-			 item.setStatus(StatusEnum.valueOf("CANCELADO").getNome());
+			 agendaNegocio.alterarAgenda(agenda.getId(),StatusEnum.CANCELADO.name(),pessoaNegocio.consultarPorId(item.getIdPaciente()));
+			 if (listAgendas.size() == contador) {
+				 item.setStatus(StatusEnum.valueOf("CANCELADO").getNome());
+			 }
+			 contador++;
 			 atualizarPagamentoPagarMe(item);
 		 }
-		 
+		 }
 	  }
 	  return listaPendentes.size() > 0 ? true : false;
   }
