@@ -449,7 +449,7 @@ public class EnvioEmailConsulta {
 	private String corpoHtmlEmailBoleto() {
 		StringBuffer corpoHtmlEmail = new StringBuffer();
 		corpoHtmlEmail.append("	<div class=\"col-12\" style=\"padding-top: 20px;\">");
-		corpoHtmlEmail.append("	<p>Seu agendamento foi aberto com sucesso, e aguarda pagamento pra confirmação!</p>");
+		corpoHtmlEmail.append("	<p>Seu agendamento foi aberto com sucesso, e aguarda pagamento para confirmação!</p>");
 
 		corpoHtmlEmail.append("	<p>Segue o link do seu boleto para pagamento!</p>");
 		corpoHtmlEmail.append("	<p>#linkPagamento#</p>");
@@ -500,16 +500,17 @@ public class EnvioEmailConsulta {
 	private String corpoHtmlEmailPix() {
 		StringBuffer corpoHtmlEmail = new StringBuffer();
 		corpoHtmlEmail.append("	<div class=\"col-12\" style=\"padding-top: 20px;\">");
-		corpoHtmlEmail.append("	<p>Seu agendamento foi aberto com sucesso, e aguarda pagamento pra confirmação!</p>");
+		corpoHtmlEmail.append("	<p>Seu agendamento foi aberto com sucesso, e aguarda pagamento para confirmação!</p>");
 
 		corpoHtmlEmail.append("	<p>Segue o código para pagamento pelo PIX!</p>");
 		corpoHtmlEmail.append("	 <img id='barcode' \n"
-				+ "							            src=\"#linkPagamento#\" \n"
+				+ "							            src=https://api.qrserver.com/v1/create-qr-code/?data=\"#linkPagamento#\" \n"
 				+ "							            alt=\"\" \n"
 				+ "							            title=\"Pix\" \n"
 				+ "							            width=\"150\" \n"
 				+ "							            height=\"150\" /> </p>");
-		
+		corpoHtmlEmail.append("	 <p> Se preferir, copie e cole o código #linkPagamento#</p> ");
+				
 		corpoHtmlEmail
 				.append("<table width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\">");
 		corpoHtmlEmail.append("			  <tr>");

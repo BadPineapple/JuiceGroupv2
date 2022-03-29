@@ -143,11 +143,16 @@ public class PagarMeController {
 				profissional.setSituacaoAprovacaoProfissional(SituacaoAprovacaoProfissionalEnum.PENDENTE);
 				envioEmailConsulta.enviarMensagemAutorizarProfissional(profissional);
 			}
+			
+		
+			
 			profissionalNegocio.incluirAtualizar(profissional);
 			Transaction capturarTransacao = new Transaction().find(tx.getId());
 			capturarTransacao.capture(tx.getAmount());
+			String boletoUrl = tx.getBoletoUrl();
+			String pixQrCode = tx.getPixQRCode();
 			PagamentoPagarMe pagamentoPagarMe = new PagamentoPagarMe();
-			pagamentoPagarMe = pagamentoPagarMe.pagamento(capturarTransacao, null, profissional);
+			pagamentoPagarMe = pagamentoPagarMe.pagamento(capturarTransacao, null, profissional,payment_method,payment_method.equals("boleto") ? boletoUrl : pixQrCode);
 			pagarMeNegocio.salvarPagamentoPagarMe(pagamentoPagarMe);
 			return new ResponseEntity<>("Incluido Plano com Sucesso", HttpStatus.OK);
 	  }

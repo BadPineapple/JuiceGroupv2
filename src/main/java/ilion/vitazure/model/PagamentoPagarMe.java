@@ -37,6 +37,8 @@ public class PagamentoPagarMe {
 	private String  planoVitazureSelecionado;
 	private String dataAgenda;
 	private String nomePaciente;
+	private String tipoPagamento;
+	private String linkPagamento;
 	
 	public Long getId() {
 		return id;
@@ -118,7 +120,21 @@ public class PagamentoPagarMe {
 	public void setNomePaciente(String nomePaciente) {
 		this.nomePaciente = nomePaciente;
 	}
-	public PagamentoPagarMe pagamento(Transaction transacao, Agenda agenda , Profissional profissional){
+	
+	public String getTipoPagamento() {
+		return tipoPagamento;
+	}
+	public void setTipoPagamento(String tipoPagamento) {
+		this.tipoPagamento = tipoPagamento;
+	}
+	public String getLinkPagamento() {
+		return linkPagamento;
+	}
+	public void setLinkPagamento(String linkPagamento) {
+		this.linkPagamento = linkPagamento;
+	}
+	
+	public PagamentoPagarMe pagamento(Transaction transacao, Agenda agenda , Profissional profissional, String tipoPagamento, String linkpagamento){
 		
 		PagamentoPagarMe pagamento =  new PagamentoPagarMe();
 		
@@ -140,8 +156,9 @@ public class PagamentoPagarMe {
 		pagamento.setDataTransacao(transacao.getUpdatedAt().toString());
 		pagamento.setStatus(situacaoTransacao(transacao.getStatus()));
 		pagamento.setValorPago(new BigDecimal(transacao.getAmount()).divide(new BigDecimal(100)));
+		pagamento.setTipoPagamento(tipoPagamento);
+		pagamento.setLinkPagamento(linkpagamento);
 		return pagamento;
-		
 	}
 	
 	private String situacaoTransacao(Status status) {
@@ -179,5 +196,6 @@ public class PagamentoPagarMe {
 	public String getPlanoApresentar() {
 		  return getPlanoVitazure().equals("plano_mensal") ? "Mensal" : getPlanoVitazure().equals("plano_semestral") ? "Semestral" :  "Anual";
 		}
+
 	
 }

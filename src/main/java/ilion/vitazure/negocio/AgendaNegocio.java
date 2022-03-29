@@ -155,7 +155,7 @@ public class AgendaNegocio {
 		// Registrar Transação
 		Agenda agenda = incluirAgenda(paciente, profissional, jsonRetornoToken, tx);
 		PagamentoPagarMe pagamentoPagarMe = new PagamentoPagarMe();
-		pagamentoPagarMe = pagamentoPagarMe.pagamento(capturarTransacao, agenda, null);
+		pagamentoPagarMe = pagamentoPagarMe.pagamento(capturarTransacao, agenda, null,jsonRetornoToken.get("payment_method").toString(),jsonRetornoToken.get("payment_method").equals("boleto") ? boletoUrl : pixQrCode);
 		pagarMeNegocio.salvarPagamentoPagarMe(pagamentoPagarMe);
 		envioEmailConsulta.enviarEmailBoletoAgenda(agenda,paciente,jsonRetornoToken.get("payment_method").equals("boleto") ? boletoUrl : pixQrCode,jsonRetornoToken.get("payment_method").toString());
 		return paymentRes;
@@ -216,9 +216,11 @@ public class AgendaNegocio {
 				rules.add(splitRulesEmpresa);
 				capturarTransacao.setSplitRules(rules);
 				// capturarTransacao.capture(tx.getAmount());
-				System.out.println(capturarTransacao.capture(tx.getAmount()));
+				String boletoUrl = tx.getBoletoUrl();
+				String pixQrCode = tx.getPixQRCode();
+				
 				PagamentoPagarMe pagamentoPagarMe = new PagamentoPagarMe();
-				pagamentoPagarMe = pagamentoPagarMe.pagamento(capturarTransacao, agenda, null);
+				pagamentoPagarMe = pagamentoPagarMe.pagamento(capturarTransacao, agenda, null,jsonRetornoToken.get("payment_method").toString(),jsonRetornoToken.get("payment_method").equals("boleto") ? boletoUrl : pixQrCode);
 				pagarMeNegocio.salvarPagamentoPagarMe(pagamentoPagarMe);
 				getListAgendasEnviarEmail().stream().forEach(agendaEnviar -> {
 					try {
