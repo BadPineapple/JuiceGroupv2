@@ -366,8 +366,8 @@ function efetuarPagamento($scope, $http, $window , id ,valorOnline ,valorPresenc
 	          	  
 	          	  console.log('days ' + days);
 	          	var vnow = new Date();
-	          	var dataExpiracaoBoleto = addDays(vnow,2);
-	          	var dataExpiracaoPix = addDays(vnow,0);
+	          	var dataExpiracaoBoleto = addDays(vnow,days-2);
+	          	var dataExpiracaoPix = addDays(vnow,days);
 	          	console.log('dias ' + days);
 	          	if (days < 3 ) {
 					var cont = confirm("Atenção, O agendamento para pagamento com boleto, deverá ser superior a 3 dias. Deseja Continuar?")
