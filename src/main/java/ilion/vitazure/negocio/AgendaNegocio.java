@@ -244,11 +244,11 @@ public class AgendaNegocio {
 			Profissional profissional, Transaction tx) {
 		try {
 			List<Date> listDatasPacote = new ArrayList<Date>();
-			if (jsonRetornoToken.get("pacote").toString().equals("pacote2")) {
+			if (jsonRetornoToken.get("pacote").toString().contains("pacote2")) {
 				listDatasPacote.addAll(listaDataPacote(dataAgendaInicial, 1));
-			} else if (jsonRetornoToken.get("pacote").toString().equals("pacote3")) {
+			} else if (jsonRetornoToken.get("pacote").toString().contains("pacote3")) {
 				listDatasPacote.addAll(listaDataPacote(dataAgendaInicial, 2));
-			} else if (jsonRetornoToken.get("pacote").toString().equals("pacote4")) {
+			} else if (jsonRetornoToken.get("pacote").toString().contains("pacote4")) {
 				listDatasPacote.addAll(listaDataPacote(dataAgendaInicial, 3));
 			}
 			listDatasPacote.stream().forEach(data -> gerarAgenda(data, jsonRetornoToken, paciente, profissional, tx));
