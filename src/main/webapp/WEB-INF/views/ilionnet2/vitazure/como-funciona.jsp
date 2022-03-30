@@ -253,12 +253,12 @@
                                 <div class="toggle-body vitazure">
 
                                     <p>Se for usar um computador desktop ou notebook, sugerimos observar os seguintes equipamentos:</p>
-									<p>&nbsp;&nbsp;&nbsp;&nbsp;1- Webcam - recomendamos uma câmara (1280 x 720 pixels) com sistema HD de 720p no mínimo;
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;1- Webcam - recomendamos uma câmara (1280 x 720 pixels) com sistema HD de 720p no mínimo;
     									</br>&nbsp;&nbsp;&nbsp;&nbsp;2- Microfone de Lapela;
-    									</br>&nbsp;&nbsp;&nbsp;&nbsp;3-  Fone de ouvido.	</p>
+    									</br>&nbsp;&nbsp;&nbsp;&nbsp;3-  Fone de ouvido.	</p>
     								<p>Os notebooks mais recentes (2021) já possuem os componentes acima, exceção do fone de ouvido, recomendação do seu uso também nos notebooks.
 									</br>Se você pensa em usar o aparelho celular, observe os seguintes equipamentos:</p>
-									<p>&nbsp;&nbsp;&nbsp;&nbsp;1-  Fone de ouvido;
+									<p>&nbsp;&nbsp;&nbsp;&nbsp;1-  Fone de ouvido;
     								</br>&nbsp;&nbsp;&nbsp;&nbsp;2- Anel de led (Ring Light) – em ambientes com pouca luz, recomendamos o uso das luzes de led.</p>		
                                 	<p>Link de comunicação (internet):
 									</br>Recomendamos que o link seja de no mínimo 15MB;
