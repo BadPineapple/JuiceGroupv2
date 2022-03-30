@@ -105,10 +105,17 @@
 											<div id="enderecoLinkLocaliazacaoProfissional${profissional.id}" class="col-12" style="padding-top: 10px;"></div>
 										 <c:if test="${!pessoa.pessoaImportada}">   
 										    <div class="button-agenda" style="padding-bottom: 20px;">
-                                                 <span id="${profissional.id}.pacote2" ng-if="${profissional.pacote2com5Desconto}"  onclick='selecionarPacote(${profissional.id},"pacote2");'>Pacote com 2 consultas por 5% de desconto</span>
-                                                 <span id="${profissional.id}.pacote3" ng-if="${profissional.pacote3com10Desconto}"  onclick='selecionarPacote(${profissional.id},"pacote3");'>Pacote com 3 consultas por 10% de desconto</span>
-                                                 <span id="${profissional.id}.pacote4" ng-if="${profissional.pacote4com15Desconto}"  onclick='selecionarPacote(${profissional.id},"pacote4");'>Pacote com 4 consultas por 15% de desconto</span>
+                                                 <span id="${profissional.id}.pacote2" ng-if="${profissional.pacote2com5Desconto}"  onclick='selecionarPacote(${profissional.id},"pacote2","");'>Pacote com 2 consultas por 5% de desconto</span>
+                                                 <span id="${profissional.id}.pacote3" ng-if="${profissional.pacote3com10Desconto}"  onclick='selecionarPacote(${profissional.id},"pacote3","");'>Pacote com 3 consultas por 10% de desconto</span>
+                                                 <span id="${profissional.id}.pacote4" ng-if="${profissional.pacote4com15Desconto}"  onclick='selecionarPacote(${profissional.id},"pacote4","");'>Pacote com 4 consultas por 15% de desconto</span>
                                             </div>
+                                            <c:if test="${!profissional.pacote2com5Desconto and !profissional.pacote3com10Desconto and !profissional.pacote4com15Desconto}">
+		                                            <div class="button-agenda" style="padding-bottom: 20px;">
+		                                                 <span id="${profissional.id}.pacote2x"   onclick='selecionarPacote(${profissional.id},"pacote2x","x");'>Pacote com 2 consultas</span>
+		                                                 <span id="${profissional.id}.pacote3x"   onclick='selecionarPacote(${profissional.id},"pacote3x","x");'>Pacote com 3 consultas</span>
+		                                                 <span id="${profissional.id}.pacote4x"   onclick='selecionarPacote(${profissional.id},"pacote4x","x");'>Pacote com 4 consultas</span>
+		                                            </div>
+                                          	</c:if>  
                                           </c:if>  
 											<a href="#" ng-click="efetuarPagamento('${profissional.id}' , '${profissional.valorConsultaOnline}' , '${profissional.valorConsultaPresencial}' 
 											,'${profissional.valorOnlinePacote2}' ,'${profissional.valorOnlinePacote3}' ,'${profissional.valorOnlinePacote4}'
