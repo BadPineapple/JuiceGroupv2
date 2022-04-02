@@ -215,10 +215,10 @@ public class menuVitazureController  extends CustomErrorController{
 			RedirectAttributes redirectAttributes) {
 		try {
 			pessoaNegocio.excluir(id);
-			return "redirect:/cliente/?m=ok";
+			return "redirect:/cliente?m=ok";
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("msgError", e.getMessage());
-			return "redirect:/cliente/?m=erro";
+			return "redirect:/cliente?m=erro";
 		}
 	 }
 	
@@ -230,10 +230,10 @@ public class menuVitazureController  extends CustomErrorController{
 			RedirectAttributes redirectAttributes) {
 		try {
 			pessoaNegocio.excluir(id);
-			return "redirect:/profissional/?m=ok";
+			return "redirect:/profissional?m=ok";
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("msgError", e.getMessage());
-			return "redirect:/profissional/?m=erro";
+			return "redirect:/profissional?m=erro";
 		}
 	 }
 	

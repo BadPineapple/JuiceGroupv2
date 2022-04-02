@@ -686,8 +686,8 @@
 								
 							<div class="col-md-12 col-lg-12 col-sm-12" style="text-align: center;padding-top: 30px;padding-bottom: 50px;">
 							    <div class="  form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed">
-										<button type="submit" class="btn btn-success pmd-checkbox-ripple-effect">Salvar</button>
-										<a href="<ilion:url/>profissional" class="btn btn-warning">Cancelar</a>
+										<button type="submit" class="btn btn-success pmd-checkbox-ripple-effect"><i class="fa fa-save" style="padding-right: 10px"></i>Salvar</button>
+										<a href="<ilion:url/>profissional" class="btn btn-warning"><i class="fas fa-search" style="padding-right: 10px"></i>Cancelar</a>
 								</div>		
 						   </div>	
 					</div>	

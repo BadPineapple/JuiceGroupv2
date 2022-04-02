@@ -52,7 +52,7 @@ public class LoginController extends CustomErrorController {
 		Boolean estaLogado = usuarioSessao != null;
 		
 		if (estaLogado) {
-			return "redirect:/ilionnet/home";
+			return "redirect:/agenda";
 		}
 		
 		return "/ilionnet/modulos/admin/login";
@@ -80,7 +80,7 @@ public class LoginController extends CustomErrorController {
     		return "redirect:/ilionnet/login";
 		}
     	
-        return "redirect:/ilionnet/vitazure/home";
+        return "redirect:/agenda";
     }
     
     @RequestMapping("/ilionnet/esqueci-minha-senha")

@@ -40,7 +40,7 @@
 								</div> 
 							</div>
 							<div class="col-md-6 col-lg-6 col-sm-12">
-			                 	<label>Periodo Transação</label>
+			                 	<label style="margin-left: 16px;">Periodo Transação</label>
 			                   <div class="form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed" style="width: 100%;">
 			                       <div class="col-md-5 col-lg-5 col-sm-12">
 				                        <input type="date" name="dataInicio" id="dataInicio" class="form-control input-group-lg" style="width: 100%;font-size: 16px;"/>
@@ -53,8 +53,9 @@
 			                        </div>   
 			                   </div>
 			                 </div>
-							<div class="col-md-2 col-lg-2 col-sm-12 text-center" style="padding-top: 35px;">	
-							  <button class="btn btn-primary">Buscar</button>
+							<div class="col-md-2 col-lg-2 col-sm-12" style="padding-top: 35px;">
+							  <button class="btn btn-primary" style="min-width: 10px;" title="buscar"><i class="fas fa-search"></i></button>
+							  <a class="btn btn-danger" onclick="limparCampoConsulta()" style="min-width: 10px;" title="Limpar Campos Pesquisa"><i class="fas fa-eraser"></i></a>
 							</div>  
 						</div>	
 						</form>
@@ -165,6 +166,15 @@
 		$('#dataInicio').val('${param.dataInicio}');
 		$('#dataFim').val('${param.dataFim}');
 	})();
+</script>
+<script>
+
+ function limparCampoConsulta(){
+	 $('#palavraChave').val('');
+		$('#dataInicio').val('');
+		$('#dataFim').val('');
+ }
+ 
 </script>
 <script type="text/javascript">
 	(function() {

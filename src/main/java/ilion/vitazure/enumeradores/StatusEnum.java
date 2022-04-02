@@ -4,11 +4,9 @@ public enum StatusEnum {
 
 	PENDENTE("Pendente"),
 	AG_PAGAMENTO("Aguardando Pagamento"),
-	PROCESSAMENTO("Processamento"),
 	CONFIRMADO("Confirmado"),
 	CANCELADO("Cancelado"),
 	REALIZADO("Realizado"),
-	NAO_ENCONTRATO("NO"),
 	NAO_COMPARECEU("Não compareceu"),
 	REMARCADO("Remarcado"),
 	AGUARDANDO_REMARCACAO("Aguardando Remarcação");
@@ -42,7 +40,7 @@ public enum StatusEnum {
 				return item;
 			}
 		}
-		return StatusEnum.NAO_ENCONTRATO;
+		return null;
 	}
 	
 	

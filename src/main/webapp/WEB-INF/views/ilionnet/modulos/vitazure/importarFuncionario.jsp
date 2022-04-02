@@ -37,7 +37,7 @@
 								</div> 
 							</div>
 							<div class="col-md-2 col-lg-2 col-sm-12 text-center" style="padding-top: 12px;">	
-							  <button class="btn btn-primary">Importar</button>
+							  <button class="btn btn-primary" style="min-width: 10px;" title="Importar"><i class="fas fa-file-import" style="padding-right: 10px;"></i>Importar</button>
 							</div>  
 						</div>	
 					   </form>

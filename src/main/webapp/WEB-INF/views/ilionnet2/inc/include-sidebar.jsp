@@ -74,7 +74,7 @@
    </a>
   </li>
   </ilion:permissao>
-<ilion:permissao tipo="usuario.sp">
+<ilion:permissao tipo="vitazure_rel_resumo_atendimento">
   <li>
    <a class="pmd-ripple-effect" href="<ilion:url/>relResumoAtendimento">
     <i class="media-left media-middle">

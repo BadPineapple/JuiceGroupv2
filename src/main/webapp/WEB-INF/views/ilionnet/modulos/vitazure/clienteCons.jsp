@@ -39,8 +39,8 @@
 									<input type="Large" name="palavraChave" id="palavraChave" class="form-control input-group-lg" style="width: 100% !important;"/>
 								</div> 
 							</div>
-							<div class="col-md-2 col-lg-2 col-sm-12 text-center" style="padding-top: 35px;">	
-							  <button class="btn btn-primary">Buscar</button>
+							<div class="col-md-2 col-lg-2 col-sm-12" style="padding-top: 35px;">	
+							  <button class="btn btn-primary" style="min-width: 10px;" title="buscar"><i class="fas fa-search"></i></button>
 							</div>  
 						</div>	
 						</form>
@@ -116,7 +116,7 @@
 		      </valuelist:root>  
 	             <div class="row" >
 			        <div class="col-md-2" style="padding-top: 17px;">
-						  <a href="<ilion:url/>vitazure/cliente/0" class="btn btn-primary" role="button">Novo</a>
+						  <a href="<ilion:url/>vitazure/cliente/0" class="btn btn-primary" role="button"><i class="fas fa-file-plus" style="padding-right: 7px;"></i>Novo</a>
 		            </div>
 		            <div class="col-md-10" >
 		             	<ilion:vlhPagination valueListInfo="${clientes.valueListInfo}" navCssClass="pull-right"/>

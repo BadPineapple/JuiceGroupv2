@@ -23,6 +23,7 @@ function post($scope, $http, $window) {
 	if($scope.tipoConta != '' && $scope.tipoConta == 'PS'){
 		$scope.pessoa.psicologo='true';
 		$scope.pessoa.cliente='false';
+		$scope.pessoa.tipoConta= $scope.tipoConta;
 	}
 	if(arquivos.length != 0){
 		$scope.pessoa.foto = arquivos;

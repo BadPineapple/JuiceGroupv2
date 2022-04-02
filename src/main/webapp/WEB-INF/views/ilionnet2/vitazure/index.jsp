@@ -213,7 +213,43 @@
                 </div>
             </div>
         </div>
+		<div class="blog">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h3>Confira as últimas do Blog</h3>
+                    </div>
+                    <c:forEach items="${posts}" var="post">
+                        <div class="col-12 col-md-6 col-xl-3">
+                            <div class="post">
+                                <a href="${post.link}" target='_blank'>
+                                    <div class="post-img">
+                                        <figure style=" text-align-last: center">
+                                            <img src="${post.imagem}" alt="" style="max-height: 20.4rem; border-radius: 3px;">
+                                        </figure>
+                                    </div>
 
+                                    <div class="post-title" style="text-justify: auto">
+                                        <p>${post.titulo}</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </c:forEach>
+                    <div class="col-12">
+                        <div class="more-post line">
+                            <a href="https://blog.vitazure.com.br/" target='_blank'>
+                                Veja mais posts
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M15.2931 6.70711C14.9026 6.31658 14.9026 5.68342 15.2931 5.29289C15.6837 4.90237 16.3168 4.90237 16.7074 5.29289L22.7073 11.2929C23.0979 11.6834 23.0979 12.3166 22.7073 12.7071L16.7074 18.7071C16.3168 19.0976 15.6837 19.0976 15.2931 18.7071C14.9026 18.3166 14.9026 17.6834 15.2931 17.2929L19.586 13H2.01103C1.45265 13 1 12.5523 1 12C1 11.4477 1.45265 11 2.01103 11H19.586L15.2931 6.70711Z" fill="black"/>
+                                </svg>
+                                    
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="area-white">
             <div class="container">
                 <div class="row">
@@ -491,125 +527,6 @@
 
                                 <p>O cliente paga apenas pela consulta. Não há taxa adicional ou mensalidade recorrente. É viável.</p>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-<!--         <div class="area-cell"> -->
-<!--             <div class="container"> -->
-<!--                 <div class="row"> -->
-<!--                     <div class="col-12 col-md-6 col-xl-6"> -->
-<!--                         <h2>Acompanhe suas consultas também pelo app.</h2> -->
-
-<!--                         <p>Com mais essa facilidade você poderá acompanhar suas consultas pelo celular, tablet ou computador.</p> -->
-
-<!--                         <div class="lojas-aplicativos"> -->
-<!--                             <p>Disponível para Android e iOS.</p> -->
-
-<!--                             <div class="aplicativos"> -->
-<!--                                 <a href="#"> -->
-<!--                                     <figure> -->
-<!--                                         <img src="assets/images/google-play.png" alt=""> -->
-<!--                                     </figure> -->
-<!--                                 </a> -->
-
-<!--                                 <a href="#"> -->
-<!--                                     <figure> -->
-<!--                                         <img src="assets/images/apple-store.png" alt=""> -->
-<!--                                     </figure> -->
-<!--                                 </a> -->
-<!--                             </div> -->
-<!--                         </div> -->
-<!--                     </div> -->
-<!--                 </div> -->
-<!--             </div> -->
-<!--         </div> -->
-
-        <div class="blog">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <h3>Confira as últimas do Blog</h3>
-                    </div>
-
-                    <c:forEach items="${posts}" var="post">
-                        <div class="col-12 col-md-6 col-xl-3">
-                            <div class="post">
-                                <a href="${post.link}" target='_blank'>
-                                    <div class="post-img">
-                                        <figure style=" text-align-last: center">
-                                            <img src="${post.imagem}" alt="" style="max-height: 20.4rem; border-radius: 3px;">
-                                        </figure>
-                                    </div>
-
-                                    <div class="post-title" style="text-justify: auto">
-                                        <p>${post.titulo}</p>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </c:forEach>
-                    <%--<div class="col-12 col-md-6 col-xl-3">--%>
-                        <%--<div class="post">--%>
-                            <%--<a href="#">--%>
-                                <%--<div class="post-img">--%>
-                                    <%--<figure>--%>
-                                        <%--<img src="assets/images/post-2.jpg" alt="">--%>
-                                    <%--</figure>--%>
-                                <%--</div>--%>
-        <%----%>
-                                <%--<div class="post-title">--%>
-                                    <%--<p>Corona blues: um novo conceito de saúde mental na pandemia.</p>--%>
-                                <%--</div>--%>
-                            <%--</a>--%>
-                        <%--</div>--%>
-                    <%--</div>--%>
-
-                    <%--<div class="col-12 col-md-6 col-xl-3">--%>
-                        <%--<div class="post">--%>
-                            <%--<a href="#">--%>
-                                <%--<div class="post-img">--%>
-                                    <%--<figure>--%>
-                                        <%--<img src="assets/images/post-3.jpg" alt="">--%>
-                                    <%--</figure>--%>
-                                <%--</div>--%>
-        <%----%>
-                                <%--<div class="post-title">--%>
-                                    <%--<p>Masculinidade tóxica: entenda o contexto histórico e seu problema atual</p>--%>
-                                <%--</div>--%>
-                            <%--</a>--%>
-                        <%--</div>--%>
-                    <%--</div>--%>
-
-                    <%--<div class="col-12 col-md-6 col-xl-3">--%>
-                        <%--<div class="post">--%>
-                            <%--<a href="#">--%>
-                                <%--<div class="post-img">--%>
-                                    <%--<figure>--%>
-                                        <%--<img src="assets/images/post-4.jpg" alt="">--%>
-                                    <%--</figure>--%>
-                                <%--</div>--%>
-        <%----%>
-                                <%--<div class="post-title">--%>
-                                    <%--<p>Abuso no ambiente de trabalho: como a terapia pode ajudar?</p>--%>
-                                <%--</div>--%>
-                            <%--</a>--%>
-                        <%--</div>--%>
-                    <%--</div>--%>
-
-
-
-                    <div class="col-12">
-                        <div class="more-post line">
-                            <a href="https://blog.vitazure.com.br/" target='_blank'>
-                                Veja mais posts
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M15.2931 6.70711C14.9026 6.31658 14.9026 5.68342 15.2931 5.29289C15.6837 4.90237 16.3168 4.90237 16.7074 5.29289L22.7073 11.2929C23.0979 11.6834 23.0979 12.3166 22.7073 12.7071L16.7074 18.7071C16.3168 19.0976 15.6837 19.0976 15.2931 18.7071C14.9026 18.3166 14.9026 17.6834 15.2931 17.2929L19.586 13H2.01103C1.45265 13 1 12.5523 1 12C1 11.4477 1.45265 11 2.01103 11H19.586L15.2931 6.70711Z" fill="black"/>
-                                </svg>
-                                    
-                            </a>
                         </div>
                     </div>
                 </div>

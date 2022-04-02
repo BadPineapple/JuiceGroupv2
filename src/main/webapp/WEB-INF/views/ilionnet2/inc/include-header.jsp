@@ -114,7 +114,7 @@
 
             <a href="javascript:void(0);" class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect pull-left margin-r8 pmd-sidebar-toggle"><i class="material-icons">menu</i></a>   
 
-          <a href="<ilion:url/>ilionnet/home" class="navbar-brand">
+          <a href="<ilion:url/>agenda" class="navbar-brand">
 			
 			Vitazure
 			
