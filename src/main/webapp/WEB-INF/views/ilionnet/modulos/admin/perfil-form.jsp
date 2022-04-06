@@ -152,7 +152,7 @@
     <td width="*" class="linkCinza"><form:checkbox path="permissoes" value="vitazure_importar_funcionario"/> Incluir</td>
   </tr>
   <tr>
-    <td width="15%" align="right" valign="middle" class="linkCinzaEscuro">Rel. Atendimento Empresa:</td>
+    <td width="15%" align="right" valign="middle" class="linkCinzaEscuro">Relatórios:</td>
     <td width="*" class="linkCinza"><form:checkbox path="permissoes" value="vitazure_rel_resumo_atendimento"/> Visualizar</td>
   </tr>
   <tr>

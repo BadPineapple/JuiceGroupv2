@@ -51,6 +51,10 @@ public class Usuario implements Serializable {
 	@ManyToOne
 	private Perfil perfil;
 	
+	private String cnpj;
+	
+	private Integer nrFuncionarios;
+	
 	@Transient
 	private List<String> permissoes;
 	
@@ -186,6 +190,22 @@ public class Usuario implements Serializable {
 
 	public void setAdmin(Boolean admin) {
 		this.admin = admin;
+	}
+
+	public String getCnpj() {
+		return cnpj;
+	}
+
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
+	}
+
+	public Integer getNrFuncionarios() {
+		return nrFuncionarios;
+	}
+
+	public void setNrFuncionarios(Integer nrFuncionarios) {
+		this.nrFuncionarios = nrFuncionarios;
 	}
 
 	@Override

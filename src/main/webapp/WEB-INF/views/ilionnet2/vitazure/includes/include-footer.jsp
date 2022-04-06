@@ -35,36 +35,37 @@
 
                         <c:forEach items="${art}" var="arq">
 
-                            <c:if test="${arq.title == \"Cï¿½digo de ï¿½tica\"}">
+                            <c:if test="${arq.title == \"Código de ética\"}">
                                 <c:set var="arqEtica" value="${arq.url}"/>
                             </c:if>
 
-                            <c:if test="${arq.title == \"Resoluï¿½ï¿½o\"}">
+                            <c:if test="${arq.title == \"Resolução\"}">
                                 <c:set var="arqResolucao" value="${arq.url}"/>
                             </c:if>
 
-                            <c:if test="${arq.title == \"Termos e condiï¿½ï¿½es\"}">
+                            <c:if test="${arq.title == \"Termos e condições\"}">
                                 <c:set var="arqTermos" value="${arq.url}"/>
                             </c:if>
 
-                            <c:if test="${arq.title == \"Polï¿½tica de privacidade\"}">
+                            <c:if test="${arq.title == \"Política de privacidade\"}">
                                 <c:set var="arqPolitica" value="${arq.url}"/>
                             </c:if>
 
                         </c:forEach>
 
-                        <li><a href="${arqEtica}" class="line" target="_blank">Cï¿½digo de ï¿½tica profissional do Psicï¿½logo</a></li>
+                        <li><a href="${arqEtica}" class="line" target="_blank">Código de ética profissional do Psicólogo</a></li>
 
-                        <li><a href="${arqResolucao}" class="line" target="_blank">Resoluï¿½ï¿½o CFP nï¿½ 11/2018</a></li>
+                        <li><a href="${arqResolucao}" class="line" target="_blank">Resolução CFP nº 11/2018</a></li>
 
-                        <li><a href="${arqTermos}" class="line" target="_blank">Termos e condiï¿½ï¿½es de uso</a></li>
+                        <li><a href="${arqTermos}" class="line" target="_blank">Termos e condições de uso</a></li>
 
-                        <li><a href="${arqPolitica}" class="line" target="_blank">Polï¿½tica de privacidade</a></li>
+                        <li><a href="${arqPolitica}" class="line" target="_blank">Política de privacidade</a></li>
                         
                         <li><a href="<ilion:url/>ouvidoria" class="line">Ouvidoria</a></li>
 
                     </ul>
                 </div>
+            </div>
             </div>
 
             <div class="col-12">

@@ -280,7 +280,8 @@ public class menuVitazureController  extends CustomErrorController{
 			ValueList agendas = new ValueListImpl(new ArrayList<>(), new ValueListInfo());
 			request.setAttribute("agendas", agendas);
 		}
-		request.setAttribute("empresas", usuarioNegocio.consultarEmpresasCadastradas());
+		Usuario usuarioSessao = (Usuario) request.getSession().getAttribute("usuarioSessao");
+		request.setAttribute("empresas", usuarioNegocio.consultarEmpresasCadastradas(usuarioSessao));
 		request.setAttribute("status", StatusEnum.values());
 		
 			return "/ilionnet/modulos/vitazure/relResumoAtendimento";

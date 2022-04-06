@@ -360,11 +360,15 @@ public class UsuarioNegocio {
 		return  (List<Usuario>) hibernateUtil.list(dc);
 	}
 	
-	public List<String> consultarEmpresasCadastradas(){
+	public List<String> consultarEmpresasCadastradas(Usuario usuarioSessao){
 		List<String> listEmpresas = new ArrayList<String>();
 		DetachedCriteria dc = DetachedCriteria.forClass(Usuario.class);
 		dc.setProjection(Projections.distinct(Projections.property("empresa")));
-		dc.add(Restrictions.ne("empresa", ""));
+		if(usuarioSessao.getEmpresa() != null && !usuarioSessao.getEmpresa().equals("")) {
+			dc.add(Restrictions.eq("empresa", usuarioSessao.getEmpresa()));
+		}else {
+			dc.add(Restrictions.ne("empresa", ""));
+		}
 		dc.addOrder(Order.asc("empresa"));
 		listEmpresas = hibernateUtil.listarColumn(dc, "empresa");
 		return listEmpresas;

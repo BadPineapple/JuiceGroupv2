@@ -7,6 +7,17 @@
 </head>
 
 <body>
+<script type="text/javascript" language="javascript" src="design/script/jquery/jquery-1.2.6.js"></script>
+<script type="text/javascript" language="javascript" src="design/script/jquery/jquery.maskedinput-1.2.1.js"></script>
+<script type="text/javascript" language="javascript">
+jQuery.noConflict();
+jQuery(function(jQuery){
+	jQuery("#telefone").mask("(99) 9999-9999");
+	jQuery("#celular").mask("(99) 9999-9999");
+    jQuery("#cnpj").mask("999.999/9999-99");
+    jQuery("#nrFuncionarios").mask("999");
+});
+</script>
 <table id="container" align="center" cellpadding="0" cellspacing="0">
   <tr>
     <td style="vertical-align: top;"><jsp:include page="../include-cabecalho.jsp" flush="true"/>
@@ -50,8 +61,14 @@
   <tr> 
     <td width="15%" height="17" align="right" valign="middle" class="linkCinzaEscuro">*Nome:</td>
     <td width="35%" class="linkCinza"><form:input path="nome" cssClass="forms2" cssStyle="width:80%;"/></td>
+    <td width="15%" align="right" class="linkCinzaEscuro">Cnpj:</td>
+    <td width="35%" class="linkCinza"><form:input path="cnpj" cssClass="forms2" id="cnpj" cssStyle="width:80%;"/></td>
+  </tr>
+  <tr>
     <td width="15%" align="right" class="linkCinzaEscuro">Empresa:</td>
     <td width="35%" class="linkCinza"><form:input path="empresa" cssClass="forms2" cssStyle="width:80%;"/></td>
+    <td width="15%" align="right" class="linkCinzaEscuro">Nr. de funcionários Empresa:</td>
+    <td width="35%" class="linkCinza"><form:input path="nrFuncionarios" id="nrFuncionarios" cssClass="forms2" cssStyle="width:80%;"/></td>
   </tr>
   <tr> 
     <td align="right" valign="middle" class="linkCinzaEscuro">*Email:</td>
