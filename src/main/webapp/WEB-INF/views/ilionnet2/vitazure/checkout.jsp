@@ -34,7 +34,7 @@
                             	<c:when test="${ paymentUrl == null || paymentUrl == ''}">
                              	</c:when>
                              	<c:otherwise>
-                             		<p><a href="${paymentUrl}?format=pdf" class="button-secundary" target="_blank">gerar boleto</a>
+                             		<p><a href="${paymentUrl}?format=pdf" class="button-secundary" target="_blank">Gerar boleto</a>
                              	</c:otherwise>
                             </c:choose>
                             <c:choose>
@@ -43,7 +43,7 @@
                              </c:when>
                              <c:otherwise>
 							      <img id='barcode' 
-							            src="https://api.qrserver.com/v1/create-qr-code/?data=${qrCode};size=300x300" 
+							            src="https://api.qrserver.com/v1/create-qr-code/?data=${qrCode}" 
 							            alt="" 
 							            title="Pix" 
 							            width="150" 

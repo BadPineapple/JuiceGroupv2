@@ -36,7 +36,7 @@ public class EnvioEmailConsulta {
 
 	public void enviar(Agenda agenda) throws Exception {
 		StringBuffer htmlEmail = new StringBuffer();
-		htmlEmail.append(emailPadrao(corpoHtmlEmailSolicitacaoAgendamento()));
+		htmlEmail.append(emailPadrao(corpoHtmlEmailSolicitacaoReagendamento()));
 		enviarEmailAlteracaoSituacaoAgendaCliente(agenda,
 				htmlEmail.toString().replaceAll("#nome#", agenda.getPaciente().getNome())
 						.replaceAll("#nomePaciente#", agenda.getPaciente().getNome())
@@ -504,12 +504,12 @@ public class EnvioEmailConsulta {
 
 		corpoHtmlEmail.append("	<p>Segue o código para pagamento pelo PIX!</p>");
 		corpoHtmlEmail.append("	 <img id='barcode' \n"
-				+ "							            src=https://api.qrserver.com/v1/create-qr-code/?data=\"#linkPagamento#\" \n"
+				+ "							            src=https://api.qrserver.com/v1/create-qr-code/?data=#linkPagamento#"
 				+ "							            alt=\"\" \n"
 				+ "							            title=\"Pix\" \n"
 				+ "							            width=\"150\" \n"
 				+ "							            height=\"150\" /> </p>");
-		corpoHtmlEmail.append("	 <p> Se preferir, copie e cole o código #linkPagamento#</p> ");
+		corpoHtmlEmail.append("	 <p> Se preferir, copie e cole o código abaixo </p> <p>#linkPagamento#</p> ");
 				
 		corpoHtmlEmail
 				.append("<table width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\">");
@@ -741,6 +741,74 @@ public class EnvioEmailConsulta {
 		return corpoHtmlEmail.toString();
 	}
 
+	private String corpoHtmlEmailSolicitacaoReagendamento() {
+		StringBuffer corpoHtmlEmail = new StringBuffer();
+		corpoHtmlEmail.append("	<div class=\"col-12\" style=\"padding-top: 20px;\">");
+		corpoHtmlEmail
+				.append(" <table width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\">");
+		corpoHtmlEmail.append("	<tr> ");
+		corpoHtmlEmail.append(
+				"	   <td align=\"center\" bgcolor=\"#D6E4E9\"><font size=\"2\" face=\"Arial, Helvetica, sans-serif\"><strong>Reagendamento Consulta</strong></font></td>");
+		corpoHtmlEmail.append("	</tr>");
+		corpoHtmlEmail.append("			  <tr>");
+		corpoHtmlEmail.append("			    <td valign=\"top\" bgcolor=\"#F3F3F3\">");
+		corpoHtmlEmail.append(
+				"				  <table width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"3\" cellspacing=\"5\" bgcolor=\"#F3F3F3\">");
+		corpoHtmlEmail.append("				        <tr> ");
+		corpoHtmlEmail.append(
+				"				          <td><table width=\"100%\" border=\"0\" cellpadding=\"3\" cellspacing=\"0\" bgcolor=\"#FFFFFF\">");
+		corpoHtmlEmail.append("				              <tr> ");
+		corpoHtmlEmail.append("				                <td colspan=\"2\" align=\"right\">&nbsp;</td>");
+		corpoHtmlEmail.append("				              </tr>");
+		corpoHtmlEmail.append("				              <tr> ");
+		corpoHtmlEmail.append(
+				"				                <td width=\"90\"><strong><font size=\"2\" face=\"Arial, Helvetica, sans-serif\" style=\"color: #1895d4;\">Nome:</font></strong></td>");
+		corpoHtmlEmail.append(
+				"				                <td><font size=\"2\" face=\"Arial, Helvetica, sans-serif\">#nomePaciente#</font></td>");
+		corpoHtmlEmail.append("				              </tr>");
+		corpoHtmlEmail.append("				              <tr> ");
+		corpoHtmlEmail.append(
+				"				                <td width=\"90\"><strong><font size=\"2\" face=\"Arial, Helvetica, sans-serif\" style=\"color: #1895d4;\">E-mail:</font></strong></td>");
+		corpoHtmlEmail.append(
+				"				                <td><font size=\"2\" face=\"Arial, Helvetica, sans-serif\">#emailPaciente#</font></td>");
+		corpoHtmlEmail.append("				              </tr>");
+		corpoHtmlEmail.append("				              <tr> ");
+		corpoHtmlEmail.append(
+				"				                <td width=\"90\"><strong><font size=\"2\" face=\"Arial, Helvetica, sans-serif\" style=\"color: #1895d4;\">Celular:</font></strong></td>");
+		corpoHtmlEmail.append(
+				"				                <td><font size=\"2\" face=\"Arial, Helvetica, sans-serif\">#celularPaciente#</font></td>");
+		corpoHtmlEmail.append("				              </tr>");
+		corpoHtmlEmail.append("				              <tr> ");
+		corpoHtmlEmail.append(
+				"				                <td width=\"90\"><strong><font size=\"2\" face=\"Arial, Helvetica, sans-serif\" style=\"color: #1895d4;\">Data:</font></strong></td>");
+		corpoHtmlEmail.append(
+				"				                <td><font size=\"2\" face=\"Arial, Helvetica, sans-serif\">#dataAgendaEmail#</font></td>");
+		corpoHtmlEmail.append("				              </tr>");
+		corpoHtmlEmail.append("				              <tr> ");
+		corpoHtmlEmail.append(
+				"				                <td width=\"90\"><strong><font size=\"2\" face=\"Arial, Helvetica, sans-serif\" style=\"color: #1895d4;\">Horário:</font></strong></td>");
+		corpoHtmlEmail.append(
+				"				                <td><font size=\"2\" face=\"Arial, Helvetica, sans-serif\">#horaAgendaEmail#</font></td>");
+		corpoHtmlEmail.append("				              </tr>");
+		corpoHtmlEmail.append("				              <tr> ");
+		corpoHtmlEmail.append(
+				"				                <td width=\"90\"><strong style=\"margin-right: 3px;\"><font size=\"2\" face=\"Arial, Helvetica, sans-serif\" style=\"color: #1895d4;\">Profissional:</font></strong></td>");
+		corpoHtmlEmail.append(
+				"				                <td><font size=\"2\" face=\"Arial, Helvetica, sans-serif\">#profissionalAtendimento#</font></td>");
+		corpoHtmlEmail.append("				              </tr>");
+		corpoHtmlEmail.append("				              <tr> ");
+		corpoHtmlEmail.append("				                <td colspan=\"2\" align=\"right\">&nbsp;</td>");
+		corpoHtmlEmail.append("				              </tr>");
+		corpoHtmlEmail.append("						</table>");
+		corpoHtmlEmail.append("						</td>");
+		corpoHtmlEmail.append("						</tr>");
+		corpoHtmlEmail.append("					</table>");
+		corpoHtmlEmail.append("			    </td>");
+		corpoHtmlEmail.append("		   </tr>");
+		corpoHtmlEmail.append("		</table>");
+		corpoHtmlEmail.append("</div>");
+		return corpoHtmlEmail.toString();
+	}
 	public String emailPadrao(String corpoEmail) {
 		StringBuffer sb = new StringBuffer();
 		sb.append("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">");

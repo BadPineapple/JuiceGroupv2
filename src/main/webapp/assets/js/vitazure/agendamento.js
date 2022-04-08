@@ -371,14 +371,14 @@ function efetuarPagamento($scope, $http, $window , id ,valorOnline ,valorPresenc
 	          	var vnow = new Date();
 	          	var dataExpiracaoBoleto = addDays(vnow,days-2);
 	          	var dataExpiracaoPix = addDays(vnow,days);
-	          	if (days < 3 ) {
-					var cont = confirm("Atenção, O agendamento para pagamento com boleto, deverá ser superior a 3 dias. Deseja Continuar?")
+	          	if (days < 6 ) {
+					var cont = confirm("Atenção: Boleto Bancário só estará disponível caso a data da consulta seja superior a 6 (seis) dias da data do pagamento. Deseja Continuar?")
 					if(!cont) {
 						  document.getElementById("spinner").style.display = "none";
 						return;
 					}
 				}
-	            var listOptions = days < 3 ? 'credit_card,pix' : 'credit_card,pix,boleto';
+	            var listOptions = days < 6 ? 'credit_card,pix' : 'credit_card,pix,boleto';
 	            
 	            
 	            document.getElementById("spinner").style.display = "none";

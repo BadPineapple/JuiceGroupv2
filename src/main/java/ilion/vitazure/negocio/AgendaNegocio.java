@@ -143,6 +143,8 @@ public class AgendaNegocio {
 		Profissional profissional = profissionalNegocio
 				.consultarPorId(Long.parseLong(jsonRetornoToken.get("idProfissional").toString()));
 		// Capturar Transação
+		Thread.sleep(5000);
+		System.out.println("Pasou no Sleep");
 		Transaction capturarTransacao = new Transaction().find(tx.getId());
 		capturarTransacao.setSplitRules(getSplitedRules(profissional, situacaoPagarme,
 				jsonRetornoToken.get("payment_method").toString().toUpperCase()));
@@ -320,6 +322,7 @@ public class AgendaNegocio {
 		return agenda;
 	}
 
+
 	public ValueList buscar(VLHForm vlhForm, ValueListInfo valueListInfo, Usuario usuarioSessao, Pessoa pessoaAgenda) {
 		DetachedCriteria dc = DetachedCriteria.forClass(Agenda.class);
 		dc.createAlias("paciente", "pac");
@@ -360,7 +363,7 @@ public class AgendaNegocio {
 			dc.add(Restrictions.eq("prof.pessoa.id", pessoaAgenda.getId()));
 		}
 
-		ValueList notificacaos = hibernateUtil.consultarValueList(dc, org.hibernate.criterion.Order.desc("id"),
+		ValueList notificacaos = hibernateUtil.consultarValueList(dc, org.hibernate.criterion.Order.desc("dataHoraAgendamento"),
 				valueListInfo);
 
 		return notificacaos;
@@ -397,6 +400,18 @@ public class AgendaNegocio {
 		dc.add(Restrictions.eq("idTransacao", idTransacao));
 		return (List<Agenda>) hibernateUtil.buscar(dc,1,10);
 	}
+	
+	public List<Agenda> atualizarAgendaPorIdTransacao(Integer idTransacao,String situacao,Pessoa pessoaSessao) {
+		DetachedCriteria dc = DetachedCriteria.forClass(Agenda.class);
+		dc.add(Restrictions.eq("idTransacao", idTransacao));
+		List<Agenda> agendas = hibernateUtil.buscar(dc,1,10);
+		for (Agenda item : agendas ) {
+			item.setStatus(StatusEnum.valueOf(situacao));
+			hibernateUtil.update(item);
+			envioEmailConsulta.enviarEmailAlteracaoSituacaoAgenda(item, pessoaSessao);
+		}
+		return agendas;
+	}
 	@Transactional
 	public Agenda avaliarAtendimento(Agenda agenda) {
 		StringBuilder sql = new StringBuilder();
@@ -430,17 +445,17 @@ public class AgendaNegocio {
 			Profissional profissional = profissionalNegocio.consultarPorId(Long.parseLong(jsonRetornoToken.get("idProfissional").toString()));
 			Date dataAgenda = Uteis.converterDataHoraString(jsonRetornoToken.get("dataAtendimento").toString(),jsonRetornoToken.get("horarioPossivelAtendimento").toString());
 			Agenda agendaReagendada = agendaNegocio.consultarAgendaId(Long.parseLong(jsonRetornoToken.get("idAgendaReagendada").toString()));
-//			Agenda agenda = new Agenda(paciente, profissional, dataAgenda,jsonRetornoToken.get("tipoAtendimento").toString().equals("online") || jsonRetornoToken.get("tipoAtendimento").toString().equals("") ? Boolean.TRUE : Boolean.FALSE, jsonRetornoToken.get("tipoAtendimento").toString().equals("presencial") ? Boolean.TRUE	: Boolean.FALSE,
-//					"", StatusEnum.PENDENTE, null, "");
-//			if (agenda.getOnline()) {
-//				wherebyApi.gerarLinkAtendimentoOnline(profissional, agenda);
-//			}
-//			agenda = (Agenda) hibernateUtil.save(agenda);
-//			agendaReagendada.setIdAgendaReagendamento(agenda.getId());
+			Agenda agenda = new Agenda(paciente, profissional, dataAgenda,jsonRetornoToken.get("tipoAtendimento").toString().equals("online") || jsonRetornoToken.get("tipoAtendimento").toString().equals("") ? Boolean.TRUE : Boolean.FALSE, jsonRetornoToken.get("tipoAtendimento").toString().equals("presencial") ? Boolean.TRUE	: Boolean.FALSE,
+					"", StatusEnum.PENDENTE, null, "");
+			if (agenda.getOnline()) {
+				wherebyApi.gerarLinkAtendimentoOnline(profissional, agenda);
+			}
+			agenda = (Agenda) hibernateUtil.save(agenda);
+			agendaReagendada.setIdAgendaReagendamento(agenda.getId());
 			agendaReagendada.setDataHoraAgendamento(dataAgenda);
 			agendaReagendada.setReagendamentoConcluido(Boolean.TRUE);
 			hibernateUtil.update(agendaReagendada);
-//			agendaNegocio.alterarAgenda(agendaReagendada.getId(), StatusEnum.REMARCADO.toString(), paciente);
+			agendaNegocio.alterarAgenda(agendaReagendada.getId(), StatusEnum.REMARCADO.toString(), paciente);
 			envioEmailConsulta.enviar(agendaReagendada);
 			return agendaReagendada;
 		} catch (ParseException e) {

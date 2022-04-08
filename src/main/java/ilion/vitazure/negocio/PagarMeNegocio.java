@@ -469,32 +469,25 @@ public class PagarMeNegocio {
 		 
 		 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
 		 LocalDate dateObject = LocalDate.parse(item.getDataFormatada(), formatter);
-		 List<Agenda> listAgendas = agendaNegocio.consultarAgendaIdTransacao(item.getIdTransacao());
-		 int contador = 1;
-		 for (Agenda agenda : listAgendas) {
-			 
-		  Period dias = Period.between(agenda.getDataHoraAgendamento().toInstant().atZone(ZoneId.systemDefault())
-			      .toLocalDate(), LocalDate.now());
+		 Agenda agenda = agendaNegocio.consultarAgendaId(item.getAgenda());
+	     if ( agenda != null ) {  
+		  Period dias = Period.between(LocalDate.now(),agenda.getDataHoraAgendamento().toInstant().atZone(ZoneId.systemDefault())
+			      .toLocalDate() );
 		  
-		 if (status.equals("PAID") &&  dias.getDays() <= 0) {
+		 if ((status.equals("PAID") &&  dias.getDays() >= 0 && dias.getMonths() == 0)) {
 			 //ATUALIZA PAGAMENTO, LIBERA AGENDAMENTO
-			 agendaNegocio.alterarAgenda(agenda.getId(),StatusEnum.PENDENTE.name(),pessoaNegocio.consultarPorId(item.getIdPaciente()));
-			 if (listAgendas.size() == contador) {
-				 item.setStatus(StatusEnum.valueOf("CONFIRMADO").getNome());
-			 }
-			 contador++;
+			 
+			 item.setStatus(StatusEnum.valueOf("CONFIRMADO").getNome());
+				 agendaNegocio.atualizarAgendaPorIdTransacao(agenda.getIdTransacao(),StatusEnum.PENDENTE.name(),pessoaNegocio.consultarPorId(item.getIdPaciente()));
+				 atualizarPagamentoPagarMe(item);
+		 }
+		 if (!status.equals("PAID") &&  dias.getDays() >= 0  && dias.getMonths() == 0) {
+			 
+			 item.setStatus(StatusEnum.valueOf("CANCELADO").getNome());
+			 	 agendaNegocio.atualizarAgendaPorIdTransacao(agenda.getIdTransacao(),StatusEnum.CANCELADO.name(),pessoaNegocio.consultarPorId(item.getIdPaciente()));
 			 atualizarPagamentoPagarMe(item);
 		 }
-		 if (!status.equals("PAID") &&  dias.getDays() >= 0 ) {
-			 System.out.println(item.getIdPaciente());
-			 agendaNegocio.alterarAgenda(agenda.getId(),StatusEnum.CANCELADO.name(),pessoaNegocio.consultarPorId(item.getIdPaciente()));
-			 if (listAgendas.size() == contador) {
-				 item.setStatus(StatusEnum.valueOf("CANCELADO").getNome());
-			 }
-			 contador++;
-			 atualizarPagamentoPagarMe(item);
-		 }
-		 }
+	     }
 	  }
 	  return listaPendentes.size() > 0 ? true : false;
   }

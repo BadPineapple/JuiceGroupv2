@@ -458,7 +458,7 @@ public class VitazureController {
 			  	 List<EnderecoAtendimento> enderecoAtendimento = new ArrayList<EnderecoAtendimento>();
 			  	 enderecoAtendimento.addAll(enderecoNegocio.consultarEnderecoPorPessoa(profissional.getId()));
 			  	 request.setAttribute("enderecoAtendimento", enderecoAtendimento);
-			  	 request.setAttribute("cidadeProfissional", enderecoAtendimento.get(0).getCidade());
+			  	 request.setAttribute("cidadeProfissional", enderecoAtendimento.size() > 0 ? enderecoAtendimento.get(0).getCidade() : null);
 				 return "/ilionnet2/vitazure/perfil-do-profissional-reagendamento";
 			 }
 			 @RequestMapping("/vitazure/reagendamentoProfissional")
