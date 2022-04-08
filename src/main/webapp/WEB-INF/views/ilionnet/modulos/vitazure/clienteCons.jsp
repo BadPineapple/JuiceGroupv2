@@ -74,6 +74,9 @@
 								<valuelist:column title="Classificação"> 
 							        <c:out value="${cliente.classificacaoImportacao eq '1.0' ? 'Titular' : cliente.classificacaoImportacao eq '2.0' ? 'Dependente' : '-'}"/>
 						        </valuelist:column> 
+								<valuelist:column title="Cpf Titular"> 
+							        <c:out value="${cliente.cpfTitular eq '' ? '-' : cliente.cpfTitular}"/>
+						        </valuelist:column> 
 								<valuelist:column title="Opcoes"> 
 							        <a href="<ilion:url/>vitazure/cliente/${cliente.id}" class="btn pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-default btn-sm">
 										<i class="material-icons md-dark pmd-sm">edit</i>

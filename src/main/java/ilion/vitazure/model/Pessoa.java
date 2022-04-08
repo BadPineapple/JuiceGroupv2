@@ -45,6 +45,7 @@ public class Pessoa implements Serializable{
 	  private String relacaoContato;
 	  private String nomeContato;
 	  private String celularContato;
+	  private String cpfTitular;
 	  private Boolean clienteAtivo;
 	  @Transient
 	  private String tipoConta;
@@ -279,6 +280,16 @@ public class Pessoa implements Serializable{
 			celularContato = "";
 		}
 		return celularContato;
+	}
+	
+	public String getCpfTitular() {
+		if (cpfTitular == null) {
+			cpfTitular = "";
+		}
+		return cpfTitular;
+	}
+	public void setCpfTitular(String cpfTitular) {
+		this.cpfTitular = cpfTitular;
 	}
 	public void setCelularContato(String celularContato) {
 		this.celularContato = celularContato;

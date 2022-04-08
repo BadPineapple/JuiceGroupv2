@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import ilion.admin.negocio.Usuario;
 import ilion.arquivo.negocio.ArquivoNegocio;
 import ilion.util.contexto.autorizacao.AcessoLivre;
 import ilion.util.exceptions.ValidacaoException;
@@ -62,11 +63,11 @@ public class PessoaController {
 
 			  pessoa.setEmail(pessoa.getEmail().toLowerCase(Locale.ROOT));
 
-	    	  if (!Uteis.ehEmailValido(pessoa.getEmail())) {
+	    	  if (pessoa.getEmail() != null && !pessoa.getEmail().equals("") && !Uteis.ehEmailValido(pessoa.getEmail())) {
 	    	  	return new ResponseEntity<>(new JsonString("E-mail informado inválido."), HttpStatus.BAD_REQUEST);
 			  }
 
-	    	  if (!(pessoa.getCelular().matches("^\\((?:[14689][1-9]|2[12478]|3[1234578]|5[1345]|7[134579])\\) (?:[2-8]|9[1-9])[0-9]{3}-[0-9]{4}$"))) {
+	    	  if (pessoa.getCelular() != null && !pessoa.getCelular().equals("") && !(pessoa.getCelular().matches("^\\((?:[14689][1-9]|2[12478]|3[1234578]|5[1345]|7[134579])\\) (?:[2-8]|9[1-9])[0-9]{3}-[0-9]{4}$"))) {
 	    	  	return new ResponseEntity<>(new JsonString("Número de telefone inválido. Verifique se o DDD está correto"), HttpStatus.BAD_REQUEST);
 					}
 

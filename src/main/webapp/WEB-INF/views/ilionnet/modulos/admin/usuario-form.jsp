@@ -15,7 +15,7 @@ jQuery(function(jQuery){
 	jQuery("#telefone").mask("(99) 9999-9999");
 	jQuery("#celular").mask("(99) 9999-9999");
     jQuery("#cnpj").mask("999.999/9999-99");
-    jQuery("#nrFuncionarios").mask("999");
+    jQuery("#nrFuncionarios").mask("99999");
 });
 </script>
 <table id="container" align="center" cellpadding="0" cellspacing="0">

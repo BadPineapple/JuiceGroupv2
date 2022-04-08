@@ -68,6 +68,7 @@
 						                     pessoa.pessoaImportada='${pessoa.pessoaImportada}';
 						                     pessoa.nomeResponsavelImportacao='${pessoa.nomeResponsavelImportacao}';
 						                     pessoa.clienteAtivo='${pessoa.clienteAtivo}';
+						                     pessoa.cpfTitular='${pessoa.cpfTitular}';
                           					 "/>
                           
                             <div class="row">

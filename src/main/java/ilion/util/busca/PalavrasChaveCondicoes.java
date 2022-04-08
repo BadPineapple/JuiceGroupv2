@@ -33,7 +33,7 @@ public class PalavrasChaveCondicoes {
 			return Collections.emptyList();
 		}
 		
-		q = BuscaUtil.ajustar(q);
+//		q = BuscaUtil.ajustar(q);
 		
 		String[] palavrasVetor = q.split(" ");
 		

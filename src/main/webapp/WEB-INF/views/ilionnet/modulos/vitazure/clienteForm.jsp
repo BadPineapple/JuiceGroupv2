@@ -31,7 +31,6 @@
 		  <li><a href="<ilion:url/>cliente">Cliente</a></li>
 		  <li class="active">Edi&ccedil;&atilde;o</li>
 		</ol><!--breadcrum end--> 
-		
 		<div class="pmd-card pmd-z-depth">
 				<div class="pmd-card-body">	
 					<form ng-submit="submit()">
@@ -63,13 +62,14 @@
 						                     pessoa.pessoaImportada='${pessoa.pessoaImportada}';
 						                     pessoa.nomeResponsavelImportacao='${pessoa.nomeResponsavelImportacao}';
 						                    pessoa.clienteAtivo='${pessoa.clienteAtivo}';
+						                    pessoa.cpfTitular='${pessoa.cpfTitular}';
 						                     "/>
 							<div class="row">
 						          <div class="col-md-12 col-lg-12 col-sm-12">
 						            <div class="col-md-6 col-lg-6 col-sm-12">
 						              <div class="  form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed">
 						                <label for="nome" class="control-label">Nome</label>
-						                <input type="text" id="nome" ng-model="pessoa.nome" class="form-control input-group-lg" required/>
+						                <input type="text" id="nome" ng-model="pessoa.nome" class="form-control input-group-lg" ${usuarioSessao.admin ? '' : 'required'}/>
 						              </div>
 						            </div>
 						             <div class="col-md-3 col-lg-3 col-sm-12">
@@ -90,13 +90,13 @@
 						            <div class="col-md-3 col-lg-3 col-sm-12">
 						              <div class="  form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed">
 						                <label for="email" class="control-label">Email</label>
-						                <input type="email" id="email" ng-model="pessoa.email" class="form-control input-group-lg" required/>
+						                <input type="email" id="email" ng-model="pessoa.email" class="form-control input-group-lg"  ${usuarioSessao.admin ? '' : 'required'}/>
 						              </div>
 						            </div>
 						             <div class="col-md-3 col-lg-3 col-sm-12">
 								        <div class="  form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed">
 								           <label for="senha" class="control-label">Senha</label>
-								           <input type="password" id="senha" ng-model="pessoa.senha" class="form-control input-group-lg" required/>
+								           <input type="password" id="senha" ng-model="pessoa.senha" class="form-control input-group-lg" ${usuarioSessao.admin ? '' : 'required'}/>
 								        </div>
 								    </div>
 						            <div class="col-md-3 col-lg-3 col-sm-12">
@@ -116,13 +116,13 @@
 								   <div class="col-md-3 col-lg-3 col-sm-12">
 						              <div class="  form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed">
 						                <label for="cep" class="control-label">CEP</label>
-						                <input type="Large" id="cep" ng-model="pessoa.cep" data-mask="00.000-000" class="form-control input-group-lg" required/>
+						                <input type="Large" id="cep" ng-model="pessoa.cep" data-mask="00.000-000" class="form-control input-group-lg" ${usuarioSessao.admin ? '' : 'required'}/>
 						              </div>
 						            </div>
 						             <div class="col-md-3 col-lg-3 col-sm-12">
 								        <div class="  form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed">
 								           <label for="endereco" class="control-label">Genero</label>
-								           <input type="Large" id="genero" ng-model="pessoa.genero" class="form-control input-group-lg" required/>
+								           <input type="Large" id="genero" ng-model="pessoa.genero" class="form-control input-group-lg" ${usuarioSessao.admin ? '' : 'required'}/>
 								        </div>
 								    </div>
 						            <div class="col-md-3 col-lg-3 col-sm-12">

@@ -59,6 +59,8 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
 	private List<Pessoa> pessoasOperacao2ProfissionalNaoCadastrado;
 	private List<Pessoa> pessoasOperacao2VinculadoOutraEmpresa;
 	private List<Pessoa> pessoasOperacao3VinculadoOutraEmpresa;
+	private List<Pessoa> pessoasCpfInvalido;
+	private List<Pessoa> pessoasCpfTitularInvalido;
 	private static final String SLASH_WINDOWS = "\\";
 	private static final String SLASH_LINUX = "/";
 	private Boolean operacoesValidadas;
@@ -276,6 +278,28 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
 		}
 		return pessoasOperacao2VinculadoOutraEmpresa;
 	}
+	
+	public List<Pessoa> getPessoasCpfInvalido() {
+		if(pessoasCpfInvalido == null) {
+			pessoasCpfInvalido = new ArrayList<Pessoa>();
+		}
+		return pessoasCpfInvalido;
+	}
+
+	public void setPessoasCpfInvalido(List<Pessoa> pessoasCpfInvalido) {
+		this.pessoasCpfInvalido = pessoasCpfInvalido;
+	}
+
+	public List<Pessoa> getPessoasCpfTitularInvalido() {
+		if(pessoasCpfTitularInvalido == null) {
+			pessoasCpfTitularInvalido = new ArrayList<Pessoa>();
+		}
+		return pessoasCpfTitularInvalido;
+	}
+
+	public void setPessoasCpfTitularInvalido(List<Pessoa> pessoasCpfTitularInvalido) {
+		this.pessoasCpfTitularInvalido = pessoasCpfTitularInvalido;
+	}
 
 	public void setPessoasOperacao2VinculadoOutraEmpresa(List<Pessoa> pessoasOperacao2VinculadoOutraEmpresa) {
 		this.pessoasOperacao2VinculadoOutraEmpresa = pessoasOperacao2VinculadoOutraEmpresa;
@@ -348,6 +372,7 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
       		  String cpf = null;
       		  String operacao = null;
       		  String classificacao = null;
+      		  String cpfTitular = null;
       		
               while (celulas.hasNext()) {
                   XSSFCell celula = (XSSFCell) celulas.next();
@@ -366,10 +391,13 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
                       case 3:
                     	  classificacao = celula.toString();
                     	  break;
+                      case 4:
+                    	  cpfTitular = celula.toString();
+                    	  break;
                   }
 
               }
-      			importarFuncionario(nome, cpf,operacao , classificacao);
+      			importarFuncionario(nome, cpf,operacao , classificacao , cpfTitular);
           }
 	        validarCpfDuplicadoLista();
 	      } catch (IOException e) {
@@ -377,7 +405,7 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
 	      }
 	    }
 	
-	private void importarFuncionario(String nome, String cpf ,String operacao, String classificacao) throws Exception {
+	private void importarFuncionario(String nome, String cpf ,String operacao, String classificacao , String cpfTitular) throws Exception {
 		
 		Pessoa pessoa = new Pessoa();
 		pessoa = pessoaNegocio.consultarPorCpf(cpf);
@@ -393,6 +421,7 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
 			pessoa.setSenha("Vitazure1");
 			pessoa.setConfirmado(Boolean.TRUE);
 			pessoa.setClienteAtivo(Boolean.TRUE);
+			pessoa.setCpfTitular(cpfTitular);
 		}else{
 			pessoa.setConfirmado(Boolean.TRUE);
 			pessoa.setClienteAtivo(Boolean.TRUE);
@@ -418,7 +447,11 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
 	
 	private void incluirAtualizarFuncionarioArquivo(Pessoa pessoa) {
 		try {
-			if(pessoa.getOperacaoImportacao().equals("1.0") && Uteis.ehNuloOuVazio(pessoa.getEmpresaImportacao())) {
+			if(!Uteis.ehCpfValido(pessoa.getCpf())) {
+				getPessoasCpfInvalido().add(pessoa);
+			}else if(pessoa.getClassificacaoImportacao().equals("2.0") && Uteis.ehNuloOuVazio(pessoa.getCpfTitular())) {
+				getPessoasCpfTitularInvalido().add(pessoa);
+			}else if(pessoa.getOperacaoImportacao().equals("1.0") && Uteis.ehNuloOuVazio(pessoa.getEmpresaImportacao())) {
 				pessoa.setEmpresaImportacao(getUsuario().getEmpresa());
 				getPessoasOperacao1().add(pessoa);
 				pessoaNegocio.incluirAtualizar(pessoa);
@@ -572,6 +605,30 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
 			retorno.append("<strong>Qtd. de linhas não importadas, com CPF vinculado a outra empresa:").append(getPessoasOperacao3VinculadoOutraEmpresa().size()).append("</strong><br/>");
 			retorno.append(" <div class=\"col-md-12 col-lg-12 col-sm-12\">");
 			getPessoasOperacao3VinculadoOutraEmpresa().forEach(pessoa -> {
+				retorno.append(" <div class=\"col-md-6 col-lg-6 col-sm-12\">");
+				retorno.append("<strong>Nome: </strong>").append(pessoa.getNome());
+				retorno.append("</div>");
+				retorno.append(" <div class=\"col-md-6 col-lg-6 col-sm-12\">");
+				retorno.append("<strong>CPf: </strong>").append(pessoa.getCpf());
+				retorno.append("</div>");
+			});
+			retorno.append("</div>");
+		}if(!getPessoasCpfInvalido().isEmpty()) {
+			retorno.append("<strong>Qtd. de linhas não importadas, com CPF Invalido:").append(getPessoasCpfInvalido().size()).append("</strong><br/>");
+			retorno.append(" <div class=\"col-md-12 col-lg-12 col-sm-12\">");
+			getPessoasCpfInvalido().forEach(pessoa -> {
+				retorno.append(" <div class=\"col-md-6 col-lg-6 col-sm-12\">");
+				retorno.append("<strong>Nome: </strong>").append(pessoa.getNome());
+				retorno.append("</div>");
+				retorno.append(" <div class=\"col-md-6 col-lg-6 col-sm-12\">");
+				retorno.append("<strong>CPf: </strong>").append(pessoa.getCpf());
+				retorno.append("</div>");
+			});
+			retorno.append("</div>");
+		}if(!getPessoasCpfTitularInvalido().isEmpty()) {
+			retorno.append("<strong>Qtd. de linhas não importadas, sem CPF do Titular:").append(getPessoasCpfTitularInvalido().size()).append("</strong><br/>");
+			retorno.append(" <div class=\"col-md-12 col-lg-12 col-sm-12\">");
+			getPessoasCpfTitularInvalido().forEach(pessoa -> {
 				retorno.append(" <div class=\"col-md-6 col-lg-6 col-sm-12\">");
 				retorno.append("<strong>Nome: </strong>").append(pessoa.getNome());
 				retorno.append("</div>");

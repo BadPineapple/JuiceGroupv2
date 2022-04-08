@@ -52,7 +52,7 @@
 	                        <label class="control-label">Instruções para importar uma lista de funcionários:</label>
 							<br/>
 							1 - A lista deve ser formatada em arquivo Excel. com o nome do arquivo funcionarios.xls ou funcionarios.xlsx;<br/>
-							2 - Cada linha deve conter somente o NOME, CPF, OPERAÇÃO e CLASSIFICAÇÃO;<br/>
+							2 - Cada linha deve conter somente o NOME, CPF, OPERAÇÃO, CLASSIFICAÇÃO e CPF TITULAR;<br/>
 							3 - Os dados devem ser separados em colunas, NÃO coloque título nas colunas, SOMENTE os dados dos funcionários;<br/>
 							4 - O Campo OPERAÇÃO deve receber os seguintes valores:<br/>
 							&nbsp;&nbsp;1 (um) - Quando um novo funcionário será incluído;<br/>
