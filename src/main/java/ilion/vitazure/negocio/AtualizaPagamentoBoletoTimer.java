@@ -60,6 +60,7 @@ public class AtualizaPagamentoBoletoTimer {
 			try {
 				LOGGER.info("Iniciando validação de pagamentos pendentes");
 				Boolean possuiPendentes = pagarMeNegocio.atualizarPagamento();
+				LOGGER.info("Finalizado validação de pagamentos pendentes");
 				
 			} catch (Exception e) {
 				String m = "ERRO Atualizar Itens Pendentes de Pagamento";

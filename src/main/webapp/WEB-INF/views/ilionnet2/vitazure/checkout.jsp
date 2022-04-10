@@ -25,10 +25,13 @@
                             		<h3>Seu agendamento foi concluído com sucesso!</h3>
                             	</c:otherwise>
                             </c:choose>
-                            <p>${ paymentUrl == null && qrCode == null 
+                            <h4>
+                              ${ paymentUrl == null && qrCode == null 
                             	? "Por favor, aguarde a confirmação do agendamendo pelo profissional selecionado." 
                             	: paymentUrl != null && paymentUrl != '' ? " Por favor, após o pagamento, aguarde a confirmação do agendamendo pelo profissional selecionado."
-                            	: "Use o QrCode abaixo para realizar o seu pagamento, aguarde a confirmação do agendamento que será enviada no seu e-mail."}</p>
+                            	: "<p>Use o QrCode abaixo para realizar o pagamento, você também receberá uma cópia no seu e-mail.</p>"
+                            	  }
+                            </p>
                             
                             <c:choose>
                             	<c:when test="${ paymentUrl == null || paymentUrl == ''}">
@@ -48,7 +51,8 @@
 							            title="Pix" 
 							            width="150" 
 							            height="150" />
-							    
+							    <p><b>Atenção:</b> A validade para pagamento será de 60 minutos, após este prazo o QrCode perderá sua validade.</br>
+                            	   Após o pagamento, aguarde a confirmação do agendamento que será enviada no seu e-mail.</p>
                              </p>
                              </c:otherwise>
                             </c:choose>

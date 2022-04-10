@@ -11,6 +11,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.apache.log4j.Logger;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.Order;
@@ -51,6 +52,8 @@ import net.mlw.vlh.ValueList;
 @SuppressWarnings("unchecked")
 public class PagarMeNegocio {
 
+ static final Logger LOGGER = Logger.getLogger(PagarMeNegocio.class);
+	
   @Autowired
   private PropNegocio propNegocio;
 
@@ -464,9 +467,11 @@ public class PagarMeNegocio {
   
   public boolean atualizarPagamento()  throws Exception {
 	  List<PagamentoPagarMe> listaPendentes = getListaPagamentosPendentes();
+	  LOGGER.info("Total de Itens a Processar " + listaPendentes.size());
 	  for( PagamentoPagarMe item : listaPendentes ) {
+		    
 		 String status =  getStatusPayment(item);
-		 
+		 LOGGER.info("Total de Itens a Processar " + item.getIdTransacao() + " id_Paciente: " + item.getIdPaciente() + " data Agenda: " + item.getDataAgenda() + " Status: " + status );
 		 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
 		 LocalDate dateObject = LocalDate.parse(item.getDataFormatada(), formatter);
 		 Agenda agenda = agendaNegocio.consultarAgendaId(item.getAgenda());
@@ -474,16 +479,16 @@ public class PagarMeNegocio {
 		  Period dias = Period.between(LocalDate.now(),agenda.getDataHoraAgendamento().toInstant().atZone(ZoneId.systemDefault())
 			      .toLocalDate() );
 		  
-		 if ((status.equals("PAID") &&  dias.getDays() >= 0 && dias.getMonths() == 0)) {
+		 if ((status.equals("PAID") &&  dias.getDays() >= 0 && dias.getMonths() >= 0)) {
 			 //ATUALIZA PAGAMENTO, LIBERA AGENDAMENTO
 			 
-			 item.setStatus(StatusEnum.valueOf("CONFIRMADO").getNome());
+			 item.setStatus(StatusEnum.valueOf("CONFIRMADO").getNome().toUpperCase());
 				 agendaNegocio.atualizarAgendaPorIdTransacao(agenda.getIdTransacao(),StatusEnum.PENDENTE.name(),pessoaNegocio.consultarPorId(item.getIdPaciente()));
 				 atualizarPagamentoPagarMe(item);
 		 }
-		 if (!status.equals("PAID") &&  dias.getDays() >= 0  && dias.getMonths() == 0) {
+		 if (!status.equals("PAID") &&  dias.getDays() >= 0  && dias.getMonths() >= 0) {
 			 
-			 item.setStatus(StatusEnum.valueOf("CANCELADO").getNome());
+			 item.setStatus(StatusEnum.valueOf("CANCELADO").getNome().toUpperCase());
 			 	 agendaNegocio.atualizarAgendaPorIdTransacao(agenda.getIdTransacao(),StatusEnum.CANCELADO.name(),pessoaNegocio.consultarPorId(item.getIdPaciente()));
 			 atualizarPagamentoPagarMe(item);
 		 }

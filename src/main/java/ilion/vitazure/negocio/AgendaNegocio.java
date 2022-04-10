@@ -406,7 +406,7 @@ public class AgendaNegocio {
 		dc.add(Restrictions.eq("idTransacao", idTransacao));
 		List<Agenda> agendas = hibernateUtil.buscar(dc,1,10);
 		for (Agenda item : agendas ) {
-			item.setStatus(StatusEnum.valueOf(situacao));
+			item.setStatus(StatusEnum.valueOf(situacao.toUpperCase()));
 			hibernateUtil.update(item);
 			envioEmailConsulta.enviarEmailAlteracaoSituacaoAgenda(item, pessoaSessao);
 		}

@@ -144,9 +144,11 @@ public class EnvioEmailConsulta {
 			htmlEmail.append(emailPadrao(corpoHtmlEmailPagtoAprovadoProssionnal()));
 			enviarEmailAlteracaoSituacaoAgendaProfissional(			
 			agenda,
-					htmlEmail.toString().replaceAll("#nome#", agenda.getPaciente().getNome())
+					htmlEmail.toString().replaceAll("#nome#", agenda.getProfissional().getPessoa().getNome())
 							.replaceAll("#dataAgendaEmail#", agenda.getDataAgendaEmail())
-							.replaceAll("#profissionalAtendimento#", agenda.getProfissional().getPessoa().getNome())
+							.replaceAll("#nomePaciente#", agenda.getPaciente().getNome())
+							.replaceAll("#emailPaciente#", agenda.getPaciente().getEmail())
+							.replaceAll("#celularPaciente#", agenda.getPaciente().getCelular())
 							.replaceAll("#horaAgendaEmail#", agenda.getHoraAgendaEmail()).replaceAll("#urlEntrar#",
 									urlEntrar),
 					"Confirmação Pagamento");
@@ -381,11 +383,24 @@ public class EnvioEmailConsulta {
 		corpoHtmlEmail.append("				              </tr>");
 		corpoHtmlEmail.append("				              <tr> ");
 		corpoHtmlEmail.append(
-				"				                <td width=\"90\"><strong style=\"margin-right: 3px;\"><font size=\"2\" face=\"Arial, Helvetica, sans-serif\" style=\"color: #1895d4;\">Profissional:</font></strong></td>");
+				"				                <td width=\"90\"><strong style=\"margin-right: 3px;\"><font size=\"2\" face=\"Arial, Helvetica, sans-serif\" style=\"color: #1895d4;\">Paciente:</font></strong></td>");
 		corpoHtmlEmail.append(
-				"				                <td><font size=\"2\" face=\"Arial, Helvetica, sans-serif\">#profissionalAtendimento#</font></td>");
+				"				                <td><font size=\"2\" face=\"Arial, Helvetica, sans-serif\">#nomePaciente#</font></td>");
 		corpoHtmlEmail.append("				              </tr>");
 		corpoHtmlEmail.append("				              <tr> ");
+		corpoHtmlEmail.append(
+				"				                <td width=\"90\"><strong><font size=\"2\" face=\"Arial, Helvetica, sans-serif\" style=\"color: #1895d4;\">E-mail:</font></strong></td>");
+		corpoHtmlEmail.append(
+				"				                <td><font size=\"2\" face=\"Arial, Helvetica, sans-serif\">#emailPaciente#</font></td>");
+		corpoHtmlEmail.append("				              </tr>");
+		corpoHtmlEmail.append("				              <tr> ");
+		corpoHtmlEmail.append(
+				"				                <td width=\"90\"><strong><font size=\"2\" face=\"Arial, Helvetica, sans-serif\" style=\"color: #1895d4;\">Celular:</font></strong></td>");
+		corpoHtmlEmail.append(
+				"				                <td><font size=\"2\" face=\"Arial, Helvetica, sans-serif\">#celularPaciente#</font></td>");
+		corpoHtmlEmail.append("				              </tr>");
+		corpoHtmlEmail.append("				              <tr> ");
+
 		corpoHtmlEmail.append("				                <td colspan=\"2\" align=\"right\">&nbsp;</td>");
 		corpoHtmlEmail.append("				              </tr>");
 		corpoHtmlEmail.append("						</table>");
@@ -510,7 +525,8 @@ public class EnvioEmailConsulta {
 				+ "							            width=\"150\" \n"
 				+ "							            height=\"150\" /> </p>");
 		corpoHtmlEmail.append("	 <p> Se preferir, copie e cole o código abaixo </p> <p>#linkPagamento#</p> ");
-				
+		corpoHtmlEmail.append("<b>Atenção:</b> A validade para pagamento será de <b>60 minutos</b>, após este prazo o QrCode perderá sua validade.</p>");
+		corpoHtmlEmail.append("Após o pagamento, aguarde a confirmação do agendamento que será enviada no seu e-mail.");
 		corpoHtmlEmail
 				.append("<table width=\"100%\" border=\"0\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\">");
 		corpoHtmlEmail.append("			  <tr>");

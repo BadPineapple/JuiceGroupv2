@@ -229,7 +229,7 @@ $http.post("/vitazure/agendar/" , retornoToken)
 }
 
 function agendar(respostaPagamento ,$scope, $http, $window , id) {
-	console.log(respostaPagamento);
+	
 	var idProfissional = id;
 	var horarioPossivelAtendimento  = horariosDisponiveisAtendimento[idHoraTemp].horaPossivelAtendiemnto;
 	var tipoAtendimento  = definirTipo(idProfissional);
@@ -247,12 +247,12 @@ function agendar(respostaPagamento ,$scope, $http, $window , id) {
 
 $http.post("/vitazure/agendar/" , retornoToken)
         .then(function (response) {
-		console.log('retorno do java' + response.data);
+		
             alert_success(response.data.message, () => {
 	            document.getElementById("spinner").style.display = "none";
-	            console.log(response.data);
+	            
 	            if(response.data.attributeOne == "boleto") {
-		console.log('retorno do java' + response.data.attributeOne);
+		
 	            	$window.open(response.data.attributeTwo,'_blank');
 	            }
 				$window.location.href = "/vitazure/telaAgradecimento";
@@ -269,6 +269,13 @@ function addDays(date, days) {
   result.setDate(result.getDate() + days);
   return result;
 }
+
+
+Date.prototype.addHours= function(h){
+    this.setHours(this.getHours()+h);
+    return this;
+}
+
 function efetuarPagamento($scope, $http, $window , id ,valorOnline ,valorPresencial,valorOnlinePacote2 ,valorOnlinePacote3,valorOnlinePacote4,valorPresencialPacote2,valorPresencialPacote3 ,valorPresencialPacote4) {
     var confirma = 0;
     var tipoAtendimento  = definirTipo(id);
@@ -370,7 +377,8 @@ function efetuarPagamento($scope, $http, $window , id ,valorOnline ,valorPresenc
 	          	var days = Math.ceil(diff / (1000 * 60 * 60 * 24));
 	          	var vnow = new Date();
 	          	var dataExpiracaoBoleto = addDays(vnow,days-2);
-	          	var dataExpiracaoPix = addDays(vnow,days);
+	          	var dataExpiracaoPix = vnow.addHours(1);
+	          	
 	          	if (days < 6 ) {
 					var cont = confirm("Atenção: Boleto Bancário só estará disponível caso a data da consulta seja superior a 6 (seis) dias da data do pagamento. Deseja Continuar?")
 					if(!cont) {
