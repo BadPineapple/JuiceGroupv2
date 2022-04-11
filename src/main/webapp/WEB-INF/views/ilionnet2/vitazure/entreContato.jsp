@@ -11,6 +11,10 @@
 </head>
 
 <body id="index" class="home">
+<div class="divSpinner" id="spinner">   
+   <img alt="" src="../../assets/images/logo-square.png" style="width: 126px;position: relative;top: 167px;left: 49%;">
+   <div class="spinner"></div>
+</div>
         <div id="app">
         <jsp:include page="includes/include-header.jsp" flush="true" />
         <div class="content-internas">

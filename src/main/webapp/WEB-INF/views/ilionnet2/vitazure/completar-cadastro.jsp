@@ -159,6 +159,12 @@
 	                                        <input type="text" data-mask="(00) 00000-0000" ng-model="pessoa.celularContato" id="celular" onblur="validarDDD(this.value , 'celular')"/>
 	                                    </div>
 	                                </div>
+	                                <div class="col-12">
+	                                    <div class="input-block">
+	                                        <label>CPF Titular</label>
+	                                        <input type="text" data-mask="000.000.000-00" ng-model="pessoa.cpfTitular" id="cpfTitular"/>
+	                                    </div>
+	                                </div>
                                 </c:if>
                                 <div class="col-12">
                                         <div class="termos">

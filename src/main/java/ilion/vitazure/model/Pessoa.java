@@ -61,6 +61,9 @@ public class Pessoa implements Serializable{
 	  private String operacaoImportacao;
 
 	  private String classificacaoImportacao;
+	  
+	  @Transient
+	  private Boolean alteracaoIlionnet;
 	
 	public Long getId() {
 		if (id == null) {
@@ -321,6 +324,15 @@ public class Pessoa implements Serializable{
 	}
 	public void setClassificacaoImportacao(String classificacaoImportacao) {
 		this.classificacaoImportacao = classificacaoImportacao;
+	}
+	public Boolean getAlteracaoIlionnet() {
+		if(alteracaoIlionnet == null) {
+			alteracaoIlionnet = Boolean.FALSE;
+		}
+		return alteracaoIlionnet;
+	}
+	public void setAlteracaoIlionnet(Boolean alteracaoIlionnet) {
+		this.alteracaoIlionnet = alteracaoIlionnet;
 	}
 	
 	

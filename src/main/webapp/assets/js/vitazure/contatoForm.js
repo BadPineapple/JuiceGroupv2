@@ -28,20 +28,25 @@ function consultarProfissional($scope, $http, $window , $timeout) {
 
 
 function submit($scope, $http, $window , $timeout) {
+		document.getElementById("spinner").style.display = "inline-block";
 		if( ! $scope.contato.nome ){
 			alert("Digite seu nome");
+			document.getElementById("spinner").style.display = "none";
 			return;
 		}
 		if( ! $scope.contato.email ){
 			alert("Digite seu e-mail");
+			document.getElementById("spinner").style.display = "none";
 			return;
 		}
 		if( ! $scope.contato.telefone ){
 			alert("Digite seu telefone");
+			document.getElementById("spinner").style.display = "none";
 			return;
 		}
 		if( ! $scope.contato.mensagem){
 			alert("Digite a mensagem");
+			document.getElementById("spinner").style.display = "none";
 			return;
 		}
 		$http.post("/rest/contato-registrar", $scope.contato)
@@ -49,8 +54,10 @@ function submit($scope, $http, $window , $timeout) {
             alert_success('Sua mensagem foi encaminhada,em breve retornaremos.', () => {
 				$window.location.href = "/entreContato";
 			});
+			document.getElementById("spinner").style.display = "none";
         }).catch(function (response) {
         alert_error(response.data.message);
+		document.getElementById("spinner").style.display = "none";
     })
 }
 

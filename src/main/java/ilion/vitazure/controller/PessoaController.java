@@ -102,7 +102,7 @@ public class PessoaController {
 	    	  pessoa = pessoaNegocio.incluirAtualizar(pessoa);
 	    	  pessoaNegocio.enviarEmailAtivacao(pessoa);
 	    	  request.getSession().setAttribute(PessoaNegocio.ATRIBUTO_SESSAO, pessoa);
-			return new ResponseEntity<>(new JsonString("Para continuar o cadastro confirme o link enviado por e-mail."), HttpStatus.OK);
+			return new ResponseEntity<>(new JsonString(pessoa.getAlteracaoIlionnet() ? "Dados alterado com sucesso.": "Para continuar o cadastro confirme o link enviado por e-mail."), HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<>(new JsonString(e.getMessage()), HttpStatus.BAD_REQUEST);
