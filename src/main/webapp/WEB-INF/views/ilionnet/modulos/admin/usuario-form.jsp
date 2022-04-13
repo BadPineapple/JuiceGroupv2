@@ -15,7 +15,6 @@ jQuery(function(jQuery){
 	jQuery("#telefone").mask("(99) 9999-9999");
 	jQuery("#celular").mask("(99) 9999-9999");
     jQuery("#cnpj").mask("999.999/9999-99");
-    jQuery("#nrFuncionarios").mask("99999");
 });
 </script>
 <table id="container" align="center" cellpadding="0" cellspacing="0">
@@ -68,7 +67,7 @@ jQuery(function(jQuery){
     <td width="15%" align="right" class="linkCinzaEscuro">Empresa:</td>
     <td width="35%" class="linkCinza"><form:input path="empresa" cssClass="forms2" cssStyle="width:80%;"/></td>
     <td width="15%" align="right" class="linkCinzaEscuro">Nr. de funcionários Empresa:</td>
-    <td width="35%" class="linkCinza"><form:input path="nrFuncionarios" id="nrFuncionarios" cssClass="forms2" cssStyle="width:80%;"/></td>
+    <td width="35%" class="linkCinza"><form:input path="nrFuncionarios" id="nrFuncionarios"  maxlength="5" cssClass="forms2" cssStyle="width:80%;" onkeypress="return somenteNumeros(event)"/></td>
   </tr>
   <tr> 
     <td align="right" valign="middle" class="linkCinzaEscuro">*Email:</td>
@@ -143,5 +142,17 @@ if(m == "ok") {
 	alert("Usuário gravado com sucesso.");
 }
 </script>
+
+<script>
+function somenteNumeros(e) {
+    var charCode = e.charCode ? e.charCode : e.keyCode;
+    if (charCode != 8 && charCode != 9) {
+        if (charCode < 48 || charCode > 57) {
+            return false;
+        }
+    }
+}
+</script>
+
 </body>
 </html>

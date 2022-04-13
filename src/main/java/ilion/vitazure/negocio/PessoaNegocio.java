@@ -1,6 +1,7 @@
 package ilion.vitazure.negocio;
 
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -171,9 +172,20 @@ public class PessoaNegocio {
 		}
 		
 		ValueList notificacaos = hibernateUtil.consultarValueList(dc, org.hibernate.criterion.Order.desc("id"), valueListInfo);
-
+		List<Pessoa> listPessoa = new ArrayList<Pessoa>();
+		listPessoa.addAll(notificacaos.getList());
+		listPessoa.stream().filter(pes -> !pes.getCpfTitular().equals("")).forEach(pessoa -> pessoa.setNomeTitular(consultarPessoaCofTitular(pessoa.getCpfTitular())));
+		notificacaos.getList().clear();
+		notificacaos.getList().addAll(listPessoa);
 		return notificacaos;
 
+	}
+	
+	private String consultarPessoaCofTitular(String cpf) {
+		StringBuilder sql = new StringBuilder();
+		sql.append("select nome from pessoa where (cpf ilike '").append(cpf).append("' or REPLACE(REPLACE(cpf,'-','') , '.','') ilike '").append(cpf).append("') ");
+		String pessoaTemp = (String) hibernateUtil.uniqueResultSQL(sql.toString());
+		return pessoaTemp;
 	}
 	
 	public void validarUsuario(Pessoa pessoa) throws Exception{

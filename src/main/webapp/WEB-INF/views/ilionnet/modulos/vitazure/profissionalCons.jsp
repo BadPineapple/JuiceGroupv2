@@ -50,6 +50,7 @@
 		       <valuelist:root value="profissionais" url="?setarParametros=true&" includeParameters="palavraChave">  
 		        <div class="pmd-card pmd-z-depth pmd-card-custom-view">
 		            <div class="table-responsive">
+		              <c:if test="${!empty profissionais.list}">
 		                <table class="table table-bordered">
 		                  <valuelist:row bean="profissional">
 		                        <valuelist:column title="ID"> 
@@ -109,6 +110,12 @@
 <!-- 							</tr> -->
 <%-- 							</c:forEach> --%>
 						</table>
+						</c:if>  
+						<c:if test="${empty clientes.list}">
+						  <div class="col-md-12">
+						  	<p>Dados Não Encontrado.</p>
+						  </div>	
+						</c:if>
 		            </div>
 		        </div>
 		       </valuelist:root> 

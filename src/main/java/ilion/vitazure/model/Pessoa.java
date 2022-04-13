@@ -47,8 +47,12 @@ public class Pessoa implements Serializable{
 	  private String celularContato;
 	  private String cpfTitular;
 	  private Boolean clienteAtivo;
+	  private Pessoa pessoaTitular;
 	  @Transient
 	  private String tipoConta;
+	  
+	  @Transient
+	  private String nomeTitular;
 	  
 	  @ManyToOne
 	  @JoinColumn(nullable = true)
@@ -333,6 +337,24 @@ public class Pessoa implements Serializable{
 	}
 	public void setAlteracaoIlionnet(Boolean alteracaoIlionnet) {
 		this.alteracaoIlionnet = alteracaoIlionnet;
+	}
+	public String getNomeTitular() {
+		if (nomeTitular == null) {
+			nomeTitular = "";
+		}
+		return nomeTitular;
+	}
+	public void setNomeTitular(String nomeTitular) {
+		this.nomeTitular = nomeTitular;
+	}
+	public Pessoa getPessoaTitular() {
+		if(pessoaTitular == null) {
+			pessoaTitular = new Pessoa();
+		}
+		return pessoaTitular;
+	}
+	public void setPessoaTitular(Pessoa pessoaTitular) {
+		this.pessoaTitular = pessoaTitular;
 	}
 	
 	

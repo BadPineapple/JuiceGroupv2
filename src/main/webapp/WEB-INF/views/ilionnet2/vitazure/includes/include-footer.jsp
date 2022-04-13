@@ -53,13 +53,13 @@
 
                         </c:forEach>
 
-                        <li><a href="${arqEtica}" class="line" target="_blank">Código de Ética profissional do Psicólogo</a></li>
+                        <li><a href="${arqEtica}" class="line" target="_blank">C&oacute;digo de &Eacute;tica profissional do Psic&oacute;logo</a></li>
 
-                        <li><a href="${arqResolucao}" class="line" target="_blank">Resolução CFP nº 11/2018</a></li>
+                        <li><a href="${arqResolucao}" class="line" target="_blank">Resolu&ccedil;&atilde;o CFP n&ordm; 11/2018</a></li>
 
-                        <li><a href="${arqTermos}" class="line" target="_blank">Termos e condições de uso</a></li>
+                        <li><a href="${arqTermos}" class="line" target="_blank">Termos e condi&ccedil;&otilde;es de uso</a></li>
 
-                        <li><a href="${arqPolitica}" class="line" target="_blank">Política de privacidade</a></li>
+                        <li><a href="${arqPolitica}" class="line" target="_blank">Pol&iacute;tica de privacidade</a></li>
                         
                         <li><a href="<ilion:url/>ouvidoria" class="line">Ouvidoria</a></li>
 
@@ -71,7 +71,7 @@
             <div class="col-12">
                 <div class="copyright">
 
-                    <p>&copy; 2021. Todos os direitos reservados.</p>
+                    <p>&copy; 2022. Todos os direitos reservados.</p>
 					<div class="redes-sociais">
                         <a href="https://transparencyreport.google.com/safe-browsing/search?url=vitazure.com.br%2Fhome&hl=pt_BR" target="_blank">
                             <figure>

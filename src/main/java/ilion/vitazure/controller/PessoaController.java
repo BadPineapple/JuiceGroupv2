@@ -69,8 +69,12 @@ public class PessoaController {
 
 	    	  if (pessoa.getCelular() != null && !pessoa.getCelular().equals("") && !(pessoa.getCelular().matches("^\\((?:[14689][1-9]|2[12478]|3[1234578]|5[1345]|7[134579])\\) (?:[2-8]|9[1-9])[0-9]{3}-[0-9]{4}$"))) {
 	    	  	return new ResponseEntity<>(new JsonString("Número de telefone inválido. Verifique se o DDD está correto"), HttpStatus.BAD_REQUEST);
-					}
-
+	    	  }
+	    	  
+	    	  if(pessoa.getCpf() != null && !pessoa.getCpf().equals("") && !Uteis.ehCpfValido(pessoa.getCpf())) {
+	    		  return new ResponseEntity<>(new JsonString("Cpf informado inválido."), HttpStatus.BAD_REQUEST); 
+	    	  }
+	    	  
 	    	  Boolean containNumber = false;
 					Boolean containUpperCase = false;
 
@@ -96,7 +100,7 @@ public class PessoaController {
 	  			pessoa.setNomeResponsavelImportacao(pessoaImportada.getNomeResponsavelImportacao());
 	  			pessoa.setPessoaImportada(pessoaImportada.getPessoaImportada());
 	  		  }
-	  		  if(pessoaImportada == null && pessoa.getTipoConta().equals("CO")) {
+	  		  if(pessoaImportada == null && pessoa.getTipoConta() != null  && pessoa.getTipoConta().equals("CO")) {
 	  			return new ResponseEntity<>(new JsonString("CPF não existe na base de dados, entre em contato com sua empresa."), HttpStatus.BAD_REQUEST);
 	  		  }
 	    	  pessoa = pessoaNegocio.incluirAtualizar(pessoa);

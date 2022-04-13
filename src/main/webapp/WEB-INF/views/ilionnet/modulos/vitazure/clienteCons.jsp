@@ -47,9 +47,10 @@
 					</div>
 			    </div>
 		        <!-- Basic Bootstrap Table example -->
-		      <valuelist:root value="clientes" url="?setarParametros=true&" includeParameters="palavraChave">   
+		      <valuelist:root value="clientes" url="?setarParametros=true&" includeParameters="palavraChave" >   
 		        <div class="pmd-card pmd-z-depth pmd-card-custom-view">
 		            <div class="table-responsive">
+		     		  <c:if test="${!empty clientes.list}">
 		                <table class="table table-bordered">
 		                   <valuelist:row bean="cliente">
 		                        <valuelist:column title="ID"> 
@@ -76,6 +77,9 @@
 						        </valuelist:column> 
 								<valuelist:column title="Cpf Titular"> 
 							        <c:out value="${cliente.cpfTitular eq '' ? '-' : cliente.cpfTitular}"/>
+						        </valuelist:column> 
+								<valuelist:column title="Nome Titular"> 
+							        <c:out value="${cliente.nomeTitular eq '' ? '-' : cliente.nomeTitular}"/>
 						        </valuelist:column> 
 								<valuelist:column title="Opcoes"> 
 							        <a href="<ilion:url/>vitazure/cliente/${cliente.id}" class="btn pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-default btn-sm">
@@ -114,9 +118,15 @@
 <!-- 							</tr> -->
 <%-- 							</c:forEach> --%>
 						</table>
+		      		</c:if>  
+						<c:if test="${empty clientes.list}">
+						  <div class="col-md-12">
+						  	<p>Dados Não Encontrado.</p>
+						  </div>	
+						</c:if>
 		            </div>
 		        </div>
-		      </valuelist:root>  
+		      </valuelist:root>
 	             <div class="row" >
 			        <div class="col-md-2" style="padding-top: 17px;">
 						  <a href="<ilion:url/>vitazure/cliente/0" class="btn btn-primary" role="button"><i class="fas fa-file-plus" style="padding-right: 7px;"></i>Novo</a>
