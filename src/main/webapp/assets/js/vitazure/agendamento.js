@@ -387,7 +387,7 @@ function efetuarPagamento($scope, $http, $window , id ,valorOnline ,valorPresenc
 	          	var vnow = new Date();
 	          	var dataExpiracaoBoleto = addDays(vnow,days-2);
 	          	var dataExpiracaoPix = vnow.addHours(1);
-	          	
+          	
 	          	if (days < 6 ) {
 					var cont = confirm("Atenção: Boleto Bancário só estará disponível caso a data da consulta seja superior a 6 (seis) dias da data do pagamento. Deseja Continuar?")
 					if(!cont) {
