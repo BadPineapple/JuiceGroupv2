@@ -40,10 +40,11 @@ function agendamentoController($scope, $http, $window) {
     };
      $scope.definirNovoAgendamento = function (idProfissional) {
 		
-		//$("#body-modal" ).load("/vitazure/nova-consulta-profissional/"+idProfissional,()=>{
-			 $('#modalNovaConsulta').modal({backdrop: false});
-		//});
-       
+	 $('#iframe-consulta').attr('src',"/vitazure/nova-consulta-profissional/"+idProfissional);
+		 $('#modalNovaConsulta').modal({backdrop: false});
+         Window['agendamento_completado'] = function(){
+			$('#modalNovaConsulta').modal('hide');	
+		}
     };
      $scope.consultarAgenda = function () {
         consultarAgenda($scope, $http, $window);
@@ -220,6 +221,9 @@ $http.post("/vitazure/agendar/" , retornoToken)
         .then(function (response) {
             alert_success(response.data.message, () => {
 	            document.getElementById("spinner").style.display = "none";
+	            if ( window.parent &&  window.parent.Window['agendamento_completado'] ){
+					window.parent.Window['agendamento_completado']();
+				}
 				$window.location.href = "/vitazure/telaAgradecimento";
 			});
         }).catch(function (response) {
@@ -229,7 +233,6 @@ $http.post("/vitazure/agendar/" , retornoToken)
 }
 
 function agendar(respostaPagamento ,$scope, $http, $window , id) {
-	
 	var idProfissional = id;
 	var horarioPossivelAtendimento  = horariosDisponiveisAtendimento[idHoraTemp].horaPossivelAtendiemnto;
 	var tipoAtendimento  = definirTipo(idProfissional);
@@ -247,20 +250,26 @@ function agendar(respostaPagamento ,$scope, $http, $window , id) {
 
 $http.post("/vitazure/agendar/" , retornoToken)
         .then(function (response) {
-		
             alert_success(response.data.message, () => {
 	            document.getElementById("spinner").style.display = "none";
-	            
+		           if ( window.parent &&  window.parent.Window['agendamento_completado'] ){
+					window.parent.Window['agendamento_completado']();
+				}
 	            if(response.data.attributeOne == "boleto") {
-		
 	            	$window.open(response.data.attributeTwo,'_blank');
 	            }
 				$window.location.href = "/vitazure/telaAgradecimento";
 				
 			});
         }).catch(function (response) {
-        alert_error(response.data.message);
-		document.getElementById("spinner").style.display = "none";
+        alert_error(response.data.message,()=>{
+			document.getElementById("spinner").style.display = "none";
+		    if ( window.parent &&  window.parent.Window['agendamento_completado'] ){
+				window.parent.Window['agendamento_completado']();
+			}
+		});
+      
+		
     })
 }
 

@@ -115,6 +115,11 @@ public class AgendaNegocio {
 					"", StatusEnum.AG_PAGAMENTO, null, "");
 			agenda.setTokenTransacaoPagamentoConsulta(jsonRetornoToken.get("token").toString());
 			agenda.setIdTransacao(tx.getId());
+			if (jsonRetornoToken.get("payment_method").toString().toUpperCase().equals("BOLETO") ||
+					jsonRetornoToken.get("payment_method").toString().toUpperCase().equals("PIX") ) { 
+				agenda.setTipoPagamento(jsonRetornoToken.get("payment_method").toString().toUpperCase());
+				agenda.setUrlPagamento(jsonRetornoToken.get("payment_method").equals("boleto") ? tx.getBoletoUrl() : "https://api.qrserver.com/v1/create-qr-code/?data="+tx.getPixQRCode());
+			}
 			if (agenda.getOnline()) {
 				wherebyApi.gerarLinkAtendimentoOnline(profissional, agenda);
 			}
@@ -157,7 +162,7 @@ public class AgendaNegocio {
 		// Registrar Transação
 		Agenda agenda = incluirAgenda(paciente, profissional, jsonRetornoToken, tx);
 		PagamentoPagarMe pagamentoPagarMe = new PagamentoPagarMe();
-		pagamentoPagarMe = pagamentoPagarMe.pagamento(capturarTransacao, agenda, null,jsonRetornoToken.get("payment_method").toString(),jsonRetornoToken.get("payment_method").equals("boleto") ? boletoUrl : pixQrCode);
+		pagamentoPagarMe = pagamentoPagarMe.pagamento(capturarTransacao, agenda, null,jsonRetornoToken.get("payment_method").toString(),jsonRetornoToken.get("payment_method").equals("boleto") ? boletoUrl : "https://api.qrserver.com/v1/create-qr-code/?data="+pixQrCode);
 		pagarMeNegocio.salvarPagamentoPagarMe(pagamentoPagarMe);
 		envioEmailConsulta.enviarEmailBoletoAgenda(agenda,paciente,jsonRetornoToken.get("payment_method").equals("boleto") ? boletoUrl : pixQrCode,jsonRetornoToken.get("payment_method").toString());
 		return paymentRes;

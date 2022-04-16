@@ -429,6 +429,29 @@ public class SiteController extends CustomErrorController {
 	  		request.setAttribute("cidadeProfissional", enderecoAtendimento.isEmpty() ? "" : enderecoAtendimento.get(0).getCidade());
 			return "/ilionnet2/vitazure/perfil-do-profissional";
 	  	}
+	 
+	 @GetMapping("/vitazure/nova-consulta-profissional/{id}")
+	  	public String novaConsultaProfissional(HttpServletRequest request ,@PathVariable Long id) {
+	  		Pessoa PessoaSessao = (Pessoa) request.getSession().getAttribute(PessoaNegocio.ATRIBUTO_SESSAO);
+	  		Profissional profissional = profissionalNegocio.consultaPerfilCompletoPorId(id , PessoaSessao);
+//	  		List<Agenda> listAgendaDia = agendaNegocio.consultarAgendaDia(PessoaSessao);
+//	  		request.setAttribute("agendaDia", listAgendaDia);
+	  		request.setAttribute("pessoa", PessoaSessao);
+	  		request.setAttribute("areaRestrita", true);
+	  		profissionalNegocio.consultarDataDisponivelProfissional(profissional , false , false);
+	  		List<TemaTrabalho> temasTrabalho = temaNegocio.consultarTemasPorProfissional(id);
+	  		List<FormacaoAcademica> formacoes = formacaoAcademicaNegocio.consultarFormacoesPorPessoa(id);
+	  		List<Especialidade> especialidades = especialidadeNegocio.consultarEspecialidadesProfissional(id);
+	  		request.getSession().setAttribute("profissional", profissional);
+	  		request.getSession().setAttribute("temasTrabalho", temasTrabalho);
+	  		request.getSession().setAttribute("formacoes", formacoes);
+	  		request.getSession().setAttribute("especialidades", especialidades);
+	  		List<EnderecoAtendimento> enderecoAtendimento = new ArrayList<EnderecoAtendimento>();
+	  		enderecoAtendimento.addAll(enderecoNegocio.consultarEnderecoPorPessoa(profissional.getId()));
+	  		request.setAttribute("enderecoAtendimento", enderecoAtendimento);
+	  		request.setAttribute("cidadeProfissional", enderecoAtendimento.isEmpty() ? "" : enderecoAtendimento.get(0).getCidade());
+			return "/ilionnet2/vitazure/nova-consulta-profissional";
+	  	}
 	
 
 	 @GetMapping("/resultado-de-busca-externa/{especialista}")

@@ -465,6 +465,13 @@ public class PagarMeNegocio {
 	  
   }
   
+  public List<PagamentoPagarMe> getListaPagamentosByAgenda(Long idAgenda) {
+	  DetachedCriteria dc = DetachedCriteria.forClass(PagamentoPagarMe.class);
+	  dc.add(Restrictions.eq("agenda",idAgenda));
+	  List<PagamentoPagarMe> list = (List<PagamentoPagarMe>) hibernateUtil.list(dc);
+	  return list;
+	  
+  }
   public boolean atualizarPagamento()  throws Exception {
 	  List<PagamentoPagarMe> listaPendentes = getListaPagamentosPendentes();
 	  LOGGER.info("Total de Itens a Processar " + listaPendentes.size());
