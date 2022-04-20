@@ -37,6 +37,8 @@
                                 <thead>
                                     <tr>
                                         <td style="text-align: center;">id</td>
+                                        <td style="text-align: center;">Nr. Transação</td>
+                                        <td style="text-align: center;">Tipo Pagamento</td>
                                         <td style="text-align: center;">Agenda</td>
                                         <td style="text-align: center;">Data Consulta</td>
                                         <td style="text-align: center;">Profissional</td>
@@ -49,6 +51,8 @@
                                 <c:forEach var="pagamento" items="${listPagamentos}">
                                     <tr>
                                         <td style="text-align: center;">${pagamento.id}</td>
+                                        <td style="text-align: center;">${pagamento.idTransacao}</td>
+                                        <td style="text-align: center;">${pagamento.tipoPagamento}</td>
                                         <td style="text-align: center;">${pagamento.agenda}</td>
                                         <td style="text-align: center;">${pagamento.dataAgenda}</td>
                                         <td style="text-align: center;">${pagamento.profissional}</td>

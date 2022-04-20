@@ -162,7 +162,7 @@ public class AgendaNegocio {
 		// Registrar Transação
 		Agenda agenda = incluirAgenda(paciente, profissional, jsonRetornoToken, tx);
 		PagamentoPagarMe pagamentoPagarMe = new PagamentoPagarMe();
-		pagamentoPagarMe = pagamentoPagarMe.pagamento(capturarTransacao, agenda, null,jsonRetornoToken.get("payment_method").toString(),jsonRetornoToken.get("payment_method").equals("boleto") ? boletoUrl : "https://api.qrserver.com/v1/create-qr-code/?data="+pixQrCode);
+		pagamentoPagarMe = pagamentoPagarMe.pagamento(capturarTransacao, agenda, null,jsonRetornoToken.get("payment_method").toString().toUpperCase(),jsonRetornoToken.get("payment_method").equals("boleto") ? boletoUrl : "https://api.qrserver.com/v1/create-qr-code/?data="+pixQrCode);
 		pagarMeNegocio.salvarPagamentoPagarMe(pagamentoPagarMe);
 		envioEmailConsulta.enviarEmailBoletoAgenda(agenda,paciente,jsonRetornoToken.get("payment_method").equals("boleto") ? boletoUrl : pixQrCode,jsonRetornoToken.get("payment_method").toString());
 		return paymentRes;
