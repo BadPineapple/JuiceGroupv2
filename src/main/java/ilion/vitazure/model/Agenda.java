@@ -69,6 +69,10 @@ public class Agenda {
 	  
 	  private Date dataHoraEnviadoAlerta;
 	  
+	  private String tipoPagamento;
+	  
+	  private String urlPagamento;
+	  
 	  public Long getId() {
 			if (id == null) {
 				id = 0l;
@@ -307,6 +311,22 @@ public class Agenda {
 
 		public void setDataHoraEnviadoAlerta(Date dataHoraEnviadoAlerta) {
 			this.dataHoraEnviadoAlerta = dataHoraEnviadoAlerta;
+		}
+
+		public String getTipoPagamento() {
+			return tipoPagamento;
+		}
+
+		public void setTipoPagamento(String tipoPagamento) {
+			this.tipoPagamento = tipoPagamento;
+		}
+
+		public String getUrlPagamento() {
+			return urlPagamento;
+		}
+
+		public void setUrlPagamento(String urlPagamento) {
+			this.urlPagamento = urlPagamento;
 		}
 		
 		
