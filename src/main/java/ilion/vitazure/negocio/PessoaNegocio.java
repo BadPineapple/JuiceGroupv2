@@ -181,7 +181,7 @@ public class PessoaNegocio {
 
 	}
 	
-	private String consultarPessoaCofTitular(String cpf) {
+	public String consultarPessoaCofTitular(String cpf) {
 		StringBuilder sql = new StringBuilder();
 		sql.append("select nome from pessoa where (cpf ilike '").append(cpf).append("' or REPLACE(REPLACE(cpf,'-','') , '.','') ilike '").append(cpf).append("') ");
 		String pessoaTemp = (String) hibernateUtil.uniqueResultSQL(sql.toString());

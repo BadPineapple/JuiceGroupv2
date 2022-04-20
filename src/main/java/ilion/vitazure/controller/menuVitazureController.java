@@ -154,6 +154,7 @@ public class menuVitazureController  extends CustomErrorController{
 			Pessoa pessoa = new Pessoa();
 			if (id != null && id != 0) {
 				pessoa = pessoaNegocio.consultarPorId(id);
+				pessoa.setNomeTitular(!pessoa.getCpfTitular().equals("") ? pessoaNegocio.consultarPessoaCofTitular(pessoa.getCpfTitular()) : "");
 			}
 			request.setAttribute("pessoa", pessoa);
 			return "/ilionnet/modulos/vitazure/clienteForm";

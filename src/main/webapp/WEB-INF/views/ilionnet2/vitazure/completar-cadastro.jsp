@@ -68,6 +68,7 @@
 						                     pessoa.pessoaImportada='${pessoa.pessoaImportada}';
 						                     pessoa.nomeResponsavelImportacao='${pessoa.nomeResponsavelImportacao}';
 						                     pessoa.clienteAtivo='${pessoa.clienteAtivo}';
+						                     pessoa.classificacaoImportacao='${pessoa.classificacaoImportacao}';
 						                     pessoa.cpfTitular='${pessoa.cpfTitular}';
                           					 "/>
                           
@@ -162,7 +163,7 @@
 	                                <div class="col-12">
 	                                    <div class="input-block">
 	                                        <label>CPF Titular</label>
-	                                        <input type="text" data-mask="000.000.000-00" ng-model="pessoa.cpfTitular" id="cpfTitular"/>
+	                                        <input type="text" data-mask="000.000.000-00" class="not-active" ng-model="pessoa.cpfTitular" id="cpfTitular"/>
 	                                    </div>
 	                                </div>
                                 </c:if>

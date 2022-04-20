@@ -63,6 +63,8 @@
 						                    pessoa.nomeResponsavelImportacao='${pessoa.nomeResponsavelImportacao}';
 						                    pessoa.clienteAtivo='${pessoa.clienteAtivo}';
 						                    pessoa.cpfTitular='${pessoa.cpfTitular}';
+						                    pessoa.nomeTitular='${pessoa.nomeTitular}';
+						                    pessoa.classificacaoImportacao='${pessoa.classificacaoImportacao}';
 						                    pessoa.alteracaoIlionnet='true';
 						                     "/>
 							<div class="row">
@@ -146,7 +148,7 @@
                                 </div>
 							</div>
 							<div class="col-md-12 col-lg-12 col-sm-12">	
-							<div class="col-md-3 col-lg-3 col-sm-12">
+							<div class="col-md-4 col-lg-4 col-sm-12">
 						              <div class="  form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed">
                                         <label>Relação Contato</label>
                                         <select ng-model="pessoa.relacaoContato" class="form-control input-group-lg">
@@ -156,24 +158,42 @@
 										</select>
                                     </div>
                                 </div>
-                                <div class="col-md-3 col-lg-3 col-sm-12">
+                                <div class="col-md-4 col-lg-4 col-sm-12">
 						              <div class="  form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed">
                                         <label>Nome Contato</label>
                                         <input type="text" ng-model="pessoa.nomeContato" class="form-control input-group-lg"/>
                                     </div>
                                 </div>
-                               <div class="col-md-3 col-lg-3 col-sm-12">
+                               <div class="col-md-4 col-lg-4 col-sm-12">
 						              <div class="  form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed">
                                         <label>Celular Contato</label>
                                         <input type="text" data-mask="(00) 00000-0000" ng-model="pessoa.celularContato" id="celular"  class="form-control input-group-lg"/>
                                     </div>
                                 </div>
-                               <div class="col-md-3 col-lg-3 col-sm-12">
+                           </div>
+                           <div class="col-md-12 col-lg-12 col-sm-12">
+                             <div class="col-md-4 col-lg-4 col-sm-12">
+						              <div class="  form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed">
+                                        <label>Classificacao Importacao</label>
+                                        <select ng-model="pessoa.classificacaoImportacao" class="form-control input-group-lg">
+						   					<option value=""></option>
+						   					<option value="1.0">Titular</option>
+						   					<option value="2.0">Dependente</option>
+										</select>
+                                    </div>
+                                </div>	
+                             <div class="col-md-4 col-lg-4 col-sm-12">
 						              <div class="  form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed">
                                         <label>CPF Titular</label>
                                         <input type="text" data-mask="000.000.000-00" ng-model="pessoa.cpfTitular" id="cpfTitular"  class="form-control input-group-lg"/>
                                     </div>
-                                </div>
+                                </div>	
+                             <div class="col-md-4 col-lg-4 col-sm-12">
+						              <div class="  form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed">
+                                        <label>Nome Titular</label>
+                                        <input type="text" data-mask="000.000.000-00" ng-model="pessoa.nomeTitular" id="cpfTitular" disabled="true"  class="form-control input-group-lg"/>
+                                    </div>
+                                </div>	
                            </div> 	
 							<div class="col-md-12 col-lg-12 col-sm-12" style="text-align: center;padding-top: 30px;padding-bottom: 50px;">
 							    <div class="  form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed">
