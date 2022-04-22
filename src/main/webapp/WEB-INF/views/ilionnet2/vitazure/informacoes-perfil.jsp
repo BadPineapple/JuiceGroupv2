@@ -140,6 +140,7 @@
 										    ProfissionalVH.profissional.idConta='${profissional.idConta}';
 										    ProfissionalVH.profissional.situacaoAprovacaoProfissional='${profissional.situacaoAprovacaoProfissional}';
 										    ProfissionalVH.profissional.aceiteContrato='${profissional.aceiteContrato}';
+										    ProfissionalVH.profissional.aceiteUsoImagem='${profissional.aceiteUsoImagem}';
 										    ProfissionalVH.profissional.dataAceiteContrato='${profissional.dataAceiteContrato}';
 										    ProfissionalVH.profissional.ipAceiteContrato='${profissional.ipAceiteContrato}';
 										    ProfissionalVH.profissional.ipExternoAceiteContrato='${profissional.ipExternoAceiteContrato}';
@@ -999,7 +1000,37 @@
                                     </div>
                                 </div>
                             </div>
-                            
+                            <div class="match-toggle">
+                                <div class="toggle-header">
+                                    <strong>Assinatura do termo de uso de imagem</strong>
+                                </div>
+                                <div class="toggle-body vitazure">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="toogle-title">
+                                                <p>Assinando/selecionando este termo, você autoriza o uso de imagem pela Vitazure nos termos descritos neste documento. Em casos de alterações no presente termo, o profissional será comunicado com antecedência para nova confirmação da autorização.</p>
+                                            </div>
+                                        </div>
+									
+										<div class="col-12" style="padding-left:40px;">
+                                                    <ilion:arquivoCategoriaLista categoria="documentos" order="posicao" layout="lateral" varRetorno="art"/>
+                                                        <c:forEach var="arq" items="${art}">
+                                                            <c:if test="${arq.title == \"Adesao Prestacao servico\"}">
+                                                                <c:set var="arqTermos" value="${arq.url}"/>
+                                                            </c:if>
+                                                        </c:forEach>
+                                            <p><input type="checkbox" ng-model="ProfissionalVH.profissional.aceiteUsoImagem" id="aceiteUsoImagem" ng-checked="${profissional.aceiteUsoImagem} " onclick="aceiteUsoImagem(this.checked)"/>
+                                            &nbsp;&nbsp;Declaro que li e concordo com o <a href="${arqTermos}" target="_blank" >&nbsp;Termo de Uso de Imagem da Vitazure.</a>&nbsp;&nbsp;da Vitazure.</p>
+                                    </div>
+										<div class="col-12" style="padding-left:40px;">
+			                                <p style="margin-bottom: 3rem;">Dúvidas? Acesse: vitazure.com.br, na seção "Fale conosco, nós estamos online".</p>
+										</div>
+                                        <div class="col-12">
+                                            <button class="button-secundary checkbox-button" ng-click="perfilProfissional('')" style="font-size: 1.8rem; height: 5.4rem; line-height: 5.4rem; text-transform: uppercase;">Salvar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="match-toggle">
                                 <div class="toggle-header">
                                     <strong>Assinatura do termo de adesão</strong>

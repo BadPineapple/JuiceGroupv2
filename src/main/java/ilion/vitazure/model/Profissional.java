@@ -158,6 +158,8 @@ public class Profissional implements Serializable{
 	  
 	  private Boolean aceiteContrato;
 	  
+	  private Boolean aceiteUsoImagem;
+	  
 	  private String dataAceiteContrato;
 	  
 	  private String ipAceiteContrato;
@@ -851,6 +853,14 @@ public class Profissional implements Serializable{
 
 	public void setAtendimentoPresencial(Boolean atendimentoPresencial) {
 		this.atendimentoPresencial = atendimentoPresencial;
+	}
+
+	public Boolean getAceiteUsoImagem() {
+		return aceiteUsoImagem;
+	}
+
+	public void setAceiteUsoImagem(Boolean aceiteUsoImagem) {
+		this.aceiteUsoImagem = aceiteUsoImagem;
 	}
 	
 	

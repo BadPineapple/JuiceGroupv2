@@ -1433,7 +1433,7 @@ h1.title-gray {
 }
 
 .dias.active {
-    border: 3px solid #83B2CD;
+    border: 3px solid #0097D6;
     background: #B8DFED;
     border-radius: 10px;
 }
@@ -1501,7 +1501,7 @@ h1.title-gray {
 }
 
 .horarios span.active {
-    border: 3px solid #83B2CD;
+    border: 3px solid #0097D6;
 }
 
 .horarios-disponiveis .button-secundary {

@@ -29,8 +29,8 @@ class HorarioAtendimento{
 agendamentoApp.controller('AgendamentoController', agendamentoController);
 
 function agendamentoController($scope, $http, $window) {
-    $scope.consultarDatasProfissional = function (id, profissional) {
-        consultarDatasProfissional($scope, $http, $window , id , profissional);
+    $scope.consultarDatasProfissional = function (id, profissional, first) {
+        consultarDatasProfissional($scope, $http, $window , id , profissional, first);
     };
     $scope.efetuarPagamento = function (id ,valorOnline ,valorPresencial,valorOnlinePacote2 ,valorOnlinePacote3,valorOnlinePacote4,valorPresencialPacote2,valorPresencialPacote3 ,valorPresencialPacote4) {
         efetuarPagamento($scope, $http, $window , id,valorOnline ,valorPresencial,valorOnlinePacote2 ,valorOnlinePacote3,valorOnlinePacote4,valorPresencialPacote2,valorPresencialPacote3 ,valorPresencialPacote4);
@@ -78,8 +78,7 @@ function agendamentoController($scope, $http, $window) {
 
 }
 
-function consultarDatasProfissional($scope, $http, $window , id , profissional) {
-   
+function consultarDatasProfissional($scope, $http, $window , id , profissional,first) {
     document.getElementById(profissional+'.'+id).className = "dias active slick-slide slick-current slick-active";
 	if(idTemp != ''){
 	  document.getElementById(idTemp).className = "dias slick-slide slick-cloned";
@@ -103,16 +102,38 @@ function consultarDatasProfissional($scope, $http, $window , id , profissional) 
 		       var enderecoLinkLocaliazacaoProfissional = "#enderecoLinkLocaliazacaoProfissional"+profissional +" a";
 		       $(enderecoProfissional).remove();
 		       $(enderecoLinkLocaliazacaoProfissional).remove();
+		       
+		       var horarionaodisponivel = {};
+		       if(response.data.length == 0) {
+				horarionaodisponivel.codigoProfissional = profissional;
+				horarionaodisponivel.tipoAtendimento = tipoAtendimento;
+			    horariosDisponiveisAtendimento.push({horarionaodisponivel});
+			    horariosDisponiveisAtendimento.forEach(AdicionarHorariosNaoDisponiveis);
+				} else {
            		 for (var i = 0; i < response.data.length; i++) {
+					
            		    horariosDisponiveisAtendimento.push(response.data[i]);
     			}
            		horariosDisponiveisAtendimento.forEach(AdicionarHorariosDisponiveis);
+           		}
         }).catch(function (response) {
           alert(response.data);
     })
+    if (first == 'true') {
+     document.getElementById(profissional+'.'+id).className = "dias active slick-slide slick-current slick-active";
+    }
 }
 
 
+function AdicionarHorariosNaoDisponiveis(item, indice){
+	    var idIncluir = "#panelFiltrosSelecionados"+item.horarionaodisponivel.codigoProfissional;
+        var idHora = 0;
+		$(idIncluir).append(
+			"<a type='text' id='"+idHora+"' class='line' style='text-align: center; font-size: 1.6rem;line-height: 2rem;font-weight: 700;'>"+
+				"Agenda não disponível para a modalidade "+item.horarionaodisponivel.tipoAtendimento+			  
+			"</a>"
+			);	
+};
 function AdicionarHorariosDisponiveis(item, indice){
 	    var idIncluir = "#panelFiltrosSelecionados"+item.codigoProfissional;
         var idHora = indice+"/"+item.codigoProfissional;
@@ -123,12 +144,13 @@ function AdicionarHorariosDisponiveis(item, indice){
 			);	
 };
 
+
 function selecionarHora(id , codigoProfissional){
 	var idHora = id+"/"+codigoProfissional;
     idProfissionalHorario = codigoProfissional;
-	document.getElementById(idHora).style = "border: 3px solid #83B2CD;background: #B8DFED;border-radius: 10px;text-align: center; margin: 10px 10px;transition: all .3s ease-in-out;padding: 5px; width: 74px;font-size: 1.6rem;line-height: 2rem;font-weight: 700;";
+	document.getElementById(idHora).style = "border: 3px solid #0097D6;background: #B8DFED;border-radius: 10px;text-align: center; margin: 10px 10px;transition: all .3s ease-in-out;padding: 5px; width: 74px;font-size: 1.6rem;line-height: 2rem;font-weight: 700;";
 	if(idTempSelecionado != ''){
-	  document.getElementById(idTempSelecionado).style = "background: #B8DFED;border-radius: 10px;text-align: center; margin: 10px 10px;transition: all .3s ease-in-out;padding: 5px; width: 74px;font-size: 1.6rem;line-height: 2rem;font-weight: 700;";
+	  document.getElementById(idTempSelecionado).style = "border: 3px solid #0097D6;background: #B8DFED;border-radius: 10px;text-align: center; margin: 10px 10px;transition: all .3s ease-in-out;padding: 5px; width: 74px;font-size: 1.6rem;line-height: 2rem;font-weight: 700;";
 	} 
 	 idHoraTemp = id;
      idTempSelecionado = idHora;

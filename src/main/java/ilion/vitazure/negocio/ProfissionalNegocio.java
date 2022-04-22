@@ -248,6 +248,9 @@ public class ProfissionalNegocio {
 		}if(!profissionalVH.getProfissional().getAceiteContrato()) {
 			profissionalVH.getItensIncompletos().add("Termo de Adesão de prestação de serviços da Vitazure");
 			dadosCompleto = Boolean.FALSE;
+		}if(!profissionalVH.getProfissional().getAceiteUsoImagem()) {
+			profissionalVH.getItensIncompletos().add("Termo de Uso de Imagem da Vitazure");
+			dadosCompleto = Boolean.FALSE;
 		}
 		profissionalVH.getProfissional().setDadosCompleto(dadosCompleto);
 		Profissional obj = new Profissional();
