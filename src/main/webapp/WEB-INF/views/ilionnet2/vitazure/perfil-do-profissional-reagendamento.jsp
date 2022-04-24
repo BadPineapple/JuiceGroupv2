@@ -110,7 +110,7 @@
 										</div>
 										<div class="slider-dias">
 											<c:forEach var="agenda"	items="${profissional.datasPossivelAgendamento}">
-												<div class="dias" id="${profissional.id}.${agenda}">
+												<div class="dias" id="${profissional.id}.${agenda}" data-id="${profissional.id}.${agenda}" data-ng-init="consultarDatasProfissional('${agenda}' , '${profissional.id}', 'true')">
 													<strong style="font-size: 1.2rem;"> <a ng-click="consultarDatasProfissional('${agenda}' , '${profissional.id}')"><ilion:formatarDataSemana	value="${agenda}" /></a></strong>
 												</div>
 											</c:forEach>
