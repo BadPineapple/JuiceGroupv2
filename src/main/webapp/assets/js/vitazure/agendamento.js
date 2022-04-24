@@ -119,7 +119,9 @@ function consultarDatasProfissional($scope, $http, $window , id , profissional,f
         }).catch(function (response) {
           alert(response.data);
     })
+    console.log('valor do first', first);
     if (first == 'true') {
+     console.log('entrou no first', profissional);
      document.getElementById(profissional+'.'+id).className = "dias active slick-slide slick-current slick-active";
     }
 }

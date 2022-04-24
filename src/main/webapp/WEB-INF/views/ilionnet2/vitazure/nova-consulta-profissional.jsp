@@ -96,7 +96,7 @@
                                                  <span id="${profissional.id}.presencial" onclick='marcardesmarcar(${profissional.id},"presencial");'>Presencial</span>
                                             </div>
 											</div>
-										</div>
+										</div> 
 										<div class="slider-dias">
 											<c:forEach var="agenda"	items="${profissional.datasPossivelAgendamento}" varStatus="stat">
 											<c:if test="${stat.first}">

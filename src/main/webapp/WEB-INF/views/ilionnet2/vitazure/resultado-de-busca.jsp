@@ -92,11 +92,17 @@
 											</div>
 										</div>
 										<div class="slider-dias">
-											<c:forEach var="agenda"	items="${profissional.datasPossivelAgendamento}">
-												<div class="dias" id="${profissional.id}.${agenda}">
-													<strong style="width: 70px; cursor: pointer;"> <a ng-click="consultarDatasProfissional('${agenda}' , '${profissional.id}')" ><ilion:formatarDataSemana	value="${agenda}" /></a>
-													</strong>
+											<c:forEach var="agenda"	items="${profissional.datasPossivelAgendamento}" varStatus="stat">
+											<c:if test="${stat.first}">
+												<div class="dias" id="${profissional.id}.${agenda}" data-id="${profissional.id}.${agenda}" data-ng-init="consultarDatasProfissional('${agenda}' , '${profissional.id}', 'true')">
+													<strong style="font-size: 1.2rem;"> <a ng-click="consultarDatasProfissional('${agenda}' , '${profissional.id}')"><ilion:formatarDataSemana	value="${agenda}" /></a></strong>
 												</div>
+    										</c:if>
+    										<c:if test="${!stat.first}">
+												 <div class="dias" id="${profissional.id}.${agenda}" data-id="${profissional.id}.${agenda}" >
+													<strong style="font-size: 1.2rem;"> <a ng-click="consultarDatasProfissional('${agenda}' , '${profissional.id}', 'false')"><ilion:formatarDataSemana	value="${agenda}" /></a></strong>
+												</div> 
+											</c:if>
 											</c:forEach>
 										</div>
 										<div class="horarios-disponiveis">
