@@ -13,7 +13,7 @@
 jQuery.noConflict();
 jQuery(function(jQuery){
 	jQuery("#telefone").mask("(99) 9999-9999");
-	jQuery("#celular").mask("(99) 9999-9999");
+	jQuery("#celular").mask("(99) 99999-9999");
     jQuery("#cnpj").mask("999.999/9999-99");
 });
 </script>

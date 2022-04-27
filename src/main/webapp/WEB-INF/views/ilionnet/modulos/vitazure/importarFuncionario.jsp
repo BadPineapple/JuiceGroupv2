@@ -33,7 +33,7 @@
 						<div class="row">
 						      <div class="col-md-10 col-lg-10 col-sm-12">
 						          <div class="form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed" style="width: 100% !important;padding-top: 20px;">
-						           	<td class="linkCinza"><input type="file" name="arquivo" class="forms2" accept="*" size="30" /></td>
+						           	<td class="linkCinza"><input type="file" name="arquivo" class="forms2" accept="*" size="30"/></td>
 								</div> 
 							</div>
 							<div class="col-md-2 col-lg-2 col-sm-12 text-center" style="padding-top: 12px;">	
@@ -52,7 +52,7 @@
 	                        <label class="control-label">Instruções para importar uma lista de funcionários:</label>
 							<br/>
 							1 - A lista deve ser formatada em arquivo Excel. com o nome do arquivo funcionarios.xls ou funcionarios.xlsx;<br/>
-							2 - Cada linha deve conter somente o NOME, CPF, OPERAÇÃO, CLASSIFICAÇÃO e CPF TITULAR;<br/>
+							2 - Cada linha deve conter somente o NOME, CPF, OPERAÇÃO, CLASSIFICAÇÃO e CPF TITULAR, sendo que as colunas de CPFs devem conter somente números, exemplo: 12345678900<br/>
 							3 - Os dados devem ser separados em colunas, NÃO coloque título nas colunas, SOMENTE os dados dos funcionários;<br/>
 							4 - O Campo OPERAÇÃO deve receber os seguintes valores:<br/>
 							&nbsp;&nbsp;1 (um) - Quando um novo funcionário será incluído;<br/>
@@ -61,7 +61,7 @@
 							5 - O Campo CLASSIFICAÇÃO deve receber os seguintes valores:<br/>
 							&nbsp;&nbsp;1 (um) - Cliente titular;<br/>
 							&nbsp;&nbsp;2 (dois) - Cliente dependente;<br/>
-							6 - Os dados devem ser separados em colunas, NÃO coloque título nas colunas, SOMENTE os dados dos funcionários;<br/>
+							Caso necessite de suporte use um dos nossos canais de atendimento: WhatsApp: 62 99847-2376 ou acesse pelo site <u><a href="https://www.vitazure.com.br/home" target="_blank">www.vitazure.com.br</a></u> nosso chat de atendimento ao cliente.<br/>
 							<br/>
 	                   </div>
 			    </div>

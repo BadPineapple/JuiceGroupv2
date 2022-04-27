@@ -3,6 +3,7 @@ package ilion.vitazure.negocio;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -339,6 +340,18 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
 	}
 	
 	
+	public String realizarObterValorString(XSSFCell celula) throws Exception {
+        if (XSSFCell.CELL_TYPE_STRING == celula.getCellType()) {
+            return celula.getStringCellValue();
+        } else if (XSSFCell.CELL_TYPE_NUMERIC == celula.getCellType()) {
+            return new BigDecimal(celula.getNumericCellValue()).toPlainString();
+        } else {
+            return "";
+        }
+    }
+	
+	
+	
 	public void importarExcelFuncionario(MultipartFile arquivo, String caminho, String pacote) throws Exception {
 
 	      String extension = FilenameUtils.getExtension(arquivo.getOriginalFilename());
@@ -383,7 +396,7 @@ public class ArquivoTextoImportarFuncionario implements ContatoImportacao{
                       	nome = celula.toString();
                       	break;
                       case 1:
-                      	cpf = celula.toString();
+                      	cpf = realizarObterValorString(celula);
                       	break;
                       case 2:
                       	operacao = celula.toString();

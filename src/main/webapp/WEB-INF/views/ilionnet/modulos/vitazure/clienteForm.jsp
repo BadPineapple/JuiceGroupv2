@@ -124,8 +124,13 @@
 						            </div>
 						             <div class="col-md-3 col-lg-3 col-sm-12">
 								        <div class="  form-group pmd-textfield pmd-textfield-floating-label form-group-lg textfield-floating-label-completed pmd-textfield-floating-label-completed">
-								           <label for="endereco" class="control-label">Genero</label>
-								           <input type="Large" id="genero" ng-model="pessoa.genero" class="form-control input-group-lg" ${usuarioSessao.admin ? '' : 'required'}/>
+								           <label for="endereco" class="control-label">Gênero</label>
+                                        	<select id="genero" ng-model="pessoa.genero" class="form-control input-sm" ${usuarioSessao.admin ? '' : 'required'}>
+						   					<option value="M">Masculino</option>
+						   					<option value="F">Feminino</option>
+						   					<option value="NB">Não-binário</option>
+						   					<option value="PNR">Prefiro não responder</option>
+										</select>
 								        </div>
 								    </div>
 						            <div class="col-md-3 col-lg-3 col-sm-12">

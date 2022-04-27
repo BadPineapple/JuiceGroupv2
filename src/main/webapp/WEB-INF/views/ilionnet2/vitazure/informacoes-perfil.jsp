@@ -1015,7 +1015,7 @@
 										<div class="col-12" style="padding-left:40px;">
                                                     <ilion:arquivoCategoriaLista categoria="documentos" order="posicao" layout="lateral" varRetorno="art"/>
                                                         <c:forEach var="arq" items="${art}">
-                                                            <c:if test="${arq.title == \"Adesao Prestacao servico\"}">
+                                                            <c:if test="${arq.title == \"Termo uso imagem\"}">
                                                                 <c:set var="arqTermos" value="${arq.url}"/>
                                                             </c:if>
                                                         </c:forEach>
